@@ -11,16 +11,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Widget _selectedScreen = Container(
-  //   child: const Text('OLAa'),
-  // );
   Widget _selectedScreen = const DecorationsList();
 
   void _changeScreen(Widget newScreen) {
     setState(() {
       _selectedScreen = newScreen;
     });
-    Navigator.pop(context); // Cierra el Drawer después de seleccionar
+    Navigator.pop(context);
   }
 
   @override

@@ -35,7 +35,6 @@ class DecoProvider extends ChangeNotifier {
     }).toList();
   }
 
-  // Función para filtrar las skills dentro de la lista de habilidades
   bool _filterSkills(List<Skill> skills, String skill) {
     return skills
         .any((s) => s.skillName.toLowerCase().contains(skill.toLowerCase()));

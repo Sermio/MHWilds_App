@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/decoration.dart';
 import 'package:mhwilds_app/utils/utils.dart';
@@ -94,25 +95,31 @@ class _DecorationsListState extends State<DecorationsList> {
           future: getSkillUrl(name, slot, skills[0].skillLevel),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const SizedBox(
+              return SizedBox(
                 width: 28,
                 height: 28,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ); // Muestra un indicador de carga mientras se obtiene la URL
+                child: FadeIn(
+                  child:
+                      Image.asset('assets/imgs/decorations/default_jewel.png'),
+                ),
+              );
             } else if (snapshot.hasError ||
                 !snapshot.hasData ||
                 snapshot.data == null) {
-              return const SizedBox(
+              return SizedBox(
                 width: 28,
                 height: 28,
-                child: Icon(Icons.broken_image, size: 20),
-              ); // Muestra un icono de imagen rota si falla
+                child: FadeIn(
+                  child:
+                      Image.asset('assets/imgs/decorations/default_jewel.png'),
+                ),
+              );
             } else {
               return SizedBox(
                 width: 28,
                 height: 28,
-                child: Image.network(snapshot.data!),
-              ); // Muestra la imagen cuando la URL es válida
+                child: FadeIn(child: Image.network(snapshot.data!)),
+              );
             }
           },
         );
