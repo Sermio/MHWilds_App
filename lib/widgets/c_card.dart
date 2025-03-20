@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/screens/monster_details.dart';
 // import 'package:mh_app/data/decoration.dart';
 // import 'package:mh_app/data/monster.dart';
 // import 'package:mh_app/screens/monster_details_screen.dart';
@@ -35,13 +37,14 @@ class Ccard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // if (cardData is Monster) {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) => MonsterDetails(monster: cardData)),
-        //   );
-        // } else if (cardData is ItemDecoration) {
+        if (cardData is Monster) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MonsterDetails(monster: cardData)),
+          );
+        }
+        //else if (cardData is ItemDecoration) {
         //   Navigator.push(
         //     context,
         //     MaterialPageRoute(

@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 Future<String?> getSkillUrl(String skillName, int slot, int skillLevel) async {
@@ -72,4 +75,41 @@ int countRomanNumerals(String skillName) {
     return match.group(0)!.length;
   }
   return 0;
+}
+
+Color zoneBackgroundColor(String zone) {
+  switch (zone) {
+    case 'Ancient Forest':
+      return Colors.green.shade500;
+    case 'Coral Highlands':
+      return Colors.pink.shade100;
+    case 'Wildspire Waste':
+      return Colors.yellow.shade700;
+    case 'Rotten Vale':
+      return Colors.brown.shade200;
+    case "Elder's Recess":
+      return Colors.grey.shade300;
+    case "Caverns of El Dorado":
+      return Colors.yellow;
+    case "Confluence of Fates":
+      return Colors.cyan.shade100;
+    default:
+      return Colors.white;
+  }
+}
+
+Future<String?> getValidMonsterImageUrl(String monsterName) async {
+  List<String> urlVariations = [
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/arkveld2_monster_monterhunsterwilds_wiki_guide300px.png"
+  ];
+
+  for (String url in urlVariations) {
+    final response = await http.head(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      return url;
+    }
+  }
+
+  return null;
 }

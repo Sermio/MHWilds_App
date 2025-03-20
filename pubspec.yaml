@@ -38,6 +38,7 @@ dependencies:
   http: ^1.3.0
   transparent_image: ^2.0.1
   animate_do: ^4.2.0
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,8 @@ flutter:
     - assets/data/
     - assets/data/decorations_list.json
     - assets/imgs/decorations/
+    - assets/imgs/maps/
+    - assets/imgs/monsters/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

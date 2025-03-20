@@ -28,7 +28,7 @@ class MonsterScreen extends StatelessWidget {
           return Ccard(
             cardData: monsterData,
             cardTitle: monsterData.monsterName,
-            // cardBody: _monsterDataBody(monsterData.skills),
+            // cardBody: const Text("body"),
             cardSubtitle1Label: "Type: ",
             cardSubtitle2Label: "Specie: ",
             cardSubtitle1: monsterData.monsterType,
@@ -36,24 +36,6 @@ class MonsterScreen extends StatelessWidget {
             // leading: ,
             // trailing: getJewelSlotIcon(monsterData.slot),
           );
-
-          // return Card(
-          //   child: ListTile(
-          //     title: Text(monsterData.monsterName),
-          //     subtitle: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         Text("Type: ${monsterData.monsterType}"),
-          //         Text("Specie: ${monsterData.monsterSpecie}"),
-          //         Text("Element: ${monsterData.element.join(', ')}"),
-          //         Text("Ailment: ${monsterData.ailment.join(', ')}"),
-          //         Text("Weaknesses: ${monsterData.weaknesses.join(', ')}"),
-          //         Text("Resistances: ${monsterData.resistances.join(', ')}"),
-          //         Text("Locations: ${monsterData.locations.join(', ')}"),
-          //       ],
-          //     ),
-          //   ),
-          // );
         },
       ),
     );
