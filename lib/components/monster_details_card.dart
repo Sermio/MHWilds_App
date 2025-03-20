@@ -57,14 +57,15 @@ class MonsterDetailsCard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 15),
+                  Text(monster.locations[0]),
                   Wrap(
                     spacing: 8.0,
                     runSpacing: 2.0,
                     children: monster.locations.map((loc) {
                       return Cchip(
                         // item: monster,
-                        chipItem: loc,
-                        itemName: loc ?? "",
+                        // chipItem: loc,
+                        itemName: loc ?? "a",
                         getItemColor: zoneBackgroundColor,
                         optionalWidget: Image.asset(
                           'assets/imgs/maps/map.png',

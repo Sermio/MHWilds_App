@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Cchip<T> extends StatelessWidget {
   // final T item;
-  final T chipItem;
+  // final T chipItem;
   final String itemName;
   final Color Function(String) getItemColor;
   final Widget? optionalWidget;
@@ -12,7 +12,7 @@ class Cchip<T> extends StatelessWidget {
   const Cchip({
     super.key,
     // required this.item,
-    required this.chipItem,
+    // required this.chipItem,
     required this.itemName,
     required this.getItemColor,
     this.optionalWidget,
@@ -40,7 +40,7 @@ class Cchip<T> extends StatelessWidget {
           children: [
             Text(
               itemName.isNotEmpty ? itemName : "Unknown",
-              style: const TextStyle(color: Colors.white, fontSize: 12),
+              style: const TextStyle(color: Colors.black, fontSize: 12),
             ),
             if (optionalWidget != null) ...[
               const SizedBox(width: 6),

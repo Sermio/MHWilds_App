@@ -79,19 +79,15 @@ int countRomanNumerals(String skillName) {
 
 Color zoneBackgroundColor(String zone) {
   switch (zone) {
-    case 'Ancient Forest':
+    case 'Scarlet Forest':
       return Colors.green.shade500;
-    case 'Coral Highlands':
+    case 'Oilwell Basin':
       return Colors.pink.shade100;
-    case 'Wildspire Waste':
+    case 'Ruins Of Wyveria':
       return Colors.yellow.shade700;
-    case 'Rotten Vale':
-      return Colors.brown.shade200;
-    case "Elder's Recess":
-      return Colors.grey.shade300;
-    case "Caverns of El Dorado":
+    case "Windward Plains":
       return Colors.yellow;
-    case "Confluence of Fates":
+    case "Iceshard Cliffs":
       return Colors.cyan.shade100;
     default:
       return Colors.white;
