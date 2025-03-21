@@ -70,6 +70,7 @@ flutter:
     - assets/imgs/decorations/
     - assets/imgs/maps/
     - assets/imgs/monsters/
+    - assets/imgs/monster_icons/
     - assets/imgs/elements/
   #   - images/a_dot_ham.jpeg
 

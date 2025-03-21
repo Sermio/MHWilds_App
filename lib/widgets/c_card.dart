@@ -37,7 +37,9 @@ class Ccard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        print(cardData);
         if (cardData is Monster) {
+          print("aaa");
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -97,11 +99,16 @@ class Ccard extends StatelessWidget {
                       cardSubtitle2Label ?? "cardSubtitle2Label",
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      cardSubtitle2 ?? "subtitle2",
+                    Expanded(
+                      child: Text(
+                        cardSubtitle2 ?? "Unknown",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: const TextStyle(fontWeight: FontWeight.normal),
+                      ),
                     ),
                   ],
-                ),
+                )
               ],
             ),
           ),

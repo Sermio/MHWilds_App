@@ -99,20 +99,22 @@ class MonsterDetailsCard extends StatelessWidget {
                 Wrap(
                   spacing: 8.0,
                   runSpacing: 2.0,
-                  children: monster.locations.map((loc) {
-                    return Cchip(
-                      // item: monster,
-                      // chipItem: loc,
-                      itemName: loc ?? "",
-                      getItemColor: zoneBackgroundColor,
-                      optionalWidget: Image.asset(
-                        'assets/imgs/maps/map.png',
-                        width: 16,
-                        height: 16,
-                        color: const Color.fromARGB(255, 120, 115, 115),
-                      ),
-                    );
-                  }).toList(),
+                  children: monster.locations?.map((loc) {
+                        return Cchip(
+                          itemName:
+                              loc ?? "", // Se asegura de que loc no sea nulo
+                          getItemColor:
+                              zoneBackgroundColor, // Asumimos que esto está bien
+                          optionalWidget: Image.asset(
+                            'assets/imgs/maps/map.png', // Verifica que la ruta de la imagen esté correcta
+                            width: 16,
+                            height: 16,
+                            color: const Color.fromARGB(
+                                255, 120, 115, 115), // Color de la imagen
+                          ),
+                        );
+                      }).toList() ??
+                      [], // Aseguramos que en caso de que locations sea null, no genere error
                 ),
               ],
             ),
