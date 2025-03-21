@@ -15,6 +15,14 @@ class MonsterDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const List<String> materialColumns = [
+      'Material',
+      'Frequency',
+      'Target Rewards',
+      'Break Part Rewards',
+      'Carves',
+      'Destroyed Wounds',
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text('${monster.monsterName} details'),
@@ -45,14 +53,7 @@ class MonsterDetails extends StatelessWidget {
                         const EdgeInsetsDirectional.symmetric(horizontal: 20),
                     child: MonsterTable(
                       rank: 'Low Rank Materials',
-                      columnsTitles: const [
-                        'Material',
-                        'Frequency',
-                        'Target Rewards',
-                        'Break Part Rewards',
-                        'Carves',
-                        'Destroyed Wounds',
-                      ],
+                      columnsTitles: materialColumns,
                       materials: materialsLowRank[monster.monsterName] ?? [],
                     ),
                   ),
@@ -64,14 +65,7 @@ class MonsterDetails extends StatelessWidget {
                         const EdgeInsetsDirectional.symmetric(horizontal: 20),
                     child: MonsterTable(
                       rank: 'High Rank Materials',
-                      columnsTitles: const [
-                        'Material',
-                        'Frequency',
-                        'Target Rewards',
-                        'Break Part Rewards',
-                        'Carves',
-                        'Destroyed Wounds',
-                      ],
+                      columnsTitles: materialColumns,
                       materials: materialsHighRank[monster.monsterName] ?? [],
                     ),
                   ),

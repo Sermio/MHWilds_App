@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/data/monsters.dart'; // Asegúrate de que tienes tus monstruos aquí
+import 'package:mhwilds_app/data/monsters.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
@@ -44,12 +44,9 @@ class _MonsterScreenState extends State<MonsterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Filtrar los monstruos según el texto de búsqueda en cada campo y las ubicaciones seleccionadas
     List<String> filteredMonsterKeys = monsters.keys.where((monsterKey) {
-      Map<String, dynamic> monsterMap =
-          monsters[monsterKey]!; // Accedemos al Map de Monster
-      Monster monster =
-          Monster.fromMap(monsterMap); // Convertimos el Map a un objeto Monster
+      Map<String, dynamic> monsterMap = monsters[monsterKey]!;
+      Monster monster = Monster.fromMap(monsterMap);
 
       bool matchesName = monster.monsterName
           .toLowerCase()
@@ -59,7 +56,6 @@ class _MonsterScreenState extends State<MonsterScreen> {
           .toLowerCase()
           .contains(_searchSpeciesQuery.toLowerCase());
 
-      // Filtrar por ubicación seleccionada
       bool matchesLocation = _selectedLocations.isEmpty ||
           (monster.locations != null &&
               monster.locations!
@@ -137,7 +133,6 @@ class _MonsterScreenState extends State<MonsterScreen> {
                 ],
               ),
             ),
-            // Botón para resetear los filtros
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
@@ -158,7 +153,6 @@ class _MonsterScreenState extends State<MonsterScreen> {
               itemBuilder: (context, index) {
                 String monsterKey = filteredMonsterKeys[index];
 
-                // Accedemos al Map y lo convertimos en un objeto Monster
                 Map<String, dynamic> monsterMap = monsters[monsterKey]!;
                 Monster monster = Monster.fromMap(monsterMap);
 
@@ -167,15 +161,12 @@ class _MonsterScreenState extends State<MonsterScreen> {
                     child: Image.asset(
                         'assets/imgs/monster_icons/${monster.monsterName.toLowerCase().replaceAll(' ', '_')}.png'),
                   ),
-                  cardData: monster, // Ahora pasamos el objeto Monster
-                  cardTitle: monster.monsterName ??
-                      "Unknown", // Accedemos a los atributos de Monster
+                  cardData: monster,
+                  cardTitle: monster.monsterName ?? "Unknown",
                   cardSubtitle1Label: "Specie: ",
                   cardSubtitle2Label: "Locations: ",
-                  cardSubtitle1: monster.monsterSpecie ??
-                      "Unknown", // Especie del monstruo
-                  cardSubtitle2:
-                      monster.locations?.join(", ") ?? "Unknown", // Ubicaciones
+                  cardSubtitle1: monster.monsterSpecie ?? "Unknown",
+                  cardSubtitle2: monster.locations?.join(", ") ?? "Unknown",
                 );
               },
             ),

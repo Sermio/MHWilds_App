@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/screens/map_details.dart';
 // import 'package:mh_app/data/monster.dart';
 // import 'package:mh_app/screens/monster_map_details_screen.dart';
 
@@ -22,13 +23,13 @@ class Cchip<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => MonsterMapDetails(
-        //             map: chipItem as MonsterLocation,
-        //           )),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MonsterMapDetails(
+                    map: itemName,
+                  )),
+        );
       },
       child: Chip(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),

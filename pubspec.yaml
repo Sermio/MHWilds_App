@@ -69,6 +69,11 @@ flutter:
     - assets/data/decorations_list.json
     - assets/imgs/decorations/
     - assets/imgs/maps/
+    - assets/imgs/maps/iceshard_cliffs/
+    - assets/imgs/maps/oilwell_basin/
+    - assets/imgs/maps/ruins_of_wyveria/
+    - assets/imgs/maps/scarlet_forest/
+    - assets/imgs/maps/windward_plains/
     - assets/imgs/monsters/
     - assets/imgs/monster_icons/
     - assets/imgs/elements/
