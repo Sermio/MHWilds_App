@@ -18,105 +18,103 @@ class MonsterDetailsCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ListTile(
-              title: Text(
-                textAlign: TextAlign.center,
-                monster.monsterName,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
+            Text(
+              textAlign: TextAlign.center,
+              monster.monsterName,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Type: ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      monster.monsterType,
+                    ),
+                  ],
                 ),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Type: ",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Species: ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      monster.monsterSpecie,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                const Divider(
+                  color: Colors.black,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MonsterAttributes(
+                      attributeType: 'Elements',
+                      attributeList: monster.elements,
+                    ),
+                    MonsterAttributes(
+                      attributeType: 'Ailments',
+                      attributeList: monster.ailments,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MonsterAttributes(
+                      attributeType: 'Weaknesses',
+                      attributeList: monster.weaknesses,
+                    ),
+                    MonsterAttributes(
+                      attributeType: 'Resistances',
+                      attributeList: monster.resistances,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                const Divider(
+                  color: Colors.black,
+                ),
+                const Text(
+                  'Locations',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Wrap(
+                  spacing: 8.0,
+                  runSpacing: 2.0,
+                  children: monster.locations.map((loc) {
+                    return Cchip(
+                      // item: monster,
+                      // chipItem: loc,
+                      itemName: loc ?? "",
+                      getItemColor: zoneBackgroundColor,
+                      optionalWidget: Image.asset(
+                        'assets/imgs/maps/map.png',
+                        width: 16,
+                        height: 16,
+                        color: const Color.fromARGB(255, 120, 115, 115),
                       ),
-                      Text(
-                        monster.monsterType,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Species: ",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        monster.monsterSpecie,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  const Divider(
-                    color: Colors.black,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      MonsterAttributes(
-                        attributeType: 'Elements',
-                        attributeList: monster.elements,
-                      ),
-                      MonsterAttributes(
-                        attributeType: 'Ailments',
-                        attributeList: monster.ailments,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      MonsterAttributes(
-                        attributeType: 'Weaknesses',
-                        attributeList: monster.weaknesses,
-                      ),
-                      MonsterAttributes(
-                        attributeType: 'Resistances',
-                        attributeList: monster.resistances,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  const Divider(
-                    color: Colors.black,
-                  ),
-                  const Text(
-                    'Locations',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Wrap(
-                    spacing: 8.0,
-                    runSpacing: 2.0,
-                    children: monster.locations.map((loc) {
-                      return Cchip(
-                        // item: monster,
-                        // chipItem: loc,
-                        itemName: loc ?? "",
-                        getItemColor: zoneBackgroundColor,
-                        optionalWidget: Image.asset(
-                          'assets/imgs/maps/map.png',
-                          width: 16,
-                          height: 16,
-                          color: const Color.fromARGB(255, 120, 115, 115),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
+                    );
+                  }).toList(),
+                ),
+              ],
             ),
           ],
         ),
