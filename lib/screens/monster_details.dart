@@ -12,11 +12,6 @@ class MonsterDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final List<Weakness> elementWeakness =
-    //     getElementWeakness(monster.weaknesses);
-    // final List<Weakness> ailmentsWeakness =
-    //     getAilmentsWeakness(monster.weaknesses);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('${monster.monsterName} details'),
@@ -36,14 +31,6 @@ class MonsterDetails extends StatelessWidget {
                     ),
                   ),
                   MonsterDetailsCard(monster: monster),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // IconsList(elementWeakness, ailmentsWeakness),
-                      Icon(Icons.abc)
-                    ],
-                  ),
-                  const SizedBox(height: 120),
                 ],
               ),
             ),
