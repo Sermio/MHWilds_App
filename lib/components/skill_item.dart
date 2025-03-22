@@ -1,5 +1,3 @@
-// skill_item.dart
-
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/skill_container_preview.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
@@ -31,7 +29,6 @@ class SkillItem extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    // title: Text('Skill: ${skill.progression}'),
                     content: SizedBox(
                       width: double.maxFinite,
                       child: ConstrainedBox(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
+import 'package:mhwilds_app/screens/materials_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 
 class Cdrawer extends StatelessWidget {
@@ -36,15 +37,10 @@ class Cdrawer extends StatelessWidget {
         children: [
           Column(
             children: [
-              const ListTile(
-                title: Text('Sample'),
-                trailing: Icon(Icons.block, size: 35),
-                // onTap: () => onItemSelected(const SampleScreen()),
-              ),
               ListTile(
                 title: const Text('Monsters'),
                 trailing: Image.asset(
-                  'assets/imgs/drawer/monster_icon.png',
+                  'assets/imgs/monster_icons/chatacabra.png',
                   width: 35,
                   height: 35,
                 ),
@@ -53,11 +49,20 @@ class Cdrawer extends StatelessWidget {
               ListTile(
                 title: const Text('Decorations'),
                 trailing: Image.asset(
-                  'assets/imgs/drawer/jewel.png',
+                  'assets/imgs/decorations/jewel.webp',
                   width: 35,
                   height: 35,
                 ),
                 onTap: () => onItemSelected(const DecorationsList()),
+              ),
+              ListTile(
+                title: const Text('Materials'),
+                trailing: Image.asset(
+                  'assets/imgs/materials/default_material.webp',
+                  width: 35,
+                  height: 35,
+                ),
+                onTap: () => onItemSelected(const MaterialsList()),
               ),
             ],
           ),

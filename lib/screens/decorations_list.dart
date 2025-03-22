@@ -15,6 +15,7 @@ class DecorationsList extends StatefulWidget {
 class _DecorationsListState extends State<DecorationsList> {
   final TextEditingController _searchNameController = TextEditingController();
   String _searchNameQuery = '';
+  String? _selectedType; // Para el filtro de tipo
   bool _filtersVisible = false;
 
   void _toggleFiltersVisibility() {
@@ -27,6 +28,7 @@ class _DecorationsListState extends State<DecorationsList> {
     setState(() {
       _searchNameQuery = '';
       _searchNameController.clear();
+      _selectedType = null; // Resetear el filtro de tipo
     });
   }
 
@@ -37,9 +39,15 @@ class _DecorationsListState extends State<DecorationsList> {
       Map<String, dynamic> decorationMap = decorations[decorationKey]!;
       DecorationItem decoration = DecorationItem.fromMap(decorationMap);
 
-      return decoration.decorationName
+      // Filtrar por nombre y por tipo (si el tipo está seleccionado)
+      bool matchesName = decoration.decorationName
           .toLowerCase()
           .contains(_searchNameQuery.toLowerCase());
+
+      bool matchesType =
+          _selectedType == null || decoration.decorationType == _selectedType;
+
+      return matchesName && matchesType;
     }).toList();
 
     return Scaffold(
@@ -60,6 +68,24 @@ class _DecorationsListState extends State<DecorationsList> {
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(),
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownButton<String>(
+                value: _selectedType,
+                hint: const Text('Select Type'),
+                onChanged: (newType) {
+                  setState(() {
+                    _selectedType = newType;
+                  });
+                },
+                items: ['Armor Decoration', 'Weapon Decoration'].map((type) {
+                  return DropdownMenuItem<String>(
+                    value: type,
+                    child: Text(type),
+                  );
+                }).toList(),
               ),
             ),
             Padding(
@@ -126,9 +152,7 @@ class _DecorationsListState extends State<DecorationsList> {
                 snapshot.hasError ||
                 !snapshot.hasData ||
                 snapshot.data == null) {
-              child = FadeIn(
-                child: Image.asset('assets/imgs/decorations/default_jewel.png'),
-              );
+              child = const CircularProgressIndicator();
             } else {
               child = FadeIn(
                 child: Image.network(snapshot.data!),

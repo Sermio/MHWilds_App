@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/decoration.dart';
 import 'package:mhwilds_app/models/monster.dart';
-import 'package:mhwilds_app/screens/decoration_details_screen.dart';
+import 'package:mhwilds_app/screens/decoration_details.dart';
 import 'package:mhwilds_app/screens/monster_details.dart';
 // import 'package:mh_app/data/decoration.dart';
 // import 'package:mh_app/data/monster.dart';
@@ -92,22 +92,26 @@ class Ccard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Text(
-                      cardSubtitle2Label ?? "cardSubtitle2Label",
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Expanded(
-                      child: Text(
-                        cardSubtitle2 ?? "Unknown",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: const TextStyle(fontWeight: FontWeight.normal),
-                      ),
-                    ),
-                  ],
-                )
+                if (cardSubtitle2 != null && cardSubtitle2Label != null)
+                  Row(
+                    children: [
+                      if (cardSubtitle2Label != null)
+                        Text(
+                          cardSubtitle2Label ?? "cardSubtitle2Label",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      if (cardSubtitle2 != null)
+                        Expanded(
+                          child: Text(
+                            cardSubtitle2 ?? "Unknown",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.normal),
+                          ),
+                        ),
+                    ],
+                  )
               ],
             ),
           ),

@@ -14,10 +14,6 @@ Future<String?> getSkillUrl(String skillName, int slot, int skillLevel) async {
 
   int cutIndex = -1;
 
-  if (skillName.toLowerCase().contains('blast')) {
-    print('ola');
-  }
-
   if (slashIndex != -1) {
     int spaceIndex = skillName.indexOf(' ', slashIndex);
     String firstPart = skillName.substring(0, slashIndex).trim();
@@ -110,6 +106,26 @@ Color zoneBackgroundColor(String zone) {
 Future<String?> getValidMonsterImageUrl(String monsterName) async {
   List<String> urlVariations = [
     "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/arkveld2_monster_monterhunsterwilds_wiki_guide300px.png"
+  ];
+
+  for (String url in urlVariations) {
+    final response = await http.head(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      return url;
+    }
+  }
+
+  return null;
+}
+
+Future<String?> getValidMaterialImageUrl(String materialName) async {
+  // Reemplazar el "+" seguido de un espacio por solo "+"
+  String formattedMaterialName = materialName.replaceAll(RegExp(r'\s\+'), '+');
+
+  // Construir la URL con el nombre de material formateado
+  List<String> urlVariations = [
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedMaterialName.toLowerCase().replaceAll(' ', '_')}_item_equipment_material_mhwilds_wiki_guide_85px.png"
   ];
 
   for (String url in urlVariations) {

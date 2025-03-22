@@ -15,12 +15,10 @@ class SkillContainerPreview extends StatelessWidget {
     final progressionList = skillProgression.split(';');
 
     return ListView.separated(
-      shrinkWrap: true, // Se ajusta al contenido
-      physics:
-          const NeverScrollableScrollPhysics(), // Desactiva el desplazamiento interno
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: progressionList.length,
-      separatorBuilder: (context, index) =>
-          const Divider(), // Separador entre elementos
+      separatorBuilder: (context, index) => const Divider(),
       itemBuilder: (context, index) {
         final progression = progressionList[index].trim();
         final levelMatch = RegExp(r'Level (\d+)').firstMatch(progression);
