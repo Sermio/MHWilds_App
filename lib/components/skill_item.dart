@@ -1,20 +1,19 @@
 // skill_item.dart
 
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/skill_container_preview.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/skill.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 
 class SkillItem extends StatelessWidget {
   final Skill skill;
-  final GlobalKey gestureKey;
-  final VoidCallback onTap;
+  final int skillNumber;
 
   const SkillItem({
     super.key,
     required this.skill,
-    required this.gestureKey,
-    required this.onTap,
+    required this.skillNumber,
   });
 
   @override
@@ -28,8 +27,24 @@ class SkillItem extends StatelessWidget {
             width: 50,
             height: 50,
             child: GestureDetector(
-              key: gestureKey,
-              onTap: onTap,
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    // title: Text('Skill: ${skill.progression}'),
+                    content: SizedBox(
+                      width: double.maxFinite,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxHeight: 300),
+                        child: SkillContainerPreview(
+                          skillLevel: skillNumber.toString(),
+                          skillProgression: skill.progression,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
               child: UrlImageLoader(
                 itemName: skill.name,
                 loadImageUrlFunction: getValidSkillImageUrl,
@@ -42,7 +57,7 @@ class SkillItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${skill.name} + ${skill.levels}",
+                  "${skill.name} + $skillNumber",
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.bold,

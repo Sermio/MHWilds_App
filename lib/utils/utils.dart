@@ -71,10 +71,8 @@ Future<String?> getSkillUrl(String skillName, int slot, int skillLevel) async {
 
   for (String url in urlVariations) {
     final response = await http.head(Uri.parse(url));
-    print(url);
 
     if (response.statusCode == 200) {
-      print(url);
       return url;
     }
   }

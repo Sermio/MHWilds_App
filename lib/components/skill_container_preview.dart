@@ -14,30 +14,35 @@ class SkillContainerPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final progressionList = skillProgression.split(';');
 
-    return Expanded(
-      // Agregar Expanded aquí
-      child: ListView.builder(
-        itemCount: progressionList.length,
-        itemBuilder: (context, index) {
-          final progression = progressionList[index].trim();
-          final levelMatch = RegExp(r'Level (\d+)').firstMatch(progression);
-          final level = levelMatch?.group(1);
-          final isCurrentLevel = level == skillLevel;
+    return ListView.separated(
+      shrinkWrap: true, // Se ajusta al contenido
+      physics:
+          const NeverScrollableScrollPhysics(), // Desactiva el desplazamiento interno
+      itemCount: progressionList.length,
+      separatorBuilder: (context, index) =>
+          const Divider(), // Separador entre elementos
+      itemBuilder: (context, index) {
+        final progression = progressionList[index].trim();
+        final levelMatch = RegExp(r'Level (\d+)').firstMatch(progression);
+        final level = levelMatch?.group(1);
+        final isCurrentLevel = level == skillLevel;
 
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Text(
                 progression,
                 style: TextStyle(
-                  fontWeight:
-                      isCurrentLevel ? FontWeight.bold : FontWeight.normal,
+                  fontWeight: progression.contains('Lvl $skillLevel')
+                      ? FontWeight.bold
+                      : FontWeight.normal,
                 ),
               ),
-            ],
-          );
-        },
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
