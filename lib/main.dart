@@ -5,12 +5,7 @@ import 'package:mhwilds_app/providers/decorations_provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => DecoProvider()..loadDecos()),
-      ],
-      child: const MyApp(),
-    ),
+    const MyApp(),
   );
 }
 

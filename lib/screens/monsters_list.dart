@@ -5,14 +5,14 @@ import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
 
-class MonsterScreen extends StatefulWidget {
-  const MonsterScreen({super.key});
+class MonstersList extends StatefulWidget {
+  const MonstersList({super.key});
 
   @override
   _MonsterScreenState createState() => _MonsterScreenState();
 }
 
-class _MonsterScreenState extends State<MonsterScreen> {
+class _MonsterScreenState extends State<MonstersList> {
   final TextEditingController _searchNameController = TextEditingController();
   final TextEditingController _searchSpeciesController =
       TextEditingController();

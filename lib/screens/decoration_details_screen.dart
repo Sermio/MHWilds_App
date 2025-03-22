@@ -6,7 +6,7 @@ import 'package:mhwilds_app/models/decoration.dart';
 class DecorationDetails extends StatelessWidget {
   const DecorationDetails({super.key, required this.decoration});
 
-  final Deco decoration;
+  final DecorationItem decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -14,43 +14,43 @@ class DecorationDetails extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${decoration.name} details'),
+        title: Text('${decoration.decorationName} details'),
       ),
-      body: Stack(
+      body: const Stack(
         children: [
           SingleChildScrollView(
             child: Center(
               child: Column(
                 children: [
-                  const Center(
+                  Center(
                     child: Text(
                       "Decoration Skills",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  if (decoration.skills.isNotEmpty) ...[
-                    Column(
-                      children: decoration.skills.map((skill) {
-                        final GlobalKey gestureKey = GlobalKey();
-                        return const SizedBox();
-                        // SkillItem(
-                        //   skill: skill,
-                        //   gestureKey: gestureKey,
-                        //   onTap: () {
-                        //     overlayController.toggleOverlay(
-                        //       skillId: skill.skillId,
-                        //       skillLevel: skill.level,
-                        //       gestureKey: gestureKey,
-                        //     );
-                        //   },
-                        // );
-                      }).toList(),
-                    ),
-                  ] else ...[
-                    const Text("No skills available"),
-                  ],
-                  const SizedBox(height: 80),
+                  // if (decoration.skills.isNotEmpty) ...[
+                  //   Column(
+                  //     children: decoration.skills.map((skill) {
+                  //       final GlobalKey gestureKey = GlobalKey();
+                  //       return const SizedBox();
+                  //       // SkillItem(
+                  //       //   skill: skill,
+                  //       //   gestureKey: gestureKey,
+                  //       //   onTap: () {
+                  //       //     overlayController.toggleOverlay(
+                  //       //       skillId: skill.skillId,
+                  //       //       skillLevel: skill.level,
+                  //       //       gestureKey: gestureKey,
+                  //       //     );
+                  //       //   },
+                  //       // );
+                  //     }).toList(),
+                  //   ),
+                  // ] else ...[
+                  //   const Text("No skills available"),
+                  // ],
+                  SizedBox(height: 80),
                 ],
               ),
             ),

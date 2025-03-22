@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Widget _selectedScreen = const MonsterScreen();
+  Widget _selectedScreen = const MonstersList();
 
   void _changeScreen(Widget newScreen) {
     setState(() {

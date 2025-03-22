@@ -48,7 +48,7 @@ class Cdrawer extends StatelessWidget {
                   width: 35,
                   height: 35,
                 ),
-                onTap: () => onItemSelected(const MonsterScreen()),
+                onTap: () => onItemSelected(const MonstersList()),
               ),
               ListTile(
                 title: const Text('Decorations'),

@@ -2,9 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/decoration.dart';
 import 'package:mhwilds_app/utils/utils.dart';
-import 'package:provider/provider.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
-import 'package:mhwilds_app/providers/decorations_provider.dart';
+import 'package:mhwilds_app/data/decorations.dart';
 
 class DecorationsList extends StatefulWidget {
   const DecorationsList({super.key});
@@ -14,25 +13,46 @@ class DecorationsList extends StatefulWidget {
 }
 
 class _DecorationsListState extends State<DecorationsList> {
-  final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
+  final TextEditingController _searchNameController = TextEditingController();
+  String _searchNameQuery = '';
+  bool _filtersVisible = false;
+
+  void _toggleFiltersVisibility() {
+    setState(() {
+      _filtersVisible = !_filtersVisible;
+    });
+  }
+
+  void _resetFilters() {
+    setState(() {
+      _searchNameQuery = '';
+      _searchNameController.clear();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DecoProvider>(
-      builder: (context, decoProvider, child) {
-        List<Deco> filteredDecorations =
-            decoProvider.filterDecos(name: _searchQuery);
+    List<String> filteredDecorationKeys =
+        decorations.keys.where((decorationKey) {
+      Map<String, dynamic> decorationMap = decorations[decorationKey]!;
+      DecorationItem decoration = DecorationItem.fromMap(decorationMap);
 
-        return Column(
-          children: [
+      return decoration.decorationName
+          .toLowerCase()
+          .contains(_searchNameQuery.toLowerCase());
+    }).toList();
+
+    return Scaffold(
+      body: Column(
+        children: [
+          if (_filtersVisible) ...[
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
-                controller: _searchController,
+                controller: _searchNameController,
                 onChanged: (query) {
                   setState(() {
-                    _searchQuery = query;
+                    _searchNameQuery = query;
                   });
                 },
                 decoration: const InputDecoration(
@@ -42,88 +62,131 @@ class _DecorationsListState extends State<DecorationsList> {
                 ),
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: filteredDecorations.length,
-                itemBuilder: (context, index) {
-                  final decoration = filteredDecorations[index];
-
-                  return Ccard(
-                    cardData: decoration,
-                    cardTitle: decoration.name,
-                    cardBody: _decorationBody(decoration.skills),
-                    cardSubtitle1: formatString(decoration.rarity),
-                    cardSubtitle2:
-                        "${formatString(decoration.slot)}level: ${decoration.skills[0].skillLevel}",
-                    cardSubtitle1Label: "Rarity: ",
-                    cardSubtitle2Label: "Slot: ",
-                    leading: _decorationLeading(
-                        decoration.name,
-                        int.parse(formatString(decoration.slot)),
-                        decoration.skills),
-                    trailing: getJewelSlotIcon(decoration.slot),
-                  );
-                },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: _resetFilters,
+                child: const Text('Reset Filters'),
               ),
             ),
+            const Divider(color: Colors.black)
           ],
-        );
-      },
-    );
-  }
+          const SizedBox(height: 10),
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredDecorationKeys.length,
+              itemBuilder: (context, index) {
+                String decorationKey = filteredDecorationKeys[index];
+                Map<String, dynamic> decorationMap =
+                    decorations[decorationKey]!;
+                DecorationItem decoration =
+                    DecorationItem.fromMap(decorationMap);
 
-  Widget _decorationBody(List<Skill> skills) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: skills.map((skill) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
-          child: Text(
-            '${skill.skillName} +${skill.skillLevel}',
-            style: const TextStyle(fontWeight: FontWeight.bold),
+                return Ccard(
+                  leading: _decorationLeading(decoration.decorationName,
+                      decoration.decorationSlot, decoration.decorationSkill),
+                  trailing: getJewelSlotIcon(decoration.decorationSlot),
+                  cardData: decoration,
+                  cardTitle: decoration.decorationName ?? "Unknown",
+                  cardSubtitle1Label: "Type: ",
+                  cardSubtitle2Label: "Rarity: ",
+                  cardSubtitle1: decoration.decorationType ?? "Unknown",
+                  cardSubtitle2: decoration.decorationRarity ?? "Unknown",
+                );
+              },
+            ),
           ),
-        );
-      }).toList(),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _toggleFiltersVisibility,
+        child: Icon(
+          _filtersVisible ? Icons.close : Icons.search,
+        ),
+      ),
     );
   }
 
-  Widget _decorationLeading(String name, int slot, List<Skill> skills) {
+  // Widget _decorationLeading(String name, int slot, List<String> skills) {
+  //   return Column(
+  //     mainAxisAlignment: MainAxisAlignment.center,
+  //     children: skills.map((skill) {
+  //       return FutureBuilder<String?>(
+  //         future: getSkillUrl(name, slot, skills[0].skillLevel),
+  //         builder: (context, snapshot) {
+  //           if (snapshot.connectionState == ConnectionState.waiting) {
+  //             return SizedBox(
+  //               width: 28,
+  //               height: 28,
+  //               child: FadeIn(
+  //                 child:
+  //                     Image.asset('assets/imgs/decorations/default_jewel.png'),
+  //               ),
+  //             );
+  //           } else if (snapshot.hasError ||
+  //               !snapshot.hasData ||
+  //               snapshot.data == null) {
+  //             return SizedBox(
+  //               width: 28,
+  //               height: 28,
+  //               child: FadeIn(
+  //                 child:
+  //                     Image.asset('assets/imgs/decorations/default_jewel.png'),
+  //               ),
+  //             );
+  //           } else {
+  //             return SizedBox(
+  //               width: 28,
+  //               height: 28,
+  //               child: FadeIn(child: Image.network(snapshot.data!)),
+  //             );
+  //           }
+  //         },
+  //       );
+  //     }).toList(),
+  //   );
+  // }
+
+  Widget _decorationLeading(
+      String skillName, String decorationSlot, String skillsString) {
+    // Dividir el string de habilidades por '\\n\\'
+    final skills = skillsString.split('\\n\\');
+    final skillLevel = skillName[skillName.length - 1];
+    final slot = decorationSlot[decorationSlot.length - 1];
+
+    // Obtener solo la primera habilidad
+    final firstSkill = skills.isNotEmpty ? skills[0] : '';
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: skills.map((skill) {
-        return FutureBuilder<String?>(
-          future: getSkillUrl(name, slot, skills[0].skillLevel),
+      children: [
+        FutureBuilder<String?>(
+          future:
+              getSkillUrl(skillName, int.parse(slot), int.parse(skillLevel)),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return SizedBox(
-                width: 28,
-                height: 28,
-                child: FadeIn(
-                  child:
-                      Image.asset('assets/imgs/decorations/default_jewel.png'),
-                ),
-              );
-            } else if (snapshot.hasError ||
+            Widget child;
+
+            if (snapshot.connectionState == ConnectionState.waiting ||
+                snapshot.hasError ||
                 !snapshot.hasData ||
                 snapshot.data == null) {
-              return SizedBox(
-                width: 28,
-                height: 28,
-                child: FadeIn(
-                  child:
-                      Image.asset('assets/imgs/decorations/default_jewel.png'),
-                ),
+              child = FadeIn(
+                child: Image.asset('assets/imgs/decorations/default_jewel.png'),
               );
             } else {
-              return SizedBox(
-                width: 28,
-                height: 28,
-                child: FadeIn(child: Image.network(snapshot.data!)),
+              child = FadeIn(
+                child: Image.network(snapshot.data!),
               );
             }
+
+            return SizedBox(
+              width: 28,
+              height: 28,
+              child: child,
+            );
           },
-        );
-      }).toList(),
+        ),
+      ],
     );
   }
 
