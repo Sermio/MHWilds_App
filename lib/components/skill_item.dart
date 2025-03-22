@@ -1,15 +1,18 @@
 // skill_item.dart
 
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/models/skill.dart';
+import 'package:mhwilds_app/utils/utils.dart';
 
 class SkillItem extends StatelessWidget {
-  // final Skill skill;
+  final Skill skill;
   final GlobalKey gestureKey;
   final VoidCallback onTap;
 
   const SkillItem({
     super.key,
-    // required this.skill,
+    required this.skill,
     required this.gestureKey,
     required this.onTap,
   });
@@ -27,29 +30,29 @@ class SkillItem extends StatelessWidget {
             child: GestureDetector(
               key: gestureKey,
               onTap: onTap,
-              // child: UrlImageLoader(
-              //   itemName: skill.skillName,
-              //   loadImageUrlFunction: getValidDecorationImageUrl,
-              // ),
+              child: UrlImageLoader(
+                itemName: skill.name,
+                loadImageUrlFunction: getValidSkillImageUrl,
+              ),
             ),
           ),
           const SizedBox(width: 18),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Text(
-                //   "${skill.skillName} + ${skill.level}",
-                //   style: const TextStyle(
-                //     fontSize: 13,
-                //     fontWeight: FontWeight.bold,
-                //   ),
-                //   overflow: TextOverflow.ellipsis,
-                // ),
-                // Text(
-                //   skill.description,
-                //   style: const TextStyle(fontSize: 16),
-                // ),
+                Text(
+                  "${skill.name} + ${skill.levels}",
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  skill.description,
+                  style: const TextStyle(fontSize: 16),
+                ),
               ],
             ),
           ),

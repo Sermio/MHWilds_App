@@ -4,7 +4,7 @@ Map<String, Map<String, dynamic>> skills = {
     "type": "Weapon Skill",
     "description": "Increases attack power.",
     "progression":
-        "Level 1:▒Attack +3 ;Level 2:▒Attack +5 ;Level 3:▒Attack +7 ;Level 4:▒ Attack +2% Bonus: +8 ;Level 5:▒ Attack +4% Bonus: +9",
+        "Level 1: Attack +3 ;Level 2: Attack +5 ;Level 3: Attack +7 ;Level 4:  Attack +2% Bonus: +8 ;Level 5:  Attack +4% Bonus: +9",
     "levels": "5 levels"
   },
   "Resentment": {
@@ -1494,7 +1494,7 @@ Map<String, Map<String, dynamic>> skills = {
     "description":
         "Temporarily increases attack after a successful Power Clash or Offset attack.",
     "progression":
-        "2 Pieces:▒Temporarily grants attack +10 after a successful Power Clash or Offset attack 4 Pieces:▒Temporarily grants attack +25 after a successful Power Clash or Offset attack",
+        "2 Pieces: Temporarily grants attack +10 after a successful Power Clash or Offset attack 4 Pieces: Temporarily grants attack +25 after a successful Power Clash or Offset attack",
     "levels": "2 levels"
   },
   "Rathalos's Flare": {
@@ -1533,7 +1533,7 @@ Map<String, Map<String, dynamic>> skills = {
   "Ebony Odogaron's Power": {
     "name": "EBONY ODOGARON'S POWER",
     "type": "Set Bonus Skill",
-    "description": "Increases the duration of the Burst▒skill",
+    "description": "Increases the duration of the Burst skill",
     "progression":
         "2 Pieces: Extends the duration of the Burst skill and grants attack +3 while Burst is active. 4 Pieces: Further extends the duration of the Burst skill and grants attack +10 while Burst is active.",
     "levels": "2 levels"
@@ -1551,13 +1551,13 @@ Map<String, Map<String, dynamic>> skills = {
     "type": "Set Bonus Skill",
     "description": "Increases defense when using a specialized tool",
     "progression":
-        "2 Pieces:▒Increases defense temporarily when using a specialized tool. 4 Pieces: Greatly increases defense and resistance temporarily when using a specialized tool.",
+        "2 Pieces: Increases defense temporarily when using a specialized tool. 4 Pieces: Greatly increases defense and resistance temporarily when using a specialized tool.",
     "levels": "2 levels"
   },
   "Rey Dau's Voltage": {
     "name": "REY DAU'S VOLTAGE",
     "type": "Set Bonus Skill",
-    "description": "Increases the activation time of the Latent Power▒skill",
+    "description": "Increases the activation time of the Latent Power skill",
     "progression":
         "2 Pieces: Moderately extends the activation time of the Latent Power skill. 4 Pieces: Extends the activation time of the Latent Power skill.",
     "levels": "2 levels"
@@ -1565,7 +1565,7 @@ Map<String, Map<String, dynamic>> skills = {
   "Nu Udra's Mutiny": {
     "name": "NU UDRA'S MUTINY",
     "type": "Set Bonus Skill",
-    "description": "Increases the damage output while Resentment▒is active",
+    "description": "Increases the damage output while Resentment is active",
     "progression":
         "2 Pieces: Deals moderate additional damage while the Resentment skill is active. 4 Pieces: Deals additional damage while the Resentment skill is active.",
     "levels": "2 levels"
@@ -1576,7 +1576,7 @@ Map<String, Map<String, dynamic>> skills = {
     "description":
         "Increases attack after recovering from certain status effects",
     "progression":
-        "2 Pieces: Increases attack after recovering from webbed status, frostblight, being pinned, or a Power Clash. 4 Pieces:▒Greatly increases attack after recovering from webbed status, frostblight, being pinned, or a Power Clash.",
+        "2 Pieces: Increases attack after recovering from webbed status, frostblight, being pinned, or a Power Clash. 4 Pieces: Greatly increases attack after recovering from webbed status, frostblight, being pinned, or a Power Clash.",
     "levels": "2 levels"
   },
   "Gore Magala's Tyranny": {

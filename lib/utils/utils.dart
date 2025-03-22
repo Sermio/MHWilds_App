@@ -14,24 +14,19 @@ Future<String?> getSkillUrl(String skillName, int slot, int skillLevel) async {
 
   int cutIndex = -1;
 
-  // Verificar si la habilidad contiene la palabra 'bandolier' (esto parece ser un caso específico)
   if (skillName.toLowerCase().contains('blast')) {
     print('ola');
   }
 
-  // Verificar si existe una barra '/' y cortar antes de ella
   if (slashIndex != -1) {
-    // Encuentra el primer espacio después de la barra y corta todo lo que esté entre la barra y el primer espacio
     int spaceIndex = skillName.indexOf(' ', slashIndex);
     String firstPart = skillName.substring(0, slashIndex).trim();
     String secondPart =
         spaceIndex != -1 ? skillName.substring(spaceIndex).trim() : '';
 
-    // Une la primera parte con la segunda parte después del primer espacio
     skillName = '$firstPart $secondPart';
   }
 
-  // Si encuentra 'jewel' o una barra, recorta el nombre de la habilidad
   if (jewelIndex != -1 && slashIndex != -1) {
     cutIndex = jewelIndex < slashIndex ? jewelIndex : slashIndex;
   } else if (jewelIndex != -1) {
@@ -44,7 +39,6 @@ Future<String?> getSkillUrl(String skillName, int slot, int skillLevel) async {
       ? skillName.substring(0, cutIndex).trim().toLowerCase()
       : skillName.trim().toLowerCase();
 
-  // Si el número de 'I's en el nombre de la habilidad es 2 o 3, se agrega el nivel de habilidad correspondiente
   if (numberOfIs == 2) {
     fillIs = "ii";
   } else if (numberOfIs == 3) {
@@ -55,7 +49,6 @@ Future<String?> getSkillUrl(String skillName, int slot, int skillLevel) async {
     fillIs = "iii";
   }
 
-  // Asegúrate de que el nombre base tenga la palabra 'jewel' y el nivel agregado correctamente
   baseSkillName = baseSkillName.replaceAll(' ', '');
   List<String> urlVariations = [
     "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${baseSkillName}jewel${fillIs}_${slot}_decoration__mhwilds_wiki_guide.png",
@@ -130,4 +123,35 @@ Future<String?> getValidMonsterImageUrl(String monsterName) async {
   }
 
   return null;
+}
+
+Future<String?> getValidSkillImageUrl(String decorationName) async {
+  List<String> urlVariations = [
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${decorationName.toLowerCase().replaceAll(' ', '-')}_skill_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${decorationName.toLowerCase().replaceAll(' ', '_')}_skill_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${decorationName.toLowerCase().replaceAll(' ', '-')}_skill_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${decorationName.toLowerCase().replaceAll(' ', '_')}_skill_mhwilds_wiki_guide_85px.png",
+  ];
+
+  const int maxRetries = 4;
+  const Duration timeoutDuration = Duration(seconds: 2);
+
+  for (String url in urlVariations) {
+    for (int attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        final response =
+            await http.head(Uri.parse(url)).timeout(timeoutDuration);
+        if (response.statusCode == 200) {
+          return url;
+        }
+      } catch (e) {
+        if (attempt == maxRetries - 1) {
+          print(
+              "Error al cargar imagen en $url después de $maxRetries intentos.");
+        }
+      }
+    }
+  }
+
+  return 'https://monsterhunterworld.wiki.fextralife.com/file/Monster-Hunter-World/evade-window-skill-mhw.png';
 }

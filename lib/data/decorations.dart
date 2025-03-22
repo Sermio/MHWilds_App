@@ -138,7 +138,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Tetrad Shot + 3\\n\\nFire Attack + 1",
+    "decoration_skill": "Tetrad Shot + 3;Fire Attack + 1",
     "decoration_description":
         "Increases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.\\nIncreases fire element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -148,7 +148,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Tetrad Shot + 3\\n\\nThunder Attack + 1",
+    "decoration_skill": "Tetrad Shot + 3;Thunder Attack + 1",
     "decoration_description":
         "Increases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.\\nIncreases thunder element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -158,7 +158,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Tetrad Shot +3\\n\\nDragon Attack +1",
+    "decoration_skill": "Tetrad Shot +3;Dragon Attack +1",
     "decoration_description":
         "Increases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.\\nIncreases dragon element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -168,7 +168,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Tetrad Shot + 3\\n\\nIce Attack + 1",
+    "decoration_skill": "Tetrad Shot + 3;Ice Attack + 1",
     "decoration_description":
         "Increases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.\\nIncreases ice element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -178,7 +178,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Tetrad Shot + 3\\n\\nGuard + 1",
+    "decoration_skill": "Tetrad Shot + 3;Guard + 1",
     "decoration_description":
         "Increases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -188,7 +188,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Tetrad Shot + 3\\n\\nBallistics + 1",
+    "decoration_skill": "Tetrad Shot + 3;Ballistics + 1",
     "decoration_description":
         "Increases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.\\nExtends the range in which ammo and arrows have maximum power",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -198,7 +198,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Tetrad Shot +3\\n\\nWater Attack + 1",
+    "decoration_skill": "Tetrad Shot +3;Water Attack + 1",
     "decoration_description":
         "Increases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.\\nIncreases water element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -277,7 +277,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nTetrad Shot + 1",
+    "decoration_skill": "Fire Attack + 3;Tetrad Shot + 1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nIncreases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -287,7 +287,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nCritical Element + 1",
+    "decoration_skill": "Fire Attack + 3;Critical Element + 1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nIncreases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -297,7 +297,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack +3\\n\\nPower Prolonger + 1",
+    "decoration_skill": "Fire Attack +3;Power Prolonger + 1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nAllows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -307,7 +307,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nFocus + 1",
+    "decoration_skill": "Fire Attack + 3;Focus + 1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nIncreases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -317,7 +317,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nOffensive Guard + 1",
+    "decoration_skill": "Fire Attack + 3;Offensive Guard + 1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nTemporarily increases attack power after executing a perfectly/timed guard.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -327,7 +327,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nHandicraft +1",
+    "decoration_skill": "Fire Attack + 3;Handicraft +1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -337,7 +337,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nGuard + 1",
+    "decoration_skill": "Fire Attack + 3;Guard + 1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -347,7 +347,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nSlugger + 1",
+    "decoration_skill": "Fire Attack + 3;Slugger + 1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -357,7 +357,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nOpening Shot +1",
+    "decoration_skill": "Fire Attack + 3;Opening Shot +1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nIncreases the bowgun's reload speed and increases the power of bullets when fully loaded.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -367,7 +367,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nBallistics +1",
+    "decoration_skill": "Fire Attack + 3;Ballistics +1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nExtends the range in which ammo and arrows have maximum power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -377,7 +377,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nRapid Morph + 1",
+    "decoration_skill": "Fire Attack + 3;Rapid Morph + 1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nIncreases switch speed and power for switch axes and charge blades.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -387,7 +387,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack + 3\\n\\nRazor Sharp + 1",
+    "decoration_skill": "Fire Attack + 3;Razor Sharp + 1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nPrevents your weapon from losing sharpness.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -397,7 +397,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Fire Attack +3\\n\\nGuard Up +1",
+    "decoration_skill": "Fire Attack +3;Guard Up +1",
     "decoration_description":
         "Increases fire element attack power. (Elemental attack power has a maximum limit.)\\nAllows you to guard against ordinarily unblockable attacks.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -467,7 +467,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nTetrad Shot + 1",
+    "decoration_skill": "Thunder Attack + 3;Tetrad Shot + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nIncreases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -477,7 +477,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nCritical Element + 1",
+    "decoration_skill": "Thunder Attack + 3;Critical Element + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nIncreases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -487,7 +487,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nPower Prolonger + 1",
+    "decoration_skill": "Thunder Attack + 3;Power Prolonger + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nAllows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -497,7 +497,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nFocus + 1",
+    "decoration_skill": "Thunder Attack + 3;Focus + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -507,7 +507,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nOffensive Guard + 1",
+    "decoration_skill": "Thunder Attack + 3;Offensive Guard + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -517,7 +517,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Thunder Attack + 3;Handicraft + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nIncreases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -527,7 +527,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nGuard + 1",
+    "decoration_skill": "Thunder Attack + 3;Guard + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -537,7 +537,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nSlugger + 1",
+    "decoration_skill": "Thunder Attack + 3;Slugger + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -547,7 +547,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nOpening Shot + 1",
+    "decoration_skill": "Thunder Attack + 3;Opening Shot + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nIncreases the bowgun's reload speed and increases the power of bullets when fully loaded.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -557,7 +557,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nBallistics + 1",
+    "decoration_skill": "Thunder Attack + 3;Ballistics + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nExtends the range in which ammo and arrows have maximum power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -567,7 +567,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nRapid Morph + 1",
+    "decoration_skill": "Thunder Attack + 3;Rapid Morph + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nIncreases switch speed and power for switch axes and charge blades.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -577,7 +577,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nRazor Sharp + 1",
+    "decoration_skill": "Thunder Attack + 3;Razor Sharp + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nPrevents your weapon from losing sharpness.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -587,7 +587,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Thunder Attack + 3\\n\\nGuard Up + 1",
+    "decoration_skill": "Thunder Attack + 3;Guard Up + 1",
     "decoration_description":
         "Increases thunder element attack power. (Elemental attack power has a maximum limit.)\\nAllows you to guard against ordinarily unblockable attacks.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -686,7 +686,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Charge Up +1\\n\\nAttack Boost  +1",
+    "decoration_skill": "Charge Up +1;Attack Boost  +1",
     "decoration_description":
         "Increases your power to induce stun when you hit a monster with a hammer's charged attack.\\nIncreases attack power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -696,7 +696,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Charge Up +1\\n\\nCritical Draw + 1",
+    "decoration_skill": "Charge Up +1;Critical Draw + 1",
     "decoration_description":
         "Increases your power to induce stun when you hit a monster with a hammer's charged attack.\\nIncreases affinity when performing draw attacks. (Not effective while riding.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -706,7 +706,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Charge Up + 1\\n\\nCritical Eye + 1",
+    "decoration_skill": "Charge Up + 1;Critical Eye + 1",
     "decoration_description":
         "Increases your power to induce stun when you hit a monster with a hammer's charged attack.\\nIncreases affinity.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -716,7 +716,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Charge Up +1\\n\\nHandicraft +1",
+    "decoration_skill": "Charge Up +1;Handicraft +1",
     "decoration_description":
         "Increases your power to induce stun when you hit a monster with a hammer's charged attack.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -726,7 +726,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Charge Up + 1\\n\\nSlugger + 1",
+    "decoration_skill": "Charge Up + 1;Slugger + 1",
     "decoration_description":
         "Increases your power to induce stun when you hit a monster with a hammer's charged attack.\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -736,7 +736,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Charge Master + 1\\n\\nHandicraft + 1",
+    "decoration_skill": "Charge Master + 1;Handicraft + 1",
     "decoration_description":
         "Increases element power and status buildup for charged attacks.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -746,7 +746,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Charge Master + 1\\n\\nSlugger + 1",
+    "decoration_skill": "Charge Master + 1;Slugger + 1",
     "decoration_description":
         "Increases element power and status buildup for charged attacks.\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -796,7 +796,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Element +3\\n\\nFire Attack +1",
+    "decoration_skill": "Critical Element +3;Fire Attack +1",
     "decoration_description":
         "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.\\nIncreases fire element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -806,7 +806,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Element + 3\\n\\nThunder Attack + 1",
+    "decoration_skill": "Critical Element + 3;Thunder Attack + 1",
     "decoration_description":
         "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.\\nIncreases thunder element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -816,7 +816,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Element + 3\\n\\nDragon Attack + 1",
+    "decoration_skill": "Critical Element + 3;Dragon Attack + 1",
     "decoration_description":
         "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.\\nIncreases dragon element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -826,7 +826,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Element + 3\\n\\nIce Attack + 1",
+    "decoration_skill": "Critical Element + 3;Ice Attack + 1",
     "decoration_description":
         "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.\\nIncreases ice element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -836,7 +836,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Element + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Critical Element + 3;Handicraft + 1",
     "decoration_description":
         "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -846,7 +846,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Element + 3\\n\\nGuard + 1",
+    "decoration_skill": "Critical Element + 3;Guard + 1",
     "decoration_description":
         "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -856,7 +856,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Element + 3\\n\\nSlugger +1",
+    "decoration_skill": "Critical Element + 3;Slugger +1",
     "decoration_description":
         "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -866,7 +866,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Element +3\\n\\nWater Attack +1",
+    "decoration_skill": "Critical Element +3;Water Attack +1",
     "decoration_description":
         "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.\\nIncreases water element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -896,7 +896,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Element +3\\n\\nBallistics + 1",
+    "decoration_skill": "Critical Element +3;Ballistics + 1",
     "decoration_description":
         "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.\\nExtends the range in which ammo and arrows have maximum power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -916,7 +916,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Status + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Critical Status + 3;Handicraft + 1",
     "decoration_description":
         "Increases abnormal status effects (paralysis, poison, sleep, blast) when landing critical hits.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -926,7 +926,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Status + 3\\n\\nGuard +1",
+    "decoration_skill": "Critical Status + 3;Guard +1",
     "decoration_description":
         "Increases abnormal status effects (paralysis, poison, sleep, blast) when landing critical hits.\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -936,7 +936,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Status +3\\n\\nBallistics + 1",
+    "decoration_skill": "Critical Status +3;Ballistics + 1",
     "decoration_description":
         "Increases abnormal status effects (paralysis, poison, sleep, blast) when landing critical hits.\\nExtends the range in which ammo and arrows have maximum power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -966,7 +966,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Critical Status + 3\\n\\nSlugger + 1",
+    "decoration_skill": "Critical Status + 3;Slugger + 1",
     "decoration_description":
         "Increases abnormal status effects (paralysis, poison, sleep, blast) when landing critical hits.\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1082,7 +1082,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack +3\\n\\nTetrad Shot + 1",
+    "decoration_skill": "Dragon Attack +3;Tetrad Shot + 1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nIncreases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1092,7 +1092,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack + 3\\n\\nCritical Element + 1",
+    "decoration_skill": "Dragon Attack + 3;Critical Element + 1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nIncreases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1102,7 +1102,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack +3\\n\\nPower Prolonger +1",
+    "decoration_skill": "Dragon Attack +3;Power Prolonger +1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nAllows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1112,7 +1112,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack +3\\n\\nFocus +1",
+    "decoration_skill": "Dragon Attack +3;Focus +1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nIncreases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1122,7 +1122,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack + 3\\n\\nOffensive Guard + 1",
+    "decoration_skill": "Dragon Attack + 3;Offensive Guard + 1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nTemporarily increases attack power after executing a perfectly/timed guard.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1132,7 +1132,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Dragon Attack + 3;Handicraft + 1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1142,7 +1142,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack + 3\\n\\nGuard + 1",
+    "decoration_skill": "Dragon Attack + 3;Guard + 1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1152,7 +1152,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack + 3\\n\\nSlugger + 1",
+    "decoration_skill": "Dragon Attack + 3;Slugger + 1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1162,7 +1162,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack +3\\n\\nOpening Shot +1",
+    "decoration_skill": "Dragon Attack +3;Opening Shot +1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nIncreases the bowgun's reload speed and increases the power of bullets when fully loaded.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1172,7 +1172,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack + 3\\n\\nBallistics + 1",
+    "decoration_skill": "Dragon Attack + 3;Ballistics + 1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nExtends the range in which ammo and arrows have maximum power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1182,7 +1182,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack + 3\\n\\nRapid Morph + 1",
+    "decoration_skill": "Dragon Attack + 3;Rapid Morph + 1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nIncreases switch speed and power for switch axes and charge blades.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1192,7 +1192,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack + 3\\n\\nRazor Sharp + 1",
+    "decoration_skill": "Dragon Attack + 3;Razor Sharp + 1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nPrevents your weapon from losing sharpness.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1202,7 +1202,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Dragon Attack + 3\\n\\nGuard Up + 1",
+    "decoration_skill": "Dragon Attack + 3;Guard Up + 1",
     "decoration_description":
         "Increases dragon element attack power. (Elemental attack power has a maximum limit.)\\nAllows you to guard against ordinarily unblockable attacks.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1329,7 +1329,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Power Prolonger + 3\\n\\nFire Attack + 1",
+    "decoration_skill": "Power Prolonger + 3;Fire Attack + 1",
     "decoration_description":
         "Allows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.\\nIncreases fire element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1339,7 +1339,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Power Prolonger + 3\\n\\nThunder Attack + 1",
+    "decoration_skill": "Power Prolonger + 3;Thunder Attack + 1",
     "decoration_description":
         "Allows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.\\nIncreases thunder element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1349,7 +1349,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Power Prolonger + 3\\n\\nDragon Attack + 1",
+    "decoration_skill": "Power Prolonger + 3;Dragon Attack + 1",
     "decoration_description":
         "Allows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.\\nIncreases dragon element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1359,7 +1359,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Power Prolonger + 3\\n\\nIce Attack + 1",
+    "decoration_skill": "Power Prolonger + 3;Ice Attack + 1",
     "decoration_description":
         "Allows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.\\nIncreases ice element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1369,7 +1369,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Power Prolonger + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Power Prolonger + 3;Handicraft + 1",
     "decoration_description":
         "Allows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1379,7 +1379,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Power Prolonger + 3\\n\\nWater Attack + 1",
+    "decoration_skill": "Power Prolonger + 3;Water Attack + 1",
     "decoration_description":
         "Allows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.\\nIncreases water element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1484,7 +1484,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Airborne + 1\\n\\nAttack Boost + 1",
+    "decoration_skill": "Airborne + 1;Attack Boost + 1",
     "decoration_description":
         "Increases the damage caused by jumping attacks.\\nIncreases attack power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1494,7 +1494,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Airborne + 1\\n\\nCritical Draw + 1",
+    "decoration_skill": "Airborne + 1;Critical Draw + 1",
     "decoration_description":
         "Increases the damage caused by jumping attacks.\\nIncreases affinity when performing draw attacks. (Not effective while riding.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1504,7 +1504,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Airborne + 1\\n\\nCritical Eye + 1",
+    "decoration_skill": "Airborne + 1;Critical Eye + 1",
     "decoration_description":
         "Increases the damage caused by jumping attacks.\\nIncreases affinity.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1514,7 +1514,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Airborne + 1\\n\\nHandicraft + 1",
+    "decoration_skill": "Airborne + 1;Handicraft + 1",
     "decoration_description":
         "Increases the damage caused by jumping attacks.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1554,7 +1554,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Focus + 3\\n\\nFire Attack + 1",
+    "decoration_skill": "Focus + 3;Fire Attack + 1",
     "decoration_description":
         "Increases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.\\nIncreases fire element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1564,7 +1564,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Focus + 3\\n\\nThunder Attack + 1",
+    "decoration_skill": "Focus + 3;Thunder Attack + 1",
     "decoration_description":
         "Increases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.\\nIncreases thunder element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1574,7 +1574,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Focus + 3\\n\\nDragon Attack + 1",
+    "decoration_skill": "Focus + 3;Dragon Attack + 1",
     "decoration_description":
         "Increases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.\\nIncreases dragon element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1584,7 +1584,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Focus + 3\\n\\nIce Attack + 1",
+    "decoration_skill": "Focus + 3;Ice Attack + 1",
     "decoration_description":
         "Increases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.\\nIncreases ice element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1594,7 +1594,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Focus + 3\\n\\nHandicraft +1",
+    "decoration_skill": "Focus + 3;Handicraft +1",
     "decoration_description":
         "Increases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1604,7 +1604,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Focus + 3\\n\\nSlugger + 1",
+    "decoration_skill": "Focus + 3;Slugger + 1",
     "decoration_description":
         "Increases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1614,7 +1614,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Focus + 3\\n\\nBallistics + 1",
+    "decoration_skill": "Focus + 3;Ballistics + 1",
     "decoration_description":
         "Increases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.\\nExtends the range in which ammo and arrows have maximum power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1624,7 +1624,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Focus +3\\n\\nWater Attack +1",
+    "decoration_skill": "Focus +3;Water Attack +1",
     "decoration_description":
         "Increases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.\\nIncreases water element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1703,7 +1703,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack +3\\n\\nTetrad Shot +1",
+    "decoration_skill": "Ice Attack +3;Tetrad Shot +1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nIncreases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1713,7 +1713,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nCritical Element + 1",
+    "decoration_skill": "Ice Attack + 3;Critical Element + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nIncreases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1723,7 +1723,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nPower Prolonger + 1",
+    "decoration_skill": "Ice Attack + 3;Power Prolonger + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nAllows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1733,7 +1733,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nFocus + 1",
+    "decoration_skill": "Ice Attack + 3;Focus + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nIncreases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1743,7 +1743,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nOffensive Guard + 1",
+    "decoration_skill": "Ice Attack + 3;Offensive Guard + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nTemporarily increases attack power after executing a perfectly/timed guard.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1753,7 +1753,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Ice Attack + 3;Handicraft + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1763,7 +1763,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nGuard +1",
+    "decoration_skill": "Ice Attack + 3;Guard +1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1773,7 +1773,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nSlugger + 1",
+    "decoration_skill": "Ice Attack + 3;Slugger + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1783,7 +1783,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nOpening Shot + 1",
+    "decoration_skill": "Ice Attack + 3;Opening Shot + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nIncreases the bowgun's reload speed and increases the power of bullets when fully loaded.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1793,7 +1793,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nBallistics + 1",
+    "decoration_skill": "Ice Attack + 3;Ballistics + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nExtends the range in which ammo and arrows have maximum power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1803,7 +1803,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nRapid Morph + 1",
+    "decoration_skill": "Ice Attack + 3;Rapid Morph + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nIncreases switch speed and power for switch axes and charge blades.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1813,7 +1813,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nRazor Sharp + 1",
+    "decoration_skill": "Ice Attack + 3;Razor Sharp + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nPrevents your weapon from losing sharpness.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1823,7 +1823,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Ice Attack + 3\\n\\nGuard Up + 1",
+    "decoration_skill": "Ice Attack + 3;Guard Up + 1",
     "decoration_description":
         "Increases ice element attack power. (Elemental attack power has a maximum limit.)\\nAllows you to guard against ordinarily unblockable attacks.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1883,7 +1883,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Punishing Draw + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Punishing Draw + 3;Handicraft + 1",
     "decoration_description":
         "Adds a stun effect to draw attacks and slightly increases attack power. (Not effective while riding.)\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1893,7 +1893,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Punishing Draw +3\\n\\nGuard +1",
+    "decoration_skill": "Punishing Draw +3;Guard +1",
     "decoration_description":
         "Adds a stun effect to draw attacks and slightly increases attack power. (Not effective while riding.)\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1963,7 +1963,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Speed Sharpening + 2\\n\\nCritical Draw +1",
+    "decoration_skill": "Speed Sharpening + 2;Critical Draw +1",
     "decoration_description":
         "Speeds up weapon sharpening when using a whetstone.\\nIncreases affinity when performing draw attacks. (Not effective while riding.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1973,7 +1973,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Speed Sharpening +2\\n\\nCritical Eye + 1",
+    "decoration_skill": "Speed Sharpening +2;Critical Eye + 1",
     "decoration_description":
         "Speeds up weapon sharpening when using a whetstone.\\nIncreases affinity.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1983,7 +1983,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Speed Sharpening +2\\n\\nHandicraft + 1",
+    "decoration_skill": "Speed Sharpening +2;Handicraft + 1",
     "decoration_description":
         "Speeds up weapon sharpening when using a whetstone.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -1993,7 +1993,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Speed Sharpening + 2\\n\\nGuard + 1",
+    "decoration_skill": "Speed Sharpening + 2;Guard + 1",
     "decoration_description":
         "Speeds up weapon sharpening when using a whetstone.\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2003,7 +2003,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Speed Sharpening +2\\n\\nSlugger + 1",
+    "decoration_skill": "Speed Sharpening +2;Slugger + 1",
     "decoration_description":
         "Speeds up weapon sharpening when using a whetstone.\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2053,7 +2053,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Offensive Guard + 3\\n\\nFire Attack + 1",
+    "decoration_skill": "Offensive Guard + 3;Fire Attack + 1",
     "decoration_description":
         "Temporarily increases attack power after executing a perfectly/timed guard.\\nIncreases fire element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2073,7 +2073,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Offensive Guard + 3\\n\\nDragon Attack + 1",
+    "decoration_skill": "Offensive Guard + 3;Dragon Attack + 1",
     "decoration_description":
         "Temporarily increases attack power after executing a perfectly/timed guard.\\nIncreases dragon element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2083,7 +2083,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Offensive Guard + 3\\n\\nIce Attack + 1",
+    "decoration_skill": "Offensive Guard + 3;Ice Attack + 1",
     "decoration_description":
         "Temporarily increases attack power after executing a perfectly/timed guard.\\nIncreases ice element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2093,7 +2093,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Offensive Guard + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Offensive Guard + 3;Handicraft + 1",
     "decoration_description":
         "Temporarily increases attack power after executing a perfectly/timed guard.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2103,7 +2103,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Offensive Guard + 3\\n\\nGuard + 1",
+    "decoration_skill": "Offensive Guard + 3;Guard + 1",
     "decoration_description":
         "Temporarily increases attack power after executing a perfectly/timed guard.\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2113,7 +2113,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Offensive Guard + 3\\n\\nWater Attack + 1",
+    "decoration_skill": "Offensive Guard + 3;Water Attack + 1",
     "decoration_description":
         "Temporarily increases attack power after executing a perfectly/timed guard.\\nIncreases water element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2278,7 +2278,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Load Shells + 2\\n\\nAttack Boost + 1",
+    "decoration_skill": "Load Shells + 2;Attack Boost + 1",
     "decoration_description":
         "Improves reloading, and increases the gunlance's shell capacity and charge blade's phial capacity.\\nIncreases attack power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2288,7 +2288,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Load Shells + 2\\n\\nCritical Draw + 1",
+    "decoration_skill": "Load Shells + 2;Critical Draw + 1",
     "decoration_description":
         "Improves reloading, and increases the gunlance's shell capacity and charge blade's phial capacity.\\nIncreases affinity when performing draw attacks. (Not effective while riding.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2308,7 +2308,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Load Shells + 2\\n\\nHandicraft + 1",
+    "decoration_skill": "Load Shells + 2;Handicraft + 1",
     "decoration_description":
         "Improves reloading, and increases the gunlance's shell capacity and charge blade's phial capacity.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2318,7 +2318,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Load Shells + 2\\n\\nGuard + 1",
+    "decoration_skill": "Load Shells + 2;Guard + 1",
     "decoration_description":
         "Improves reloading, and increases the gunlance's shell capacity and charge blade's phial capacity.\\nReduces knockbacks and stamina depletion when guarding",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2431,14 +2431,14 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_skill": "Opening Shot +3",
     "decoration_description":
         "Increases the bowgun's reload speed and increases the power of bullets when fully loaded.",
-    "decoration_melding_cost": "Glowing Orb - Sword\\n\\nAncient Orb - Sword"
+    "decoration_melding_cost": "Glowing Orb - Sword;Ancient Orb - Sword"
   },
   "Opener/Blaze Jewel 3": {
     "decoration_name": "Opener/Blaze Jewel 3",
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Opening Shot + 3\\n\\nFire Attack + 1",
+    "decoration_skill": "Opening Shot + 3;Fire Attack + 1",
     "decoration_description":
         "Increases the bowgun's reload speed and increases the power of bullets when fully loaded.\\nIncreases fire element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2448,7 +2448,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Opening Shot + 3\\n\\nThunder Attack + 1",
+    "decoration_skill": "Opening Shot + 3;Thunder Attack + 1",
     "decoration_description":
         "Increases the bowgun's reload speed and increases the power of bullets when fully loaded.\\nIncreases thunder element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2458,7 +2458,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Opening Shot + 3\\n\\nDragon Attack + 1",
+    "decoration_skill": "Opening Shot + 3;Dragon Attack + 1",
     "decoration_description":
         "Increases the bowgun's reload speed and increases the power of bullets when fully loaded.\\nIncreases dragon element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2468,7 +2468,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Opening Shot + 3\\n\\nIce Attack + 1",
+    "decoration_skill": "Opening Shot + 3;Ice Attack + 1",
     "decoration_description":
         "Increases the bowgun's reload speed and increases the power of bullets when fully loaded.\\nIncreases ice element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2478,7 +2478,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Opening Shot + 3\\n\\nGuard + 1",
+    "decoration_skill": "Opening Shot + 3;Guard + 1",
     "decoration_description":
         "Increases the bowgun's reload speed and increases the power of bullets when fully loaded.\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2488,7 +2488,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Opening Shot + 3\\n\\nBallistics + 1",
+    "decoration_skill": "Opening Shot + 3;Ballistics + 1",
     "decoration_description":
         "Increases the bowgun's reload speed and increases the power of bullets when fully loaded.\\nExtends the range in which ammo and arrows have maximum power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2498,7 +2498,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Opening Shot + 3\\n\\nWater Attack + 1",
+    "decoration_skill": "Opening Shot + 3;Water Attack + 1",
     "decoration_description":
         "Increases the bowgun's reload speed and increases the power of bullets when fully loaded.\\nIncreases water element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2510,7 +2510,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_slot": "Slot 3",
     "decoration_skill": "Para Functionality +1",
     "decoration_description": "Allows you to apply paralysis coatings.",
-    "decoration_melding_cost": "Glowing Orb - Sword\\n\\nAncient Orb - Sword"
+    "decoration_melding_cost": "Glowing Orb - Sword;Ancient Orb - Sword"
   },
   "Paralyzer Jewel 1": {
     "decoration_name": "Paralyzer Jewel 1",
@@ -2605,7 +2605,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Poison Duration Up + 1\\n\\nAttack Boost + 1",
+    "decoration_skill": "Poison Duration Up + 1;Attack Boost + 1",
     "decoration_description":
         "Extends the duration of your poison's effect on monsters.\\nIncreases attack power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2615,7 +2615,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Poison Duration Up + 1\\n\\nCritical Draw + 1",
+    "decoration_skill": "Poison Duration Up + 1;Critical Draw + 1",
     "decoration_description":
         "Extends the duration of your poison's effect on monsters.\\nIncreases affinity when performing draw attacks. (Not effective while riding.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2625,7 +2625,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Poison Duration Up +1\\n\\nCritical Eye +1",
+    "decoration_skill": "Poison Duration Up +1;Critical Eye +1",
     "decoration_description":
         "Extends the duration of your poison's effect on monsters.\\nIncreases affinity.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2635,7 +2635,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Poison Duration Up +1\\n\\nHandicraft + 1",
+    "decoration_skill": "Poison Duration Up +1;Handicraft + 1",
     "decoration_description":
         "Extends the duration of your poison's effect on monsters.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2645,7 +2645,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Poison Duration Up + 1\\n\\nGuard +1",
+    "decoration_skill": "Poison Duration Up + 1;Guard +1",
     "decoration_description":
         "Extends the duration of your poison's effect on monsters.\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2655,7 +2655,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Poison Duration Up +1\\n\\nSlugger +1",
+    "decoration_skill": "Poison Duration Up +1;Slugger +1",
     "decoration_description":
         "Extends the duration of your poison's effect on monsters.\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2665,7 +2665,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Poison Duration Up + 1\\n\\nBallistics + 1",
+    "decoration_skill": "Poison Duration Up + 1;Ballistics + 1",
     "decoration_description":
         "Extends the duration of your poison's effect on monsters.\\nExtends the range in which ammo and arrows have maximum power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2764,7 +2764,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Rapid Morph + 3\\n\\nFire Attack + 1",
+    "decoration_skill": "Rapid Morph + 3;Fire Attack + 1",
     "decoration_description":
         "Increases switch speed and power for switch axes and charge blades.\\nIncreases fire element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2774,7 +2774,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Rapid Morph + 3\\n\\nThunder Attack + 1",
+    "decoration_skill": "Rapid Morph + 3;Thunder Attack + 1",
     "decoration_description":
         "Increases switch speed and power for switch axes and charge blades.\\nIncreases thunder element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2784,7 +2784,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Rapid Morph + 3\\n\\nDragon Attack + 1",
+    "decoration_skill": "Rapid Morph + 3;Dragon Attack + 1",
     "decoration_description":
         "Increases switch speed and power for switch axes and charge blades.\\nIncreases dragon element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2794,7 +2794,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Rapid Morph + 3\\n\\nIce Attack + 1",
+    "decoration_skill": "Rapid Morph + 3;Ice Attack + 1",
     "decoration_description":
         "Increases switch speed and power for switch axes and charge blades.\\nIncreases ice element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2804,7 +2804,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Rapid Morph + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Rapid Morph + 3;Handicraft + 1",
     "decoration_description":
         "Increases switch speed and power for switch axes and charge blades.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2814,7 +2814,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Rapid Morph + 3\\n\\nGuard + 1",
+    "decoration_skill": "Rapid Morph + 3;Guard + 1",
     "decoration_description":
         "Increases switch speed and power for switch axes and charge blades.\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2824,7 +2824,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Rapid Morph + 3\\n\\nSlugger + 1",
+    "decoration_skill": "Rapid Morph + 3;Slugger + 1",
     "decoration_description":
         "Increases switch speed and power for switch axes and charge blades.\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2834,7 +2834,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Rapid Morph + 3\\n\\nWater Attack + 1",
+    "decoration_skill": "Rapid Morph + 3;Water Attack + 1",
     "decoration_description":
         "Increases switch speed and power for switch axes and charge blades.\\nIncreases water element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2872,7 +2872,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Razor Sharp + 3\\n\\nSlugger + 1",
+    "decoration_skill": "Razor Sharp + 3;Slugger + 1",
     "decoration_description":
         "Prevents your weapon from losing sharpness.\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2910,7 +2910,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Razor Sharp + 3\\n\\nFire Attack + 1",
+    "decoration_skill": "Razor Sharp + 3;Fire Attack + 1",
     "decoration_description":
         "Prevents your weapon from losing sharpness.\\nIncreases fire element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2920,7 +2920,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Razor Sharp + 3\\n\\nThunder Attack + 1",
+    "decoration_skill": "Razor Sharp + 3;Thunder Attack + 1",
     "decoration_description":
         "Prevents your weapon from losing sharpness.\\nIncreases thunder element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2930,7 +2930,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Razor Sharp + 3\\n\\nDragon Attack + 1",
+    "decoration_skill": "Razor Sharp + 3;Dragon Attack + 1",
     "decoration_description":
         "Prevents your weapon from losing sharpness.\\nIncreases dragon element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2940,7 +2940,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Razor Sharp + 3\\n\\nIce Attack + 1",
+    "decoration_skill": "Razor Sharp + 3;Ice Attack + 1",
     "decoration_description":
         "Prevents your weapon from losing sharpness.\\nIncreases ice element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2950,7 +2950,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Razor Sharp + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Razor Sharp + 3;Handicraft + 1",
     "decoration_description":
         "Prevents your weapon from losing sharpness.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2960,7 +2960,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Razor Sharp + 3\\n\\nGuard + 1",
+    "decoration_skill": "Razor Sharp + 3;Guard + 1",
     "decoration_description":
         "Prevents your weapon from losing sharpness.\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -2970,7 +2970,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 7",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Razor Sharp +3\\n\\nWater Attack + 1",
+    "decoration_skill": "Razor Sharp +3;Water Attack + 1",
     "decoration_description":
         "Prevents your weapon from losing sharpness.\\nIncreases water element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3078,7 +3078,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Guard Up + 3\\n\\nFire Attack + 1",
+    "decoration_skill": "Guard Up + 3;Fire Attack + 1",
     "decoration_description":
         "Allows you to guard against ordinarily unblockable attacks.\\nIncreases fire element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3088,7 +3088,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Guard Up +3\\n\\nThunder Attack + 1",
+    "decoration_skill": "Guard Up +3;Thunder Attack + 1",
     "decoration_description":
         "Allows you to guard against ordinarily unblockable attacks.\\nIncreases thunder element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3098,7 +3098,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Guard Up + 3\\n\\nDragon Attack + 1",
+    "decoration_skill": "Guard Up + 3;Dragon Attack + 1",
     "decoration_description":
         "Allows you to guard against ordinarily unblockable attacks.\\nIncreases dragon element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3108,7 +3108,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Guard Up + 3\\n\\nIce Attack + 1",
+    "decoration_skill": "Guard Up + 3;Ice Attack + 1",
     "decoration_description":
         "Allows you to guard against ordinarily unblockable attacks.\\nIncreases ice element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3118,7 +3118,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Guard Up +3\\n\\nHandicraft + 1",
+    "decoration_skill": "Guard Up +3;Handicraft + 1",
     "decoration_description":
         "Allows you to guard against ordinarily unblockable attacks.\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3128,7 +3128,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Guard Up + 3\\n\\nGuard + 1",
+    "decoration_skill": "Guard Up + 3;Guard + 1",
     "decoration_description":
         "Allows you to guard against ordinarily unblockable attacks.\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3138,7 +3138,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Guard Up + 3\\n\\nWater Attack + 1",
+    "decoration_skill": "Guard Up + 3;Water Attack + 1",
     "decoration_description":
         "Allows you to guard against ordinarily unblockable attacks.\\nIncreases water element attack power. (Elemental attack power has a maximum limit.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3190,7 +3190,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_slot": "Slot 3",
     "decoration_skill": "Sleep Functionality + 1",
     "decoration_description": "Allows you to apply sleep coatings.",
-    "decoration_melding_cost": "Glowing Orb - Sword\\n\\nAncient Orb - Sword"
+    "decoration_melding_cost": "Glowing Orb - Sword;Ancient Orb - Sword"
   },
   "Sonorous Jewel 2": {
     "decoration_name": "Sonorous Jewel 2",
@@ -3207,7 +3207,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Horn Maestro +2\\n\\nAttack Boost +1",
+    "decoration_skill": "Horn Maestro +2;Attack Boost +1",
     "decoration_description":
         "Increases the effect duration of hunting horn melodies. (Effect lost when you change weapons.)\\nIncreases attack power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3217,7 +3217,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Horn Maestro +2\\n\\nCritical Draw +1",
+    "decoration_skill": "Horn Maestro +2;Critical Draw +1",
     "decoration_description":
         "Increases the effect duration of hunting horn melodies. (Effect lost when you change weapons.)\\nIncreases affinity when performing draw attacks. (Not effective while riding.)",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3227,7 +3227,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Horn Maestro +2\\n\\nCritical Eye +1",
+    "decoration_skill": "Horn Maestro +2;Critical Eye +1",
     "decoration_description":
         "Increases the effect duration of hunting horn melodies. (Effect lost when you change weapons.)\\nIncreases affinity.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3237,7 +3237,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Horn Maestro + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Horn Maestro + 3;Handicraft + 1",
     "decoration_description":
         "Increases the effect duration of hunting horn melodies. (Effect lost when you change weapons.)\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3247,7 +3247,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Horn Maestro + 3\\n\\nSlugger + 1",
+    "decoration_skill": "Horn Maestro + 3;Slugger + 1",
     "decoration_description":
         "Increases the effect duration of hunting horn melodies. (Effect lost when you change weapons.)\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3326,7 +3326,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nTetrad Shot + 1",
+    "decoration_skill": "Water Attack + 3;Tetrad Shot + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nIncreases affinity of bowgun ammo/ coatings from the fourth shot and attack of the fourth and sixth shots.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3336,7 +3336,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nCritical Element + 1",
+    "decoration_skill": "Water Attack + 3;Critical Element + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nIncreases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3346,7 +3346,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nPower Prolonger + 1",
+    "decoration_skill": "Water Attack + 3;Power Prolonger + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nAllows long swords, dual blades, insect glaives, switch axes, and charge blades to stay powered up longer.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3356,7 +3356,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nFocus + 1",
+    "decoration_skill": "Water Attack + 3;Focus + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nIncreases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3366,7 +3366,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nOffensive Guard + 1",
+    "decoration_skill": "Water Attack + 3;Offensive Guard + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nTemporarily increases attack power after executing a perfectly/timed guard.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3376,7 +3376,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nHandicraft + 1",
+    "decoration_skill": "Water Attack + 3;Handicraft + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nExtends the weapon sharpness gauge. However, it will not increase the gauge past its maximum.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3386,7 +3386,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nGuard  + 1",
+    "decoration_skill": "Water Attack + 3;Guard  + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nReduces knockbacks and stamina depletion when guarding.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3396,7 +3396,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nSlugger + 1",
+    "decoration_skill": "Water Attack + 3;Slugger + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nMakes it easier to stun monsters.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3406,7 +3406,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nOpening Shot + 1",
+    "decoration_skill": "Water Attack + 3;Opening Shot + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nIncreases the bowgun's reload speed and increases the power of bullets when fully loaded.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3416,7 +3416,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nBallistics + 1",
+    "decoration_skill": "Water Attack + 3;Ballistics + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nExtends the range in which ammo and arrows have maximum power.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3426,7 +3426,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nRapid Morph + 1",
+    "decoration_skill": "Water Attack + 3;Rapid Morph + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nIncreases switch speed and power for switch axes and charge blades.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3436,7 +3436,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nRazor Sharp + 1",
+    "decoration_skill": "Water Attack + 3;Razor Sharp + 1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nPrevents your weapon from losing sharpness.",
     "decoration_melding_cost": "Ancient Orb - Sword"
@@ -3446,7 +3446,7 @@ Map<String, Map<String, dynamic>> decorations = {
     "decoration_type": "Weapon Decoration",
     "decoration_rarity": "Rarity 6",
     "decoration_slot": "Slot 3",
-    "decoration_skill": "Water Attack + 3\\n\\nGuard Up +1",
+    "decoration_skill": "Water Attack + 3;Guard Up +1",
     "decoration_description":
         "Increases water element attack power. (Elemental attack power has a maximum limit.)\\nAllows you to guard against ordinarily unblockable attacks.",
     "decoration_melding_cost": "Ancient Orb - Sword"

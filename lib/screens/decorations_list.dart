@@ -107,55 +107,11 @@ class _DecorationsListState extends State<DecorationsList> {
     );
   }
 
-  // Widget _decorationLeading(String name, int slot, List<String> skills) {
-  //   return Column(
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     children: skills.map((skill) {
-  //       return FutureBuilder<String?>(
-  //         future: getSkillUrl(name, slot, skills[0].skillLevel),
-  //         builder: (context, snapshot) {
-  //           if (snapshot.connectionState == ConnectionState.waiting) {
-  //             return SizedBox(
-  //               width: 28,
-  //               height: 28,
-  //               child: FadeIn(
-  //                 child:
-  //                     Image.asset('assets/imgs/decorations/default_jewel.png'),
-  //               ),
-  //             );
-  //           } else if (snapshot.hasError ||
-  //               !snapshot.hasData ||
-  //               snapshot.data == null) {
-  //             return SizedBox(
-  //               width: 28,
-  //               height: 28,
-  //               child: FadeIn(
-  //                 child:
-  //                     Image.asset('assets/imgs/decorations/default_jewel.png'),
-  //               ),
-  //             );
-  //           } else {
-  //             return SizedBox(
-  //               width: 28,
-  //               height: 28,
-  //               child: FadeIn(child: Image.network(snapshot.data!)),
-  //             );
-  //           }
-  //         },
-  //       );
-  //     }).toList(),
-  //   );
-  // }
-
   Widget _decorationLeading(
       String skillName, String decorationSlot, String skillsString) {
-    // Dividir el string de habilidades por '\\n\\'
     final skills = skillsString.split('\\n\\');
     final skillLevel = skillName[skillName.length - 1];
     final slot = decorationSlot[decorationSlot.length - 1];
-
-    // Obtener solo la primera habilidad
-    final firstSkill = skills.isNotEmpty ? skills[0] : '';
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

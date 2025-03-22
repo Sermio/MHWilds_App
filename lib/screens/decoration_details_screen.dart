@@ -1,82 +1,131 @@
-// decoration_details.dart
-
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/skill_item.dart';
+import 'package:mhwilds_app/data/skills.dart';
 import 'package:mhwilds_app/models/decoration.dart';
+import 'package:mhwilds_app/models/skill.dart';
+import 'package:mhwilds_app/utils/overlay_controller.dart'; // Añadir el controlador de overlay
+import 'package:mhwilds_app/components/skill_container_preview.dart';
+import 'package:mhwilds_app/components/c_preview_container.dart';
 
-class DecorationDetails extends StatelessWidget {
+class DecorationDetails extends StatefulWidget {
   const DecorationDetails({super.key, required this.decoration});
 
   final DecorationItem decoration;
 
   @override
+  State<DecorationDetails> createState() => _DecorationDetailsState();
+}
+
+class _DecorationDetailsState extends State<DecorationDetails> {
+  List<Map<String, dynamic>> cleanedSkillsWithLevel = [];
+  final overlayController = OverlayController(); // Instanciar el controlador
+
+  void cleanSkills() {
+    String decorationSkills = widget.decoration.decorationSkill;
+
+    List<String> skillList = decorationSkills.split(';');
+
+    cleanedSkillsWithLevel = skillList.map((skill) {
+      final RegExp regExp = RegExp(r'(\D+)\s?\+\s?(\d+)');
+      final match = regExp.firstMatch(skill);
+
+      if (match != null) {
+        String cleanedSkill = match.group(1)!.trim();
+        int skillNumber = int.parse(match.group(2)!);
+        return {'name': cleanedSkill, 'level': skillNumber};
+      }
+      return {'name': skill, 'level': 0};
+    }).toList();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    cleanSkills();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // final overlayController = OverlayController();
+    List<Skill> foundSkills = [];
+
+    for (var cleanedSkill in cleanedSkillsWithLevel) {
+      // Asegúrate de que las habilidades están disponibles en el mapa `skills`
+      if (skills.containsKey(cleanedSkill['name'])) {
+        Skill skill = Skill.fromMap(skills[cleanedSkill['name']]!);
+        foundSkills.add(skill);
+      }
+    }
+
+    List<Skill> filteredSkills = foundSkills.isNotEmpty ? foundSkills : [];
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${decoration.decorationName} details'),
+        title: Text('${widget.decoration.decorationName} details'),
       ),
-      body: const Stack(
+      body: Stack(
         children: [
           SingleChildScrollView(
             child: Center(
               child: Column(
                 children: [
-                  Center(
+                  const Center(
                     child: Text(
                       "Decoration Skills",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  // if (decoration.skills.isNotEmpty) ...[
-                  //   Column(
-                  //     children: decoration.skills.map((skill) {
-                  //       final GlobalKey gestureKey = GlobalKey();
-                  //       return const SizedBox();
-                  //       // SkillItem(
-                  //       //   skill: skill,
-                  //       //   gestureKey: gestureKey,
-                  //       //   onTap: () {
-                  //       //     overlayController.toggleOverlay(
-                  //       //       skillId: skill.skillId,
-                  //       //       skillLevel: skill.level,
-                  //       //       gestureKey: gestureKey,
-                  //       //     );
-                  //       //   },
-                  //       // );
-                  //     }).toList(),
-                  //   ),
-                  // ] else ...[
-                  //   const Text("No skills available"),
-                  // ],
-                  SizedBox(height: 80),
+                  if (filteredSkills.isNotEmpty)
+                    Column(
+                      children: filteredSkills.map((skill) {
+                        final GlobalKey gestureKey = GlobalKey();
+                        return SkillItem(
+                          skill: skill,
+                          gestureKey: gestureKey,
+                          onTap: () {
+                            // Activar el overlay al hacer clic
+                            overlayController.toggleOverlay(
+                              skillProgression: skill.progression,
+                              skillLevel: skill.levels
+                                  .toString(), // Asegúrate de que este campo sea correcto
+                              gestureKey: gestureKey,
+                            );
+                          },
+                        );
+                      }).toList(),
+                    )
+                  else
+                    const Text("No skills available"),
+                  const SizedBox(height: 80),
                 ],
               ),
             ),
           ),
-          // ValueListenableBuilder<bool>(
-          //   valueListenable: overlayController.overlayVisible,
-          //   builder: (context, isVisible, child) {
-          //     if (isVisible) {
-          //       return ValueListenableBuilder<Offset>(
-          //         valueListenable: overlayController.overlayPosition,
-          //         builder: (context, position, child) {
-          //           return CcontainerPreview(
-          //             overlayPortalController:
-          //                 overlayController.overlayPortalController,
-          //             position: position,
-          //             content: SkillContainerPreview(
-          //               skillId: overlayController.selectedSkillId.value,
-          //               skillLevel: overlayController.selectedSkillLevel.value,
-          //             ),
-          //           );
-          //         },
-          //       );
-          //     }
-          //     return Container();
-          //   },
-          // ),
+          // Mostrar el overlay si está activo
+          ValueListenableBuilder<bool>(
+            // Escucha los cambios en la visibilidad del overlay
+            valueListenable: overlayController.overlayVisible,
+            builder: (context, isVisible, child) {
+              if (isVisible) {
+                return ValueListenableBuilder<Offset>(
+                  valueListenable: overlayController.overlayPosition,
+                  builder: (context, position, child) {
+                    return CcontainerPreview(
+                      overlayPortalController:
+                          overlayController.overlayPortalController,
+                      position: position,
+                      content: SkillContainerPreview(
+                        skillProgression:
+                            overlayController.selectedSkillProgression.value,
+                        skillLevel: overlayController.selectedSkillLevel.value,
+                      ),
+                    );
+                  },
+                );
+              }
+              return Container(); // Si no está visible, no se muestra nada
+            },
+          ),
         ],
       ),
     );
