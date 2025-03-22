@@ -7,14 +7,13 @@ Map<String, Map<String, dynamic>> materials = {
   "Acute Fang": {
     "name": "ACUTE FANG",
     "rarity": "Rarity 6",
-    "source":
-        "Talioth; Gajios; Piragill; Kranodath; Porkeplume; Guardian Seikret"
+    "source": "Talioth;Gajios;Piragill;Kranodath;Porkeplume;Guardian Seikret"
   },
   "Advanced Armor Sphere": {
     "name": "ADVANCED ARMOR SPHERE",
     "rarity": "Rarity 6",
     "source":
-        "Received as a reward for many Quests.; Consult the individual page to learn about them."
+        "Received as a reward for many Quests.;Consult the individual page to learn about them."
   },
   "Ajarakan Carapace": {
     "name": "AJARAKAN CARAPACE",
@@ -74,13 +73,13 @@ Map<String, Map<String, dynamic>> materials = {
   "Aqua Sac": {
     "name": "AQUA SAC",
     "rarity": "Rarity 4",
-    "source": "Balahara; Uth Duna"
+    "source": "Balahara;Uth Duna"
   },
   "Argecite": {
     "name": "ARGECITE",
     "rarity": "Rarity 5",
     "source":
-        "Hunters can obtain Argecite by trading with Nata. He can be found at the Suja Base Camp and Windward Plains Base Camp.; Argecite can also be obtained from Festival Shares at the Smelting Foundry"
+        "Hunters can obtain Argecite by trading with Nata. He can be found at the Suja Base Camp and Windward Plains Base Camp.;Argecite can also be obtained from Festival Shares at the Smelting Foundry"
   },
   "Arkveld Armorplate": {
     "name": "ARKVELD ARMORPLATE",
@@ -121,13 +120,13 @@ Map<String, Map<String, dynamic>> materials = {
     "name": "ARMOR SPHERE +",
     "rarity": "Rarity 5",
     "source":
-        "Received as a reward for many Quests.; Consult the individual page to learn about them."
+        "Received as a reward for many Quests.;Consult the individual page to learn about them."
   },
   "Armor Sphere": {
     "name": "ARMOR SPHERE",
     "rarity": "Rarity 4",
     "source":
-        "Received as a reward for many Quests.; Consult the individual page to learn about them."
+        "Received as a reward for many Quests.;Consult the individual page to learn about them."
   },
   "Azuz Tanned Leather": {
     "name": "AZUZ TANNED LEATHER",
@@ -188,12 +187,12 @@ Map<String, Map<String, dynamic>> materials = {
   "Beast Gem": {
     "name": "BEAST GEM",
     "rarity": "Rarity 7",
-    "source": "Blangonga; Congalala; Doshaguma; Guardian Doshaguma"
+    "source": "Blangonga;Congalala;Doshaguma;Guardian Doshaguma"
   },
   "Bird Wyvern Gem": {
     "name": "BIRD WYVERN GEM",
     "rarity": "Rarity 7",
-    "source": "Yian Kut-Ku; Gypceros"
+    "source": "Yian Kut-Ku;Gypceros"
   },
   "Blangonga Certificate S": {
     "name": "BLANGONGA CERTIFICATE S",
@@ -298,7 +297,7 @@ Map<String, Map<String, dynamic>> materials = {
   "Colossal Bone": {
     "name": "COLOSSAL BONE",
     "rarity": "Rarity 6",
-    "source": "Conga; Blango"
+    "source": "Conga;Blango"
   },
   "Comaqchi Shell": {
     "name": "COMAQCHI SHELL",
@@ -313,7 +312,7 @@ Map<String, Map<String, dynamic>> materials = {
   "Coma Sac": {
     "name": "COMA SAC",
     "rarity": "Rarity 6",
-    "source": "Gravios; Nerscylla"
+    "source": "Gravios;Nerscylla"
   },
   "Commission Ticket": {
     "name": "COMMISSION TICKET",
@@ -369,13 +368,13 @@ Map<String, Map<String, dynamic>> materials = {
     "name": "CRUSHED CRYSTAL",
     "rarity": "Rarity 4",
     "source":
-        "Guardian Arkveld; Guardian Doshaguma; Guardian Ebony Odogaron; Guardian Fulgur Anjanath; Guardian Rathalos"
+        "Guardian Arkveld;Guardian Doshaguma;Guardian Ebony Odogaron;Guardian Fulgur Anjanath;Guardian Rathalos"
   },
   "Dalthydon Wool": {
     "name": "DALTHYDON WOOL",
     "rarity": "Rarity 6",
     "source":
-        "Can be traded with Gawdygog, at the Wudwud Hideout; Can be traded with Kilama, at the Kunafa Windsong Village."
+        "Can be traded with Gawdygog, at the Wudwud Hideout;Can be traded with Kilama, at the Kunafa Windsong Village."
   },
   "Doshaguma Certificate": {
     "name": "DOSHAGUMA CERTIFICATE",
@@ -431,7 +430,7 @@ Map<String, Map<String, dynamic>> materials = {
     "name": "DRAGONBONE RELIC",
     "rarity": "Rarity 7",
     "source":
-        "Can be collected from bonepiles in Windward Plains, Scarlet Forest, Iceshard Cliffs, and Oilwell Basin.; Can also be received as a quest reward. Consult the individual page to learn about all quests that reward Dragonbone Relic."
+        "Can be collected from bonepiles in Windward Plains, Scarlet Forest, Iceshard Cliffs, and Oilwell Basin.;Can also be received as a quest reward. Consult the individual page to learn about all quests that reward Dragonbone Relic."
   },
   "Dragonite Ore": {
     "name": "DRAGONITE ORE",
@@ -467,7 +466,7 @@ Map<String, Map<String, dynamic>> materials = {
   "Freezer Sac": {
     "name": "FREEZER SAC",
     "rarity": "Rarity 6",
-    "source": "Hirabami; Jin Dahaad"
+    "source": "Hirabami;Jin Dahaad"
   },
   "Frenzy Crystal": {
     "name": "FRENZY CRYSTAL",
@@ -478,7 +477,7 @@ Map<String, Map<String, dynamic>> materials = {
     "name": "FRENZY SHARD",
     "rarity": "Rarity 6",
     "source":
-        "Can be obtained by completing the following quests: Misty Depths, and Aberrant Atrocity.; Can be obtained by breaking the wounds of Frenzied Monsters."
+        "Can be obtained by completing the following quests: Misty Depths, and Aberrant Atrocity.;Can be obtained by breaking the wounds of Frenzied Monsters."
   },
   "Frost Sac": {
     "name": "FROST SAC",
@@ -584,13 +583,13 @@ Map<String, Map<String, dynamic>> materials = {
     "name": "GREAT HIBISCUS",
     "rarity": "Rarity 6",
     "source":
-        "Can be traded with Ren, at Sild The Keepers' Vigil.; Can be traded with Gawdygog, at Wudwud Hideout; Can be obtained as a random pickup when Rysher gathers items for you"
+        "Can be traded with Ren, at Sild The Keepers' Vigil.;Can be traded with Gawdygog, at Wudwud Hideout;Can be obtained as a random pickup when Rysher gathers items for you"
   },
   "Great Hornfly": {
     "name": "GREAT HORNFLY",
     "rarity": "Rarity 6",
     "source":
-        "Can be traded with Gawdygog, at Wudwud Hideout.; Can be traded with Musharpeye, at Wudwud Hideout.; Can be brought as special rewards from villager gathering from Plumpeach."
+        "Can be traded with Gawdygog, at Wudwud Hideout.;Can be traded with Musharpeye, at Wudwud Hideout.;Can be brought as special rewards from villager gathering from Plumpeach."
   },
   "Great Stoutbone": {
     "name": "GREAT STOUTBONE",
@@ -602,13 +601,13 @@ Map<String, Map<String, dynamic>> materials = {
     "name": "GUARDIAN BLOOD +",
     "rarity": "Rarity 6",
     "source":
-        "Guardian Doshaguma; Guardian Rathalos; Guardian Ebony Odogaron; Guardian Fulgur Anjanath"
+        "Guardian Doshaguma;Guardian Rathalos;Guardian Ebony Odogaron;Guardian Fulgur Anjanath"
   },
   "Guardian Blood": {
     "name": "GUARDIAN BLOOD",
     "rarity": "Rarity 4",
     "source":
-        "Guardian Doshaguma; Guardian Rathalos; Guardian Ebony Odogaron; Guardian Arkveld; Zoh Shia"
+        "Guardian Doshaguma;Guardian Rathalos;Guardian Ebony Odogaron;Guardian Arkveld;Zoh Shia"
   },
   "Guardian Doshaguma Claw +": {
     "name": "GUARDIAN DOSHAGUMA CLAW +",
@@ -733,12 +732,12 @@ Map<String, Map<String, dynamic>> materials = {
   "Guardian Pelt +": {
     "name": "GUARDIAN PELT +",
     "rarity": "Rarity 6",
-    "source": "Guardian Doshaguma; Guardian Fulgur Anjanath"
+    "source": "Guardian Doshaguma;Guardian Fulgur Anjanath"
   },
   "Guardian Pelt": {
     "name": "GUARDIAN PELT",
     "rarity": "Rarity 4",
-    "source": "Guardian Doshaguma; Guardian Arkveld; Zoh Shia"
+    "source": "Guardian Doshaguma;Guardian Arkveld;Zoh Shia"
   },
   "Guardian Rathalos Carapace": {
     "name": "GUARDIAN RATHALOS CARAPACE",
@@ -783,13 +782,13 @@ Map<String, Map<String, dynamic>> materials = {
   "Guardian Scale +": {
     "name": "GUARDIAN SCALE +",
     "rarity": "Rarity 6",
-    "source": "Guardian Rathalos; Guardian Ebony Odogaron"
+    "source": "Guardian Rathalos;Guardian Ebony Odogaron"
   },
   "Guardian Scale": {
     "name": "GUARDIAN SCALE",
     "rarity": "Rarity 4",
     "source":
-        "Guardian Rathalos; Guardian Ebony Odogaron; Guardian Arkveld; Zoh Shia"
+        "Guardian Rathalos;Guardian Ebony Odogaron;Guardian Arkveld;Zoh Shia"
   },
   "Guardian Seikret Feather +": {
     "name": "GUARDIAN SEIKRET FEATHER +",
@@ -855,7 +854,7 @@ Map<String, Map<String, dynamic>> materials = {
     "name": "HARD ARMOR SPHERE",
     "rarity": "Rarity 7",
     "source":
-        "Can be traded with Sekka, at the Suja Peaks of Accord.; Received as a reward for many Quests. Consult the individual page to learn about them."
+        "Can be traded with Sekka, at the Suja Peaks of Accord.;Received as a reward for many Quests. Consult the individual page to learn about them."
   },
   "Herbivore Carapace": {
     "name": "HERBIVORE CARAPACE",
@@ -943,7 +942,7 @@ Map<String, Map<String, dynamic>> materials = {
   "Inferno Sac": {
     "name": "INFERNO SAC",
     "rarity": "Rarity 6",
-    "source": "Gravios; Guardian Rathalos; Yian Kut-Ku; Rathian; Rathalos"
+    "source": "Gravios;Guardian Rathalos;Yian Kut-Ku;Rathian;Rathalos"
   },
   "Iron Ore": {
     "name": "IRON ORE",
@@ -1084,7 +1083,7 @@ Map<String, Map<String, dynamic>> materials = {
     "name": "LIGHTCRYSTAL",
     "rarity": "Rarity 5",
     "source":
-        "Can be traded with Kilama, at the Kunafa Windsong Village; Can be found in Windward Plains, Oilwell Basin, and Ruins of Wyveria"
+        "Can be traded with Kilama, at the Kunafa Windsong Village;Can be found in Windward Plains, Oilwell Basin, and Ruins of Wyveria"
   },
   "Machalite Ore": {
     "name": "MACHALITE ORE",
@@ -1099,12 +1098,12 @@ Map<String, Map<String, dynamic>> materials = {
   "Monster Broth": {
     "name": "MONSTER BROTH",
     "rarity": "Rarity 6",
-    "source": "Lala Barina; Bulaqchi; Vespoid; Nerscylla Hatchling; Comaqchi"
+    "source": "Lala Barina;Bulaqchi;Vespoid;Nerscylla Hatchling;Comaqchi"
   },
   "Monster Fluid": {
     "name": "MONSTER FLUID",
     "rarity": "Rarity 4",
-    "source": "Lala Barina; Bulaqchi; Vespoid; Nerscylla Hatchling; Comaqchi"
+    "source": "Lala Barina;Bulaqchi;Vespoid;Nerscylla Hatchling;Comaqchi"
   },
   "Monster Hardbone": {
     "name": "MONSTER HARDBONE",
@@ -1120,7 +1119,7 @@ Map<String, Map<String, dynamic>> materials = {
   "Mystery Bone": {
     "name": "MYSTERY BONE",
     "rarity": "Rarity 4",
-    "source": "Bulaqchi; Porkeplume; Rafma"
+    "source": "Bulaqchi;Porkeplume;Rafma"
   },
   "Nerscylla Carapace": {
     "name": "NERSCYLLA CARAPACE",
@@ -1271,7 +1270,7 @@ Map<String, Map<String, dynamic>> materials = {
     "name": "QUALITY BONE",
     "rarity": "Rarity 6",
     "source":
-        "Can be found in bonepiles in all regions once High Rank is reached. ; Can also be received as a reward for many Quests. Check the individual page to learn more about them!"
+        "Can be found in bonepiles in all regions once High Rank is reached.;Can also be received as a reward for many Quests. Check the individual page to learn more about them!"
   },
   "Quematrice Certificate": {
     "name": "QUEMATRICE CERTIFICATE",
@@ -1391,7 +1390,7 @@ Map<String, Map<String, dynamic>> materials = {
   "Rath Medulla": {
     "name": "RATH MEDULLA",
     "rarity": "Rarity 6",
-    "source": "Rathian; Rathalos"
+    "source": "Rathian;Rathalos"
   },
   "Rey Dau Boltgem": {
     "name": "REY DAU BOLTGEM",
@@ -1496,7 +1495,7 @@ Map<String, Map<String, dynamic>> materials = {
   "Rubbery Hide +": {
     "name": "RUBBERY HIDE +",
     "rarity": "Rarity 6",
-    "source": "Nerscylla; Gypceros"
+    "source": "Nerscylla;Gypceros"
   },
   "Rubbery Hide": {
     "name": "RUBBERY HIDE",
@@ -1507,25 +1506,24 @@ Map<String, Map<String, dynamic>> materials = {
     "name": "SCARRED SCALE",
     "rarity": "Rarity 6",
     "source":
-        "Can be traded with Gawdygog, at Wudwud Hideout.; Can be traded with Sekka. at Suja Peaks of Accord."
+        "Can be traded with Gawdygog, at Wudwud Hideout.;Can be traded with Sekka. at Suja Peaks of Accord."
   },
   "Sharp Fang": {
     "name": "SHARP FANG",
     "rarity": "Rarity 4",
-    "source":
-        "Talioth; Gajios; Piragill; Kranodath; Porkeplume; Guardian Seikret"
+    "source": "Talioth;Gajios;Piragill;Kranodath;Porkeplume;Guardian Seikret"
   },
   "Sild Cotton": {
     "name": "SILD COTTON",
     "rarity": "Rarity 6",
     "source":
-        "Can be traded with Gawdygog, at Wudwud Hideout.; Can be traded with Ren, at Sild The Keepers' Vigil."
+        "Can be traded with Gawdygog, at Wudwud Hideout.;Can be traded with Ren, at Sild The Keepers' Vigil."
   },
   "Sinister Cloth": {
     "name": "SINISTER CLOTH",
     "rarity": "Rarity 6",
     "source":
-        "Can be traded with Gawdygog, at Wudwud Hideout.; Can be one of the items that Murtabak randomly brings some when gathering items"
+        "Can be traded with Gawdygog, at Wudwud Hideout.;Can be one of the items that Murtabak randomly brings some when gathering items"
   },
   "Specklite": {
     "name": "SPECKLITE",
@@ -1551,7 +1549,7 @@ Map<String, Map<String, dynamic>> materials = {
   "Sturdy Bone": {
     "name": "STURDY BONE",
     "rarity": "Rarity 4",
-    "source": "Bulaqchi; Porkeplume; Rafma"
+    "source": "Bulaqchi;Porkeplume;Rafma"
   },
   "Suja Textiles": {
     "name": "SUJA TEXTILES",
@@ -1576,17 +1574,17 @@ Map<String, Map<String, dynamic>> materials = {
   "Torrent Sac": {
     "name": "TORRENT SAC",
     "rarity": "Rarity 6",
-    "source": "Balahara; Uth Duna"
+    "source": "Balahara;Uth Duna"
   },
   "Tough Guardian Bone": {
     "name": "TOUGH GUARDIAN BONE",
     "rarity": "Rarity 4",
-    "source": "Guardian Arkveld; Zoh Shia; Guardian Seikret"
+    "source": "Guardian Arkveld;Zoh Shia;Guardian Seikret"
   },
   "Toxin Sac": {
     "name": "TOXIN SAC",
     "rarity": "Rarity 6",
-    "source": "Rompopolo; Gypceros"
+    "source": "Rompopolo;Gypceros"
   },
   "Uth Duna Certificate": {
     "name": "UTH DUNA CERTIFICATE",
@@ -1696,12 +1694,12 @@ Map<String, Map<String, dynamic>> materials = {
   "Wingdrake Hide +": {
     "name": "WINGDRAKE HIDE +",
     "rarity": "Rarity 6",
-    "source": "Baunos; Harpios"
+    "source": "Baunos;Harpios"
   },
   "Wingdrake Hide": {
     "name": "WINGDRAKE HIDE",
     "rarity": "Rarity 4",
-    "source": "Baunos; Harpios"
+    "source": "Baunos;Harpios"
   },
   "Wyverian Bloodstone": {
     "name": "WYVERIAN BLOODSTONE",
@@ -1731,7 +1729,7 @@ Map<String, Map<String, dynamic>> materials = {
   "Wyvern Gem": {
     "name": "WYVERN GEM",
     "rarity": "Rarity 7",
-    "source": "Gravios; Quematrice; Balahara; Rompopolo; Hirabami"
+    "source": "Gravios;Quematrice;Balahara;Rompopolo;Hirabami"
   },
   "Xu Wu Cerebrospinal Fluid": {
     "name": "XU WU CEREBROSPINAL FLUID",

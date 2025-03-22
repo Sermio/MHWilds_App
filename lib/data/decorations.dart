@@ -3482,7 +3482,7 @@ Map<String, Map<String, dynamic>> decorations = {
   },
   "Throttle Jewel 3": {
     "decoration_name": "Throttle Jewel 3",
-    "decoration_type": "Armor  Decoration",
+    "decoration_type": "Armor Decoration",
     "decoration_rarity": "Rarity 5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Latent Power + 1",
