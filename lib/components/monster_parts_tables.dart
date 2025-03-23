@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/materialImage.dart';
+import 'package:mhwilds_app/components/material_image.dart';
 
 class MonsterTable extends StatefulWidget {
   const MonsterTable(

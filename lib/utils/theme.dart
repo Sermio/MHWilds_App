@@ -14,6 +14,7 @@ class AppTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
+    drawerTheme: const DrawerThemeData(backgroundColor: Colors.white),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: AppColors.goldSoft,
       elevation: 10,

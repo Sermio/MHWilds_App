@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SkillContainerPreview extends StatelessWidget {
   final String skillLevel;
-  final String skillProgression;
+  final List<String> skillProgression;
 
   const SkillContainerPreview({
     super.key,
@@ -12,16 +12,14 @@ class SkillContainerPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final progressionList = skillProgression.split(';');
-
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: progressionList.length,
+      itemCount: skillProgression.length,
       separatorBuilder: (context, index) => const Divider(),
       itemBuilder: (context, index) {
-        final progression = progressionList[index].trim();
-        final levelMatch = RegExp(r'Level (\d+)').firstMatch(progression);
+        final progression = skillProgression[index].trim();
+        final levelMatch = RegExp(r'Lvl (\d+)').firstMatch(progression);
         final level = levelMatch?.group(1);
         final isCurrentLevel = level == skillLevel;
 
@@ -32,9 +30,8 @@ class SkillContainerPreview extends StatelessWidget {
               child: Text(
                 progression,
                 style: TextStyle(
-                  fontWeight: progression.contains('Lvl $skillLevel')
-                      ? FontWeight.bold
-                      : FontWeight.normal,
+                  fontWeight:
+                      isCurrentLevel ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
             ),

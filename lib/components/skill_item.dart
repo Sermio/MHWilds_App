@@ -44,6 +44,7 @@ class SkillItem extends StatelessWidget {
               height: 50,
               child: GestureDetector(
                 child: UrlImageLoader(
+                  animate: true,
                   itemName: skill.name,
                   loadImageUrlFunction: getValidSkillImageUrl,
                 ),

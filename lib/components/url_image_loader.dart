@@ -4,12 +4,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class UrlImageLoader extends StatelessWidget {
   final String itemName;
+  final bool animate;
   final Future<String?> Function(String) loadImageUrlFunction;
 
   const UrlImageLoader({
     super.key,
     required this.itemName,
     required this.loadImageUrlFunction,
+    this.animate = false,
   });
 
   @override
@@ -27,6 +29,7 @@ class UrlImageLoader extends StatelessWidget {
           return _errorWidget();
         } else {
           return Swing(
+            animate: animate,
             child: Image.network(
               snapshot.data!,
               fit: BoxFit.contain,

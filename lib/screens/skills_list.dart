@@ -1,18 +1,23 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/data/armor_pieces.dart';
+import 'package:mhwilds_app/data/skills.dart';
+import 'package:mhwilds_app/models/armor_piece.dart';
 import 'package:mhwilds_app/models/decoration.dart';
+import 'package:mhwilds_app/models/skill.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
 import 'package:mhwilds_app/data/decorations.dart';
 
-class DecorationsList extends StatefulWidget {
-  const DecorationsList({super.key});
+class SkillsList extends StatefulWidget {
+  const SkillsList({super.key});
 
   @override
-  _DecorationsListState createState() => _DecorationsListState();
+  SkillsListState createState() => SkillsListState();
 }
 
-class _DecorationsListState extends State<DecorationsList> {
+class SkillsListState extends State<SkillsList> {
   final TextEditingController _searchNameController = TextEditingController();
   String _searchNameQuery = '';
   String? _selectedType;
@@ -34,17 +39,14 @@ class _DecorationsListState extends State<DecorationsList> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> filteredDecorationKeys =
-        decorations.keys.where((decorationKey) {
-      Map<String, dynamic> decorationMap = decorations[decorationKey]!;
-      DecorationItem decoration = DecorationItem.fromMap(decorationMap);
+    List<String> filteredSkillsKeys = skills.keys.where((skillkey) {
+      Map<String, dynamic> skillMap = skills[skillkey]!;
+      Skill skill = Skill.fromMap(skillMap);
 
-      bool matchesName = decoration.decorationName
-          .toLowerCase()
-          .contains(_searchNameQuery.toLowerCase());
+      bool matchesName =
+          skill.name.toLowerCase().contains(_searchNameQuery.toLowerCase());
 
-      bool matchesType =
-          _selectedType == null || decoration.decorationType == _selectedType;
+      bool matchesType = _selectedType == null || skill.type == _selectedType;
 
       return matchesName && matchesType;
     }).toList();
@@ -80,7 +82,7 @@ class _DecorationsListState extends State<DecorationsList> {
                     _selectedType = newType;
                   });
                 },
-                items: ['Armor Decoration', 'Weapon Decoration'].map((type) {
+                items: ['Weapon Skill', 'Armor Skill'].map((type) {
                   return DropdownMenuItem<String>(
                     value: type,
                     child: Text(type),
@@ -100,27 +102,31 @@ class _DecorationsListState extends State<DecorationsList> {
           const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              itemCount: filteredDecorationKeys.length,
+              itemCount: filteredSkillsKeys.length,
               itemBuilder: (context, index) {
-                String decorationKey = filteredDecorationKeys[index];
-                Map<String, dynamic> decorationMap =
-                    decorations[decorationKey]!;
-                DecorationItem decoration =
-                    DecorationItem.fromMap(decorationMap);
+                String skillkey = filteredSkillsKeys[index];
+                Map<String, dynamic> skillMap = skills[skillkey]!;
+                Skill skill = Skill.fromMap(skillMap);
 
                 return BounceInLeft(
                   duration: const Duration(milliseconds: 900),
                   delay: Duration(milliseconds: index * 5),
                   child: Ccard(
-                    leading: _decorationLeading(decoration.decorationName,
-                        decoration.decorationSlot, decoration.decorationSkill),
-                    trailing: getJewelSlotIcon(decoration.decorationSlot),
-                    cardData: decoration,
-                    cardTitle: decoration.decorationName ?? "Unknown",
+                    leading: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: UrlImageLoader(
+                        itemName: skill.name,
+                        loadImageUrlFunction: getValidSkillImageUrl,
+                      ),
+                    ),
+                    // trailing: getJewelSlotIcon(armor_piece.armor_pieceSlot),
+                    cardData: skill,
+                    cardTitle: skill.name ?? "Unknown",
                     cardSubtitle1Label: "Type: ",
-                    cardSubtitle2Label: "Rarity: ",
-                    cardSubtitle1: decoration.decorationType ?? "Unknown",
-                    cardSubtitle2: decoration.decorationRarity ?? "Unknown",
+                    cardSubtitle2Label: "Description: ",
+                    cardSubtitle1: skill.type ?? "Unknown",
+                    cardSubtitle2: skill.description ?? "Unknown",
                   ),
                 );
               },

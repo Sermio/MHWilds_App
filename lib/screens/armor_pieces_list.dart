@@ -1,18 +1,21 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/armor_piece_image.dart';
+import 'package:mhwilds_app/data/armor_pieces.dart';
+import 'package:mhwilds_app/models/armor_piece.dart';
 import 'package:mhwilds_app/models/decoration.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
 import 'package:mhwilds_app/data/decorations.dart';
 
-class DecorationsList extends StatefulWidget {
-  const DecorationsList({super.key});
+class ArmorPiecesList extends StatefulWidget {
+  const ArmorPiecesList({super.key});
 
   @override
-  _DecorationsListState createState() => _DecorationsListState();
+  _ArmorPiecesListState createState() => _ArmorPiecesListState();
 }
 
-class _DecorationsListState extends State<DecorationsList> {
+class _ArmorPiecesListState extends State<ArmorPiecesList> {
   final TextEditingController _searchNameController = TextEditingController();
   String _searchNameQuery = '';
   String? _selectedType;
@@ -34,17 +37,17 @@ class _DecorationsListState extends State<DecorationsList> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> filteredDecorationKeys =
-        decorations.keys.where((decorationKey) {
-      Map<String, dynamic> decorationMap = decorations[decorationKey]!;
-      DecorationItem decoration = DecorationItem.fromMap(decorationMap);
+    List<String> filteredArmorPiecesKeys =
+        armor_pieces.keys.where((armorPiecekey) {
+      Map<String, dynamic> armorPieceMap = armor_pieces[armorPiecekey]!;
+      ArmorPiece armorPiece = ArmorPiece.fromJson(armorPieceMap);
 
-      bool matchesName = decoration.decorationName
+      bool matchesName = armorPiece.name
           .toLowerCase()
           .contains(_searchNameQuery.toLowerCase());
 
       bool matchesType =
-          _selectedType == null || decoration.decorationType == _selectedType;
+          _selectedType == null || armorPiece.type == _selectedType;
 
       return matchesName && matchesType;
     }).toList();
@@ -80,7 +83,7 @@ class _DecorationsListState extends State<DecorationsList> {
                     _selectedType = newType;
                   });
                 },
-                items: ['Armor Decoration', 'Weapon Decoration'].map((type) {
+                items: ['Helmet', 'Chest', 'Arms', 'Waist', 'Legs'].map((type) {
                   return DropdownMenuItem<String>(
                     value: type,
                     child: Text(type),
@@ -100,27 +103,25 @@ class _DecorationsListState extends State<DecorationsList> {
           const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              itemCount: filteredDecorationKeys.length,
+              itemCount: filteredArmorPiecesKeys.length,
               itemBuilder: (context, index) {
-                String decorationKey = filteredDecorationKeys[index];
-                Map<String, dynamic> decorationMap =
-                    decorations[decorationKey]!;
-                DecorationItem decoration =
-                    DecorationItem.fromMap(decorationMap);
+                String armorPiecekey = filteredArmorPiecesKeys[index];
+                Map<String, dynamic> armorPieceMap =
+                    armor_pieces[armorPiecekey]!;
+                ArmorPiece armorPiece = ArmorPiece.fromJson(armorPieceMap);
 
                 return BounceInLeft(
                   duration: const Duration(milliseconds: 900),
                   delay: Duration(milliseconds: index * 5),
                   child: Ccard(
-                    leading: _decorationLeading(decoration.decorationName,
-                        decoration.decorationSlot, decoration.decorationSkill),
-                    trailing: getJewelSlotIcon(decoration.decorationSlot),
-                    cardData: decoration,
-                    cardTitle: decoration.decorationName ?? "Unknown",
+                    leading: ArmorPieceImage(armorPieceName: armorPiece.name),
+                    // trailing: getJewelSlotIcon(armor_piece.armor_pieceSlot),
+                    cardData: armorPiece,
+                    cardTitle: armorPiece.name ?? "Unknown",
                     cardSubtitle1Label: "Type: ",
-                    cardSubtitle2Label: "Rarity: ",
-                    cardSubtitle1: decoration.decorationType ?? "Unknown",
-                    cardSubtitle2: decoration.decorationRarity ?? "Unknown",
+                    cardSubtitle2Label: "Armor: ",
+                    cardSubtitle1: armorPiece.type ?? "Unknown",
+                    cardSubtitle2: armorPiece.armor ?? "Unknown",
                   ),
                 );
               },

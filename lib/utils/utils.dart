@@ -187,12 +187,17 @@ Future<String?> getValidMaterialImageUrl(String materialName) async {
   return null;
 }
 
-Future<String?> getValidSkillImageUrl(String decorationName) async {
+Future<String?> getValidSkillImageUrl(String skillName) async {
+  String formattedSkillName = skillName
+      .toLowerCase()
+      .replaceAll(' ', '-')
+      .replaceAll("'", '')
+      .replaceAll('-', '_');
   List<String> urlVariations = [
-    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${decorationName.toLowerCase().replaceAll(' ', '-')}_skill_mhwilds_wiki_guide_85px.png",
-    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${decorationName.toLowerCase().replaceAll(' ', '_')}_skill_mhwilds_wiki_guide_85px.png",
-    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${decorationName.toLowerCase().replaceAll(' ', '-')}_skill_mhwilds_wiki_guide_85px.png",
-    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${decorationName.toLowerCase().replaceAll(' ', '_')}_skill_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedSkillName}_skill_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedSkillName}_skill_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedSkillName}_skill_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedSkillName}_skill_mhwilds_wiki_guide_85px.png",
   ];
 
   const int maxRetries = 4;
@@ -215,7 +220,7 @@ Future<String?> getValidSkillImageUrl(String decorationName) async {
     }
   }
 
-  return 'https://monsterhunterworld.wiki.fextralife.com/file/Monster-Hunter-World/evade-window-skill-mhw.png';
+  return 'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/attack_boost_skill_mhwilds_wiki_guide_85px.png';
 }
 
 

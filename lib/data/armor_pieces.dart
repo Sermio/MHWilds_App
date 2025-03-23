@@ -1,7 +1,7 @@
 Map<String, Map<String, dynamic>> armor_pieces = {
   "AJARAKAN VAMBRACES": {
     "name": "AJARAKAN VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -17,7 +17,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "AJARAKAN VAMBRACES ALPHA": {
     "name": "AJARAKAN VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -34,7 +34,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "AJARAKAN VAMBRACES BETA": {
     "name": "AJARAKAN VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -51,7 +51,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ALLOY VAMBRACES": {
     "name": "ALLOY VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -67,7 +67,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ALLOY VAMBRACES ALPHA": {
     "name": "ALLOY VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -83,7 +83,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ARKVULCAN VAMBRACES ALPHA": {
     "name": "ARKVULCAN VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "",
@@ -100,7 +100,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ARKVULCAN VAMBRACES BETA": {
     "name": "ARKVULCAN VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "",
@@ -117,7 +117,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ARTIAN VAMBRACES ALPHA": {
     "name": "ARTIAN VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -133,7 +133,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BALAHARA VAMBRACES": {
     "name": "BALAHARA VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "2",
     "rank": "Low Rank",
     "slots": "--",
@@ -149,7 +149,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BALAHARA VAMBRACES ALPHA": {
     "name": "BALAHARA VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -166,7 +166,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BALAHARA VAMBRACES BETA": {
     "name": "BALAHARA VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -183,7 +183,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BARINA VAMBRACES": {
     "name": "BARINA VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -199,7 +199,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BARINA VAMBRACES ALPHA": {
     "name": "BARINA VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -216,7 +216,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BARINA VAMBRACES BETA": {
     "name": "BARINA VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -233,7 +233,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BATTLE VAMBRACES ALPHA": {
     "name": "BATTLE VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -249,7 +249,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BLANGO VAMBRACES ALPHA": {
     "name": "BLANGO VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -266,7 +266,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BLANGO VAMBRACES BETA": {
     "name": "BLANGO VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -283,7 +283,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BONE VAMBRACES": {
     "name": "BONE VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -299,7 +299,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BONE VAMBRACES ALPHA": {
     "name": "BONE VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -315,7 +315,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BUTTERFLY BRACHIA ALPHA": {
     "name": "BUTTERFLY BRACHIA ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -333,7 +333,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G ARKVELD VAMBRACES": {
     "name": "G ARKVELD VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -350,7 +350,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G ARKVELD VAMBRACES ALPHA": {
     "name": "G ARKVELD VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "",
@@ -367,7 +367,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G ARKVELD VAMBRACES BETA": {
     "name": "G ARKVELD VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "",
@@ -384,7 +384,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G DOSHAGUMA BRACES": {
     "name": "G DOSHAGUMA BRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -400,7 +400,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G DOSHAGUMA BRACES ALPHA": {
     "name": "G DOSHAGUMA BRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -417,7 +417,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G DOSHAGUMA BRACES BETA": {
     "name": "G DOSHAGUMA BRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -434,7 +434,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G EBONY BRACES": {
     "name": "G EBONY BRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -451,7 +451,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G EBONY BRACES ALPHA": {
     "name": "G EBONY BRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "--",
@@ -468,7 +468,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G EBONY BRACES BETA": {
     "name": "G EBONY BRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -485,7 +485,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G FULGUR VAMBRACES ALPHA": {
     "name": "G FULGUR VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -502,7 +502,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G FULGUR VAMBRACES BETA": {
     "name": "G FULGUR VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -519,7 +519,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G RATHALOS VAMBRACES": {
     "name": "G RATHALOS VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -536,7 +536,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G RATHALOS VAMBRACES ALPHA": {
     "name": "G RATHALOS VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -554,7 +554,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G RATHALOS VAMBRACES BETA": {
     "name": "G RATHALOS VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -571,7 +571,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GORE VAMBRACES ALPHA": {
     "name": "GORE VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -588,7 +588,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GORE VAMBRACES BETA": {
     "name": "GORE VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -605,7 +605,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GRAVIOS VAMBRACES ALPHA": {
     "name": "GRAVIOS VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -622,7 +622,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GRAVIOS VAMBRACES BETA": {
     "name": "GRAVIOS VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -639,7 +639,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GUILD ACE VAMBRACES ALPHA": {
     "name": "GUILD ACE VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "",
@@ -656,7 +656,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GYPCEROS VAMBRACES ALPHA": {
     "name": "GYPCEROS VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -673,7 +673,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GYPCEROS VAMBRACES BETA": {
     "name": "GYPCEROS VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -690,7 +690,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HIGH METAL BRACES ALPHA": {
     "name": "HIGH METAL BRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -707,7 +707,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HIRABAMI VAMBRACES": {
     "name": "HIRABAMI VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -723,7 +723,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HIRABAMI VAMBRACES ALPHA": {
     "name": "HIRABAMI VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -740,7 +740,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HIRABAMI VAMBRACES BETA": {
     "name": "HIRABAMI VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -757,7 +757,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HOPE VAMBRACES": {
     "name": "HOPE VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -773,7 +773,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HOPE VAMBRACES ALPHA": {
     "name": "HOPE VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -789,7 +789,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "INGOT VAMBRACES": {
     "name": "INGOT VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -805,7 +805,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "INGOT VAMBRACES ALPHA": {
     "name": "INGOT VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -821,7 +821,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "KING BEETLE BRACHIA ALPHA": {
     "name": "KING BEETLE BRACHIA ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -838,7 +838,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "KUT-KU VAMBRACES ALPHA": {
     "name": "KUT-KU VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -855,7 +855,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "KUT-KU VAMBRACES BETA": {
     "name": "KUT-KU VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -872,7 +872,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CHAINMAIL GLOVES": {
     "name": "CHAINMAIL GLOVES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -888,7 +888,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CHAINMAIL GLOVES ALPHA": {
     "name": "CHAINMAIL GLOVES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -904,7 +904,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CHATACABRA VAMBRACES": {
     "name": "CHATACABRA VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -920,7 +920,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CHATACABRA VAMBRACES ALPHA": {
     "name": "CHATACABRA VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -937,7 +937,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CHATACABRA VAMBRACES BETA": {
     "name": "CHATACABRA VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -954,7 +954,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "COMMISSION VAMBRACES ALPHA": {
     "name": "COMMISSION VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -970,7 +970,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CONGA VAMBRACES": {
     "name": "CONGA VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "2",
     "rank": "Low Rank",
     "slots": "--",
@@ -986,7 +986,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CONGA VAMBRACES ALPHA": {
     "name": "CONGA VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -1003,7 +1003,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CONGA VAMBRACES BETA": {
     "name": "CONGA VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1020,7 +1020,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DAHAAD SHARDBRACES ALPHA": {
     "name": "DAHAAD SHARDBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "--",
@@ -1037,7 +1037,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DAHAAD SHARDBRACES BETA": {
     "name": "DAHAAD SHARDBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1054,7 +1054,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DAMASCUS VAMBRACES ALPHA": {
     "name": "DAMASCUS VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1071,7 +1071,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DEATH STENCH GRIP ALPHA": {
     "name": "DEATH STENCH GRIP ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1087,7 +1087,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DOBER VAMBRACES ALPHA": {
     "name": "DOBER VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1104,7 +1104,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DOSHAGUMA BRACES": {
     "name": "DOSHAGUMA BRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "2",
     "rank": "Low Rank",
     "slots": "--",
@@ -1120,7 +1120,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DOSHAGUMA BRACES ALPHA": {
     "name": "DOSHAGUMA BRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1137,7 +1137,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DOSHAGUMA BRACES BETA": {
     "name": "DOSHAGUMA BRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1154,7 +1154,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DUNA VAMBRACES": {
     "name": "DUNA VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -1171,7 +1171,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DUNA WILDBRACES ALPHA": {
     "name": "DUNA WILDBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1188,7 +1188,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DUNA WILDBRACES BETA": {
     "name": "DUNA WILDBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1205,7 +1205,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "LEATHER GLOVES": {
     "name": "LEATHER GLOVES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -1221,7 +1221,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "LEATHER GLOVES ALPHA": {
     "name": "LEATHER GLOVES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1237,7 +1237,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "MELAHOA BRANCH ALPHA": {
     "name": "MELAHOA BRANCH ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1254,7 +1254,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "NERSCYLLA VAMBRACES": {
     "name": "NERSCYLLA VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -1271,7 +1271,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "NERSCYLLA VAMBRACES ALPHA": {
     "name": "NERSCYLLA VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1288,7 +1288,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "NERSCYLLA VAMBRACES BETA": {
     "name": "NERSCYLLA VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1305,7 +1305,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "QUEMATRICE BRACES": {
     "name": "QUEMATRICE BRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -1321,7 +1321,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "QUEMATRICE BRACES ALPHA": {
     "name": "QUEMATRICE BRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1338,7 +1338,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "QUEMATRICE BRACES BETA": {
     "name": "QUEMATRICE BRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1354,7 +1354,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "RATHALOS VAMBRACES ALPHA": {
     "name": "RATHALOS VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1371,7 +1371,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "RATHALOS VAMBRACES BETA": {
     "name": "RATHALOS VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1388,7 +1388,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "RATHIAN VAMBRACES ALPHA": {
     "name": "RATHIAN VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -1405,7 +1405,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "RATHIAN VAMBRACES BETA": {
     "name": "RATHIAN VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1422,7 +1422,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "REY SANDBRACES": {
     "name": "REY SANDBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -1439,7 +1439,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "REY SANDBRACES ALPHA": {
     "name": "REY SANDBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1456,7 +1456,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "REY SANDBRACES BETA": {
     "name": "REY SANDBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1473,7 +1473,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ROMPOPOLO VAMBRACES": {
     "name": "ROMPOPOLO VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -1490,7 +1490,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ROMPOPOLO VAMBRACES ALPHA": {
     "name": "ROMPOPOLO VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1507,7 +1507,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ROMPOPOLO VAMBRACES BETA": {
     "name": "ROMPOPOLO VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1524,7 +1524,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "TALIOTH VAMBRACES": {
     "name": "TALIOTH VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -1540,7 +1540,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "TALIOTH VAMBRACES ALPHA": {
     "name": "TALIOTH VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -1556,7 +1556,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "TALIOTH VAMBRACES BETA": {
     "name": "TALIOTH VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1572,7 +1572,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "UDRA MIREBRACES": {
     "name": "UDRA MIREBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -1588,7 +1588,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "UDRA MIREBRACES ALPHA": {
     "name": "UDRA MIREBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1605,7 +1605,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "UDRA MIREBRACES BETA": {
     "name": "UDRA MIREBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1622,7 +1622,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "VESPOID VAMBRACES": {
     "name": "VESPOID VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -1638,7 +1638,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "VESPOID VAMBRACES ALPHA": {
     "name": "VESPOID VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -1654,7 +1654,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "VESPOID VAMBRACES BETA": {
     "name": "VESPOID VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1670,7 +1670,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "XU WU VAMBRACES": {
     "name": "XU WU VAMBRACES",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -1686,7 +1686,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "XU WU VAMBRACES ALPHA": {
     "name": "XU WU VAMBRACES ALPHA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1703,7 +1703,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "XU WU VAMBRACES BETA": {
     "name": "XU WU VAMBRACES BETA",
-    "type": "arms",
+    "type": "Arms",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",

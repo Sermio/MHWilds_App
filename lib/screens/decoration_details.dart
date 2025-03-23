@@ -32,7 +32,7 @@ class _DecorationDetailsState extends State<DecorationDetails> {
           'level': int.parse(match.group(2)!),
         };
       }
-      return {'name': skill, 'level': 0};
+      return {'name': skill.trim(), 'level': 0};
     }).toList();
   }
 
