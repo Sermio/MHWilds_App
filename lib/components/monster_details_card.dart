@@ -1,5 +1,6 @@
 // MonsterDetailsCard.dart
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/models/monster.dart';
@@ -99,22 +100,25 @@ class MonsterDetailsCard extends StatelessWidget {
                 Wrap(
                   spacing: 8.0,
                   runSpacing: 2.0,
-                  children: monster.locations?.map((loc) {
-                        return Cchip(
-                          itemName:
-                              loc ?? "", // Se asegura de que loc no sea nulo
-                          getItemColor:
-                              zoneBackgroundColor, // Asumimos que esto está bien
-                          optionalWidget: Image.asset(
-                            'assets/imgs/maps/map.png', // Verifica que la ruta de la imagen esté correcta
-                            width: 16,
-                            height: 16,
-                            color: const Color.fromARGB(
-                                255, 120, 115, 115), // Color de la imagen
+                  children: monster.locations?.asMap().entries.map((entry) {
+                        int index = entry.key;
+                        String loc = entry.value;
+                        return Bounce(
+                          from: 10,
+                          delay: Duration(milliseconds: index * 100),
+                          child: Cchip(
+                            itemName: loc ?? "",
+                            getItemColor: zoneBackgroundColor,
+                            optionalWidget: Image.asset(
+                              'assets/imgs/maps/map.png',
+                              width: 16,
+                              height: 16,
+                              color: const Color.fromARGB(255, 120, 115, 115),
+                            ),
                           ),
                         );
                       }).toList() ??
-                      [], // Aseguramos que en caso de que locations sea null, no genere error
+                      [],
                 ),
               ],
             ),

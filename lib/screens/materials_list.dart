@@ -117,36 +117,43 @@ class _MaterialsListState extends State<MaterialsList> {
                         '');
                 cleanedSource = cleanedSource.replaceAll(';', '\n');
 
-                return Ccard(
-                    leading: _MaterialImage(
-                        formattedMaterialName: formattedMaterialName),
-                    cardData: material,
-                    cardTitle: material.name ?? "Unknown",
-                    cardSubtitle1Label: "Rarity: ",
-                    cardSubtitle1: material.rarity ?? "Unknown",
-                    cardBody: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Source: ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Flexible(
-                          child: Text(
-                            cleanedSource ?? "Unknown",
-                            softWrap: true,
-                            overflow: TextOverflow.visible,
+                return BounceInLeft(
+                  duration: const Duration(milliseconds: 900),
+                  delay: Duration(milliseconds: index * 5),
+                  child: Ccard(
+                      leading: _MaterialImage(
+                          formattedMaterialName: formattedMaterialName),
+                      cardData: material,
+                      cardTitle: material.name ?? "Unknown",
+                      cardSubtitle1Label: "Rarity: ",
+                      cardSubtitle1: material.rarity ?? "Unknown",
+                      cardBody: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('Source: ',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Flexible(
+                            child: Text(
+                              cleanedSource ?? "Unknown",
+                              softWrap: true,
+                              overflow: TextOverflow.visible,
+                            ),
                           ),
-                        ),
-                      ],
-                    ));
+                        ],
+                      )),
+                );
               },
             ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _toggleFiltersVisibility,
-        child: Icon(
-          _filtersVisible ? Icons.close : Icons.search,
+      floatingActionButton: BounceInRight(
+        delay: const Duration(milliseconds: 500),
+        child: FloatingActionButton(
+          onPressed: _toggleFiltersVisibility,
+          child: Icon(
+            _filtersVisible ? Icons.close : Icons.search,
+          ),
         ),
       ),
     );

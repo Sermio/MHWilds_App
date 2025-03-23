@@ -26,8 +26,7 @@ class UrlImageLoader extends StatelessWidget {
         } else if (snapshot.hasError || !snapshot.hasData) {
           return _errorWidget();
         } else {
-          return FadeIn(
-            duration: const Duration(milliseconds: 800),
+          return Swing(
             child: Image.network(
               snapshot.data!,
               fit: BoxFit.contain,

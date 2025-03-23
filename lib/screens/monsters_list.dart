@@ -156,27 +156,35 @@ class _MonsterScreenState extends State<MonstersList> {
                 Map<String, dynamic> monsterMap = monsters[monsterKey]!;
                 Monster monster = Monster.fromMap(monsterMap);
 
-                return Ccard(
-                  leading: FadeIn(
-                    child: Image.asset(
-                        'assets/imgs/monster_icons/${monster.monsterName.toLowerCase().replaceAll(' ', '_')}.png'),
+                return BounceInLeft(
+                  duration: const Duration(milliseconds: 900),
+                  delay: Duration(milliseconds: index * 5),
+                  child: Ccard(
+                    leading: Hero(
+                      tag: monster.monsterName,
+                      child: Image.asset(
+                          'assets/imgs/monster_icons/${monster.monsterName.toLowerCase().replaceAll(' ', '_')}.png'),
+                    ),
+                    cardData: monster,
+                    cardTitle: monster.monsterName ?? "Unknown",
+                    cardSubtitle1Label: "Specie: ",
+                    cardSubtitle2Label: "Locations: ",
+                    cardSubtitle1: monster.monsterSpecie ?? "Unknown",
+                    cardSubtitle2: monster.locations?.join(", ") ?? "Unknown",
                   ),
-                  cardData: monster,
-                  cardTitle: monster.monsterName ?? "Unknown",
-                  cardSubtitle1Label: "Specie: ",
-                  cardSubtitle2Label: "Locations: ",
-                  cardSubtitle1: monster.monsterSpecie ?? "Unknown",
-                  cardSubtitle2: monster.locations?.join(", ") ?? "Unknown",
                 );
               },
             ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _toggleFiltersVisibility,
-        child: Icon(
-          _filtersVisible ? Icons.close : Icons.search,
+      floatingActionButton: BounceInRight(
+        delay: const Duration(milliseconds: 500),
+        child: FloatingActionButton(
+          onPressed: _toggleFiltersVisibility,
+          child: Icon(
+            _filtersVisible ? Icons.close : Icons.search,
+          ),
         ),
       ),
     );

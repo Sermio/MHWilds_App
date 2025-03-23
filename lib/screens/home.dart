@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_appbar.dart';
 import 'package:mhwilds_app/components/c_drawer.dart';
-import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 
 class HomeScreen extends StatefulWidget {

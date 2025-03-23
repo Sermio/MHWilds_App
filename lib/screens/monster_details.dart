@@ -36,7 +36,8 @@ class MonsterDetails extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     height: 200,
-                    child: FadeIn(
+                    child: Hero(
+                      tag: monster.monsterName,
                       child: Image.asset(
                           'assets/imgs/monsters/${monster.monsterName.toLowerCase().replaceAll(' ', '_')}.png'),
                     ),

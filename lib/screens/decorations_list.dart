@@ -108,26 +108,33 @@ class _DecorationsListState extends State<DecorationsList> {
                 DecorationItem decoration =
                     DecorationItem.fromMap(decorationMap);
 
-                return Ccard(
-                  leading: _decorationLeading(decoration.decorationName,
-                      decoration.decorationSlot, decoration.decorationSkill),
-                  trailing: getJewelSlotIcon(decoration.decorationSlot),
-                  cardData: decoration,
-                  cardTitle: decoration.decorationName ?? "Unknown",
-                  cardSubtitle1Label: "Type: ",
-                  cardSubtitle2Label: "Rarity: ",
-                  cardSubtitle1: decoration.decorationType ?? "Unknown",
-                  cardSubtitle2: decoration.decorationRarity ?? "Unknown",
+                return BounceInLeft(
+                  duration: const Duration(milliseconds: 900),
+                  delay: Duration(milliseconds: index * 5),
+                  child: Ccard(
+                    leading: _decorationLeading(decoration.decorationName,
+                        decoration.decorationSlot, decoration.decorationSkill),
+                    trailing: getJewelSlotIcon(decoration.decorationSlot),
+                    cardData: decoration,
+                    cardTitle: decoration.decorationName ?? "Unknown",
+                    cardSubtitle1Label: "Type: ",
+                    cardSubtitle2Label: "Rarity: ",
+                    cardSubtitle1: decoration.decorationType ?? "Unknown",
+                    cardSubtitle2: decoration.decorationRarity ?? "Unknown",
+                  ),
                 );
               },
             ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _toggleFiltersVisibility,
-        child: Icon(
-          _filtersVisible ? Icons.close : Icons.search,
+      floatingActionButton: BounceInRight(
+        delay: const Duration(milliseconds: 500),
+        child: FloatingActionButton(
+          onPressed: _toggleFiltersVisibility,
+          child: Icon(
+            _filtersVisible ? Icons.close : Icons.search,
+          ),
         ),
       ),
     );
