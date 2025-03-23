@@ -54,7 +54,7 @@ class _MonsterScreenState extends State<MonstersList> {
           .toLowerCase()
           .contains(_searchNameQuery.toLowerCase());
 
-      bool matchesSpecies = monster.monsterSpecie
+      bool matchesSpecies = monster.monsterSpecies
           .toLowerCase()
           .contains(_searchSpeciesQuery.toLowerCase());
 
@@ -175,9 +175,9 @@ class _MonsterScreenState extends State<MonstersList> {
                     ),
                     cardData: monster,
                     cardTitle: monster.monsterName ?? "Unknown",
-                    cardSubtitle1Label: "Specie: ",
+                    cardSubtitle1Label: "Species: ",
                     // cardSubtitle2Label: "Locations: ",
-                    cardSubtitle1: monster.monsterSpecie ?? "Unknown",
+                    cardSubtitle1: monster.monsterSpecies ?? "Unknown",
                     // cardSubtitle2: monster.locations?.join(", ") ?? "Unknown",
                     cardBody: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,

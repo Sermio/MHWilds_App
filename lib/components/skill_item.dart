@@ -18,57 +18,59 @@ class SkillItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 50,
-            height: 50,
-            child: GestureDetector(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    content: SizedBox(
-                      width: double.maxFinite,
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxHeight: 300),
-                        child: SkillContainerPreview(
-                          skillLevel: skillNumber.toString(),
-                          skillProgression: skill.progression,
-                        ),
-                      ),
-                    ),
+      child: GestureDetector(
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              content: SizedBox(
+                width: double.maxFinite,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxHeight: 300),
+                  child: SkillContainerPreview(
+                    skillLevel: skillNumber.toString(),
+                    skillProgression: skill.progression,
                   ),
-                );
-              },
-              child: UrlImageLoader(
-                itemName: skill.name,
-                loadImageUrlFunction: getValidSkillImageUrl,
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: 18),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${skill.name} + $skillNumber",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  overflow: TextOverflow.ellipsis,
+          );
+        },
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 50,
+              height: 50,
+              child: GestureDetector(
+                child: UrlImageLoader(
+                  itemName: skill.name,
+                  loadImageUrlFunction: getValidSkillImageUrl,
                 ),
-                Text(
-                  skill.description,
-                  style: const TextStyle(fontSize: 15),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+            const SizedBox(width: 18),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${skill.name} + $skillNumber",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    skill.description,
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

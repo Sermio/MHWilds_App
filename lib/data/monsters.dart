@@ -2,17 +2,19 @@ Map<String, Map<String, dynamic>> monsters = {
   "Ajarakan": {
     "monsterName": "Ajarakan",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Fanged Beast",
+    "monsterSpecies": "Fanged Beast",
     "elements": ["Fire"],
     "ailments": ["Fireblight"],
     "weaknesses": ["Water", "Ice"],
     "resistances": ["Fire"],
-    "locations": ["Oilwell Basin", "Ruins of Wyveria"]
+    "locations": ["Oilwell Basin", "Ruins of Wyveria"],
+    "tips":
+        "Approaching an Ajarakan's extreme heat will sap your health, so use cool drinks or Chillmantle Bugs to counteract it. Normal Ammo and arrows will melt if you try to pierce their molten carapaces, so you must use heat-resistant equipment or hit them with Watermoss to bring down their temperature first. Continuous friction will cause their body temperature to rise, but soften their outer shells.",
   },
   "Arkveld": {
     "monsterName": "Arkveld",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Flying Wyvern",
+    "monsterSpecies": "Flying Wyvern",
     "elements": ["Dragon"],
     "ailments": ["Dragonblight"],
     "weaknesses": ["Dragon"],
@@ -23,132 +25,158 @@ Map<String, Map<String, dynamic>> monsters = {
       "Oilwell Basin",
       "Iceshard Cliffs",
       "Ruins of Wyveria"
-    ]
+    ],
+    "tips":
+        "The more energy this monster absorbs, the more ferocious its attacks become. Once they fill their energy tanks, their chainblades will sweep out to attack an even wider area. Conversely, since their wings possess organs that absorb energy, a hunter can force the energy to leak out by focusing attacks there. Flooding them with continuous elemental attacks will eventually overload the organs, forcing the monster out of its enhanced state.",
   },
   "Balahara": {
     "monsterName": "Balahara",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Leviathan",
+    "monsterSpecies": "Leviathan",
     "elements": ["Water"],
     "ailments": ["Waterblight"],
     "weaknesses": ["Thunder"],
     "resistances": ["Water"],
-    "locations": ["Windward Plains"]
+    "locations": ["Windward Plains"],
+    "tips":
+        "The interior of a Balahara's mouth is a soft target that can be exploited if you strike right after it expels mucus. Since they rely on heightened hearing while submerged, sonic bombs or screamer pods—obtainable from Baunos—are highly effective. Sometimes the large monster you're hunting will get sucked into a Balahara sand pit...but there's nothing stopping you from going after it.",
   },
   "Blangonga": {
     "monsterName": "Blangonga",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Fanged Beast",
+    "monsterSpecies": "Fanged Beast",
     "elements": ["Ice"],
     "ailments": ["Iceblight"],
     "weaknesses": ["Fire", "Thunder"],
     "resistances": ["Ice", "Dragon"],
-    "locations": ["Iceshard Cliffs"]
+    "locations": ["Iceshard Cliffs"],
+    "tips":
+        "Blangonga use snowy ground to their advantage for extra mobility, and can summon other Blangos to gang up on unwary hunters. Use extra caution when they're angry, because they can direct the whole pack at a chosen target with perilous efficiency. Watch out for that freezing breath, too. Destroying a Blangonga's tusks is believed to undermine its authority with the other Blangos, disrupting their teamwork.",
   },
   "Chatacabra": {
     "monsterName": "Chatacabra",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Amphibian",
+    "monsterSpecies": "Amphibian",
     "elements": null,
     "ailments": null,
     "weaknesses": ["Ice", "Thunder"],
     "resistances": ["Dragon"],
-    "locations": ["Windward Plains"]
+    "locations": ["Windward Plains"],
+    "tips":
+        "The Chatacabra's soft tongue is the place to strike; look for openings after their attacks or when they become tired. Destroying the ore stuck to their forelimbs will leave them wide open to attack. They roam a wide area, so environmental elements like falling boulders or Flashflies will be useful in taking them down. To give you an idea of how hungry these things can get, some hunters have witnessed them swallowing entire barrels during their charges.",
   },
   "Congalala": {
     "monsterName": "Congalala",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Fanged Beast",
+    "monsterSpecies": "Fanged Beast",
     "elements": ["Blast", "Poison"],
     "ailments": ["Blastblight", "Poison"],
     "weaknesses": ["Fire"],
     "resistances": null,
-    "locations": ["Scarlet Forest", "Ruins of Wyveria"]
+    "locations": ["Scarlet Forest", "Ruins of Wyveria"],
+    "tips":
+        "The stench from a Congalala is so rancid that healing items have no effect. But you can quickly dispel it with a deodorant or by evading in water. Those farts are also trouble, but a hunter might just spot an opportunity if they watch carefully. Congalala are also known to use any breath type—a trick some have attributed to the black mushrooms they're seen digging up.",
   },
   "Doshaguma": {
     "monsterName": "Doshaguma",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Fanged Beast",
+    "monsterSpecies": "Fanged Beast",
     "elements": ["Blast"],
     "ailments": ["Blastblight"],
     "weaknesses": ["Fire"],
     "resistances": null,
-    "locations": ["Windward Plains", "Scarlet Forest", "Ruins of Wyveria"]
+    "locations": ["Windward Plains", "Scarlet Forest", "Ruins of Wyveria"],
+    "tips":
+        "When Doshaguma are low on health, their wounds open exposing a weak point. They'll grow more aggressive, though, so beware of counterattacks. Their stomachs are exposed when rising to their hind legs, which is a relatively soft target and potential weak point. Use their mobility to lure them into rocks and vine traps. If a Doshaguma pack attacks during a separate hunt, dung pods and large dung pods are a hunter's best friend.",
   },
   "Gore Magala": {
     "monsterName": "Gore Magala",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Demi Elder",
+    "monsterSpecies": "Demi Elder",
     "elements": null,
     "ailments": ["Frenzy"],
     "weaknesses": ["Fire"],
     "resistances": ["Water"],
-    "locations": ["Iceshard Cliffs"]
+    "locations": ["Iceshard Cliffs"],
+    "tips":
+        "Gore Magala will use its wing to attack anything it detects with its sensory scales without abandon. If a hunter contracts the Frenzy, their natural healing will decrease and any damage taken will increase, but an experienced hunter knows to keep attacking to raise their metabolism before the virus takes hold to avoid negative effects. Target the head to put a stop to Gore Magala's Frenzy.",
   },
   "Gravios": {
     "monsterName": "Gravios",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Flying Wyvern",
+    "monsterSpecies": "Flying Wyvern",
     "elements": ["Fire"],
     "ailments": ["Fireblight"],
     "weaknesses": ["Water", "Ice", "Dragon"],
     "resistances": ["Fire"],
-    "locations": ["Oilwell Basin", "Ruins of Wyveria"]
+    "locations": ["Oilwell Basin", "Ruins of Wyveria"],
+    "tips":
+        "It's no easy task breaking through that heavy armor covering a Gravios head to talon, but repeated attacks will eventually make a crack. That - and the weaknesses a Gravios exposes in its carapace during certain attacks - are your chances to deliver Focus Strikes, demolish it piece by piece, and create even more opportunities.",
   },
   "Guardian Arkveld": {
     "monsterName": "Guardian Arkveld",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Construct",
+    "monsterSpecies": "Construct",
     "elements": ["Dragon"],
     "ailments": ["Dragonblight"],
     "weaknesses": ["Dragon"],
     "resistances": null,
-    "locations": ["Ruins of Wyveria"]
+    "locations": ["Ruins of Wyveria"],
+    "tips":
+        "Guardian Arkveld uses retractable chainblades on their wings to attack. Not only are the blades used to absorb and release energy like other Guardians, but they can also convert the energy to the dragon element and discharge it, which will trigger an explosion of the same element if it comes into contact with Wylkrystals. The crystals formed by their attacks will explode from elemental interference, making Slinger ammo effective.",
   },
   "Guardian Doshaguma": {
     "monsterName": "Guardian Doshaguma",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Construct",
+    "monsterSpecies": "Construct",
     "elements": null,
     "ailments": null,
     "weaknesses": ["Ice"],
     "resistances": null,
-    "locations": ["Ruins of Wyveria"]
+    "locations": ["Ruins of Wyveria"],
+    "tips":
+        "Most Guardian Doshaguma attacks are big forelimb swings. While not agile, the attacks that carry Guardian energy will cause wide explosions. Watch out for the acid in their saliva, which temporarily lower defense. By dealing with their forearm attacks properly, you can expose a weak point worth exploiting. The crystals formed by their attacks will explode from elemental interference, making Slinger ammo effective.",
   },
   "Guardian Ebony": {
     "monsterName": "Guardian Ebony Odogaron",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Construct",
+    "monsterSpecies": "Construct",
     "elements": null,
     "ailments": ["Bleeding"],
     "weaknesses": ["Water"],
     "resistances": null,
-    "locations": ["Ruins of Wyveria"]
+    "locations": ["Ruins of Wyveria"],
+    "tips":
+        "Guardian Ebony Odogaron are most notable for their honed claws that induce bleeding and dexterous tails, both of which carry Guardian energy that can trigger explosions. If their dragon-element attacks connect with Wylkrystals, it will cause an explosion of the same element. However, since the crystals are triggered through elemental interference Slinger ammo can also be used effectively.",
   },
   "Guardian Fulgur Anjanath": {
     "monsterName": "Guardian Fulgur Anjanath",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Construct",
+    "monsterSpecies": "Construct",
     "elements": ["Thunder"],
     "ailments": ["Thunderblight"],
     "weaknesses": ["Ice", "Water", "Dragon"],
     "resistances": null,
-    "locations": ["Ruins of Wyveria"]
+    "locations": ["Ruins of Wyveria"],
+    "tips":
+        "A hunter must watch out for a Guardian Fulgur Anjanath's sparks and teeth. While their lightning attacks alone are a threat, their maws infused with Guardian energy will cause wide-range explosions. Try to topple one by aggressively targeting its legs. The crystals that form from their attacks will explode through elemental interference, so Slinger ammo can also be effective.",
   },
   "Guardian Rathalos": {
     "monsterName": "Guardian Rathalos",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Construct",
+    "monsterSpecies": "Construct",
     "elements": ["Fire"],
     "ailments": ["Fireblight", "Poison"],
     "weaknesses": ["Thunder", "Dragon"],
     "resistances": ["Fire"],
-    "locations": ["Ruins of Wyveria"]
+    "locations": ["Ruins of Wyveria"],
+    "tips":
+        "The unique Guardian energy from Guardian Rathalos's claw attacks is explosive and dangerous. This energy will cause wyvern milk on the ground to crystalize, and if these crystals are hit by the monster's fire attacks it will cause an explosion of the same element. Given that they are triggered by elemental interference, Slinger ammo could be used effectively against them.",
   },
   "Gypceros": {
     "monsterName": "Gypceros",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Bird Wyvern",
+    "monsterSpecies": "Bird Wyvern",
     "elements": null,
     "ailments": ["Poison"],
     "weaknesses": ["Fire"],
@@ -158,156 +186,187 @@ Map<String, Map<String, dynamic>> monsters = {
       "Oilwell Basin",
       "Iceshard Cliffs",
       "Ruins of Wyveria"
-    ]
+    ],
+    "tips":
+        "Faced with a Gypceros, a hunter has two headaches to deal with: the poison and the flashes. The poison will pool and hamper your movements, but you can clear it away with some watermoss. As for the flashes, destroying its crest will stop them; in the meantime, it's a good idea to take cover. If you can't see its crest glow before the attack, that means you're still inside the dazzling danger results.",
   },
   "Hirabami": {
     "monsterName": "Hirabami",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Leviathan",
+    "monsterSpecies": "Leviathan",
     "elements": ["Ice"],
     "ailments": ["Frostblight"],
     "weaknesses": ["Fire", "Thunder"],
     "resistances": ["Ice"],
-    "locations": ["Iceshard Cliffs", "Ruins of Wyveria"]
+    "locations": ["Iceshard Cliffs", "Ruins of Wyveria"],
+    "tips":
+        "Hirabami can remain aloft as they maneuver skillfully between the ground and the sky. You'll need to watch out for those tail claws, but handle an attack well to turn it into a counterstrike opportunity. Destroying the membrane on their necks will lower their guard while aloft. Furthermore, you can target the membrane wound to knock them out of the air, making this a prime target.",
   },
   "Jin Dahaad": {
     "monsterName": "Jin Dahaad",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Leviathan",
+    "monsterSpecies": "Leviathan",
     "elements": ["Ice"],
     "ailments": ["Iceblight", "Frostblight"],
     "weaknesses": ["Fire"],
     "resistances": ["Ice"],
-    "locations": ["Iceshard Cliffs"]
+    "locations": ["Iceshard Cliffs"],
+    "tips":
+        "Every part of Jin Dahaad's massive body is capable of powerful freezing attacks. Diminish their offensive capabilities by attacking the ridges that they use for cooling. The largest ridges on their back are particularly powerful and should be destroyed, but the hide there is very tough unless the other ridges are dealt with first.\n\nThere are multiple large icy boulders above the arena. You can either use them to deal massive damage to Jin Dahaad or as cover for its crystallize attack.",
   },
   "Lala Barina": {
     "monsterName": "Lala Barina",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Temnoceran",
+    "monsterSpecies": "Temnoceran",
     "elements": null,
     "ailments": ["Paralysis"],
     "weaknesses": ["Fire"],
     "resistances": ["Water"],
-    "locations": ["Scarlet Forest", "Ruins of Wyveria"]
+    "locations": ["Scarlet Forest", "Ruins of Wyveria"],
+    "tips":
+        "The paralyric effect of a single Lala Barina floret are weak and not enough to subdue a hunter, but repeated contact should be avoided. The stinger on their abdomens makes approaching from the rear a risky bet, but when tired, the stinger will stay exposed and vulnerable. There are reports that when in terrain such as their nests where they hang from above, sustained attacks will knock them down.",
   },
   "Mizutsune": {
     "monsterName": "Mizutsune",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Leviathans",
+    "monsterSpecies": "Leviathans",
     "elements": ["Water"],
     "ailments": ["Waterblight"],
     "weaknesses": ["Thunder", "Dragon", "Ice"],
     "resistances": ["Water", "Fire"],
-    "locations": []
+    "locations": [],
+    "tips": "???",
   },
   "Nerscylla": {
     "monsterName": "Nerscylla",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Temnoceran",
+    "monsterSpecies": "Temnoceran",
     "elements": null,
     "ailments": ["Poison", "Sleep", "Webbed"],
     "weaknesses": ["Fire"],
     "resistances": ["Water", "Dragon"],
-    "locations": ["Oilwell Basin", "Iceshard Cliffs", "Ruins of Wyveria"]
+    "locations": ["Oilwell Basin", "Iceshard Cliffs", "Ruins of Wyveria"],
+    "tips":
+        "To defend against the poison, sleep, and binding effects of a Nerscylla's webbing, a hunter must go in duly prepared. While its powerful pincers are quite dangerous, they can and should be targeted as a weakness, provided they are approached correctly. The Gypceros hides drapes on Nerscylla's back are resistant to thunder but susceptible to fire - qualities that are reversed once the hide is destroyed.",
   },
   "Nu Udra": {
     "monsterName": "Nu Udra",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Cephalopod",
+    "monsterSpecies": "Cephalopod",
     "elements": ["Fire"],
     "ailments": ["Fireblight"],
     "weaknesses": ["Water"],
     "resistances": ["Fire"],
-    "locations": ["Oilwell Basin"]
+    "locations": ["Oilwell Basin"],
+    "tips":
+        "Each of a Nu Udra's many unique tentacles can be severed. But watch out when they get angry and burst into flame. You can douse any parts that are burning with watermoss - a recommended strategy, since it will leave the monster weakened. A Nu Udra's soft body allows them to slip through crevasses and move in surprising ways, so be careful not to let them get the jump on you.",
   },
   "Quematrice": {
     "monsterName": "Quematrice",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Brute Wyvern",
+    "monsterSpecies": "Brute Wyvern",
     "elements": ["Fire"],
     "ailments": ["Fireblight"],
     "weaknesses": ["Water"],
     "resistances": ["Fire"],
-    "locations": ["Windward Plains", "Ruins of Wyveria"]
+    "locations": ["Windward Plains", "Ruins of Wyveria"],
+    "tips":
+        "Keep an eye on where flammable material settles on the ground to gauge how much a Quematrice's fire will spread. Since they rely on their tails to attack from a distance as well as to start blazes, a hunter can weaken this monster significantly by cutting it off.",
   },
   "Rathalos": {
     "monsterName": "Rathalos",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Flying Wyvern",
+    "monsterSpecies": "Flying Wyvern",
     "elements": ["Fire"],
     "ailments": ["Fireblight", "Poison"],
     "weaknesses": ["Dragon"],
     "resistances": ["Fire"],
-    "locations": ["Scarlet Forest", "Oilwell Basin", "Ruins of Wyveria"]
+    "locations": ["Scarlet Forest", "Oilwell Basin", "Ruins of Wyveria"],
+    "tips":
+        "As King of the Skies, Rathalos will attack with a variert of aerial strikes. A bright flash should be enough to disorient them and bring them down. When Rathalos are in trouble, their Rathian mates may swoop in to help, so be sure to have dung pods and large dung pods at the ready.",
   },
   "Rathian": {
     "monsterName": "Rathian",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Flying Wyvern",
+    "monsterSpecies": "Flying Wyvern",
     "elements": ["Fire"],
     "ailments": ["Fireblight", "Poison"],
     "weaknesses": ["Dragon"],
     "resistances": ["Fire"],
-    "locations": ["Windward Plains", "Scarlet Forest", "Oilwell Basin"]
+    "locations": ["Windward Plains", "Scarlet Forest", "Oilwell Basin"],
+    "tips":
+        "Hunters will need to maneuver carefully to avoid the potent venom in the Rathian's tail spikes and her wide attack range. By severing the tail, you can limit her reach and gain the upper hand. After breathing fire, the inside of the Rathian's mouth becomes tender, making it a prime target to strike.",
   },
   "Rey Dau": {
     "monsterName": "Rey Dau",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Flying Wyvern",
+    "monsterSpecies": "Flying Wyvern",
     "elements": ["Thunder"],
     "ailments": ["Thunderblight"],
     "weaknesses": ["Ice"],
     "resistances": ["Thunder"],
-    "locations": ["Windward Plains"]
+    "locations": ["Windward Plains"],
+    "tips":
+        "When a Rey Dau's wing or tail touches the ground while charged, it causes a reaction that produces a mantle of fulgurite. Not only does this widen the appendage's attack range, but it also increases the monster's charging capacity - so make a point of breaking these parts. Their heads may also be vulnerable after a discharge attack. Hunters are advised to bring thunder-resistant armor and water-based weaponry.",
   },
   "Rompopolo": {
     "monsterName": "Rompopolo",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Brute Wyvern",
+    "monsterSpecies": "Brute Wyvern",
     "elements": null,
     "ailments": ["Poison"],
     "weaknesses": ["Water"],
     "resistances": ["Poison"],
-    "locations": ["Oilwell Basin"]
+    "locations": ["Oilwell Basin"],
+    "tips":
+        "Hunters must be wary of the Rompopolo's poisonous explosions. Gas sacs can be found all over their bodies; the anterior ones contain poison, while the posterior sacs are for explosions. If you see one start to swell, strike it to shrink it back down. When fighting in oilsit, the blasts will kick up rubble that can act as stable footholds.",
   },
   "Uth Duna": {
     "monsterName": "Uth Duna",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Leviathan",
+    "monsterSpecies": "Leviathan",
     "elements": ["Water"],
     "ailments": ["Waterblight"],
     "weaknesses": ["Thunder"],
     "resistances": ["Water"],
-    "locations": ["Scarlet Forest"]
+    "locations": ["Scarlet Forest"],
+    "tips":
+        "Seeing as an Uth Duna's veil reduces attack damage, the first order of business is to dispel it quickly. It will fall away once it loses enough water, but that's not entirely good news; without the veil weighing the monster down, an Uth Duna will become more agile and aggressive. You can dodge their wave with  some creative evading, or by using things like Wedge Beetles to escape upward.",
   },
   "Xu Wu": {
     "monsterName": "Xu Wu",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Cephalopod",
+    "monsterSpecies": "Cephalopod",
     "elements": ["Dragon"],
     "ailments": null,
     "weaknesses": ["Ice"],
     "resistances": ["Dragon"],
-    "locations": ["Ruins of Wyveria"]
+    "locations": ["Ruins of Wyveria"],
+    "tips":
+        "Due to their predatory nature, you can expect Xu Wu to attack Guardians inside their habitat. They have no eyes, but their other senses are develeped and they excel at catching prey off guard, especially with their ability to enter small crevices and crawl quickly across the ground. When one exposes its mouth, that means a deadly attack is coming, but with a powerful blow, you might be able to topple the creature.",
   },
   "Yian Kut-Ku": {
     "monsterName": "Yian Kut-Ku",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Bird Wyvern",
+    "monsterSpecies": "Bird Wyvern",
     "elements": ["Fire"],
     "ailments": null,
     "weaknesses": ["Thunder", "Ice"],
     "resistances": ["Dragon"],
-    "locations": ["Scarlet Forest", "Iceshard Cliffs"]
+    "locations": ["Scarlet Forest", "Iceshard Cliffs"],
+    "tips":
+        "The Yian Kut-Ku's superior hearing comes with great sensitivity to sound. A loud noise is sometimes all it takes to stop them in their tracks, reason enough to make liberal use of sonic bombs. But there's a catch: once a Yian Kut-Ku comes back to itself, it's going to be really flocking mad and come at a hunter even more viciously than before.",
   },
   "Zoh Shia": {
     "monsterName": "Zoh Shia",
     "monsterType": "Large Monster",
-    "monsterSpecie": "Construct",
+    "monsterSpecies": "Construct",
     "elements": null,
     "ailments": ["Fireblight", "Thunderblight"],
     "weaknesses": ["Dragon"],
     "resistances": null,
-    "locations": ["Ruins of Wyveria"]
+    "locations": ["Ruins of Wyveria"],
+    "tips":
+        "Zoh Shia share the same basic traits of other Guardians. The crystals on their wings and heads can be stripped away to deplete their energy stores. The white crystals on their bodies will grow back weaker, making them easier to destroy a second time. The crystals they create will detonate if they take elemental damage, but a talented hunter can use elemental Slinger ammo and smart maneuvering to make good use of them.",
   },
 };

@@ -1,6 +1,7 @@
 class Monster {
   final String monsterName;
-  final String monsterSpecie;
+  final String monsterSpecies;
+  final String tips;
   final List<String>? locations;
   final String monsterType;
   final List<String> elements;
@@ -10,7 +11,8 @@ class Monster {
 
   Monster({
     required this.monsterName,
-    required this.monsterSpecie,
+    required this.monsterSpecies,
+    required this.tips,
     this.locations,
     required this.monsterType,
     required this.elements,
@@ -22,7 +24,8 @@ class Monster {
   factory Monster.fromMap(Map<String, dynamic> map) {
     return Monster(
       monsterName: map['monsterName'] ?? '',
-      monsterSpecie: map['monsterSpecie'] ?? '',
+      monsterSpecies: map['monsterSpecies'] ?? '',
+      tips: map['tips'] ?? '',
       locations: List<String>.from(map['locations'] ?? []),
       monsterType: map['monsterType'] ?? '',
       elements: List<String>.from(map['elements'] ?? []),

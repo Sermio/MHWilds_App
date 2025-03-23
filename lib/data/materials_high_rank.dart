@@ -1367,7 +1367,7 @@ Map<String, List<Map<String, String>>> materialsHighRank = {
       "Frequency": "-",
       "Target Rewards": "3%",
       "Break Part Rewards": "-",
-      "Carves": "5%\n7% (Taill)",
+      "Carves": "5%\n7% (Tail)",
       "Destroyed Wounds": "-"
     },
   ],

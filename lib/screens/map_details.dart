@@ -71,7 +71,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('${widget.map} Details')),
+      appBar: AppBar(centerTitle: true, title: Text(widget.map)),
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator()) // Muestra el loader

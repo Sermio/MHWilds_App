@@ -64,7 +64,7 @@ Map<String, Map<String, dynamic>> skills = {
     "type": "Weapon Skill",
     "description": "Increases affinity.",
     "progression":
-        "Lvl 1: Affinity +4% Lvl 2: Affinity +8% Lvl 3: Affinity +12% Lvl 4: Affinity +16% Lvl 5: Affinity +20%",
+        "Lvl 1: Affinity +4%; Lvl 2: Affinity +8%; Lvl 3: Affinity +12%; Lvl 4: Affinity +16%; Lvl 5: Affinity +20%",
     "levels": "5 levels"
   },
   "Critical Draw": {
@@ -545,7 +545,7 @@ Map<String, Map<String, dynamic>> skills = {
     "type": "Armor Skill",
     "description": "Speeds up stamina recovery.",
     "progression":
-        "Lvl 1: Stamina recovery speed +10% Lvl 2: Stamina recovery speed +30% Lvl 3: Stamina recovery speed +50%",
+        "Lvl 1: Stamina recovery speed +10%; Lvl 2: Stamina recovery speed +30%; Lvl 3: Stamina recovery speed +50%",
     "levels": "3 levels"
   },
   "Marathon Runner": {
@@ -650,7 +650,7 @@ Map<String, Map<String, dynamic>> skills = {
     "type": "Weapon Skill",
     "description": "Makes it easier to stun monsters.",
     "progression":
-        "Lvl 1: Stun power +20% Lvl 2: Stun power +30% Lvl 3: Stun power +40%",
+        "Lvl 1: Stun power +20%; Lvl 2: Stun power +30%; Lvl 3: Stun power +40%",
     "levels": "3 levels"
   },
   "Stamina Thief": {
@@ -658,7 +658,7 @@ Map<String, Map<String, dynamic>> skills = {
     "type": "Weapon Skill",
     "description": "Increases certain attacks' ability to exhaust monsters.",
     "progression":
-        "Lvl 1: Exhaust power +20% Lvl 2: Exhaust power +30% Lvl 3: Exhaust power +40%",
+        "Lvl 1: Exhaust power +20%; Lvl 2: Exhaust power +30%; Lvl 3: Exhaust power +40%",
     "levels": "3 levels"
   },
   "Artillery": {
@@ -676,7 +676,7 @@ Map<String, Map<String, dynamic>> skills = {
     "description":
         "Increases switch speed and power for switch axes and charge blades.",
     "progression":
-        "Lvl 1: Speed +10% Lvl 2: Speed +20% Morph attack damage +10% Lvl 3: Speed +30% Morph attack damage +20%",
+        "Lvl 1: Speed +10%; Lvl 2: Speed +20% Morph attack damage +10%; Lvl 3: Speed +30% Morph attack damage +20%",
     "levels": "3 levels"
   },
   "Partbreaker": {
@@ -933,7 +933,7 @@ Map<String, Map<String, dynamic>> skills = {
     "type": "Armor Skill",
     "description": "Increases the damage of explosive items.",
     "progression":
-        "Lvl 1: Explosive power +10% Lvl 2: Explosive power +20% Lvl 3: Explosive power +30%",
+        "Lvl 1: Explosive power +10%; Lvl 2: Explosive power +20%; Lvl 3: Explosive power +30%",
     "levels": "3 levels"
   },
   "Mushroomancer": {
@@ -950,7 +950,7 @@ Map<String, Map<String, dynamic>> skills = {
     "type": "Armor Skill",
     "description": "Extends the duration of some item effects.",
     "progression":
-        "Lvl 1: Item effect duration +10% Lvl 2: Item effect duration +25% Lvl 3: Item effect duration +50%",
+        "Lvl 1: Item effect duration +10%; Lvl 2: Item effect duration +25%; Lvl 3: Item effect duration +50%",
     "levels": "3 levels"
   },
   "Free Meal": {

@@ -67,13 +67,6 @@ class _DecorationDetailsState extends State<DecorationDetails> {
             child: Center(
               child: Column(
                 children: [
-                  // const Center(
-                  //   child: Text(
-                  //     "Skills",
-                  //     style:
-                  //         TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  //   ),
-                  // ),
                   if (foundSkills.isNotEmpty)
                     Column(
                       children: foundSkills.map((skillData) {
