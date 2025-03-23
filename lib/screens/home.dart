@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_appbar.dart';
 import 'package:mhwilds_app/components/c_drawer.dart';
+import 'package:mhwilds_app/screens/decorations_list.dart';
+import 'package:mhwilds_app/screens/materials_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,9 +14,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Widget _selectedScreen = const MonstersList();
+  String _appBarTitle = "Monsters";
 
   void _changeScreen(Widget newScreen) {
     setState(() {
+      if (newScreen is MonstersList) {
+        _appBarTitle = "Monsters";
+      } else if (newScreen is DecorationsList) {
+        _appBarTitle = "Decorations";
+      } else if (newScreen is MaterialsList) {
+        _appBarTitle = "Materials";
+      }
       _selectedScreen = newScreen;
     });
     Navigator.pop(context);
@@ -23,7 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Cappbar(),
+      appBar: Cappbar(
+        title: _appBarTitle,
+      ),
       drawer: Cdrawer(onItemSelected: _changeScreen),
       body: _selectedScreen,
     );

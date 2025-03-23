@@ -1,7 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mhwilds_app/data/monsters.dart';
 import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
 
@@ -65,6 +67,7 @@ class _MonsterScreenState extends State<MonstersList> {
     }).toList();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           if (_filtersVisible) ...[
@@ -79,7 +82,9 @@ class _MonsterScreenState extends State<MonstersList> {
                 },
                 decoration: const InputDecoration(
                   labelText: 'Search by Name',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: Icon(
+                    Icons.search,
+                  ),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -95,8 +100,9 @@ class _MonsterScreenState extends State<MonstersList> {
                 },
                 decoration: const InputDecoration(
                   labelText: 'Search by Specie',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(
+                    Icons.search,
+                  ),
                 ),
               ),
             ),
@@ -116,6 +122,7 @@ class _MonsterScreenState extends State<MonstersList> {
                     ].map((location) {
                       return FilterChip(
                         label: Text(location),
+                        labelStyle: const TextStyle(color: Colors.black),
                         backgroundColor: zoneBackgroundColor(location),
                         selected: _selectedLocations.contains(location),
                         onSelected: (isSelected) {
@@ -160,6 +167,7 @@ class _MonsterScreenState extends State<MonstersList> {
                   duration: const Duration(milliseconds: 900),
                   delay: Duration(milliseconds: index * 5),
                   child: Ccard(
+                    bodyOnTop: false,
                     leading: Hero(
                       tag: monster.monsterName,
                       child: Image.asset(
@@ -168,9 +176,26 @@ class _MonsterScreenState extends State<MonstersList> {
                     cardData: monster,
                     cardTitle: monster.monsterName ?? "Unknown",
                     cardSubtitle1Label: "Specie: ",
-                    cardSubtitle2Label: "Locations: ",
+                    // cardSubtitle2Label: "Locations: ",
                     cardSubtitle1: monster.monsterSpecie ?? "Unknown",
-                    cardSubtitle2: monster.locations?.join(", ") ?? "Unknown",
+                    // cardSubtitle2: monster.locations?.join(", ") ?? "Unknown",
+                    cardBody: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Locations: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Flexible(
+                          child: Text(
+                            monster.locations
+                                    ?.join(", ")
+                                    .replaceAll(', ', '\n') ??
+                                "Unknown",
+                            softWrap: true,
+                            overflow: TextOverflow.visible,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

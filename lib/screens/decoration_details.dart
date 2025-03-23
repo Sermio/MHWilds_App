@@ -58,7 +58,8 @@ class _DecorationDetailsState extends State<DecorationDetails> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.decoration.decorationName} details'),
+        title: Text(widget.decoration.decorationName),
+        centerTitle: true,
       ),
       body: Stack(
         children: [
@@ -66,13 +67,13 @@ class _DecorationDetailsState extends State<DecorationDetails> {
             child: Center(
               child: Column(
                 children: [
-                  const Center(
-                    child: Text(
-                      "Decoration Skills",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  // const Center(
+                  //   child: Text(
+                  //     "Skills",
+                  //     style:
+                  //         TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  //   ),
+                  // ),
                   if (foundSkills.isNotEmpty)
                     Column(
                       children: foundSkills.map((skillData) {

@@ -20,6 +20,7 @@ class Ccard extends StatelessWidget {
   final Widget? leading;
   final Widget? trailing;
   final Color? cardTitleColor;
+  bool bodyOnTop;
 
   Ccard({
     super.key,
@@ -33,6 +34,7 @@ class Ccard extends StatelessWidget {
     this.leading,
     this.trailing,
     this.cardTitleColor,
+    this.bodyOnTop = true,
   });
 
   @override
@@ -63,6 +65,10 @@ class Ccard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: Card(
+          // color: const Color.fromARGB(98, 124, 132, 116),
+          elevation: 3,
+          color: Colors.white,
+
           child: ListTile(
             leading: leading,
             trailing: trailing,
@@ -77,7 +83,7 @@ class Ccard extends StatelessWidget {
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (cardBody != null) ...[
+                if (cardBody != null && bodyOnTop) ...[
                   cardBody!,
                   const SizedBox(height: 5),
                 ],
@@ -111,7 +117,11 @@ class Ccard extends StatelessWidget {
                           ),
                         ),
                     ],
-                  )
+                  ),
+                if (cardBody != null && !bodyOnTop) ...[
+                  cardBody!,
+                  const SizedBox(height: 5),
+                ],
               ],
             ),
           ),

@@ -56,14 +56,14 @@ class SkillItem extends StatelessWidget {
                 Text(
                   "${skill.name} + $skillNumber",
                   style: const TextStyle(
-                    fontSize: 13,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   skill.description,
-                  style: const TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 15),
                 ),
               ],
             ),

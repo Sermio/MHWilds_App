@@ -121,6 +121,7 @@ class _MaterialsListState extends State<MaterialsList> {
                   duration: const Duration(milliseconds: 900),
                   delay: Duration(milliseconds: index * 5),
                   child: Ccard(
+                      bodyOnTop: false,
                       leading: _MaterialImage(
                           formattedMaterialName: formattedMaterialName),
                       cardData: material,

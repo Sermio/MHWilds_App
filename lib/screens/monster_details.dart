@@ -25,7 +25,8 @@ class MonsterDetails extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Text('${monster.monsterName} details'),
+        title: Text(monster.monsterName),
+        centerTitle: true,
       ),
       body: Stack(
         children: [
@@ -33,17 +34,13 @@ class MonsterDetails extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: 200,
-                    child: Hero(
-                      tag: monster.monsterName,
-                      child: Image.asset(
-                          'assets/imgs/monsters/${monster.monsterName.toLowerCase().replaceAll(' ', '_')}.png'),
-                    ),
+                  Hero(
+                    tag: monster.monsterName,
+                    child: Image.asset(
+                        'assets/imgs/monsters/${monster.monsterName.toLowerCase().replaceAll(' ', '_')}.png'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 0),
+                    padding: EdgeInsets.zero,
                     child: MonsterDetailsCard(monster: monster),
                   ),
                   const SizedBox(

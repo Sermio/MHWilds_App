@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
 
 class Cappbar extends StatelessWidget implements PreferredSizeWidget {
-  const Cappbar({super.key});
+  const Cappbar({super.key, this.title = ""});
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-          size: 35,
-        ),
-        elevation: 10,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.green,
-                Colors.transparent,
-              ],
+    return AppBar(
+      title: Text(title),
+      centerTitle: true,
+      elevation: 10,
+      // backgroundColor: Colors.transparent,
+      flexibleSpace: Stack(
+        children: [
+          Container(
+              // color: const Color(0xFFC3A35D),
+              ),
+          Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: Center(
+              child: Image.asset(
+                height: 80,
+                width: 80,
+                'assets/imgs/banner/test.webp',
+              ),
             ),
           ),
-        ),
-        // backgroundColor: Colors.transparent,
-        // flexibleSpace: Image.asset(
-        //   'assets/imgs/banner/banner.png',
-        //   fit: BoxFit.cover,
-        // ),
+        ],
       ),
     );
   }

@@ -73,6 +73,7 @@ class _DecorationsListState extends State<DecorationsList> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: DropdownButton<String>(
+                dropdownColor: Colors.white,
                 value: _selectedType,
                 hint: const Text('Select Type'),
                 onChanged: (newType) {

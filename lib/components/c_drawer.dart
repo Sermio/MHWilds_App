@@ -38,7 +38,10 @@ class Cdrawer extends StatelessWidget {
           Column(
             children: [
               ListTile(
-                title: const Text('Monsters'),
+                title: const Text(
+                  'Monsters',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 trailing: Image.asset(
                   'assets/imgs/monster_icons/chatacabra.png',
                   width: 35,
@@ -46,8 +49,12 @@ class Cdrawer extends StatelessWidget {
                 ),
                 onTap: () => onItemSelected(const MonstersList()),
               ),
+              const Divider(),
               ListTile(
-                title: const Text('Decorations'),
+                title: const Text(
+                  'Decorations',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 trailing: Image.asset(
                   'assets/imgs/decorations/jewel.webp',
                   width: 35,
@@ -55,8 +62,12 @@ class Cdrawer extends StatelessWidget {
                 ),
                 onTap: () => onItemSelected(const DecorationsList()),
               ),
+              const Divider(),
               ListTile(
-                title: const Text('Materials'),
+                title: const Text(
+                  'Materials',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 trailing: Image.asset(
                   'assets/imgs/materials/default_material.webp',
                   width: 35,
@@ -64,6 +75,7 @@ class Cdrawer extends StatelessWidget {
                 ),
                 onTap: () => onItemSelected(const MaterialsList()),
               ),
+              const Divider(),
             ],
           ),
         ],

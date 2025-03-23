@@ -139,11 +139,11 @@ Color zoneBackgroundColor(String zone) {
     case 'Scarlet Forest':
       return Colors.green.shade500;
     case 'Oilwell Basin':
-      return Colors.pink.shade100;
-    case 'Ruins Of Wyveria':
-      return Colors.yellow.shade700;
+      return const Color.fromARGB(255, 142, 141, 141);
+    case 'Ruins of Wyveria':
+      return const Color(0xFF8D6E63);
     case "Windward Plains":
-      return Colors.yellow;
+      return const Color(0xFFF8D200);
     case "Iceshard Cliffs":
       return Colors.cyan.shade100;
     default:
@@ -217,3 +217,11 @@ Future<String?> getValidSkillImageUrl(String decorationName) async {
 
   return 'https://monsterhunterworld.wiki.fextralife.com/file/Monster-Hunter-World/evade-window-skill-mhw.png';
 }
+
+
+// Color(0xFFC3A35D) // Color dorado suave
+
+// Color(0xFF605632) // Color marrón oliva
+
+// Color(0xFF040404) // Color negro profundo
+// Color(0xFF758A61) // Color verde oliva apagado
