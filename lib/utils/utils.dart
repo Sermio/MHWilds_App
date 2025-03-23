@@ -3,6 +3,48 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' as services;
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:image/image.dart' as img;
+
+Future<bool> isGrayScaleFromUrl(String imageUrl) async {
+  try {
+    final response = await http.get(Uri.parse(imageUrl));
+    if (response.statusCode != 200) {
+      throw Exception('Error al descargar la imagen');
+    }
+
+    Uint8List bytes = response.bodyBytes;
+    img.Image? image = img.decodeImage(bytes);
+    if (image == null) {
+      throw Exception('No se pudo decodificar la imagen');
+    }
+
+    int grayscalePixels = 0;
+    int totalPixels = 0;
+
+    for (int y = 0; y < image.height; y += 10) {
+      for (int x = 0; x < image.width; x += 10) {
+        img.Pixel pixel = image.getPixel(x, y);
+        int r = pixel.r as int;
+        int g = pixel.g as int;
+        int b = pixel.b as int;
+
+        if ((r - g).abs() < 5 && (r - b).abs() < 5 && (g - b).abs() < 5) {
+          grayscalePixels++;
+        }
+        totalPixels++;
+      }
+    }
+
+    return (grayscalePixels / totalPixels) > 0.9;
+  } catch (e) {
+    print('Error al procesar la imagen: $e');
+    return false;
+  }
+}
 
 Future<String?> getSkillUrl(String skillName, int slot, int skillLevel) async {
   int jewelIndex = skillName.toLowerCase().indexOf('jewel');
@@ -11,6 +53,9 @@ Future<String?> getSkillUrl(String skillName, int slot, int skillLevel) async {
   String fillIs = "";
   if (skillName.contains("/")) {
     fillIs = "iii";
+  }
+  if (skillName.toLowerCase().contains("artillery")) {
+    print("");
   }
 
   int cutIndex = -1;
@@ -68,9 +113,11 @@ Future<String?> getSkillUrl(String skillName, int slot, int skillLevel) async {
 
   for (String url in urlVariations) {
     final response = await http.head(Uri.parse(url));
-
     if (response.statusCode == 200) {
-      return url;
+      bool isGrayscale = await isGrayScaleFromUrl(url);
+      if (!isGrayscale) {
+        return url;
+      }
     }
   }
 

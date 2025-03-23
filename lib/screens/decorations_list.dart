@@ -150,15 +150,19 @@ class _DecorationsListState extends State<DecorationsList> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FutureBuilder<String?>(
-          future:
-              getSkillUrl(skillName, int.parse(slot), int.parse(skillLevel)),
+          future: getSkillUrl(skillName, int.parse(slot), int.parse(skillLevel))
+              .timeout(const Duration(seconds: 3), onTimeout: () {
+            return null;
+          }),
           builder: (context, snapshot) {
             Widget child;
-
-            if (snapshot.connectionState == ConnectionState.waiting ||
-                snapshot.hasError ||
+            if (snapshot.connectionState == ConnectionState.done &&
+                !snapshot.hasData) {
+              child =
+                  Image.asset('assets/imgs/decorations/missing_decoration.png');
+            } else if (snapshot.connectionState == ConnectionState.waiting ||
                 !snapshot.hasData ||
-                snapshot.data == null) {
+                snapshot.hasError) {
               child = const CircularProgressIndicator();
             } else {
               child = FadeIn(
