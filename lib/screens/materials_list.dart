@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/materialImage.dart';
 import 'package:mhwilds_app/models/material.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
@@ -103,9 +104,9 @@ class _MaterialsListState extends State<MaterialsList> {
                 String materialKey = filteredMaterialKeys[index];
                 MaterialItem material =
                     MaterialItem.fromMap(materials[materialKey]!);
-                String formattedMaterialName = material.name
-                    .replaceAll(RegExp(r'\s\+'), '+')
-                    .replaceAll(RegExp(r'[()]'), '');
+                // String formattedMaterialName = material.name
+                //     .replaceAll(RegExp(r'\s\+'), '+')
+                //     .replaceAll(RegExp(r'[()]'), '');
                 String cleanedSource = material.source
                     .replaceAll(
                         RegExp(
@@ -122,8 +123,7 @@ class _MaterialsListState extends State<MaterialsList> {
                   delay: Duration(milliseconds: index * 5),
                   child: Ccard(
                       bodyOnTop: false,
-                      leading: _MaterialImage(
-                          formattedMaterialName: formattedMaterialName),
+                      leading: MaterialImage(materialName: material.name),
                       cardData: material,
                       cardTitle: material.name ?? "Unknown",
                       cardSubtitle1Label: "Rarity: ",
@@ -156,49 +156,6 @@ class _MaterialsListState extends State<MaterialsList> {
             _filtersVisible ? Icons.close : Icons.search,
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _MaterialImage extends StatelessWidget {
-  const _MaterialImage({
-    super.key,
-    required this.formattedMaterialName,
-  });
-
-  final String formattedMaterialName;
-
-  @override
-  Widget build(BuildContext context) {
-    return FadeIn(
-      child: Image.network(
-        height: 50,
-        width: 50,
-        'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedMaterialName.toLowerCase().replaceAll(' ', '_')}_item_equipment_material_mhwilds_wiki_guide_85px.png',
-        loadingBuilder: (BuildContext context, Widget child,
-            ImageChunkEvent? loadingProgress) {
-          if (loadingProgress == null) {
-            return child;
-          } else {
-            return SizedBox(
-              height: 50,
-              width: 50,
-              child: Center(
-                child: CircularProgressIndicator(
-                  value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded /
-                          (loadingProgress.expectedTotalBytes ?? 1)
-                      : null,
-                ),
-              ),
-            );
-          }
-        },
-        errorBuilder:
-            (BuildContext context, Object error, StackTrace? stackTrace) {
-          return Image.asset('assets/imgs/materials/default_material.webp');
-        },
       ),
     );
   }

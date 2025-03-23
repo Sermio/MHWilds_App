@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/materialImage.dart';
 
 class MonsterTable extends StatefulWidget {
   const MonsterTable(
@@ -55,11 +56,7 @@ class _MonsterTableState extends State<MonsterTable> {
                   child: DataTable(
                     columns: _buildColumns(widget.columnsTitles),
                     rows: _buildRows(widget.columnsTitles),
-                    // dataRowHeight: 60,
-                    // dataRowMinHeight: 10,
                     dataRowMaxHeight: 60,
-                    // headingRowHeight: 40,
-                    // horizontalMargin: 0,
                     columnSpacing: 20,
                   ),
                 ),
@@ -70,16 +67,16 @@ class _MonsterTableState extends State<MonsterTable> {
   }
 
   List<DataColumn> _buildColumns(List<String> columnsTitles) {
-    return columnsTitles
-        .map((title) => DataColumn(
-              label: Text(
-                title.replaceAll(' ', '\n'),
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-                softWrap: true,
-              ),
-            ))
-        .toList();
+    return columnsTitles.map((title) {
+      return DataColumn(
+        label: Text(
+          title.replaceAll(' ', '\n'),
+          style: const TextStyle(fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+          softWrap: true,
+        ),
+      );
+    }).toList();
   }
 
   List<DataRow> _buildRows(List<String> columnsTitles) {
@@ -90,8 +87,21 @@ class _MonsterTableState extends State<MonsterTable> {
 
       for (var key in columnsTitles) {
         String value = material[key] ?? "-";
-        cells.add(
-          DataCell(
+        const MaterialImage(
+          materialName: 'Poison Sac',
+        );
+        if (key == 'Image') {
+          cells.add(DataCell(
+            SizedBox(
+              width: 50,
+              height: 50,
+              child: MaterialImage(
+                materialName: material['Material'] ?? '',
+              ),
+            ),
+          ));
+        } else {
+          cells.add(DataCell(
             SingleChildScrollView(
               child: Text(
                 value.replaceAll(' ', '\n'),
@@ -99,8 +109,8 @@ class _MonsterTableState extends State<MonsterTable> {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-          ),
-        );
+          ));
+        }
       }
 
       rows.add(DataRow(cells: cells));
