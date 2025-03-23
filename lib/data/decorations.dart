@@ -2,7 +2,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Adapt Jewel 1": {
     "decoration_name": "Adapt Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Adaptability +1",
     "decoration_description":
@@ -12,7 +12,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Ambush Jewel 2": {
     "decoration_name": "Ambush Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Ambush +1",
     "decoration_description":
@@ -22,7 +22,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Antiblast Jewel 1": {
     "decoration_name": "Antiblast Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Blast Resistance +1",
     "decoration_description": "Grants protection against blastblight.",
@@ -31,7 +31,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Antidote Jewel 1": {
     "decoration_name": "Antidote Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Poison Resistance +1",
     "decoration_description": "Reduces damage while poisoned.",
@@ -40,7 +40,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Antipara Jewel 1": {
     "decoration_name": "Antipara Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Paralysis Resistance +1",
     "decoration_description": "Reduces the duration of paralysis.",
@@ -49,7 +49,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Artillery Jewel 1": {
     "decoration_name": "Artillery Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Artillery +1",
     "decoration_description":
@@ -59,7 +59,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Artillery Jewel II 2": {
     "decoration_name": "Artillery Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Artillery +2",
     "decoration_description":
@@ -69,7 +69,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Artillery Jewel III 3": {
     "decoration_name": "Artillery Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Artillery +3",
     "decoration_description":
@@ -79,7 +79,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Attack Jewel 1": {
     "decoration_name": "Attack Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Attack Boost +1",
     "decoration_description": "Increases attack power.",
@@ -88,7 +88,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Attack Jewel II 2": {
     "decoration_name": "Attack Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Attack Boost +2",
     "decoration_description": "Increases attack power.",
@@ -97,7 +97,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Attack Jewel III 3": {
     "decoration_name": "Attack Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Attack Boost +3",
     "decoration_description": "Increases attack power.",
@@ -106,7 +106,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bandolier Jewel 1": {
     "decoration_name": "Bandolier Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Tetrad Shot +1",
     "decoration_description":
@@ -116,7 +116,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bandolier Jewel II 2": {
     "decoration_name": "Bandolier Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Tetrad Shot +2",
     "decoration_description":
@@ -126,7 +126,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bandolier Jewel III 3": {
     "decoration_name": "Bandolier Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Tetrad Shot +3",
     "decoration_description":
@@ -136,7 +136,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bandolier/Blaze Jewel 3": {
     "decoration_name": "Bandolier/Blaze Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Tetrad Shot + 3;Fire Attack + 1",
     "decoration_description":
@@ -146,7 +146,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bandolier/Bolt Jewel 3": {
     "decoration_name": "Bandolier/Bolt Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Tetrad Shot + 3;Thunder Attack + 1",
     "decoration_description":
@@ -156,7 +156,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bandolier/Dragon Jewel 3": {
     "decoration_name": "Bandolier/Dragon Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Tetrad Shot +3;Dragon Attack +1",
     "decoration_description":
@@ -166,7 +166,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bandolier/Frost Jewel 3": {
     "decoration_name": "Bandolier/Frost Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Tetrad Shot + 3;Ice Attack + 1",
     "decoration_description":
@@ -176,7 +176,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bandolier/Ironwall Jewel 3": {
     "decoration_name": "Bandolier/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Tetrad Shot + 3;Guard + 1",
     "decoration_description":
@@ -186,7 +186,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bandolier/Precise Jewel 3": {
     "decoration_name": "Bandolier/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Tetrad Shot + 3;Ballistics + 1",
     "decoration_description":
@@ -196,7 +196,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bandolier/Stream Jewel 3": {
     "decoration_name": "Bandolier/Stream Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Tetrad Shot +3;Water Attack + 1",
     "decoration_description":
@@ -206,7 +206,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blast Jewel 1": {
     "decoration_name": "Blast Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Blast Attack +1",
     "decoration_description":
@@ -216,7 +216,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blast Jewel II 2": {
     "decoration_name": "Blast Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Blast Attack +2",
     "decoration_description":
@@ -226,7 +226,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blast Jewel III 3": {
     "decoration_name": "Blast Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Blast Attack +3",
     "decoration_description":
@@ -236,7 +236,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blastcoat Jewel 2": {
     "decoration_name": "Blastcoat Jewel 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Blast Functionality +1",
     "decoration_description": "Allows you to apply blast coatings.",
@@ -245,7 +245,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze Jewel 1": {
     "decoration_name": "Blaze Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Fire Attack +1",
     "decoration_description":
@@ -255,7 +255,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze Jewel II 2": {
     "decoration_name": "Blaze Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Fire Attack +2",
     "decoration_description":
@@ -265,7 +265,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze Jewel III 3": {
     "decoration_name": "Blaze Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack +3",
     "decoration_description":
@@ -275,7 +275,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Bandolier Jewel 3": {
     "decoration_name": "Blaze/Bandolier Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Tetrad Shot + 1",
     "decoration_description":
@@ -285,7 +285,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Crit Elem Jewel 3": {
     "decoration_name": "Blaze/Crit Elem Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Critical Element + 1",
     "decoration_description":
@@ -295,7 +295,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Enhancer Jewel 3": {
     "decoration_name": "Blaze/Enhancer Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack +3;Power Prolonger + 1",
     "decoration_description":
@@ -305,7 +305,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Focus Jewel 3": {
     "decoration_name": "Blaze/Focus Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Focus + 1",
     "decoration_description":
@@ -315,7 +315,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Guardian Jewel 3": {
     "decoration_name": "Blaze/Guardian Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Offensive Guard + 1",
     "decoration_description":
@@ -325,7 +325,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Handicraft Jewel 3": {
     "decoration_name": "Blaze/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Handicraft +1",
     "decoration_description":
@@ -335,7 +335,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Ironwall Jewel 3": {
     "decoration_name": "Blaze/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Guard + 1",
     "decoration_description":
@@ -345,7 +345,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/KO Jewel 3": {
     "decoration_name": "Blaze/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Slugger + 1",
     "decoration_description":
@@ -355,7 +355,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Opener Jewel 3": {
     "decoration_name": "Blaze/Opener Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Opening Shot +1",
     "decoration_description":
@@ -365,7 +365,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Precise Jewel 3": {
     "decoration_name": "Blaze/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Ballistics +1",
     "decoration_description":
@@ -375,7 +375,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Quickswitch Jewel 3": {
     "decoration_name": "Blaze/Quickswitch Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Rapid Morph + 1",
     "decoration_description":
@@ -385,7 +385,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Rzr Sharp Jewel 3": {
     "decoration_name": "Blaze/Rzr Sharp Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack + 3;Razor Sharp + 1",
     "decoration_description":
@@ -395,7 +395,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blaze/Shield Jewel 3": {
     "decoration_name": "Blaze/Shield Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Fire Attack +3;Guard Up +1",
     "decoration_description":
@@ -405,7 +405,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blunt Jewel 1": {
     "decoration_name": "Blunt Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Bludgeoner +1",
     "decoration_description":
@@ -415,7 +415,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blunt Jewel II 2": {
     "decoration_name": "Blunt Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Bludgeoner +2",
     "decoration_description":
@@ -425,7 +425,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Blunt Jewel III 3": {
     "decoration_name": "Blunt Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Bludgeoner +3",
     "decoration_description":
@@ -435,7 +435,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt Jewel 1": {
     "decoration_name": "Bolt Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Thunder Attack +1",
     "decoration_description":
@@ -445,7 +445,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt Jewel II 2": {
     "decoration_name": "Bolt Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Thunder Attack +2",
     "decoration_description":
@@ -455,7 +455,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt Jewel III 3": {
     "decoration_name": "Bolt Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack +3",
     "decoration_description":
@@ -465,7 +465,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Bandolier Jewel 3": {
     "decoration_name": "Bolt/Bandolier Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Tetrad Shot + 1",
     "decoration_description":
@@ -475,7 +475,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Crit Elem Jewel 3": {
     "decoration_name": "Bolt/Crit Elem Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Critical Element + 1",
     "decoration_description":
@@ -485,7 +485,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Enhancer Jewel 3": {
     "decoration_name": "Bolt/Enhancer Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Power Prolonger + 1",
     "decoration_description":
@@ -495,7 +495,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Focus Jewel 3": {
     "decoration_name": "Bolt/Focus Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Focus + 1",
     "decoration_description":
@@ -505,7 +505,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Guardian Jewel 3": {
     "decoration_name": "Bolt/Guardian Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Offensive Guard + 1",
     "decoration_description":
@@ -515,7 +515,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Handicraft Jewel 3": {
     "decoration_name": "Bolt/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Handicraft + 1",
     "decoration_description":
@@ -525,7 +525,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Ironwall Jewel 3": {
     "decoration_name": "Bolt/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Guard + 1",
     "decoration_description":
@@ -535,7 +535,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/KO Jewel 3": {
     "decoration_name": "Bolt/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Slugger + 1",
     "decoration_description":
@@ -545,7 +545,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Opener Jewel 3": {
     "decoration_name": "Bolt/Opener Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Opening Shot + 1",
     "decoration_description":
@@ -555,7 +555,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Precise Jewel 3": {
     "decoration_name": "Bolt/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Ballistics + 1",
     "decoration_description":
@@ -565,7 +565,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Quickswitch Jewel 3": {
     "decoration_name": "Bolt/Quickswitch Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Rapid Morph + 1",
     "decoration_description":
@@ -575,7 +575,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Rzr Sharp Jewel 3": {
     "decoration_name": "Bolt/Rzr Sharp Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Razor Sharp + 1",
     "decoration_description":
@@ -585,7 +585,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bolt/Shield Jewel 3": {
     "decoration_name": "Bolt/Shield Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Thunder Attack + 3;Guard Up + 1",
     "decoration_description":
@@ -595,7 +595,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Bomber Jewel 1": {
     "decoration_name": "Bomber Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Bombardier +1",
     "decoration_description": "Increases the damage of explosive items.",
@@ -604,7 +604,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Botany Jewel 1": {
     "decoration_name": "Botany Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Botanist +1",
     "decoration_description":
@@ -614,7 +614,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Brace Jewel 1": {
     "decoration_name": "Brace Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Flinch Free +1",
     "decoration_description":
@@ -624,7 +624,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Chain Jewel 3": {
     "decoration_name": "Chain Jewel 3",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Burst +1",
     "decoration_description":
@@ -634,7 +634,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Challenger Jewel 3": {
     "decoration_name": "Challenger Jewel 3",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Agitator + 1",
     "decoration_description":
@@ -644,7 +644,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge Jewel 1": {
     "decoration_name": "Charge Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Charge Master +1",
     "decoration_description":
@@ -654,7 +654,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge Jewel II 2": {
     "decoration_name": "Charge Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Charge Master +2",
     "decoration_description":
@@ -664,7 +664,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge Jewel III 3": {
     "decoration_name": "Charge Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Charge Master +3",
     "decoration_description":
@@ -674,7 +674,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge Up Jewel 2": {
     "decoration_name": "Charge Up Jewel 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Charge Up +2",
     "decoration_description":
@@ -684,7 +684,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge Up/Attack Jewel 3": {
     "decoration_name": "Charge Up/Attack Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Charge Up +1;Attack Boost  +1",
     "decoration_description":
@@ -694,7 +694,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge Up/Draw Jewel 3": {
     "decoration_name": "Charge Up/Draw Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Charge Up +1;Critical Draw + 1",
     "decoration_description":
@@ -704,7 +704,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge Up/Expert Jewel 3": {
     "decoration_name": "Charge Up/Expert Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Charge Up + 1;Critical Eye + 1",
     "decoration_description":
@@ -714,7 +714,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge Up/Handicraft Jewel 3": {
     "decoration_name": "Charge Up/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Charge Up +1;Handicraft +1",
     "decoration_description":
@@ -724,7 +724,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge Up/KO Jewel 3": {
     "decoration_name": "Charge Up/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Charge Up + 1;Slugger + 1",
     "decoration_description":
@@ -734,7 +734,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge/Handicraft Jewel 3": {
     "decoration_name": "Charge/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Charge Master + 1;Handicraft + 1",
     "decoration_description":
@@ -744,7 +744,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Charge/KO Jewel 3": {
     "decoration_name": "Charge/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Charge Master + 1;Slugger + 1",
     "decoration_description":
@@ -754,7 +754,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Climber Jewel 1": {
     "decoration_name": "Climber Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Cliffhanger +1",
     "decoration_description":
@@ -764,7 +764,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Counter Jewel 2": {
     "decoration_name": "Counter Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Counterstrike +1",
     "decoration_description":
@@ -774,7 +774,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Counterattack Jewel 3": {
     "decoration_name": "Counterattack Jewel 3",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Adrenaline Rush + 1",
     "decoration_description":
@@ -784,7 +784,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Elem Jewel III 3": {
     "decoration_name": "Crit Elem Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Element +3",
     "decoration_description":
@@ -794,7 +794,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Elem/Blaze Jewel 3": {
     "decoration_name": "Crit Elem/Blaze Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Element +3;Fire Attack +1",
     "decoration_description":
@@ -804,7 +804,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Elem/Bolt Jewel 3": {
     "decoration_name": "Crit Elem/Bolt Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Element + 3;Thunder Attack + 1",
     "decoration_description":
@@ -814,7 +814,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Elem/Dragon Jewel 3": {
     "decoration_name": "Crit Elem/Dragon Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Element + 3;Dragon Attack + 1",
     "decoration_description":
@@ -824,7 +824,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Elem/Frost Jewel 3": {
     "decoration_name": "Crit Elem/Frost Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Element + 3;Ice Attack + 1",
     "decoration_description":
@@ -834,7 +834,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Elem/Handicraft Jewel 3": {
     "decoration_name": "Crit Elem/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Element + 3;Handicraft + 1",
     "decoration_description":
@@ -844,7 +844,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Elem/Ironwall Jewel 3": {
     "decoration_name": "Crit Elem/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Element + 3;Guard + 1",
     "decoration_description":
@@ -854,7 +854,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Elem/KO Jewel 3": {
     "decoration_name": "Crit Elem/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Element + 3;Slugger +1",
     "decoration_description":
@@ -864,7 +864,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Elem/Stream Jewel 3": {
     "decoration_name": "Crit Elem/Stream Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Element +3;Water Attack +1",
     "decoration_description":
@@ -874,7 +874,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Element Jewel 1": {
     "decoration_name": "Crit Element Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Critical Element +1",
     "decoration_description":
@@ -884,7 +884,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Element Jewel II 2": {
     "decoration_name": "Crit Element Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Critical Element +2",
     "decoration_description":
@@ -894,7 +894,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Element/Precise Jewel 3": {
     "decoration_name": "Crit Element/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Element +3;Ballistics + 1",
     "decoration_description":
@@ -904,7 +904,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Stat Jewel III 3": {
     "decoration_name": "Crit Stat Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Status +3",
     "decoration_description":
@@ -914,7 +914,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Stat/Handicraft Jewel 3": {
     "decoration_name": "Crit Stat/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Status + 3;Handicraft + 1",
     "decoration_description":
@@ -924,7 +924,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Stat/Ironwall Jewel 3": {
     "decoration_name": "Crit Stat/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Status + 3;Guard +1",
     "decoration_description":
@@ -934,7 +934,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Stat/Precise Jewel 3": {
     "decoration_name": "Crit Stat/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Status +3;Ballistics + 1",
     "decoration_description":
@@ -944,7 +944,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Status Jewel 1": {
     "decoration_name": "Crit Status Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Critical Status +1",
     "decoration_description":
@@ -954,7 +954,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Status Jewel II 2": {
     "decoration_name": "Crit Status Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Critical Status +2",
     "decoration_description":
@@ -964,7 +964,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Crit Status/KO Jewel 3": {
     "decoration_name": "Crit Status/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Status + 3;Slugger + 1",
     "decoration_description":
@@ -974,7 +974,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Critical Jewel 1": {
     "decoration_name": "Critical Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Critical Boost +1",
     "decoration_description": "Increases the damage of critical hits.",
@@ -983,7 +983,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Critical Jewel II 2": {
     "decoration_name": "Critical Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Critical Boost +2",
     "decoration_description": "Increases the damage of critical hits.",
@@ -992,7 +992,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Critical Jewel III 3": {
     "decoration_name": "Critical Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Boost +3",
     "decoration_description": "Increases the damage of critical hits.",
@@ -1001,7 +1001,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Def Lock Jewel 1": {
     "decoration_name": "Def Lock Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Iron Skin +1",
     "decoration_description": "Grants protection against defense down.",
@@ -1010,7 +1010,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Defense Jewel 1": {
     "decoration_name": "Defense Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Defense Boost +1",
     "decoration_description":
@@ -1020,7 +1020,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Destroyer Jewel 2": {
     "decoration_name": "Destroyer Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Partbreaker +1",
     "decoration_description":
@@ -1030,7 +1030,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dive Jewel 1": {
     "decoration_name": "Dive Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Leap of Faith +1",
     "decoration_description":
@@ -1040,7 +1040,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon Jewel 1": {
     "decoration_name": "Dragon Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Dragon Attack +1",
     "decoration_description":
@@ -1050,7 +1050,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon Jewel II 2": {
     "decoration_name": "Dragon Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Dragon Attack +2",
     "decoration_description":
@@ -1060,7 +1060,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon Jewel III 3": {
     "decoration_name": "Dragon Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack +3",
     "decoration_description":
@@ -1070,7 +1070,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon Res Jewel 1": {
     "decoration_name": "Dragon Res Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Dragon Resistance +1",
     "decoration_description":
@@ -1080,7 +1080,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Bandolier Jewel 3": {
     "decoration_name": "Dragon/Bandolier Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack +3;Tetrad Shot + 1",
     "decoration_description":
@@ -1090,7 +1090,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Crit Elem Jewel 3": {
     "decoration_name": "Dragon/Crit Elem Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack + 3;Critical Element + 1",
     "decoration_description":
@@ -1100,7 +1100,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Enhancer Jewel 3": {
     "decoration_name": "Dragon/Enhancer Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack +3;Power Prolonger +1",
     "decoration_description":
@@ -1110,7 +1110,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Focus Jewel 3": {
     "decoration_name": "Dragon/Focus Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack +3;Focus +1",
     "decoration_description":
@@ -1120,7 +1120,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Guardian Jewel 3": {
     "decoration_name": "Dragon/Guardian Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack + 3;Offensive Guard + 1",
     "decoration_description":
@@ -1130,7 +1130,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Handicraft Jewel 3": {
     "decoration_name": "Dragon/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack + 3;Handicraft + 1",
     "decoration_description":
@@ -1140,7 +1140,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Ironwall Jewel 3": {
     "decoration_name": "Dragon/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack + 3;Guard + 1",
     "decoration_description":
@@ -1150,7 +1150,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/KO Jewel 3": {
     "decoration_name": "Dragon/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack + 3;Slugger + 1",
     "decoration_description":
@@ -1160,7 +1160,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Opener Jewel 3": {
     "decoration_name": "Dragon/Opener Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack +3;Opening Shot +1",
     "decoration_description":
@@ -1170,7 +1170,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Precise Jewel 3": {
     "decoration_name": "Dragon/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack + 3;Ballistics + 1",
     "decoration_description":
@@ -1180,7 +1180,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Quickswitch Jewel 3": {
     "decoration_name": "Dragon/Quickswitch Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack + 3;Rapid Morph + 1",
     "decoration_description":
@@ -1190,7 +1190,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Rzr Sharp Jewel 3": {
     "decoration_name": "Dragon/Rzr Sharp Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack + 3;Razor Sharp + 1",
     "decoration_description":
@@ -1200,7 +1200,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Dragon/Shield Jewel 3": {
     "decoration_name": "Dragon/Shield Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Dragon Attack + 3;Guard Up + 1",
     "decoration_description":
@@ -1210,7 +1210,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Drain Jewel 1": {
     "decoration_name": "Drain Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Stamina Thief +1",
     "decoration_description":
@@ -1220,7 +1220,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Drain Jewel II 2": {
     "decoration_name": "Drain Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Stamina Thief +2",
     "decoration_description":
@@ -1230,7 +1230,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Drain Jewel III 3": {
     "decoration_name": "Drain Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Stamina Thief +3",
     "decoration_description":
@@ -1240,7 +1240,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Draincoat Jewel 2": {
     "decoration_name": "Draincoat Jewel 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Exhaust Functionality +2",
     "decoration_description": "Allows you to apply exhaust coatings.",
@@ -1249,7 +1249,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Draw Jewel 1": {
     "decoration_name": "Draw Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Critical Draw +1",
     "decoration_description":
@@ -1259,7 +1259,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Draw Jewel II 2": {
     "decoration_name": "Draw Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Critical Draw +2",
     "decoration_description":
@@ -1269,7 +1269,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Draw Jewel III 3": {
     "decoration_name": "Draw Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Draw +3",
     "decoration_description":
@@ -1279,7 +1279,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Earplugs Jewel 2": {
     "decoration_name": "Earplugs Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Earplugs +1",
     "decoration_description": "Grants protection from large monsters' roars.",
@@ -1288,7 +1288,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Enduring Jewel 1": {
     "decoration_name": "Enduring Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Item Prolonger +1",
     "decoration_description": "Extends the duration of some item effects.",
@@ -1297,7 +1297,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Enhancer Jewel 1": {
     "decoration_name": "Enhancer Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Power Prolonger +1",
     "decoration_description":
@@ -1307,7 +1307,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Enhancer Jewel II 2": {
     "decoration_name": "Enhancer Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Power Prolonger +2",
     "decoration_description":
@@ -1317,7 +1317,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Enhancer Jewel III 3": {
     "decoration_name": "Enhancer Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Power Prolonger +3",
     "decoration_description":
@@ -1327,7 +1327,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Enhancer/Blaze Jewel 3": {
     "decoration_name": "Enhancer/Blaze Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Power Prolonger + 3;Fire Attack + 1",
     "decoration_description":
@@ -1337,7 +1337,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Enhancer/Bolt Jewel 3": {
     "decoration_name": "Enhancer/Bolt Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Power Prolonger + 3;Thunder Attack + 1",
     "decoration_description":
@@ -1347,7 +1347,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Enhancer/Dragon Jewel 3": {
     "decoration_name": "Enhancer/Dragon Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Power Prolonger + 3;Dragon Attack + 1",
     "decoration_description":
@@ -1357,7 +1357,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Enhancer/Frost Jewel 3": {
     "decoration_name": "Enhancer/Frost Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Power Prolonger + 3;Ice Attack + 1",
     "decoration_description":
@@ -1367,7 +1367,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Enhancer/Handicraft Jewel 3": {
     "decoration_name": "Enhancer/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Power Prolonger + 3;Handicraft + 1",
     "decoration_description":
@@ -1377,7 +1377,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Enhancer/Stream Jewel 3": {
     "decoration_name": "Enhancer/Stream Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Power Prolonger + 3;Water Attack + 1",
     "decoration_description":
@@ -1387,7 +1387,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Escape Jewel 1": {
     "decoration_name": "Escape Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Bind Resistance +1",
     "decoration_description":
@@ -1397,7 +1397,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Evasion Jewel 2": {
     "decoration_name": "Evasion Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Evade Window +1",
     "decoration_description":
@@ -1407,7 +1407,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Expert Jewel 1": {
     "decoration_name": "Expert Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Critical Eye +1",
     "decoration_description": "Increases affinity.",
@@ -1416,7 +1416,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Expert Jewel II 2": {
     "decoration_name": "Expert Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Critical Eye +2",
     "decoration_description": "Increases affinity.",
@@ -1425,7 +1425,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Expert Jewel III 3": {
     "decoration_name": "Expert Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Critical Eye +3",
     "decoration_description": "Increases affinity.",
@@ -1434,7 +1434,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Fire Res Jewel 1": {
     "decoration_name": "Fire Res Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Fire Resistance +1",
     "decoration_description":
@@ -1444,7 +1444,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Flash Jewel 1": {
     "decoration_name": "Flash Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Blindsider +1",
     "decoration_description":
@@ -1454,7 +1454,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Flawless Jewel 2": {
     "decoration_name": "Flawless Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Peak Performance +2",
     "decoration_description": "Increases attack when your health is full.",
@@ -1463,7 +1463,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Flayer Jewel 3": {
     "decoration_name": "Flayer Jewel 3",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Flayer +1",
     "decoration_description":
@@ -1473,7 +1473,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Flight Jewel 2": {
     "decoration_name": "Flight Jewel 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Airborne +1",
     "decoration_description": "Increases the damage caused by jumping attacks.",
@@ -1482,7 +1482,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Flight/Attack Jewel 3": {
     "decoration_name": "Flight/Attack Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Airborne + 1;Attack Boost + 1",
     "decoration_description":
@@ -1492,7 +1492,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Flight/Draw Jewel 3": {
     "decoration_name": "Flight/Draw Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Airborne + 1;Critical Draw + 1",
     "decoration_description":
@@ -1502,7 +1502,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Flight/Expert Jewel 3": {
     "decoration_name": "Flight/Expert Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Airborne + 1;Critical Eye + 1",
     "decoration_description":
@@ -1512,7 +1512,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Flight/Handicraft Jewel 3": {
     "decoration_name": "Flight/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Airborne + 1;Handicraft + 1",
     "decoration_description":
@@ -1522,7 +1522,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus Jewel 1": {
     "decoration_name": "Focus Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Focus +1",
     "decoration_description":
@@ -1532,7 +1532,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus Jewel II 2": {
     "decoration_name": "Focus Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Focus +2",
     "decoration_description":
@@ -1542,7 +1542,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus Jewel III 3": {
     "decoration_name": "Focus Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Focus +3",
     "decoration_description":
@@ -1552,7 +1552,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus/Blaze Jewel 3": {
     "decoration_name": "Focus/Blaze Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Focus + 3;Fire Attack + 1",
     "decoration_description":
@@ -1562,7 +1562,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus/Bolt Jewel 3": {
     "decoration_name": "Focus/Bolt Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Focus + 3;Thunder Attack + 1",
     "decoration_description":
@@ -1572,7 +1572,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus/Dragon Jewel 3": {
     "decoration_name": "Focus/Dragon Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Focus + 3;Dragon Attack + 1",
     "decoration_description":
@@ -1582,7 +1582,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus/Frost Jewel 3": {
     "decoration_name": "Focus/Frost Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Focus + 3;Ice Attack + 1",
     "decoration_description":
@@ -1592,7 +1592,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus/Handicraft Jewel 3": {
     "decoration_name": "Focus/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Focus + 3;Handicraft +1",
     "decoration_description":
@@ -1602,7 +1602,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus/KO Jewel 3": {
     "decoration_name": "Focus/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Focus + 3;Slugger + 1",
     "decoration_description":
@@ -1612,7 +1612,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus/Precise Jewel 3": {
     "decoration_name": "Focus/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Focus + 3;Ballistics + 1",
     "decoration_description":
@@ -1622,7 +1622,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Focus/Stream Jewel 3": {
     "decoration_name": "Focus/Stream Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Focus +3;Water Attack +1",
     "decoration_description":
@@ -1632,7 +1632,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Footing Jewel 1": {
     "decoration_name": "Footing Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Tremor Resistance +1",
     "decoration_description": "Grants protection against ground tremors.",
@@ -1641,7 +1641,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Foray Jewel 3": {
     "decoration_name": "Foray Jewel 3",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Foray + 1",
     "decoration_description":
@@ -1651,7 +1651,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Forceshot Jewel 3": {
     "decoration_name": "Forceshot Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Normal Shots +1",
     "decoration_description":
@@ -1661,7 +1661,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Friendship Jewel 1": {
     "decoration_name": "Friendship Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Wide/Range +1",
     "decoration_description":
@@ -1671,7 +1671,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost Jewel 1": {
     "decoration_name": "Frost Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Ice Attack +1",
     "decoration_description":
@@ -1681,7 +1681,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost Jewel II 2": {
     "decoration_name": "Frost Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Ice Attack +2",
     "decoration_description":
@@ -1691,7 +1691,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost Jewel III 3": {
     "decoration_name": "Frost Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack +3",
     "decoration_description":
@@ -1701,7 +1701,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Bandolier Jewel 3": {
     "decoration_name": "Frost/Bandolier Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack +3;Tetrad Shot +1",
     "decoration_description":
@@ -1711,7 +1711,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Crit Elem Jewel 3": {
     "decoration_name": "Frost/Crit Elem Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Critical Element + 1",
     "decoration_description":
@@ -1721,7 +1721,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Enhancer Jewel 3": {
     "decoration_name": "Frost/Enhancer Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Power Prolonger + 1",
     "decoration_description":
@@ -1731,7 +1731,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Focus Jewel 3": {
     "decoration_name": "Frost/Focus Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Focus + 1",
     "decoration_description":
@@ -1741,7 +1741,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Guardian Jewel 3": {
     "decoration_name": "Frost/Guardian Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Offensive Guard + 1",
     "decoration_description":
@@ -1751,7 +1751,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Handicraft Jewel 3": {
     "decoration_name": "Frost/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Handicraft + 1",
     "decoration_description":
@@ -1761,7 +1761,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Ironwall Jewel 3": {
     "decoration_name": "Frost/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Guard +1",
     "decoration_description":
@@ -1771,7 +1771,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/KO Jewel 3": {
     "decoration_name": "Frost/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Slugger + 1",
     "decoration_description":
@@ -1781,7 +1781,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Opener Jewel 3": {
     "decoration_name": "Frost/Opener Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Opening Shot + 1",
     "decoration_description":
@@ -1791,7 +1791,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Precise Jewel 3": {
     "decoration_name": "Frost/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Ballistics + 1",
     "decoration_description":
@@ -1801,7 +1801,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Quickswitch Jewel 3": {
     "decoration_name": "Frost/Quickswitch Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Rapid Morph + 1",
     "decoration_description":
@@ -1811,7 +1811,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Rzr Sharp Jewel 3": {
     "decoration_name": "Frost/Rzr Sharp Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Razor Sharp + 1",
     "decoration_description":
@@ -1821,7 +1821,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Frost/Shield Jewel 3": {
     "decoration_name": "Frost/Shield Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ice Attack + 3;Guard Up + 1",
     "decoration_description":
@@ -1831,7 +1831,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Fungiform Jewel 2": {
     "decoration_name": "Fungiform Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Mushroomancer +1",
     "decoration_description":
@@ -1841,7 +1841,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Furor Jewel 2": {
     "decoration_name": "Furor Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Resentment +1",
     "decoration_description":
@@ -1851,7 +1851,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Gambit Jewel 1": {
     "decoration_name": "Gambit Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Punishing Draw +1",
     "decoration_description":
@@ -1861,7 +1861,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Gambit Jewel II 2": {
     "decoration_name": "Gambit Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Punishing Draw +2",
     "decoration_description":
@@ -1871,7 +1871,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Gambit Jewel III 3": {
     "decoration_name": "Gambit Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Punishing Draw +3",
     "decoration_description":
@@ -1881,7 +1881,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Gambit/Handicraft Jewel 3": {
     "decoration_name": "Gambit/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Punishing Draw + 3;Handicraft + 1",
     "decoration_description":
@@ -1891,7 +1891,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Gambit/Ironwall Jewel 3": {
     "decoration_name": "Gambit/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Punishing Draw +3;Guard +1",
     "decoration_description":
@@ -1901,7 +1901,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Gambit/KO Jewel 3": {
     "decoration_name": "Gambit/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Punishing Draw + 3\\nSlugger + 1",
     "decoration_description":
@@ -1911,7 +1911,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Geology Jewel 1": {
     "decoration_name": "Geology Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Geologist +1",
     "decoration_description":
@@ -1921,7 +1921,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Gobbler Jewel 1": {
     "decoration_name": "Gobbler Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Speed Eating +1",
     "decoration_description":
@@ -1931,7 +1931,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Grinder Jewel 1": {
     "decoration_name": "Grinder Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Speed Sharpening +1",
     "decoration_description":
@@ -1941,7 +1941,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Grinder Jewel II 2": {
     "decoration_name": "Grinder Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Speed Sharpening +2",
     "decoration_description":
@@ -1951,7 +1951,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Grinder/Attack Jewel 3": {
     "decoration_name": "Grinder/Attack Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Speed Sharpening + 2\\nAttack Boost + 1",
     "decoration_description":
@@ -1961,7 +1961,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Grinder/Draw Jewel 3": {
     "decoration_name": "Grinder/Draw Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Speed Sharpening + 2;Critical Draw +1",
     "decoration_description":
@@ -1971,7 +1971,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Grinder/Expert Jewel 3": {
     "decoration_name": "Grinder/Expert Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Speed Sharpening +2;Critical Eye + 1",
     "decoration_description":
@@ -1981,7 +1981,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Grinder/Handicraft Jewel 3": {
     "decoration_name": "Grinder/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Speed Sharpening +2;Handicraft + 1",
     "decoration_description":
@@ -1991,7 +1991,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Grinder/Ironwall Jewel 3": {
     "decoration_name": "Grinder/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Speed Sharpening + 2;Guard + 1",
     "decoration_description":
@@ -2001,7 +2001,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Grinder/KO Jewel 3": {
     "decoration_name": "Grinder/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Speed Sharpening +2;Slugger + 1",
     "decoration_description":
@@ -2011,7 +2011,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Growth Jewel 1": {
     "decoration_name": "Growth Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Self/Improvement +1",
     "decoration_description":
@@ -2021,7 +2021,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Guardian Jewel 1": {
     "decoration_name": "Guardian Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Offensive Guard +1",
     "decoration_description":
@@ -2031,7 +2031,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Guardian Jewel II 2": {
     "decoration_name": "Guardian Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Offensive Guard +2",
     "decoration_description":
@@ -2041,7 +2041,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Guardian Jewel III 3": {
     "decoration_name": "Guardian Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Offensive Guard + 3",
     "decoration_description":
@@ -2051,7 +2051,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Guardian/Blaze Jewel 3": {
     "decoration_name": "Guardian/Blaze Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Offensive Guard + 3;Fire Attack + 1",
     "decoration_description":
@@ -2061,7 +2061,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Guardian/Bolt Jewel 3": {
     "decoration_name": "Guardian/Bolt Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Offensive Guard + 3\\nThunder Attack + 1",
     "decoration_description":
@@ -2071,7 +2071,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Guardian/Dragon Jewel 3": {
     "decoration_name": "Guardian/Dragon Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Offensive Guard + 3;Dragon Attack + 1",
     "decoration_description":
@@ -2081,7 +2081,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Guardian/Frost Jewel 3": {
     "decoration_name": "Guardian/Frost Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Offensive Guard + 3;Ice Attack + 1",
     "decoration_description":
@@ -2091,7 +2091,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Guardian/Handicraft Jewel 3": {
     "decoration_name": "Guardian/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Offensive Guard + 3;Handicraft + 1",
     "decoration_description":
@@ -2101,7 +2101,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Guardian/Ironwall Jewel 3": {
     "decoration_name": "Guardian/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Offensive Guard + 3;Guard + 1",
     "decoration_description":
@@ -2111,7 +2111,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Guardian/Stream Jewel 3": {
     "decoration_name": "Guardian/Stream Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Offensive Guard + 3;Water Attack + 1",
     "decoration_description":
@@ -2121,7 +2121,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Handicraft Jewel 1": {
     "decoration_name": "Handicraft Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Handicraft +1",
     "decoration_description":
@@ -2131,7 +2131,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Handicraft Jewel II 2": {
     "decoration_name": "Handicraft Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Handicraft +2",
     "decoration_description":
@@ -2141,7 +2141,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Handicraft Jewel III 3": {
     "decoration_name": "Handicraft Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Handicraft +3",
     "decoration_description":
@@ -2151,7 +2151,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Hungerless Jewel 1": {
     "decoration_name": "Hungerless Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Hunger Resistance +1",
     "decoration_description": "Reduces maximum stamina depletion over time.",
@@ -2160,7 +2160,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Ice Res Jewel 1": {
     "decoration_name": "Ice Res Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Ice Resistance +1",
     "decoration_description":
@@ -2170,7 +2170,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Intimidator Jewel 1": {
     "decoration_name": "Intimidator Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Intimidator +1",
     "decoration_description":
@@ -2180,7 +2180,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Ironwall Jewel 1": {
     "decoration_name": "Ironwall Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Guard +1",
     "decoration_description":
@@ -2190,7 +2190,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Ironwall Jewel II 2": {
     "decoration_name": "Ironwall Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Guard +2",
     "decoration_description":
@@ -2200,7 +2200,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Ironwall Jewel III 3": {
     "decoration_name": "Ironwall Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Guard +3",
     "decoration_description":
@@ -2210,7 +2210,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Jumping Jewel 2": {
     "decoration_name": "Jumping Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Evade Extender +2",
     "decoration_description": "Increases evade distance.",
@@ -2219,7 +2219,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "KO Jewel 1": {
     "decoration_name": "KO Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Slugger +1",
     "decoration_description": "Makes it easier to stun monsters.",
@@ -2228,7 +2228,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "KO Jewel II 2": {
     "decoration_name": "KO Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Slugger +2",
     "decoration_description": "Makes it easier to stun monsters.",
@@ -2237,7 +2237,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "KO Jewel III 3": {
     "decoration_name": "KO Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Slugger +3",
     "decoration_description": "Makes it easier to stun monsters.",
@@ -2246,7 +2246,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Leap Jewel 1": {
     "decoration_name": "Leap Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Jump Master +1",
     "decoration_description":
@@ -2256,7 +2256,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Magazine Jewel 1": {
     "decoration_name": "Magazine Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Load Shells +1",
     "decoration_description":
@@ -2266,7 +2266,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Magazine Jewel II 2": {
     "decoration_name": "Magazine Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Load Shells +2",
     "decoration_description":
@@ -2276,7 +2276,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Magazine/Attack Jewel 3": {
     "decoration_name": "Magazine/Attack Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Load Shells + 2;Attack Boost + 1",
     "decoration_description":
@@ -2286,7 +2286,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Magazine/Draw Jewel 3": {
     "decoration_name": "Magazine/Draw Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Load Shells + 2;Critical Draw + 1",
     "decoration_description":
@@ -2296,7 +2296,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Magazine/Expert Jewel 3": {
     "decoration_name": "Magazine/Expert Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Load Shells +2\\nCritical Eye + 1",
     "decoration_description":
@@ -2306,7 +2306,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Magazine/Handicraft Jewel 3": {
     "decoration_name": "Magazine/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Load Shells + 2;Handicraft + 1",
     "decoration_description":
@@ -2316,7 +2316,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Magazine/Ironwall Jewel 3": {
     "decoration_name": "Magazine/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Load Shells + 2;Guard + 1",
     "decoration_description":
@@ -2326,7 +2326,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Maintenance Jewel 2": {
     "decoration_name": "Maintenance Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Tool Specialist +1",
     "decoration_description":
@@ -2336,7 +2336,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Mastery Jewel 3": {
     "decoration_name": "Mastery Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Master's Touch +1",
     "decoration_description":
@@ -2346,7 +2346,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Medicine Jewel 1": {
     "decoration_name": "Medicine Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Recovery Up +1",
     "decoration_description":
@@ -2356,7 +2356,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Mighty Jewel 2": {
     "decoration_name": "Mighty Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Maximum Might +1",
     "decoration_description":
@@ -2366,7 +2366,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Mind's Eye Jewel 1": {
     "decoration_name": "Mind's Eye Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Mind's Eye +1",
     "decoration_description":
@@ -2376,7 +2376,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Mind's Eye Jewel II 2": {
     "decoration_name": "Mind's Eye Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Mind's Eye +2",
     "decoration_description":
@@ -2386,7 +2386,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Mind's Eye Jewel III 3": {
     "decoration_name": "Mind's Eye Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Mind's Eye +3",
     "decoration_description":
@@ -2396,7 +2396,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Mirewalker Jewel 1": {
     "decoration_name": "Mirewalker Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Aquatic/Oilsilt Mobility +1",
     "decoration_description":
@@ -2406,7 +2406,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Opener Jewel 1": {
     "decoration_name": "Opener Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Opening Shot +1",
     "decoration_description":
@@ -2416,7 +2416,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Opener Jewel II 2": {
     "decoration_name": "Opener Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Opening Shot +2",
     "decoration_description":
@@ -2426,7 +2426,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Opener Jewel III 3": {
     "decoration_name": "Opener Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Opening Shot +3",
     "decoration_description":
@@ -2436,7 +2436,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Opener/Blaze Jewel 3": {
     "decoration_name": "Opener/Blaze Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Opening Shot + 3;Fire Attack + 1",
     "decoration_description":
@@ -2446,7 +2446,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Opener/Bolt Jewel 3": {
     "decoration_name": "Opener/Bolt Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Opening Shot + 3;Thunder Attack + 1",
     "decoration_description":
@@ -2456,7 +2456,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Opener/Dragon Jewel 3": {
     "decoration_name": "Opener/Dragon Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Opening Shot + 3;Dragon Attack + 1",
     "decoration_description":
@@ -2466,7 +2466,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Opener/Frost Jewel 3": {
     "decoration_name": "Opener/Frost Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Opening Shot + 3;Ice Attack + 1",
     "decoration_description":
@@ -2476,7 +2476,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Opener/Ironwall Jewel 3": {
     "decoration_name": "Opener/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Opening Shot + 3;Guard + 1",
     "decoration_description":
@@ -2486,7 +2486,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Opener/Precise Jewel 3": {
     "decoration_name": "Opener/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Opening Shot + 3;Ballistics + 1",
     "decoration_description":
@@ -2496,7 +2496,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Opener/Stream Jewel 3": {
     "decoration_name": "Opener/Stream Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Opening Shot + 3;Water Attack + 1",
     "decoration_description":
@@ -2506,7 +2506,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Paracoat Jewel 3": {
     "decoration_name": "Paracoat Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Para Functionality +1",
     "decoration_description": "Allows you to apply paralysis coatings.",
@@ -2515,7 +2515,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Paralyzer Jewel 1": {
     "decoration_name": "Paralyzer Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Paralysis Attack +1",
     "decoration_description":
@@ -2525,7 +2525,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Paralyzer Jewel II 2": {
     "decoration_name": "Paralyzer Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Paralysis Attack +2",
     "decoration_description":
@@ -2535,7 +2535,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Paralyzer Jewel III 3": {
     "decoration_name": "Paralyzer Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Paralysis Attack +3",
     "decoration_description":
@@ -2545,7 +2545,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Pep Jewel 1": {
     "decoration_name": "Pep Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Sleep Resistance +1",
     "decoration_description": "Reduces the duration of sleep.",
@@ -2554,7 +2554,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Perfume Jewel 1": {
     "decoration_name": "Perfume Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Stench Resistance +1",
     "decoration_description": "Grants protection against stench.",
@@ -2563,7 +2563,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Phoenix Jewel 2": {
     "decoration_name": "Phoenix Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Coalescence +1",
     "decoration_description":
@@ -2573,7 +2573,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Physique Jewel 1": {
     "decoration_name": "Physique Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Constitution +1",
     "decoration_description":
@@ -2583,7 +2583,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Pierce Jewel 3": {
     "decoration_name": "Pierce Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Piercing Shots + 1",
     "decoration_description":
@@ -2593,7 +2593,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Poison Jewel 2": {
     "decoration_name": "Poison Jewel 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Poison Duration Up +2",
     "decoration_description":
@@ -2603,7 +2603,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Poison/Attack Jewel 3": {
     "decoration_name": "Poison/Attack Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Poison Duration Up + 1;Attack Boost + 1",
     "decoration_description":
@@ -2613,7 +2613,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Poison/Draw Jewel 3": {
     "decoration_name": "Poison/Draw Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Poison Duration Up + 1;Critical Draw + 1",
     "decoration_description":
@@ -2623,7 +2623,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Poison/Expert Jewel 3": {
     "decoration_name": "Poison/Expert Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Poison Duration Up +1;Critical Eye +1",
     "decoration_description":
@@ -2633,7 +2633,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Poison/Handicraft Jewel 3": {
     "decoration_name": "Poison/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Poison Duration Up +1;Handicraft + 1",
     "decoration_description":
@@ -2643,7 +2643,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Poison/Ironwall Jewel 3": {
     "decoration_name": "Poison/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Poison Duration Up + 1;Guard +1",
     "decoration_description":
@@ -2653,7 +2653,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Poison/KO Jewel 3": {
     "decoration_name": "Poison/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Poison Duration Up +1;Slugger +1",
     "decoration_description":
@@ -2663,7 +2663,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Poison/Precise Jewel 3": {
     "decoration_name": "Poison/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Poison Duration Up + 1;Ballistics + 1",
     "decoration_description":
@@ -2673,7 +2673,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Poisoncoat Jewel 2": {
     "decoration_name": "Poisoncoat Jewel 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Poison Functionality +1",
     "decoration_description": "Allows you to apply poison coatings.",
@@ -2682,7 +2682,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Potential Jewel 2": {
     "decoration_name": "Potential Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Heroics +1",
     "decoration_description":
@@ -2692,7 +2692,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Precise Jewel 1": {
     "decoration_name": "Precise Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Ballistics +1",
     "decoration_description":
@@ -2702,7 +2702,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Precise Jewel II 2": {
     "decoration_name": "Precise Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Ballistics +2",
     "decoration_description":
@@ -2712,7 +2712,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Precise Jewel III 3": {
     "decoration_name": "Precise Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Ballistics +3",
     "decoration_description":
@@ -2722,7 +2722,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Protection Jewel 1": {
     "decoration_name": "Protection Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Divine Blessing +1",
     "decoration_description":
@@ -2732,7 +2732,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch Jewel 1": {
     "decoration_name": "Quickswitch Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Rapid Morph +1",
     "decoration_description":
@@ -2742,7 +2742,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch Jewel II 2": {
     "decoration_name": "Quickswitch Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Rapid Morph +2",
     "decoration_description":
@@ -2752,7 +2752,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch Jewel III 3": {
     "decoration_name": "Quickswitch Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Rapid Morph +3",
     "decoration_description":
@@ -2762,7 +2762,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch/Blaze Jewel 3": {
     "decoration_name": "Quickswitch/Blaze Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Rapid Morph + 3;Fire Attack + 1",
     "decoration_description":
@@ -2772,7 +2772,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch/Bolt Jewel 3": {
     "decoration_name": "Quickswitch/Bolt Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Rapid Morph + 3;Thunder Attack + 1",
     "decoration_description":
@@ -2782,7 +2782,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch/Dragon Jewel 3": {
     "decoration_name": "Quickswitch/Dragon Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Rapid Morph + 3;Dragon Attack + 1",
     "decoration_description":
@@ -2792,7 +2792,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch/Frost Jewel 3": {
     "decoration_name": "Quickswitch/Frost Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Rapid Morph + 3;Ice Attack + 1",
     "decoration_description":
@@ -2802,7 +2802,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch/Handicraft Jewel 3": {
     "decoration_name": "Quickswitch/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Rapid Morph + 3;Handicraft + 1",
     "decoration_description":
@@ -2812,7 +2812,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch/Ironwall Jewel 3": {
     "decoration_name": "Quickswitch/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Rapid Morph + 3;Guard + 1",
     "decoration_description":
@@ -2822,7 +2822,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch/KO Jewel 3": {
     "decoration_name": "Quickswitch/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Rapid Morph + 3;Slugger + 1",
     "decoration_description":
@@ -2832,7 +2832,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Quickswitch/Stream Jewel 3": {
     "decoration_name": "Quickswitch/Stream Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Rapid Morph + 3;Water Attack + 1",
     "decoration_description":
@@ -2842,7 +2842,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Ranger Jewel 1": {
     "decoration_name": "Ranger Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Outdoorsman +1",
     "decoration_description":
@@ -2852,7 +2852,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Razor Sharp Jewel 1": {
     "decoration_name": "Razor Sharp Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Razor Sharp +1",
     "decoration_description": "Prevents your weapon from losing sharpness.",
@@ -2861,7 +2861,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Razor Sharp Jewel II 2": {
     "decoration_name": "Razor Sharp Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Razor Sharp +2",
     "decoration_description": "Prevents your weapon from losing sharpness.",
@@ -2870,7 +2870,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Razor Sharp/KO Jewel 3": {
     "decoration_name": "Razor Sharp/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Razor Sharp + 3;Slugger + 1",
     "decoration_description":
@@ -2880,7 +2880,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Recovery Jewel 1": {
     "decoration_name": "Recovery Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Recovery Speed +1",
     "decoration_description":
@@ -2890,7 +2890,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Refresh Jewel 2": {
     "decoration_name": "Refresh Jewel 2",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Stamina Surge +1",
     "decoration_description": "Speeds up stamina recovery.",
@@ -2899,7 +2899,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Rzr Sharp Jewel III 3": {
     "decoration_name": "Rzr Sharp Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Razor Sharp +3",
     "decoration_description": "Prevents your weapon from losing sharpness.",
@@ -2908,7 +2908,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Rzr Sharp/Blaze Jewel 3": {
     "decoration_name": "Rzr Sharp/Blaze Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Razor Sharp + 3;Fire Attack + 1",
     "decoration_description":
@@ -2918,7 +2918,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Rzr Sharp/Bolt Jewel 3": {
     "decoration_name": "Rzr Sharp/Bolt Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Razor Sharp + 3;Thunder Attack + 1",
     "decoration_description":
@@ -2928,7 +2928,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Rzr Sharp/Dragon Jewel 3": {
     "decoration_name": "Rzr Sharp/Dragon Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Razor Sharp + 3;Dragon Attack + 1",
     "decoration_description":
@@ -2938,7 +2938,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Rzr Sharp/Frost Jewel 3": {
     "decoration_name": "Rzr Sharp/Frost Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Razor Sharp + 3;Ice Attack + 1",
     "decoration_description":
@@ -2948,7 +2948,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Rzr Sharp/Handicraft Jewel 3": {
     "decoration_name": "Rzr Sharp/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Razor Sharp + 3;Handicraft + 1",
     "decoration_description":
@@ -2958,7 +2958,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Rzr Sharp/Ironwall Jewel 3": {
     "decoration_name": "Rzr Sharp/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Razor Sharp + 3;Guard + 1",
     "decoration_description":
@@ -2968,7 +2968,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Rzr Sharp/Stream Jewel 3": {
     "decoration_name": "Rzr Sharp/Stream Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 7",
+    "decoration_rarity": "7",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Razor Sharp +3;Water Attack + 1",
     "decoration_description":
@@ -2978,7 +2978,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sa+o Jewel 3": {
     "decoration_name": "Sa+o Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Rapid Fire Up +1",
     "decoration_description": "Improves light bowgun rapid fire.",
@@ -2987,7 +2987,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sane Jewel 1": {
     "decoration_name": "Sane Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Antivirus +1",
     "decoration_description":
@@ -2997,7 +2997,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Satiated Jewel 1": {
     "decoration_name": "Satiated Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Free Meal +1",
     "decoration_description":
@@ -3007,7 +3007,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sharp Jewel 1": {
     "decoration_name": "Sharp Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Protective Polish +1",
     "decoration_description":
@@ -3017,7 +3017,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sharp Jewel II 2": {
     "decoration_name": "Sharp Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Protective Polish +2",
     "decoration_description":
@@ -3027,7 +3027,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sharp Jewel III 3": {
     "decoration_name": "Sharp Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Protective Polish +3",
     "decoration_description":
@@ -3037,7 +3037,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sheath Jewel 1": {
     "decoration_name": "Sheath Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Quick Sheathe +1",
     "decoration_description": "Speeds up weapon sheathing.",
@@ -3046,7 +3046,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shield Jewel 1": {
     "decoration_name": "Shield Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Guard Up +1",
     "decoration_description":
@@ -3056,7 +3056,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shield Jewel II 2": {
     "decoration_name": "Shield Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Guard Up +2",
     "decoration_description":
@@ -3066,7 +3066,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shield Jewel III 3": {
     "decoration_name": "Shield Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Guard Up +3",
     "decoration_description":
@@ -3076,7 +3076,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shield/Blaze Jewel 3": {
     "decoration_name": "Shield/Blaze Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Guard Up + 3;Fire Attack + 1",
     "decoration_description":
@@ -3086,7 +3086,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shield/Bolt Jewel 3": {
     "decoration_name": "Shield/Bolt Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Guard Up +3;Thunder Attack + 1",
     "decoration_description":
@@ -3096,7 +3096,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shield/Dragon Jewel 3": {
     "decoration_name": "Shield/Dragon Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Guard Up + 3;Dragon Attack + 1",
     "decoration_description":
@@ -3106,7 +3106,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shield/Frost Jewel 3": {
     "decoration_name": "Shield/Frost Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Guard Up + 3;Ice Attack + 1",
     "decoration_description":
@@ -3116,7 +3116,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shield/Handicraft Jewel 3": {
     "decoration_name": "Shield/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Guard Up +3;Handicraft + 1",
     "decoration_description":
@@ -3126,7 +3126,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shield/Ironwall Jewel 3": {
     "decoration_name": "Shield/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Guard Up + 3;Guard + 1",
     "decoration_description":
@@ -3136,7 +3136,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shield/Stream Jewel 3": {
     "decoration_name": "Shield/Stream Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Guard Up + 3;Water Attack + 1",
     "decoration_description":
@@ -3146,7 +3146,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Shockproof Jewel 1": {
     "decoration_name": "Shockproof Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Shock Absorber +1",
     "decoration_description":
@@ -3156,7 +3156,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sleep Jewel 1": {
     "decoration_name": "Sleep Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Sleep Attack +1",
     "decoration_description":
@@ -3166,7 +3166,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sleep Jewel II 2": {
     "decoration_name": "Sleep Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Sleep Attack +2",
     "decoration_description":
@@ -3176,7 +3176,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sleep Jewel III 3": {
     "decoration_name": "Sleep Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Sleep Attack +3",
     "decoration_description":
@@ -3186,7 +3186,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sleepcoat Jewel 3": {
     "decoration_name": "Sleepcoat Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Sleep Functionality + 1",
     "decoration_description": "Allows you to apply sleep coatings.",
@@ -3195,7 +3195,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sonorous Jewel 2": {
     "decoration_name": "Sonorous Jewel 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Horn Maestro +1",
     "decoration_description":
@@ -3205,7 +3205,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sonorous/Attack Jewel 3": {
     "decoration_name": "Sonorous/Attack Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Horn Maestro +2;Attack Boost +1",
     "decoration_description":
@@ -3215,7 +3215,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sonorous/Draw Jewel 3": {
     "decoration_name": "Sonorous/Draw Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Horn Maestro +2;Critical Draw +1",
     "decoration_description":
@@ -3225,7 +3225,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sonorous/Expert Jewel 3": {
     "decoration_name": "Sonorous/Expert Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Horn Maestro +2;Critical Eye +1",
     "decoration_description":
@@ -3235,7 +3235,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sonorous/Handicraft Jewel 3": {
     "decoration_name": "Sonorous/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Horn Maestro + 3;Handicraft + 1",
     "decoration_description":
@@ -3245,7 +3245,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sonorous/KO Jewel 3": {
     "decoration_name": "Sonorous/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Horn Maestro + 3;Slugger + 1",
     "decoration_description":
@@ -3255,7 +3255,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Specimen Jewel 1": {
     "decoration_name": "Specimen Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Entomologist +1",
     "decoration_description":
@@ -3265,7 +3265,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Spread Jewel 3": {
     "decoration_name": "Spread Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Spread/Power Shots + 1",
     "decoration_description":
@@ -3275,7 +3275,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Sprinter Jewel 1": {
     "decoration_name": "Sprinter Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Marathon Runner +1",
     "decoration_description":
@@ -3285,7 +3285,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Steadfast Jewel 1": {
     "decoration_name": "Steadfast Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Stun Resistance +1",
     "decoration_description": "Reduces the duration of stun.",
@@ -3294,7 +3294,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream Jewel 1": {
     "decoration_name": "Stream Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Water Attack +1",
     "decoration_description":
@@ -3304,7 +3304,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream Jewel II 2": {
     "decoration_name": "Stream Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Water Attack +2",
     "decoration_description":
@@ -3314,7 +3314,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream Jewel III 3": {
     "decoration_name": "Stream Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack +3",
     "decoration_description":
@@ -3324,7 +3324,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Bandolier Jewel 3": {
     "decoration_name": "Stream/Bandolier Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Tetrad Shot + 1",
     "decoration_description":
@@ -3334,7 +3334,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Crit Elem Jewel 3": {
     "decoration_name": "Stream/Crit Elem Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Critical Element + 1",
     "decoration_description":
@@ -3344,7 +3344,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Enhancer Jewel 3": {
     "decoration_name": "Stream/Enhancer Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Power Prolonger + 1",
     "decoration_description":
@@ -3354,7 +3354,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Focus Jewel 3": {
     "decoration_name": "Stream/Focus Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Focus + 1",
     "decoration_description":
@@ -3364,7 +3364,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Guardian Jewel 3": {
     "decoration_name": "Stream/Guardian Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Offensive Guard + 1",
     "decoration_description":
@@ -3374,7 +3374,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Handicraft Jewel 3": {
     "decoration_name": "Stream/Handicraft Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Handicraft + 1",
     "decoration_description":
@@ -3384,7 +3384,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Ironwall Jewel 3": {
     "decoration_name": "Stream/Ironwall Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Guard  + 1",
     "decoration_description":
@@ -3394,7 +3394,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/KO Jewel 3": {
     "decoration_name": "Stream/KO Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Slugger + 1",
     "decoration_description":
@@ -3404,7 +3404,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Opener Jewel 3": {
     "decoration_name": "Stream/Opener Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Opening Shot + 1",
     "decoration_description":
@@ -3414,7 +3414,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Precise Jewel 3": {
     "decoration_name": "Stream/Precise Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Ballistics + 1",
     "decoration_description":
@@ -3424,7 +3424,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Quickswitch Jewel 3": {
     "decoration_name": "Stream/Quickswitch Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Rapid Morph + 1",
     "decoration_description":
@@ -3434,7 +3434,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Rzr Sharp Jewel 3": {
     "decoration_name": "Stream/Rzr Sharp Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Razor Sharp + 1",
     "decoration_description":
@@ -3444,7 +3444,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Stream/Shield Jewel 3": {
     "decoration_name": "Stream/Shield Jewel 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 6",
+    "decoration_rarity": "6",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Water Attack + 3;Guard Up +1",
     "decoration_description":
@@ -3454,7 +3454,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Survival Jewel 1": {
     "decoration_name": "Survival Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Survival Expert +1",
     "decoration_description":
@@ -3464,7 +3464,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Suture Jewel 1": {
     "decoration_name": "Suture Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Bleeding Resistance +1",
     "decoration_description": "Grants protection against bleeding.",
@@ -3473,7 +3473,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Tenderizer Jewel 3": {
     "decoration_name": "Tenderizer Jewel 3",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Weakness Exploit + 1",
     "decoration_description":
@@ -3483,7 +3483,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Throttle Jewel 3": {
     "decoration_name": "Throttle Jewel 3",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Latent Power + 1",
     "decoration_description":
@@ -3493,7 +3493,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Thunder Res Jewel 1": {
     "decoration_name": "Thunder Res Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Thunder Resistance +1",
     "decoration_description":
@@ -3503,7 +3503,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Trueshot Jewel 1": {
     "decoration_name": "Trueshot Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Special Ammo Boost +1",
     "decoration_description":
@@ -3513,7 +3513,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Trueshot Jewel II 2": {
     "decoration_name": "Trueshot Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Special Ammo Boost +2",
     "decoration_description":
@@ -3523,7 +3523,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Venom Jewel 1": {
     "decoration_name": "Venom Jewel 1",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Poison Attack +1",
     "decoration_description":
@@ -3533,7 +3533,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Venom Jewel II 2": {
     "decoration_name": "Venom Jewel II 2",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 4",
+    "decoration_rarity": "4",
     "decoration_slot": "Slot 2",
     "decoration_skill": "Poison Attack +2",
     "decoration_description":
@@ -3543,7 +3543,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Venom Jewel III 3": {
     "decoration_name": "Venom Jewel III 3",
     "decoration_type": "Weapon Decoration",
-    "decoration_rarity": "Rarity 5",
+    "decoration_rarity": "5",
     "decoration_slot": "Slot 3",
     "decoration_skill": "Poison Attack +3",
     "decoration_description":
@@ -3553,7 +3553,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Water Res Jewel 1": {
     "decoration_name": "Water Res Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Water Resistance +1",
     "decoration_description":
@@ -3563,7 +3563,7 @@ Map<String, Map<String, dynamic>> decorations = {
   "Wind Resist Jewel 1": {
     "decoration_name": "Wind Resist Jewel 1",
     "decoration_type": "Armor Decoration",
-    "decoration_rarity": "Rarity 3",
+    "decoration_rarity": "3",
     "decoration_slot": "Slot 1",
     "decoration_skill": "Windproof +1",
     "decoration_description": "Grants protection against wind pressure.",
