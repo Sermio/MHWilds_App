@@ -17,7 +17,6 @@ class MonsterDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     const List<String> materialColumns = [
       'Material',
-      'Frequency',
       'Target Rewards',
       'Break Part Rewards',
       'Carves',
