@@ -19,6 +19,7 @@ class _ArmorPiecesListState extends State<ArmorPiecesList> {
   final TextEditingController _searchNameController = TextEditingController();
   String _searchNameQuery = '';
   String? _selectedType;
+  String? _selectedRarity;
   bool _filtersVisible = false;
 
   void _toggleFiltersVisibility() {
@@ -32,6 +33,7 @@ class _ArmorPiecesListState extends State<ArmorPiecesList> {
       _searchNameQuery = '';
       _searchNameController.clear();
       _selectedType = null;
+      _selectedRarity = null;
     });
   }
 
@@ -45,11 +47,12 @@ class _ArmorPiecesListState extends State<ArmorPiecesList> {
       bool matchesName = armorPiece.name
           .toLowerCase()
           .contains(_searchNameQuery.toLowerCase());
-
       bool matchesType =
           _selectedType == null || armorPiece.type == _selectedType;
+      bool matchesRarity = _selectedRarity == null ||
+          armorPiece.rarity.toString() == _selectedRarity;
 
-      return matchesName && matchesType;
+      return matchesName && matchesType && matchesRarity;
     }).toList();
 
     return Scaffold(
@@ -93,6 +96,26 @@ class _ArmorPiecesListState extends State<ArmorPiecesList> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
+              child: DropdownButton<String>(
+                dropdownColor: Colors.white,
+                value: _selectedRarity,
+                hint: const Text('Select Rarity'),
+                onChanged: (newRarity) {
+                  setState(() {
+                    _selectedRarity = newRarity;
+                  });
+                },
+                items: List.generate(8, (index) => (index + 1).toString())
+                    .map((rarity) {
+                  return DropdownMenuItem<String>(
+                    value: rarity,
+                    child: Text('Rarity $rarity'),
+                  );
+                }).toList(),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: _resetFilters,
                 child: const Text('Reset Filters'),
@@ -114,8 +137,12 @@ class _ArmorPiecesListState extends State<ArmorPiecesList> {
                   duration: const Duration(milliseconds: 900),
                   delay: Duration(milliseconds: index * 5),
                   child: Ccard(
-                    leading: ArmorPieceImage(armorPieceName: armorPiece.name),
-                    // trailing: getJewelSlotIcon(armor_piece.armor_pieceSlot),
+                    trailing: Image.asset(
+                      'assets/imgs/armor/rarity${armorPiece.rarity}.webp',
+                      scale: 0.8,
+                    ),
+                    leading:
+                        ArmorPieceImageDependingOnType(armorPiece: armorPiece),
                     cardData: armorPiece,
                     cardTitle: armorPiece.name ?? "Unknown",
                     cardSubtitle1Label: "Type: ",
@@ -140,71 +167,43 @@ class _ArmorPiecesListState extends State<ArmorPiecesList> {
       ),
     );
   }
+}
 
-  Widget _decorationLeading(
-      String skillName, String decorationSlot, String skillsString) {
-    final skills = skillsString.split('\\n\\');
-    final skillLevel = skillName[skillName.length - 1];
-    final slot = decorationSlot[decorationSlot.length - 1];
+class ArmorPieceImageDependingOnType extends StatelessWidget {
+  const ArmorPieceImageDependingOnType({
+    super.key,
+    required this.armorPiece,
+  });
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        FutureBuilder<String?>(
-          future: getSkillUrl(skillName, int.parse(slot), int.parse(skillLevel))
-              .timeout(const Duration(seconds: 3), onTimeout: () {
-            return null;
-          }),
-          builder: (context, snapshot) {
-            Widget child;
-            if (snapshot.connectionState == ConnectionState.done &&
-                !snapshot.hasData) {
-              child =
-                  Image.asset('assets/imgs/decorations/missing_decoration.png');
-            } else if (snapshot.connectionState == ConnectionState.waiting ||
-                !snapshot.hasData ||
-                snapshot.hasError) {
-              child = const CircularProgressIndicator();
-            } else {
-              child = FadeIn(
-                child: Image.network(snapshot.data!),
-              );
-            }
+  final ArmorPiece armorPiece;
 
-            return SizedBox(
-              width: 28,
-              height: 28,
-              child: child,
-            );
-          },
-        ),
-      ],
+  @override
+  Widget build(BuildContext context) {
+    String armorPieceType;
+
+    switch (armorPiece.type) {
+      case 'Helmet':
+        armorPieceType = 'helm';
+        break;
+      case 'Chest':
+        armorPieceType = 'body';
+        break;
+      case 'Arms':
+        armorPieceType = 'arm';
+        break;
+      case 'Waist':
+        armorPieceType = 'waist';
+        break;
+      case 'Legs':
+        armorPieceType = 'leg';
+        break;
+      default:
+        armorPieceType = 'helm';
+    }
+
+    return ArmorPieceImage(
+      armorPieceName: armorPiece.name,
+      armorPieceType: armorPieceType,
     );
-  }
-
-  Widget getJewelSlotIcon(String slot) {
-    if (slot.contains("1")) {
-      return Image.asset('assets/imgs/decorations/gem_level_1.png');
-    }
-    if (slot.contains("2")) {
-      return Image.asset('assets/imgs/decorations/gem_level_2.png');
-    }
-    if (slot.contains("3")) {
-      return Image.asset('assets/imgs/decorations/gem_level_3.png');
-    }
-    if (slot.contains("4")) {
-      return Image.asset('assets/imgs/decorations/gem_level_4.png');
-    }
-    return Image.asset('assets/imgs/decorations/gem_level_1.png');
-  }
-
-  String formatString(String input) {
-    int spaceIndex = input.indexOf(' ');
-
-    if (spaceIndex != -1) {
-      return input.substring(spaceIndex + 1);
-    }
-
-    return input;
   }
 }

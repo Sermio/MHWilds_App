@@ -5,9 +5,11 @@ class ArmorPieceImage extends StatelessWidget {
   const ArmorPieceImage({
     super.key,
     required this.armorPieceName,
+    required this.armorPieceType,
   });
 
   final String armorPieceName;
+  final String armorPieceType;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class ArmorPieceImage extends StatelessWidget {
       child: Image.network(
         height: 50,
         width: 50,
-        'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedArmorPieceName.toLowerCase().replaceAll(' ', '_')}_arm_typea_mhwilds_wiki_guide_200px.png',
+        'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedArmorPieceName.toLowerCase().replaceAll(' ', '_')}_${armorPieceType}_typea_mhwilds_wiki_guide_200px.png',
         loadingBuilder: (BuildContext context, Widget child,
             ImageChunkEvent? loadingProgress) {
           if (loadingProgress == null) {
