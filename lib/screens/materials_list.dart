@@ -96,9 +96,9 @@ class _MaterialsListState extends State<MaterialsList> {
             ),
             const Divider(color: Colors.black)
           ],
-          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
+              padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
               itemCount: filteredMaterialKeys.length,
               itemBuilder: (context, index) {
                 String materialKey = filteredMaterialKeys[index];

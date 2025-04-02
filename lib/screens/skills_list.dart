@@ -99,9 +99,9 @@ class SkillsListState extends State<SkillsList> {
             ),
             const Divider(color: Colors.black)
           ],
-          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
+              padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
               itemCount: filteredSkillsKeys.length,
               itemBuilder: (context, index) {
                 String skillkey = filteredSkillsKeys[index];

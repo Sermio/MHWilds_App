@@ -123,9 +123,9 @@ class _ArmorPiecesListState extends State<ArmorPiecesList> {
             ),
             const Divider(color: Colors.black)
           ],
-          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
+              padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
               itemCount: filteredArmorPiecesKeys.length,
               itemBuilder: (context, index) {
                 String armorPiecekey = filteredArmorPiecesKeys[index];
