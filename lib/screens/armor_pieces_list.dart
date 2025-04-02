@@ -138,7 +138,7 @@ class _ArmorPiecesListState extends State<ArmorPiecesList> {
                   delay: Duration(milliseconds: index * 5),
                   child: Ccard(
                     trailing: Image.asset(
-                      'assets/imgs/armor/rarity${armorPiece.rarity}.webp',
+                      'assets/imgs/armor/${armorPiece.type.toLowerCase()}/rarity${armorPiece.rarity}.webp',
                       scale: 0.8,
                     ),
                     leading:

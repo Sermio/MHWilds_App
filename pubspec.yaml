@@ -80,6 +80,11 @@ flutter:
     - assets/imgs/elements/
     - assets/imgs/materials/
     - assets/imgs/armor/
+    - assets/imgs/armor/arms/
+    - assets/imgs/armor/chest/
+    - assets/imgs/armor/helmet/
+    - assets/imgs/armor/legs/
+    - assets/imgs/armor/waist/
     - assets/imgs/logo/
   #   - images/a_dot_ham.jpeg
 

@@ -20,6 +20,7 @@ class ArmorPieceImage extends StatelessWidget {
             (match) {
       return match.group(1)!.toLowerCase() == 'alpha' ? 'a' : 'b';
     });
+    // print(formattedArmorPieceName);
 
     return FadeIn(
       child: Image.network(
