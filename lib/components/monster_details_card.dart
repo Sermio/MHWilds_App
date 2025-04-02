@@ -105,60 +105,69 @@ class MonsterDetailsCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 15),
-            const Divider(
-              color: Colors.black,
-            ),
-            const Text(
-              'Locations',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Wrap(
-              spacing: 8.0,
-              runSpacing: 2.0,
-              children: monster.locations?.asMap().entries.map((entry) {
-                    int index = entry.key;
-                    String loc = entry.value;
-                    return Bounce(
-                      from: 10,
-                      delay: Duration(milliseconds: index * 100),
-                      child: Cchip(
-                        itemName: loc ?? "",
-                        getItemColor: zoneBackgroundColor,
-                        optionalWidget: Image.asset(
-                          'assets/imgs/maps/map.png',
-                          width: 16,
-                          height: 16,
-                        ),
-                      ),
-                    );
-                  }).toList() ??
-                  [],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const Divider(
-              color: Colors.black,
-            ),
-            const Text(
-              'Tips',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.symmetric(horizontal: 15),
-              child: Wrap(
-                children: [
-                  Text(monster.tips),
-                ],
+            if (monster.locations!.isNotEmpty) const SizedBox(height: 15),
+            if (monster.locations!.isNotEmpty)
+              const Divider(
+                color: Colors.black,
               ),
-            ),
+            if (monster.locations!.isNotEmpty)
+              const Text(
+                'Locations',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            if (monster.locations!.isNotEmpty)
+              const SizedBox(
+                height: 15,
+              ),
+            if (monster.locations!.isNotEmpty)
+              Wrap(
+                spacing: 8.0,
+                runSpacing: 2.0,
+                children: monster.locations?.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      String loc = entry.value;
+                      return Bounce(
+                        from: 10,
+                        delay: Duration(milliseconds: index * 100),
+                        child: Cchip(
+                          itemName: loc ?? "",
+                          getItemColor: zoneBackgroundColor,
+                          optionalWidget: Image.asset(
+                            'assets/imgs/maps/map.png',
+                            width: 16,
+                            height: 16,
+                          ),
+                        ),
+                      );
+                    }).toList() ??
+                    [],
+              ),
+            if (monster.tips != "")
+              const SizedBox(
+                height: 15,
+              ),
+            if (monster.tips != "")
+              const Divider(
+                color: Colors.black,
+              ),
+            if (monster.tips != "")
+              const Text(
+                'Tips',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            if (monster.tips != "")
+              const SizedBox(
+                height: 15,
+              ),
+            if (monster.tips != "")
+              Padding(
+                padding: const EdgeInsetsDirectional.symmetric(horizontal: 15),
+                child: Wrap(
+                  children: [
+                    Text(monster.tips),
+                  ],
+                ),
+              ),
           ],
         ),
       ),

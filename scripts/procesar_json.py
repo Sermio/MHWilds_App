@@ -9,8 +9,7 @@ headers = [
 # JSON de entrada (simulando tu estructura)
 raw_data = """
 
-Kut-Ku Scale +\t\n\t20%\t -\t30%\t50%\n\nKut-Ku Carapace\t\n \t20%\t- \t23%\t50%\n\nKut-Ku Ear\t\n \t8%\t100% (Head)\t13%\t-\n\nKut-Ku Wing\t\n \t15%\t-\t18%\t-\n\nInferno Sac\t\n \t18%\t-\t-\t-\n\nYian Kut-Ku Certificate S\t\n \t8%\t-\t-\t-\n\nGiant Beak\t\n\t8%\t-\t11%\t-\n\nBird Wyvern Gem\t\n\t3%\t-\t5%\t-
-
+Guardian Scale\t\n\t20%\t100%\t50%\t45%\n\nGuardian Pelt\t\n \t20%\t100%(Left Chainblade)\n100%(Right Chainblade)\t30%\t43%\n\nGuardian Blood\t\n \t10%\t-\t20%\n100%(Tail)\t12%\n\nNourishing Extract\t\n \t30%\t-\t-\t-\n\nTough Guardian Bone\t\n \t20%\t-\t-\t-
 
 """
 

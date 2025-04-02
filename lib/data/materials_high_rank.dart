@@ -553,46 +553,46 @@ Map<String, List<Map<String, String>>> materialsHighRank = {
       "Destroyed Wounds": "-"
     },
   ],
-  "Guardian": [
+  "Guardian Arkveld": [
     {
-      "Material": "Guardian Scale",
-      "Frequency": "-",
-      "Target Rewards": "20%",
-      "Break Part Rewards": "100%",
-      "Carves": "50%",
-      "Destroyed Wounds": "45%"
+        "Material": "Guardian Scale",
+        "Frequency": "-",
+        "Target Rewards": "20%",
+        "Break Part Rewards": "100%",
+        "Carves": "50%",
+        "Destroyed Wounds": "45%"
     },
     {
-      "Material": "Guardian Pelt",
-      "Frequency": "-",
-      "Target Rewards": "20%",
-      "Break Part Rewards": "100%(Left Chainblade)\n100%(Right Chainblade)",
-      "Carves": "30%",
-      "Destroyed Wounds": "43%"
+        "Material": "Guardian Pelt",
+        "Frequency": "-",
+        "Target Rewards": "20%",
+        "Break Part Rewards": "100%(Left Chainblade)\n100%(Right Chainblade)",
+        "Carves": "30%",
+        "Destroyed Wounds": "43%"
     },
     {
-      "Material": "Guardian Blood",
-      "Frequency": "-",
-      "Target Rewards": "10%",
-      "Break Part Rewards": "-",
-      "Carves": "20%\n100%(Tail)",
-      "Destroyed Wounds": "12%"
+        "Material": "Guardian Blood",
+        "Frequency": "-",
+        "Target Rewards": "10%",
+        "Break Part Rewards": "-",
+        "Carves": "20%\n100%(Tail)",
+        "Destroyed Wounds": "12%"
     },
     {
-      "Material": "Nourishing Extract",
-      "Frequency": "-",
-      "Target Rewards": "30%",
-      "Break Part Rewards": "-",
-      "Carves": "-",
-      "Destroyed Wounds": "-"
+        "Material": "Nourishing Extract",
+        "Frequency": "-",
+        "Target Rewards": "30%",
+        "Break Part Rewards": "-",
+        "Carves": "-",
+        "Destroyed Wounds": "-"
     },
     {
-      "Material": "Tough Guardian Bone",
-      "Frequency": "-",
-      "Target Rewards": "20%",
-      "Break Part Rewards": "-",
-      "Carves": "-",
-      "Destroyed Wounds": "-"
+        "Material": "Tough Guardian Bone",
+        "Frequency": "-",
+        "Target Rewards": "20%",
+        "Break Part Rewards": "-",
+        "Carves": "-",
+        "Destroyed Wounds": "-"
     },
   ],
   "Guardian Doshaguma": [
