@@ -16,6 +16,7 @@
   <li><strong>Filtering System</strong>: Users can filter the list of monsters, decorations, armor, skills, and materials using a search field for more efficient navigation.</li>
   <li><strong>Map Images</strong>: Images of different map areas in the game are included, displaying zones and available camps.</li>
   <li><strong>Asynchronous Loading</strong>: The app uses <code>FutureBuilder</code> and caching to load data efficiently, displaying a loading indicator while data is being fetched.</li>
+  <li><strong>Animations & UI Feedback</strong>: Various animations help guide the user, making interactive elements clearer and enhancing usability.</li>
 </ul>
 
 <h2>Technologies Used</h2>
