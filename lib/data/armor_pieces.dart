@@ -1,7 +1,7 @@
 Map<String, Map<String, dynamic>> armor_pieces = {
   "AJARAKAN HELM": {
     "name": "AJARAKAN HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -18,7 +18,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "AJARAKAN HELM ALPHA": {
     "name": "AJARAKAN HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -35,7 +35,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "AJARAKAN HELM BETA": {
     "name": "AJARAKAN HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -52,7 +52,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ALLOY HELM": {
     "name": "ALLOY HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -68,7 +68,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ALLOY HELM ALPHA": {
     "name": "ALLOY HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -84,7 +84,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ARKVULCAN HELM ALPHA": {
     "name": "ARKVULCAN HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "--",
@@ -101,7 +101,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ARKVULCAN HELM BETA": {
     "name": "ARKVULCAN HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "",
@@ -118,7 +118,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ARTIAN HELM ALPHA": {
     "name": "ARTIAN HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -134,7 +134,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "AZUZ HEADDRESS ALPHA": {
     "name": "AZUZ HEADDRESS ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -150,7 +150,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BALAHARA HELM": {
     "name": "BALAHARA HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "2",
     "rank": "Low Rank",
     "slots": "--",
@@ -166,7 +166,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BALAHARA HELM ALPHA": {
     "name": "BALAHARA HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -183,7 +183,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BALAHARA HELM BETA": {
     "name": "BALAHARA HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -200,7 +200,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BARINA HEADGEAR": {
     "name": "BARINA HEADGEAR",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -216,7 +216,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BARINA HEADGEAR ALPHA": {
     "name": "BARINA HEADGEAR ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -233,7 +233,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BARINA HEADGEAR BETA": {
     "name": "BARINA HEADGEAR BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -250,7 +250,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BATTLE HELM ALPHA": {
     "name": "BATTLE HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -266,7 +266,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BLANGO HELM ALPHA": {
     "name": "BLANGO HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -283,7 +283,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BLANGO HELM BETA": {
     "name": "BLANGO HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -300,7 +300,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BONE HELM": {
     "name": "BONE HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -316,7 +316,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BONE HELM ALPHA": {
     "name": "BONE HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -332,7 +332,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BULAQCHI SPECS": {
     "name": "BULAQCHI SPECS",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -348,7 +348,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BULAQCHI SPECS ALPHA": {
     "name": "BULAQCHI SPECS ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -364,7 +364,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BULAQCHI SPECS BETA": {
     "name": "BULAQCHI SPECS BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -380,7 +380,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G ARKVELD HELM": {
     "name": "G ARKVELD HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -397,7 +397,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G ARKVELD HELM ALPHA": {
     "name": "G ARKVELD HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "",
@@ -414,7 +414,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G ARKVELD HELM BETA": {
     "name": "G ARKVELD HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "",
@@ -431,7 +431,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G DOSHAGUMA HELM": {
     "name": "G DOSHAGUMA HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -448,7 +448,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G DOSHAGUMA HELM ALPHA": {
     "name": "G DOSHAGUMA HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -465,7 +465,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G DOSHAGUMA HELM BETA": {
     "name": "G DOSHAGUMA HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -482,7 +482,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G EBONY HELM": {
     "name": "G EBONY HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -499,7 +499,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G EBONY HELM ALPHA": {
     "name": "G EBONY HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "--",
@@ -516,7 +516,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G EBONY HELM BETA": {
     "name": "G EBONY HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -533,7 +533,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G FULGUR HELM ALPHA": {
     "name": "G FULGUR HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "--",
@@ -550,7 +550,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G FULGUR HELM BETA": {
     "name": "G FULGUR HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -567,7 +567,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G RATHALOS HELM": {
     "name": "G RATHALOS HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "--",
@@ -584,7 +584,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G RATHALOS HELM ALPHA": {
     "name": "G RATHALOS HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -601,7 +601,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "G RATHALOS HELM BETA": {
     "name": "G RATHALOS HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -618,7 +618,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GORE HELM ALPHA": {
     "name": "GORE HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -635,7 +635,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GORE HELM BETA": {
     "name": "GORE HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -652,7 +652,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GRAVIOS HELM ALPHA": {
     "name": "GRAVIOS HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -669,7 +669,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GRAVIOS HELM BETA": {
     "name": "GRAVIOS HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -686,7 +686,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GUILD ACE EARRINGS ALPHA": {
     "name": "GUILD ACE EARRINGS ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "",
@@ -702,7 +702,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GYPCEROS HELM ALPHA": {
     "name": "GYPCEROS HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -719,7 +719,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "GYPCEROS HELM BETA": {
     "name": "GYPCEROS HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -736,7 +736,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HIGH METAL HELM ALPHA": {
     "name": "HIGH METAL HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -753,7 +753,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HIRABAMI HEADDRESS": {
     "name": "HIRABAMI HEADDRESS",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -770,7 +770,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HIRABAMI HEADDRESS ALPHA": {
     "name": "HIRABAMI HEADDRESS ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -787,7 +787,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HIRABAMI HEADDRESS BETA": {
     "name": "HIRABAMI HEADDRESS BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -804,7 +804,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HOPE MASK": {
     "name": "HOPE MASK",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -820,7 +820,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "HOPE MASK ALPHA": {
     "name": "HOPE MASK ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -836,7 +836,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "INGOT HELM": {
     "name": "INGOT HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -852,7 +852,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "INGOT HELM ALPHA": {
     "name": "INGOT HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -868,7 +868,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "KING BEETLE VERTEX ALPHA": {
     "name": "KING BEETLE VERTEX ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -885,7 +885,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "KUNAFA HEADGEAR ALPHA": {
     "name": "KUNAFA HEADGEAR ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -901,7 +901,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "KUT-KU HELM ALPHA": {
     "name": "KUT-KU HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -917,7 +917,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "KUT-KU HELM BETA": {
     "name": "KUT-KU HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -933,7 +933,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "BUTTERFLY VERTEX ALPHA": {
     "name": "BUTTERFLY VERTEX ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -951,7 +951,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CHAINMAIL HEADGEAR": {
     "name": "CHAINMAIL HEADGEAR",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -967,7 +967,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CHAINMAIL HEADGEAR ALPHA": {
     "name": "CHAINMAIL HEADGEAR ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -983,7 +983,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CHATACABRA HELM": {
     "name": "CHATACABRA HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -999,7 +999,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CHATACABRA HELM ALPHA": {
     "name": "CHATACABRA HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1015,7 +1015,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CHATACABRA HELM BETA": {
     "name": "CHATACABRA HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1031,7 +1031,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "COMAQCHI ACCESSORY": {
     "name": "COMAQCHI ACCESSORY",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -1047,7 +1047,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "COMAQCHI ACCESSORY ALPHA": {
     "name": "COMAQCHI ACCESSORY ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -1063,7 +1063,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "COMAQCHI ACCESSORY BETA": {
     "name": "COMAQCHI ACCESSORY BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1079,7 +1079,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "COMMISSION HELM ALPHA": {
     "name": "COMMISSION HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1095,7 +1095,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CONGA HELM": {
     "name": "CONGA HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "2",
     "rank": "Low Rank",
     "slots": "--",
@@ -1111,7 +1111,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CONGA HELM ALPHA": {
     "name": "CONGA HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1127,7 +1127,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "CONGA HELM BETA": {
     "name": "CONGA HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1143,7 +1143,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DAHAAD SHARDHELM ALPHA": {
     "name": "DAHAAD SHARDHELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1160,7 +1160,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DAHAAD SHARDHELM BETA": {
     "name": "DAHAAD SHARDHELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1177,7 +1177,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DAMASCUS HELM ALPHA": {
     "name": "DAMASCUS HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1194,7 +1194,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DEATH STENCH BRAIN ALPHA": {
     "name": "DEATH STENCH BRAIN ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1210,7 +1210,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DOBER HELM ALPHA": {
     "name": "DOBER HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1227,7 +1227,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DOSHAGUMA HELM": {
     "name": "DOSHAGUMA HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "2",
     "rank": "Low Rank",
     "slots": "--",
@@ -1244,7 +1244,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DOSHAGUMA HELM ALPHA": {
     "name": "DOSHAGUMA HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1261,7 +1261,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DOSHAGUMA HELM BETA": {
     "name": "DOSHAGUMA HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1278,7 +1278,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DRAGONKING EYEPATCH ALPHA": {
     "name": "DRAGONKING EYEPATCH ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "8",
     "rank": "High Rank",
     "slots": "--",
@@ -1295,7 +1295,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DUNA HELM": {
     "name": "DUNA HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "--",
@@ -1312,7 +1312,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DUNA WILDHELM ALPHA": {
     "name": "DUNA WILDHELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1329,7 +1329,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "DUNA WILDHELM BETA": {
     "name": "DUNA WILDHELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1346,7 +1346,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "EXPEDITION HEADGEAR ALPHA": {
     "name": "EXPEDITION HEADGEAR ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1362,7 +1362,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "LEATHER HEADGEAR": {
     "name": "LEATHER HEADGEAR",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -1378,7 +1378,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "LEATHER HEADGEAR ALPHA": {
     "name": "LEATHER HEADGEAR ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1394,7 +1394,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "MELAHOA HAT ALPHA": {
     "name": "MELAHOA HAT ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1411,7 +1411,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "MIMIPHYTA ALPHA": {
     "name": "MIMIPHYTA ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1428,7 +1428,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "NERSCYLLA HELM": {
     "name": "NERSCYLLA HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -1445,7 +1445,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "NERSCYLLA HELM ALPHA": {
     "name": "NERSCYLLA HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -1462,7 +1462,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "NERSCYLLA HELM BETA": {
     "name": "NERSCYLLA HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1479,7 +1479,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "QUEMATRICE HELM": {
     "name": "QUEMATRICE HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -1496,7 +1496,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "QUEMATRICE HELM ALPHA": {
     "name": "QUEMATRICE HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1513,7 +1513,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "QUEMATRICE HELM BETA": {
     "name": "QUEMATRICE HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1530,7 +1530,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "RATHALOS HELM ALPHA": {
     "name": "RATHALOS HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1547,7 +1547,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "RATHALOS HELM BETA": {
     "name": "RATHALOS HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1564,7 +1564,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "RATHIAN HELM ALPHA": {
     "name": "RATHIAN HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1581,7 +1581,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "RATHIAN HELM BETA": {
     "name": "RATHIAN HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1598,7 +1598,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "REY SANDHELM": {
     "name": "REY SANDHELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "--",
@@ -1615,7 +1615,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "REY SANDHELM ALPHA": {
     "name": "REY SANDHELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "--",
@@ -1632,7 +1632,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "REY SANDHELM BETA": {
     "name": "REY SANDHELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1649,7 +1649,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ROMPOPOLO HELM": {
     "name": "ROMPOPOLO HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "3",
     "rank": "Low Rank",
     "slots": "--",
@@ -1665,7 +1665,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ROMPOPOLO HELM ALPHA": {
     "name": "ROMPOPOLO HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1682,7 +1682,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "ROMPOPOLO HELM BETA": {
     "name": "ROMPOPOLO HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1699,7 +1699,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "SILD HOOD ALPHA": {
     "name": "SILD HOOD ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1715,7 +1715,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "UDRA MIREHELM": {
     "name": "UDRA MIREHELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -1731,7 +1731,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "UDRA MIREHELM ALPHA": {
     "name": "UDRA MIREHELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1748,7 +1748,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "UDRA MIREHELM BETA": {
     "name": "UDRA MIREHELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "7",
     "rank": "High Rank",
     "slots": "",
@@ -1765,7 +1765,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "VESPOID HELM": {
     "name": "VESPOID HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "1",
     "rank": "Low Rank",
     "slots": "--",
@@ -1781,7 +1781,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "VESPOID HELM ALPHA": {
     "name": "VESPOID HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "--",
@@ -1797,7 +1797,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "VESPOID HELM BETA": {
     "name": "VESPOID HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "5",
     "rank": "High Rank",
     "slots": "",
@@ -1813,7 +1813,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "XU WU HELM": {
     "name": "XU WU HELM",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "4",
     "rank": "Low Rank",
     "slots": "",
@@ -1830,7 +1830,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "XU WU HELM ALPHA": {
     "name": "XU WU HELM ALPHA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",
@@ -1847,7 +1847,7 @@ Map<String, Map<String, dynamic>> armor_pieces = {
   },
   "XU WU HELM BETA": {
     "name": "XU WU HELM BETA",
-    "type": "Helmet",
+    "type": "Head",
     "rarity": "6",
     "rank": "High Rank",
     "slots": "",

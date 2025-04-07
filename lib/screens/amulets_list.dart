@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/data/amulets.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
 
 class AmuletList extends StatefulWidget {
@@ -77,28 +78,64 @@ class _AmuletListState extends State<AmuletList> {
               itemCount: filteredAmulets.length,
               itemBuilder: (context, index) {
                 var amulet = filteredAmulets[index];
-                var rank;
-                var ranks = amulet['ranks']
-                    as List?; // Convertimos a List? (puede ser null)
+                var ranks = amulet['ranks'] as List?;
 
-                if (ranks != null && ranks.isNotEmpty) {
-                  rank = ranks[0];
+                var firstRank =
+                    ranks != null && ranks.isNotEmpty ? ranks[0] : null;
+
+                String amuletName = '';
+                if (firstRank != null) {
+                  amuletName =
+                      (firstRank['names'] as Map<String, dynamic>?)?['en'] ??
+                          "Unknown".toString();
+
+                  int lastSpaceIndex = amuletName.lastIndexOf(' ');
+                  if (lastSpaceIndex != -1) {
+                    amuletName = amuletName.substring(0, lastSpaceIndex);
+                  }
                 }
 
-                return BounceInLeft(
-                    duration: const Duration(milliseconds: 900),
-                    delay: Duration(milliseconds: index * 5),
-                    child: Ccard(
-                      // trailing: getJewelSlotIcon(rank['level'].toString()),
-                      cardData: rank,
-                      cardTitle:
-                          (rank['names'] as Map<String, dynamic>)['en'] ??
-                              "Unknown",
-                      cardSubtitle1Label: "Rarity: ",
-                      cardSubtitle2Label: "Level: ",
-                      cardSubtitle1: rank['rarity'].toString(),
-                      cardSubtitle2: rank['level'].toString(),
-                    ));
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FadeInRight(
+                      duration: const Duration(milliseconds: 900),
+                      delay: Duration(milliseconds: index),
+                      child: Container(
+                        width: double.infinity,
+                        color: AppColors.goldSoft,
+                        child: Text(
+                          amuletName.isNotEmpty ? amuletName : "Unknown",
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    if (ranks != null && ranks.isNotEmpty)
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: ranks.length,
+                        itemBuilder: (context, rankIndex) {
+                          var rank = ranks[rankIndex];
+                          return BounceInLeft(
+                            duration: const Duration(milliseconds: 900),
+                            delay: Duration(milliseconds: rankIndex * 50),
+                            child: Ccard(
+                              cardData: rank,
+                              cardTitle: (rank['names']
+                                      as Map<String, dynamic>)['en'] ??
+                                  "Unknown",
+                              cardSubtitle1Label: "Rarity: ",
+                              cardSubtitle2Label: "Level: ",
+                              cardSubtitle1: rank['rarity'].toString(),
+                              cardSubtitle2: rank['level'].toString(),
+                            ),
+                          );
+                        },
+                      ),
+                  ],
+                );
               },
             ),
           ),

@@ -16,13 +16,11 @@ class Cdrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            menuHeader(),
-            menuItems(),
-          ],
-        ),
+      child: Column(
+        children: [
+          menuHeader(),
+          Expanded(child: SingleChildScrollView(child: menuItems())),
+        ],
       ),
     );
   }
@@ -145,6 +143,19 @@ class Cdrawer extends StatelessWidget {
                 ),
                 onTap: () => onItemSelected(const ArmorPiecesList2()),
               ),
+              // const Divider(),
+              // ListTile(
+              //   title: const Text(
+              //     'Armors2',
+              //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              //   ),
+              //   trailing: Image.asset(
+              //     'assets/imgs/decorations/jewel.webp',
+              //     width: 35,
+              //     height: 35,
+              //   ),
+              //   onTap: () => onItemSelected(const ArmorPiecesList2()),
+              // ),
             ],
           ),
         ],

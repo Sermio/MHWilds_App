@@ -2,9 +2,9 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/armor_piece_image.dart';
 import 'package:mhwilds_app/models/armor_piece2.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
-import 'package:mhwilds_app/data/armor_pieces2.dart'; // Asegúrate de que armors2 sea una lista de objetos ArmorPiece2
-import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/data/armor_pieces2.dart';
 
 class ArmorPiecesList2 extends StatefulWidget {
   const ArmorPiecesList2({super.key});
@@ -39,20 +39,17 @@ class _ArmorPiecesList2State extends State<ArmorPiecesList2> {
   Widget build(BuildContext context) {
     List<Map<String, Object?>> filteredArmorPieces =
         armors2.where((armorPiece) {
-      // Verificar si el nombre contiene la consulta de búsqueda
       bool matchesName = (armorPiece['names'] as Map<String, String>)
           .values
           .any((name) =>
               name.toLowerCase().contains(_searchNameQuery.toLowerCase()));
 
-      // Verificar si el tipo coincide con el filtro seleccionado
       bool matchesType = _selectedType == null ||
-          (armorPiece['groupBonus'] != null &&
-              (armorPiece['groupBonus'] as Map<String, dynamic>)['skillId']
-                      ?.toString() ==
-                  _selectedType);
+          (armorPiece['pieces'] != null &&
+              (armorPiece['pieces'] as List<dynamic>).any((piece) =>
+                  piece['kind']?.toLowerCase() ==
+                  _selectedType?.toLowerCase()));
 
-      // Verificar si la rareza coincide con el filtro seleccionado
       bool matchesRarity = _selectedRarity == null ||
           armorPiece['rarity'].toString() == _selectedRarity;
 
@@ -90,9 +87,9 @@ class _ArmorPiecesList2State extends State<ArmorPiecesList2> {
                     _selectedType = newType;
                   });
                 },
-                items: ['Skill 1', 'Skill 2', 'Skill 3'].map((type) {
+                items: ['Head', 'Chest', 'Arms', 'Waist', 'Legs'].map((type) {
                   return DropdownMenuItem<String>(
-                    value: type,
+                    value: type.toLowerCase(),
                     child: Text(type),
                   );
                 }).toList(),
@@ -134,29 +131,66 @@ class _ArmorPiecesList2State extends State<ArmorPiecesList2> {
               itemBuilder: (context, index) {
                 var armorPiece = filteredArmorPieces[index];
 
-                return BounceInLeft(
-                  duration: const Duration(milliseconds: 900),
-                  delay: Duration(milliseconds: index * 5),
-                  child: Ccard(
-                    trailing: Image.asset(
-                      'assets/imgs/armor/rarity${armorPiece['rarity']}.webp',
-                      scale: 0.8,
-                    ),
-                    // leading: ArmorPieceImageDependingOnType(armorPiece: armorPiece),
-                    cardData: armorPiece,
-                    cardTitle:
-                        (armorPiece['names'] as Map<String, dynamic>?)?['en'] ??
-                            "Unknown",
+                var pieces = (armorPiece['pieces'] is List)
+                    ? (armorPiece['pieces'] as List).where((piece) {
+                        return _selectedType == null ||
+                            piece['kind'].toString().toLowerCase() ==
+                                _selectedType?.toLowerCase();
+                      }).toList()
+                    : [];
 
-                    cardSubtitle1Label: "Rarity: ",
-                    cardSubtitle2Label: "Skill: ",
-                    cardSubtitle1: armorPiece['rarity'].toString(),
-                    cardSubtitle2:
-                        (armorPiece as Map<String, dynamic>)['groupBonus']
-                                    ?['skillId']
-                                ?.toString() ??
-                            "Unknown",
-                  ),
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FadeInRight(
+                      duration: const Duration(milliseconds: 900),
+                      delay: Duration(milliseconds: index),
+                      child: Container(
+                        width: double.infinity,
+                        color: AppColors.goldSoft,
+                        child: Text(
+                          (armorPiece['names']
+                                  as Map<String, dynamic>?)?['en'] ??
+                              "Unknown",
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: pieces.length ?? 0,
+                      itemBuilder: (context, pieceIndex) {
+                        var piece = pieces[pieceIndex];
+
+                        return BounceInLeft(
+                          duration: const Duration(milliseconds: 900),
+                          delay: Duration(milliseconds: pieceIndex * 50),
+                          child: Ccard(
+                            trailing: Image.asset(
+                              'assets/imgs/armor/${piece['kind'].toString().toLowerCase()}/rarity${armorPiece['rarity']}.webp',
+                              scale: 0.8,
+                            ),
+                            // leading: ArmorPieceImage(
+                            //   armorPieceName: (piece['names']
+                            //           as Map<String, dynamic>?)?['en'] ??
+                            //       "Unknown",
+                            //   armorPieceType: piece['kind'].toString(),
+                            // ),
+                            cardData: piece,
+                            cardTitle: (piece['names']
+                                    as Map<String, dynamic>?)?['en'] ??
+                                "Unknown",
+                            cardSubtitle1Label: "Rarity: ",
+                            cardSubtitle2Label: "Type: ",
+                            cardSubtitle1: armorPiece['rarity'].toString(),
+                            cardSubtitle2: piece['kind'].toString(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 );
               },
             ),
@@ -172,46 +206,6 @@ class _ArmorPiecesList2State extends State<ArmorPiecesList2> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class ArmorPieceImageDependingOnType extends StatelessWidget {
-  const ArmorPieceImageDependingOnType({
-    super.key,
-    required this.armorPiece,
-  });
-
-  final ArmorPiece2 armorPiece;
-
-  @override
-  Widget build(BuildContext context) {
-    String armorPieceType;
-
-    // Aquí puedes determinar el tipo de la pieza basado en las propiedades del objeto
-    switch (armorPiece.pieces[0].kind) {
-      case 'Helmet':
-        armorPieceType = 'helm';
-        break;
-      case 'Chest':
-        armorPieceType = 'body';
-        break;
-      case 'Arms':
-        armorPieceType = 'arm';
-        break;
-      case 'Waist':
-        armorPieceType = 'waist';
-        break;
-      case 'Legs':
-        armorPieceType = 'leg';
-        break;
-      default:
-        armorPieceType = 'helm';
-    }
-
-    return ArmorPieceImage(
-      armorPieceName: armorPiece.names['en'] ?? 'Unknown',
-      armorPieceType: armorPieceType,
     );
   }
 }
