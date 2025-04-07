@@ -87,17 +87,18 @@ class Ccard extends StatelessWidget {
                   cardBody!,
                   const SizedBox(height: 5),
                 ],
-                Row(
-                  children: [
-                    Text(
-                      cardSubtitle1Label ?? "cardSubtitle1Label",
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      cardSubtitle1 ?? "subtitle1",
-                    ),
-                  ],
-                ),
+                if (cardSubtitle1 != null && cardSubtitle1Label != null)
+                  Row(
+                    children: [
+                      Text(
+                        cardSubtitle1Label ?? "cardSubtitle1Label",
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        cardSubtitle1 ?? "subtitle1",
+                      ),
+                    ],
+                  ),
                 if (cardSubtitle2 != null && cardSubtitle2Label != null)
                   Row(
                     children: [

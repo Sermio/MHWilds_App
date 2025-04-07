@@ -7,6 +7,7 @@ import 'package:mhwilds_app/screens/decorations_list2.dart';
 import 'package:mhwilds_app/screens/materials_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
+import 'package:mhwilds_app/screens/skills_list2.dart';
 
 class Cdrawer extends StatelessWidget {
   final Function(Widget) onItemSelected;
@@ -143,19 +144,19 @@ class Cdrawer extends StatelessWidget {
                 ),
                 onTap: () => onItemSelected(const ArmorPiecesList2()),
               ),
-              // const Divider(),
-              // ListTile(
-              //   title: const Text(
-              //     'Armors2',
-              //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              //   ),
-              //   trailing: Image.asset(
-              //     'assets/imgs/decorations/jewel.webp',
-              //     width: 35,
-              //     height: 35,
-              //   ),
-              //   onTap: () => onItemSelected(const ArmorPiecesList2()),
-              // ),
+              const Divider(),
+              ListTile(
+                title: const Text(
+                  'Skills2',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                trailing: Image.asset(
+                  'assets/imgs/decorations/jewel.webp',
+                  width: 35,
+                  height: 35,
+                ),
+                onTap: () => onItemSelected(const SkillList2()),
+              ),
             ],
           ),
         ],
