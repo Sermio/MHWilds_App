@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/screens/armor_pieces_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
+import 'package:mhwilds_app/screens/decorations_list2.dart';
 import 'package:mhwilds_app/screens/materials_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
@@ -102,6 +103,19 @@ class Cdrawer extends StatelessWidget {
                   height: 35,
                 ),
                 onTap: () => onItemSelected(const ArmorPiecesList()),
+              ),
+              const Divider(),
+              ListTile(
+                title: const Text(
+                  'Decorations2',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                trailing: Image.asset(
+                  'assets/imgs/decorations/jewel.webp',
+                  width: 35,
+                  height: 35,
+                ),
+                onTap: () => onItemSelected(const DecorationsList2()),
               ),
             ],
           ),

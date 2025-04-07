@@ -2,3 +2,4 @@ add armor decoration slots
 add mizutsune
 add guardian arkveld items @done
 add small monsters @done
+add female armor images, the url should be ypeB,         'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedArmorPieceName.toLowerCase().replaceAll(' ', '_')}_${armorPieceType}_typea_mhwilds_wiki_guide_200px.png',
