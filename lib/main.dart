@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/screens/home.dart';
 import 'package:mhwilds_app/utils/theme.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    const MyApp(),
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => SkillsProvider()),
+    ], child: const MyApp()),
   );
 }
 

@@ -1,9 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
-import 'package:mhwilds_app/data/skills2.dart'; // asegúrate que tienes una lista aquí
+import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
+import 'package:provider/provider.dart';
+import 'package:mhwilds_app/providers/skills_provider.dart';
 
 class SkillList2 extends StatefulWidget {
   const SkillList2({super.key});
@@ -18,6 +20,23 @@ class _SkillListState2 extends State<SkillList2> {
   String? _selectedType;
   bool _filtersVisible = false;
 
+  @override
+  void initState() {
+    super.initState();
+
+    // Usar addPostFrameCallback para ejecutar la llamada después de que el marco termine de construir
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final skillsProvider =
+          Provider.of<SkillsProvider>(context, listen: false);
+
+      // Verificar si los datos ya están cargados en el provider, si no, cargarlos
+      if (skillsProvider.skills.isEmpty) {
+        skillsProvider
+            .fetchSkills(); // Llamar al método que obtiene los datos de la API
+      }
+    });
+  }
+
   void _toggleFiltersVisibility() {
     setState(() {
       _filtersVisible = !_filtersVisible;
@@ -30,21 +49,15 @@ class _SkillListState2 extends State<SkillList2> {
       _searchNameController.clear();
       _selectedType = null;
     });
+
+    // Restablecer los filtros en el provider
+    Provider.of<SkillsProvider>(context, listen: false).clearFilters();
   }
 
   @override
   Widget build(BuildContext context) {
-    final filteredSkills = skills2.where((skill) {
-      final nameMatches = (skill['names'] as Map<String, String>).values.any(
-          (name) =>
-              name.toLowerCase().contains(_searchNameQuery.toLowerCase()));
-
-      final typeMatches = _selectedType == null ||
-          (skill['kind']?.toString().toLowerCase() ==
-              _selectedType!.toLowerCase());
-
-      return nameMatches && typeMatches;
-    }).toList();
+    final skillsProvider = Provider.of<SkillsProvider>(context);
+    final filteredSkills = skillsProvider.skills;
 
     return Scaffold(
       appBar: AppBar(
@@ -61,6 +74,9 @@ class _SkillListState2 extends State<SkillList2> {
                   setState(() {
                     _searchNameQuery = query;
                   });
+
+                  // Aplicar el filtro de nombre
+                  skillsProvider.applyFilters(name: _searchNameQuery);
                 },
                 decoration: const InputDecoration(
                   labelText: 'Search by Name',
@@ -78,6 +94,10 @@ class _SkillListState2 extends State<SkillList2> {
                   setState(() {
                     _selectedType = newType;
                   });
+
+                  // Aplicar el filtro de tipo
+                  skillsProvider.applyFilters(
+                      kind: _selectedType?.toLowerCase());
                 },
                 items: ['Weapon', 'Armor', 'Group', 'Set'].map((type) {
                   return DropdownMenuItem<String>(
@@ -97,47 +117,38 @@ class _SkillListState2 extends State<SkillList2> {
             const Divider(color: Colors.black),
           ],
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              itemCount: filteredSkills.length,
-              itemBuilder: (context, index) {
-                final skill = filteredSkills[index];
+            child: skillsProvider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    itemCount: filteredSkills.length,
+                    itemBuilder: (context, index) {
+                      final skill = filteredSkills[index];
 
-                return BounceInLeft(
-                  duration: const Duration(milliseconds: 900),
-                  delay: Duration(milliseconds: index * 5),
-                  child: Ccard(
-                    leading: SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: UrlImageLoader(
-                        itemName:
-                            (skill['names'] as Map<String, dynamic>?)?['en'] ??
-                                "Unknown",
-                        loadImageUrlFunction: getValidSkillImageUrl,
-                      ),
-                    ),
-                    cardData: skill,
-                    cardBody: _SkillBody(
-                      skill: skill,
-                      skillDescription: (skill['descriptions']
-                              as Map<String, dynamic>?)?['en'] ??
-                          "-",
-                    ),
-                    cardTitle:
-                        (skill['names'] as Map<String, dynamic>?)?['en'] ??
-                            "Unknown",
-
-                    // cardSubtitle1Label: "Type: ",
-                    // cardSubtitle2Label: "descriptions: ",
-                    // cardSubtitle1: skill['kind']?.toString() ?? "Unknown",
-                    // cardSubtitle2: (skill['descriptions']
-                    //         as Map<String, dynamic>?)?['en'] ??
-                    //     "Unknown",
+                      return BounceInLeft(
+                        duration: const Duration(milliseconds: 900),
+                        delay: Duration(milliseconds: index * 5),
+                        child: Ccard(
+                          leading: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: UrlImageLoader(
+                              itemName:
+                                  skill.name, // Acceder a name directamente
+                              loadImageUrlFunction: getValidSkillImageUrl,
+                            ),
+                          ),
+                          cardData: skill,
+                          cardBody: _SkillBody(
+                            skill: skill,
+                            skillDescription: skill
+                                .description, // Usar description directamente
+                          ),
+                          cardTitle: skill.name, // Acceder a name directamente
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
@@ -158,12 +169,12 @@ class _SkillBody extends StatelessWidget {
     this.skillDescription = '-',
   });
 
-  final Map<String, Object> skill;
+  final Skill2 skill;
   final String skillDescription;
 
   @override
   Widget build(BuildContext context) {
-    final ranks = (skill['ranks'] as List<dynamic>?) ?? [];
+    final ranks = skill.ranks;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,9 +187,6 @@ class _SkillBody extends StatelessWidget {
         ...ranks.asMap().entries.map((entry) {
           final index = entry.key + 1;
           final rank = entry.value;
-          final description = (rank as Map<String, dynamic>)['descriptions']
-                  ?['en'] ??
-              'No description';
 
           return Padding(
             padding: const EdgeInsets.only(bottom: 6.0),
@@ -193,7 +201,7 @@ class _SkillBody extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    description,
+                    rank.description, // Acceder a description directamente
                     style: const TextStyle(fontSize: 15),
                   ),
                 ),
