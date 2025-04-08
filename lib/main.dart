@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/screens/home.dart';
 import 'package:mhwilds_app/utils/theme.dart';
@@ -8,6 +9,7 @@ void main() {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => SkillsProvider()),
+      ChangeNotifierProvider(create: (_) => ArmorSetProvider()),
     ], child: const MyApp()),
   );
 }

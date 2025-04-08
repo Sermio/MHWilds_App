@@ -142,7 +142,7 @@ class Cdrawer extends StatelessWidget {
                   width: 35,
                   height: 35,
                 ),
-                onTap: () => onItemSelected(const ArmorPiecesList2()),
+                onTap: () => onItemSelected(const ArmorSetList()),
               ),
               const Divider(),
               ListTile(

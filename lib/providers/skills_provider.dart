@@ -22,8 +22,7 @@ class SkillsProvider with ChangeNotifier {
 
     try {
       _allSkills = await SkillsApi.fetchSkills();
-      _filteredSkills =
-          List.from(_allSkills); // Copia para trabajar con el filtrado
+      _filteredSkills = List.from(_allSkills);
     } catch (e) {
       print(e);
     }
@@ -33,15 +32,12 @@ class SkillsProvider with ChangeNotifier {
   }
 
   void applyFilters({String? name, String? kind}) {
-    // Actualizar los filtros solo si son proporcionados
     _nameFilter = name ?? _nameFilter;
     _kindFilter = kind ?? _kindFilter;
 
     _filteredSkills = _allSkills.where((skill) {
       final matchesName = _nameFilter.isEmpty ||
-          skill.name
-              .toLowerCase()
-              .contains(_nameFilter.toLowerCase()); // Usamos `skill.name`
+          skill.name.toLowerCase().contains(_nameFilter.toLowerCase());
 
       final matchesKind = _kindFilter.isEmpty || skill.kind == _kindFilter;
 
@@ -54,8 +50,7 @@ class SkillsProvider with ChangeNotifier {
   void clearFilters() {
     _nameFilter = '';
     _kindFilter = '';
-    _filteredSkills =
-        List.from(_allSkills); // Reseteo de los filtros, sin cambios
+    _filteredSkills = List.from(_allSkills);
     notifyListeners();
   }
 }

@@ -24,15 +24,12 @@ class _SkillListState2 extends State<SkillList2> {
   void initState() {
     super.initState();
 
-    // Usar addPostFrameCallback para ejecutar la llamada después de que el marco termine de construir
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final skillsProvider =
           Provider.of<SkillsProvider>(context, listen: false);
 
-      // Verificar si los datos ya están cargados en el provider, si no, cargarlos
       if (skillsProvider.skills.isEmpty) {
-        skillsProvider
-            .fetchSkills(); // Llamar al método que obtiene los datos de la API
+        skillsProvider.fetchSkills();
       }
     });
   }
@@ -50,7 +47,6 @@ class _SkillListState2 extends State<SkillList2> {
       _selectedType = null;
     });
 
-    // Restablecer los filtros en el provider
     Provider.of<SkillsProvider>(context, listen: false).clearFilters();
   }
 
@@ -60,9 +56,6 @@ class _SkillListState2 extends State<SkillList2> {
     final filteredSkills = skillsProvider.skills;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Skill2 List'),
-      ),
       body: Column(
         children: [
           if (_filtersVisible) ...[
@@ -75,7 +68,6 @@ class _SkillListState2 extends State<SkillList2> {
                     _searchNameQuery = query;
                   });
 
-                  // Aplicar el filtro de nombre
                   skillsProvider.applyFilters(name: _searchNameQuery);
                 },
                 decoration: const InputDecoration(
@@ -95,7 +87,6 @@ class _SkillListState2 extends State<SkillList2> {
                     _selectedType = newType;
                   });
 
-                  // Aplicar el filtro de tipo
                   skillsProvider.applyFilters(
                       kind: _selectedType?.toLowerCase());
                 },
@@ -128,23 +119,22 @@ class _SkillListState2 extends State<SkillList2> {
                       return BounceInLeft(
                         duration: const Duration(milliseconds: 900),
                         delay: Duration(milliseconds: index * 5),
+                        from: 200,
                         child: Ccard(
                           leading: SizedBox(
                             width: 50,
                             height: 50,
                             child: UrlImageLoader(
-                              itemName:
-                                  skill.name, // Acceder a name directamente
+                              itemName: skill.name,
                               loadImageUrlFunction: getValidSkillImageUrl,
                             ),
                           ),
                           cardData: skill,
                           cardBody: _SkillBody(
                             skill: skill,
-                            skillDescription: skill
-                                .description, // Usar description directamente
+                            skillDescription: skill.description,
                           ),
-                          cardTitle: skill.name, // Acceder a name directamente
+                          cardTitle: skill.name,
                         ),
                       );
                     },
@@ -201,7 +191,7 @@ class _SkillBody extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    rank.description, // Acceder a description directamente
+                    rank.description,
                     style: const TextStyle(fontSize: 15),
                   ),
                 ),

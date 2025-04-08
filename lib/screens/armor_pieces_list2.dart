@@ -1,24 +1,38 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/armor_piece_image.dart';
-import 'package:mhwilds_app/models/armor_piece2.dart';
+import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/models/armor_set.dart';
+import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
-import 'package:mhwilds_app/data/armor_pieces2.dart';
+import 'package:provider/provider.dart';
 
-class ArmorPiecesList2 extends StatefulWidget {
-  const ArmorPiecesList2({super.key});
+class ArmorSetList extends StatefulWidget {
+  const ArmorSetList({super.key});
 
   @override
-  _ArmorPiecesList2State createState() => _ArmorPiecesList2State();
+  _ArmorSetListState createState() => _ArmorSetListState();
 }
 
-class _ArmorPiecesList2State extends State<ArmorPiecesList2> {
+class _ArmorSetListState extends State<ArmorSetList> {
   final TextEditingController _searchNameController = TextEditingController();
   String _searchNameQuery = '';
-  String? _selectedType;
-  String? _selectedRarity;
+  String? _selectedKind; // Cambiamos de _selectedRank a _selectedKind
   bool _filtersVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final armorSetProvider =
+          Provider.of<ArmorSetProvider>(context, listen: false);
+
+      if (!armorSetProvider.hasData) {
+        armorSetProvider.fetchArmorSets();
+      }
+    });
+  }
 
   void _toggleFiltersVisibility() {
     setState(() {
@@ -30,31 +44,16 @@ class _ArmorPiecesList2State extends State<ArmorPiecesList2> {
     setState(() {
       _searchNameQuery = '';
       _searchNameController.clear();
-      _selectedType = null;
-      _selectedRarity = null;
+      _selectedKind = null;
     });
+    // Recargar los sets completos sin aplicar ningún filtro
+    Provider.of<ArmorSetProvider>(context, listen: false).clearFilters();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, Object?>> filteredArmorPieces =
-        armors2.where((armorPiece) {
-      bool matchesName = (armorPiece['names'] as Map<String, String>)
-          .values
-          .any((name) =>
-              name.toLowerCase().contains(_searchNameQuery.toLowerCase()));
-
-      bool matchesType = _selectedType == null ||
-          (armorPiece['pieces'] != null &&
-              (armorPiece['pieces'] as List<dynamic>).any((piece) =>
-                  piece['kind']?.toLowerCase() ==
-                  _selectedType?.toLowerCase()));
-
-      bool matchesRarity = _selectedRarity == null ||
-          armorPiece['rarity'].toString() == _selectedRarity;
-
-      return matchesName && matchesType && matchesRarity;
-    }).toList();
+    final armorSetProvider = Provider.of<ArmorSetProvider>(context);
+    final filteredArmorSets = armorSetProvider.armorSets;
 
     return Scaffold(
       body: Column(
@@ -68,6 +67,9 @@ class _ArmorPiecesList2State extends State<ArmorPiecesList2> {
                   setState(() {
                     _searchNameQuery = query;
                   });
+
+                  armorSetProvider.applyFilters(
+                      name: _searchNameQuery, kind: _selectedKind);
                 },
                 decoration: const InputDecoration(
                   labelText: 'Search by Name',
@@ -76,45 +78,27 @@ class _ArmorPiecesList2State extends State<ArmorPiecesList2> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: DropdownButton<String>(
-                dropdownColor: Colors.white,
-                value: _selectedType,
-                hint: const Text('Select Type'),
-                onChanged: (newType) {
-                  setState(() {
-                    _selectedType = newType;
-                  });
-                },
-                items: ['Head', 'Chest', 'Arms', 'Waist', 'Legs'].map((type) {
-                  return DropdownMenuItem<String>(
-                    value: type.toLowerCase(),
-                    child: Text(type),
-                  );
-                }).toList(),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: DropdownButton<String>(
-                dropdownColor: Colors.white,
-                value: _selectedRarity,
-                hint: const Text('Select Rarity'),
-                onChanged: (newRarity) {
-                  setState(() {
-                    _selectedRarity = newRarity;
-                  });
-                },
-                items: List.generate(8, (index) => (index + 1).toString())
-                    .map((rarity) {
-                  return DropdownMenuItem<String>(
-                    value: rarity,
-                    child: Text('Rarity $rarity'),
-                  );
-                }).toList(),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: DropdownButton<String>(
+            //     value: _selectedKind,
+            //     hint: const Text('Select Kind'),
+            //     onChanged: (newKind) {
+            //       setState(() {
+            //         _selectedKind = newKind?.toLowerCase();
+            //       });
+
+            //       armorSetProvider.applyFilters(
+            //           name: _searchNameQuery, kind: _selectedKind);
+            //     },
+            //     items: ['Head', 'Chest', 'Arms', 'Waist', 'Legs'].map((kind) {
+            //       return DropdownMenuItem<String>(
+            //         value: kind.toLowerCase(),
+            //         child: Text(kind),
+            //       );
+            //     }).toList(),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
@@ -122,90 +106,106 @@ class _ArmorPiecesList2State extends State<ArmorPiecesList2> {
                 child: const Text('Reset Filters'),
               ),
             ),
-            const Divider(color: Colors.black)
+            const Divider(color: Colors.black),
           ],
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
-              itemCount: filteredArmorPieces.length,
-              itemBuilder: (context, index) {
-                var armorPiece = filteredArmorPieces[index];
+            child: armorSetProvider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    itemCount: filteredArmorSets.length,
+                    itemBuilder: (context, index) {
+                      final armorSet = filteredArmorSets[index];
 
-                var pieces = (armorPiece['pieces'] is List)
-                    ? (armorPiece['pieces'] as List).where((piece) {
-                        return _selectedType == null ||
-                            piece['kind'].toString().toLowerCase() ==
-                                _selectedType?.toLowerCase();
-                      }).toList()
-                    : [];
-
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FadeInRight(
-                      duration: const Duration(milliseconds: 900),
-                      delay: Duration(milliseconds: index),
-                      child: Container(
-                        width: double.infinity,
-                        color: AppColors.goldSoft,
-                        child: Text(
-                          (armorPiece['names']
-                                  as Map<String, dynamic>?)?['en'] ??
-                              "Unknown",
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: pieces.length ?? 0,
-                      itemBuilder: (context, pieceIndex) {
-                        var piece = pieces[pieceIndex];
-
-                        return BounceInLeft(
-                          duration: const Duration(milliseconds: 900),
-                          delay: Duration(milliseconds: pieceIndex * 50),
-                          child: Ccard(
-                            trailing: Image.asset(
-                              'assets/imgs/armor/${piece['kind'].toString().toLowerCase()}/rarity${armorPiece['rarity']}.webp',
-                              scale: 0.8,
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                            child: FadeInRight(
+                              duration: const Duration(milliseconds: 900),
+                              delay: Duration(milliseconds: index),
+                              from: 200,
+                              child: Container(
+                                width: double.infinity,
+                                color: AppColors.goldSoft,
+                                child: Text(
+                                  armorSet.name,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
                             ),
-                            // leading: ArmorPieceImage(
-                            //   armorPieceName: (piece['names']
-                            //           as Map<String, dynamic>?)?['en'] ??
-                            //       "Unknown",
-                            //   armorPieceType: piece['kind'].toString(),
-                            // ),
-                            cardData: piece,
-                            cardTitle: (piece['names']
-                                    as Map<String, dynamic>?)?['en'] ??
-                                "Unknown",
-                            cardSubtitle1Label: "Rarity: ",
-                            cardSubtitle2Label: "Type: ",
-                            cardSubtitle1: armorPiece['rarity'].toString(),
-                            cardSubtitle2: piece['kind'].toString(),
                           ),
-                        );
-                      },
-                    ),
-                  ],
-                );
-              },
-            ),
+                          const SizedBox(height: 10),
+                          ...armorSet.pieces.asMap().map((index, piece) {
+                            return MapEntry(
+                              index, // índice
+                              BounceInLeft(
+                                duration: const Duration(milliseconds: 900),
+                                delay: Duration(milliseconds: index * 80),
+                                from: 200,
+                                child: Ccard(
+                                  cardData: piece,
+                                  leading: Image.asset(
+                                    'assets/imgs/armor/${piece.kind.toString().toLowerCase()}/rarity${piece.rarity}.webp',
+                                    scale: 0.8,
+                                  ),
+                                  cardBody: _ArmorSetBody(
+                                    armorSet: armorSet,
+                                    piece: piece,
+                                  ),
+                                  cardTitle: piece.name,
+                                ),
+                              ),
+                            );
+                          }).values,
+                          const SizedBox(height: 20),
+                        ],
+                      );
+                    },
+                  ),
           ),
         ],
       ),
-      floatingActionButton: BounceInRight(
-        delay: const Duration(milliseconds: 500),
-        child: FloatingActionButton(
-          onPressed: _toggleFiltersVisibility,
-          child: Icon(
-            _filtersVisible ? Icons.close : Icons.search,
-          ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _toggleFiltersVisibility,
+        child: Icon(
+          _filtersVisible ? Icons.close : Icons.search,
         ),
       ),
+    );
+  }
+}
+
+class _ArmorSetBody extends StatelessWidget {
+  const _ArmorSetBody({
+    super.key,
+    required this.armorSet,
+    required this.piece,
+  });
+
+  final ArmorSet armorSet;
+  final ArmorPiece piece;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Text(
+        //   'Rank: ${piece.rank}',
+        //   style: const TextStyle(fontSize: 15),
+        // ),
+        // const SizedBox(height: 6),
+        Text(
+          'Armor: ${piece.defense['base']}',
+          style: const TextStyle(fontSize: 14),
+        ),
+        const SizedBox(height: 6),
+        // Aquí puedes agregar más detalles si lo deseas
+      ],
     );
   }
 }
