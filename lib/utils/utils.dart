@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 
+final Map<String, String?> _skillImageUrlCache = {};
+
 Future<bool> isGrayScaleFromUrl(String imageUrl) async {
   try {
     final response = await http.get(Uri.parse(imageUrl));
@@ -167,13 +169,17 @@ Future<String?> getValidMonsterImageUrl(String monsterName) async {
   return null;
 }
 
-Future<String?> getValidMaterialImageUrl(String materialName) async {
-  // Reemplazar el "+" seguido de un espacio por solo "+"
-  String formattedMaterialName = materialName.replaceAll(RegExp(r'\s\+'), '+');
+Future<String?> getValidItemImageUrl(String materialName) async {
+  // String formattedMaterialName = materialName.replaceAll(RegExp(r'\s\+'), '+');
 
   // Construir la URL con el nombre de material formateado
   List<String> urlVariations = [
-    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedMaterialName.toLowerCase().replaceAll(' ', '_')}_item_equipment_material_mhwilds_wiki_guide_85px.png"
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${materialName}_item_equipment_material_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${materialName}_item_healing_support_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${materialName}_item_ingredient_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${materialName}_item_trap_offense_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${materialName}_item_bowgun_ammo_mhwilds_wiki_guide_85px.png",
+    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${materialName}_item_special_items_other_mhwilds_wiki_guide_85px.png",
   ];
 
   for (String url in urlVariations) {
@@ -193,11 +199,15 @@ Future<String?> getValidSkillImageUrl(String skillName) async {
       .replaceAll(' ', '-')
       .replaceAll("'", '')
       .replaceAll('-', '_');
+
+  // Check cache first
+  if (_skillImageUrlCache.containsKey(formattedSkillName)) {
+    return _skillImageUrlCache[formattedSkillName];
+  }
+
   List<String> urlVariations = [
     "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedSkillName}_skill_mhwilds_wiki_guide_85px.png",
-    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedSkillName}_skill_mhwilds_wiki_guide_85px.png",
-    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedSkillName}_skill_mhwilds_wiki_guide_85px.png",
-    "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedSkillName}_skill_mhwilds_wiki_guide_85px.png",
+    // Añade más variantes si alguna cambia en el futuro
   ];
 
   const int maxRetries = 4;
@@ -209,9 +219,10 @@ Future<String?> getValidSkillImageUrl(String skillName) async {
         final response =
             await http.head(Uri.parse(url)).timeout(timeoutDuration);
         if (response.statusCode == 200) {
+          _skillImageUrlCache[formattedSkillName] = url;
           return url;
         }
-      } catch (e) {
+      } catch (_) {
         if (attempt == maxRetries - 1) {
           print(
               "Error al cargar imagen en $url después de $maxRetries intentos.");
@@ -220,7 +231,12 @@ Future<String?> getValidSkillImageUrl(String skillName) async {
     }
   }
 
-  return 'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/attack_boost_skill_mhwilds_wiki_guide_85px.png';
+  // Fallback
+  const fallbackUrl =
+      'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/attack_boost_skill_mhwilds_wiki_guide_85px.png';
+
+  _skillImageUrlCache[formattedSkillName] = fallbackUrl;
+  return fallbackUrl;
 }
 
 

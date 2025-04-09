@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:mhwilds_app/api/items_api.dart';
+import 'package:mhwilds_app/models/item.dart';
+
+class ItemsProvider with ChangeNotifier {
+  List<Item> _allItems = [];
+  List<Item> _filteredItems = [];
+  bool _isLoading = false;
+
+  String _nameFilter = '';
+  int _rarityFilter =
+      -1; // Puedes usar -1 como valor por defecto para no aplicar filtro
+
+  List<Item> get items => _filteredItems;
+  bool get isLoading => _isLoading;
+  bool get hasData => _allItems.isNotEmpty;
+
+  Future<void> fetchItems() async {
+    if (_allItems.isNotEmpty) return;
+
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      _allItems = await ItemsApi
+          .fetchItems(); // Asegúrate de tener esta API implementada
+      _filteredItems = List.from(_allItems);
+    } catch (e) {
+      print(e);
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  void applyFilters({String? name, int? rarity}) {
+    _nameFilter = name ?? _nameFilter;
+    _rarityFilter = rarity ?? _rarityFilter;
+
+    _filteredItems = _allItems.where((item) {
+      final matchesName = _nameFilter.isEmpty ||
+          item.name.toLowerCase().contains(_nameFilter.toLowerCase());
+
+      final matchesRarity = _rarityFilter == -1 || item.rarity == _rarityFilter;
+
+      return matchesName && matchesRarity;
+    }).toList();
+
+    notifyListeners();
+  }
+
+  void clearFilters() {
+    _nameFilter = '';
+    _rarityFilter = -1;
+    _filteredItems = List.from(_allItems);
+    notifyListeners();
+  }
+}

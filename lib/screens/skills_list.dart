@@ -205,7 +205,7 @@ class _SkillBody extends StatelessWidget {
     this.skillDescription = '-',
   });
 
-  final Skill2 skill;
+  final Skills skill;
   final String skillDescription;
 
   @override

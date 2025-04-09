@@ -28,23 +28,20 @@ class UrlImageLoader extends StatelessWidget {
         } else if (snapshot.hasError || !snapshot.hasData) {
           return _errorWidget();
         } else {
-          return Swing(
-            animate: animate,
-            child: Image.network(
-              snapshot.data!,
-              fit: BoxFit.contain,
-              width: double.infinity,
-              height: 200,
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return const SizedBox(
-                  width: double.infinity,
-                  height: 200,
-                  child: Center(child: CircularProgressIndicator()),
-                );
-              },
-              errorBuilder: (context, error, stackTrace) => _errorWidget(),
-            ),
+          return Image.network(
+            snapshot.data!,
+            fit: BoxFit.contain,
+            width: double.infinity,
+            height: 200,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return const SizedBox(
+                width: double.infinity,
+                height: 200,
+                child: Center(child: CircularProgressIndicator()),
+              );
+            },
+            errorBuilder: (context, error, stackTrace) => _errorWidget(),
           );
         }
       },

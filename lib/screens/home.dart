@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_appbar.dart';
 import 'package:mhwilds_app/components/c_drawer.dart';
+import 'package:mhwilds_app/screens/amulets_list.dart';
 import 'package:mhwilds_app/screens/armor_pieces_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
+import 'package:mhwilds_app/screens/items_list.dart';
 import 'package:mhwilds_app/screens/materials_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
@@ -27,9 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
       } else if (newScreen is MaterialsList) {
         _appBarTitle = "Materials";
       } else if (newScreen is ArmorSetList) {
-        _appBarTitle = "Armor Pieces";
+        _appBarTitle = "Armor Sets";
       } else if (newScreen is SkillList) {
         _appBarTitle = "Skills";
+      } else if (newScreen is AmuletList) {
+        _appBarTitle = "Amulets";
+      } else if (newScreen is ItemList) {
+        _appBarTitle = "Items";
       }
       _selectedScreen = newScreen;
     });

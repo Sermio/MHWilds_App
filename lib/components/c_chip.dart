@@ -23,13 +23,13 @@ class Cchip<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MonsterMapDetails(
-                    map: itemName,
-                  )),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => MonsterMapDetails(
+        //             map: itemName,
+        //           )),
+        // );
       },
       child: Chip(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),

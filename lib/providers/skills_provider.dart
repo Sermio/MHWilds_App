@@ -3,14 +3,14 @@ import 'package:mhwilds_app/api/skills_api.dart';
 import 'package:mhwilds_app/models/skills.dart';
 
 class SkillsProvider with ChangeNotifier {
-  List<Skill2> _allSkills = [];
-  List<Skill2> _filteredSkills = [];
+  List<Skills> _allSkills = [];
+  List<Skills> _filteredSkills = [];
   bool _isLoading = false;
 
   String _nameFilter = '';
   String _kindFilter = '';
 
-  List<Skill2> get skills => _filteredSkills;
+  List<Skills> get skills => _filteredSkills;
   bool get isLoading => _isLoading;
   bool get hasData => _allSkills.isNotEmpty;
 

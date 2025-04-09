@@ -1,4 +1,4 @@
-class Skill2 {
+class Skills {
   final int id;
   final int gameId;
   final String name;
@@ -6,7 +6,7 @@ class Skill2 {
   final String description;
   final List<Rank> ranks;
 
-  Skill2({
+  Skills({
     required this.id,
     required this.gameId,
     required this.name,
@@ -15,8 +15,8 @@ class Skill2 {
     required this.ranks,
   });
 
-  factory Skill2.fromJson(Map<String, dynamic> json) {
-    return Skill2(
+  factory Skills.fromJson(Map<String, dynamic> json) {
+    return Skills(
       id: json['id'] as int,
       gameId: json['gameId'] as int,
       name: json['name'] as String,

@@ -8,6 +8,18 @@ List<Map<String, String>> ailments = [
         "Waterblight is caused by the Water Element which reduces the Stamina recovery of the Hunter.\nIt can be cured by consuming a Nulberry, or using a Cleanser Booster."
   },
   {
+    "FIREBLIGHT":
+        "Fireblight is caused by the Fire Element which causes the hunter to lose health over time.\nIt can be cured by consuming a Nulberry. When available, players can jump into a nearby water, or roll 3 times on the ground."
+  },
+  {
+    "ICEBLIGHT":
+        "Iceblight is caused by the Ice Element which increases the Stamina consumption when performing tasks such as dashing, attacking, and dodging.\nIt can be cured by consuming a Nulberry."
+  },
+  {
+    "DRAGONBLIGHT":
+        "Dragonblight is caused by the Dragon Element which nullifies the damaging effects and status buildup from this element.\nIt can be cured by consuming a Nulberry."
+  },
+  {
     "BLAST":
         "Blast is a status that marks a monster that can damage them through small explosions.\nIt can be cured with a Nulberry or by dodge-rolling up to three times."
   },

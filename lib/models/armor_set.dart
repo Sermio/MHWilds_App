@@ -1,3 +1,5 @@
+import 'package:mhwilds_app/models/item.dart';
+
 class ArmorPiece {
   final String kind;
   final String name;
@@ -247,43 +249,6 @@ class CraftingMaterial {
       item: Item.fromJson(json['item'] ?? {}),
       quantity: json['quantity'] ?? 0,
       id: json['id'] ?? 0,
-    );
-  }
-}
-
-class Item {
-  final int id;
-  final int gameId;
-  final int rarity;
-  final String name;
-  final String description;
-  final int value;
-  final int carryLimit;
-  final List<dynamic> recipes;
-
-  Item({
-    required this.id,
-    required this.gameId,
-    required this.rarity,
-    required this.name,
-    required this.description,
-    required this.value,
-    required this.carryLimit,
-    required this.recipes,
-  });
-
-  factory Item.fromJson(Map<String, dynamic> json) {
-    return Item(
-      id: json['id'] ?? 0,
-      gameId: json['gameId'] ?? 0,
-      rarity: json['rarity'] ?? 0,
-      name: json['name'] ?? 'Unknown',
-      description: json['description'] ?? 'No description available',
-      value: json['value'] ?? 0,
-      carryLimit: json['carryLimit'] ?? 0,
-      recipes: json['recipes'] != null
-          ? List<dynamic>.from(json['recipes'])
-          : <dynamic>[],
     );
   }
 }
