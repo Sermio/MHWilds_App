@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/data/amulets.dart';
+import 'package:mhwilds_app/providers/amulets_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:mhwilds_app/models/amulet.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
 
@@ -16,6 +18,20 @@ class _AmuletListState extends State<AmuletList> {
   String _searchNameQuery = '';
   bool _filtersVisible = false;
 
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final amuletProvider =
+          Provider.of<AmuletProvider>(context, listen: false);
+
+      if (!amuletProvider.hasData) {
+        amuletProvider.fetchAmulets();
+      }
+    });
+  }
+
   void _toggleFiltersVisibility() {
     setState(() {
       _filtersVisible = !_filtersVisible;
@@ -27,23 +43,16 @@ class _AmuletListState extends State<AmuletList> {
       _searchNameQuery = '';
       _searchNameController.clear();
     });
+    Provider.of<AmuletProvider>(context, listen: false).clearFilters();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, Object>> filteredAmulets = amulets.where((amulet) {
-      bool matchesName = (amulet['ranks'] as List).any((rank) {
-        return (rank['names'] as Map<String, String>).values.any((name) =>
-            name.toLowerCase().contains(_searchNameQuery.toLowerCase()));
-      });
+    final amuletProvider = Provider.of<AmuletProvider>(context);
 
-      return matchesName;
-    }).toList();
+    List<Amulet> filteredAmulets = amuletProvider.filteredAmulets;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Amulets List'),
-      ),
       body: Column(
         children: [
           if (_filtersVisible) ...[
@@ -55,6 +64,7 @@ class _AmuletListState extends State<AmuletList> {
                   setState(() {
                     _searchNameQuery = query;
                   });
+                  amuletProvider.applyFilters(name: _searchNameQuery);
                 },
                 decoration: const InputDecoration(
                   labelText: 'Search by Name',
@@ -73,71 +83,68 @@ class _AmuletListState extends State<AmuletList> {
             const Divider(color: Colors.black)
           ],
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              itemCount: filteredAmulets.length,
-              itemBuilder: (context, index) {
-                var amulet = filteredAmulets[index];
-                var ranks = amulet['ranks'] as List?;
+            child: amuletProvider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    itemCount: filteredAmulets.length,
+                    itemBuilder: (context, index) {
+                      var amulet = filteredAmulets[index];
+                      var ranks = amulet.ranks;
 
-                var firstRank =
-                    ranks != null && ranks.isNotEmpty ? ranks[0] : null;
+                      var firstRank = ranks.isNotEmpty ? ranks[0] : null;
 
-                String amuletName = '';
-                if (firstRank != null) {
-                  amuletName =
-                      (firstRank['names'] as Map<String, dynamic>?)?['en'] ??
-                          "Unknown".toString();
+                      String amuletName = '';
+                      if (firstRank != null) {
+                        amuletName = firstRank.name ?? "Unknown";
 
-                  int lastSpaceIndex = amuletName.lastIndexOf(' ');
-                  if (lastSpaceIndex != -1) {
-                    amuletName = amuletName.substring(0, lastSpaceIndex);
-                  }
-                }
+                        int lastSpaceIndex = amuletName.lastIndexOf(' ');
+                        if (lastSpaceIndex != -1) {
+                          amuletName = amuletName.substring(0, lastSpaceIndex);
+                        }
+                      }
 
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FadeInRight(
-                      duration: const Duration(milliseconds: 900),
-                      delay: Duration(milliseconds: index),
-                      child: Container(
-                        width: double.infinity,
-                        color: AppColors.goldSoft,
-                        child: Text(
-                          amuletName.isNotEmpty ? amuletName : "Unknown",
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    if (ranks != null && ranks.isNotEmpty)
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: ranks.length,
-                        itemBuilder: (context, rankIndex) {
-                          var rank = ranks[rankIndex];
-                          return BounceInLeft(
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FadeInRight(
                             duration: const Duration(milliseconds: 900),
-                            delay: Duration(milliseconds: rankIndex * 50),
-                            child: Ccard(
-                              cardData: rank,
-                              cardTitle: (rank['names']
-                                      as Map<String, dynamic>)['en'] ??
-                                  "Unknown",
-                              cardSubtitle1Label: "Rarity: ",
-                              cardSubtitle2Label: "Level: ",
-                              cardSubtitle1: rank['rarity'].toString(),
-                              cardSubtitle2: rank['level'].toString(),
+                            delay: Duration(milliseconds: index),
+                            child: Container(
+                              width: double.infinity,
+                              color: AppColors.goldSoft,
+                              child: Text(
+                                amuletName.isNotEmpty ? amuletName : "Unknown",
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
                             ),
-                          );
-                        },
-                      ),
-                  ],
-                );
-              },
-            ),
+                          ),
+                          if (ranks.isNotEmpty)
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: ranks.length,
+                              itemBuilder: (context, rankIndex) {
+                                var rank = ranks[rankIndex];
+                                return BounceInLeft(
+                                  duration: const Duration(milliseconds: 900),
+                                  delay: Duration(milliseconds: rankIndex * 50),
+                                  child: Ccard(
+                                    cardData: rank,
+                                    cardTitle: rank.name ?? "Unknown",
+                                    cardSubtitle1Label: "Rarity: ",
+                                    cardSubtitle2Label: "Level: ",
+                                    cardSubtitle1: rank.rarity.toString(),
+                                    cardSubtitle2: rank.level.toString(),
+                                  ),
+                                );
+                              },
+                            ),
+                        ],
+                      );
+                    },
+                  ),
           ),
         ],
       ),

@@ -48,11 +48,11 @@ class Ccard extends StatelessWidget {
                 builder: (context) => MonsterDetails(monster: cardData)),
           );
         } else if (cardData is DecorationItem) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DecorationDetails(decoration: cardData)),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => DecorationDetails(decoration: cardData)),
+          // );
         }
         // else {
         //   // Redirigir a una pantalla por defecto

@@ -22,7 +22,7 @@ class ArmorSetProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      _allArmorSets = await ArmorApi.fetchArmorSets();
+      _allArmorSets = await ArmorsApi.fetchArmorSets();
       _originalArmorSets = List.from(_allArmorSets);
       _filteredArmorSets = List.from(_allArmorSets);
     } catch (e) {
@@ -79,10 +79,4 @@ class ArmorSetProvider with ChangeNotifier {
 
     notifyListeners();
   }
-  // void clearFilters() {
-  //   _nameFilter = '';
-  //   _kindFilter = null;
-  //   _filteredArmorSets = List.from(_allArmorSets); // Restaurar lista completa
-  //   notifyListeners();
-  // }
 }

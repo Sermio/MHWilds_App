@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/skill_container_preview.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
-import 'package:mhwilds_app/models/skill.dart';
+import 'package:mhwilds_app/models/armor_set.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 
 class SkillItem extends StatelessWidget {
@@ -20,21 +20,21 @@ class SkillItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: SizedBox(
-                width: double.maxFinite,
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxHeight: 300),
-                  child: SkillContainerPreview(
-                    skillLevel: skillNumber.toString(),
-                    skillProgression: skill.progression,
-                  ),
-                ),
-              ),
-            ),
-          );
+          // showDialog(
+          //   context: context,
+          //   builder: (context) => AlertDialog(
+          //     content: SizedBox(
+          //       width: double.maxFinite,
+          //       child: ConstrainedBox(
+          //         constraints: const BoxConstraints(maxHeight: 300),
+          //         child: SkillContainerPreview(
+          //           skillLevel: skillNumber.toString(),
+          //           skillProgression: skill.progression,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // );
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,10 +63,10 @@ class SkillItem extends StatelessWidget {
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text(
-                    skill.description,
-                    style: const TextStyle(fontSize: 15),
-                  ),
+                  // Text(
+                  //   skill.description,
+                  //   style: const TextStyle(fontSize: 15),
+                  // ),
                 ],
               ),
             ),

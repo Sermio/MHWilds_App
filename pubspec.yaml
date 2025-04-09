@@ -66,8 +66,6 @@ flutter:
   assets:
     - assets/imgs/banner/
     - assets/imgs/drawer/
-    - assets/data/
-    - assets/data/decorations_list.json
     - assets/imgs/decorations/
     - assets/imgs/maps/
     - assets/imgs/maps/iceshard_cliffs/
@@ -76,6 +74,7 @@ flutter:
     - assets/imgs/maps/scarlet_forest/
     - assets/imgs/maps/windward_plains/
     - assets/imgs/monsters/
+    - assets/imgs/amulets/
     - assets/imgs/monster_icons/
     - assets/imgs/elements/
     - assets/imgs/materials/
@@ -86,6 +85,7 @@ flutter:
     - assets/imgs/armor/legs/
     - assets/imgs/armor/waist/
     - assets/imgs/logo/
+    - assets/imgs/weapons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

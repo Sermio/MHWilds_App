@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/screens/amulets_list.dart';
 import 'package:mhwilds_app/screens/armor_pieces_list.dart';
-import 'package:mhwilds_app/screens/armor_pieces_list2.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
-import 'package:mhwilds_app/screens/decorations_list2.dart';
 import 'package:mhwilds_app/screens/materials_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
-import 'package:mhwilds_app/screens/skills_list2.dart';
 
 class Cdrawer extends StatelessWidget {
   final Function(Widget) onItemSelected;
@@ -53,32 +50,6 @@ class Cdrawer extends StatelessWidget {
                 ),
                 onTap: () => onItemSelected(const MonstersList()),
               ),
-              // const Divider(),
-              // ListTile(
-              //   title: const Text(
-              //     'Decorations',
-              //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              //   ),
-              //   trailing: Image.asset(
-              //     'assets/imgs/decorations/jewel.webp',
-              //     width: 35,
-              //     height: 35,
-              //   ),
-              //   onTap: () => onItemSelected(const DecorationsList()),
-              // ),
-              // const Divider(),
-              // ListTile(
-              //   title: const Text(
-              //     'Skills',
-              //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              //   ),
-              //   trailing: Image.asset(
-              //     'assets/imgs/drawer/skill.webp',
-              //     width: 35,
-              //     height: 35,
-              //   ),
-              //   onTap: () => onItemSelected(const SkillsList()),
-              // ),
               const Divider(),
               ListTile(
                 title: const Text(
@@ -92,23 +63,10 @@ class Cdrawer extends StatelessWidget {
                 ),
                 onTap: () => onItemSelected(const MaterialsList()),
               ),
-              // const Divider(),
-              // ListTile(
-              //   title: const Text(
-              //     'Armor pieces',
-              //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              //   ),
-              //   trailing: Image.asset(
-              //     'assets/imgs/drawer/armor.webp',
-              //     width: 35,
-              //     height: 35,
-              //   ),
-              //   onTap: () => onItemSelected(const ArmorPiecesList()),
-              // ),
               const Divider(),
               ListTile(
                 title: const Text(
-                  'Decorations2',
+                  'Decorations',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 trailing: Image.asset(
@@ -116,7 +74,7 @@ class Cdrawer extends StatelessWidget {
                   width: 35,
                   height: 35,
                 ),
-                onTap: () => onItemSelected(const DecorationsList2()),
+                onTap: () => onItemSelected(const DecorationsList()),
               ),
               const Divider(),
               ListTile(
@@ -125,7 +83,7 @@ class Cdrawer extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 trailing: Image.asset(
-                  'assets/imgs/decorations/jewel.webp',
+                  'assets/imgs/amulets/rarity7.webp',
                   width: 35,
                   height: 35,
                 ),
@@ -134,11 +92,11 @@ class Cdrawer extends StatelessWidget {
               const Divider(),
               ListTile(
                 title: const Text(
-                  'Armors2',
+                  'Armors',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 trailing: Image.asset(
-                  'assets/imgs/decorations/jewel.webp',
+                  'assets/imgs/drawer/armor.webp',
                   width: 35,
                   height: 35,
                 ),
@@ -147,15 +105,15 @@ class Cdrawer extends StatelessWidget {
               const Divider(),
               ListTile(
                 title: const Text(
-                  'Skills2',
+                  'Skills',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 trailing: Image.asset(
-                  'assets/imgs/decorations/jewel.webp',
+                  'assets/imgs/drawer/skill.webp',
                   width: 35,
                   height: 35,
                 ),
-                onTap: () => onItemSelected(const SkillList2()),
+                onTap: () => onItemSelected(const SkillList()),
               ),
             ],
           ),

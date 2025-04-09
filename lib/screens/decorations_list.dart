@@ -1,9 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/models/decoration.dart';
-import 'package:mhwilds_app/utils/utils.dart';
+import 'package:provider/provider.dart';
+import 'package:mhwilds_app/providers/decorations_provider.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
-import 'package:mhwilds_app/data/decorations.dart';
 
 class DecorationsList extends StatefulWidget {
   const DecorationsList({super.key});
@@ -18,6 +17,20 @@ class _DecorationsListState extends State<DecorationsList> {
   String? _selectedType;
   bool _filtersVisible = false;
 
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final decorationsProvider =
+          Provider.of<DecorationsProvider>(context, listen: false);
+
+      if (!decorationsProvider.hasData) {
+        decorationsProvider.fetchDecorations();
+      }
+    });
+  }
+
   void _toggleFiltersVisibility() {
     setState(() {
       _filtersVisible = !_filtersVisible;
@@ -30,24 +43,13 @@ class _DecorationsListState extends State<DecorationsList> {
       _searchNameController.clear();
       _selectedType = null;
     });
+    Provider.of<DecorationsProvider>(context, listen: false).clearFilters();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String> filteredDecorationKeys =
-        decorations.keys.where((decorationKey) {
-      Map<String, dynamic> decorationMap = decorations[decorationKey]!;
-      DecorationItem decoration = DecorationItem.fromMap(decorationMap);
-
-      bool matchesName = decoration.decorationName
-          .toLowerCase()
-          .contains(_searchNameQuery.toLowerCase());
-
-      bool matchesType =
-          _selectedType == null || decoration.decorationType == _selectedType;
-
-      return matchesName && matchesType;
-    }).toList();
+    final decorationsProvider = Provider.of<DecorationsProvider>(context);
+    final filteredDecorations = decorationsProvider.filteredDecorations;
 
     return Scaffold(
       body: Column(
@@ -61,6 +63,8 @@ class _DecorationsListState extends State<DecorationsList> {
                   setState(() {
                     _searchNameQuery = query;
                   });
+                  decorationsProvider.applyFilters(
+                      name: _searchNameQuery, type: _selectedType);
                 },
                 decoration: const InputDecoration(
                   labelText: 'Search by Name',
@@ -79,11 +83,23 @@ class _DecorationsListState extends State<DecorationsList> {
                   setState(() {
                     _selectedType = newType;
                   });
+                  decorationsProvider.applyFilters(
+                      name: _searchNameQuery, type: _selectedType);
                 },
-                items: ['Armor Decoration', 'Weapon Decoration'].map((type) {
+                items: ['Weapon', 'Armor'].map((type) {
                   return DropdownMenuItem<String>(
                     value: type,
-                    child: Text(type),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(type),
+                        Image.asset(
+                          "assets/imgs/${type == 'Weapon' ? 'weapons/artian' : 'drawer/armor'}.webp",
+                          width: 30,
+                          height: 30,
+                        ),
+                      ],
+                    ),
                   );
                 }).toList(),
               ),
@@ -98,112 +114,54 @@ class _DecorationsListState extends State<DecorationsList> {
             const Divider(color: Colors.black)
           ],
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
-              itemCount: filteredDecorationKeys.length,
-              itemBuilder: (context, index) {
-                String decorationKey = filteredDecorationKeys[index];
-                Map<String, dynamic> decorationMap =
-                    decorations[decorationKey]!;
-                DecorationItem decoration =
-                    DecorationItem.fromMap(decorationMap);
+            child: decorationsProvider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    itemCount: filteredDecorations.length,
+                    itemBuilder: (context, index) {
+                      var decoration = filteredDecorations[index];
 
-                return BounceInLeft(
-                  duration: const Duration(milliseconds: 900),
-                  delay: Duration(milliseconds: index * 5),
-                  child: Ccard(
-                    leading: _decorationLeading(decoration.decorationName,
-                        decoration.decorationSlot, decoration.decorationSkill),
-                    trailing: getJewelSlotIcon(decoration.decorationSlot),
-                    cardData: decoration,
-                    cardTitle: decoration.decorationName ?? "Unknown",
-                    cardSubtitle1Label: "Type: ",
-                    cardSubtitle2Label: "Rarity: ",
-                    cardSubtitle1: decoration.decorationType ?? "Unknown",
-                    cardSubtitle2: decoration.decorationRarity ?? "Unknown",
+                      return BounceInLeft(
+                        duration: const Duration(milliseconds: 900),
+                        delay: Duration(milliseconds: index * 5),
+                        child: Ccard(
+                          leading: _getJewelSlotIcon(decoration.slot),
+                          cardData: decoration,
+                          cardTitle: decoration.name,
+                          cardSubtitle1Label: "Type: ",
+                          cardSubtitle2Label: "Rarity: ",
+                          cardSubtitle1: decoration.kind,
+                          cardSubtitle2: decoration.rarity.toString(),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
-      floatingActionButton: BounceInRight(
-        delay: const Duration(milliseconds: 500),
-        child: FloatingActionButton(
-          onPressed: _toggleFiltersVisibility,
-          child: Icon(
-            _filtersVisible ? Icons.close : Icons.search,
-          ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _toggleFiltersVisibility,
+        child: Icon(
+          _filtersVisible ? Icons.close : Icons.search,
         ),
       ),
     );
   }
 
-  Widget _decorationLeading(
-      String skillName, String decorationSlot, String skillsString) {
-    final skills = skillsString.split('\\n\\');
-    final skillLevel = skillName[skillName.length - 1];
-    final slot = decorationSlot[decorationSlot.length - 1];
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        FutureBuilder<String?>(
-          future: getSkillUrl(skillName, int.parse(slot), int.parse(skillLevel))
-              .timeout(const Duration(seconds: 3), onTimeout: () {
-            return null;
-          }),
-          builder: (context, snapshot) {
-            Widget child;
-            if (snapshot.connectionState == ConnectionState.done &&
-                !snapshot.hasData) {
-              child =
-                  Image.asset('assets/imgs/decorations/missing_decoration.png');
-            } else if (snapshot.connectionState == ConnectionState.waiting ||
-                !snapshot.hasData ||
-                snapshot.hasError) {
-              child = const CircularProgressIndicator();
-            } else {
-              child = FadeIn(
-                child: Image.network(snapshot.data!),
-              );
-            }
-
-            return SizedBox(
-              width: 28,
-              height: 28,
-              child: child,
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget getJewelSlotIcon(String slot) {
-    if (slot.contains("1")) {
+  Widget _getJewelSlotIcon(int slot) {
+    if (slot == 1) {
       return Image.asset('assets/imgs/decorations/gem_level_1.png');
     }
-    if (slot.contains("2")) {
+    if (slot == 2) {
       return Image.asset('assets/imgs/decorations/gem_level_2.png');
     }
-    if (slot.contains("3")) {
+    if (slot == 3) {
       return Image.asset('assets/imgs/decorations/gem_level_3.png');
     }
-    if (slot.contains("4")) {
+    if (slot == 4) {
       return Image.asset('assets/imgs/decorations/gem_level_4.png');
     }
     return Image.asset('assets/imgs/decorations/gem_level_1.png');
-  }
-
-  String formatString(String input) {
-    int spaceIndex = input.indexOf(' ');
-
-    if (spaceIndex != -1) {
-      return input.substring(spaceIndex + 1);
-    }
-
-    return input;
   }
 }

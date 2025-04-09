@@ -45,12 +45,12 @@ class CustomCard extends StatelessWidget {
         ),
       );
     } else if (cardData is DecorationItem) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DecorationDetails(decoration: cardData),
-        ),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => DecorationDetails(decoration: cardData),
+      //   ),
+      // );
     }
   }
 
@@ -81,9 +81,9 @@ class CustomCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      title,
                       bodyOnTop && body != null ? body! : const SizedBox(),
                       if (bodyOnTop && body != null) const SizedBox(height: 8),
-                      title,
                       const SizedBox(height: 6),
                       if (subtitle1 != null) subtitle1!,
                       if (subtitle2 != null) ...[

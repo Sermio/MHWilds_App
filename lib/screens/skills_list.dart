@@ -1,27 +1,39 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
-import 'package:mhwilds_app/data/armor_pieces.dart';
-import 'package:mhwilds_app/data/skills.dart';
-import 'package:mhwilds_app/models/armor_piece.dart';
-import 'package:mhwilds_app/models/decoration.dart';
-import 'package:mhwilds_app/models/skill.dart';
+import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
-import 'package:mhwilds_app/data/decorations.dart';
+import 'package:mhwilds_app/widgets/custom_card.dart';
+import 'package:provider/provider.dart';
+import 'package:mhwilds_app/providers/skills_provider.dart';
 
-class SkillsList extends StatefulWidget {
-  const SkillsList({super.key});
+class SkillList extends StatefulWidget {
+  const SkillList({super.key});
 
   @override
-  SkillsListState createState() => SkillsListState();
+  _SkillListState2 createState() => _SkillListState2();
 }
 
-class SkillsListState extends State<SkillsList> {
+class _SkillListState2 extends State<SkillList> {
   final TextEditingController _searchNameController = TextEditingController();
   String _searchNameQuery = '';
   String? _selectedType;
   bool _filtersVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final skillsProvider =
+          Provider.of<SkillsProvider>(context, listen: false);
+
+      if (skillsProvider.skills.isEmpty) {
+        skillsProvider.fetchSkills();
+      }
+    });
+  }
 
   void _toggleFiltersVisibility() {
     setState(() {
@@ -35,21 +47,14 @@ class SkillsListState extends State<SkillsList> {
       _searchNameController.clear();
       _selectedType = null;
     });
+
+    Provider.of<SkillsProvider>(context, listen: false).clearFilters();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String> filteredSkillsKeys = skills.keys.where((skillkey) {
-      Map<String, dynamic> skillMap = skills[skillkey]!;
-      Skill skill = Skill.fromMap(skillMap);
-
-      bool matchesName =
-          skill.name.toLowerCase().contains(_searchNameQuery.toLowerCase());
-
-      bool matchesType = _selectedType == null || skill.type == _selectedType;
-
-      return matchesName && matchesType;
-    }).toList();
+    final skillsProvider = Provider.of<SkillsProvider>(context);
+    final filteredSkills = skillsProvider.skills;
 
     return Scaffold(
       body: Column(
@@ -63,6 +68,8 @@ class SkillsListState extends State<SkillsList> {
                   setState(() {
                     _searchNameQuery = query;
                   });
+
+                  skillsProvider.applyFilters(name: _searchNameQuery);
                 },
                 decoration: const InputDecoration(
                   labelText: 'Search by Name',
@@ -81,11 +88,24 @@ class SkillsListState extends State<SkillsList> {
                   setState(() {
                     _selectedType = newType;
                   });
+
+                  skillsProvider.applyFilters(
+                      kind: _selectedType?.toLowerCase());
                 },
-                items: ['Weapon Skill', 'Armor Skill'].map((type) {
+                items: ['Weapon', 'Armor', 'Group', 'Set'].map((type) {
                   return DropdownMenuItem<String>(
                     value: type,
-                    child: Text(type),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(type),
+                        Image.asset(
+                          _getSkillImage(type.toLowerCase()),
+                          width: 30,
+                          height: 30,
+                        ),
+                      ],
+                    ),
                   );
                 }).toList(),
               ),
@@ -97,119 +117,136 @@ class SkillsListState extends State<SkillsList> {
                 child: const Text('Reset Filters'),
               ),
             ),
-            const Divider(color: Colors.black)
+            const Divider(color: Colors.black),
           ],
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
-              itemCount: filteredSkillsKeys.length,
-              itemBuilder: (context, index) {
-                String skillkey = filteredSkillsKeys[index];
-                Map<String, dynamic> skillMap = skills[skillkey]!;
-                Skill skill = Skill.fromMap(skillMap);
+            child: skillsProvider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    itemCount: filteredSkills.length,
+                    itemBuilder: (context, index) {
+                      final skill = filteredSkills[index];
 
-                return BounceInLeft(
-                  duration: const Duration(milliseconds: 900),
-                  delay: Duration(milliseconds: index * 5),
-                  child: Ccard(
-                    leading: SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: UrlImageLoader(
-                        itemName: skill.name,
-                        loadImageUrlFunction: getValidSkillImageUrl,
-                      ),
-                    ),
-                    // trailing: getJewelSlotIcon(armor_piece.armor_pieceSlot),
-                    cardData: skill,
-                    cardTitle: skill.name ?? "Unknown",
-                    cardSubtitle1Label: "Type: ",
-                    cardSubtitle2Label: "Description: ",
-                    cardSubtitle1: skill.type ?? "Unknown",
-                    cardSubtitle2: skill.description ?? "Unknown",
+                      return BounceInLeft(
+                        duration: const Duration(milliseconds: 900),
+                        delay: Duration(milliseconds: index * 5),
+                        from: 200,
+                        child: CustomCard(
+                          cardData: skill,
+                          body: _SkillBody(
+                            skill: skill,
+                            skillDescription: skill.description,
+                          ),
+                          title: Row(
+                            children: [
+                              SizedBox(
+                                width: 30,
+                                height: 30,
+                                child: UrlImageLoader(
+                                  itemName: skill.name,
+                                  loadImageUrlFunction: getValidSkillImageUrl,
+                                ),
+                              ),
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                    skill.name,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                              Image.asset(
+                                _getSkillImage(skill.kind),
+                                width: 30,
+                                height: 30,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
-      floatingActionButton: BounceInRight(
-        delay: const Duration(milliseconds: 500),
-        child: FloatingActionButton(
-          onPressed: _toggleFiltersVisibility,
-          child: Icon(
-            _filtersVisible ? Icons.close : Icons.search,
-          ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _toggleFiltersVisibility,
+        child: Icon(
+          _filtersVisible ? Icons.close : Icons.search,
         ),
       ),
     );
   }
+}
 
-  Widget _decorationLeading(
-      String skillName, String decorationSlot, String skillsString) {
-    final skills = skillsString.split('\\n\\');
-    final skillLevel = skillName[skillName.length - 1];
-    final slot = decorationSlot[decorationSlot.length - 1];
+String _getSkillImage(String skillKind) {
+  switch (skillKind) {
+    case 'weapon':
+      return 'assets/imgs/weapons/artian.webp';
+    case 'armor':
+      return 'assets/imgs/drawer/armor.webp';
+    case 'group':
+      return 'assets/imgs/armor/chest/group_armor.webp';
+    case 'set':
+      return 'assets/imgs/armor/chest/set_armor.webp';
+    default:
+      return 'assets/imgs/weapons/artian.webp';
+  }
+}
+
+class _SkillBody extends StatelessWidget {
+  const _SkillBody({
+    super.key,
+    required this.skill,
+    this.skillDescription = '-',
+  });
+
+  final Skill2 skill;
+  final String skillDescription;
+
+  @override
+  Widget build(BuildContext context) {
+    final ranks = skill.ranks;
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FutureBuilder<String?>(
-          future: getSkillUrl(skillName, int.parse(slot), int.parse(skillLevel))
-              .timeout(const Duration(seconds: 3), onTimeout: () {
-            return null;
-          }),
-          builder: (context, snapshot) {
-            Widget child;
-            if (snapshot.connectionState == ConnectionState.done &&
-                !snapshot.hasData) {
-              child =
-                  Image.asset('assets/imgs/decorations/missing_decoration.png');
-            } else if (snapshot.connectionState == ConnectionState.waiting ||
-                !snapshot.hasData ||
-                snapshot.hasError) {
-              child = const CircularProgressIndicator();
-            } else {
-              child = FadeIn(
-                child: Image.network(snapshot.data!),
-              );
-            }
-
-            return SizedBox(
-              width: 28,
-              height: 28,
-              child: child,
-            );
-          },
+        Text(
+          skillDescription,
+          // overflow: TextOverflow.ellipsis,
+          softWrap: true,
         ),
+        const SizedBox(height: 8),
+        ...ranks.asMap().entries.map((entry) {
+          final index = entry.key + 1;
+          final rank = entry.value;
+
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 6.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Level $index: ",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    rank.description,
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }),
       ],
     );
-  }
-
-  Widget getJewelSlotIcon(String slot) {
-    if (slot.contains("1")) {
-      return Image.asset('assets/imgs/decorations/gem_level_1.png');
-    }
-    if (slot.contains("2")) {
-      return Image.asset('assets/imgs/decorations/gem_level_2.png');
-    }
-    if (slot.contains("3")) {
-      return Image.asset('assets/imgs/decorations/gem_level_3.png');
-    }
-    if (slot.contains("4")) {
-      return Image.asset('assets/imgs/decorations/gem_level_4.png');
-    }
-    return Image.asset('assets/imgs/decorations/gem_level_1.png');
-  }
-
-  String formatString(String input) {
-    int spaceIndex = input.indexOf(' ');
-
-    if (spaceIndex != -1) {
-      return input.substring(spaceIndex + 1);
-    }
-
-    return input;
   }
 }
