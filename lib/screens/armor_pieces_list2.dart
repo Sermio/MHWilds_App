@@ -46,8 +46,11 @@ class _ArmorSetListState extends State<ArmorSetList> {
       _searchNameController.clear();
       _selectedKind = null;
     });
-    // Recargar los sets completos sin aplicar ningún filtro
-    Provider.of<ArmorSetProvider>(context, listen: false).clearFilters();
+
+    final provider = Provider.of<ArmorSetProvider>(context, listen: false);
+    provider.clearFilters();
+
+    provider.applyFilters(name: '', kind: null);
   }
 
   @override
@@ -78,27 +81,27 @@ class _ArmorSetListState extends State<ArmorSetList> {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: DropdownButton<String>(
-            //     value: _selectedKind,
-            //     hint: const Text('Select Kind'),
-            //     onChanged: (newKind) {
-            //       setState(() {
-            //         _selectedKind = newKind?.toLowerCase();
-            //       });
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownButton<String>(
+                value: _selectedKind,
+                hint: const Text('Select Kind'),
+                onChanged: (newKind) {
+                  setState(() {
+                    _selectedKind = newKind?.toLowerCase();
+                  });
 
-            //       armorSetProvider.applyFilters(
-            //           name: _searchNameQuery, kind: _selectedKind);
-            //     },
-            //     items: ['Head', 'Chest', 'Arms', 'Waist', 'Legs'].map((kind) {
-            //       return DropdownMenuItem<String>(
-            //         value: kind.toLowerCase(),
-            //         child: Text(kind),
-            //       );
-            //     }).toList(),
-            //   ),
-            // ),
+                  armorSetProvider.applyFilters(
+                      name: _searchNameQuery, kind: _selectedKind);
+                },
+                items: ['Head', 'Chest', 'Arms', 'Waist', 'Legs'].map((kind) {
+                  return DropdownMenuItem<String>(
+                    value: kind.toLowerCase(),
+                    child: Text(kind),
+                  );
+                }).toList(),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(

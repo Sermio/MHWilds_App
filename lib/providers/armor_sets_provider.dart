@@ -4,6 +4,7 @@ import 'package:mhwilds_app/models/armor_set.dart';
 
 class ArmorSetProvider with ChangeNotifier {
   List<ArmorSet> _allArmorSets = [];
+  late final List<ArmorSet> _originalArmorSets;
   List<ArmorSet> _filteredArmorSets = [];
   bool _isLoading = false;
 
@@ -21,9 +22,9 @@ class ArmorSetProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      _allArmorSets = await ArmorApi.fetchArmorSets(); // Ajusta la API
-      _filteredArmorSets =
-          List.from(_allArmorSets); // Inicializamos la lista filtrada
+      _allArmorSets = await ArmorApi.fetchArmorSets();
+      _originalArmorSets = List.from(_allArmorSets);
+      _filteredArmorSets = List.from(_allArmorSets);
     } catch (e) {
       print(e);
     }
@@ -36,50 +37,47 @@ class ArmorSetProvider with ChangeNotifier {
     _nameFilter = name ?? _nameFilter;
     _kindFilter = kind ?? _kindFilter;
 
-    // Si no hay filtros aplicados, no filtramos las piezas.
     if (_nameFilter.isEmpty && _kindFilter == null) {
-      _filteredArmorSets = List.from(_allArmorSets);
-      for (var set in _filteredArmorSets) {
-        set.pieces = List.from(
-            set.pieces); // Restauramos las piezas originales sin ningún filtro
-      }
+      _filteredArmorSets = _allArmorSets.map((set) => set.copy()).toList();
     } else {
-      _filteredArmorSets = _allArmorSets.where((set) {
-        final matchesName = _nameFilter.isEmpty ||
-            set.name.toLowerCase().contains(_nameFilter.toLowerCase());
+      _filteredArmorSets = _allArmorSets
+          .map((set) {
+            final matchesName = _nameFilter.isEmpty ||
+                set.name.toLowerCase().contains(_nameFilter.toLowerCase());
 
-        // Filtrar las piezas dentro del set según el 'kind'
-        final filteredPieces = set.pieces.where((piece) {
-          final matchesKind = _kindFilter == null || piece.kind == _kindFilter;
-          return matchesKind;
-        }).toList();
+            final filteredPieces = set.pieces.where((piece) {
+              final matchesKind =
+                  _kindFilter == null || piece.kind == _kindFilter;
+              return matchesKind;
+            }).toList();
 
-        // Solo incluir el set si tiene piezas que coinciden con el filtro de 'kind'
-        return matchesName && filteredPieces.isNotEmpty;
-      }).toList();
-
-      // Actualizamos las piezas filtradas dentro de cada ArmorSet
-      for (var set in _filteredArmorSets) {
-        set.pieces = set.pieces.where((piece) {
-          return _kindFilter == null || piece.kind == _kindFilter;
-        }).toList();
-      }
+            if (matchesName && filteredPieces.isNotEmpty) {
+              return ArmorSet(
+                id: set.id,
+                name: set.name,
+                gameId: set.gameId,
+                groupBonus: set.groupBonus,
+                pieces: filteredPieces,
+              );
+            } else {
+              return null;
+            }
+          })
+          .whereType<ArmorSet>()
+          .toList();
     }
 
     notifyListeners();
   }
 
-  void clearFilters() async {
+  void clearFilters() {
     _nameFilter = '';
     _kindFilter = null;
 
-    // Llamamos a fetchArmorSets() para recargar todos los sets completos.
-    await fetchArmorSets(); // Asegúrate de que esta llamada termine antes de continuar.
+    _allArmorSets = List.from(_originalArmorSets);
+    _filteredArmorSets = List.from(_originalArmorSets);
 
-    // Después de recargar los sets, restablecemos los sets filtrados a su estado original
-    _filteredArmorSets = List.from(_allArmorSets);
-
-    notifyListeners(); // Notificamos a los listeners para que la UI se actualice.
+    notifyListeners();
   }
   // void clearFilters() {
   //   _nameFilter = '';

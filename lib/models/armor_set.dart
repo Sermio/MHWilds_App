@@ -163,6 +163,15 @@ class ArmorSet {
     required this.id,
     required this.gameId,
   });
+  ArmorSet copy() {
+    return ArmorSet(
+      id: id,
+      name: name,
+      gameId: gameId,
+      groupBonus: groupBonus,
+      pieces: List.from(pieces),
+    );
+  }
 
   factory ArmorSet.fromJson(Map<String, dynamic> json) {
     return ArmorSet(
