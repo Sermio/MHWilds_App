@@ -1,80 +1,141 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
-import 'package:mhwilds_app/components/monster_parts_tables.dart';
-import 'package:mhwilds_app/components/url_image_loader.dart';
-import 'package:mhwilds_app/data/materials_high_rank.dart';
-import 'package:mhwilds_app/data/materials_low_rank.dart';
 import 'package:mhwilds_app/models/monster.dart';
-import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/utils/colors.dart';
+import 'package:mhwilds_app/widgets/custom_card.dart';
 
-class MonsterDetails extends StatelessWidget {
+class MonsterDetails extends StatefulWidget {
+  final Monster monster;
+
   const MonsterDetails({super.key, required this.monster});
 
-  final Monster monster;
+  @override
+  // ignore: library_private_types_in_public_api
+  _MonsterDetailsState createState() => _MonsterDetailsState();
+}
+
+class _MonsterDetailsState extends State<MonsterDetails> {
+  String selectedRank = 'low';
+  bool isLowRankAvailable = false;
+  bool isHighRankAvailable = false;
+
+  void checkAvailableRanks() {
+    bool lowAvailable = false;
+    bool highAvailable = false;
+
+    for (var reward in widget.monster.rewards) {
+      for (var condition in reward.conditions) {
+        if (condition.rank == 'low') {
+          lowAvailable = true;
+        }
+        if (condition.rank == 'high') {
+          highAvailable = true;
+        }
+      }
+    }
+
+    if (!lowAvailable && highAvailable) {
+      setState(() {
+        selectedRank = 'high';
+      });
+    } else if (!highAvailable && lowAvailable) {
+      setState(() {
+        selectedRank = 'low';
+      });
+    }
+
+    setState(() {
+      isLowRankAvailable = lowAvailable;
+      isHighRankAvailable = highAvailable;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkAvailableRanks();
+  }
+
+  void _onRankChanged(int index) {
+    setState(() {
+      selectedRank = index == 0 ? 'low' : 'high';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    const List<String> materialColumns = [
-      'Image',
-      'Material',
-      'Target Rewards',
-      'Break Part Rewards',
-      'Carves',
-      'Destroyed Wounds',
-    ];
     return Scaffold(
       appBar: AppBar(
-        title: Text(monster.name),
+        title: Text(widget.monster.name),
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Center(
-              child: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Hero(
+              tag: widget.monster.name,
+              child: Image.asset(
+                'assets/imgs/monsters/${widget.monster.name.toLowerCase().replaceAll(' ', '_')}.png',
+                width: MediaQuery.of(context).size.width,
+                height: 250,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(0.0),
+              child: MonsterDetailsCard(monster: widget.monster),
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ToggleButtons(
+                fillColor: AppColors.goldSoft,
+                borderRadius: BorderRadius.circular(10),
+                disabledColor: Colors.grey,
+                isSelected: [
+                  selectedRank == 'low' && isLowRankAvailable,
+                  selectedRank == 'high' && isHighRankAvailable,
+                ],
+                onPressed: (index) {
+                  if ((index == 0 && isLowRankAvailable) ||
+                      (index == 1 && isHighRankAvailable)) {
+                    _onRankChanged(index);
+                  }
+                },
                 children: [
-                  Hero(
-                    tag: monster.name,
-                    child: Image.asset(
-                        'assets/imgs/monsters/${monster.name.toLowerCase().replaceAll(' ', '_')}.png'),
-                  ),
                   Padding(
-                    padding: EdgeInsets.zero,
-                    child: MonsterDetailsCard(monster: monster),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.symmetric(horizontal: 0),
-                    child: MonsterRewards(
-                      rewards: monster.rewards,
-                      selectedRank: 'low', // o 'high'
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      'Low',
+                      style: TextStyle(
+                        color: isLowRankAvailable ? Colors.black : Colors.grey,
+                      ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.symmetric(horizontal: 20),
-                    child: MonsterTable(
-                      rank: 'High Rank Materials',
-                      columnsTitles: materialColumns,
-                      materials: materialsHighRank[monster.name] ?? [],
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      'High',
+                      style: TextStyle(
+                        color: isHighRankAvailable ? Colors.black : Colors.grey,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 50,
                   ),
                 ],
               ),
             ),
-          ),
-          // const CbackButton(),
-        ],
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 0.0),
+              child: MonsterRewards(
+                rewards: widget.monster.rewards,
+                selectedRank: selectedRank,
+              ),
+            ),
+            const SizedBox(height: 50),
+          ],
+        ),
       ),
     );
   }
@@ -92,30 +153,94 @@ class MonsterRewards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Filtramos los rewards según el 'rank' seleccionado (low o high)
-    List<Map<String, String>> filteredRewards = rewards
-        .where((reward) => reward.conditions.any((condition) =>
-            condition.rank == selectedRank)) // Filtramos por 'rank'
-        .map((reward) {
-      // Extraemos la información relevante de cada reward
-      final condition = reward.conditions.firstWhere(
-        (c) => c.rank == selectedRank,
-        orElse: () => reward.conditions.first,
-      );
-
-      return {
-        'Name': reward.item.name,
-        'Kind': condition.kind,
-        'Chance': "${condition.chance}%",
-        'Part': condition.part ?? '-',
-      };
-    }).toList();
+    List<Reward> filteredRewards = rewards
+        .where((reward) => reward.conditions
+            .any((condition) => condition.rank == selectedRank))
+        .toList();
 
     return filteredRewards.isNotEmpty
-        ? MonsterTable(
-            rank: selectedRank,
-            columnsTitles: const ['Name', 'Kind', 'Part', 'Chance'],
-            materials: filteredRewards,
+        ? ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: filteredRewards.length,
+            itemBuilder: (context, index) {
+              final reward = filteredRewards[index];
+
+              var uniqueConditions = <String, RewardCondition>{};
+              for (var condition in reward.conditions) {
+                uniqueConditions[condition.kind] = condition;
+              }
+
+              var filteredConditions = uniqueConditions.values.toList();
+
+              return CustomCard(
+                title: Row(
+                  children: [
+                    SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: MaterialImage(
+                        materialName: reward.item.name,
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          reward.item.name,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                body: Column(
+                  children: [
+                    ...filteredConditions
+                        .map<Widget>((RewardCondition condition) {
+                      String formattedKind = condition.kind
+                          .replaceAll('-', ' ')
+                          .split(' ')
+                          .map((word) =>
+                              word[0].toUpperCase() + word.substring(1))
+                          .join(' ');
+
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Column(
+                          children: [
+                            const Divider(
+                              color: Colors.black,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${condition.chance.toString()}%",
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                const SizedBox(width: 40),
+                                Text(
+                                  formattedKind,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+                  ],
+                ),
+              );
+            },
           )
         : const SizedBox();
   }

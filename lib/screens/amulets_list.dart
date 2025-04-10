@@ -10,6 +10,7 @@ class AmuletList extends StatefulWidget {
   const AmuletList({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AmuletListState createState() => _AmuletListState();
 }
 
@@ -96,7 +97,7 @@ class _AmuletListState extends State<AmuletList> {
 
                       String amuletName = '';
                       if (firstRank != null) {
-                        amuletName = firstRank.name ?? "Unknown";
+                        amuletName = firstRank.name;
 
                         int lastSpaceIndex = amuletName.lastIndexOf(' ');
                         if (lastSpaceIndex != -1) {
@@ -132,7 +133,7 @@ class _AmuletListState extends State<AmuletList> {
                                   delay: Duration(milliseconds: rankIndex * 50),
                                   child: Ccard(
                                     cardData: rank,
-                                    cardTitle: rank.name ?? "Unknown",
+                                    cardTitle: rank.name,
                                     cardSubtitle1Label: "Rarity: ",
                                     cardSubtitle2Label: "Level: ",
                                     cardSubtitle1: rank.rarity.toString(),

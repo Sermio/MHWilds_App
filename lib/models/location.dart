@@ -13,12 +13,12 @@ class Zone {
 
   factory Zone.fromJson(Map<String, dynamic> json) {
     return Zone(
-      id: json['id'] ?? 0, // Valor predeterminado 0 si es null
-      zoneCount: json['zoneCount'] ?? 0, // Valor predeterminado 0 si es null
-      name: json['name'] ?? '', // Valor predeterminado vacío si es null
+      id: json['id'] ?? 0,
+      zoneCount: json['zoneCount'] ?? 0,
+      name: json['name'] ?? '',
       camps: json['camps'] != null
           ? (json['camps'] as List).map((camp) => Camp.fromJson(camp)).toList()
-          : [], // Lista vacía si camps es null
+          : [],
     );
   }
 
@@ -45,9 +45,9 @@ class Camp {
 
   factory Camp.fromJson(Map<String, dynamic> json) {
     return Camp(
-      id: json['id'] ?? 0, // Valor predeterminado 0 si es null
-      zone: json['zone'] ?? 0, // Valor predeterminado 0 si es null
-      name: json['name'] ?? '', // Valor predeterminado vacío si es null
+      id: json['id'] ?? 0,
+      zone: json['zone'] ?? 0,
+      name: json['name'] ?? '',
     );
   }
 

@@ -8,8 +8,7 @@ class ItemsProvider with ChangeNotifier {
   bool _isLoading = false;
 
   String _nameFilter = '';
-  int _rarityFilter =
-      -1; // Puedes usar -1 como valor por defecto para no aplicar filtro
+  int _rarityFilter = -1;
 
   List<Item> get items => _filteredItems;
   bool get isLoading => _isLoading;
@@ -22,10 +21,10 @@ class ItemsProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      _allItems = await ItemsApi
-          .fetchItems(); // Asegúrate de tener esta API implementada
+      _allItems = await ItemsApi.fetchItems();
       _filteredItems = List.from(_allItems);
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
 

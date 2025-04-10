@@ -18,9 +18,9 @@ class LocationsProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      _zones = await LocationsApi
-          .fetchLocations(); // Llamada a la API para obtener las zonas
+      _zones = await LocationsApi.fetchLocations();
     } catch (e) {
+      // ignore: avoid_print
       print("Error fetching zones: $e");
     }
 

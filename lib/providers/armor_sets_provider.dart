@@ -26,6 +26,7 @@ class ArmorSetProvider with ChangeNotifier {
       _originalArmorSets = List.from(_allArmorSets);
       _filteredArmorSets = List.from(_allArmorSets);
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
 

@@ -199,12 +199,12 @@ class Resistance {
 }
 
 class Weakness {
-  final String kind; // 'element', 'status', 'effect', etc.
-  final String? element; // Solo se usa si kind == 'element'
-  final String? status; // Solo se usa si kind == 'status'
-  final String? effect; // Solo se usa si kind == 'effect'
-  final int level; // Nivel de la debilidad (1, 2, etc.)
-  final String? condition; // Condición adicional para algunas debilidades
+  final String kind;
+  final String? element;
+  final String? status;
+  final String? effect;
+  final int level;
+  final String? condition;
 
   Weakness({
     required this.kind,
@@ -218,11 +218,11 @@ class Weakness {
   factory Weakness.fromJson(Map<String, dynamic> json) {
     return Weakness(
       kind: json['kind'] ?? '',
-      element: json['element'], // Puede ser null, solo si kind == 'element'
-      status: json['status'], // Puede ser null, solo si kind == 'status'
-      effect: json['effect'], // Puede ser null, solo si kind == 'effect'
+      element: json['element'],
+      status: json['status'],
+      effect: json['effect'],
       level: json['level'] ?? 0,
-      condition: json['condition'], // Puede ser null si no hay condición
+      condition: json['condition'],
     );
   }
 }
@@ -255,8 +255,8 @@ class RewardCondition {
   final int quantity;
   final int chance;
   final String? subtype;
-  final String? part; // Nuevo campo para 'part'
-  final int id; // Nuevo campo para 'id'
+  final String? part;
+  final int id;
 
   RewardCondition({
     required this.kind,
@@ -264,8 +264,8 @@ class RewardCondition {
     required this.quantity,
     required this.chance,
     this.subtype,
-    this.part, // Campo opcional 'part'
-    required this.id, // Campo obligatorio 'id'
+    this.part,
+    required this.id,
   });
 
   factory RewardCondition.fromJson(Map<String, dynamic> json) {
@@ -275,9 +275,8 @@ class RewardCondition {
       quantity: json['quantity'] ?? 0,
       chance: json['chance'] ?? 0,
       subtype: json['subtype'],
-      part: json['part'], // 'part' podría ser null
-      id: json['id'] ??
-          0, // Se asegura de que 'id' tenga un valor por defecto si no está presente
+      part: json['part'],
+      id: json['id'] ?? 0,
     );
   }
 }

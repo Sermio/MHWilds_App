@@ -24,6 +24,7 @@ class SkillsProvider with ChangeNotifier {
       _allSkills = await SkillsApi.fetchSkills();
       _filteredSkills = List.from(_allSkills);
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
 

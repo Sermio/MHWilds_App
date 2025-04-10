@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/material.dart';
-import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
 import 'package:mhwilds_app/data/materials.dart';
 
@@ -10,6 +9,7 @@ class MaterialsList extends StatefulWidget {
   const MaterialsList({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MaterialsListState createState() => _MaterialsListState();
 }
 
@@ -40,7 +40,6 @@ class _MaterialsListState extends State<MaterialsList> {
     List<String> filteredMaterialKeys = materials.keys.where((materialKey) {
       MaterialItem material = MaterialItem.fromMap(materials[materialKey]!);
 
-      // Filtrar por nombre y por source (si el source está seleccionado)
       bool matchesName =
           material.name.toLowerCase().contains(_searchNameQuery.toLowerCase());
 
@@ -125,9 +124,9 @@ class _MaterialsListState extends State<MaterialsList> {
                       bodyOnTop: false,
                       leading: MaterialImage(materialName: material.name),
                       cardData: material,
-                      cardTitle: material.name ?? "Unknown",
+                      cardTitle: material.name,
                       cardSubtitle1Label: "Rarity: ",
-                      cardSubtitle1: material.rarity ?? "Unknown",
+                      cardSubtitle1: material.rarity,
                       cardBody: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -135,7 +134,7 @@ class _MaterialsListState extends State<MaterialsList> {
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           Flexible(
                             child: Text(
-                              cleanedSource ?? "Unknown",
+                              cleanedSource,
                               softWrap: true,
                               overflow: TextOverflow.visible,
                             ),

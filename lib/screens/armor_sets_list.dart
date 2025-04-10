@@ -1,6 +1,5 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/armor_set.dart';
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/utils/colors.dart';
@@ -11,13 +10,14 @@ class ArmorSetList extends StatefulWidget {
   const ArmorSetList({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ArmorSetListState createState() => _ArmorSetListState();
 }
 
 class _ArmorSetListState extends State<ArmorSetList> {
   final TextEditingController _searchNameController = TextEditingController();
   String _searchNameQuery = '';
-  String? _selectedKind; // Cambiamos de _selectedRank a _selectedKind
+  String? _selectedKind;
   bool _filtersVisible = false;
 
   @override
@@ -155,7 +155,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                           const SizedBox(height: 10),
                           ...armorSet.pieces.asMap().map((index, piece) {
                             return MapEntry(
-                              index, // índice
+                              index,
                               BounceInLeft(
                                 duration: const Duration(milliseconds: 900),
                                 delay: Duration(milliseconds: index * 80),
@@ -212,7 +212,6 @@ String _getKindImage(String skillKind) {
 
 class _ArmorSetBody extends StatelessWidget {
   const _ArmorSetBody({
-    super.key,
     required this.armorSet,
     required this.piece,
   });
@@ -225,17 +224,11 @@ class _ArmorSetBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   'Rank: ${piece.rank}',
-        //   style: const TextStyle(fontSize: 15),
-        // ),
-        // const SizedBox(height: 6),
         Text(
           'Armor: ${piece.defense['base']}',
           style: const TextStyle(fontSize: 14),
         ),
         const SizedBox(height: 6),
-        // Aquí puedes agregar más detalles si lo deseas
       ],
     );
   }

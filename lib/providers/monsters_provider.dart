@@ -23,6 +23,7 @@ class MonstersProvider with ChangeNotifier {
       _monsters = await MonstersApi.fetchMonsters();
       _filteredMonsters = List.from(_monsters);
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
 
@@ -40,10 +41,8 @@ class MonstersProvider with ChangeNotifier {
       bool matchesSpecies = species == null ||
           monster.species.toLowerCase().contains(species.toLowerCase());
 
-      // Aplicar el filtro de ubicación
       bool matchesLocation = _hasLocationFilter
           ? monster.locations.any((location) {
-              // Aquí se compara correctamente el nombre de la ubicación con los nombres de la lista
               return _selectedLocations.any((loc) =>
                   location.name.toLowerCase().contains(loc.toLowerCase()));
             })

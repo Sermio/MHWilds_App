@@ -2,7 +2,7 @@ class ArmorPiece {
   final int gameId;
   final Map<String, String> names;
   final int rarity;
-  final dynamic setBonus; // Puede ser null
+  final dynamic setBonus;
   final GroupBonus groupBonus;
   final List<Piece> pieces;
 

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/utils/utils.dart';
-import 'package:mhwilds_app/widgets/c_card.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
@@ -12,6 +11,7 @@ class SkillList extends StatefulWidget {
   const SkillList({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SkillListState2 createState() => _SkillListState2();
 }
 
@@ -133,7 +133,6 @@ class _SkillListState2 extends State<SkillList> {
                         delay: Duration(milliseconds: index * 5),
                         from: 200,
                         child: CustomCard(
-                          cardData: skill,
                           body: _SkillBody(
                             skill: skill,
                             skillDescription: skill.description,
@@ -200,7 +199,6 @@ String _getSkillImage(String skillKind) {
 
 class _SkillBody extends StatelessWidget {
   const _SkillBody({
-    super.key,
     required this.skill,
     this.skillDescription = '-',
   });

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/models/decoration.dart';
-import 'package:mhwilds_app/models/monster.dart';
-import 'package:mhwilds_app/screens/decoration_details.dart';
-import 'package:mhwilds_app/screens/monster_details.dart';
 
 class CustomCard extends StatelessWidget {
-  final dynamic cardData;
-  final Widget title;
+  final Widget? title;
   final Widget? body;
   final Widget? subtitle1;
   final Widget? subtitle2;
@@ -21,8 +16,7 @@ class CustomCard extends StatelessWidget {
 
   const CustomCard({
     super.key,
-    required this.cardData,
-    required this.title,
+    this.title,
     this.body,
     this.subtitle1,
     this.subtitle2,
@@ -63,7 +57,7 @@ class CustomCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      title,
+                      title ?? const Text(""),
                       bodyOnTop && body != null ? body! : const SizedBox(),
                       if (bodyOnTop && body != null) const SizedBox(height: 8),
                       const SizedBox(height: 6),

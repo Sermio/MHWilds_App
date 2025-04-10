@@ -1,8 +1,5 @@
-// MonsterDetailsCard.dart
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/data/ailments.dart';
 import 'package:mhwilds_app/models/monster.dart';
@@ -95,6 +92,7 @@ class MonsterDetailsCard extends StatelessWidget {
                             title: Center(
                               child: Text(
                                 'Elements/Ailments',
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ),
                             content: SizedBox(
@@ -167,23 +165,22 @@ class MonsterDetailsCard extends StatelessWidget {
                 spacing: 8.0,
                 runSpacing: 2.0,
                 children: monster.locations.asMap().entries.map((location) {
-                      int index = location.key;
-                      String loc = location.value.name;
-                      return Bounce(
-                        from: 10,
-                        delay: Duration(milliseconds: index * 100),
-                        child: Cchip(
-                          itemName: loc ?? "",
-                          getItemColor: zoneBackgroundColor,
-                          optionalWidget: Image.asset(
-                            'assets/imgs/maps/map.png',
-                            width: 16,
-                            height: 16,
-                          ),
-                        ),
-                      );
-                    }).toList() ??
-                    [],
+                  int index = location.key;
+                  String loc = location.value.name;
+                  return Bounce(
+                    from: 10,
+                    delay: Duration(milliseconds: index * 100),
+                    child: Cchip(
+                      itemName: loc,
+                      getItemColor: zoneBackgroundColor,
+                      optionalWidget: Image.asset(
+                        'assets/imgs/maps/map.png',
+                        width: 16,
+                        height: 16,
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
             if (monster.tips != "")
               const SizedBox(
@@ -219,9 +216,7 @@ class MonsterDetailsCard extends StatelessWidget {
 }
 
 class _ElementsAndAilments extends StatelessWidget {
-  const _ElementsAndAilments({
-    super.key,
-  });
+  const _ElementsAndAilments();
 
   @override
   Widget build(BuildContext context) {
@@ -256,17 +251,12 @@ class _ElementsAndAilments extends StatelessWidget {
                 ),
               ],
             ),
-            subtitle: Text(description),
-
-            // Text(
-            //     ailmentName,
-            //     style: const TextStyle(
-            //       fontWeight: FontWeight.bold,
-            //       fontSize: 18,
-            //     ),
-            //   ),
-            //   const SizedBox(height: 5),
-            //   Text(description),
+            subtitle: Column(
+              children: [
+                const Divider(),
+                Text(description),
+              ],
+            ),
           ),
         );
       },

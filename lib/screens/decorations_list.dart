@@ -8,6 +8,7 @@ class DecorationsList extends StatefulWidget {
   const DecorationsList({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _DecorationsListState createState() => _DecorationsListState();
 }
 

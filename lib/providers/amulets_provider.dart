@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/amulet.dart';
-import 'package:mhwilds_app/api/amulets_api.dart'; // Asegúrate de importar la API correcta
+import 'package:mhwilds_app/api/amulets_api.dart';
 
 class AmuletProvider with ChangeNotifier {
   List<Amulet> _allAmulets = [];
-  late List<Amulet> _originalAmulets;
   List<Amulet> _filteredAmulets = [];
   bool _isLoading = false;
 
@@ -22,9 +21,9 @@ class AmuletProvider with ChangeNotifier {
 
     try {
       _allAmulets = await AmuletsApi.fetchAmulets();
-      _originalAmulets = List.from(_allAmulets);
       _filteredAmulets = List.from(_allAmulets);
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
 

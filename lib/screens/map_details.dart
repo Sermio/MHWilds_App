@@ -13,7 +13,7 @@ class MonsterMapDetails extends StatefulWidget {
 
 class _MonsterMapDetailsState extends State<MonsterMapDetails> {
   List<String> imageFiles = [];
-  bool isLoading = true; // Nuevo estado para controlar el loader
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -30,12 +30,14 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
     while (true) {
       String assetPath = 'assets/imgs/maps/$folder/$baseName$index.png';
 
+      // ignore: avoid_print
       print("Intentando cargar: $assetPath");
       try {
         await rootBundle.load(assetPath);
         loadedImages.add(assetPath);
         index++;
       } catch (e) {
+        // ignore: avoid_print
         print("No se encontró: $assetPath, terminando carga.");
         break;
       }
@@ -43,9 +45,10 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
 
     setState(() {
       imageFiles = loadedImages;
-      isLoading = false; // Desactiva el loader
+      isLoading = false;
     });
 
+    // ignore: avoid_print
     print("Imágenes cargadas: $imageFiles");
   }
 
@@ -73,8 +76,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: Text(widget.map)),
       body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator()) // Muestra el loader
+          ? const Center(child: CircularProgressIndicator())
           : imageFiles.isEmpty
               ? const Center(child: Text('No images found'))
               : SingleChildScrollView(

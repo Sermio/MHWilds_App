@@ -4,7 +4,6 @@ import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
-import 'package:mhwilds_app/screens/armor_pieces_list.dart';
 import 'package:mhwilds_app/screens/monster_details.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
@@ -181,7 +180,6 @@ class _MonstersListState extends State<MonstersList> {
                               ),
                             );
                           },
-                          cardData: monster,
                           title: Row(
                             children: [
                               Hero(
@@ -224,7 +222,6 @@ class _MonstersListState extends State<MonstersList> {
 
 class _MonsterBody extends StatelessWidget {
   const _MonsterBody({
-    super.key,
     required this.monster,
   });
 
@@ -251,17 +248,6 @@ class _MonsterBody extends StatelessWidget {
             Text(monster.species),
           ],
         ),
-        const SizedBox(height: 5),
-        Wrap(
-          runSpacing: 5,
-          children: [
-            const Text(
-              "Kind: ",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(monster.kind),
-          ],
-        ),
         Wrap(
           runSpacing: 5,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -285,7 +271,7 @@ class _MonsterBody extends StatelessWidget {
                     'assets/imgs/elements/${w.status!.toLowerCase()}.webp',
                   );
                 } else {
-                  return const SizedBox.shrink(); // Ignora las de tipo 'effect'
+                  return const SizedBox.shrink();
                 }
               }),
             ],
@@ -301,6 +287,7 @@ class _MonsterBody extends StatelessWidget {
             runSpacing: -5,
             children: [
               ...locations.map((loc) {
+                // ignore: unnecessary_type_check
                 final name = (loc is Location) ? loc.name : '-';
                 return Cchip(itemName: name, getItemColor: zoneBackgroundColor);
               }),

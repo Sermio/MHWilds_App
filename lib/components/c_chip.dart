@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/screens/map_details.dart';
-// import 'package:mh_app/data/monster.dart';
-// import 'package:mh_app/screens/monster_map_details_screen.dart';
 
 class Cchip<T> extends StatelessWidget {
   // final T item;

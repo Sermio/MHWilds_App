@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_appbar.dart';
 import 'package:mhwilds_app/components/c_drawer.dart';
 import 'package:mhwilds_app/screens/amulets_list.dart';
-import 'package:mhwilds_app/screens/armor_pieces_list.dart';
+import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
 import 'package:mhwilds_app/screens/materials_list.dart';
@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 

@@ -10,6 +10,7 @@ class ItemList extends StatefulWidget {
   const ItemList({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ItemListState createState() => _ItemListState();
 }
 
@@ -119,7 +120,7 @@ class _ItemListState extends State<ItemList> {
                         delay: Duration(milliseconds: index * 5),
                         from: 200,
                         child: CustomCard(
-                          cardData: item,
+                          // cardData: item,
                           // leading: MaterialImage(
                           //   materialName: item.name,
                           // ),
@@ -167,7 +168,6 @@ class _ItemListState extends State<ItemList> {
 
 class _ItemBody extends StatelessWidget {
   const _ItemBody({
-    super.key,
     required this.item,
     this.itemDescription = '-',
   });

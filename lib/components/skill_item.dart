@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/skill_container_preview.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/armor_set.dart';
 import 'package:mhwilds_app/utils/utils.dart';

@@ -13,21 +13,18 @@ class DecorationsProvider with ChangeNotifier {
   bool get hasData => _decorations.isNotEmpty;
   bool get isLoading => _isLoading;
 
-  // Método para cargar las decoraciones (puede ser desde un API o base de datos)
   Future<void> fetchDecorations() async {
-    // Si ya hay decoraciones cargadas, no las volvemos a cargar.
     if (_decorations.isNotEmpty) return;
 
     _isLoading = true;
     notifyListeners();
 
     try {
-      // Aquí es donde deberías llamar al API para obtener las decoraciones.
-      _decorations = await DecorationsApi
-          .fetchDecorations(); // Asegúrate de tener esta llamada API configurada
-      // _originalDecorations = List.from(_decorations);
+      _decorations = await DecorationsApi.fetchDecorations();
+
       _filteredDecorations = List.from(_decorations);
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
 
@@ -35,7 +32,6 @@ class DecorationsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Método para aplicar filtros basados en nombre o tipo
   void applyFilters({String? name, String? type}) {
     _filteredDecorations = _decorations.where((decoration) {
       bool matchesName = name == null ||
@@ -47,7 +43,6 @@ class DecorationsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Método para limpiar filtros
   void clearFilters() {
     _filteredDecorations = _decorations;
     notifyListeners();

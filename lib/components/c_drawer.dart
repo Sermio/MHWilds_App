@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/screens/amulets_list.dart';
-import 'package:mhwilds_app/screens/armor_pieces_list.dart';
+import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';

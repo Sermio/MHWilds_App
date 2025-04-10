@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/decoration.dart';
 import 'package:mhwilds_app/models/monster.dart';
-import 'package:mhwilds_app/screens/decoration_details.dart';
 import 'package:mhwilds_app/screens/monster_details.dart';
 // import 'package:mh_app/data/decoration.dart';
 // import 'package:mh_app/data/monster.dart';

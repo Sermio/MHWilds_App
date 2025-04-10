@@ -23,20 +23,19 @@ class DecorationItem {
 
   factory DecorationItem.fromJson(Map<String, dynamic> json) {
     return DecorationItem(
-      name: json['name'] ?? "Unknown", // Valor por defecto si 'name' es nulo
-      description: json['description'] ??
-          "No description", // Valor por defecto si 'description' es nulo
-      value: json['value'] ?? 0, // Valor por defecto si 'value' es nulo
-      slot: json['slot'] ?? 0, // Valor por defecto si 'slot' es nulo
-      rarity: json['rarity'] ?? 0, // Valor por defecto si 'rarity' es nulo
-      kind: json['kind'] ?? "Unknown", // Valor por defecto si 'kind' es nulo
+      name: json['name'] ?? "Unknown",
+      description: json['description'] ?? "No description",
+      value: json['value'] ?? 0,
+      slot: json['slot'] ?? 0,
+      rarity: json['rarity'] ?? 0,
+      kind: json['kind'] ?? "Unknown",
       skills: json['skills'] != null
           ? (json['skills'] as List)
               .map((e) => DecorationSkill.fromJson(e))
               .toList()
-          : [], // Lista vacía si 'skills' es nulo
-      id: json['id'] ?? 0, // Valor por defecto si 'id' es nulo
-      gameId: json['gameId'] ?? 0, // Valor por defecto si 'gameId' es nulo
+          : [],
+      id: json['id'] ?? 0,
+      gameId: json['gameId'] ?? 0,
     );
   }
 }
@@ -58,12 +57,10 @@ class DecorationSkill {
     return DecorationSkill(
       skill: json['skill'] != null
           ? Skill.fromJson(json['skill'])
-          : Skill(
-              id: 0, name: "Unknown"), // Valor por defecto si 'skill' es nulo
-      level: json['level'] ?? 0, // Valor por defecto si 'level' es nulo
-      description: json['description'] ??
-          "No description", // Valor por defecto si 'description' es nulo
-      id: json['id'] ?? 0, // Valor por defecto si 'id' es nulo
+          : Skill(id: 0, name: "Unknown"),
+      level: json['level'] ?? 0,
+      description: json['description'] ?? "No description",
+      id: json['id'] ?? 0,
     );
   }
 }
@@ -76,8 +73,8 @@ class Skill {
 
   factory Skill.fromJson(Map<String, dynamic> json) {
     return Skill(
-      id: json['id'] ?? 0, // Valor por defecto si 'id' es nulo
-      name: json['name'] ?? "Unknown", // Valor por defecto si 'name' es nulo
+      id: json['id'] ?? 0,
+      name: json['name'] ?? "Unknown",
     );
   }
 }

@@ -1,12 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart' as services;
 import 'dart:typed_data';
-import 'dart:ui' as ui;
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 
 final Map<String, String?> _skillImageUrlCache = {};
@@ -43,6 +37,7 @@ Future<bool> isGrayScaleFromUrl(String imageUrl) async {
 
     return (grayscalePixels / totalPixels) > 0.9;
   } catch (e) {
+    // ignore: avoid_print
     print('Error al procesar la imagen: $e');
     return false;
   }
@@ -57,6 +52,7 @@ Future<String?> getSkillUrl(String skillName, int slot, int skillLevel) async {
     fillIs = "iii";
   }
   if (skillName.toLowerCase().contains("artillery")) {
+    // ignore: avoid_print
     print("");
   }
 
@@ -139,15 +135,15 @@ int countRomanNumerals(String skillName) {
 Color zoneBackgroundColor(String zone) {
   switch (zone) {
     case 'Scarlet Forest':
-      return Colors.green.shade500;
+      return Colors.green.shade700;
     case 'Oilwell Basin':
       return const Color.fromARGB(255, 142, 141, 141);
     case 'Ruins of Wyveria':
       return const Color(0xFF8D6E63);
     case "Windward Plains":
-      return const Color(0xFFF8D200);
+      return Colors.yellow.shade800;
     case "Iceshard Cliffs":
-      return Colors.cyan.shade100;
+      return Colors.cyan.shade600;
     default:
       return Colors.white;
   }
@@ -172,7 +168,6 @@ Future<String?> getValidMonsterImageUrl(String monsterName) async {
 Future<String?> getValidItemImageUrl(String materialName) async {
   // String formattedMaterialName = materialName.replaceAll(RegExp(r'\s\+'), '+');
 
-  // Construir la URL con el nombre de material formateado
   List<String> urlVariations = [
     "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${materialName}_item_equipment_material_mhwilds_wiki_guide_85px.png",
     "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${materialName}_item_healing_support_mhwilds_wiki_guide_85px.png",
@@ -200,14 +195,12 @@ Future<String?> getValidSkillImageUrl(String skillName) async {
       .replaceAll("'", '')
       .replaceAll('-', '_');
 
-  // Check cache first
   if (_skillImageUrlCache.containsKey(formattedSkillName)) {
     return _skillImageUrlCache[formattedSkillName];
   }
 
   List<String> urlVariations = [
     "https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedSkillName}_skill_mhwilds_wiki_guide_85px.png",
-    // Añade más variantes si alguna cambia en el futuro
   ];
 
   const int maxRetries = 4;
@@ -224,6 +217,7 @@ Future<String?> getValidSkillImageUrl(String skillName) async {
         }
       } catch (_) {
         if (attempt == maxRetries - 1) {
+          // ignore: avoid_print
           print(
               "Error al cargar imagen en $url después de $maxRetries intentos.");
         }
@@ -231,18 +225,9 @@ Future<String?> getValidSkillImageUrl(String skillName) async {
     }
   }
 
-  // Fallback
   const fallbackUrl =
       'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/attack_boost_skill_mhwilds_wiki_guide_85px.png';
 
   _skillImageUrlCache[formattedSkillName] = fallbackUrl;
   return fallbackUrl;
 }
-
-
-// Color(0xFFC3A35D) // Color dorado suave
-
-// Color(0xFF605632) // Color marrón oliva
-
-// Color(0xFF040404) // Color negro profundo
-// Color(0xFF758A61) // Color verde oliva apagado
