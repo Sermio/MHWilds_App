@@ -1,31 +1,48 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:mhwilds_app/data/monsters.dart';
+import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/models/monster.dart';
-import 'package:mhwilds_app/utils/colors.dart';
+import 'package:mhwilds_app/providers/locations_provider.dart';
+import 'package:mhwilds_app/providers/monsters_provider.dart';
+import 'package:mhwilds_app/screens/armor_pieces_list.dart';
+import 'package:mhwilds_app/screens/monster_details.dart';
 import 'package:mhwilds_app/utils/utils.dart';
-import 'package:mhwilds_app/widgets/c_card.dart';
+import 'package:mhwilds_app/widgets/custom_card.dart';
+import 'package:provider/provider.dart';
 
 class MonstersList extends StatefulWidget {
   const MonstersList({super.key});
 
   @override
-  _MonsterScreenState createState() => _MonsterScreenState();
+  State<MonstersList> createState() => _MonstersListState();
 }
 
-class _MonsterScreenState extends State<MonstersList> {
+class _MonstersListState extends State<MonstersList> {
   final TextEditingController _searchNameController = TextEditingController();
   final TextEditingController _searchSpeciesController =
       TextEditingController();
-  final TextEditingController _searchLocationController =
-      TextEditingController();
-
   String _searchNameQuery = '';
   String _searchSpeciesQuery = '';
-  List<String> _selectedLocations = [];
-
+  final List<String> _selectedLocations = [];
   bool _filtersVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<MonstersProvider>(context, listen: false);
+      if (!provider.hasData) {
+        provider.fetchMonsters();
+      }
+
+      final zonesProvider =
+          Provider.of<LocationsProvider>(context, listen: false);
+      if (!zonesProvider.hasData) {
+        zonesProvider.fetchZones();
+      }
+    });
+  }
 
   void _toggleFiltersVisibility() {
     setState(() {
@@ -37,37 +54,20 @@ class _MonsterScreenState extends State<MonstersList> {
     setState(() {
       _searchNameQuery = '';
       _searchSpeciesQuery = '';
-      _selectedLocations = [];
-
+      _selectedLocations.clear();
       _searchNameController.clear();
       _searchSpeciesController.clear();
     });
+    Provider.of<MonstersProvider>(context, listen: false).clearFilters();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String> filteredMonsterKeys = monsters.keys.where((monsterKey) {
-      Map<String, dynamic> monsterMap = monsters[monsterKey]!;
-      Monster monster = Monster.fromMap(monsterMap);
-
-      bool matchesName = monster.monsterName
-          .toLowerCase()
-          .contains(_searchNameQuery.toLowerCase());
-
-      bool matchesSpecies = monster.monsterSpecies
-          .toLowerCase()
-          .contains(_searchSpeciesQuery.toLowerCase());
-
-      bool matchesLocation = _selectedLocations.isEmpty ||
-          (monster.locations != null &&
-              monster.locations!
-                  .any((location) => _selectedLocations.contains(location)));
-
-      return matchesName && matchesSpecies && matchesLocation;
-    }).toList();
+    final monstersProvider = Provider.of<MonstersProvider>(context);
+    final zonesProvider = Provider.of<LocationsProvider>(context);
+    final monsters = monstersProvider.filteredMonsters;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Column(
         children: [
           if (_filtersVisible) ...[
@@ -79,12 +79,15 @@ class _MonsterScreenState extends State<MonstersList> {
                   setState(() {
                     _searchNameQuery = query;
                   });
+                  monstersProvider.applyFilters(
+                    name: _searchNameQuery,
+                    species: _searchSpeciesQuery,
+                    locations: _selectedLocations,
+                  );
                 },
                 decoration: const InputDecoration(
                   labelText: 'Search by Name',
-                  prefixIcon: Icon(
-                    Icons.search,
-                  ),
+                  prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -97,48 +100,54 @@ class _MonsterScreenState extends State<MonstersList> {
                   setState(() {
                     _searchSpeciesQuery = query;
                   });
+                  monstersProvider.applyFilters(
+                    name: _searchNameQuery,
+                    species: _searchSpeciesQuery,
+                    locations: _selectedLocations,
+                  );
                 },
                 decoration: const InputDecoration(
-                  labelText: 'Search by Specie',
-                  prefixIcon: Icon(
-                    Icons.search,
-                  ),
+                  labelText: 'Search by Species',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(),
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Wrap(
-                    spacing: 10.0,
-                    children: [
-                      "Windward Plains",
-                      "Scarlet Forest",
-                      "Oilwell Basin",
-                      "Iceshard Cliffs",
-                      "Ruins of Wyveria",
-                    ].map((location) {
-                      return FilterChip(
-                        label: Text(location),
-                        labelStyle: const TextStyle(color: Colors.black),
-                        backgroundColor: zoneBackgroundColor(location),
-                        selected: _selectedLocations.contains(location),
-                        onSelected: (isSelected) {
-                          setState(() {
-                            if (isSelected) {
-                              _selectedLocations.add(location);
-                            } else {
-                              _selectedLocations.remove(location);
-                            }
-                          });
-                        },
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
+              child: zonesProvider.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Wrap(
+                          spacing: 10.0,
+                          children: zonesProvider.zones.map((zone) {
+                            return FilterChip(
+                              label: Text(zone.name),
+                              labelStyle: const TextStyle(color: Colors.black),
+                              backgroundColor: zoneBackgroundColor(zone.name),
+                              selected: _selectedLocations.contains(zone.name),
+                              onSelected: (isSelected) {
+                                setState(() {
+                                  if (isSelected) {
+                                    _selectedLocations.add(zone.name);
+                                  } else {
+                                    _selectedLocations.remove(zone.name);
+                                  }
+                                });
+                                // Apply filter
+                                monstersProvider.applyFilters(
+                                  name: _searchNameQuery,
+                                  species: _searchSpeciesQuery,
+                                  locations: _selectedLocations,
+                                );
+                              },
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -147,69 +156,159 @@ class _MonsterScreenState extends State<MonstersList> {
                 child: const Text('Reset Filters'),
               ),
             ),
-            const Divider(
-              color: Colors.black,
-            )
+            const Divider(color: Colors.black),
           ],
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
-              itemCount: filteredMonsterKeys.length,
-              itemBuilder: (context, index) {
-                String monsterKey = filteredMonsterKeys[index];
+            child: monstersProvider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    itemCount: monsters.length,
+                    itemBuilder: (context, index) {
+                      var monster = monsters[index];
 
-                Map<String, dynamic> monsterMap = monsters[monsterKey]!;
-                Monster monster = Monster.fromMap(monsterMap);
-
-                return BounceInLeft(
-                  duration: const Duration(milliseconds: 900),
-                  delay: Duration(milliseconds: index * 5),
-                  child: Ccard(
-                    bodyOnTop: false,
-                    leading: Hero(
-                      tag: monster.monsterName,
-                      child: Image.asset(
-                          'assets/imgs/monster_icons/${monster.monsterName.toLowerCase().replaceAll(' ', '_')}.png'),
-                    ),
-                    cardData: monster,
-                    cardTitle: monster.monsterName ?? "Unknown",
-                    cardSubtitle1Label: "Species: ",
-                    // cardSubtitle2Label: "Locations: ",
-                    cardSubtitle1: monster.monsterSpecies ?? "Unknown",
-                    // cardSubtitle2: monster.locations?.join(", ") ?? "Unknown",
-                    cardBody: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Locations: ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Flexible(
-                          child: Text(
-                            monster.locations
-                                    ?.join(", ")
-                                    .replaceAll(', ', '\n') ??
-                                "Unknown",
-                            softWrap: true,
-                            overflow: TextOverflow.visible,
+                      return BounceInLeft(
+                        duration: const Duration(milliseconds: 900),
+                        delay: Duration(milliseconds: index * 5),
+                        child: CustomCard(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MonsterDetails(
+                                  monster: monster,
+                                ),
+                              ),
+                            );
+                          },
+                          cardData: monster,
+                          title: Row(
+                            children: [
+                              Hero(
+                                tag: monster.name,
+                                child: Image.asset(
+                                    width: 50,
+                                    height: 50,
+                                    'assets/imgs/monster_icons/${monster.name.toLowerCase().replaceAll(' ', '_')}.png'),
+                              ),
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                    monster.name,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
+                          body: _MonsterBody(monster: monster),
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
-      floatingActionButton: BounceInRight(
-        delay: const Duration(milliseconds: 500),
-        child: FloatingActionButton(
-          onPressed: _toggleFiltersVisibility,
-          child: Icon(
-            _filtersVisible ? Icons.close : Icons.search,
-          ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _toggleFiltersVisibility,
+        child: Icon(
+          _filtersVisible ? Icons.close : Icons.search,
         ),
       ),
+    );
+  }
+}
+
+class _MonsterBody extends StatelessWidget {
+  const _MonsterBody({
+    super.key,
+    required this.monster,
+  });
+
+  final Monster monster;
+
+  @override
+  Widget build(BuildContext context) {
+    final locations = monster.locations;
+    final weaknessesLevel1 = monster.weaknesses.where((w) {
+      return (w.kind == 'element' || w.kind == 'status') && w.level == 1;
+    }).toList();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Wrap(
+          runSpacing: 5,
+          children: [
+            Text(monster.description),
+            const Text(
+              "Species: ",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(monster.species),
+          ],
+        ),
+        const SizedBox(height: 5),
+        Wrap(
+          runSpacing: 5,
+          children: [
+            const Text(
+              "Kind: ",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(monster.kind),
+          ],
+        ),
+        Wrap(
+          runSpacing: 5,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            if (weaknessesLevel1.isNotEmpty) ...[
+              const Text(
+                "Weaknesses: ",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              ...weaknessesLevel1.map((w) {
+                if (w.kind == 'element') {
+                  return Image.asset(
+                    width: 30,
+                    height: 30,
+                    'assets/imgs/elements/${w.element!.toLowerCase()}.webp',
+                  );
+                } else if (w.kind == 'status') {
+                  return Image.asset(
+                    width: 27,
+                    height: 27,
+                    'assets/imgs/elements/${w.status!.toLowerCase()}.webp',
+                  );
+                } else {
+                  return const SizedBox.shrink(); // Ignora las de tipo 'effect'
+                }
+              }),
+            ],
+          ],
+        ),
+        if (locations.isNotEmpty) ...[
+          const Text(
+            "Locations:",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Wrap(
+            spacing: 5,
+            runSpacing: -5,
+            children: [
+              ...locations.map((loc) {
+                final name = (loc is Location) ? loc.name : '-';
+                return Cchip(itemName: name, getItemColor: zoneBackgroundColor);
+              }),
+            ],
+          ),
+          const SizedBox(height: 8),
+        ],
+      ],
     );
   }
 }

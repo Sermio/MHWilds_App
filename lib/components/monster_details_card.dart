@@ -31,7 +31,7 @@ class MonsterDetailsCard extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  monster.monsterType,
+                  monster.kind,
                 ),
               ],
             ),
@@ -43,7 +43,7 @@ class MonsterDetailsCard extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  monster.monsterSpecies,
+                  monster.species,
                 ),
               ],
             ),
@@ -57,12 +57,28 @@ class MonsterDetailsCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     MonsterAttributes(
-                      attributeType: 'Elements',
-                      attributeList: monster.elements,
+                      attributeType: "Elements",
+                      children: monster.elements
+                          .where((w) => w.isNotEmpty)
+                          .map(
+                            (w) => Image.asset(
+                              'assets/imgs/elements/${w.toLowerCase()}.webp',
+                              height: 25,
+                            ),
+                          )
+                          .toList(),
                     ),
                     MonsterAttributes(
-                      attributeType: 'Ailments',
-                      attributeList: monster.ailments,
+                      attributeType: "Ailments",
+                      children: monster.ailments
+                          .where((w) => w.name.isNotEmpty)
+                          .map(
+                            (w) => Image.asset(
+                              'assets/imgs/elements/${w.name.toLowerCase()}.webp',
+                              height: 25,
+                            ),
+                          )
+                          .toList(),
                     ),
                   ],
                 ),
@@ -96,36 +112,63 @@ class MonsterDetailsCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MonsterAttributes(
-                  attributeType: 'Weaknesses',
-                  attributeList: monster.weaknesses,
+                  attributeType: "Weaknesses",
+                  children: monster.weaknesses
+                      .where((w) =>
+                          (w.element != null && w.element!.isNotEmpty) ||
+                          (w.status != null &&
+                              w.status!.isNotEmpty &&
+                              w.level == 1))
+                      .map((w) {
+                    final value = w.element ?? w.status;
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/imgs/elements/${value!.toLowerCase()}.webp',
+                            height: 25,
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
                 ),
                 MonsterAttributes(
-                  attributeType: 'Resistances',
-                  attributeList: monster.resistances,
+                  attributeType: "Resistances",
+                  children: monster.resistances
+                      .where((w) => w.element.isNotEmpty)
+                      .map(
+                        (w) => Image.asset(
+                          'assets/imgs/elements/${w.element.toLowerCase()}.webp',
+                          height: 25,
+                        ),
+                      )
+                      .toList(),
                 ),
               ],
             ),
-            if (monster.locations!.isNotEmpty) const SizedBox(height: 15),
-            if (monster.locations!.isNotEmpty)
+            if (monster.locations.isNotEmpty) const SizedBox(height: 15),
+            if (monster.locations.isNotEmpty)
               const Divider(
                 color: Colors.black,
               ),
-            if (monster.locations!.isNotEmpty)
+            if (monster.locations.isNotEmpty)
               const Text(
                 'Locations',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-            if (monster.locations!.isNotEmpty)
+            if (monster.locations.isNotEmpty)
               const SizedBox(
                 height: 15,
               ),
-            if (monster.locations!.isNotEmpty)
+            if (monster.locations.isNotEmpty)
               Wrap(
                 spacing: 8.0,
                 runSpacing: 2.0,
-                children: monster.locations?.asMap().entries.map((entry) {
-                      int index = entry.key;
-                      String loc = entry.value;
+                children: monster.locations.asMap().entries.map((location) {
+                      int index = location.key;
+                      String loc = location.value.name;
                       return Bounce(
                         from: 10,
                         delay: Duration(milliseconds: index * 100),
@@ -232,33 +275,29 @@ class _ElementsAndAilments extends StatelessWidget {
 }
 
 class MonsterAttributes extends StatelessWidget {
-  const MonsterAttributes(
-      {super.key, required this.attributeType, this.attributeList});
+  const MonsterAttributes({
+    super.key,
+    required this.attributeType,
+    required this.children,
+  });
 
   final String attributeType;
-  final List<String>? attributeList;
+  final List<Widget>? children;
 
   @override
   Widget build(BuildContext context) {
+    final hasContent = children != null && children!.isNotEmpty;
+
     return Column(
       children: [
         Text(
           attributeType,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        attributeList != null && attributeList!.isNotEmpty
+        hasContent
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: attributeList!
-                    .map((attr) => SizedBox(
-                          height: 25,
-                          child: Image.asset(
-                            'assets/imgs/elements/${attr.toLowerCase()}.webp',
-                          ),
-                        ))
-                    .toList(),
+                children: children!,
               )
             : const SizedBox(
                 height: 25,
@@ -267,4 +306,22 @@ class MonsterAttributes extends StatelessWidget {
       ],
     );
   }
+}
+
+Widget attributeIconWithText(String imageName, String label) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 4),
+    child: Column(
+      children: [
+        Image.asset(
+          'assets/imgs/elements/${imageName.toLowerCase()}.webp',
+          height: 25,
+        ),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 10),
+        ),
+      ],
+    ),
+  );
 }

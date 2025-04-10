@@ -36,28 +36,10 @@ class CustomCard extends StatelessWidget {
     this.onTap,
   });
 
-  void _defaultNavigation(BuildContext context) {
-    if (cardData is Monster) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MonsterDetails(monster: cardData),
-        ),
-      );
-    } else if (cardData is DecorationItem) {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => DecorationDetails(decoration: cardData),
-      //   ),
-      // );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap ?? () => _defaultNavigation(context),
+      onTap: onTap,
       child: Padding(
         padding: padding,
         child: Material(

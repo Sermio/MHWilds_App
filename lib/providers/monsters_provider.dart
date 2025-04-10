@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/api/monsters_api.dart';
-import 'package:mhwilds_app/models/monster2.dart';
+import 'package:mhwilds_app/models/monster.dart';
 
 class MonstersProvider with ChangeNotifier {
-  List<Monster2> _monsters = [];
-  List<Monster2> _filteredMonsters = [];
+  List<Monster> _monsters = [];
+  List<Monster> _filteredMonsters = [];
   bool _isLoading = false;
   List<String> _selectedLocations = [];
   bool _hasLocationFilter = false;
 
   bool get isLoading => _isLoading;
-  List<Monster2> get filteredMonsters => _filteredMonsters;
+  List<Monster> get filteredMonsters => _filteredMonsters;
   bool get hasData => _monsters.isNotEmpty;
 
   Future<void> fetchMonsters() async {

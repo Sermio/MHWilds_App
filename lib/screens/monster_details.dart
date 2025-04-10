@@ -25,7 +25,7 @@ class MonsterDetails extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Text(monster.monsterName),
+        title: Text(monster.name),
         centerTitle: true,
       ),
       body: Stack(
@@ -35,9 +35,9 @@ class MonsterDetails extends StatelessWidget {
               child: Column(
                 children: [
                   Hero(
-                    tag: monster.monsterName,
+                    tag: monster.name,
                     child: Image.asset(
-                        'assets/imgs/monsters/${monster.monsterName.toLowerCase().replaceAll(' ', '_')}.png'),
+                        'assets/imgs/monsters/${monster.name.toLowerCase().replaceAll(' ', '_')}.png'),
                   ),
                   Padding(
                     padding: EdgeInsets.zero,
@@ -52,7 +52,7 @@ class MonsterDetails extends StatelessWidget {
                     child: MonsterTable(
                       rank: 'Low Rank Materials',
                       columnsTitles: materialColumns,
-                      materials: materialsLowRank[monster.monsterName] ?? [],
+                      materials: materialsLowRank[monster.name] ?? [],
                     ),
                   ),
                   const SizedBox(
@@ -64,7 +64,7 @@ class MonsterDetails extends StatelessWidget {
                     child: MonsterTable(
                       rank: 'High Rank Materials',
                       columnsTitles: materialColumns,
-                      materials: materialsHighRank[monster.monsterName] ?? [],
+                      materials: materialsHighRank[monster.name] ?? [],
                     ),
                   ),
                   const SizedBox(
