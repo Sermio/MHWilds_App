@@ -5,7 +5,6 @@ import 'package:mhwilds_app/screens/amulets_list.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
-import 'package:mhwilds_app/screens/materials_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
 
@@ -27,8 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
         _appBarTitle = "Monsters";
       } else if (newScreen is DecorationsList) {
         _appBarTitle = "Decorations";
-      } else if (newScreen is MaterialsList) {
-        _appBarTitle = "Materials";
       } else if (newScreen is ArmorSetList) {
         _appBarTitle = "Armor Sets";
       } else if (newScreen is SkillList) {

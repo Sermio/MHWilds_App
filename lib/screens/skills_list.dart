@@ -32,6 +32,7 @@ class _SkillListState2 extends State<SkillList> {
       if (skillsProvider.skills.isEmpty) {
         skillsProvider.fetchSkills();
       }
+      _resetFilters();
     });
   }
 

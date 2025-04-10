@@ -40,6 +40,7 @@ class _MonstersListState extends State<MonstersList> {
       if (!zonesProvider.hasData) {
         zonesProvider.fetchZones();
       }
+      _resetFilters();
     });
   }
 
@@ -237,6 +238,9 @@ class _MonsterBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(
+          height: 5,
+        ),
         Wrap(
           runSpacing: 5,
           children: [
@@ -278,10 +282,10 @@ class _MonsterBody extends StatelessWidget {
           ],
         ),
         if (locations.isNotEmpty) ...[
-          const Text(
-            "Locations:",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+          // const Text(
+          //   "Locations:",
+          //   style: TextStyle(fontWeight: FontWeight.bold),
+          // ),
           Wrap(
             spacing: 5,
             runSpacing: -5,

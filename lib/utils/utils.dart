@@ -137,13 +137,13 @@ Color zoneBackgroundColor(String zone) {
     case 'Scarlet Forest':
       return Colors.green.shade700;
     case 'Oilwell Basin':
-      return const Color.fromARGB(255, 142, 141, 141);
+      return const Color.fromARGB(242, 142, 141, 141);
     case 'Ruins of Wyveria':
-      return const Color(0xFF8D6E63);
+      return const Color.fromARGB(221, 141, 110, 99);
     case "Windward Plains":
-      return Colors.yellow.shade800;
+      return const Color.fromARGB(255, 249, 207, 37);
     case "Iceshard Cliffs":
-      return Colors.cyan.shade600;
+      return const Color.fromARGB(167, 1, 150, 170);
     default:
       return Colors.white;
   }

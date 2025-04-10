@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/item.dart';
+import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
@@ -30,6 +31,7 @@ class _ItemListState extends State<ItemList> {
       if (itemsProvider.items.isEmpty) {
         itemsProvider.fetchItems();
       }
+      _resetFilters();
     });
   }
 
@@ -120,10 +122,16 @@ class _ItemListState extends State<ItemList> {
                         delay: Duration(milliseconds: index * 5),
                         from: 200,
                         child: CustomCard(
-                          // cardData: item,
-                          // leading: MaterialImage(
-                          //   materialName: item.name,
-                          // ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ItemDetails(
+                                  item: item,
+                                ),
+                              ),
+                            );
+                          },
                           body: _ItemBody(
                             item: item,
                             itemDescription: item.description,

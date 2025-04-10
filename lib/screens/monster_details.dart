@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
 import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 
@@ -174,24 +175,36 @@ class MonsterRewards extends StatelessWidget {
               var filteredConditions = uniqueConditions.values.toList();
 
               return CustomCard(
-                title: Row(
-                  children: [
-                    SizedBox(
-                      width: 30,
-                      height: 30,
-                      child: MaterialImage(
-                        materialName: reward.item.name,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ItemDetails(
+                        item: reward.item,
                       ),
                     ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          reward.item.name,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                          textAlign: TextAlign.center,
+                  );
+                },
+                title: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: MaterialImage(
+                          materialName: reward.item.name,
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      width: 50,
+                    ),
+                    Text(
+                      reward.item.name,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),
@@ -216,16 +229,20 @@ class MonsterRewards extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
-                                  "${condition.chance.toString()}%",
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
+                                SizedBox(
+                                  width: 40,
+                                  child: Text(
+                                    "${condition.chance.toString()}%",
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 40),
                                 Text(
                                   formattedKind,
+                                  softWrap: true,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     color: Colors.black,

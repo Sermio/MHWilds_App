@@ -29,6 +29,7 @@ class _DecorationsListState extends State<DecorationsList> {
       if (!decorationsProvider.hasData) {
         decorationsProvider.fetchDecorations();
       }
+      _resetFilters();
     });
   }
 

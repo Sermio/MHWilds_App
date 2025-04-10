@@ -9,6 +9,7 @@ class MonstersProvider with ChangeNotifier {
   List<String> _selectedLocations = [];
   bool _hasLocationFilter = false;
 
+  List<Monster> get allMonsters => _monsters;
   bool get isLoading => _isLoading;
   List<Monster> get filteredMonsters => _filteredMonsters;
   bool get hasData => _monsters.isNotEmpty;

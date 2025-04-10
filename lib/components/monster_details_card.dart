@@ -201,7 +201,7 @@ class MonsterDetailsCard extends StatelessWidget {
               ),
             if (monster.tips != "")
               Padding(
-                padding: const EdgeInsetsDirectional.symmetric(horizontal: 15),
+                padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 15),
                 child: Wrap(
                   children: [
                     Text(monster.tips),

@@ -31,6 +31,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
       if (!armorSetProvider.hasData) {
         armorSetProvider.fetchArmorSets();
       }
+      _resetFilters();
     });
   }
 

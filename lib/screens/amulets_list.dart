@@ -30,6 +30,7 @@ class _AmuletListState extends State<AmuletList> {
       if (!amuletProvider.hasData) {
         amuletProvider.fetchAmulets();
       }
+      _resetFilters();
     });
   }
 
