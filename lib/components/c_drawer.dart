@@ -5,6 +5,7 @@ import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
 import 'package:mhwilds_app/screens/materials_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
+import 'package:mhwilds_app/screens/monsters_list2.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
 
 class Cdrawer extends StatelessWidget {
@@ -64,6 +65,19 @@ class Cdrawer extends StatelessWidget {
               //   ),
               //   onTap: () => onItemSelected(const MaterialsList()),
               // ),
+              const Divider(),
+              ListTile(
+                title: const Text(
+                  'Monsters2',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                trailing: Image.asset(
+                  'assets/imgs/monster_icons/chatacabra.png',
+                  width: 35,
+                  height: 35,
+                ),
+                onTap: () => onItemSelected(const MonstersList2()),
+              ),
               const Divider(),
               ListTile(
                 title: const Text(
