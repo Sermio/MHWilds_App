@@ -48,11 +48,10 @@ class MonsterDetails extends StatelessWidget {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.symmetric(horizontal: 20),
-                    child: MonsterTable(
-                      rank: 'Low Rank Materials',
-                      columnsTitles: materialColumns,
-                      materials: materialsLowRank[monster.name] ?? [],
+                        const EdgeInsetsDirectional.symmetric(horizontal: 0),
+                    child: MonsterRewards(
+                      rewards: monster.rewards,
+                      selectedRank: 'low', // o 'high'
                     ),
                   ),
                   const SizedBox(
@@ -78,5 +77,46 @@ class MonsterDetails extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class MonsterRewards extends StatelessWidget {
+  final List<Reward> rewards;
+  final String selectedRank;
+
+  const MonsterRewards({
+    super.key,
+    required this.rewards,
+    required this.selectedRank,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // Filtramos los rewards según el 'rank' seleccionado (low o high)
+    List<Map<String, String>> filteredRewards = rewards
+        .where((reward) => reward.conditions.any((condition) =>
+            condition.rank == selectedRank)) // Filtramos por 'rank'
+        .map((reward) {
+      // Extraemos la información relevante de cada reward
+      final condition = reward.conditions.firstWhere(
+        (c) => c.rank == selectedRank,
+        orElse: () => reward.conditions.first,
+      );
+
+      return {
+        'Name': reward.item.name,
+        'Kind': condition.kind,
+        'Chance': "${condition.chance}%",
+        'Part': condition.part ?? '-',
+      };
+    }).toList();
+
+    return filteredRewards.isNotEmpty
+        ? MonsterTable(
+            rank: selectedRank,
+            columnsTitles: const ['Name', 'Kind', 'Part', 'Chance'],
+            materials: filteredRewards,
+          )
+        : const SizedBox();
   }
 }

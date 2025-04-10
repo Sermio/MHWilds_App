@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 
 class MonsterTable extends StatefulWidget {
-  const MonsterTable(
-      {super.key,
-      required this.rank,
-      required this.columnsTitles,
-      required this.materials});
+  const MonsterTable({
+    super.key,
+    required this.rank,
+    required this.columnsTitles,
+    required this.materials,
+  });
 
   final String rank;
   final List<String> columnsTitles;
@@ -87,30 +88,15 @@ class _MonsterTableState extends State<MonsterTable> {
 
       for (var key in columnsTitles) {
         String value = material[key] ?? "-";
-        const MaterialImage(
-          materialName: 'Poison Sac',
-        );
-        if (key == 'Image') {
-          cells.add(DataCell(
-            SizedBox(
-              width: 50,
-              height: 50,
-              child: MaterialImage(
-                materialName: material['Material'] ?? '',
-              ),
+        cells.add(DataCell(
+          SingleChildScrollView(
+            child: Text(
+              value.replaceAll(' ', '\n'),
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
             ),
-          ));
-        } else {
-          cells.add(DataCell(
-            SingleChildScrollView(
-              child: Text(
-                value.replaceAll(' ', '\n'),
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ));
-        }
+          ),
+        ));
       }
 
       rows.add(DataRow(cells: cells));

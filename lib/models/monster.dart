@@ -1,3 +1,5 @@
+import 'package:mhwilds_app/models/item.dart';
+
 class Monster {
   final int id;
   final String kind;
@@ -227,7 +229,7 @@ class Weakness {
 
 class Reward {
   final int id;
-  final RewardItem item;
+  final Item item;
   final List<RewardCondition> conditions;
 
   Reward({
@@ -239,39 +241,10 @@ class Reward {
   factory Reward.fromJson(Map<String, dynamic> json) {
     return Reward(
       id: json['id'] ?? 0,
-      item: RewardItem.fromJson(json['item'] ?? {}),
+      item: Item.fromJson(json['item'] ?? {}),
       conditions: (json['conditions'] as List<dynamic>? ?? [])
           .map((e) => RewardCondition.fromJson(e))
           .toList(),
-    );
-  }
-}
-
-class RewardItem {
-  final int id;
-  final int rarity;
-  final int carryLimit;
-  final int value;
-  final String name;
-  final String description;
-
-  RewardItem({
-    required this.id,
-    required this.rarity,
-    required this.carryLimit,
-    required this.value,
-    required this.name,
-    required this.description,
-  });
-
-  factory RewardItem.fromJson(Map<String, dynamic> json) {
-    return RewardItem(
-      id: json['id'] ?? 0,
-      rarity: json['rarity'] ?? 0,
-      carryLimit: json['carryLimit'] ?? 0,
-      value: json['value'] ?? 0,
-      name: json['name'] ?? '',
-      description: json['description'] ?? '',
     );
   }
 }
@@ -282,6 +255,8 @@ class RewardCondition {
   final int quantity;
   final int chance;
   final String? subtype;
+  final String? part; // Nuevo campo para 'part'
+  final int id; // Nuevo campo para 'id'
 
   RewardCondition({
     required this.kind,
@@ -289,6 +264,8 @@ class RewardCondition {
     required this.quantity,
     required this.chance,
     this.subtype,
+    this.part, // Campo opcional 'part'
+    required this.id, // Campo obligatorio 'id'
   });
 
   factory RewardCondition.fromJson(Map<String, dynamic> json) {
@@ -298,6 +275,9 @@ class RewardCondition {
       quantity: json['quantity'] ?? 0,
       chance: json['chance'] ?? 0,
       subtype: json['subtype'],
+      part: json['part'], // 'part' podría ser null
+      id: json['id'] ??
+          0, // Se asegura de que 'id' tenga un valor por defecto si no está presente
     );
   }
 }
