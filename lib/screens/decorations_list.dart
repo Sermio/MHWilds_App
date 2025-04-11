@@ -2,11 +2,11 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/decoration.dart';
+import 'package:mhwilds_app/screens/skill_details.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/decorations_provider.dart';
-import 'package:mhwilds_app/widgets/c_card.dart';
 
 class DecorationsList extends StatefulWidget {
   const DecorationsList({super.key});
@@ -132,44 +132,28 @@ class _DecorationsListState extends State<DecorationsList> {
                         duration: const Duration(milliseconds: 900),
                         delay: Duration(milliseconds: index * 5),
                         child: CustomCard(
-                          title: Row(
-                            children: [
-                              SizedBox(
-                                width: 30,
-                                height: 30,
-                                child: _getJewelSlotIcon(decoration.slot),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    decoration.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                    textAlign: TextAlign.center,
-                                  ),
+                          onTap: () {
+                            final skillIds = decoration.skills
+                                .map((s) => s.skill.id)
+                                .toList();
+                            final skillLevels =
+                                decoration.skills.map((s) => s.level).toList();
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SkillDetails(
+                                  skillsIds: skillIds,
+                                  skillsLevels: skillLevels,
                                 ),
                               ),
-                              Image.asset(
-                                getTypeImage(decoration.kind),
-                                width: 30,
-                                height: 30,
-                              ),
-                            ],
-                          ),
+                            );
+                          },
+                          title: _CardTitle(decoration: decoration),
                           body: _CardBody(
                             decoration: decoration,
                           ),
                         ),
-                        // Ccard(
-                        //   leading: _getJewelSlotIcon(decoration.slot),
-                        //   cardData: decoration,
-                        //   cardTitle: decoration.name,
-                        //   cardSubtitle1Label: "Type: ",
-                        //   cardSubtitle2Label: "Rarity: ",
-                        //   cardSubtitle1: decoration.kind,
-                        //   cardSubtitle2: decoration.rarity.toString(),
-                        // ),
                       );
                     },
                   ),
@@ -184,21 +168,40 @@ class _DecorationsListState extends State<DecorationsList> {
       ),
     );
   }
+}
 
-  Widget _getJewelSlotIcon(int slot) {
-    if (slot == 1) {
-      return Image.asset('assets/imgs/decorations/gem_level_1.png');
-    }
-    if (slot == 2) {
-      return Image.asset('assets/imgs/decorations/gem_level_2.png');
-    }
-    if (slot == 3) {
-      return Image.asset('assets/imgs/decorations/gem_level_3.png');
-    }
-    if (slot == 4) {
-      return Image.asset('assets/imgs/decorations/gem_level_4.png');
-    }
-    return Image.asset('assets/imgs/decorations/gem_level_1.png');
+class _CardTitle extends StatelessWidget {
+  const _CardTitle({
+    required this.decoration,
+  });
+
+  final DecorationItem decoration;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 30,
+          height: 30,
+          child: getJewelSlotIcon(decoration.slot),
+        ),
+        Expanded(
+          child: Center(
+            child: Text(
+              decoration.name,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        Image.asset(
+          getTypeImage(decoration.kind),
+          width: 30,
+          height: 30,
+        ),
+      ],
+    );
   }
 }
 

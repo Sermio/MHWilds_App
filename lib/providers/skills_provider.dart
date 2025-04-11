@@ -10,6 +10,7 @@ class SkillsProvider with ChangeNotifier {
   String _nameFilter = '';
   String _kindFilter = '';
 
+  List<Skills> get allSkills => _allSkills;
   List<Skills> get skills => _filteredSkills;
   bool get isLoading => _isLoading;
   bool get hasData => _allSkills.isNotEmpty;

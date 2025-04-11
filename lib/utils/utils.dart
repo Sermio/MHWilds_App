@@ -246,3 +246,19 @@ String getTypeImage(String skillKind) {
       return 'assets/imgs/weapons/artian.webp';
   }
 }
+
+Widget getJewelSlotIcon(int slot) {
+  if (slot == 1) {
+    return Image.asset('assets/imgs/decorations/gem_level_1.png');
+  }
+  if (slot == 2) {
+    return Image.asset('assets/imgs/decorations/gem_level_2.png');
+  }
+  if (slot == 3) {
+    return Image.asset('assets/imgs/decorations/gem_level_3.png');
+  }
+  if (slot == 4) {
+    return Image.asset('assets/imgs/decorations/gem_level_4.png');
+  }
+  return Image.asset('assets/imgs/decorations/gem_level_1.png');
+}

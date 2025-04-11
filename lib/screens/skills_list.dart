@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/skills.dart';
+import 'package:mhwilds_app/screens/skill_details.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
@@ -134,6 +135,19 @@ class _SkillListState2 extends State<SkillList> {
                         delay: Duration(milliseconds: index * 5),
                         from: 200,
                         child: CustomCard(
+                          onTap: () {
+                            final skillIds =
+                                skill.ranks.map((s) => s.skill.id).toList();
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SkillDetails(
+                                  skillsIds: skillIds,
+                                ),
+                              ),
+                            );
+                          },
                           body: _SkillBody(
                             skill: skill,
                             skillDescription: skill.description,
@@ -158,7 +172,6 @@ class _SkillListState2 extends State<SkillList> {
 
 class _CardTitle extends StatelessWidget {
   const _CardTitle({
-    super.key,
     required this.skill,
   });
 
