@@ -262,3 +262,20 @@ Widget getJewelSlotIcon(int slot) {
   }
   return Image.asset('assets/imgs/decorations/gem_level_1.png');
 }
+
+String getKindImage(String skillKind) {
+  switch (skillKind) {
+    case 'head':
+      return 'assets/imgs/armor/head/rarity8.webp';
+    case 'chest':
+      return 'assets/imgs/armor/chest/rarity8.webp';
+    case 'arms':
+      return 'assets/imgs/armor/arms/rarity8.webp';
+    case 'waist':
+      return 'assets/imgs/armor/waist/rarity8.webp';
+    case 'legs':
+      return 'assets/imgs/armor/legs/rarity8.webp';
+    default:
+      return 'assets/imgs/armor/chest/rarity8.webp';
+  }
+}

@@ -91,7 +91,7 @@ class _AmuletListState extends State<AmuletList> {
             child: amuletProvider.isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 0),
                     itemCount: filteredAmulets.length,
                     itemBuilder: (context, index) {
                       var amulet = filteredAmulets[index];

@@ -1,160 +1,150 @@
+import 'package:mhwilds_app/models/item.dart';
+import 'package:mhwilds_app/models/skills.dart';
+
 class ArmorPiece {
-  final int gameId;
-  final Map<String, String> names;
+  final String kind;
+  final String name;
+  final String description;
+  final String rank;
   final int rarity;
-  final dynamic setBonus;
-  final GroupBonus groupBonus;
-  final List<Piece> pieces;
+  final Map<String, int> resistances;
+  final Map<String, int> defense;
+  final List<SkillInfo> skills;
+  final List<int> slots;
+  final ArmorSet armorSet;
+  final Crafting crafting;
+  final int id;
 
   ArmorPiece({
-    required this.gameId,
-    required this.names,
+    required this.kind,
+    required this.name,
+    required this.description,
+    required this.rank,
     required this.rarity,
-    this.setBonus,
-    required this.groupBonus,
-    required this.pieces,
+    required this.resistances,
+    required this.defense,
+    required this.skills,
+    required this.slots,
+    required this.armorSet,
+    required this.crafting,
+    required this.id,
   });
 
   factory ArmorPiece.fromJson(Map<String, dynamic> json) {
     return ArmorPiece(
-      gameId: json['game_id'],
-      names: Map<String, String>.from(json['names']),
-      rarity: json['rarity'],
-      setBonus: json['set_bonus'],
-      groupBonus: GroupBonus.fromJson(json['group_bonus']),
-      pieces: (json['pieces'] as List)
-          .map((piece) => Piece.fromJson(piece))
+      kind: json['kind'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      rank: json['rank'] as String? ?? '',
+      rarity: json['rarity'] as int? ?? 0,
+      resistances: Map<String, int>.from(json['resistances'] ?? {}),
+      defense: Map<String, int>.from(json['defense'] ?? {}),
+      skills: (json['skills'] as List? ?? [])
+          .map((skillJson) => SkillInfo.fromJson(skillJson))
           .toList(),
+      slots: (json['slots'] as List? ?? []).map((e) => e as int).toList(),
+      armorSet: ArmorSet.fromJson(json['armorSet'] ?? {}),
+      crafting: Crafting.fromJson(json['crafting'] ?? {}),
+      id: json['id'] as int? ?? 0,
     );
   }
 }
 
-class GroupBonus {
-  final int skillId;
-  final List<Rank> ranks;
+class SkillInfo {
+  final Skills skill;
+  final int level;
+  final String description;
+  final int id;
 
-  GroupBonus({
-    required this.skillId,
-    required this.ranks,
+  SkillInfo({
+    required this.skill,
+    required this.level,
+    required this.description,
+    required this.id,
   });
 
-  factory GroupBonus.fromJson(Map<String, dynamic> json) {
-    return GroupBonus(
-      skillId: json['skill_id'],
-      ranks:
-          (json['ranks'] as List).map((rank) => Rank.fromJson(rank)).toList(),
+  factory SkillInfo.fromJson(Map<String, dynamic> json) {
+    return SkillInfo(
+      skill: Skills.fromJson(json['skill'] ?? {}),
+      level: json['level'] as int? ?? 0,
+      description: json['description'] as String? ?? '',
+      id: json['id'] as int? ?? 0,
     );
   }
 }
 
-class Rank {
-  final int pieces;
-  final int skillLevel;
+class ArmorSet {
+  final int id;
+  final String name;
 
-  Rank({
-    required this.pieces,
-    required this.skillLevel,
+  ArmorSet({
+    required this.id,
+    required this.name,
   });
 
-  factory Rank.fromJson(Map<String, dynamic> json) {
-    return Rank(
-      pieces: json['pieces'],
-      skillLevel: json['skill_level'],
-    );
-  }
-}
-
-class Piece {
-  final String kind;
-  final Map<String, String> names;
-  final Map<String, String> descriptions;
-  final Defense defense;
-  final Resistances resistances;
-  final List<int> slots;
-  final Map<String, int> skills;
-  final Crafting crafting;
-
-  Piece({
-    required this.kind,
-    required this.names,
-    required this.descriptions,
-    required this.defense,
-    required this.resistances,
-    required this.slots,
-    required this.skills,
-    required this.crafting,
-  });
-
-  factory Piece.fromJson(Map<String, dynamic> json) {
-    return Piece(
-      kind: json['kind'],
-      names: Map<String, String>.from(json['names']),
-      descriptions: Map<String, String>.from(json['descriptions']),
-      defense: Defense.fromJson(json['defense']),
-      resistances: Resistances.fromJson(json['resistances']),
-      slots: List<int>.from(json['slots']),
-      skills: Map<String, int>.from(json['skills']),
-      crafting: Crafting.fromJson(json['crafting']),
-    );
-  }
-}
-
-class Defense {
-  final int base;
-  final int max;
-
-  Defense({
-    required this.base,
-    required this.max,
-  });
-
-  factory Defense.fromJson(Map<String, dynamic> json) {
-    return Defense(
-      base: json['base'],
-      max: json['max'],
-    );
-  }
-}
-
-class Resistances {
-  final int fire;
-  final int water;
-  final int thunder;
-  final int ice;
-  final int dragon;
-
-  Resistances({
-    required this.fire,
-    required this.water,
-    required this.thunder,
-    required this.ice,
-    required this.dragon,
-  });
-
-  factory Resistances.fromJson(Map<String, dynamic> json) {
-    return Resistances(
-      fire: json['fire'],
-      water: json['water'],
-      thunder: json['thunder'],
-      ice: json['ice'],
-      dragon: json['dragon'],
+  factory ArmorSet.fromJson(Map<String, dynamic> json) {
+    return ArmorSet(
+      id: json['id'] as int? ?? 0,
+      name: json['name'] as String? ?? '',
     );
   }
 }
 
 class Crafting {
-  final int price;
-  final Map<String, int> inputs;
+  final Armor armor;
+  final List<Material> materials;
+  final int zennyCost;
+  final int id;
 
   Crafting({
-    required this.price,
-    required this.inputs,
+    required this.armor,
+    required this.materials,
+    required this.zennyCost,
+    required this.id,
   });
 
   factory Crafting.fromJson(Map<String, dynamic> json) {
     return Crafting(
-      price: json['price'],
-      inputs: Map<String, int>.from(json['inputs']),
+      armor: Armor.fromJson(json['armor'] ?? {}),
+      materials: (json['materials'] as List? ?? [])
+          .map((materialJson) => Material.fromJson(materialJson))
+          .toList(),
+      zennyCost: json['zennyCost'] as int? ?? 0,
+      id: json['id'] as int? ?? 0,
+    );
+  }
+}
+
+class Armor {
+  final int id;
+
+  Armor({
+    required this.id,
+  });
+
+  factory Armor.fromJson(Map<String, dynamic> json) {
+    return Armor(
+      id: json['id'] as int? ?? 0,
+    );
+  }
+}
+
+class Material {
+  final Item item;
+  final int quantity;
+  final int id;
+
+  Material({
+    required this.item,
+    required this.quantity,
+    required this.id,
+  });
+
+  factory Material.fromJson(Map<String, dynamic> json) {
+    return Material(
+      item: Item.fromJson(json['item'] ?? {}),
+      quantity: json['quantity'] as int? ?? 0,
+      id: json['id'] as int? ?? 0,
     );
   }
 }

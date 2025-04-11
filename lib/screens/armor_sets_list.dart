@@ -1,9 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/models/armor_set.dart';
+import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/models/armor_piece.dart';
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/utils/colors.dart';
-import 'package:mhwilds_app/widgets/c_card.dart';
+import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
 
 class ArmorSetList extends StatefulWidget {
@@ -104,7 +106,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                       children: [
                         Text(kind),
                         Image.asset(
-                          _getKindImage(kind.toLowerCase()),
+                          getKindImage(kind.toLowerCase()),
                           width: 30,
                           height: 30,
                         ),
@@ -127,7 +129,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             child: armorSetProvider.isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 0),
                     itemCount: filteredArmorSets.length,
                     itemBuilder: (context, index) {
                       final armorSet = filteredArmorSets[index];
@@ -161,18 +163,24 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                 duration: const Duration(milliseconds: 900),
                                 delay: Duration(milliseconds: index * 80),
                                 from: 200,
-                                child: Ccard(
-                                  cardData: piece,
-                                  leading: Image.asset(
-                                    'assets/imgs/armor/${piece.kind.toString().toLowerCase()}/rarity${piece.rarity}.webp',
-                                    scale: 0.8,
+                                child: CustomCard(
+                                  title: _CardTitle(armorPiece: piece),
+                                  body: _CardBody(
+                                    armorPiece: piece,
                                   ),
-                                  cardBody: _ArmorSetBody(
-                                    armorSet: armorSet,
-                                    piece: piece,
-                                  ),
-                                  cardTitle: piece.name,
                                 ),
+                                // Ccard(
+                                //   cardData: piece,
+                                //   leading: Image.asset(
+                                //     'assets/imgs/armor/${piece.kind.toString().toLowerCase()}/rarity${piece.rarity}.webp',
+                                //     scale: 0.8,
+                                //   ),
+                                //   cardBody: _ArmorSetBody(
+                                //     armorSet: armorSet,
+                                //     piece: piece,
+                                //   ),
+                                //   cardTitle: piece.name,
+                                // ),
                               ),
                             );
                           }).values,
@@ -194,42 +202,212 @@ class _ArmorSetListState extends State<ArmorSetList> {
   }
 }
 
-String _getKindImage(String skillKind) {
-  switch (skillKind) {
-    case 'head':
-      return 'assets/imgs/armor/head/rarity8.webp';
-    case 'chest':
-      return 'assets/imgs/armor/chest/rarity8.webp';
-    case 'arms':
-      return 'assets/imgs/armor/arms/rarity8.webp';
-    case 'waist':
-      return 'assets/imgs/armor/waist/rarity8.webp';
-    case 'legs':
-      return 'assets/imgs/armor/legs/rarity8.webp';
-    default:
-      return 'assets/imgs/armor/chest/rarity8.webp';
+class _CardTitle extends StatelessWidget {
+  const _CardTitle({
+    required this.armorPiece,
+  });
+
+  final ArmorPiece armorPiece;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 30,
+          height: 30,
+          child: Image.asset(
+            'assets/imgs/armor/${armorPiece.kind.toString().toLowerCase()}/rarity${armorPiece.rarity}.webp',
+            scale: 0.8,
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: Text(
+              armorPiece.name,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 
-class _ArmorSetBody extends StatelessWidget {
-  const _ArmorSetBody({
-    required this.armorSet,
-    required this.piece,
+class _CardBody extends StatelessWidget {
+  const _CardBody({
+    required this.armorPiece,
   });
 
-  final ArmorSet armorSet;
-  final ArmorPiece piece;
+  final ArmorPiece armorPiece;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Armor: ${piece.defense['base']}',
-          style: const TextStyle(fontSize: 14),
+        ArmorPieceSlotsWidget(
+          armorPiece: armorPiece,
         ),
-        const SizedBox(height: 6),
+        const SizedBox(
+          height: 10,
+        ),
+        Wrap(
+          direction: Axis.vertical,
+          children: [
+            _CardResistances(
+              armorPiece: armorPiece,
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Column(
+          children: armorPiece.skills.map((skill) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _BodySkills(
+                  skill: skill,
+                ),
+                Wrap(
+                  children: [
+                    Text(skill.skill.description),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+}
+
+class _BodySkills extends StatelessWidget {
+  const _BodySkills({
+    required this.skill,
+  });
+
+  final SkillInfo skill;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 20,
+          height: 20,
+          child: UrlImageLoader(
+            itemName: skill.skill.name,
+            loadImageUrlFunction: getValidSkillImageUrl,
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Text(
+          skill.skill.name,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(width: 10),
+        Text(
+          'Lv ${skill.level}',
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
+}
+
+class _CardResistances extends StatelessWidget {
+  const _CardResistances({
+    required this.armorPiece,
+  });
+
+  final ArmorPiece armorPiece;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: [
+        Row(
+          children: [
+            SizedBox(
+              height: 20,
+              child: Image.asset(
+                'assets/imgs/armor/armor.webp',
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(armorPiece.defense['base'].toString()),
+            const SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
+        ...armorPiece.resistances.entries.map(
+          (entry) {
+            final resistanceType = entry.key;
+            final resistanceValue = entry.value;
+
+            return Row(
+              children: [
+                SizedBox(
+                  height: 20,
+                  child: Image.asset(
+                    'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
+                  ),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(resistanceValue.toString()),
+                const SizedBox(
+                  width: 10,
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class ArmorPieceSlotsWidget extends StatelessWidget {
+  final ArmorPiece armorPiece;
+
+  const ArmorPieceSlotsWidget({super.key, required this.armorPiece});
+
+  @override
+  Widget build(BuildContext context) {
+    if (armorPiece.slots.isEmpty ||
+        armorPiece.slots.every((slot) => slot == null)) {
+      return const Text(
+        '- - -',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      );
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(width: 5),
+        ...armorPiece.slots.map((slot) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: SizedBox(
+              width: 20,
+              height: 20,
+              child: getJewelSlotIcon(slot),
+            ),
+          );
+        }),
       ],
     );
   }

@@ -137,13 +137,15 @@ class _SkillListState2 extends State<SkillList> {
                         child: CustomCard(
                           onTap: () {
                             final skillIds =
-                                skill.ranks.map((s) => s.skill.id).toList();
+                                skill.ranks.map((s) => s.skill?.id).toList();
 
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => SkillDetails(
-                                  skillsIds: skillIds,
+                                  skillsIds: skillIds
+                                      .where((id) => id != null)
+                                      .toList() as List<int>,
                                 ),
                               ),
                             );

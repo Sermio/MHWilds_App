@@ -4,7 +4,7 @@ import 'package:mhwilds_app/models/armor_set.dart';
 
 class ArmorSetProvider with ChangeNotifier {
   List<ArmorSet> _allArmorSets = [];
-  late final List<ArmorSet> _originalArmorSets;
+  List<ArmorSet> _originalArmorSets = [];
   List<ArmorSet> _filteredArmorSets = [];
   bool _isLoading = false;
 
@@ -39,7 +39,7 @@ class ArmorSetProvider with ChangeNotifier {
     _kindFilter = kind ?? _kindFilter;
 
     if (_nameFilter.isEmpty && _kindFilter == null) {
-      _filteredArmorSets = _allArmorSets.map((set) => set.copy()).toList();
+      _filteredArmorSets = List.from(_allArmorSets);
     } else {
       _filteredArmorSets = _allArmorSets
           .map((set) {
@@ -58,6 +58,7 @@ class ArmorSetProvider with ChangeNotifier {
                 name: set.name,
                 gameId: set.gameId,
                 groupBonus: set.groupBonus,
+                bonus: set.bonus,
                 pieces: filteredPieces,
               );
             } else {
@@ -75,7 +76,6 @@ class ArmorSetProvider with ChangeNotifier {
     _nameFilter = '';
     _kindFilter = null;
 
-    _allArmorSets = List.from(_originalArmorSets);
     _filteredArmorSets = List.from(_originalArmorSets);
 
     notifyListeners();
