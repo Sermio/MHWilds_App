@@ -1,5 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/models/decoration.dart';
+import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/decorations_provider.dart';
 import 'package:mhwilds_app/widgets/c_card.dart';
@@ -127,15 +131,45 @@ class _DecorationsListState extends State<DecorationsList> {
                       return BounceInLeft(
                         duration: const Duration(milliseconds: 900),
                         delay: Duration(milliseconds: index * 5),
-                        child: Ccard(
-                          leading: _getJewelSlotIcon(decoration.slot),
-                          cardData: decoration,
-                          cardTitle: decoration.name,
-                          cardSubtitle1Label: "Type: ",
-                          cardSubtitle2Label: "Rarity: ",
-                          cardSubtitle1: decoration.kind,
-                          cardSubtitle2: decoration.rarity.toString(),
+                        child: CustomCard(
+                          title: Row(
+                            children: [
+                              SizedBox(
+                                width: 30,
+                                height: 30,
+                                child: _getJewelSlotIcon(decoration.slot),
+                              ),
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                    decoration.name,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                              Image.asset(
+                                getTypeImage(decoration.kind),
+                                width: 30,
+                                height: 30,
+                              ),
+                            ],
+                          ),
+                          body: _CardBody(
+                            decoration: decoration,
+                          ),
                         ),
+                        // Ccard(
+                        //   leading: _getJewelSlotIcon(decoration.slot),
+                        //   cardData: decoration,
+                        //   cardTitle: decoration.name,
+                        //   cardSubtitle1Label: "Type: ",
+                        //   cardSubtitle2Label: "Rarity: ",
+                        //   cardSubtitle1: decoration.kind,
+                        //   cardSubtitle2: decoration.rarity.toString(),
+                        // ),
                       );
                     },
                   ),
@@ -165,5 +199,52 @@ class _DecorationsListState extends State<DecorationsList> {
       return Image.asset('assets/imgs/decorations/gem_level_4.png');
     }
     return Image.asset('assets/imgs/decorations/gem_level_1.png');
+  }
+}
+
+class _CardBody extends StatelessWidget {
+  const _CardBody({
+    required this.decoration,
+  });
+
+  final DecorationItem decoration;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: decoration.skills.map((skill) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: UrlImageLoader(
+                    itemName: skill.skill.name,
+                    loadImageUrlFunction: getValidSkillImageUrl,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(skill.skill.name),
+                const SizedBox(width: 10),
+                Text('Lv: ${skill.level}'),
+              ],
+            ),
+            Wrap(
+              children: [
+                Text(skill.description),
+              ],
+            )
+          ],
+        );
+      }).toList(),
+    );
   }
 }

@@ -231,3 +231,18 @@ Future<String?> getValidSkillImageUrl(String skillName) async {
   _skillImageUrlCache[formattedSkillName] = fallbackUrl;
   return fallbackUrl;
 }
+
+String getTypeImage(String skillKind) {
+  switch (skillKind) {
+    case 'weapon':
+      return 'assets/imgs/weapons/artian.webp';
+    case 'armor':
+      return 'assets/imgs/drawer/armor.webp';
+    case 'group':
+      return 'assets/imgs/armor/chest/group_armor.webp';
+    case 'set':
+      return 'assets/imgs/armor/chest/set_armor.webp';
+    default:
+      return 'assets/imgs/weapons/artian.webp';
+  }
+}

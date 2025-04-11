@@ -101,7 +101,7 @@ class _SkillListState2 extends State<SkillList> {
                       children: [
                         Text(type),
                         Image.asset(
-                          _getSkillImage(type.toLowerCase()),
+                          getTypeImage(type.toLowerCase()),
                           width: 30,
                           height: 30,
                         ),
@@ -138,34 +138,7 @@ class _SkillListState2 extends State<SkillList> {
                             skill: skill,
                             skillDescription: skill.description,
                           ),
-                          title: Row(
-                            children: [
-                              SizedBox(
-                                width: 30,
-                                height: 30,
-                                child: UrlImageLoader(
-                                  itemName: skill.name,
-                                  loadImageUrlFunction: getValidSkillImageUrl,
-                                ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    skill.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                              Image.asset(
-                                _getSkillImage(skill.kind),
-                                width: 30,
-                                height: 30,
-                              ),
-                            ],
-                          ),
+                          title: _CardTitle(skill: skill),
                         ),
                       );
                     },
@@ -183,18 +156,42 @@ class _SkillListState2 extends State<SkillList> {
   }
 }
 
-String _getSkillImage(String skillKind) {
-  switch (skillKind) {
-    case 'weapon':
-      return 'assets/imgs/weapons/artian.webp';
-    case 'armor':
-      return 'assets/imgs/drawer/armor.webp';
-    case 'group':
-      return 'assets/imgs/armor/chest/group_armor.webp';
-    case 'set':
-      return 'assets/imgs/armor/chest/set_armor.webp';
-    default:
-      return 'assets/imgs/weapons/artian.webp';
+class _CardTitle extends StatelessWidget {
+  const _CardTitle({
+    super.key,
+    required this.skill,
+  });
+
+  final Skills skill;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 30,
+          height: 30,
+          child: UrlImageLoader(
+            itemName: skill.name,
+            loadImageUrlFunction: getValidSkillImageUrl,
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: Text(
+              skill.name,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        Image.asset(
+          getTypeImage(skill.kind),
+          width: 30,
+          height: 30,
+        ),
+      ],
+    );
   }
 }
 
