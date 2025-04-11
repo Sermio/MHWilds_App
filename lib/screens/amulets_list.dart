@@ -1,10 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/providers/amulets_provider.dart';
+import 'package:mhwilds_app/screens/skill_details.dart';
+import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/models/amulet.dart';
 import 'package:mhwilds_app/utils/colors.dart';
-import 'package:mhwilds_app/widgets/c_card.dart';
 
 class AmuletList extends StatefulWidget {
   const AmuletList({super.key});
@@ -132,13 +135,29 @@ class _AmuletListState extends State<AmuletList> {
                                 return BounceInLeft(
                                   duration: const Duration(milliseconds: 900),
                                   delay: Duration(milliseconds: rankIndex * 50),
-                                  child: Ccard(
-                                    cardData: rank,
-                                    cardTitle: rank.name,
-                                    cardSubtitle1Label: "Rarity: ",
-                                    cardSubtitle2Label: "Level: ",
-                                    cardSubtitle1: rank.rarity.toString(),
-                                    cardSubtitle2: rank.level.toString(),
+                                  child: CustomCard(
+                                    onTap: () {
+                                      final skillIds = rank.skills
+                                          .map((s) => s.skill.id)
+                                          .toList();
+                                      final skillLevels = rank.skills
+                                          .map((s) => s.level)
+                                          .toList();
+
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SkillDetails(
+                                            skillsIds: skillIds,
+                                            skillsLevels: skillLevels,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    title: _CardTitle(rank: rank),
+                                    body: _CardBody(
+                                      amuletRank: rank,
+                                    ),
                                   ),
                                 );
                               },
@@ -156,6 +175,86 @@ class _AmuletListState extends State<AmuletList> {
           _filtersVisible ? Icons.close : Icons.search,
         ),
       ),
+    );
+  }
+}
+
+class _CardTitle extends StatelessWidget {
+  const _CardTitle({
+    required this.rank,
+  });
+
+  final AmuletRank rank;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 30,
+          height: 30,
+          child: Image.asset(
+            'assets/imgs/amulets/rarity${rank.rarity}.webp',
+            scale: 0.8,
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: Text(
+              rank.name,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CardBody extends StatelessWidget {
+  const _CardBody({
+    required this.amuletRank,
+  });
+
+  final AmuletRank amuletRank;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: amuletRank.skills.map((skill) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: UrlImageLoader(
+                    itemName: skill.skill.name,
+                    loadImageUrlFunction: getValidSkillImageUrl,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(skill.skill.name),
+                const SizedBox(width: 10),
+                Text('Lv ${skill.level}'),
+              ],
+            ),
+            Wrap(
+              children: [
+                Text(skill.description),
+              ],
+            )
+          ],
+        );
+      }).toList(),
     );
   }
 }

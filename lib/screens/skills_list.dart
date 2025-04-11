@@ -226,7 +226,6 @@ class _SkillBody extends StatelessWidget {
       children: [
         Text(
           skillDescription,
-          // overflow: TextOverflow.ellipsis,
           softWrap: true,
         ),
         const SizedBox(height: 8),
@@ -240,7 +239,7 @@ class _SkillBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Level $index: ",
+                  "Lv $index: ",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),

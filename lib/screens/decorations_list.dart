@@ -237,7 +237,7 @@ class _CardBody extends StatelessWidget {
                 ),
                 Text(skill.skill.name),
                 const SizedBox(width: 10),
-                Text('Lv: ${skill.level}'),
+                Text('Lv ${skill.level}'),
               ],
             ),
             Wrap(
