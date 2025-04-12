@@ -5,6 +5,7 @@ import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/armor_piece.dart';
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/api/skills_api.dart';
+import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
@@ -130,7 +131,17 @@ class _ArmorDetailsState extends State<ArmorDetails> {
           const Divider(),
           _buildMapRow("Rank", widget.armor.rank),
           const Divider(),
-          _buildMapRow("Slots", widget.armor.slots.join(", ")),
+          Row(
+            children: [
+              const Text(
+                'Slots',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const Spacer(),
+              ArmorPieceSlotsWidget(armorPiece: widget.armor),
+            ],
+          ),
+          // _buildMapRow("Slots", widget.armor.slots.join(", ")),
           const Divider(),
           Row(
             children: [
@@ -171,7 +182,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text("$title:", style: const TextStyle(fontWeight: FontWeight.bold)),
-        Flexible(child: Text(value, textAlign: TextAlign.right)),
+        Flexible(child: Text(value.toUpperCase(), textAlign: TextAlign.right)),
       ],
     );
   }
