@@ -5,6 +5,7 @@ import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/armor_piece.dart';
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/api/skills_api.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
@@ -46,27 +47,49 @@ class _ArmorDetailsState extends State<ArmorDetails> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              width: 30,
-              height: 30,
-              child: Image.asset(
-                'assets/imgs/armor/${widget.armor.kind.toString().toLowerCase()}/rarity${widget.armor.rarity}.webp',
-                scale: 0.8,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                widget.armor.description,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 30.0),
+            //   child: SizedBox(
+            //     width: 50,
+            //     height: 50,
+            //     child: Image.asset(
+            //       'assets/imgs/armor/${widget.armor.kind.toString().toLowerCase()}/rarity${widget.armor.rarity}.webp',
+            //       scale: 0.5,
+            //     ),
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.all(16.0),
+            //   child: Text(
+            //     widget.armor.description,
+            //     style: const TextStyle(fontSize: 16),
+            //   ),
+            // ),
             _buildSectionTitle("Stats"),
             _buildStats(context),
             _buildSectionTitle("Skills"),
             _SkillsSection(skills: _skills, widget: widget),
             _buildSectionTitle("Crafting Materials"),
+            CustomCard(
+              shadowColor: AppColors.goldSoft,
+              title: ListTile(
+                // leading: Image.asset(
+                //   'assets/imgs/materials/zenny.webp',
+                //   height: 40,
+                //   width: 40,
+                // ),
+                title: const Text(
+                  'Zenny',
+                  style: TextStyle(fontSize: 16),
+                ),
+                trailing: Text(
+                  'x${widget.armor.crafting.zennyCost}',
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
+            ),
             ...widget.armor.crafting.materials.map((material) => CustomCard(
+                  shadowColor: AppColors.goldSoft,
                   onTap: () {
                     Navigator.push(
                       context,
@@ -78,13 +101,16 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                     );
                   },
                   title: ListTile(
-                    leading: MaterialImage(
-                      height: 40,
-                      width: 40,
-                      materialName: material.item.name,
-                    ),
+                    // leading: MaterialImage(
+                    //   height: 40,
+                    //   width: 40,
+                    //   materialName: material.item.name,
+                    // ),
                     title: Text(material.item.name),
-                    trailing: Text('x${material.quantity}'),
+                    trailing: Text(
+                      'x${material.quantity}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
                 )),
             const SizedBox(height: 40),
@@ -98,21 +124,43 @@ class _ArmorDetailsState extends State<ArmorDetails> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildMapRow("Rarity", widget.armor.rarity.toString()),
+          const Divider(),
           _buildMapRow("Rank", widget.armor.rank),
+          const Divider(),
           _buildMapRow("Slots", widget.armor.slots.join(", ")),
-          _buildMapRow(
-              "Defense",
-              widget.armor.defense.entries
-                  .map((e) => "${e.key}: ${e.value}")
-                  .join(", ")),
-          _buildMapRow(
-              "Resistances",
-              widget.armor.resistances.entries
-                  .map((e) => "${e.key}: ${e.value}")
-                  .join(", ")),
-          _buildMapRow("Zenny Cost", "${widget.armor.crafting.zennyCost} z"),
+          const Divider(),
+          Row(
+            children: [
+              const Text("Armor:",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              const Spacer(),
+              ArmorBaseDefense(
+                baseDefense: widget.armor.defense['base']!,
+              ),
+            ],
+          ),
+          const Divider(),
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  elementsDialog(context);
+                },
+                child: const Text("Resistances:",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.goldSoft)),
+              ),
+              const Spacer(),
+              _ArmorResistancesRow(armor: widget.armor),
+            ],
+          ),
+          const Divider(),
+          // _buildMapRow("Zenny Cost", "${widget.armor.crafting.zennyCost} z"),
+          // const Divider(),
         ],
       ),
     );
@@ -132,12 +180,72 @@ class _ArmorDetailsState extends State<ArmorDetails> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
       child: Align(
-        alignment: Alignment.centerLeft,
+        alignment: Alignment.center,
         child: Text(
           title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
       ),
+    );
+  }
+}
+
+class ArmorBaseDefense extends StatelessWidget {
+  final int baseDefense;
+
+  const ArmorBaseDefense({super.key, required this.baseDefense});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          height: 20,
+          child: Image.asset(
+            'assets/imgs/armor/armor.webp',
+          ),
+        ),
+        const SizedBox(width: 5),
+        Text(baseDefense.toString()),
+        // const SizedBox(width: 10),
+      ],
+    );
+  }
+}
+
+class _ArmorResistancesRow extends StatelessWidget {
+  final ArmorPiece armor;
+
+  const _ArmorResistancesRow({super.key, required this.armor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        ...armor.resistances.entries.map(
+          (entry) {
+            final resistanceType = entry.key;
+            final resistanceValue = entry.value;
+
+            return Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Row(
+                children: [
+                  SizedBox(
+                    height: 20,
+                    child: Image.asset(
+                      'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  Text(resistanceValue.toString()),
+                  // const SizedBox(width: 10),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }
@@ -182,7 +290,10 @@ class _SkillsSection extends StatelessWidget {
                           loadImageUrlFunction: getValidSkillImageUrl,
                         ),
                       ),
-                      title: Text(skillInfo.name),
+                      title: Text(
+                        skillInfo.name,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       subtitle: Text(skillInfo.description),
                     ),
                     const SizedBox(height: 10),

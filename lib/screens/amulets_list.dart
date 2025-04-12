@@ -117,7 +117,7 @@ class _AmuletListState extends State<AmuletList> {
                             delay: Duration(milliseconds: index),
                             child: Container(
                               width: double.infinity,
-                              color: AppColors.goldSoft,
+                              color: AppColors.mutedOlive,
                               child: Text(
                                 amuletName.isNotEmpty ? amuletName : "Unknown",
                                 style: const TextStyle(
@@ -136,6 +136,7 @@ class _AmuletListState extends State<AmuletList> {
                                   duration: const Duration(milliseconds: 900),
                                   delay: Duration(milliseconds: rankIndex * 50),
                                   child: CustomCard(
+                                    shadowColor: AppColors.goldSoft,
                                     onTap: () {
                                       final skillIds = rank.skills
                                           .map((s) => s.skill.id)

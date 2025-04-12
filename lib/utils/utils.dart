@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 import 'package:image/image.dart' as img;
+import 'package:mhwilds_app/components/monster_details_card.dart';
 
 final Map<String, String?> _skillImageUrlCache = {};
 
@@ -278,4 +279,22 @@ String getKindImage(String skillKind) {
     default:
       return 'assets/imgs/armor/chest/rarity8.webp';
   }
+}
+
+Future<dynamic> elementsDialog(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (context) => const AlertDialog(
+      title: Center(
+        child: Text(
+          'Elements/Ailments',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+      content: SizedBox(
+        width: double.maxFinite,
+        child: ElementsAndAilments(),
+      ),
+    ),
+  );
 }

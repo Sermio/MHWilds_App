@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
@@ -122,6 +123,7 @@ class _ItemListState extends State<ItemList> {
                         delay: Duration(milliseconds: index * 5),
                         from: 200,
                         child: CustomCard(
+                          shadowColor: AppColors.goldSoft,
                           onTap: () {
                             Navigator.push(
                               context,
@@ -139,11 +141,11 @@ class _ItemListState extends State<ItemList> {
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              MaterialImage(
-                                height: 40,
-                                width: 40,
-                                materialName: item.name,
-                              ),
+                              // MaterialImage(
+                              //   height: 40,
+                              //   width: 40,
+                              //   materialName: item.name,
+                              // ),
                               Expanded(
                                 child: Center(
                                   child: Text(
@@ -217,19 +219,19 @@ class _ItemBody extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '${recipeItem.name} (',
+                            recipeItem.name,
                             style: const TextStyle(fontSize: 15),
                           ),
                           // const SizedBox(width: 8),
-                          MaterialImage(
-                            height: 30,
-                            width: 30,
-                            materialName: recipeItem.name,
-                          ),
-                          const Text(
-                            ')',
-                            style: TextStyle(fontSize: 15),
-                          ),
+                          // MaterialImage(
+                          //   height: 30,
+                          //   width: 30,
+                          //   materialName: recipeItem.name,
+                          // ),
+                          // const Text(
+                          //   ')',
+                          //   style: TextStyle(fontSize: 15),
+                          // ),
                         ],
                       ),
                       if (!isLast) ...[

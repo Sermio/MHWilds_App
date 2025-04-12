@@ -5,6 +5,7 @@ import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/monster_details.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
@@ -171,6 +172,7 @@ class _MonstersListState extends State<MonstersList> {
                         duration: const Duration(milliseconds: 900),
                         delay: Duration(milliseconds: index * 5),
                         child: CustomCard(
+                          shadowColor: AppColors.goldSoft,
                           onTap: () {
                             Navigator.push(
                               context,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +56,7 @@ class ItemDetails extends StatelessWidget {
                           .toList();
 
                       return CustomCard(
+                        shadowColor: AppColors.goldSoft,
                         title: Row(
                           children: [
                             if (monster.name.isNotEmpty)

@@ -146,7 +146,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                               from: 200,
                               child: Container(
                                 width: double.infinity,
-                                color: AppColors.goldSoft,
+                                color: AppColors.mutedOlive,
                                 child: Text(
                                   armorSet.name,
                                   style: const TextStyle(
@@ -165,6 +165,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                 delay: Duration(milliseconds: index * 80),
                                 from: 200,
                                 child: CustomCard(
+                                  shadowColor: AppColors.goldSoft,
                                   onTap: () {
                                     Navigator.push(
                                       context,

@@ -175,6 +175,7 @@ class MonsterRewards extends StatelessWidget {
               var filteredConditions = uniqueConditions.values.toList();
 
               return CustomCard(
+                shadowColor: AppColors.goldSoft,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -187,14 +188,14 @@ class MonsterRewards extends StatelessWidget {
                 },
                 title: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20),
                       child: SizedBox(
                         width: 30,
                         height: 30,
-                        child: MaterialImage(
-                          materialName: reward.item.name,
-                        ),
+                        // child: MaterialImage(
+                        //   materialName: reward.item.name,
+                        // ),
                       ),
                     ),
                     const SizedBox(

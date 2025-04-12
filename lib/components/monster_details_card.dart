@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/data/ailments.dart';
 import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 
 class MonsterDetailsCard extends StatelessWidget {
@@ -79,30 +80,7 @@ class MonsterDetailsCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Positioned(
-                    right: 10,
-                    child: GestureDetector(
-                      child: const Icon(
-                        Icons.info_outline,
-                      ),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => const AlertDialog(
-                            title: Center(
-                              child: Text(
-                                'Elements/Ailments',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            content: SizedBox(
-                              width: double.maxFinite,
-                              child: _ElementsAndAilments(),
-                            ),
-                          ),
-                        );
-                      },
-                    )),
+                const Positioned(right: 10, child: ElementsInfo()),
               ],
             ),
             const SizedBox(height: 15),
@@ -215,8 +193,27 @@ class MonsterDetailsCard extends StatelessWidget {
   }
 }
 
-class _ElementsAndAilments extends StatelessWidget {
-  const _ElementsAndAilments();
+class ElementsInfo extends StatelessWidget {
+  const ElementsInfo({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: const Icon(
+        Icons.info_outline,
+        color: AppColors.goldSoft,
+      ),
+      onTap: () {
+        elementsDialog(context);
+      },
+    );
+  }
+}
+
+class ElementsAndAilments extends StatelessWidget {
+  const ElementsAndAilments({super.key});
 
   @override
   Widget build(BuildContext context) {

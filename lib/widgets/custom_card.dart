@@ -12,6 +12,7 @@ class CustomCard extends StatelessWidget {
   final Color backgroundColor;
   final BorderRadius borderRadius;
   final double elevation;
+  final Color? shadowColor;
   final VoidCallback? onTap;
 
   const CustomCard({
@@ -27,6 +28,7 @@ class CustomCard extends StatelessWidget {
     this.backgroundColor = Colors.white,
     this.borderRadius = const BorderRadius.all(Radius.circular(12)),
     this.elevation = 3.0,
+    this.shadowColor,
     this.onTap,
   });
 
@@ -38,6 +40,7 @@ class CustomCard extends StatelessWidget {
         padding: padding,
         child: Material(
           elevation: elevation,
+          shadowColor: shadowColor, // <-- Aquí se usa
           borderRadius: borderRadius,
           color: backgroundColor,
           child: Container(

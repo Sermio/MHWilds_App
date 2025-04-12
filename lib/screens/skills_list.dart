@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
@@ -135,6 +136,7 @@ class _SkillListState2 extends State<SkillList> {
                         delay: Duration(milliseconds: index * 5),
                         from: 200,
                         child: CustomCard(
+                          shadowColor: AppColors.goldSoft,
                           onTap: () {
                             final skillIds =
                                 skill.ranks.map((s) => s.skill?.id).toList();

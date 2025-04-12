@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/decoration.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
@@ -132,6 +133,7 @@ class _DecorationsListState extends State<DecorationsList> {
                         duration: const Duration(milliseconds: 900),
                         delay: Duration(milliseconds: index * 5),
                         child: CustomCard(
+                          shadowColor: AppColors.goldSoft,
                           onTap: () {
                             final skillIds = decoration.skills
                                 .map((s) => s.skill.id)
