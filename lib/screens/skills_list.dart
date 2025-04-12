@@ -143,9 +143,7 @@ class _SkillListState2 extends State<SkillList> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => SkillDetails(
-                                  skillsIds: skillIds
-                                      .where((id) => id != null)
-                                      .toList() as List<int>,
+                                  skillsIds: skillIds.whereType<int>().toList(),
                                 ),
                               ),
                             );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/armor_piece.dart';
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
+import 'package:mhwilds_app/screens/armor_piece_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
@@ -164,23 +165,21 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                 delay: Duration(milliseconds: index * 80),
                                 from: 200,
                                 child: CustomCard(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ArmorDetails(
+                                          armor: piece,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   title: _CardTitle(armorPiece: piece),
                                   body: _CardBody(
                                     armorPiece: piece,
                                   ),
                                 ),
-                                // Ccard(
-                                //   cardData: piece,
-                                //   leading: Image.asset(
-                                //     'assets/imgs/armor/${piece.kind.toString().toLowerCase()}/rarity${piece.rarity}.webp',
-                                //     scale: 0.8,
-                                //   ),
-                                //   cardBody: _ArmorSetBody(
-                                //     armorSet: armorSet,
-                                //     piece: piece,
-                                //   ),
-                                //   cardTitle: piece.name,
-                                // ),
                               ),
                             );
                           }).values,

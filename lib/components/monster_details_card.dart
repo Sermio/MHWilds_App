@@ -291,7 +291,7 @@ class MonsterAttributes extends StatelessWidget {
               )
             : const SizedBox(
                 height: 25,
-                child: Center(child: Text("None")),
+                child: Center(child: Text("-")),
               ),
       ],
     );

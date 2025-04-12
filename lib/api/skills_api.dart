@@ -14,4 +14,17 @@ class SkillsApi {
       throw Exception('Error al cargar skills: ${response.statusCode}');
     }
   }
+
+  static Future<Skills> fetchSkillById(int skillId) async {
+    final response =
+        await http.get(Uri.parse('https://wilds.mhdb.io/en/skills/$skillId'));
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> jsonData = json.decode(response.body);
+      return Skills.fromJson(jsonData);
+    } else {
+      throw Exception(
+          'Error al cargar la skill con ID $skillId: ${response.statusCode}');
+    }
+  }
 }

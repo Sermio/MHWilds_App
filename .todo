@@ -1,5 +1,11 @@
-add armor decoration slots
-add mizutsune
+Add crafting cost to Amulets
+Add crafting cost to armors
+Add Weapons
+
+
+
+add armor decoration slots @done
+add mizutsune @done
 add guardian arkveld items @done
 add small monsters @done
 add female armor images, the url should be ypeB,         'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedArmorPieceName.toLowerCase().replaceAll(' ', '_')}_${armorPieceType}_typea_mhwilds_wiki_guide_200px.png',
