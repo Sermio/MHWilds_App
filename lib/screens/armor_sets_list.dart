@@ -386,29 +386,33 @@ class ArmorPieceSlotsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (armorPiece.slots.isEmpty ||
-        armorPiece.slots.every((slot) => slot == null)) {
-      return const Text(
-        '- - -',
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-      );
-    }
+    const int totalSlots = 3;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(width: 5),
-        ...armorPiece.slots.map((slot) {
+      children: List.generate(totalSlots, (index) {
+        final slot =
+            index < armorPiece.slots.length ? armorPiece.slots[index] : null;
+
+        if (slot == null) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 3),
+            child: Text(
+              '-',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          );
+        } else {
           return Padding(
-            padding: const EdgeInsets.only(right: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 3),
             child: SizedBox(
               width: 20,
               height: 20,
               child: getJewelSlotIcon(slot),
             ),
           );
-        }),
-      ],
+        }
+      }),
     );
   }
 }
