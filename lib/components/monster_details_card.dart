@@ -145,17 +145,13 @@ class MonsterDetailsCard extends StatelessWidget {
                 children: monster.locations.asMap().entries.map((location) {
                   int index = location.key;
                   String loc = location.value.name;
-                  return Bounce(
-                    from: 10,
-                    delay: Duration(milliseconds: index * 100),
-                    child: Cchip(
-                      itemName: loc,
-                      getItemColor: zoneBackgroundColor,
-                      optionalWidget: Image.asset(
-                        'assets/imgs/maps/map.png',
-                        width: 16,
-                        height: 16,
-                      ),
+                  return Cchip(
+                    itemName: loc,
+                    getItemColor: zoneBackgroundColor,
+                    optionalWidget: Image.asset(
+                      'assets/imgs/maps/map.png',
+                      width: 16,
+                      height: 16,
                     ),
                   );
                 }).toList(),

@@ -25,7 +25,7 @@ class Cdrawer extends StatelessWidget {
 
   Widget menuHeader() {
     return Image.asset(
-      'assets/imgs/drawer/header.jpg',
+      'assets/imgs/drawer/logo512.png',
       fit: BoxFit.cover,
     );
   }

@@ -17,16 +17,16 @@ class Cappbar extends StatelessWidget implements PreferredSizeWidget {
           Container(
               // color: const Color(0xFFC3A35D),
               ),
-          Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: Center(
-              child: Image.asset(
-                height: 80,
-                width: 80,
-                'assets/imgs/banner/test.webp',
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 5.0),
+          //   child: Center(
+          //     child: Image.asset(
+          //       height: 150,
+          //       width: 150,
+          //       'assets/imgs/logo/logo512transparent.png',
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
