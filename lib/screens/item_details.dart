@@ -28,12 +28,12 @@ class ItemDetails extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const SizedBox(height: 16),
-              SizedBox(
-                width: 60,
-                height: 60,
-                child: MaterialImage(materialName: item.name),
-              ),
+              // const SizedBox(height: 16),
+              // SizedBox(
+              //   width: 60,
+              //   height: 60,
+              //   child: MaterialImage(materialName: item.name),
+              // ),
               const SizedBox(height: 8),
               Text(
                 item.name,
