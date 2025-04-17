@@ -4,6 +4,7 @@ import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
+import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/screens/monster_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
@@ -125,14 +126,14 @@ class _MonstersListState extends State<MonstersList> {
                           spacing: 10.0,
                           children: zonesProvider.zones.map((zone) {
                             return FilterChip(
-                              label: Text(zone.name),
+                              label: Text(zone.name!),
                               labelStyle: const TextStyle(color: Colors.black),
-                              backgroundColor: zoneBackgroundColor(zone.name),
+                              backgroundColor: zoneBackgroundColor(zone.name!),
                               selected: _selectedLocations.contains(zone.name),
                               onSelected: (isSelected) {
                                 setState(() {
                                   if (isSelected) {
-                                    _selectedLocations.add(zone.name);
+                                    _selectedLocations.add(zone.name!);
                                   } else {
                                     _selectedLocations.remove(zone.name);
                                   }
@@ -295,7 +296,18 @@ class _MonsterBody extends StatelessWidget {
               ...locations.map((loc) {
                 // ignore: unnecessary_type_check
                 final name = (loc is Location) ? loc.name : '-';
-                return Cchip(itemName: name, getItemColor: zoneBackgroundColor);
+                return Cchip(
+                  itemName: name,
+                  getItemColor: zoneBackgroundColor,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => MonsterMapDetails(mapId: loc.id),
+                      ),
+                    );
+                  },
+                );
               }),
             ],
           ),

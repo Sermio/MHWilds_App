@@ -90,7 +90,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
               child: DropdownButton<String>(
                 dropdownColor: Colors.white,
                 value: _selectedKind,
-                hint: const Text('Select Kind'),
+                hint: const Text('Select Type'),
                 onChanged: (newKind) {
                   setState(() {
                     _selectedKind = newKind?.toLowerCase();

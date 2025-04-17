@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/data/ailments.dart';
 import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 
@@ -145,13 +146,26 @@ class MonsterDetailsCard extends StatelessWidget {
                 children: monster.locations.asMap().entries.map((location) {
                   int index = location.key;
                   String loc = location.value.name;
-                  return Cchip(
-                    itemName: loc,
-                    getItemColor: zoneBackgroundColor,
-                    optionalWidget: Image.asset(
-                      'assets/imgs/maps/map.png',
-                      width: 16,
-                      height: 16,
+                  return Bounce(
+                    from: 10,
+                    delay: Duration(milliseconds: index * 150),
+                    child: Cchip(
+                      itemName: loc,
+                      getItemColor: zoneBackgroundColor,
+                      optionalWidget: Image.asset(
+                        'assets/imgs/maps/map.png',
+                        width: 16,
+                        height: 16,
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                MonsterMapDetails(mapId: location.value.id),
+                          ),
+                        );
+                      },
                     ),
                   );
                 }).toList(),

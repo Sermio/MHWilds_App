@@ -3,11 +3,11 @@ import 'package:mhwilds_app/api/locations_api.dart';
 import 'package:mhwilds_app/models/location.dart';
 
 class LocationsProvider with ChangeNotifier {
-  List<Zone> _zones = [];
+  List<MapData> _zones = [];
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
-  List<Zone> get zones => _zones;
+  List<MapData> get zones => _zones;
 
   bool get hasData => _zones.isNotEmpty;
 

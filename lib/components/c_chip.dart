@@ -6,6 +6,7 @@ class Cchip<T> extends StatelessWidget {
   final String itemName;
   final Color Function(String) getItemColor;
   final Widget? optionalWidget;
+  final VoidCallback? onTap;
 
   const Cchip({
     super.key,
@@ -14,20 +15,13 @@ class Cchip<T> extends StatelessWidget {
     required this.itemName,
     required this.getItemColor,
     this.optionalWidget,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => MonsterMapDetails(
-        //             map: itemName,
-        //           )),
-        // );
-      },
+      onTap: onTap,
       child: Chip(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         elevation: 5,

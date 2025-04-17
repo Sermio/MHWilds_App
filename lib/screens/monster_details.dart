@@ -78,9 +78,9 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               tag: widget.monster.name,
               child: Image.asset(
                 'assets/imgs/monsters/${widget.monster.name.toLowerCase().replaceAll(' ', '_')}.png',
-                width: MediaQuery.of(context).size.width,
+                width: 380,
                 height: 250,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             Padding(
