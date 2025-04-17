@@ -20,4 +20,17 @@ class MonstersApi {
       throw Exception('Error loading monsters: ${response.statusCode}');
     }
   }
+
+  static Future<Monster> fetchMonsterById(int monsterId) async {
+    final response = await http
+        .get(Uri.parse('https://wilds.mhdb.io/en/monsters/$monsterId'));
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> jsonData = json.decode(response.body);
+      return Monster.fromJson(jsonData);
+    } else {
+      throw Exception(
+          'Error al cargar el monstruo con ID $monsterId: ${response.statusCode}');
+    }
+  }
 }

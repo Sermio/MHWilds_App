@@ -179,7 +179,7 @@ class _MonstersListState extends State<MonstersList> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => MonsterDetails(
-                                  monster: monster,
+                                  monsterId: monster.id,
                                 ),
                               ),
                             );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/material_image.dart';
+import 'package:mhwilds_app/api/monsters_api.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
@@ -7,55 +7,45 @@ import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 
 class MonsterDetails extends StatefulWidget {
-  final Monster monster;
+  final int monsterId;
 
-  const MonsterDetails({super.key, required this.monster});
+  const MonsterDetails({super.key, required this.monsterId});
 
   @override
-  // ignore: library_private_types_in_public_api
   _MonsterDetailsState createState() => _MonsterDetailsState();
 }
 
 class _MonsterDetailsState extends State<MonsterDetails> {
+  late Future<Monster> _monsterFuture;
   String selectedRank = 'low';
   bool isLowRankAvailable = false;
   bool isHighRankAvailable = false;
 
-  void checkAvailableRanks() {
+  @override
+  void initState() {
+    super.initState();
+    _monsterFuture = MonstersApi.fetchMonsterById(widget.monsterId);
+  }
+
+  void checkAvailableRanks(Monster monster) {
     bool lowAvailable = false;
     bool highAvailable = false;
 
-    for (var reward in widget.monster.rewards) {
+    for (var reward in monster.rewards) {
       for (var condition in reward.conditions) {
-        if (condition.rank == 'low') {
-          lowAvailable = true;
-        }
-        if (condition.rank == 'high') {
-          highAvailable = true;
-        }
+        if (condition.rank == 'low') lowAvailable = true;
+        if (condition.rank == 'high') highAvailable = true;
       }
     }
 
     if (!lowAvailable && highAvailable) {
-      setState(() {
-        selectedRank = 'high';
-      });
+      selectedRank = 'high';
     } else if (!highAvailable && lowAvailable) {
-      setState(() {
-        selectedRank = 'low';
-      });
+      selectedRank = 'low';
     }
 
-    setState(() {
-      isLowRankAvailable = lowAvailable;
-      isHighRankAvailable = highAvailable;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    checkAvailableRanks();
+    isLowRankAvailable = lowAvailable;
+    isHighRankAvailable = highAvailable;
   }
 
   void _onRankChanged(int index) {
@@ -66,78 +56,103 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.monster.name),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Hero(
-              tag: widget.monster.name,
-              child: Image.asset(
-                'assets/imgs/monsters/${widget.monster.name.toLowerCase().replaceAll(' ', '_')}.png',
-                width: 380,
-                height: 250,
-                fit: BoxFit.fill,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(0.0),
-              child: MonsterDetailsCard(monster: widget.monster),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ToggleButtons(
-                fillColor: AppColors.goldSoft,
-                borderRadius: BorderRadius.circular(10),
-                disabledColor: Colors.grey,
-                isSelected: [
-                  selectedRank == 'low' && isLowRankAvailable,
-                  selectedRank == 'high' && isHighRankAvailable,
-                ],
-                onPressed: (index) {
-                  if ((index == 0 && isLowRankAvailable) ||
-                      (index == 1 && isHighRankAvailable)) {
-                    _onRankChanged(index);
-                  }
-                },
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
-                      'Low',
-                      style: TextStyle(
-                        color: isLowRankAvailable ? Colors.black : Colors.grey,
-                      ),
-                    ),
+    return FutureBuilder<Monster>(
+      future: _monsterFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        } else if (snapshot.hasError) {
+          return Scaffold(
+            body: Center(child: Text('Error: ${snapshot.error}')),
+          );
+        } else if (!snapshot.hasData) {
+          return const Scaffold(
+            body: Center(child: Text('No se encontró el monstruo')),
+          );
+        }
+
+        final monster = snapshot.data!;
+        checkAvailableRanks(monster);
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(monster.name),
+            centerTitle: true,
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Hero(
+                  tag: monster.name,
+                  child: Image.asset(
+                    'assets/imgs/monsters/${monster.name.toLowerCase().replaceAll(' ', '_')}.png',
+                    width: 380,
+                    height: 250,
+                    fit: BoxFit.fill,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
-                      'High',
-                      style: TextStyle(
-                        color: isHighRankAvailable ? Colors.black : Colors.grey,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: MonsterDetailsCard(monster: monster),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: ToggleButtons(
+                    fillColor: AppColors.goldSoft,
+                    borderRadius: BorderRadius.circular(10),
+                    disabledColor: Colors.grey,
+                    isSelected: [
+                      selectedRank == 'low' && isLowRankAvailable,
+                      selectedRank == 'high' && isHighRankAvailable,
+                    ],
+                    onPressed: (index) {
+                      if ((index == 0 && isLowRankAvailable) ||
+                          (index == 1 && isHighRankAvailable)) {
+                        _onRankChanged(index);
+                      }
+                    },
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          'Low',
+                          style: TextStyle(
+                            color:
+                                isLowRankAvailable ? Colors.black : Colors.grey,
+                          ),
+                        ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          'High',
+                          style: TextStyle(
+                            color: isHighRankAvailable
+                                ? Colors.black
+                                : Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                  child: MonsterRewards(
+                    rewards: monster.rewards,
+                    selectedRank: selectedRank,
+                  ),
+                ),
+                const SizedBox(height: 50),
+              ],
             ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0.0),
-              child: MonsterRewards(
-                rewards: widget.monster.rewards,
-                selectedRank: selectedRank,
-              ),
-            ),
-            const SizedBox(height: 50),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
