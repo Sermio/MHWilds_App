@@ -59,19 +59,11 @@ class ElementsDialog extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Elementos y Estados',
+                          'Elements and Ailments',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          'Guía completa de Monster Hunter Wilds',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black54,
                           ),
                         ),
                       ],
