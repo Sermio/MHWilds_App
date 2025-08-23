@@ -452,7 +452,7 @@ class _MonstersListState extends State<MonstersList> {
         backgroundColor: AppColors.goldSoft,
         child: Icon(
           _filtersVisible ? Icons.close : Icons.tune,
-          color: Colors.white,
+          color: Colors.black,
         ),
       ),
     );

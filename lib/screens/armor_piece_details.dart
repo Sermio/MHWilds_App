@@ -262,6 +262,69 @@ class _ArmorResistancesRow extends StatelessWidget {
   }
 }
 
+class ArmorPieceSlotsWidget extends StatelessWidget {
+  final ArmorPiece armorPiece;
+
+  const ArmorPieceSlotsWidget({super.key, required this.armorPiece});
+
+  @override
+  Widget build(BuildContext context) {
+    if (armorPiece.slots.isEmpty) {
+      return const Text(
+        'No slots',
+        style: TextStyle(
+          color: Colors.grey,
+          fontStyle: FontStyle.italic,
+        ),
+      );
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: armorPiece.slots.map((slot) {
+        Color slotColor;
+        switch (slot) {
+          case 1:
+            slotColor = Colors.green;
+            break;
+          case 2:
+            slotColor = Colors.blue;
+            break;
+          case 3:
+            slotColor = Colors.purple;
+            break;
+          case 4:
+            slotColor = Colors.orange;
+            break;
+          default:
+            slotColor = Colors.grey;
+        }
+
+        return Container(
+          margin: const EdgeInsets.only(left: 4),
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+            color: slotColor.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: slotColor, width: 1),
+          ),
+          child: Center(
+            child: Text(
+              slot.toString(),
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                color: slotColor,
+              ),
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+}
+
 class _SkillsSection extends StatelessWidget {
   const _SkillsSection({
     super.key,
