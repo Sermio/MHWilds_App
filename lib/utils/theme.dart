@@ -22,8 +22,8 @@ class AppTheme {
     textTheme: const TextTheme(
       bodyMedium: TextStyle(color: Colors.black),
     ),
-    cardTheme:
-        const CardTheme(shadowColor: AppColors.goldSoft, color: Colors.white),
+    cardTheme: const CardThemeData(
+        shadowColor: AppColors.goldSoft, color: Colors.white),
     scaffoldBackgroundColor: Colors.white,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(

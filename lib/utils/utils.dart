@@ -280,21 +280,3 @@ String getKindImage(String skillKind) {
       return 'assets/imgs/armor/chest/rarity8.webp';
   }
 }
-
-Future<dynamic> elementsDialog(BuildContext context) {
-  return showDialog(
-    context: context,
-    builder: (context) => const AlertDialog(
-      title: Center(
-        child: Text(
-          'Elements/Ailments',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
-      content: SizedBox(
-        width: double.maxFinite,
-        child: ElementsAndAilments(),
-      ),
-    ),
-  );
-}

@@ -10,6 +10,7 @@ class Monster {
   final String features;
   final String tips;
   final int baseHealth;
+  final MonsterSize? size;
   final List<Ailment> ailments;
   final List<Location> locations;
   final List<Resistance> resistances;
@@ -28,6 +29,7 @@ class Monster {
     required this.features,
     required this.tips,
     required this.baseHealth,
+    this.size,
     required this.ailments,
     required this.locations,
     required this.resistances,
@@ -48,6 +50,7 @@ class Monster {
       features: json['features'] ?? '',
       tips: json['tips'] ?? '',
       baseHealth: json['baseHealth'] ?? 0,
+      size: json['size'] != null ? MonsterSize.fromJson(json['size']) : null,
       ailments: (json['ailments'] as List<dynamic>? ?? [])
           .map((e) => Ailment.fromJson(e))
           .toList(),
@@ -323,6 +326,29 @@ class BreakablePart {
       name: json['name'] ?? '',
       part: json['part'] ?? '',
       monsterId: json['monster']?['id'] ?? 0,
+    );
+  }
+}
+
+class MonsterSize {
+  final double base;
+  final double mini;
+  final double silver;
+  final double gold;
+
+  MonsterSize({
+    required this.base,
+    required this.mini,
+    required this.silver,
+    required this.gold,
+  });
+
+  factory MonsterSize.fromJson(Map<String, dynamic> json) {
+    return MonsterSize(
+      base: (json['base'] ?? 0.0).toDouble(),
+      mini: (json['mini'] ?? 0.0).toDouble(),
+      silver: (json['silver'] ?? 0.0).toDouble(),
+      gold: (json['gold'] ?? 0.0).toDouble(),
     );
   }
 }

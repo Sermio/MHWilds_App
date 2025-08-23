@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
+import 'package:mhwilds_app/components/elements_dialog.dart';
 import 'package:mhwilds_app/data/ailments.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
@@ -216,7 +217,10 @@ class ElementsInfo extends StatelessWidget {
         color: AppColors.goldSoft,
       ),
       onTap: () {
-        elementsDialog(context);
+        showDialog(
+          context: context,
+          builder: (context) => const ElementsDialog(),
+        );
       },
     );
   }
@@ -233,35 +237,88 @@ class ElementsAndAilments extends StatelessWidget {
         String ailmentName = ailments[index].keys.first;
         String description = ailments[index][ailmentName] ?? "";
 
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: ListTile(
-            title: Row(
-              children: [
-                SizedBox(
-                  height: 25,
-                  child: Image.asset(
-                    'assets/imgs/elements/${ailmentName.toLowerCase()}.webp',
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    ailmentName,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                    softWrap: true,
-                    overflow: TextOverflow.visible,
-                  ),
-                ),
-              ],
+        return Container(
+          margin: const EdgeInsets.only(bottom: 16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+            border: Border.all(
+              color: Colors.grey.withOpacity(0.2),
+              width: 1,
             ),
-            subtitle: Column(
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Divider(),
-                Text(description),
+                // Header con icono y nombre
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.orange.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Colors.orange.withOpacity(0.3),
+                          width: 1,
+                        ),
+                      ),
+                      child: Image.asset(
+                        'assets/imgs/elements/${ailmentName.toLowerCase()}.webp',
+                        height: 32,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Text(
+                        ailmentName
+                            .replaceAll('-', ' ')
+                            .split(' ')
+                            .map((word) =>
+                                word[0].toUpperCase() + word.substring(1))
+                            .join(' '),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 16),
+
+                // Descripción
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.grey.withOpacity(0.2),
+                      width: 1,
+                    ),
+                  ),
+                  child: Text(
+                    description,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.black87,
+                      height: 1.4,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
               ],
             ),
           ),

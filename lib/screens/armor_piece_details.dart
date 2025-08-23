@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/elements_dialog.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
@@ -158,7 +159,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
             children: [
               GestureDetector(
                 onTap: () {
-                  elementsDialog(context);
+                  ElementsDialog();
                 },
                 child: const Text("Resistances:",
                     style: TextStyle(
