@@ -7,6 +7,7 @@ import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
+import 'package:mhwilds_app/screens/weapons_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,6 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
         _appBarTitle = "Talismans";
       } else if (newScreen is ItemList) {
         _appBarTitle = "Items";
+      } else if (newScreen is WeaponsList) {
+        _appBarTitle = "Weapons";
       }
       _selectedScreen = newScreen;
     });

@@ -5,6 +5,7 @@ import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
+import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 
 class Cdrawer extends StatelessWidget {
@@ -143,6 +144,14 @@ class Cdrawer extends StatelessWidget {
             icon: Icons.shield,
             iconColor: Colors.blue[600]!,
             onTap: () => onItemSelected(const ArmorSetList()),
+          ),
+          const SizedBox(height: 8),
+          _buildMenuItem(
+            title: 'Weapons',
+            subtitle: 'Combat weapons and tools',
+            icon: Icons.gps_fixed,
+            iconColor: Colors.indigo[600]!,
+            onTap: () => onItemSelected(const WeaponsList()),
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
