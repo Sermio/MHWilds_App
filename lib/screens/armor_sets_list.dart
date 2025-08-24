@@ -20,6 +20,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
   final TextEditingController _searchNameController = TextEditingController();
   String _searchNameQuery = '';
   String? _selectedKind;
+  int? _selectedRarity;
   bool _filtersVisible = false;
 
   @override
@@ -46,13 +47,13 @@ class _ArmorSetListState extends State<ArmorSetList> {
   void _resetFilters() {
     setState(() {
       _searchNameQuery = '';
-      _searchNameController.clear();
       _selectedKind = null;
+      _selectedRarity = null;
+      _searchNameController.clear();
     });
 
     final provider = Provider.of<ArmorSetProvider>(context, listen: false);
     provider.clearFilters();
-    provider.applyFilters(name: '', kind: null);
   }
 
   @override
@@ -172,6 +173,51 @@ class _ArmorSetListState extends State<ArmorSetList> {
                           });
                           armorSetProvider.applyFilters(
                               name: _searchNameQuery, kind: _selectedKind);
+                        },
+                        elevation: 2,
+                        pressElevation: 4,
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Filtro de rareza
+                  const Text(
+                    'Rarity',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: [1, 2, 3, 4, 5, 6, 7].map((rarity) {
+                      return FilterChip(
+                        label: Text(
+                          'Rarity $rarity',
+                          style: TextStyle(
+                            color: _selectedRarity == rarity
+                                ? Colors.white
+                                : Colors.black87,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        backgroundColor:
+                            _getRarityColor(rarity).withOpacity(0.2),
+                        selectedColor: _getRarityColor(rarity),
+                        selected: _selectedRarity == rarity,
+                        onSelected: (isSelected) {
+                          setState(() {
+                            _selectedRarity = isSelected ? rarity : null;
+                          });
+                          armorSetProvider.applyFilters(
+                            name: _searchNameQuery,
+                            kind: _selectedKind,
+                            rarity: _selectedRarity,
+                          );
                         },
                         elevation: 2,
                         pressElevation: 4,
@@ -429,19 +475,19 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                   children: [
                                                     // Imagen de la armadura
                                                     Container(
-                                                      width: 60,
-                                                      height: 60,
+                                                      width: 35,
+                                                      height: 35,
                                                       decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(15),
+                                                                .circular(10),
                                                         boxShadow: [
                                                           BoxShadow(
                                                             color: AppColors
                                                                 .goldSoft
                                                                 .withOpacity(
                                                                     0.3),
-                                                            blurRadius: 8,
+                                                            blurRadius: 6,
                                                             offset:
                                                                 const Offset(
                                                                     0, 2),
@@ -451,7 +497,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                       child: ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(15),
+                                                                .circular(10),
                                                         child: Image.asset(
                                                           'assets/imgs/armor/${piece.kind}/rarity${piece.rarity}.webp',
                                                           fit: BoxFit.cover,
@@ -472,7 +518,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
-                                                              fontSize: 20,
+                                                              fontSize: 18,
                                                               color: Colors
                                                                   .black87,
                                                             ),
@@ -513,6 +559,49 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                                 fontSize: 12,
                                                                 color: _getKindColor(
                                                                     piece.kind),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 8),
+                                                          // Indicador de rarity
+                                                          Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                              horizontal: 8,
+                                                              vertical: 4,
+                                                            ),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: _getRarityColor(
+                                                                      piece
+                                                                          .rarity)
+                                                                  .withOpacity(
+                                                                      0.1),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              border:
+                                                                  Border.all(
+                                                                color: _getRarityColor(
+                                                                        piece
+                                                                            .rarity)
+                                                                    .withOpacity(
+                                                                        0.3),
+                                                              ),
+                                                            ),
+                                                            child: Text(
+                                                              'Rarity ${piece.rarity}',
+                                                              style: TextStyle(
+                                                                fontSize: 12,
+                                                                color: _getRarityColor(
+                                                                    piece
+                                                                        .rarity),
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w600,
@@ -859,6 +948,27 @@ class _ArmorSetListState extends State<ArmorSetList> {
         return Colors.orange[400]!;
       case 'legs':
         return Colors.purple[400]!;
+      default:
+        return Colors.grey[400]!;
+    }
+  }
+
+  Color _getRarityColor(int rarity) {
+    switch (rarity) {
+      case 1:
+        return Colors.grey[400]!;
+      case 2:
+        return Colors.green[400]!;
+      case 3:
+        return Colors.blue[400]!;
+      case 4:
+        return Colors.purple[400]!;
+      case 5:
+        return Colors.orange[400]!;
+      case 6:
+        return Colors.red[400]!;
+      case 7:
+        return Colors.amber[400]!;
       default:
         return Colors.grey[400]!;
     }

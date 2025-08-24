@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:mhwilds_app/models/amulet.dart';
+import 'package:mhwilds_app/models/talisman.dart';
 import 'dart:convert';
 
 class AmuletsApi {
@@ -11,7 +11,7 @@ class AmuletsApi {
       final List<dynamic> jsonData = json.decode(response.body);
       return jsonData.map((e) => Amulet.fromJson(e)).toList();
     } else {
-      throw Exception('Error al cargar amulets: ${response.statusCode}');
+      throw Exception('Error al cargar talismans: ${response.statusCode}');
     }
   }
 }

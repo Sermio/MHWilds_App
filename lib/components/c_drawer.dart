@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/screens/amulets_list.dart';
+import 'package:mhwilds_app/screens/talismans_list.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
@@ -130,7 +130,7 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            title: 'Amulets',
+            title: 'Talismans',
             subtitle: 'Powerful accessories',
             icon: Icons.workspace_premium,
             iconColor: AppColors.goldSoft,

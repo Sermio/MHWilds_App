@@ -1,10 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
-import 'package:mhwilds_app/providers/amulets_provider.dart';
+import 'package:mhwilds_app/providers/talismans_provider.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
 import 'package:provider/provider.dart';
-import 'package:mhwilds_app/models/amulet.dart';
+import 'package:mhwilds_app/models/talisman.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 
@@ -19,6 +19,7 @@ class AmuletList extends StatefulWidget {
 class _AmuletListState extends State<AmuletList> {
   final TextEditingController _searchNameController = TextEditingController();
   String _searchNameQuery = '';
+  int? _selectedRarity;
   bool _filtersVisible = false;
 
   @override
@@ -26,11 +27,11 @@ class _AmuletListState extends State<AmuletList> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final amuletProvider =
-          Provider.of<AmuletProvider>(context, listen: false);
+      final talismansProvider =
+          Provider.of<TalismansProvider>(context, listen: false);
 
-      if (!amuletProvider.hasData) {
-        amuletProvider.fetchAmulets();
+      if (!talismansProvider.hasData) {
+        talismansProvider.fetchAmulets();
       }
       _resetFilters();
     });
@@ -45,15 +46,16 @@ class _AmuletListState extends State<AmuletList> {
   void _resetFilters() {
     setState(() {
       _searchNameQuery = '';
+      _selectedRarity = null;
       _searchNameController.clear();
     });
-    Provider.of<AmuletProvider>(context, listen: false).clearFilters();
+    Provider.of<TalismansProvider>(context, listen: false).clearFilters();
   }
 
   @override
   Widget build(BuildContext context) {
-    final amuletProvider = Provider.of<AmuletProvider>(context);
-    List<Amulet> filteredAmulets = amuletProvider.filteredAmulets;
+    final talismansProvider = Provider.of<TalismansProvider>(context);
+    List<Amulet> filteredAmulets = talismansProvider.filteredAmulets;
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
@@ -110,11 +112,14 @@ class _AmuletListState extends State<AmuletList> {
                       setState(() {
                         _searchNameQuery = query;
                       });
-                      amuletProvider.applyFilters(name: _searchNameQuery);
+                      talismansProvider.applyFilters(
+                        name: _searchNameQuery,
+                        rarity: _selectedRarity,
+                      );
                     },
                     decoration: InputDecoration(
                       labelText: 'Search by Name',
-                      hintText: 'Enter amulet name...',
+                      hintText: 'Enter talisman name...',
                       prefixIcon:
                           const Icon(Icons.search, color: AppColors.goldSoft),
                       border: OutlineInputBorder(
@@ -130,14 +135,64 @@ class _AmuletListState extends State<AmuletList> {
                       fillColor: Colors.grey[50],
                     ),
                   ),
+                  const SizedBox(height: 16),
+
+                  // Filtro de rareza
+                  const Text(
+                    'Rarity',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: [1, 2, 3, 4, 5, 6, 7].map((rarity) {
+                      return FilterChip(
+                        label: Text(
+                          'Rarity $rarity',
+                          style: TextStyle(
+                            color: _selectedRarity == rarity
+                                ? Colors.white
+                                : Colors.black87,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        backgroundColor:
+                            _getRarityColor(rarity).withOpacity(0.2),
+                        selectedColor: _getRarityColor(rarity),
+                        selected: _selectedRarity == rarity,
+                        onSelected: (isSelected) {
+                          setState(() {
+                            _selectedRarity = isSelected ? rarity : null;
+                          });
+                          print('=== UI DEBUG ===');
+                          print('Selected rarity: $_selectedRarity');
+                          print('Current search query: $_searchNameQuery');
+                          print(
+                              'Calling applyFilters with rarity: $_selectedRarity');
+                          print('=== END UI DEBUG ===');
+                          talismansProvider.applyFilters(
+                            name: _searchNameQuery,
+                            rarity: _selectedRarity,
+                          );
+                        },
+                        elevation: 2,
+                        pressElevation: 4,
+                      );
+                    }).toList(),
+                  ),
                 ],
               ),
             ),
           ],
 
-          // Lista de amuletos
+          // Lista de talismanes
           Expanded(
-            child: amuletProvider.isLoading
+            child: talismansProvider.isLoading
                 ? const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -145,7 +200,7 @@ class _AmuletListState extends State<AmuletList> {
                         CircularProgressIndicator(color: AppColors.goldSoft),
                         SizedBox(height: 16),
                         Text(
-                          'Loading amulets...',
+                          'Loading talismans...',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey,
@@ -166,7 +221,7 @@ class _AmuletListState extends State<AmuletList> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'No amulets found',
+                              'No talismans found',
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.grey[600],
@@ -239,28 +294,28 @@ class _AmuletListState extends State<AmuletList> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        // Header del amuleto
+                                        // Header del talisman
                                         Row(
                                           children: [
-                                            // Imagen del amuleto
+                                            // Imagen del talisman
                                             Container(
-                                              width: 60,
-                                              height: 60,
+                                              width: 35,
+                                              height: 35,
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(15),
+                                                    BorderRadius.circular(10),
                                                 boxShadow: [
                                                   BoxShadow(
                                                     color: AppColors.goldSoft
                                                         .withOpacity(0.3),
-                                                    blurRadius: 8,
+                                                    blurRadius: 6,
                                                     offset: const Offset(0, 2),
                                                   ),
                                                 ],
                                               ),
                                               child: ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(15),
+                                                    BorderRadius.circular(10),
                                                 child: Image.asset(
                                                   'assets/imgs/amulets/rarity${firstRank?.rarity ?? 1}.webp',
                                                   fit: BoxFit.cover,
@@ -279,7 +334,7 @@ class _AmuletListState extends State<AmuletList> {
                                                     style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontSize: 20,
+                                                      fontSize: 18,
                                                       color: Colors.black87,
                                                     ),
                                                   ),
@@ -348,6 +403,7 @@ class _AmuletListState extends State<AmuletList> {
           ),
         ],
       ),
+      // Botón flotante para mostrar/ocultar filtros
       floatingActionButton: FloatingActionButton(
         onPressed: _toggleFiltersVisibility,
         backgroundColor: AppColors.goldSoft,

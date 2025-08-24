@@ -285,23 +285,23 @@ class _DecorationsListState extends State<DecorationsList> {
                                           children: [
                                             // Imagen de la decoración
                                             Container(
-                                              width: 60,
-                                              height: 60,
+                                              width: 35,
+                                              height: 35,
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(15),
+                                                    BorderRadius.circular(10),
                                                 boxShadow: [
                                                   BoxShadow(
                                                     color: AppColors.goldSoft
                                                         .withOpacity(0.3),
-                                                    blurRadius: 8,
+                                                    blurRadius: 6,
                                                     offset: const Offset(0, 2),
                                                   ),
                                                 ],
                                               ),
                                               child: ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(15),
+                                                    BorderRadius.circular(10),
                                                 child: Image.asset(
                                                   'assets/imgs/decorations/gem_level_${_getDecorationLevel(decoration.skills)}.png',
                                                   fit: BoxFit.cover,
@@ -319,7 +319,7 @@ class _DecorationsListState extends State<DecorationsList> {
                                                     style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontSize: 20,
+                                                      fontSize: 18,
                                                       color: Colors.black87,
                                                     ),
                                                   ),

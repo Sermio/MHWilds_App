@@ -10,6 +10,7 @@ class ArmorSetProvider with ChangeNotifier {
 
   String _nameFilter = '';
   String? _kindFilter;
+  int? _rarityFilter;
 
   List<ArmorSet> get armorSets => _filteredArmorSets;
   bool get isLoading => _isLoading;
@@ -34,11 +35,12 @@ class ArmorSetProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void applyFilters({String? name, String? kind}) {
+  void applyFilters({String? name, String? kind, int? rarity}) {
     _nameFilter = name ?? _nameFilter;
     _kindFilter = kind ?? _kindFilter;
+    _rarityFilter = rarity ?? _rarityFilter;
 
-    if (_nameFilter.isEmpty && _kindFilter == null) {
+    if (_nameFilter.isEmpty && _kindFilter == null && _rarityFilter == null) {
       _filteredArmorSets = List.from(_allArmorSets);
     } else {
       _filteredArmorSets = _allArmorSets
@@ -49,7 +51,9 @@ class ArmorSetProvider with ChangeNotifier {
             final filteredPieces = set.pieces.where((piece) {
               final matchesKind =
                   _kindFilter == null || piece.kind == _kindFilter;
-              return matchesKind;
+              final matchesRarity =
+                  _rarityFilter == null || piece.rarity == _rarityFilter;
+              return matchesKind && matchesRarity;
             }).toList();
 
             if (matchesName && filteredPieces.isNotEmpty) {
@@ -75,6 +79,7 @@ class ArmorSetProvider with ChangeNotifier {
   void clearFilters() {
     _nameFilter = '';
     _kindFilter = null;
+    _rarityFilter = null;
 
     _filteredArmorSets = List.from(_originalArmorSets);
 
