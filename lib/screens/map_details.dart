@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/models/location.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 
 class MonsterMapDetails extends StatefulWidget {
   const MonsterMapDetails({super.key, required this.mapId});
@@ -72,20 +73,101 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
   void _showFullImage(BuildContext context, String imagePath) {
     showDialog(
       context: context,
+      barrierDismissible: true,
       builder: (context) => Dialog(
         backgroundColor: Colors.transparent,
         insetPadding: const EdgeInsets.all(10),
-        child: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Center(
-            child: InteractiveViewer(
-              maxScale: double.infinity,
-              child: Image.asset(imagePath, fit: BoxFit.contain),
+        child: Stack(
+          children: [
+            // Área transparente que se puede tocar para cerrar
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Container(color: Colors.transparent),
+              ),
             ),
-          ),
+            // Imagen centrada con zoom que NO se puede tocar para cerrar
+            Center(
+              child: InteractiveViewer(
+                boundaryMargin: const EdgeInsets.all(20),
+                minScale: 0.5,
+                maxScale: 4.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        blurRadius: 20,
+                        spreadRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(imagePath, fit: BoxFit.contain),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  // Función para asignar colores según el nivel de riesgo
+  Color _getRiskColor(String? risk) {
+    if (risk == null) return Colors.grey;
+
+    String riskLower = risk.toLowerCase().trim();
+
+    // Riesgos bajos - Verde
+    if (riskLower.contains('low') ||
+        riskLower.contains('bajo') ||
+        riskLower == '1' ||
+        riskLower == 'safe' ||
+        riskLower == 'seguro') {
+      return Colors.green;
+    }
+
+    // Riesgos medios - Amarillo/Naranja
+    if (riskLower.contains('medium') ||
+        riskLower.contains('medio') ||
+        riskLower == '2' ||
+        riskLower == 'moderate' ||
+        riskLower == 'moderado') {
+      return Colors.orange;
+    }
+
+    // Riesgos altos - Rojo
+    if (riskLower.contains('high') ||
+        riskLower.contains('alto') ||
+        riskLower == '3' ||
+        riskLower == 'dangerous' ||
+        riskLower == 'peligroso') {
+      return Colors.red;
+    }
+
+    // Riesgos extremos - Púrpura
+    if (riskLower.contains('extreme') ||
+        riskLower.contains('extremo') ||
+        riskLower == '4' ||
+        riskLower == 'deadly' ||
+        riskLower == 'letal') {
+      return Colors.purple;
+    }
+
+    // Riesgos especiales - Azul
+    if (riskLower.contains('special') ||
+        riskLower.contains('especial') ||
+        riskLower.contains('unique') ||
+        riskLower.contains('único')) {
+      return Colors.blue;
+    }
+
+    // Por defecto - Gris
+    return Colors.grey;
   }
 
   Widget _buildCampList(int floor) {
@@ -95,83 +177,288 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: campsOnFloor.map((camp) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
-          child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            child: ListTile(
-              leading: const Icon(Icons.cabin_rounded),
-              title: Text(camp.name!),
-              subtitle: RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyMedium,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: AppColors.goldSoft.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Text(
+              'Camps of Level ${floor + 1}',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: AppColors.oliveBrown,
+              ),
+            ),
+          ),
+        ),
+        ...campsOnFloor.map((camp) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 12.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
                   children: [
-                    const TextSpan(
-                      text: 'Risk: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: AppColors.goldSoft,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.goldSoft.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.cabin_rounded,
+                        color: Colors.white,
+                        size: 24,
+                      ),
                     ),
-                    TextSpan(text: '${camp.risk}'),
-                    const TextSpan(
-                      text: '  |  Zone: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            camp.name!,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              _buildInfoChip(
+                                'Risk',
+                                '${camp.risk}',
+                                _getRiskColor(camp.risk),
+                              ),
+                              const SizedBox(width: 12),
+                              _buildInfoChip(
+                                'Zone',
+                                '${camp.zone}',
+                                AppColors.goldSoft,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    TextSpan(text: '${camp.zone}'),
                   ],
                 ),
               ),
             ),
+          );
+        }).toList(),
+      ],
+    );
+  }
+
+  Widget _buildInfoChip(String label, String value, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: color.withOpacity(0.3),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            '$label: ',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: color.withOpacity(0.8),
+            ),
           ),
-        );
-      }).toList(),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: color,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        centerTitle: true,
         title: Text(mapData?.name ?? 'Map'),
+        centerTitle: true,
+        elevation: 10,
+        backgroundColor: AppColors.goldSoft,
+        foregroundColor: Colors.white,
       ),
       body: isLoadingImages
-          ? const Center(child: CircularProgressIndicator())
+          ? Container(
+              height: 200,
+              margin: const EdgeInsets.all(20),
+              child: const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(AppColors.goldSoft),
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      'Loading map...',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
           : imageFiles.isEmpty
-              ? const Center(child: Text('No images found'))
+              ? Container(
+                  height: 200,
+                  margin: const EdgeInsets.all(20),
+                  child: const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.map_outlined,
+                          size: 64,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'No map images found',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               : SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: imageFiles.asMap().entries.map((entry) {
                       int index = entry.key;
                       String image = entry.value;
                       int floorIndex = index;
                       int levelLabel = index + 1;
 
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Level $levelLabel:',
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold)),
-                            const SizedBox(height: 10),
-                            GestureDetector(
-                              onTap: () => _showFullImage(context, image),
-                              child: FadeIn(
-                                duration: const Duration(milliseconds: 800),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: Image.asset(image),
-                                ),
+                      return FadeInUp(
+                        duration: Duration(milliseconds: 600 + (index * 200)),
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
                               ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(24),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.goldSoft,
+                                    borderRadius: BorderRadius.circular(25),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            AppColors.goldSoft.withOpacity(0.3),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Text(
+                                    'Level $levelLabel',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white,
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                GestureDetector(
+                                  onTap: () => _showFullImage(context, image),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 15,
+                                          offset: const Offset(0, 5),
+                                        ),
+                                      ],
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(16),
+                                      child: Image.asset(
+                                        image,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 24),
+                                _buildCampList(floorIndex),
+                              ],
                             ),
-                            const SizedBox(height: 16),
-                            _buildCampList(floorIndex),
-                          ],
+                          ),
                         ),
                       );
                     }).toList(),
