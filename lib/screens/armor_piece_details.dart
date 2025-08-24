@@ -3,7 +3,7 @@ import 'package:mhwilds_app/components/elements_dialog.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
-import 'package:mhwilds_app/models/armor_piece.dart';
+import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/api/skills_api.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
@@ -13,7 +13,7 @@ import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 
 class ArmorDetails extends StatefulWidget {
-  final ArmorPiece armor;
+  final armor_models.ArmorPiece armor;
 
   const ArmorDetails({super.key, required this.armor});
 
@@ -30,7 +30,8 @@ class _ArmorDetailsState extends State<ArmorDetails> {
     _skills = fetchSkillsForArmor(widget.armor);
   }
 
-  Future<List<Skills>> fetchSkillsForArmor(ArmorPiece armor) async {
+  Future<List<Skills>> fetchSkillsForArmor(
+      armor_models.ArmorPiece armor) async {
     List<Skills> skills = [];
     for (var skillInfo in armor.skills) {
       int skillId = skillInfo.skill.id;
@@ -46,75 +47,86 @@ class _ArmorDetailsState extends State<ArmorDetails> {
         title: Text(widget.armor.name),
         centerTitle: true,
       ),
+      backgroundColor: Colors.grey[50],
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 30.0),
-            //   child: SizedBox(
-            //     width: 50,
-            //     height: 50,
-            //     child: Image.asset(
-            //       'assets/imgs/armor/${widget.armor.kind.toString().toLowerCase()}/rarity${widget.armor.rarity}.webp',
-            //       scale: 0.5,
-            //     ),
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.all(16.0),
-            //   child: Text(
-            //     widget.armor.description,
-            //     style: const TextStyle(fontSize: 16),
-            //   ),
-            // ),
-            _buildSectionTitle("Stats"),
-            _buildStats(context),
-            _buildSectionTitle("Skills"),
-            _SkillsSection(skills: _skills, widget: widget),
-            _buildSectionTitle("Crafting Materials"),
-            CustomCard(
-              shadowColor: AppColors.goldSoft,
-              title: ListTile(
-                // leading: Image.asset(
-                //   'assets/imgs/materials/zenny.webp',
-                //   height: 40,
-                //   width: 40,
-                // ),
-                title: const Text(
-                  'Zenny',
-                  style: TextStyle(fontSize: 16),
-                ),
-                trailing: Text(
-                  'x${widget.armor.crafting.zennyCost}',
-                  style: const TextStyle(fontSize: 16),
-                ),
+            // Header de la pieza de armadura
+            Container(
+              margin: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-            ),
-            ...widget.armor.crafting.materials.map((material) => CustomCard(
-                  shadowColor: AppColors.goldSoft,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ItemDetails(
-                          item: material.item,
+              child: Column(
+                children: [
+                  // Imagen de la pieza de armadura
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.goldSoft.withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
                         ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        'assets/imgs/armor/${widget.armor.kind.toString().toLowerCase()}/rarity${widget.armor.rarity}.webp',
+                        fit: BoxFit.cover,
                       ),
-                    );
-                  },
-                  title: ListTile(
-                    // leading: MaterialImage(
-                    //   height: 40,
-                    //   width: 40,
-                    //   materialName: material.item.name,
-                    // ),
-                    title: Text(material.item.name),
-                    trailing: Text(
-                      'x${material.quantity}',
-                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
-                )),
+                  const SizedBox(height: 16),
+                  // Nombre de la pieza
+                  Text(
+                    widget.armor.name,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  // Descripción de la pieza
+                  if (widget.armor.description.isNotEmpty) ...[
+                    Text(
+                      widget.armor.description,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                        height: 1.4,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ],
+              ),
+            ),
+
+            // Sección de estadísticas
+            _buildStatsSection(),
+
+            // Sección de habilidades
+            _buildSkillsSection(),
+
+            // Sección de materiales de crafting
+            _buildCraftingSection(),
+
             const SizedBox(height: 40),
           ],
         ),
@@ -122,70 +134,119 @@ class _ArmorDetailsState extends State<ArmorDetails> {
     );
   }
 
-  Widget _buildStats(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+  Widget _buildStatsSection() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildMapRow("Rarity", widget.armor.rarity.toString()),
-          const Divider(),
-          _buildMapRow("Rank", widget.armor.rank),
-          const Divider(),
-          Row(
-            children: [
-              const Text(
-                'Slots',
-                style: TextStyle(fontWeight: FontWeight.bold),
+          // Título de la sección
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: AppColors.goldSoft.withOpacity(0.1),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
               ),
-              const Spacer(),
-              ArmorPieceSlotsWidget(armorPiece: widget.armor),
-            ],
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.analytics,
+                  color: AppColors.goldSoft,
+                  size: 24,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  'Statistics',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800],
+                  ),
+                ),
+              ],
+            ),
           ),
-          // _buildMapRow("Slots", widget.armor.slots.join(", ")),
-          const Divider(),
-          Row(
-            children: [
-              const Text("Armor:",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              const Spacer(),
-              ArmorBaseDefense(
-                baseDefense: widget.armor.defense['base']!,
-              ),
-            ],
+
+          // Contenido de estadísticas
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                _buildStatRow("Rarity", widget.armor.rarity.toString()),
+                const Divider(height: 24),
+                _buildStatRow("Rank", widget.armor.rank),
+                const Divider(height: 24),
+                _buildStatRow("Slots", "",
+                    trailing: ArmorPieceSlotsWidget(armorPiece: widget.armor)),
+                const Divider(height: 24),
+                _buildStatRow("Base Defense", "${widget.armor.defense['base']}",
+                    trailing: ArmorBaseDefense(
+                        baseDefense: widget.armor.defense['base']!)),
+                const Divider(height: 24),
+                _buildStatRow("Resistances", "",
+                    trailing: _ArmorResistancesRow(armor: widget.armor),
+                    onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const ElementsDialog(),
+                  );
+                }),
+              ],
+            ),
           ),
-          const Divider(),
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  ElementsDialog();
-                },
-                child: const Text("Resistances:",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.goldSoft)),
-              ),
-              const Spacer(),
-              _ArmorResistancesRow(armor: widget.armor),
-            ],
-          ),
-          const Divider(),
-          // _buildMapRow("Zenny Cost", "${widget.armor.crafting.zennyCost} z"),
-          // const Divider(),
         ],
       ),
     );
   }
 
-  Widget _buildMapRow(String title, String value) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget _buildStatRow(String title, String value,
+      {Widget? trailing, VoidCallback? onTap}) {
+    Widget content = Row(
       children: [
-        Text("$title:", style: const TextStyle(fontWeight: FontWeight.bold)),
-        Flexible(child: Text(value.toUpperCase(), textAlign: TextAlign.right)),
+        Text(
+          "$title:",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: onTap != null ? AppColors.goldSoft : Colors.grey[700],
+          ),
+        ),
+        const Spacer(),
+        if (trailing != null)
+          trailing
+        else
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black87,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
       ],
     );
+
+    if (onTap != null) {
+      return GestureDetector(
+        onTap: onTap,
+        child: content,
+      );
+    }
+
+    return content;
   }
 
   Widget _buildSectionTitle(String title) {
@@ -197,6 +258,412 @@ class _ArmorDetailsState extends State<ArmorDetails> {
           title,
           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSkillsSection() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Título de la sección
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: AppColors.goldSoft.withOpacity(0.1),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.flash_on,
+                  color: AppColors.goldSoft,
+                  size: 24,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  'Skills',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Contenido de habilidades
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: FutureBuilder<List<Skills>>(
+              future: _skills,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child:
+                          CircularProgressIndicator(color: AppColors.goldSoft),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Text(
+                        "Error loading skills",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                  );
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Text(
+                        "No skills available",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Column(
+                    children: snapshot.data!.map((skillInfo) {
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[50],
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: Colors.grey[200]!,
+                            width: 1,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.white,
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: UrlImageLoader(
+                                      itemName: skillInfo.name,
+                                      loadImageUrlFunction:
+                                          getValidSkillImageUrl,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        skillInfo.name,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black87,
+                                        ),
+                                      ),
+                                      if (skillInfo.description.isNotEmpty) ...[
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          skillInfo.description,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.grey[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            ...skillInfo.ranks.map((rank) {
+                              bool isCurrentLevel = widget.armor.skills.any(
+                                (armorSkill) =>
+                                    armorSkill.skill.id == skillInfo.id &&
+                                    armorSkill.level == rank.level,
+                              );
+
+                              return Container(
+                                margin: const EdgeInsets.only(bottom: 8),
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: isCurrentLevel
+                                      ? AppColors.goldSoft.withOpacity(0.1)
+                                      : Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: isCurrentLevel
+                                        ? AppColors.goldSoft.withOpacity(0.3)
+                                        : Colors.grey[200]!,
+                                    width: isCurrentLevel ? 2 : 1,
+                                  ),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 4,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: isCurrentLevel
+                                            ? AppColors.goldSoft
+                                            : Colors.grey[400],
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Text(
+                                        "Lv ${rank.level}",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: Text(
+                                        rank.description,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.black87,
+                                          fontWeight: isCurrentLevel
+                                              ? FontWeight.w500
+                                              : FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }).toList(),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  );
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCraftingSection() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Título de la sección
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: AppColors.goldSoft.withOpacity(0.1),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.build,
+                  color: AppColors.goldSoft,
+                  size: 24,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  'Crafting Materials',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Contenido de materiales
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                // Costo de Zenny
+                Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.grey[200]!,
+                      width: 1,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: AppColors.goldSoft.withOpacity(0.1),
+                        ),
+                        child: Icon(
+                          Icons.monetization_on,
+                          color: AppColors.goldSoft,
+                          size: 24,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          'Zenny',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'x${widget.armor.crafting.zennyCost}',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.goldSoft,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Materiales
+                ...widget.armor.crafting.materials
+                    .map((material) => Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[50],
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.grey[200]!,
+                              width: 1,
+                            ),
+                          ),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(12),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ItemDetails(
+                                      item: material.item,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: Colors.white,
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: MaterialImage(
+                                          materialName: material.item.name,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: Text(
+                                        material.item.name,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black87,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      'x${material.quantity}',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.goldSoft,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ))
+                    .toList(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -226,7 +693,7 @@ class ArmorBaseDefense extends StatelessWidget {
 }
 
 class _ArmorResistancesRow extends StatelessWidget {
-  final ArmorPiece armor;
+  final armor_models.ArmorPiece armor;
 
   const _ArmorResistancesRow({super.key, required this.armor});
 
@@ -263,7 +730,7 @@ class _ArmorResistancesRow extends StatelessWidget {
 }
 
 class ArmorPieceSlotsWidget extends StatelessWidget {
-  final ArmorPiece armorPiece;
+  final armor_models.ArmorPiece armorPiece;
 
   const ArmorPieceSlotsWidget({super.key, required this.armorPiece});
 
@@ -321,87 +788,6 @@ class ArmorPieceSlotsWidget extends StatelessWidget {
           ),
         );
       }).toList(),
-    );
-  }
-}
-
-class _SkillsSection extends StatelessWidget {
-  const _SkillsSection({
-    super.key,
-    required Future<List<Skills>> skills,
-    required this.widget,
-  }) : _skills = skills;
-
-  final Future<List<Skills>> _skills;
-  final ArmorDetails widget;
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<Skills>>(
-      future: _skills,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return const Center(child: Text("Error al cargar las habilidades"));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text("No hay habilidades disponibles"));
-        } else {
-          return Column(
-            children: snapshot.data!.map((skillInfo) {
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: UrlImageLoader(
-                          itemName: skillInfo.name,
-                          loadImageUrlFunction: getValidSkillImageUrl,
-                        ),
-                      ),
-                      title: Text(
-                        skillInfo.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(skillInfo.description),
-                    ),
-                    const SizedBox(height: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: skillInfo.ranks.map((rank) {
-                        bool isCurrentLevel = widget.armor.skills.any(
-                          (armorSkill) =>
-                              armorSkill.skill.id == skillInfo.id &&
-                              armorSkill.level == rank.level,
-                        );
-
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Lv ${rank.level}: ",
-                              style: isCurrentLevel
-                                  ? const TextStyle(fontWeight: FontWeight.bold)
-                                  : null,
-                            ),
-                            Expanded(child: Text(rank.description)),
-                          ],
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          );
-        }
-      },
     );
   }
 }

@@ -120,6 +120,96 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           // Consejos de caza
           if (monster.tips.isNotEmpty) ...[
             _buildInfoRow('Hunting Tips', monster.tips, isDescription: true),
+            const SizedBox(height: 12),
+          ],
+
+          // Variantes del monstruo
+          if (monster.variants.isNotEmpty) ...[
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.orange.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Colors.orange.withOpacity(0.3),
+                  width: 1,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.warning_amber,
+                        size: 20,
+                        color: Colors.orange[700],
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Monster Variants',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orange[700],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: monster.variants.map((variant) {
+                      bool isTempered =
+                          variant.kind.toLowerCase().contains('tempered') ||
+                              variant.name.toLowerCase().contains('tempered');
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: isTempered
+                              ? Colors.red.withOpacity(0.2)
+                              : Colors.blue.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: isTempered
+                                ? Colors.red.withOpacity(0.6)
+                                : Colors.blue.withOpacity(0.6),
+                            width: 2,
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              variant.name,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: isTempered
+                                    ? Colors.red[700]
+                                    : Colors.blue[700],
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              variant.kind,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: isTempered
+                                    ? Colors.red[600]
+                                    : Colors.blue[600],
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+            ),
           ],
         ],
       ),
@@ -905,15 +995,42 @@ class MonsterRewards extends StatelessWidget {
                                     word[0].toUpperCase() + word.substring(1))
                                 .join(' ');
 
+                            // Determinar si es tempered o arch-tempered
+                            bool isTempered = condition.kind
+                                .toLowerCase()
+                                .contains('tempered');
+                            bool isArchTempered = condition.kind
+                                .toLowerCase()
+                                .contains('arch-tempered');
+
+                            // Colores según el tipo de condición
+                            Color conditionColor;
+                            Color borderColor;
+                            Color backgroundColor;
+
+                            if (isArchTempered) {
+                              conditionColor = Colors.orange[700]!;
+                              borderColor = Colors.orange.withOpacity(0.6);
+                              backgroundColor = Colors.orange.withOpacity(0.1);
+                            } else if (isTempered) {
+                              conditionColor = Colors.purple[700]!;
+                              borderColor = Colors.purple.withOpacity(0.6);
+                              backgroundColor = Colors.purple.withOpacity(0.1);
+                            } else {
+                              conditionColor = Colors.grey[700]!;
+                              borderColor = Colors.grey[200]!;
+                              backgroundColor = Colors.grey[50]!;
+                            }
+
                             return Container(
                               margin: const EdgeInsets.only(bottom: 6),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
-                                color: Colors.grey[50],
+                                color: backgroundColor,
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
-                                  color: Colors.grey[200]!,
+                                  color: borderColor,
                                   width: 1,
                                 ),
                               ),
@@ -949,9 +1066,9 @@ class MonsterRewards extends StatelessWidget {
                                   Expanded(
                                     child: Text(
                                       formattedKind,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 14,
-                                        color: Colors.black87,
+                                        color: conditionColor,
                                         fontWeight: FontWeight.w500,
                                       ),
                                       softWrap: true,

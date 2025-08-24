@@ -255,6 +255,135 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                   ),
                                 ),
                               ),
+                              // Skills de grupo
+                              if (armorSet.groupBonus.ranks.isNotEmpty) ...[
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.goldSoft.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color:
+                                          AppColors.goldSoft.withOpacity(0.3),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.group_work,
+                                            size: 20,
+                                            color: AppColors.goldSoft,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Text(
+                                            'Set Bonus: ${armorSet.groupBonus.skill.name}',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.grey[800],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 12),
+                                      ...armorSet.groupBonus.ranks
+                                          .map((rank) => Container(
+                                                margin: const EdgeInsets.only(
+                                                    bottom: 8),
+                                                padding:
+                                                    const EdgeInsets.all(12),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  border: Border.all(
+                                                    color: AppColors.goldSoft
+                                                        .withOpacity(0.2),
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 4,
+                                                      ),
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            AppColors.goldSoft,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12),
+                                                      ),
+                                                      child: Text(
+                                                        '${rank.pieces} pieces',
+                                                        style: const TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 12),
+                                                    Expanded(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            'Level ${rank.skill.level}',
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color: Colors
+                                                                  .black87,
+                                                            ),
+                                                          ),
+                                                          if (rank
+                                                              .skill
+                                                              .description
+                                                              .isNotEmpty) ...[
+                                                            const SizedBox(
+                                                                height: 4),
+                                                            Text(
+                                                              rank.skill
+                                                                  .description,
+                                                              style: TextStyle(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .grey[600],
+                                                                height: 1.3,
+                                                              ),
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                            ),
+                                                          ],
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ))
+                                          .toList(),
+                                    ],
+                                  ),
+                                ),
+                              ],
                               // Piezas del set
                               ...armorSet.pieces.map((piece) => BounceInLeft(
                                     duration: const Duration(milliseconds: 600),
@@ -436,6 +565,91 @@ class _ArmorSetListState extends State<ArmorSetList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Sección de defensa
+        Row(
+          children: [
+            Icon(
+              Icons.shield,
+              size: 16,
+              color: AppColors.goldSoft,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              'Defense:',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[700],
+              ),
+            ),
+            const Spacer(),
+            Row(
+              children: [
+                SizedBox(
+                  height: 16,
+                  child: Image.asset(
+                    'assets/imgs/armor/armor.webp',
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  '${armorPiece.defense['base']}',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        // Sección de slots
+        Row(
+          children: [
+            Icon(
+              Icons.settings,
+              size: 16,
+              color: AppColors.goldSoft,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              'Slots:',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[700],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        _buildSlotsWidget(armorPiece),
+        const SizedBox(height: 12),
+        // Sección de resistencias
+        Row(
+          children: [
+            Icon(
+              Icons.security,
+              size: 16,
+              color: AppColors.goldSoft,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              'Resistances:',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[700],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        _buildResistancesWidget(armorPiece),
+        const SizedBox(height: 12),
+        // Sección de skills
         Row(
           children: [
             Icon(
@@ -513,6 +727,123 @@ class _ArmorSetListState extends State<ArmorSetList> {
               ),
             )),
       ],
+    );
+  }
+
+  Widget _buildSlotsWidget(armor_models.ArmorPiece armorPiece) {
+    if (armorPiece.slots.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.grey[300]!),
+        ),
+        child: Text(
+          'No slots',
+          style: TextStyle(
+            fontSize: 11,
+            color: Colors.grey[600],
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+      );
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: armorPiece.slots.map((slot) {
+        Color slotColor;
+        switch (slot) {
+          case 1:
+            slotColor = Colors.green;
+            break;
+          case 2:
+            slotColor = Colors.blue;
+            break;
+          case 3:
+            slotColor = Colors.purple;
+            break;
+          case 4:
+            slotColor = Colors.orange;
+            break;
+          default:
+            slotColor = Colors.grey;
+        }
+
+        return Container(
+          margin: const EdgeInsets.only(right: 6),
+          width: 18,
+          height: 18,
+          decoration: BoxDecoration(
+            color: slotColor.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: slotColor, width: 1),
+          ),
+          child: Center(
+            child: Text(
+              slot.toString(),
+              style: TextStyle(
+                fontSize: 9,
+                fontWeight: FontWeight.bold,
+                color: slotColor,
+              ),
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildResistancesWidget(armor_models.ArmorPiece armorPiece) {
+    if (armorPiece.resistances.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.grey[300]!),
+        ),
+        child: Text(
+          'No resistances',
+          style: TextStyle(
+            fontSize: 11,
+            color: Colors.grey[600],
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+      );
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: armorPiece.resistances.entries.map((entry) {
+        final resistanceType = entry.key;
+        final resistanceValue = entry.value;
+
+        return Container(
+          margin: const EdgeInsets.only(right: 8),
+          child: Row(
+            children: [
+              SizedBox(
+                height: 16,
+                child: Image.asset(
+                  'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
+                ),
+              ),
+              const SizedBox(width: 4),
+              Text(
+                resistanceValue.toString(),
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
+                ),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 
