@@ -126,21 +126,44 @@ class MonsterDetailsCard extends StatelessWidget {
                       runSpacing: 4,
                       alignment: WrapAlignment.center,
                       children: monster.variants.map((variant) {
+                        // Determinar si es tempered o arch-tempered
                         bool isTempered =
                             variant.kind.toLowerCase().contains('tempered') ||
                                 variant.name.toLowerCase().contains('tempered');
+                        bool isArchTempered = variant.kind
+                                .toLowerCase()
+                                .contains('arch-tempered') ||
+                            variant.name
+                                .toLowerCase()
+                                .contains('arch-tempered');
+
+                        // Colores según el tipo de variante
+                        Color variantColor;
+                        Color borderColor;
+                        Color backgroundColor;
+
+                        if (isArchTempered) {
+                          variantColor = Colors.orange[700]!;
+                          borderColor = Colors.orange.withOpacity(0.6);
+                          backgroundColor = Colors.orange.withOpacity(0.1);
+                        } else if (isTempered) {
+                          variantColor = Colors.purple[700]!;
+                          borderColor = Colors.purple.withOpacity(0.6);
+                          backgroundColor = Colors.purple.withOpacity(0.1);
+                        } else {
+                          variantColor = Colors.blue[700]!;
+                          borderColor = Colors.blue.withOpacity(0.6);
+                          backgroundColor = Colors.blue.withOpacity(0.1);
+                        }
+
                         return Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: isTempered
-                                ? Colors.red.withOpacity(0.2)
-                                : Colors.blue.withOpacity(0.2),
+                            color: backgroundColor,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: isTempered
-                                  ? Colors.red.withOpacity(0.6)
-                                  : Colors.blue.withOpacity(0.6),
+                              color: borderColor,
                               width: 1,
                             ),
                           ),
@@ -149,9 +172,7 @@ class MonsterDetailsCard extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
-                              color: isTempered
-                                  ? Colors.red[700]
-                                  : Colors.blue[700],
+                              color: variantColor,
                             ),
                           ),
                         );
@@ -169,18 +190,16 @@ class MonsterDetailsCard extends StatelessWidget {
                   attributeType: "Weaknesses",
                   children: monster.weaknesses
                       .where((w) =>
-                          (w.element != null && w.element!.isNotEmpty) ||
-                          (w.status != null &&
-                              w.status!.isNotEmpty &&
-                              w.level == 1))
+                          w.kind == 'element' &&
+                          w.element != null &&
+                          w.element!.isNotEmpty)
                       .map((w) {
-                    final value = w.element ?? w.status;
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: Column(
                         children: [
                           Image.asset(
-                            'assets/imgs/elements/${value!.toLowerCase()}.webp',
+                            'assets/imgs/elements/${w.element!.toLowerCase()}.webp',
                             height: 25,
                           ),
                         ],
@@ -191,7 +210,7 @@ class MonsterDetailsCard extends StatelessWidget {
                 MonsterAttributes(
                   attributeType: "Resistances",
                   children: monster.resistances
-                      .where((w) => w.element.isNotEmpty)
+                      .where((w) => w.kind == 'element' && w.element.isNotEmpty)
                       .map(
                         (w) => Image.asset(
                           'assets/imgs/elements/${w.element.toLowerCase()}.webp',

@@ -161,21 +161,42 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                     spacing: 8,
                     runSpacing: 8,
                     children: monster.variants.map((variant) {
+                      // Determinar si es tempered o arch-tempered
                       bool isTempered =
                           variant.kind.toLowerCase().contains('tempered') ||
                               variant.name.toLowerCase().contains('tempered');
+                      bool isArchTempered = variant.kind
+                              .toLowerCase()
+                              .contains('arch-tempered') ||
+                          variant.name.toLowerCase().contains('arch-tempered');
+
+                      // Colores según el tipo de variante
+                      Color variantColor;
+                      Color borderColor;
+                      Color backgroundColor;
+
+                      if (isArchTempered) {
+                        variantColor = Colors.orange[700]!;
+                        borderColor = Colors.orange.withOpacity(0.6);
+                        backgroundColor = Colors.orange.withOpacity(0.1);
+                      } else if (isTempered) {
+                        variantColor = Colors.purple[700]!;
+                        borderColor = Colors.purple.withOpacity(0.6);
+                        backgroundColor = Colors.purple.withOpacity(0.1);
+                      } else {
+                        variantColor = Colors.blue[700]!;
+                        borderColor = Colors.blue.withOpacity(0.6);
+                        backgroundColor = Colors.blue.withOpacity(0.1);
+                      }
+
                       return Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 8),
                         decoration: BoxDecoration(
-                          color: isTempered
-                              ? Colors.red.withOpacity(0.2)
-                              : Colors.blue.withOpacity(0.2),
+                          color: backgroundColor,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: isTempered
-                                ? Colors.red.withOpacity(0.6)
-                                : Colors.blue.withOpacity(0.6),
+                            color: borderColor,
                             width: 2,
                           ),
                         ),
@@ -186,9 +207,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
-                                color: isTempered
-                                    ? Colors.red[700]
-                                    : Colors.blue[700],
+                                color: variantColor,
                               ),
                             ),
                             const SizedBox(height: 4),
@@ -196,9 +215,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                               variant.kind,
                               style: TextStyle(
                                 fontSize: 12,
-                                color: isTempered
-                                    ? Colors.red[600]
-                                    : Colors.blue[600],
+                                color: variantColor,
                                 fontStyle: FontStyle.italic,
                               ),
                             ),
@@ -402,84 +419,6 @@ class _MonsterDetailsState extends State<MonsterDetails> {
     );
   }
 
-  // Sección de variantes
-  Widget _buildVariantsSection(Monster monster) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
-      padding: const EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.goldSoft.withOpacity(0.2),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const Text(
-              'Variants',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.orange,
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          ...monster.variants.map(
-            (variant) => Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.grey[50],
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey[200]!),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.swap_horiz, color: AppColors.goldSoft),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          variant.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                          ),
-                        ),
-                        Text(
-                          variant.kind,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   // Widgets auxiliares
   Widget _buildInfoRow(String label, String value,
       {bool isDescription = false}) {
@@ -554,8 +493,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           ),
         ),
         const SizedBox(height: 8),
-        ...weaknesses.where((w) => w.level == 1).map((w) {
-          final element = w.element ?? w.status ?? '';
+        ...weaknesses
+            .where((w) => w.kind == 'element' && w.level == 1)
+            .map((w) {
+          final element = w.element ?? '';
           if (element.isEmpty) return const SizedBox.shrink();
 
           return Container(
@@ -571,9 +512,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
   }
 
   Widget _buildResistancesColumn(List<Resistance> resistances) {
-    // Filtrar solo las resistencias que tienen elementos válidos
-    final validResistances =
-        resistances.where((r) => r.element.isNotEmpty).toList();
+    // Filtrar solo las resistencias elementales que tienen elementos válidos
+    final validResistances = resistances
+        .where((r) => r.kind == 'element' && r.element.isNotEmpty)
+        .toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -835,12 +777,6 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                 // Partes rompibles
                 if (monster.breakableParts.isNotEmpty) ...[
                   _buildBreakablePartsSection(monster),
-                  const SizedBox(height: 20),
-                ],
-
-                // Variantes del monstruo
-                if (monster.variants.isNotEmpty) ...[
-                  _buildVariantsSection(monster),
                   const SizedBox(height: 20),
                 ],
 

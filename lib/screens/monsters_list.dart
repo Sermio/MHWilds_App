@@ -333,30 +333,40 @@ class _MonstersListState extends State<MonstersList> {
                                           children: [
                                             Hero(
                                               tag: monster.name,
-                                              child: Container(
-                                                width: 60,
-                                                height: 60,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: AppColors.goldSoft
-                                                          .withOpacity(0.3),
-                                                      blurRadius: 8,
-                                                      offset:
-                                                          const Offset(0, 2),
+                                              child: Stack(
+                                                children: [
+                                                  Container(
+                                                    width: 100,
+                                                    height: 100,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: AppColors
+                                                              .goldSoft
+                                                              .withOpacity(0.3),
+                                                          blurRadius: 8,
+                                                          offset: const Offset(
+                                                              0, 2),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                  child: Image.asset(
-                                                    'assets/imgs/monster_icons/${monster.name.toLowerCase().replaceAll(' ', '_')}.png',
-                                                    fit: BoxFit.cover,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      child: Image.asset(
+                                                        'assets/imgs/monster_icons/${monster.name.toLowerCase().replaceAll(' ', '_')}.png',
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
+                                                  // Superposición de debilidades elementales
+                                                  ..._buildElementalWeaknessOverlays(
+                                                      monster),
+                                                ],
                                               ),
                                             ),
                                             const SizedBox(width: 16),
@@ -430,9 +440,6 @@ class _MonstersListState extends State<MonstersList> {
                                           const SizedBox(height: 16),
                                         ],
 
-                                        // Debilidades
-                                        _buildWeaknessesSection(monster),
-
                                         // Ubicaciones
                                         _buildLocationsSection(monster),
                                       ],
@@ -456,6 +463,76 @@ class _MonstersListState extends State<MonstersList> {
         ),
       ),
     );
+  }
+
+  List<Widget> _buildElementalWeaknessOverlays(Monster monster) {
+    // Debug: imprimir las debilidades del monstruo
+    print('Monster: ${monster.name}');
+    print('Total weaknesses: ${monster.weaknesses.length}');
+    monster.weaknesses.forEach((w) {
+      print('  - Kind: ${w.kind}, Element: ${w.element}, Level: ${w.level}');
+    });
+
+    // Mostrar todas las debilidades elementales, no solo las de nivel 2+
+    final elementalWeaknesses = monster.weaknesses.where((w) {
+      return w.kind == 'element';
+    }).toList();
+
+    print('Elemental weaknesses found: ${elementalWeaknesses.length}');
+
+    if (elementalWeaknesses.isEmpty) return [];
+
+    List<Widget> overlays = [];
+
+    // Posicionar las debilidades en la esquina inferior derecha del icono
+    for (int i = 0; i < elementalWeaknesses.length && i < 3; i++) {
+      final weakness = elementalWeaknesses[i];
+      final element = weakness.element?.toLowerCase();
+
+      if (element != null) {
+        overlays.add(
+          Positioned(
+            bottom: 2,
+            right: 2 + (i * 15), // Espaciado horizontal de derecha a izquierda
+            child: Image.asset(
+              'assets/imgs/elements/$element.webp',
+              width: 40,
+              height: 40,
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
+      }
+    }
+
+    return overlays;
+  }
+
+  Color _getElementColor(String element) {
+    switch (element) {
+      case 'fire':
+        return Colors.red;
+      case 'water':
+        return Colors.blue;
+      case 'ice':
+        return Colors.lightBlue;
+      case 'thunder':
+        return Colors.yellow;
+      case 'dragon':
+        return Colors.purple;
+      case 'poison':
+        return Colors.green;
+      case 'sleep':
+        return Colors.indigo;
+      case 'paralysis':
+        return Colors.orange;
+      case 'blast':
+        return Colors.deepOrange;
+      case 'bleeding':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
   }
 
   Widget _buildWeaknessesSection(Monster monster) {
@@ -487,14 +564,14 @@ class _MonstersListState extends State<MonstersList> {
             if (w.kind == 'element') {
               return Image.asset(
                 'assets/imgs/elements/${w.element!.toLowerCase()}.webp',
-                width: 24,
-                height: 24,
+                width: 16,
+                height: 16,
               );
             } else if (w.kind == 'status') {
               return Image.asset(
                 'assets/imgs/elements/${w.status!.toLowerCase()}.webp',
-                width: 24,
-                height: 24,
+                width: 16,
+                height: 16,
               );
             } else {
               return const SizedBox.shrink();
