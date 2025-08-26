@@ -196,14 +196,9 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                     trailing: ArmorBaseDefense(
                         baseDefense: widget.armor.defense['base']!)),
                 const Divider(height: 24),
-                _buildStatRow("Resistances", "",
-                    trailing: _ArmorResistancesRow(armor: widget.armor),
-                    onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => const ElementsDialog(),
-                  );
-                }),
+
+                // Sección de resistencias
+                ArmorResistancesWidget(armor: widget.armor),
               ],
             ),
           ),
@@ -535,135 +530,128 @@ class _ArmorDetailsState extends State<ArmorDetails> {
             ),
           ),
 
-          // Contenido de materiales
+          // Contenido de crafting
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                // Costo de Zenny
-                Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[50],
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Colors.grey[200]!,
-                      width: 1,
-                    ),
+                // Materiales (excluyendo Zenny si está en la lista)
+                if (widget.armor.crafting.materials.isNotEmpty) ...[
+                  _buildMaterialsSection(
+                    widget.armor.crafting.materials
+                        .where((material) =>
+                            material.item.name.toLowerCase() != 'zenny' &&
+                            material.item.name.toLowerCase() != 'zenny cost')
+                        .toList(),
                   ),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: AppColors.goldSoft.withOpacity(0.1),
-                        ),
-                        child: Icon(
-                          Icons.monetization_on,
-                          color: AppColors.goldSoft,
-                          size: 24,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Text(
-                          'Zenny',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black87,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'x${widget.armor.crafting.zennyCost}',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.goldSoft,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                ],
 
-                // Materiales
-                ...widget.armor.crafting.materials
-                    .map((material) => Container(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[50],
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Colors.grey[200]!,
-                              width: 1,
-                            ),
-                          ),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(12),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ItemDetails(
-                                      item: material.item,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: Colors.white,
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: MaterialImage(
-                                          materialName: material.item.name,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 16),
-                                    Expanded(
-                                      child: Text(
-                                        material.item.name,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black87,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      'x${material.quantity}',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: AppColors.goldSoft,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ))
-                    .toList(),
+                // Costo de Zenny como etiqueta amarilla separada
+                if (widget.armor.crafting.zennyCost > 0) ...[
+                  const SizedBox(height: 20),
+                  _buildCostChip('Craft', widget.armor.crafting.zennyCost),
+                ],
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildMaterialsSection(List<dynamic> materials) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ...materials.map((material) => _buildMaterialItem(material)).toList(),
+      ],
+    );
+  }
+
+  Widget _buildMaterialItem(dynamic material) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: Colors.grey[50],
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: Colors.grey[200]!,
+          width: 1,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ItemDetails(
+                  item: material.item,
+                ),
+              ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: MaterialImage(
+                      materialName: material.item.name,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    material.item.name,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+                Text(
+                  'x${material.quantity}',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.goldSoft,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCostChip(String label, int cost) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.amber[100],
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.amber[300]!),
+      ),
+      child: Text(
+        '$label: $cost Z',
+        style: TextStyle(
+          color: Colors.amber[800],
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }
@@ -699,6 +687,15 @@ class _ArmorResistancesRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildResistancesWidget(),
+      ],
+    );
+  }
+
+  Widget _buildResistancesWidget() {
     return Row(
       children: [
         ...armor.resistances.entries.map(
@@ -718,11 +715,64 @@ class _ArmorResistancesRow extends StatelessWidget {
                   ),
                   const SizedBox(width: 5),
                   Text(resistanceValue.toString()),
-                  // const SizedBox(width: 10),
                 ],
               ),
             );
           },
+        ),
+      ],
+    );
+  }
+}
+
+class ArmorResistancesWidget extends StatelessWidget {
+  final armor_models.ArmorPiece armor;
+
+  const ArmorResistancesWidget({super.key, required this.armor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              'Resistances:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: AppColors.goldSoft,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            ...armor.resistances.entries.map(
+              (entry) {
+                final resistanceType = entry.key;
+                final resistanceValue = entry.value;
+
+                return Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                        child: Image.asset(
+                          'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      Text(resistanceValue.toString()),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ],
     );

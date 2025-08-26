@@ -5,6 +5,7 @@ import 'package:mhwilds_app/providers/weapons_provider.dart';
 import 'package:mhwilds_app/screens/weapon_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/weapon_utils.dart';
+import 'package:mhwilds_app/components/sharpness_bar.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:provider/provider.dart';
@@ -768,7 +769,6 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   void _resetFilters() {
-    print('WeaponsList: Resetting filters');
     setState(() {
       _searchNameQuery = '';
       _selectedKind = null;
@@ -788,9 +788,6 @@ class _WeaponsListState extends State<WeaponsList> {
   Widget build(BuildContext context) {
     final weaponsProvider = Provider.of<WeaponsProvider>(context);
     final filteredWeapons = weaponsProvider.weapons;
-
-    print(
-        'WeaponsList: Building with _selectedKind: "$_selectedKind", filteredWeapons: ${filteredWeapons.length}');
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
@@ -1117,6 +1114,10 @@ class _WeaponsListState extends State<WeaponsList> {
                   _buildWeaponHeader(weapon),
                   const SizedBox(height: 16),
                   _buildWeaponStats(weapon),
+                  if (_hasSharpnessData(weapon)) ...[
+                    const SizedBox(height: 16),
+                    _buildSharpnessSection(weapon),
+                  ],
                   if (weapon.slots.isNotEmpty) ...[
                     const SizedBox(height: 16),
                     _buildWeaponSlots(weapon),
@@ -1303,6 +1304,9 @@ class _WeaponsListState extends State<WeaponsList> {
         // Sección de daño elemental si está disponible
         if (weapon.specials != null) ...[
           WeaponDisplayUtils.buildElementalDamageRow(weapon),
+        ],
+        // Solo añadir espacio si hay daño elemental
+        if (weapon.specials != null && _hasElementalDamage(weapon)) ...[
           const SizedBox(height: 12),
         ],
         // Sección de defense bonus
@@ -1347,9 +1351,54 @@ class _WeaponsListState extends State<WeaponsList> {
           const SizedBox(height: 12),
         ],
         // Sección de información adicional específica del tipo de arma
-        _buildAdditionalDamageInfo(weapon),
+        if (_hasAdditionalDamageInfo(weapon)) ...[
+          const SizedBox(height: 12),
+          _buildAdditionalDamageInfo(weapon),
+        ],
       ],
     );
+  }
+
+  // Método auxiliar para verificar si hay daño elemental
+  bool _hasElementalDamage(Weapon weapon) {
+    if (weapon.specials is List) {
+      final specials = weapon.specials as List;
+      return specials.any((special) {
+        if (special is Map<String, dynamic>) {
+          return (special['kind'] == 'element' ||
+                  special['kind'] == 'status') &&
+              special['damage'] != null &&
+              special['damage']['raw'] > 0;
+        }
+        return false;
+      });
+    }
+    return false;
+  }
+
+  // Método auxiliar para verificar si hay información adicional de daño
+  bool _hasAdditionalDamageInfo(Weapon weapon) {
+    switch (weapon.kind) {
+      case 'bow':
+        return weapon.coatings != null && weapon.coatings!.isNotEmpty;
+      case 'charge-blade':
+        return weapon.phial != null;
+      case 'gunlance':
+        return weapon.shell != null && weapon.shellLevel != null;
+      case 'switch-axe':
+        return weapon.phial != null;
+      case 'hunting-horn':
+        return weapon.melody != null ||
+            weapon.echoBubble != null ||
+            weapon.echoWave != null;
+      case 'heavy-bowgun':
+      case 'light-bowgun':
+        return weapon.ammo != null && weapon.ammo!.isNotEmpty;
+      case 'insect-glaive':
+        return weapon.kinsectLevel != null && weapon.kinsectLevel! > 0;
+      default:
+        return false;
+    }
   }
 
   Widget _buildAdditionalDamageInfo(Weapon weapon) {
@@ -2228,5 +2277,49 @@ class _WeaponsListState extends State<WeaponsList> {
     if (coatingLower.contains('sleep')) return 'sleep';
     if (coatingLower.contains('blast')) return 'blast';
     return 'fire'; // default
+  }
+
+  // Método auxiliar para verificar si el weapon tiene datos de sharpness
+  bool _hasSharpnessData(Weapon weapon) {
+    return weapon.sharpness.red > 0 ||
+        weapon.sharpness.orange > 0 ||
+        weapon.sharpness.yellow > 0 ||
+        weapon.sharpness.green > 0 ||
+        weapon.sharpness.blue > 0 ||
+        weapon.sharpness.white > 0 ||
+        weapon.sharpness.purple > 0;
+  }
+
+  // Método para construir la sección de sharpness
+  Widget _buildSharpnessSection(Weapon weapon) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(
+              Icons.content_cut,
+              color: AppColors.goldSoft,
+              size: 16,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              'Sharpness',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[700],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        SharpnessBar(
+          sharpness: weapon.sharpness,
+          height: 16,
+          borderRadius: 8,
+        ),
+      ],
+    );
   }
 }

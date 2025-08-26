@@ -7,6 +7,9 @@ import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/utils/weapon_utils.dart';
+import 'package:mhwilds_app/components/sharpness_bar.dart';
+import 'package:mhwilds_app/components/material_image.dart';
+import 'package:mhwilds_app/screens/item_details.dart';
 
 class WeaponDetails extends StatefulWidget {
   final Weapon weapon;
@@ -338,12 +341,45 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                _buildSharpnessBar(),
-                if (widget.weapon.handicraft.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  _buildStatRow(
-                      "Handicraft", "+${widget.weapon.handicraft.first}"),
-                ],
+                SharpnessBar(
+                  sharpness: widget.weapon.sharpness,
+                  height: 40,
+                  borderRadius: 20,
+                ),
+                const SizedBox(height: 12),
+                // Leyenda de colores
+                Wrap(
+                  spacing: 16,
+                  runSpacing: 8,
+                  children: [
+                    if (widget.weapon.sharpness.red > 0)
+                      _buildSharpnessLegend(
+                          'Red', Colors.red[400]!, widget.weapon.sharpness.red),
+                    if (widget.weapon.sharpness.orange > 0)
+                      _buildSharpnessLegend('Orange', Colors.orange[400]!,
+                          widget.weapon.sharpness.orange),
+                    if (widget.weapon.sharpness.yellow > 0)
+                      _buildSharpnessLegend('Yellow', Colors.yellow[600]!,
+                          widget.weapon.sharpness.yellow),
+                    if (widget.weapon.sharpness.green > 0)
+                      _buildSharpnessLegend('Green', Colors.green[400]!,
+                          widget.weapon.sharpness.green),
+                    if (widget.weapon.sharpness.blue > 0)
+                      _buildSharpnessLegend('Blue', Colors.blue[400]!,
+                          widget.weapon.sharpness.blue),
+                    if (widget.weapon.sharpness.white > 0)
+                      _buildSharpnessLegend(
+                          'White', Colors.white, widget.weapon.sharpness.white),
+                    if (widget.weapon.sharpness.purple > 0)
+                      _buildSharpnessLegend('Purple', Colors.purple[400]!,
+                          widget.weapon.sharpness.purple),
+                  ],
+                ),
+                // if (widget.weapon.handicraft.isNotEmpty) ...[
+                //   const SizedBox(height: 16),
+                //   _buildStatRow(
+                //       "Handicraft", "+${widget.weapon.handicraft.first}"),
+                // ],
               ],
             ),
           ),
@@ -352,119 +388,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     );
   }
 
-  Widget _buildSharpnessBar() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Barra de sharpness continua
-        Container(
-          height: 40,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                blurRadius: 4,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              if (widget.weapon.sharpness.red > 0)
-                _buildSharpnessSegment(
-                  widget.weapon.sharpness.red,
-                  Colors.red[400]!,
-                  isFirst: true,
-                ),
-              if (widget.weapon.sharpness.orange > 0)
-                _buildSharpnessSegment(
-                  widget.weapon.sharpness.orange,
-                  Colors.orange[400]!,
-                ),
-              if (widget.weapon.sharpness.yellow > 0)
-                _buildSharpnessSegment(
-                  widget.weapon.sharpness.yellow,
-                  Colors.yellow[600]!,
-                ),
-              if (widget.weapon.sharpness.green > 0)
-                _buildSharpnessSegment(
-                  widget.weapon.sharpness.green,
-                  Colors.green[400]!,
-                ),
-              if (widget.weapon.sharpness.blue > 0)
-                _buildSharpnessSegment(
-                  widget.weapon.sharpness.blue,
-                  Colors.blue[400]!,
-                ),
-              if (widget.weapon.sharpness.white > 0)
-                _buildSharpnessSegment(
-                  widget.weapon.sharpness.white,
-                  Colors.white,
-                  isLast: true,
-                ),
-              if (widget.weapon.sharpness.purple > 0)
-                _buildSharpnessSegment(
-                  widget.weapon.sharpness.purple,
-                  Colors.purple[400]!,
-                  isLast: true,
-                ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 12),
-        // Leyenda de colores
-        Wrap(
-          spacing: 16,
-          runSpacing: 8,
-          children: [
-            if (widget.weapon.sharpness.red > 0)
-              _buildSharpnessLegend(
-                  'Red', Colors.red[400]!, widget.weapon.sharpness.red),
-            if (widget.weapon.sharpness.orange > 0)
-              _buildSharpnessLegend('Orange', Colors.orange[400]!,
-                  widget.weapon.sharpness.orange),
-            if (widget.weapon.sharpness.yellow > 0)
-              _buildSharpnessLegend('Yellow', Colors.yellow[600]!,
-                  widget.weapon.sharpness.yellow),
-            if (widget.weapon.sharpness.green > 0)
-              _buildSharpnessLegend(
-                  'Green', Colors.green[400]!, widget.weapon.sharpness.green),
-            if (widget.weapon.sharpness.blue > 0)
-              _buildSharpnessLegend(
-                  'Blue', Colors.blue[400]!, widget.weapon.sharpness.blue),
-            if (widget.weapon.sharpness.white > 0)
-              _buildSharpnessLegend(
-                  'White', Colors.grey[800]!, widget.weapon.sharpness.white),
-            if (widget.weapon.sharpness.purple > 0)
-              _buildSharpnessLegend('Purple', Colors.purple[400]!,
-                  widget.weapon.sharpness.purple),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSharpnessSegment(int value, Color color,
-      {bool isFirst = false, bool isLast = false}) {
-    if (value == 0) return const SizedBox.shrink();
-
-    return Expanded(
-      flex: value,
-      child: Container(
-        height: 40,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.horizontal(
-            left: isFirst ? const Radius.circular(20) : Radius.zero,
-            right: isLast ? const Radius.circular(20) : Radius.zero,
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _buildSharpnessLegend(String label, Color color, int value) {
+    // Si el color es blanco, añadir un outline para que sea visible
+    final bool needsOutline = color == Colors.white;
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -473,6 +400,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           height: 12,
           decoration: BoxDecoration(
             color: color,
+            border: needsOutline
+                ? Border.all(color: Colors.grey[600]!, width: 2)
+                : null,
             borderRadius: BorderRadius.circular(6),
           ),
         ),
@@ -767,62 +697,29 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                // Status del weapon
-                Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: _getCraftingStatusColor().withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: _getCraftingStatusColor().withOpacity(0.3),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        _getCraftingStatusIcon(),
-                        color: _getCraftingStatusColor(),
-                        size: 24,
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        _getCraftingStatusText(),
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: _getCraftingStatusColor(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                if (widget.weapon.crafting.craftingMaterials.isNotEmpty) ...[
-                  const SizedBox(height: 20),
-                  _buildMaterialsSection('Crafting Materials',
-                      widget.weapon.crafting.craftingMaterials),
-                ],
-
+                // if (widget.weapon.crafting.craftingMaterials.isNotEmpty) ...[
+                //   _buildMaterialsSection(
+                //       widget.weapon.crafting.craftingMaterials),
+                // ],
                 if (widget.weapon.crafting.upgradeMaterials.isNotEmpty) ...[
-                  const SizedBox(height: 20),
-                  _buildMaterialsSection('Upgrade Materials',
+                  _buildMaterialsSection(
                       widget.weapon.crafting.upgradeMaterials),
                 ],
-
                 if (widget.weapon.crafting.craftingZennyCost > 0 ||
                     widget.weapon.crafting.upgradeZennyCost > 0) ...[
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      if (widget.weapon.crafting.craftingZennyCost > 0) ...[
-                        _buildCostChip(
-                            'Craft', widget.weapon.crafting.craftingZennyCost),
-                        const SizedBox(width: 12),
+                      // Mostrar solo upgradeZennyCost si hay ambos, o el que esté disponible
+                      if (_shouldShowUpgradeZennyCost()) ...[
+                        if (widget.weapon.crafting.upgradeZennyCost > 0)
+                          _buildCostChip('Upgrade',
+                              widget.weapon.crafting.upgradeZennyCost),
+                      ] else ...[
+                        if (widget.weapon.crafting.craftingZennyCost > 0)
+                          _buildCostChip('Craft',
+                              widget.weapon.crafting.craftingZennyCost),
                       ],
-                      if (widget.weapon.crafting.upgradeZennyCost > 0)
-                        _buildCostChip(
-                            'Upgrade', widget.weapon.crafting.upgradeZennyCost),
                     ],
                   ),
                 ],
@@ -834,19 +731,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     );
   }
 
-  Widget _buildMaterialsSection(String title, List<dynamic> materials) {
+  Widget _buildMaterialsSection(List<dynamic> materials) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Colors.black87,
-          ),
-        ),
-        const SizedBox(height: 12),
         ...materials.map((material) => _buildMaterialItem(material)).toList(),
       ],
     );
@@ -863,24 +751,61 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           width: 1,
         ),
       ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              material.item.name,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ItemDetails(
+                  item: material.item,
+                ),
               ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: MaterialImage(
+                      materialName: material.item.name,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    material.item.name,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+                Text(
+                  'x${material.quantity}',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.goldSoft,
+                  ),
+                ),
+              ],
             ),
           ),
-          Text(
-            'x${material.quantity}',
-            style: TextStyle(
-              color: Colors.grey[600],
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -1096,5 +1021,22 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     }
 
     return stats;
+  }
+
+  // Método auxiliar para determinar si mostrar upgradeZennyCost
+  bool _shouldShowUpgradeZennyCost() {
+    final hasCraftingCost = widget.weapon.crafting.craftingZennyCost > 0;
+    final hasUpgradeCost = widget.weapon.crafting.upgradeZennyCost > 0;
+
+    // Si tiene ambos, mostrar solo upgrade
+    if (hasCraftingCost && hasUpgradeCost) {
+      return true;
+    }
+    // Si solo tiene upgrade, mostrarlo
+    if (hasUpgradeCost) {
+      return true;
+    }
+    // Si solo tiene crafting, no mostrar upgrade
+    return false;
   }
 }

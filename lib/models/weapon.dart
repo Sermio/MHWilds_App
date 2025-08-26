@@ -66,8 +66,6 @@ class Weapon {
 
   factory Weapon.fromJson(Map<String, dynamic> json) {
     try {
-      print('Parsing weapon: ${json['name']}');
-
       // Parse damage with error handling
       Damage damage;
       try {

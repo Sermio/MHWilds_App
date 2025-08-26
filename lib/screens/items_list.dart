@@ -429,7 +429,7 @@ class _ItemListState extends State<ItemList> {
             Icon(
               Icons.construction,
               size: 16,
-              color: Colors.blue[400],
+              color: AppColors.goldSoft,
             ),
             const SizedBox(width: 6),
             Text(
@@ -443,27 +443,57 @@ class _ItemListState extends State<ItemList> {
           ],
         ),
         const SizedBox(height: 8),
-        Wrap(
-          spacing: 6,
-          runSpacing: 6,
-          children: item.recipes.first.inputs.map((recipeItem) {
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey[300]!),
-              ),
-              child: Text(
-                recipeItem.name,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            );
-          }).toList(),
+        Row(
+          children: [
+            ...item.recipes.first.inputs.asMap().entries.map((entry) {
+              final index = entry.key;
+              final recipeItem = entry.value;
+              final isLast = index == item.recipes.first.inputs.length - 1;
+
+              return Row(
+                children: [
+                  // Imagen del material
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: Colors.white,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
+                      child: MaterialImage(
+                        materialName: recipeItem.name,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  // Nombre del material
+                  Text(
+                    recipeItem.name,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  // Símbolo "+" si no es el último
+                  if (!isLast) ...[
+                    const SizedBox(width: 8),
+                    Text(
+                      '+',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                  ],
+                ],
+              );
+            }).toList(),
+          ],
         ),
       ],
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/api/monsters_api.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
+import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
@@ -493,20 +494,24 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           ),
         ),
         const SizedBox(height: 8),
-        ...weaknesses
-            .where((w) => w.kind == 'element' && w.level == 1)
-            .map((w) {
-          final element = w.element ?? '';
-          if (element.isEmpty) return const SizedBox.shrink();
+        Row(
+          children: [
+            ...weaknesses
+                .where((w) => w.kind == 'element' && w.level == 1)
+                .map((w) {
+              final element = w.element ?? '';
+              if (element.isEmpty) return const SizedBox.shrink();
 
-          return Container(
-            margin: const EdgeInsets.only(bottom: 4),
-            child: Image.asset(
-              'assets/imgs/elements/${element.toLowerCase()}.webp',
-              height: 25,
-            ),
-          );
-        }),
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Image.asset(
+                  'assets/imgs/elements/${element.toLowerCase()}.webp',
+                  height: 25,
+                ),
+              );
+            }),
+          ],
+        ),
       ],
     );
   }
@@ -547,22 +552,17 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             ),
           )
         else
-          ...validResistances.map((r) => Container(
-                margin: const EdgeInsets.only(bottom: 4),
-                child: Row(
-                  children: [
-                    Image.asset(
+          Row(
+            children: [
+              ...validResistances.map((r) => Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: Image.asset(
                       'assets/imgs/elements/${r.element.toLowerCase()}.webp',
                       height: 25,
                     ),
-                    const SizedBox(width: 8),
-                    Text(
-                      r.kind,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-              )),
+                  )),
+            ],
+          ),
       ],
     );
   }
@@ -909,16 +909,39 @@ class MonsterRewards extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Header con nombre del material
-                          Text(
-                            reward.item.name,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.black87,
-                            ),
-                            overflow: TextOverflow.visible,
-                            softWrap: true,
+                          // Header con imagen y nombre del material
+                          Row(
+                            children: [
+                              // Imagen del material
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Colors.white,
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: MaterialImage(
+                                    materialName: reward.item.name,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              // Nombre del material
+                              Expanded(
+                                child: Text(
+                                  reward.item.name,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.black87,
+                                  ),
+                                  overflow: TextOverflow.visible,
+                                  softWrap: true,
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 12),
 
