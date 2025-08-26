@@ -814,7 +814,7 @@ class _WeaponsListState extends State<WeaponsList> {
   Widget _buildFiltersSection(WeaponsProvider weaponsProvider) {
     return Container(
       margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(20),
+      height: 350, // Altura fija para los filtros
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -827,36 +827,56 @@ class _WeaponsListState extends State<WeaponsList> {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Icon(Icons.filter_list, color: AppColors.goldSoft),
-              const SizedBox(width: 8),
-              const Text(
-                'Filters',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+          // Header de filtros (fijo)
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.filter_list, color: AppColors.goldSoft),
+                const SizedBox(width: 8),
+                const Text(
+                  'Filters',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
                 ),
-              ),
-              const Spacer(),
-              TextButton.icon(
-                onPressed: _resetFilters,
-                icon: const Icon(Icons.refresh, size: 18),
-                label: const Text('Reset'),
-                style:
-                    TextButton.styleFrom(foregroundColor: AppColors.goldSoft),
-              ),
-            ],
+                const Spacer(),
+                TextButton.icon(
+                  onPressed: _resetFilters,
+                  icon: const Icon(Icons.refresh, size: 18),
+                  label: const Text('Reset'),
+                  style:
+                      TextButton.styleFrom(foregroundColor: AppColors.goldSoft),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 16),
-          _buildSearchField(weaponsProvider),
-          const SizedBox(height: 16),
-          _buildTypeFilter(weaponsProvider),
-          const SizedBox(height: 16),
-          _buildRarityFilter(weaponsProvider),
+          // Contenido de filtros con scroll
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildSearchField(weaponsProvider),
+                  const SizedBox(height: 16),
+                  _buildTypeFilter(weaponsProvider),
+                  const SizedBox(height: 16),
+                  _buildRarityFilter(weaponsProvider),
+                  const SizedBox(height: 20), // Espacio al final para scroll
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

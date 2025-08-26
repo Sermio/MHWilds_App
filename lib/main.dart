@@ -34,7 +34,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: AppTheme.lightTheme,
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: SafeArea(
+        top: false,
+        bottom: true,
+        child: const HomeScreen(),
+      ),
     );
   }
 }

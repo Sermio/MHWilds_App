@@ -64,7 +64,7 @@ class _ItemListState extends State<ItemList> {
           if (_filtersVisible) ...[
             Container(
               margin: const EdgeInsets.all(16),
-              padding: const EdgeInsets.all(20),
+              height: 250, // Altura fija para los filtros
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
@@ -77,100 +77,125 @@ class _ItemListState extends State<ItemList> {
                 ],
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.filter_list, color: AppColors.goldSoft),
-                      const SizedBox(width: 8),
-                      const Text(
-                        'Filters',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
+                  // Header de filtros (fijo)
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
                       ),
-                      const Spacer(),
-                      TextButton.icon(
-                        onPressed: _resetFilters,
-                        icon: const Icon(Icons.refresh, size: 18),
-                        label: const Text('Reset'),
-                        style: TextButton.styleFrom(
-                          foregroundColor: AppColors.goldSoft,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Campo de búsqueda por nombre
-                  TextField(
-                    controller: _searchNameController,
-                    onChanged: (query) {
-                      setState(() {
-                        _searchNameQuery = query;
-                      });
-                      itemsProvider.applyFilters(name: _searchNameQuery);
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'Search by Name',
-                      hintText: 'Enter item name...',
-                      prefixIcon:
-                          const Icon(Icons.search, color: AppColors.goldSoft),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.grey[300]!),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: AppColors.goldSoft, width: 2),
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey[50],
                     ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Filtro de rareza
-                  const Text(
-                    'Rarity',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8.0,
-                    runSpacing: 8.0,
-                    children: [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
-                      return FilterChip(
-                        label: Text(
-                          'Rarity $rarity',
+                    child: Row(
+                      children: [
+                        const Icon(Icons.filter_list,
+                            color: AppColors.goldSoft),
+                        const SizedBox(width: 8),
+                        const Text(
+                          'Filters',
                           style: TextStyle(
-                            color: _selectedRarity == rarity
-                                ? Colors.white
-                                : Colors.black87,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
                           ),
                         ),
-                        backgroundColor:
-                            _getRarityColor(rarity).withOpacity(0.2),
-                        selectedColor: _getRarityColor(rarity),
-                        selected: _selectedRarity == rarity,
-                        onSelected: (isSelected) {
-                          setState(() {
-                            _selectedRarity = isSelected ? rarity : null;
-                          });
-                          itemsProvider.applyFilters(rarity: _selectedRarity);
-                        },
-                        elevation: 2,
-                        pressElevation: 4,
-                      );
-                    }).toList(),
+                        const Spacer(),
+                        TextButton.icon(
+                          onPressed: _resetFilters,
+                          icon: const Icon(Icons.refresh, size: 18),
+                          label: const Text('Reset'),
+                          style: TextButton.styleFrom(
+                            foregroundColor: AppColors.goldSoft,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Contenido de filtros con scroll
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Campo de búsqueda por nombre
+                          TextField(
+                            controller: _searchNameController,
+                            onChanged: (query) {
+                              setState(() {
+                                _searchNameQuery = query;
+                              });
+                              itemsProvider.applyFilters(
+                                  name: _searchNameQuery);
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'Search by Name',
+                              hintText: 'Enter item name...',
+                              prefixIcon: const Icon(Icons.search,
+                                  color: AppColors.goldSoft),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide:
+                                    BorderSide(color: Colors.grey[300]!),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide(
+                                    color: AppColors.goldSoft, width: 2),
+                              ),
+                              filled: true,
+                              fillColor: Colors.grey[50],
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+
+                          // Filtro de rareza
+                          const Text(
+                            'Rarity',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8.0,
+                            runSpacing: 8.0,
+                            children: [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
+                              return FilterChip(
+                                label: Text(
+                                  'Rarity $rarity',
+                                  style: TextStyle(
+                                    color: _selectedRarity == rarity
+                                        ? Colors.white
+                                        : Colors.black87,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                backgroundColor:
+                                    _getRarityColor(rarity).withOpacity(0.2),
+                                selectedColor: _getRarityColor(rarity),
+                                selected: _selectedRarity == rarity,
+                                onSelected: (isSelected) {
+                                  setState(() {
+                                    _selectedRarity =
+                                        isSelected ? rarity : null;
+                                  });
+                                  itemsProvider.applyFilters(
+                                      rarity: _selectedRarity);
+                                },
+                                elevation: 2,
+                                pressElevation: 4,
+                              );
+                            }).toList(),
+                          ),
+                          const SizedBox(
+                              height: 20), // Espacio al final para scroll
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
