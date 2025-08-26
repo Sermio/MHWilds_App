@@ -956,12 +956,9 @@ class _WeaponsListState extends State<WeaponsList> {
               selectedColor: _getKindColor(kind),
               selected: _selectedKind == kind,
               onSelected: (isSelected) {
-                print(
-                    'WeaponsList: Filter selected - kind: "$kind", isSelected: $isSelected');
                 setState(() {
                   _selectedKind = isSelected ? kind : null;
                 });
-                print('WeaponsList: _selectedKind set to: "$_selectedKind"');
                 weaponsProvider.applyFilters(
                   name: _searchNameQuery,
                   kind: _selectedKind,

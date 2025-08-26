@@ -494,18 +494,11 @@ class _MonstersListState extends State<MonstersList> {
 
   List<Widget> _buildElementalWeaknessOverlays(Monster monster) {
     // Debug: imprimir las debilidades del monstruo
-    print('Monster: ${monster.name}');
-    print('Total weaknesses: ${monster.weaknesses.length}');
-    monster.weaknesses.forEach((w) {
-      print('  - Kind: ${w.kind}, Element: ${w.element}, Level: ${w.level}');
-    });
 
     // Mostrar todas las debilidades elementales, no solo las de nivel 2+
     final elementalWeaknesses = monster.weaknesses.where((w) {
       return w.kind == 'element';
     }).toList();
-
-    print('Elemental weaknesses found: ${elementalWeaknesses.length}');
 
     if (elementalWeaknesses.isEmpty) return [];
 
