@@ -44,8 +44,20 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
         targetSdk = 35
-        versionCode = 12
-        versionName = "1.0.9"
+        versionCode = 13
+        versionName = "1.0.10"
+        
+        // Soporte para tamaños de página de memoria de 16 kB
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64', 'x86'
+        }
+    }
+    
+    // Configuración para soporte de 16 kB
+    bundle {
+        abi {
+            enableSplit = true
+        }
     }
 
     signingConfigs {
