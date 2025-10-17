@@ -13,16 +13,20 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => SkillsProvider()),
-      ChangeNotifierProvider(create: (_) => ArmorSetProvider()),
-      ChangeNotifierProvider(create: (_) => TalismansProvider()),
-      ChangeNotifierProvider(create: (_) => DecorationsProvider()),
-      ChangeNotifierProvider(create: (_) => ItemsProvider()),
-      ChangeNotifierProvider(create: (_) => MonstersProvider()),
-      ChangeNotifierProvider(create: (_) => LocationsProvider()),
-      ChangeNotifierProvider(create: (_) => WeaponsProvider()),
-    ], child: const MyApp()),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SkillsProvider(), lazy: true),
+        ChangeNotifierProvider(create: (_) => ArmorSetProvider(), lazy: true),
+        ChangeNotifierProvider(create: (_) => TalismansProvider(), lazy: true),
+        ChangeNotifierProvider(
+            create: (_) => DecorationsProvider(), lazy: true),
+        ChangeNotifierProvider(create: (_) => ItemsProvider(), lazy: true),
+        ChangeNotifierProvider(create: (_) => MonstersProvider(), lazy: true),
+        ChangeNotifierProvider(create: (_) => LocationsProvider(), lazy: true),
+        ChangeNotifierProvider(create: (_) => WeaponsProvider(), lazy: true),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
 
@@ -34,11 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: AppTheme.lightTheme,
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        top: false,
-        bottom: true,
-        child: const HomeScreen(),
-      ),
+      home: const HomeScreen(),
     );
   }
 }
