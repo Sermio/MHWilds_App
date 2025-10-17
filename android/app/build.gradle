@@ -51,12 +51,29 @@ android {
         ndk {
             abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64', 'x86'
         }
+        
+        // Configuración específica para soporte de páginas de 16 kB
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_PAGE_SIZE_AGNOSTIC=ON"
+            }
+        }
     }
     
     // Configuración para soporte de 16 kB
     bundle {
         abi {
             enableSplit = true
+        }
+    }
+    
+    // Configuración adicional para soporte de páginas de 16 kB
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+        resources {
+            excludes += ['META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0']
         }
     }
 
