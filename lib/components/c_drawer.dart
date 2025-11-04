@@ -16,22 +16,26 @@ class Cdrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.grey[50]!,
-              Colors.white,
+      child: SafeArea(
+        top: false,
+        bottom: true,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.grey[50]!,
+                Colors.white,
+              ],
+            ),
+          ),
+          child: Column(
+            children: [
+              menuHeader(),
+              Expanded(child: SingleChildScrollView(child: menuItems())),
             ],
           ),
-        ),
-        child: Column(
-          children: [
-            menuHeader(),
-            Expanded(child: SingleChildScrollView(child: menuItems())),
-          ],
         ),
       ),
     );
@@ -103,7 +107,7 @@ class Cdrawer extends StatelessWidget {
 
   Widget menuItems() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
       child: Column(
         children: [
           _buildMenuItem(
