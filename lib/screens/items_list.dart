@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/item.dart';
@@ -258,10 +257,7 @@ class _ItemListState extends State<ItemList> {
                         itemBuilder: (context, index) {
                           final item = filteredItems[index];
 
-                          return BounceInLeft(
-                            duration: const Duration(milliseconds: 600),
-                            delay: Duration(milliseconds: index * 50),
-                            child: Container(
+                          return Container(
                               margin: const EdgeInsets.only(bottom: 16),
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -402,8 +398,7 @@ class _ItemListState extends State<ItemList> {
                                   ),
                                 ),
                               ),
-                            ),
-                          );
+                            );
                         },
                       ),
           ),

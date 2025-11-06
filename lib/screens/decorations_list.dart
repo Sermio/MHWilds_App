@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/decoration.dart';
@@ -259,142 +258,137 @@ class _DecorationsListState extends State<DecorationsList> {
                         itemBuilder: (context, index) {
                           final decoration = filteredDecorations[index];
 
-                          return BounceInLeft(
-                            duration: const Duration(milliseconds: 600),
-                            delay: Duration(milliseconds: index * 50),
-                            child: Container(
-                              margin: const EdgeInsets.only(bottom: 16),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: 16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
                                 borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(20),
-                                  onTap: () {
-                                    // Navegar a la pantalla de detalles de habilidades
-                                    final skillIds = decoration.skills
-                                        .map((s) => s.skill.id)
-                                        .toList();
-                                    final skillLevels = decoration.skills
-                                        .map((s) => s.level)
-                                        .toList();
+                                onTap: () {
+                                  // Navegar a la pantalla de detalles de habilidades
+                                  final skillIds = decoration.skills
+                                      .map((s) => s.skill.id)
+                                      .toList();
+                                  final skillLevels = decoration.skills
+                                      .map((s) => s.level)
+                                      .toList();
 
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => SkillDetails(
-                                          skillsIds: skillIds,
-                                          skillsLevels: skillLevels,
-                                        ),
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SkillDetails(
+                                        skillsIds: skillIds,
+                                        skillsLevels: skillLevels,
                                       ),
-                                    );
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        // Header de la decoración
-                                        Row(
-                                          children: [
-                                            // Imagen de la decoración
-                                            Container(
-                                              width: 35,
-                                              height: 35,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: AppColors.goldSoft
-                                                        .withOpacity(0.3),
-                                                    blurRadius: 6,
-                                                    offset: const Offset(0, 2),
-                                                  ),
-                                                ],
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Image.asset(
-                                                  'assets/imgs/decorations/gem_level_${_getDecorationLevel(decoration.skills)}.png',
-                                                  fit: BoxFit.cover,
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Header de la decoración
+                                      Row(
+                                        children: [
+                                          // Imagen de la decoración
+                                          Container(
+                                            width: 35,
+                                            height: 35,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: AppColors.goldSoft
+                                                      .withOpacity(0.3),
+                                                  blurRadius: 6,
+                                                  offset: const Offset(0, 2),
                                                 ),
+                                              ],
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: Image.asset(
+                                                'assets/imgs/decorations/gem_level_${_getDecorationLevel(decoration.skills)}.png',
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
-                                            const SizedBox(width: 16),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    decoration.name,
-                                                    style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 18,
-                                                      color: Colors.black87,
-                                                    ),
+                                          ),
+                                          const SizedBox(width: 16),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  decoration.name,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18,
+                                                    color: Colors.black87,
                                                   ),
-                                                  const SizedBox(height: 4),
-                                                  Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 8,
-                                                        vertical: 4),
-                                                    decoration: BoxDecoration(
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 4),
+                                                  decoration: BoxDecoration(
+                                                    color: _getTypeColor(
+                                                            decoration.kind)
+                                                        .withOpacity(0.1),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    border: Border.all(
                                                       color: _getTypeColor(
                                                               decoration.kind)
-                                                          .withOpacity(0.1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      border: Border.all(
-                                                        color: _getTypeColor(
-                                                                decoration.kind)
-                                                            .withOpacity(0.3),
-                                                      ),
-                                                    ),
-                                                    child: Text(
-                                                      decoration.kind,
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: _getTypeColor(
-                                                            decoration.kind),
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                          .withOpacity(0.3),
                                                     ),
                                                   ),
-                                                ],
-                                              ),
+                                                  child: Text(
+                                                    decoration.kind,
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: _getTypeColor(
+                                                          decoration.kind),
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: Colors.grey[400],
-                                              size: 20,
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 16),
-
-                                        // Habilidades
-                                        if (decoration.skills.isNotEmpty) ...[
-                                          _buildSkillsSection(decoration),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: Colors.grey[400],
+                                            size: 20,
+                                          ),
                                         ],
+                                      ),
+                                      const SizedBox(height: 16),
+
+                                      // Habilidades
+                                      if (decoration.skills.isNotEmpty) ...[
+                                        _buildSkillsSection(decoration),
                                       ],
-                                    ),
+                                    ],
                                   ),
                                 ),
                               ),

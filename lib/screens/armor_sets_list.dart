@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
@@ -456,10 +455,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                 ),
                               ],
                               // Piezas del set
-                              ...armorSet.pieces.map((piece) => BounceInLeft(
-                                    duration: const Duration(milliseconds: 600),
-                                    delay: Duration(milliseconds: index * 50),
-                                    child: Container(
+                              ...armorSet.pieces.map((piece) => Container(
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 16, vertical: 8),
                                       decoration: BoxDecoration(
@@ -656,7 +652,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                         ),
                                       ),
                                     ),
-                                  )),
+                                  ),
                             ],
                           );
                         },
