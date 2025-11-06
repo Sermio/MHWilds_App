@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/skills.dart';
@@ -260,10 +259,7 @@ class _SkillListState2 extends State<SkillList> {
                         itemBuilder: (context, index) {
                           final skill = filteredSkills[index];
 
-                          return BounceInLeft(
-                            duration: const Duration(milliseconds: 600),
-                            delay: Duration(milliseconds: index * 50),
-                            child: Container(
+                          return Container(
                               margin: const EdgeInsets.only(bottom: 16),
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -401,8 +397,7 @@ class _SkillListState2 extends State<SkillList> {
                                   ),
                                 ),
                               ),
-                            ),
-                          );
+                            );
                         },
                       ),
           ),

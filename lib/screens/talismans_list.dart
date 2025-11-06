@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/providers/talismans_provider.dart';
@@ -265,10 +264,7 @@ class _AmuletListState extends State<AmuletList> {
                           var ranks = amulet.ranks;
                           var firstRank = ranks.isNotEmpty ? ranks[0] : null;
 
-                          return BounceInLeft(
-                            duration: const Duration(milliseconds: 600),
-                            delay: Duration(milliseconds: index * 50),
-                            child: Container(
+                          return Container(
                               margin: const EdgeInsets.only(bottom: 16),
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -413,8 +409,7 @@ class _AmuletListState extends State<AmuletList> {
                                   ),
                                 ),
                               ),
-                            ),
-                          );
+                            );
                         },
                       ),
           ),

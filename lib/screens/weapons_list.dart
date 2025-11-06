@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/weapon.dart';
 import 'package:mhwilds_app/providers/weapons_provider.dart';
@@ -1075,10 +1074,7 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildWeaponCard(Weapon weapon, int index) {
-    return BounceInLeft(
-      duration: const Duration(milliseconds: 600),
-      delay: Duration(milliseconds: index * 50),
-      child: Container(
+    return Container(
         margin: const EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -1128,7 +1124,6 @@ class _WeaponsListState extends State<WeaponsList> {
             ),
           ),
         ),
-      ),
     );
   }
 

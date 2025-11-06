@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/models/monster.dart';
@@ -319,158 +318,151 @@ class _MonstersListState extends State<MonstersList> {
                         itemBuilder: (context, index) {
                           var monster = monsters[index];
 
-                          return BounceInLeft(
-                            duration: const Duration(milliseconds: 600),
-                            delay: Duration(milliseconds: index * 50),
-                            child: Container(
-                              margin: const EdgeInsets.only(bottom: 16),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: 16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
                                 borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(20),
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MonsterDetails(
-                                          monsterId: monster.id,
-                                        ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MonsterDetails(
+                                        monsterId: monster.id,
                                       ),
-                                    );
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        // Header del monstruo
-                                        Row(
-                                          children: [
-                                            Hero(
-                                              tag: monster.name,
-                                              child: Stack(
-                                                children: [
-                                                  Container(
-                                                    width: 100,
-                                                    height: 100,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: AppColors
-                                                              .goldSoft
-                                                              .withOpacity(0.3),
-                                                          blurRadius: 8,
-                                                          offset: const Offset(
-                                                              0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      child: Image.asset(
-                                                        'assets/imgs/monster_icons/${monster.name.toLowerCase().replaceAll(' ', '_')}.png',
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  // Superposición de debilidades elementales
-                                                  ..._buildElementalWeaknessOverlays(
-                                                      monster),
-                                                ],
-                                              ),
-                                            ),
-                                            const SizedBox(width: 16),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    monster.name,
-                                                    style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 20,
-                                                      color: Colors.black87,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(height: 4),
-                                                  Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 8,
-                                                        vertical: 4),
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors.goldSoft
-                                                          .withOpacity(0.1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      border: Border.all(
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Header del monstruo
+                                      Row(
+                                        children: [
+                                          Hero(
+                                            tag: monster.name,
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  width: 100,
+                                                  height: 100,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                    boxShadow: [
+                                                      BoxShadow(
                                                         color: AppColors
                                                             .goldSoft
                                                             .withOpacity(0.3),
+                                                        blurRadius: 8,
+                                                        offset:
+                                                            const Offset(0, 2),
                                                       ),
-                                                    ),
-                                                    child: Text(
-                                                      monster.species,
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color:
-                                                            AppColors.goldSoft,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                    child: Image.asset(
+                                                      'assets/imgs/monster_icons/${monster.name.toLowerCase().replaceAll(' ', '_')}.png',
+                                                      fit: BoxFit.cover,
                                                     ),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                                // Superposición de debilidades elementales
+                                                ..._buildElementalWeaknessOverlays(
+                                                    monster),
+                                              ],
                                             ),
-                                            Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: Colors.grey[400],
-                                              size: 20,
+                                          ),
+                                          const SizedBox(width: 16),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  monster.name,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20,
+                                                    color: Colors.black87,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 4),
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.goldSoft
+                                                        .withOpacity(0.1),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    border: Border.all(
+                                                      color: AppColors.goldSoft
+                                                          .withOpacity(0.3),
+                                                    ),
+                                                  ),
+                                                  child: Text(
+                                                    monster.species,
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: AppColors.goldSoft,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: Colors.grey[400],
+                                            size: 20,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 16),
+
+                                      // Descripción
+                                      if (monster.description.isNotEmpty) ...[
+                                        Text(
+                                          monster.description,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.grey[600],
+                                            height: 1.4,
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                         const SizedBox(height: 16),
-
-                                        // Descripción
-                                        if (monster.description.isNotEmpty) ...[
-                                          Text(
-                                            monster.description,
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.grey[600],
-                                              height: 1.4,
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          const SizedBox(height: 16),
-                                        ],
-
-                                        // Ubicaciones
-                                        _buildLocationsSection(monster),
                                       ],
-                                    ),
+
+                                      // Ubicaciones
+                                      _buildLocationsSection(monster),
+                                    ],
                                   ),
                                 ),
                               ),
