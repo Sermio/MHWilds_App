@@ -26,7 +26,7 @@ if (flutterVersionName == null) {
 android {
     namespace = "com.example.mhwilds_app"
     compileSdk = 35
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -44,19 +44,12 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
         targetSdk = 35
-        versionCode = 17
-        versionName = "1.0.2"
+        versionCode = 20
+        versionName = "1.0.3"
         
         // Soporte para tamaños de página de memoria de 16 kB
         ndk {
             abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64', 'x86'
-        }
-        
-        // Configuración específica para soporte de páginas de 16 kB
-        externalNativeBuild {
-            cmake {
-                arguments "-DANDROID_PAGE_SIZE_AGNOSTIC=ON"
-            }
         }
     }
     
@@ -68,7 +61,9 @@ android {
     }
     
     // Configuración adicional para soporte de páginas de 16 kB
-    packagingOptions {
+    // useLegacyPackaging = false asegura que las bibliotecas nativas no se compriman
+    // lo cual es necesario para el soporte de páginas de 16 KB
+    packaging {
         jniLibs {
             useLegacyPackaging = false
         }
