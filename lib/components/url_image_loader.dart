@@ -24,7 +24,7 @@ class UrlImageLoader extends StatelessWidget {
             child: Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasError || !snapshot.hasData) {
-          return _errorWidget();
+          return _errorWidget(context);
         } else {
           return Image.network(
             snapshot.data!,
@@ -39,36 +39,44 @@ class UrlImageLoader extends StatelessWidget {
                 child: Center(child: CircularProgressIndicator()),
               );
             },
-            errorBuilder: (context, error, stackTrace) => _errorWidget(),
+            errorBuilder: (context, error, stackTrace) => _errorWidget(context),
           );
         }
       },
     );
   }
 
-  Widget _errorWidget() {
+  Widget _errorWidget(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 200,
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(
-              "https://monsterhunterworld.wiki.fextralife.com/file/Monster-Hunter-World/canteen-monster-hunter-world-wiki-locations-npcs-felynes-skills.jpg"), // Usa la URL válida
+              "https://monsterhunterworld.wiki.fextralife.com/file/Monster-Hunter-World/canteen-monster-hunter-world-wiki-locations-npcs-felynes-skills.jpg"),
           fit: BoxFit.contain,
         ),
       ),
-      child: const Center(
+      child: Center(
         child: Text(
           "Image not found, but here's some food!",
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.inverseSurface,
             shadows: [
-              Shadow(offset: Offset(1.0, 1.0), color: Colors.black),
-              Shadow(offset: Offset(-1.0, 1.0), color: Colors.black),
-              Shadow(offset: Offset(1.0, -1.0), color: Colors.black),
-              Shadow(offset: Offset(-1.0, -1.0), color: Colors.black),
+              Shadow(
+                  offset: Offset(1.0, 1.0),
+                  color: Theme.of(context).colorScheme.shadow),
+              Shadow(
+                  offset: Offset(-1.0, 1.0),
+                  color: Theme.of(context).colorScheme.shadow),
+              Shadow(
+                  offset: Offset(1.0, -1.0),
+                  color: Theme.of(context).colorScheme.shadow),
+              Shadow(
+                  offset: Offset(-1.0, -1.0),
+                  color: Theme.of(context).colorScheme.shadow),
             ],
           ),
         ),

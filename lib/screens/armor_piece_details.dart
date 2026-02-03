@@ -7,7 +7,6 @@ import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/api/skills_api.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
-import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
@@ -42,12 +41,13 @@ class _ArmorDetailsState extends State<ArmorDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.armor.name),
         centerTitle: true,
       ),
-      backgroundColor: Colors.grey[50],
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -56,11 +56,11 @@ class _ArmorDetailsState extends State<ArmorDetails> {
               margin: const EdgeInsets.all(16),
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: colorScheme.shadow.withOpacity(0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -76,7 +76,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.goldSoft.withOpacity(0.3),
+                          color: colorScheme.primary.withOpacity(0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -94,10 +94,10 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   // Nombre de la pieza
                   Text(
                     widget.armor.name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: colorScheme.onSurface,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -108,7 +108,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                       widget.armor.description,
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.grey[600],
+                        color: colorScheme.onSurface.withOpacity(0.8),
                         height: 1.4,
                       ),
                       textAlign: TextAlign.center,
@@ -135,14 +135,15 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   }
 
   Widget _buildStatsSection() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -155,7 +156,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
@@ -164,7 +165,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
               children: [
                 Icon(
                   Icons.analytics,
-                  color: AppColors.goldSoft,
+                  color: colorScheme.primary,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
@@ -173,7 +174,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -209,6 +210,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
 
   Widget _buildStatRow(String title, String value,
       {Widget? trailing, VoidCallback? onTap}) {
+    final colorScheme = Theme.of(context).colorScheme;
     Widget content = Row(
       children: [
         Text(
@@ -216,7 +218,9 @@ class _ArmorDetailsState extends State<ArmorDetails> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: onTap != null ? AppColors.goldSoft : Colors.grey[700],
+            color: onTap != null
+                ? colorScheme.primary
+                : colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
@@ -227,7 +231,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
             value,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.black87,
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -258,14 +262,15 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   }
 
   Widget _buildSkillsSection() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -278,7 +283,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
@@ -287,7 +292,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
               children: [
                 Icon(
                   Icons.flash_on,
-                  color: AppColors.goldSoft,
+                  color: colorScheme.primary,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
@@ -296,7 +301,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -310,11 +315,11 @@ class _ArmorDetailsState extends State<ArmorDetails> {
               future: _skills,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
+                  return Center(
                     child: Padding(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child:
-                          CircularProgressIndicator(color: AppColors.goldSoft),
+                          CircularProgressIndicator(color: colorScheme.primary),
                     ),
                   );
                 } else if (snapshot.hasError) {
@@ -325,7 +330,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                         "Error loading skills",
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.grey[600],
+                          color: colorScheme.onSurface.withOpacity(0.8),
                         ),
                       ),
                     ),
@@ -338,7 +343,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                         "No skills available",
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.grey[600],
+                          color: colorScheme.onSurface.withOpacity(0.8),
                         ),
                       ),
                     ),
@@ -350,10 +355,10 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                         margin: const EdgeInsets.only(bottom: 16),
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Colors.grey[50],
+                          color: colorScheme.surfaceContainerHighest,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: Colors.grey[200]!,
+                            color: colorScheme.outlineVariant,
                             width: 1,
                           ),
                         ),
@@ -367,7 +372,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                   height: 40,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Colors.white,
+                                    color: colorScheme.surface,
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
@@ -386,10 +391,10 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                     children: [
                                       Text(
                                         skillInfo.name,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
+                                          color: colorScheme.onSurface,
                                         ),
                                       ),
                                       if (skillInfo.description.isNotEmpty) ...[
@@ -398,7 +403,8 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                           skillInfo.description,
                                           style: TextStyle(
                                             fontSize: 14,
-                                            color: Colors.grey[600],
+                                            color: colorScheme.onSurface
+                                                .withOpacity(0.8),
                                           ),
                                         ),
                                       ],
@@ -420,13 +426,13 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   color: isCurrentLevel
-                                      ? AppColors.goldSoft.withOpacity(0.1)
-                                      : Colors.white,
+                                      ? colorScheme.primary.withOpacity(0.1)
+                                      : colorScheme.surfaceContainerHighest,
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
                                     color: isCurrentLevel
-                                        ? AppColors.goldSoft.withOpacity(0.3)
-                                        : Colors.grey[200]!,
+                                        ? colorScheme.primary.withOpacity(0.3)
+                                        : colorScheme.outlineVariant,
                                     width: isCurrentLevel ? 2 : 1,
                                   ),
                                 ),
@@ -440,8 +446,9 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                       ),
                                       decoration: BoxDecoration(
                                         color: isCurrentLevel
-                                            ? AppColors.goldSoft
-                                            : Colors.grey[400],
+                                            ? colorScheme.primary
+                                            : colorScheme
+                                                .surfaceContainerHighest,
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: Text(
@@ -449,7 +456,9 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                          color: isCurrentLevel
+                                              ? colorScheme.onPrimary
+                                              : colorScheme.onSurface,
                                         ),
                                       ),
                                     ),
@@ -459,7 +468,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                         rank.description,
                                         style: TextStyle(
                                           fontSize: 14,
-                                          color: Colors.black87,
+                                          color: colorScheme.onSurface,
                                           fontWeight: isCurrentLevel
                                               ? FontWeight.w500
                                               : FontWeight.normal,
@@ -485,14 +494,15 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   }
 
   Widget _buildCraftingSection() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -505,7 +515,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
@@ -514,7 +524,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
               children: [
                 Icon(
                   Icons.build,
-                  color: AppColors.goldSoft,
+                  color: colorScheme.primary,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
@@ -523,7 +533,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -569,13 +579,14 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   }
 
   Widget _buildMaterialItem(dynamic material) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.grey[50],
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.grey[200]!,
+          color: colorScheme.outlineVariant,
           width: 1,
         ),
       ),
@@ -602,7 +613,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
+                    color: colorScheme.surface,
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -618,7 +629,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -627,7 +638,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.goldSoft,
+                    color: colorScheme.primary,
                   ),
                 ),
               ],
@@ -732,6 +743,7 @@ class ArmorResistancesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -742,7 +754,7 @@ class ArmorResistancesWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: AppColors.goldSoft,
+                color: colorScheme.primary,
               ),
             ),
           ],

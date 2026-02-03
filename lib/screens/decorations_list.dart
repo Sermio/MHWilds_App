@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/decoration.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
-import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/decorations_provider.dart';
@@ -55,22 +54,22 @@ class _DecorationsListState extends State<DecorationsList> {
   Widget build(BuildContext context) {
     final decorationsProvider = Provider.of<DecorationsProvider>(context);
     final filteredDecorations = decorationsProvider.filteredDecorations;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
-          // Filtros mejorados
           if (_filtersVisible) ...[
             Container(
               margin: const EdgeInsets.all(16),
-              height: 250, // Altura fija para los filtros
+              height: 250,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: colorScheme.shadow.withOpacity(0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -78,7 +77,6 @@ class _DecorationsListState extends State<DecorationsList> {
               ),
               child: Column(
                 children: [
-                  // Header de filtros (fijo)
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: const BoxDecoration(
@@ -89,15 +87,14 @@ class _DecorationsListState extends State<DecorationsList> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.filter_list,
-                            color: AppColors.goldSoft),
+                        Icon(Icons.filter_list, color: colorScheme.primary),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           'Filters',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                            color: colorScheme.onSurface,
                           ),
                         ),
                         const Spacer(),
@@ -106,7 +103,7 @@ class _DecorationsListState extends State<DecorationsList> {
                           icon: const Icon(Icons.refresh, size: 18),
                           label: const Text('Reset'),
                           style: TextButton.styleFrom(
-                            foregroundColor: AppColors.goldSoft,
+                            foregroundColor: colorScheme.primary,
                           ),
                         ),
                       ],
@@ -132,8 +129,8 @@ class _DecorationsListState extends State<DecorationsList> {
                             decoration: InputDecoration(
                               labelText: 'Search by Name',
                               hintText: 'Enter decoration name...',
-                              prefixIcon: const Icon(Icons.search,
-                                  color: AppColors.goldSoft),
+                              prefixIcon: Icon(Icons.search,
+                                  color: colorScheme.primary),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide:
@@ -142,21 +139,21 @@ class _DecorationsListState extends State<DecorationsList> {
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(
-                                    color: AppColors.goldSoft, width: 2),
+                                    color: colorScheme.primary, width: 2),
                               ),
                               filled: true,
-                              fillColor: Colors.grey[50],
+                              fillColor: colorScheme.surfaceContainerHighest,
                             ),
                           ),
                           const SizedBox(height: 16),
 
                           // Filtro de tipo
-                          const Text(
+                          Text(
                             'Type',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              color: Colors.black87,
+                              color: colorScheme.onSurface,
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -169,8 +166,8 @@ class _DecorationsListState extends State<DecorationsList> {
                                   type,
                                   style: TextStyle(
                                     color: _selectedType == type
-                                        ? Colors.white
-                                        : Colors.black87,
+                                        ? colorScheme.onPrimary
+                                        : colorScheme.onSurface,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -205,17 +202,17 @@ class _DecorationsListState extends State<DecorationsList> {
           // Lista de decoraciones
           Expanded(
             child: decorationsProvider.isLoading
-                ? const Center(
+                ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CircularProgressIndicator(color: AppColors.goldSoft),
-                        SizedBox(height: 16),
+                        CircularProgressIndicator(color: colorScheme.primary),
+                        const SizedBox(height: 16),
                         Text(
                           'Loading decorations...',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey,
+                            color: colorScheme.onSurface.withOpacity(0.7),
                           ),
                         ),
                       ],
@@ -229,14 +226,14 @@ class _DecorationsListState extends State<DecorationsList> {
                             Icon(
                               Icons.search_off,
                               size: 64,
-                              color: Colors.grey[400],
+                              color: colorScheme.onSurface.withOpacity(0.5),
                             ),
                             const SizedBox(height: 16),
                             Text(
                               'No decorations found',
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.grey[600],
+                                color: colorScheme.onSurface.withOpacity(0.8),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -245,7 +242,7 @@ class _DecorationsListState extends State<DecorationsList> {
                               'Try adjusting your filters',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Colors.grey[500],
+                                color: colorScheme.onSurface.withOpacity(0.6),
                               ),
                             ),
                           ],
@@ -261,11 +258,11 @@ class _DecorationsListState extends State<DecorationsList> {
                           return Container(
                             margin: const EdgeInsets.only(bottom: 16),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: colorScheme.surface,
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
+                                  color: colorScheme.shadow.withOpacity(0.1),
                                   blurRadius: 10,
                                   offset: const Offset(0, 4),
                                 ),
@@ -312,7 +309,7 @@ class _DecorationsListState extends State<DecorationsList> {
                                                   BorderRadius.circular(10),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: AppColors.goldSoft
+                                                  color: colorScheme.primary
                                                       .withOpacity(0.3),
                                                   blurRadius: 6,
                                                   offset: const Offset(0, 2),
@@ -336,10 +333,11 @@ class _DecorationsListState extends State<DecorationsList> {
                                               children: [
                                                 Text(
                                                   decoration.name,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 18,
-                                                    color: Colors.black87,
+                                                    color:
+                                                        colorScheme.onSurface,
                                                   ),
                                                 ),
                                                 const SizedBox(height: 4),
@@ -377,7 +375,8 @@ class _DecorationsListState extends State<DecorationsList> {
                                           ),
                                           Icon(
                                             Icons.arrow_forward_ios,
-                                            color: Colors.grey[400],
+                                            color: colorScheme.onSurface
+                                                .withOpacity(0.5),
                                             size: 20,
                                           ),
                                         ],
@@ -401,16 +400,17 @@ class _DecorationsListState extends State<DecorationsList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _toggleFiltersVisibility,
-        backgroundColor: AppColors.goldSoft,
+        backgroundColor: colorScheme.primary,
         child: Icon(
           _filtersVisible ? Icons.close : Icons.tune,
-          color: Colors.black,
+          color: colorScheme.onPrimary,
         ),
       ),
     );
   }
 
   Widget _buildSkillsSection(DecorationItem decoration) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -419,7 +419,7 @@ class _DecorationsListState extends State<DecorationsList> {
             Icon(
               Icons.flash_on,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -427,7 +427,7 @@ class _DecorationsListState extends State<DecorationsList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],
@@ -437,9 +437,9 @@ class _DecorationsListState extends State<DecorationsList> {
               margin: const EdgeInsets.only(bottom: 8),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.goldSoft.withOpacity(0.1),
+                color: colorScheme.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.goldSoft.withOpacity(0.3)),
+                border: Border.all(color: colorScheme.primary.withOpacity(0.3)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -460,14 +460,14 @@ class _DecorationsListState extends State<DecorationsList> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppColors.goldSoft,
+                          color: colorScheme.primary,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           '${skill.skill.name} +${skill.level}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
-                            color: Colors.white,
+                            color: colorScheme.onPrimary,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -480,7 +480,7 @@ class _DecorationsListState extends State<DecorationsList> {
                       skill.description,
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.grey[600],
+                        color: colorScheme.onSurface.withOpacity(0.8),
                         height: 1.3,
                       ),
                       maxLines: 2,

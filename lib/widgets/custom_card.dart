@@ -9,7 +9,7 @@ class CustomCard extends StatelessWidget {
   final Widget? trailing;
   final bool bodyOnTop;
   final EdgeInsetsGeometry padding;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final BorderRadius borderRadius;
   final double elevation;
   final Color? shadowColor;
@@ -25,7 +25,7 @@ class CustomCard extends StatelessWidget {
     this.trailing,
     this.bodyOnTop = true,
     this.padding = const EdgeInsets.fromLTRB(20, 8, 20, 8),
-    this.backgroundColor = Colors.white,
+    this.backgroundColor,
     this.borderRadius = const BorderRadius.all(Radius.circular(12)),
     this.elevation = 3.0,
     this.shadowColor,
@@ -34,20 +34,23 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final effectiveBackground =
+        backgroundColor ?? colorScheme.surfaceContainerHighest;
     return GestureDetector(
       onTap: onTap,
       child: Padding(
         padding: padding,
         child: Material(
           elevation: elevation,
-          shadowColor: shadowColor, // <-- Aquí se usa
+          shadowColor: shadowColor ?? colorScheme.shadow.withOpacity(0.2),
           borderRadius: borderRadius,
-          color: backgroundColor,
+          color: effectiveBackground,
           child: Container(
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
             decoration: BoxDecoration(
               borderRadius: borderRadius,
-              color: backgroundColor,
+              color: effectiveBackground,
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,

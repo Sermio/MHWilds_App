@@ -785,38 +785,43 @@ class _WeaponsListState extends State<WeaponsList> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final weaponsProvider = Provider.of<WeaponsProvider>(context);
     final filteredWeapons = weaponsProvider.weapons;
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
-          if (_filtersVisible) _buildFiltersSection(weaponsProvider),
-          Expanded(child: _buildWeaponsList(weaponsProvider, filteredWeapons)),
+          if (_filtersVisible) _buildFiltersSection(context, weaponsProvider),
+          Expanded(
+              child:
+                  _buildWeaponsList(context, weaponsProvider, filteredWeapons)),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _toggleFiltersVisibility,
-        backgroundColor: AppColors.goldSoft,
+        backgroundColor: colorScheme.primary,
         child: Icon(
           _filtersVisible ? Icons.close : Icons.tune,
-          color: Colors.black,
+          color: colorScheme.onPrimary,
         ),
       ),
     );
   }
 
-  Widget _buildFiltersSection(WeaponsProvider weaponsProvider) {
+  Widget _buildFiltersSection(
+      BuildContext context, WeaponsProvider weaponsProvider) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.all(16),
       height: 350, // Altura fija para los filtros
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -835,14 +840,14 @@ class _WeaponsListState extends State<WeaponsList> {
             ),
             child: Row(
               children: [
-                const Icon(Icons.filter_list, color: AppColors.goldSoft),
+                Icon(Icons.filter_list, color: colorScheme.primary),
                 const SizedBox(width: 8),
-                const Text(
+                Text(
                   'Filters',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: colorScheme.onSurface,
                   ),
                 ),
                 const Spacer(),
@@ -850,8 +855,8 @@ class _WeaponsListState extends State<WeaponsList> {
                   onPressed: _resetFilters,
                   icon: const Icon(Icons.refresh, size: 18),
                   label: const Text('Reset'),
-                  style:
-                      TextButton.styleFrom(foregroundColor: AppColors.goldSoft),
+                  style: TextButton.styleFrom(
+                      foregroundColor: colorScheme.primary),
                 ),
               ],
             ),
@@ -863,11 +868,11 @@ class _WeaponsListState extends State<WeaponsList> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSearchField(weaponsProvider),
+                  _buildSearchField(context, weaponsProvider),
                   const SizedBox(height: 16),
-                  _buildTypeFilter(weaponsProvider),
+                  _buildTypeFilter(context, weaponsProvider),
                   const SizedBox(height: 16),
-                  _buildRarityFilter(weaponsProvider),
+                  _buildRarityFilter(context, weaponsProvider),
                   const SizedBox(height: 20), // Espacio al final para scroll
                 ],
               ),
@@ -878,7 +883,9 @@ class _WeaponsListState extends State<WeaponsList> {
     );
   }
 
-  Widget _buildSearchField(WeaponsProvider weaponsProvider) {
+  Widget _buildSearchField(
+      BuildContext context, WeaponsProvider weaponsProvider) {
+    final colorScheme = Theme.of(context).colorScheme;
     return TextField(
       controller: _searchNameController,
       onChanged: (query) {
@@ -894,22 +901,24 @@ class _WeaponsListState extends State<WeaponsList> {
       decoration: InputDecoration(
         labelText: 'Search by Name',
         hintText: 'Enter weapon name...',
-        prefixIcon: const Icon(Icons.search, color: AppColors.goldSoft),
+        prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey[300]!),
+          borderSide: BorderSide(color: colorScheme.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.goldSoft, width: 2),
+          borderSide: BorderSide(color: colorScheme.primary, width: 2),
         ),
         filled: true,
-        fillColor: Colors.grey[50],
+        fillColor: colorScheme.surfaceContainerHighest,
       ),
     );
   }
 
-  Widget _buildTypeFilter(WeaponsProvider weaponsProvider) {
+  Widget _buildTypeFilter(
+      BuildContext context, WeaponsProvider weaponsProvider) {
+    final colorScheme = Theme.of(context).colorScheme;
     final weaponTypes = [
       'great-sword',
       'long-sword',
@@ -930,12 +939,12 @@ class _WeaponsListState extends State<WeaponsList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Type',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.black87,
+            color: colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 8),
@@ -947,7 +956,9 @@ class _WeaponsListState extends State<WeaponsList> {
               label: Text(
                 _formatWeaponKind(kind),
                 style: TextStyle(
-                  color: _selectedKind == kind ? Colors.white : Colors.black87,
+                  color: _selectedKind == kind
+                      ? colorScheme.onPrimary
+                      : colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -973,16 +984,18 @@ class _WeaponsListState extends State<WeaponsList> {
     );
   }
 
-  Widget _buildRarityFilter(WeaponsProvider weaponsProvider) {
+  Widget _buildRarityFilter(
+      BuildContext context, WeaponsProvider weaponsProvider) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Rarity',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.black87,
+            color: colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 8),
@@ -994,8 +1007,9 @@ class _WeaponsListState extends State<WeaponsList> {
               label: Text(
                 'Rarity $rarity',
                 style: TextStyle(
-                  color:
-                      _selectedRarity == rarity ? Colors.white : Colors.black87,
+                  color: _selectedRarity == rarity
+                      ? colorScheme.onPrimary
+                      : colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -1021,18 +1035,20 @@ class _WeaponsListState extends State<WeaponsList> {
     );
   }
 
-  Widget _buildWeaponsList(
+  Widget _buildWeaponsList(BuildContext context,
       WeaponsProvider weaponsProvider, List<Weapon> filteredWeapons) {
+    final colorScheme = Theme.of(context).colorScheme;
     if (weaponsProvider.isLoading) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(color: AppColors.goldSoft),
-            SizedBox(height: 16),
+            CircularProgressIndicator(color: colorScheme.primary),
+            const SizedBox(height: 16),
             Text(
               'Loading weapons...',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+              style: TextStyle(
+                  fontSize: 16, color: colorScheme.onSurface.withOpacity(0.7)),
             ),
           ],
         ),
@@ -1044,20 +1060,22 @@ class _WeaponsListState extends State<WeaponsList> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.search_off, size: 64, color: Colors.grey[400]),
+            Icon(Icons.search_off,
+                size: 64, color: colorScheme.onSurface.withOpacity(0.5)),
             const SizedBox(height: 16),
             Text(
               'No weapons found',
               style: TextStyle(
                 fontSize: 18,
-                color: Colors.grey[600],
+                color: colorScheme.onSurface.withOpacity(0.8),
                 fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               'Try adjusting your filters',
-              style: TextStyle(fontSize: 14, color: Colors.grey[500]),
+              style: TextStyle(
+                  fontSize: 14, color: colorScheme.onSurface.withOpacity(0.6)),
             ),
           ],
         ),
@@ -1074,60 +1092,62 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildWeaponCard(Weapon weapon, int index) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        decoration: BoxDecoration(
-          color: Colors.white,
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(20),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => WeaponDetails(weapon: weapon),
-                ),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildWeaponHeader(weapon),
-                  const SizedBox(height: 16),
-                  _buildWeaponStats(weapon),
-                  if (_hasSharpnessData(weapon)) ...[
-                    const SizedBox(height: 16),
-                    _buildSharpnessSection(weapon),
-                  ],
-                  if (weapon.slots.isNotEmpty) ...[
-                    const SizedBox(height: 16),
-                    _buildWeaponSlots(weapon),
-                  ],
-                  if (weapon.skills.isNotEmpty) ...[
-                    const SizedBox(height: 16),
-                    _buildWeaponSkills(weapon),
-                  ],
-                ],
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WeaponDetails(weapon: weapon),
               ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildWeaponHeader(weapon),
+                const SizedBox(height: 16),
+                _buildWeaponStats(weapon),
+                if (_hasSharpnessData(weapon)) ...[
+                  const SizedBox(height: 16),
+                  _buildSharpnessSection(weapon),
+                ],
+                if (weapon.slots.isNotEmpty) ...[
+                  const SizedBox(height: 16),
+                  _buildWeaponSlots(weapon),
+                ],
+                if (weapon.skills.isNotEmpty) ...[
+                  const SizedBox(height: 16),
+                  _buildWeaponSkills(weapon),
+                ],
+              ],
             ),
           ),
         ),
+      ),
     );
   }
 
   Widget _buildWeaponHeader(Weapon weapon) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
         Container(
@@ -1138,7 +1158,7 @@ class _WeaponsListState extends State<WeaponsList> {
             color: _getKindColor(weapon.kind).withOpacity(0.2),
             boxShadow: [
               BoxShadow(
-                color: AppColors.goldSoft.withOpacity(0.3),
+                color: colorScheme.primary.withOpacity(0.3),
                 blurRadius: 6,
                 offset: const Offset(0, 2),
               ),
@@ -1157,10 +1177,10 @@ class _WeaponsListState extends State<WeaponsList> {
             children: [
               Text(
                 weapon.name,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                  color: Colors.black87,
+                  color: colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 4),
@@ -1170,7 +1190,8 @@ class _WeaponsListState extends State<WeaponsList> {
             ],
           ),
         ),
-        Icon(Icons.arrow_forward_ios, color: Colors.grey[400], size: 20),
+        Icon(Icons.arrow_forward_ios,
+            color: colorScheme.onSurface.withOpacity(0.6), size: 20),
       ],
     );
   }
@@ -1214,6 +1235,7 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildWeaponStats(Weapon weapon) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1223,7 +1245,7 @@ class _WeaponsListState extends State<WeaponsList> {
             Icon(
               Icons.flash_on,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -1231,7 +1253,7 @@ class _WeaponsListState extends State<WeaponsList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
             const Spacer(),
@@ -1248,7 +1270,7 @@ class _WeaponsListState extends State<WeaponsList> {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -1264,7 +1286,7 @@ class _WeaponsListState extends State<WeaponsList> {
               Icon(
                 Icons.trending_up,
                 size: 16,
-                color: AppColors.goldSoft,
+                color: colorScheme.primary,
               ),
               const SizedBox(width: 6),
               Text(
@@ -1272,7 +1294,7 @@ class _WeaponsListState extends State<WeaponsList> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey[700],
+                  color: colorScheme.onSurface.withOpacity(0.8),
                 ),
               ),
               const Spacer(),
@@ -1284,7 +1306,7 @@ class _WeaponsListState extends State<WeaponsList> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                 ],
@@ -1308,7 +1330,7 @@ class _WeaponsListState extends State<WeaponsList> {
               Icon(
                 Icons.shield,
                 size: 16,
-                color: AppColors.goldSoft,
+                color: colorScheme.primary,
               ),
               const SizedBox(width: 6),
               Text(
@@ -1316,7 +1338,7 @@ class _WeaponsListState extends State<WeaponsList> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey[700],
+                  color: colorScheme.onSurface.withOpacity(0.8),
                 ),
               ),
               const Spacer(),
@@ -1333,7 +1355,7 @@ class _WeaponsListState extends State<WeaponsList> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                 ],
@@ -1452,16 +1474,17 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildMelodyWidget(HuntingHornMelody melody) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        Icon(Icons.music_note, size: 16, color: AppColors.goldSoft),
+        Icon(Icons.music_note, size: 16, color: colorScheme.primary),
         const SizedBox(width: 6),
         Text(
           'Melody:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
@@ -1478,16 +1501,17 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildEchoBubbleWidget(HuntingHornBubble echoBubble) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        Icon(Icons.bubble_chart, size: 16, color: AppColors.goldSoft),
+        Icon(Icons.bubble_chart, size: 16, color: colorScheme.primary),
         const SizedBox(width: 6),
         Text(
           'Echo Bubble:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
@@ -1504,16 +1528,17 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildEchoWaveWidget(HuntingHornWave echoWave) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        Icon(Icons.waves, size: 16, color: AppColors.goldSoft),
+        Icon(Icons.waves, size: 16, color: colorScheme.primary),
         const SizedBox(width: 6),
         Text(
           'Echo Wave:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
@@ -1530,18 +1555,19 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildBowgunDamageInfo(Weapon weapon) {
+    final colorScheme = Theme.of(context).colorScheme;
     try {
       if (weapon.ammo != null && weapon.ammo!.isNotEmpty) {
         return Row(
           children: [
-            Icon(Icons.gps_fixed, size: 16, color: AppColors.goldSoft),
+            Icon(Icons.gps_fixed, size: 16, color: colorScheme.primary),
             const SizedBox(width: 6),
             Text(
               'Ammo:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
             const Spacer(),
@@ -1598,18 +1624,19 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildInsectGlaiveDamageInfo(Weapon weapon) {
+    final colorScheme = Theme.of(context).colorScheme;
     try {
       if (weapon.kinsectLevel != null && weapon.kinsectLevel! > 0) {
         return Row(
           children: [
-            Icon(Icons.flutter_dash, size: 16, color: AppColors.goldSoft),
+            Icon(Icons.flutter_dash, size: 16, color: colorScheme.primary),
             const SizedBox(width: 6),
             Text(
               'Kinsect:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
             const Spacer(),
@@ -1632,6 +1659,7 @@ class _WeaponsListState extends State<WeaponsList> {
 
   Widget _buildElementalDamageInfo(List elementalSpecials) {
     if (elementalSpecials.isEmpty) return const SizedBox.shrink();
+    final colorScheme = Theme.of(context).colorScheme;
 
     // Mostrar el primer special elemental encontrado
     final special = elementalSpecials.first;
@@ -1665,7 +1693,7 @@ class _WeaponsListState extends State<WeaponsList> {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
@@ -1692,6 +1720,7 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildBowDamageInfo(Weapon weapon) {
+    final colorScheme = Theme.of(context).colorScheme;
     // Para bows, mostrar información sobre coatings si están disponibles
     try {
       if (weapon.coatings != null && weapon.coatings!.isNotEmpty) {
@@ -1700,7 +1729,7 @@ class _WeaponsListState extends State<WeaponsList> {
             Icon(
               Icons.arrow_upward,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -1708,7 +1737,7 @@ class _WeaponsListState extends State<WeaponsList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
             const Spacer(),
@@ -1764,6 +1793,7 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildChargeBladeDamageInfo(Weapon weapon) {
+    final colorScheme = Theme.of(context).colorScheme;
     // Para charge blade, mostrar información sobre phial damage
     try {
       if (weapon.phial != null) {
@@ -1773,7 +1803,7 @@ class _WeaponsListState extends State<WeaponsList> {
             Icon(
               Icons.flash_on,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -1781,7 +1811,7 @@ class _WeaponsListState extends State<WeaponsList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
             const Spacer(),
@@ -1841,12 +1871,13 @@ class _WeaponsListState extends State<WeaponsList> {
       if (weapon.shell != null &&
           weapon.shell!.isNotEmpty &&
           weapon.shellLevel != null) {
+        final colorScheme = Theme.of(context).colorScheme;
         return Row(
           children: [
             Icon(
               Icons.local_fire_department,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -1854,7 +1885,7 @@ class _WeaponsListState extends State<WeaponsList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
             const Spacer(),
@@ -1886,6 +1917,7 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildSwitchAxeDamageInfo(Weapon weapon) {
+    final colorScheme = Theme.of(context).colorScheme;
     // Para switch axe, mostrar información sobre phial damage
     try {
       if (weapon.phial != null) {
@@ -1895,7 +1927,7 @@ class _WeaponsListState extends State<WeaponsList> {
             Icon(
               Icons.transform,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -1903,7 +1935,7 @@ class _WeaponsListState extends State<WeaponsList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
             const Spacer(),
@@ -1952,6 +1984,7 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildWeaponSkills(Weapon weapon) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1960,7 +1993,7 @@ class _WeaponsListState extends State<WeaponsList> {
             Icon(
               Icons.flash_on,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -1968,7 +2001,7 @@ class _WeaponsListState extends State<WeaponsList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],
@@ -1978,9 +2011,9 @@ class _WeaponsListState extends State<WeaponsList> {
               margin: const EdgeInsets.only(bottom: 8),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.goldSoft.withOpacity(0.1),
+                color: colorScheme.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.goldSoft.withOpacity(0.3)),
+                border: Border.all(color: colorScheme.primary.withOpacity(0.3)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -2001,14 +2034,14 @@ class _WeaponsListState extends State<WeaponsList> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppColors.goldSoft,
+                          color: colorScheme.primary,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           '${skill.skill.name} +${skill.level}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
-                            color: Colors.white,
+                            color: colorScheme.onPrimary,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -2021,7 +2054,7 @@ class _WeaponsListState extends State<WeaponsList> {
                       skill.description,
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.grey[600],
+                        color: colorScheme.onSurface.withOpacity(0.8),
                         height: 1.3,
                       ),
                       maxLines: 2,
@@ -2036,6 +2069,7 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildWeaponSlots(Weapon weapon) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -2044,7 +2078,7 @@ class _WeaponsListState extends State<WeaponsList> {
             Icon(
               Icons.settings,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -2052,7 +2086,7 @@ class _WeaponsListState extends State<WeaponsList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],
@@ -2064,19 +2098,20 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Widget _buildSlotsWidget(List<int> slots) {
+    final colorScheme = Theme.of(context).colorScheme;
     if (slots.isEmpty) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          color: colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.grey[300]!),
+          border: Border.all(color: colorScheme.outlineVariant),
         ),
         child: Text(
           'No slots',
           style: TextStyle(
             fontSize: 11,
-            color: Colors.grey[600],
+            color: colorScheme.onSurface.withOpacity(0.8),
             fontStyle: FontStyle.italic,
           ),
         ),
@@ -2284,6 +2319,7 @@ class _WeaponsListState extends State<WeaponsList> {
 
   // Método para construir la sección de sharpness
   Widget _buildSharpnessSection(Weapon weapon) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -2291,7 +2327,7 @@ class _WeaponsListState extends State<WeaponsList> {
           children: [
             Icon(
               Icons.content_cut,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
               size: 16,
             ),
             const SizedBox(width: 8),
@@ -2300,7 +2336,7 @@ class _WeaponsListState extends State<WeaponsList> {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],

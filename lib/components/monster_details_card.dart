@@ -15,6 +15,7 @@ class MonsterDetailsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
       elevation: 5,
       margin: EdgeInsets.zero,
@@ -26,30 +27,36 @@ class MonsterDetailsCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   "Type: ",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface),
                 ),
                 Text(
                   monster.kind,
+                  style: TextStyle(color: colorScheme.onSurface),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   "Species: ",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface),
                 ),
                 Text(
                   monster.species,
+                  style: TextStyle(color: colorScheme.onSurface),
                 ),
               ],
             ),
             const SizedBox(height: 15),
-            const Divider(
-              color: Colors.black,
+            Divider(
+              color: colorScheme.outline,
             ),
             Stack(
               children: [
@@ -223,13 +230,14 @@ class MonsterDetailsCard extends StatelessWidget {
             ),
             if (monster.locations.isNotEmpty) const SizedBox(height: 15),
             if (monster.locations.isNotEmpty)
-              const Divider(
-                color: Colors.black,
+              Divider(
+                color: colorScheme.outline,
               ),
             if (monster.locations.isNotEmpty)
-              const Text(
+              Text(
                 'Locations',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: colorScheme.onSurface),
               ),
             if (monster.locations.isNotEmpty)
               const SizedBox(
@@ -271,13 +279,14 @@ class MonsterDetailsCard extends StatelessWidget {
                 height: 15,
               ),
             if (monster.tips != "")
-              const Divider(
-                color: Colors.black,
+              Divider(
+                color: colorScheme.outline,
               ),
             if (monster.tips != "")
-              const Text(
+              Text(
                 'Tips',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: colorScheme.onSurface),
               ),
             if (monster.tips != "")
               const SizedBox(
@@ -307,9 +316,9 @@ class ElementsInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: const Icon(
+      child: Icon(
         Icons.info_outline,
-        color: AppColors.goldSoft,
+        color: Theme.of(context).colorScheme.primary,
       ),
       onTap: () {
         showDialog(
@@ -326,6 +335,7 @@ class ElementsAndAilments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ListView.builder(
       itemCount: ailments.length,
       itemBuilder: (context, index) {
@@ -335,17 +345,17 @@ class ElementsAndAilments extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.only(bottom: 16),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: colorScheme.surface,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
+                color: colorScheme.shadow.withOpacity(0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
             ],
             border: Border.all(
-              color: Colors.grey.withOpacity(0.2),
+              color: colorScheme.outline.withOpacity(0.2),
               width: 1,
             ),
           ),
@@ -354,7 +364,6 @@ class ElementsAndAilments extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header con icono y nombre
                 Row(
                   children: [
                     Container(
@@ -381,34 +390,31 @@ class ElementsAndAilments extends StatelessWidget {
                             .map((word) =>
                                 word[0].toUpperCase() + word.substring(1))
                             .join(' '),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.black87,
+                          color: colorScheme.onSurface,
                         ),
                       ),
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 16),
-
-                // Descripción
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.grey[50],
+                    color: colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: Colors.grey.withOpacity(0.2),
+                      color: colorScheme.outline.withOpacity(0.2),
                       width: 1,
                     ),
                   ),
                   child: Text(
                     description,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 15,
-                      color: Colors.black87,
+                      color: colorScheme.onSurface,
                       height: 1.4,
                     ),
                     textAlign: TextAlign.justify,

@@ -85,17 +85,18 @@ class SharpnessBar extends StatelessWidget {
       );
     }
 
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
-          color: Colors.grey.withOpacity(0.3),
+          color: colorScheme.outline.withOpacity(0.3),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: colorScheme.shadow.withOpacity(0.2),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),

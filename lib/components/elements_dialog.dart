@@ -6,6 +6,7 @@ class ElementsDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
@@ -21,15 +22,14 @@ class ElementsDialog extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.white,
-              Colors.grey[50]!,
+              colorScheme.surface,
+              colorScheme.surfaceContainerHighest,
             ],
           ),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Header del diálogo
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -54,7 +54,7 @@ class ElementsDialog extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -63,7 +63,7 @@ class ElementsDialog extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                            color: colorScheme.onSurface,
                           ),
                         ),
                       ],
@@ -74,12 +74,13 @@ class ElementsDialog extends StatelessWidget {
                     icon: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: colorScheme.surfaceContainerHighest,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.close,
                         size: 20,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                   ),

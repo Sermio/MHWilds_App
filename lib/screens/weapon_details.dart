@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/weapon.dart';
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/api/skills_api.dart';
-import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
@@ -10,6 +9,7 @@ import 'package:mhwilds_app/utils/weapon_utils.dart';
 import 'package:mhwilds_app/components/sharpness_bar.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 
 class WeaponDetails extends StatefulWidget {
   final Weapon weapon;
@@ -40,8 +40,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: colorScheme.surfaceContainerHighest,
       appBar: AppBar(
         title: Text(widget.weapon.name),
         centerTitle: true,
@@ -76,15 +77,16 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   }
 
   Widget _buildWeaponHeader() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -100,7 +102,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.goldSoft.withOpacity(0.3),
+                  color: colorScheme.primary.withOpacity(0.3),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),
@@ -116,10 +118,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           // Nombre del weapon
           Text(
             widget.weapon.name,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: colorScheme.onSurface,
             ),
             textAlign: TextAlign.center,
           ),
@@ -130,7 +132,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               widget.weapon.description,
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.grey[600],
+                color: colorScheme.onSurface.withOpacity(0.8),
                 height: 1.4,
               ),
               textAlign: TextAlign.center,
@@ -142,14 +144,15 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   }
 
   Widget _buildMainStats() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -162,7 +165,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
@@ -171,7 +174,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               children: [
                 Icon(
                   Icons.analytics,
-                  color: AppColors.goldSoft,
+                  color: colorScheme.primary,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
@@ -180,7 +183,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -202,7 +205,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     Icon(
                       Icons.flash_on,
                       size: 16,
-                      color: AppColors.goldSoft,
+                      color: colorScheme.primary,
                     ),
                     const SizedBox(width: 6),
                     Text(
@@ -210,7 +213,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.grey[700],
+                        color: colorScheme.onSurface.withOpacity(0.8),
                       ),
                     ),
                     const Spacer(),
@@ -227,7 +230,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                            color: colorScheme.onSurface,
                           ),
                         ),
                       ],
@@ -264,6 +267,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   }
 
   Widget _buildStatRow(String title, dynamic value) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
         Text(
@@ -271,7 +275,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
@@ -280,7 +284,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             value,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.black87,
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.w500,
             ),
           )
@@ -291,14 +295,15 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   }
 
   Widget _buildSharpnessSection() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -311,7 +316,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
@@ -320,7 +325,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               children: [
                 Icon(
                   Icons.content_cut,
-                  color: AppColors.goldSoft,
+                  color: colorScheme.primary,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
@@ -329,7 +334,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -389,6 +394,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   }
 
   Widget _buildSharpnessLegend(String label, Color color, int value) {
+    final colorScheme = Theme.of(context).colorScheme;
     // Si el color es blanco, añadir un outline para que sea visible
     final bool needsOutline = color == Colors.white;
 
@@ -401,7 +407,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           decoration: BoxDecoration(
             color: color,
             border: needsOutline
-                ? Border.all(color: Colors.grey[600]!, width: 2)
+                ? Border.all(color: colorScheme.outlineVariant, width: 2)
                 : null,
             borderRadius: BorderRadius.circular(6),
           ),
@@ -411,7 +417,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           '$label: $value',
           style: TextStyle(
             fontSize: 12,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -420,14 +426,15 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   }
 
   Widget _buildSkillsSection() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -440,7 +447,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
@@ -449,7 +456,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               children: [
                 Icon(
                   Icons.flash_on,
-                  color: AppColors.goldSoft,
+                  color: colorScheme.primary,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
@@ -458,7 +465,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -472,11 +479,11 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               future: _skills,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
+                  return Center(
                     child: Padding(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child:
-                          CircularProgressIndicator(color: AppColors.goldSoft),
+                          CircularProgressIndicator(color: colorScheme.primary),
                     ),
                   );
                 } else if (snapshot.hasError) {
@@ -487,7 +494,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                         "Error loading skills",
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.grey[600],
+                          color: colorScheme.onSurface.withOpacity(0.8),
                         ),
                       ),
                     ),
@@ -500,7 +507,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                         "No skills available",
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.grey[600],
+                          color: colorScheme.onSurface.withOpacity(0.8),
                         ),
                       ),
                     ),
@@ -512,10 +519,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                         margin: const EdgeInsets.only(bottom: 16),
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Colors.grey[50],
+                          color: colorScheme.surfaceContainerHighest,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: Colors.grey[200]!,
+                            color: colorScheme.outlineVariant,
                             width: 1,
                           ),
                         ),
@@ -529,7 +536,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                   height: 40,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Colors.white,
+                                    color: colorScheme.surface,
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
@@ -548,10 +555,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                     children: [
                                       Text(
                                         skillInfo.name,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
+                                          color: colorScheme.onSurface,
                                         ),
                                       ),
                                       if (skillInfo.description.isNotEmpty) ...[
@@ -560,7 +567,8 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                           skillInfo.description,
                                           style: TextStyle(
                                             fontSize: 14,
-                                            color: Colors.grey[600],
+                                            color: colorScheme.onSurface
+                                                .withOpacity(0.8),
                                           ),
                                         ),
                                       ],
@@ -583,12 +591,12 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                 decoration: BoxDecoration(
                                   color: isCurrentLevel
                                       ? AppColors.goldSoft.withOpacity(0.1)
-                                      : Colors.white,
+                                      : colorScheme.surfaceContainerHighest,
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
                                     color: isCurrentLevel
                                         ? AppColors.goldSoft.withOpacity(0.3)
-                                        : Colors.grey[200]!,
+                                        : colorScheme.outlineVariant,
                                     width: isCurrentLevel ? 2 : 1,
                                   ),
                                 ),
@@ -603,7 +611,8 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                       decoration: BoxDecoration(
                                         color: isCurrentLevel
                                             ? AppColors.goldSoft
-                                            : Colors.grey[400],
+                                            : colorScheme
+                                                .surfaceContainerHighest,
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: Text(
@@ -611,7 +620,12 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                          color: isCurrentLevel
+                                              ? (colorScheme.brightness ==
+                                                      Brightness.dark
+                                                  ? colorScheme.onSurface
+                                                  : Colors.black87)
+                                              : colorScheme.onSurface,
                                         ),
                                       ),
                                     ),
@@ -621,7 +635,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                         rank.description,
                                         style: TextStyle(
                                           fontSize: 14,
-                                          color: Colors.black87,
+                                          color: colorScheme.onSurface,
                                           fontWeight: isCurrentLevel
                                               ? FontWeight.w500
                                               : FontWeight.normal,
@@ -647,14 +661,15 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   }
 
   Widget _buildCraftingSection() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -667,7 +682,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
@@ -676,7 +691,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               children: [
                 Icon(
                   Icons.build,
-                  color: AppColors.goldSoft,
+                  color: colorScheme.primary,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
@@ -685,7 +700,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -741,13 +756,14 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   }
 
   Widget _buildMaterialItem(dynamic material) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.grey[50],
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.grey[200]!,
+          color: colorScheme.outlineVariant,
           width: 1,
         ),
       ),
@@ -774,7 +790,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
+                    color: colorScheme.surface,
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -790,7 +806,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -799,7 +815,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.goldSoft,
+                    color: colorScheme.primary,
                   ),
                 ),
               ],
@@ -829,14 +845,15 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   }
 
   Widget _buildDescriptionSection() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -849,7 +866,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
@@ -858,7 +875,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               children: [
                 Icon(
                   Icons.description,
-                  color: AppColors.goldSoft,
+                  color: colorScheme.primary,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
@@ -867,7 +884,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -881,7 +898,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               widget.weapon.description,
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
                 height: 1.5,
               ),
             ),

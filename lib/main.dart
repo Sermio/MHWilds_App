@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/providers/theme_provider.dart';
 import 'package:mhwilds_app/providers/talismans_provider.dart';
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/providers/decorations_provider.dart';
@@ -15,6 +16,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => SkillsProvider(), lazy: true),
         ChangeNotifierProvider(create: (_) => ArmorSetProvider(), lazy: true),
         ChangeNotifierProvider(create: (_) => TalismansProvider(), lazy: true),
@@ -35,10 +37,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.lightTheme,
-      debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, _) {
+        return MaterialApp(
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: themeProvider.themeMode,
+          debugShowCheckedModeBanner: false,
+          home: const HomeScreen(),
+        );
+      },
     );
   }
 }

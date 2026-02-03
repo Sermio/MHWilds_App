@@ -54,22 +54,22 @@ class _ItemListState extends State<ItemList> {
   Widget build(BuildContext context) {
     final itemsProvider = Provider.of<ItemsProvider>(context);
     final filteredItems = itemsProvider.items;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
-          // Filtros mejorados
           if (_filtersVisible) ...[
             Container(
               margin: const EdgeInsets.all(16),
-              height: 250, // Altura fija para los filtros
+              height: 250,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: colorScheme.shadow.withOpacity(0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -77,7 +77,6 @@ class _ItemListState extends State<ItemList> {
               ),
               child: Column(
                 children: [
-                  // Header de filtros (fijo)
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: const BoxDecoration(
@@ -88,15 +87,14 @@ class _ItemListState extends State<ItemList> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.filter_list,
-                            color: AppColors.goldSoft),
+                        Icon(Icons.filter_list, color: colorScheme.primary),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           'Filters',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                            color: colorScheme.onSurface,
                           ),
                         ),
                         const Spacer(),
@@ -105,7 +103,7 @@ class _ItemListState extends State<ItemList> {
                           icon: const Icon(Icons.refresh, size: 18),
                           label: const Text('Reset'),
                           style: TextButton.styleFrom(
-                            foregroundColor: AppColors.goldSoft,
+                            foregroundColor: colorScheme.primary,
                           ),
                         ),
                       ],
@@ -131,31 +129,31 @@ class _ItemListState extends State<ItemList> {
                             decoration: InputDecoration(
                               labelText: 'Search by Name',
                               hintText: 'Enter item name...',
-                              prefixIcon: const Icon(Icons.search,
-                                  color: AppColors.goldSoft),
+                              prefixIcon: Icon(Icons.search,
+                                  color: colorScheme.primary),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide:
-                                    BorderSide(color: Colors.grey[300]!),
+                                borderSide: BorderSide(
+                                    color: colorScheme.outlineVariant),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(
-                                    color: AppColors.goldSoft, width: 2),
+                                    color: colorScheme.primary, width: 2),
                               ),
                               filled: true,
-                              fillColor: Colors.grey[50],
+                              fillColor: colorScheme.surfaceContainerHighest,
                             ),
                           ),
                           const SizedBox(height: 16),
 
                           // Filtro de rareza
-                          const Text(
+                          Text(
                             'Rarity',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              color: Colors.black87,
+                              color: colorScheme.onSurface,
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -168,8 +166,8 @@ class _ItemListState extends State<ItemList> {
                                   'Rarity $rarity',
                                   style: TextStyle(
                                     color: _selectedRarity == rarity
-                                        ? Colors.white
-                                        : Colors.black87,
+                                        ? colorScheme.onPrimary
+                                        : colorScheme.onSurface,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -204,17 +202,17 @@ class _ItemListState extends State<ItemList> {
           // Lista de items
           Expanded(
             child: itemsProvider.isLoading
-                ? const Center(
+                ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CircularProgressIndicator(color: AppColors.goldSoft),
-                        SizedBox(height: 16),
+                        CircularProgressIndicator(color: colorScheme.primary),
+                        const SizedBox(height: 16),
                         Text(
                           'Loading items...',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey,
+                            color: colorScheme.onSurface.withOpacity(0.7),
                           ),
                         ),
                       ],
@@ -228,14 +226,14 @@ class _ItemListState extends State<ItemList> {
                             Icon(
                               Icons.search_off,
                               size: 64,
-                              color: Colors.grey[400],
+                              color: colorScheme.onSurface.withOpacity(0.5),
                             ),
                             const SizedBox(height: 16),
                             Text(
                               'No items found',
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.grey[600],
+                                color: colorScheme.onSurface.withOpacity(0.8),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -244,7 +242,7 @@ class _ItemListState extends State<ItemList> {
                               'Try adjusting your filters',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Colors.grey[500],
+                                color: colorScheme.onSurface.withOpacity(0.6),
                               ),
                             ),
                           ],
@@ -258,147 +256,149 @@ class _ItemListState extends State<ItemList> {
                           final item = filteredItems[index];
 
                           return Container(
-                              margin: const EdgeInsets.only(bottom: 16),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
+                            margin: const EdgeInsets.only(bottom: 16),
+                            decoration: BoxDecoration(
+                              color: colorScheme.surface,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: colorScheme.shadow.withOpacity(0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
                                 borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(20),
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ItemDetails(
-                                          item: item,
-                                        ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ItemDetails(
+                                        item: item,
                                       ),
-                                    );
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        // Header del item
-                                        Row(
-                                          children: [
-                                            // Imagen del material
-                                            Container(
-                                              width: 60,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: AppColors.goldSoft
-                                                        .withOpacity(0.3),
-                                                    blurRadius: 8,
-                                                    offset: const Offset(0, 2),
-                                                  ),
-                                                ],
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                child: MaterialImage(
-                                                  materialName: item.name,
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Header del item
+                                      Row(
+                                        children: [
+                                          // Imagen del material
+                                          Container(
+                                            width: 60,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: colorScheme.primary
+                                                      .withOpacity(0.3),
+                                                  blurRadius: 8,
+                                                  offset: const Offset(0, 2),
                                                 ),
+                                              ],
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              child: MaterialImage(
+                                                materialName: item.name,
                                               ),
                                             ),
-                                            const SizedBox(width: 16),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    item.name,
-                                                    style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 20,
-                                                      color: Colors.black87,
-                                                    ),
+                                          ),
+                                          const SizedBox(width: 16),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  item.name,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20,
+                                                    color:
+                                                        colorScheme.onSurface,
                                                   ),
-                                                  const SizedBox(height: 4),
-                                                  Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 8,
-                                                        vertical: 4),
-                                                    decoration: BoxDecoration(
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 4),
+                                                  decoration: BoxDecoration(
+                                                    color: _getRarityColor(
+                                                            item.rarity)
+                                                        .withOpacity(0.1),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    border: Border.all(
                                                       color: _getRarityColor(
                                                               item.rarity)
-                                                          .withOpacity(0.1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      border: Border.all(
-                                                        color: _getRarityColor(
-                                                                item.rarity)
-                                                            .withOpacity(0.3),
-                                                      ),
-                                                    ),
-                                                    child: Text(
-                                                      'Rarity ${item.rarity}',
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: _getRarityColor(
-                                                            item.rarity),
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                          .withOpacity(0.3),
                                                     ),
                                                   ),
-                                                ],
-                                              ),
+                                                  child: Text(
+                                                    'Rarity ${item.rarity}',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: _getRarityColor(
+                                                          item.rarity),
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: Colors.grey[400],
-                                              size: 20,
-                                            ),
-                                          ],
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: colorScheme.onSurface
+                                                .withOpacity(0.5),
+                                            size: 20,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 16),
+
+                                      // Descripción
+                                      if (item.description.isNotEmpty) ...[
+                                        Text(
+                                          item.description,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: colorScheme.onSurface
+                                                .withOpacity(0.7),
+                                            height: 1.4,
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                         const SizedBox(height: 16),
-
-                                        // Descripción
-                                        if (item.description.isNotEmpty) ...[
-                                          Text(
-                                            item.description,
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.grey[600],
-                                              height: 1.4,
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          const SizedBox(height: 16),
-                                        ],
-
-                                        // Recetas
-                                        if (item.recipes.isNotEmpty) ...[
-                                          _buildRecipesSection(item),
-                                        ],
                                       ],
-                                    ),
+
+                                      // Recetas
+                                      if (item.recipes.isNotEmpty) ...[
+                                        _buildRecipesSection(context, item),
+                                      ],
+                                    ],
                                   ),
                                 ),
                               ),
-                            );
+                            ),
+                          );
                         },
                       ),
           ),
@@ -406,16 +406,17 @@ class _ItemListState extends State<ItemList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _toggleFiltersVisibility,
-        backgroundColor: AppColors.goldSoft,
+        backgroundColor: colorScheme.primary,
         child: Icon(
           _filtersVisible ? Icons.close : Icons.tune,
-          color: Colors.black,
+          color: colorScheme.onPrimary,
         ),
       ),
     );
   }
 
-  Widget _buildRecipesSection(Item item) {
+  Widget _buildRecipesSection(BuildContext context, Item item) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -424,7 +425,7 @@ class _ItemListState extends State<ItemList> {
             Icon(
               Icons.construction,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -432,7 +433,7 @@ class _ItemListState extends State<ItemList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],
@@ -447,13 +448,12 @@ class _ItemListState extends State<ItemList> {
 
               return Row(
                 children: [
-                  // Imagen del material
                   Container(
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      color: Colors.white,
+                      color: colorScheme.surface,
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(6),
@@ -463,16 +463,14 @@ class _ItemListState extends State<ItemList> {
                     ),
                   ),
                   const SizedBox(width: 6),
-                  // Nombre del material
                   Text(
                     recipeItem.name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: Colors.black87,
+                      color: colorScheme.onSurface,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  // Símbolo "+" si no es el último
                   if (!isLast) ...[
                     const SizedBox(width: 8),
                     Text(
@@ -480,7 +478,7 @@ class _ItemListState extends State<ItemList> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey[600],
+                        color: colorScheme.onSurface.withOpacity(0.6),
                       ),
                     ),
                     const SizedBox(width: 8),

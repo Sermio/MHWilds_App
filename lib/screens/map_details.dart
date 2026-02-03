@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/models/location.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
-import 'package:mhwilds_app/utils/colors.dart';
 
 class MonsterMapDetails extends StatefulWidget {
   const MonsterMapDetails({super.key, required this.mapId});
@@ -171,6 +170,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
   }
 
   Widget _buildCampList(int floor) {
+    final colorScheme = Theme.of(context).colorScheme;
     final campsOnFloor =
         mapData?.camps!.where((camp) => camp.floor == floor).toList() ?? [];
     if (campsOnFloor.isEmpty) return const SizedBox.shrink();
@@ -183,15 +183,15 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
               'Camps of Level ${floor + 1}',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: AppColors.oliveBrown,
+                color: colorScheme.onSurface,
               ),
             ),
           ),
@@ -201,11 +201,11 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
             padding: const EdgeInsets.only(bottom: 12.0),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: colorScheme.shadow.withOpacity(0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -218,19 +218,19 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: AppColors.goldSoft,
+                        color: colorScheme.primary,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.goldSoft.withOpacity(0.3),
+                            color: colorScheme.primary.withOpacity(0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
                         ],
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.cabin_rounded,
-                        color: Colors.white,
+                        color: colorScheme.onPrimary,
                         size: 24,
                       ),
                     ),
@@ -241,10 +241,10 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                         children: [
                           Text(
                             camp.name!,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
-                              color: Colors.black87,
+                              color: colorScheme.onSurface,
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -259,7 +259,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                               _buildInfoChip(
                                 'Zone',
                                 '${camp.zone}',
-                                AppColors.goldSoft,
+                                colorScheme.primary,
                               ),
                             ],
                           ),
@@ -313,33 +313,34 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: colorScheme.surfaceContainerHighest,
       appBar: AppBar(
         title: Text(mapData?.name ?? 'Map'),
         centerTitle: true,
         elevation: 10,
-        backgroundColor: AppColors.goldSoft,
-        foregroundColor: Colors.white,
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
       ),
       body: isLoadingImages
           ? Container(
               height: 200,
               margin: const EdgeInsets.all(20),
-              child: const Center(
+              child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircularProgressIndicator(
                       valueColor:
-                          AlwaysStoppedAnimation<Color>(AppColors.goldSoft),
+                          AlwaysStoppedAnimation<Color>(colorScheme.primary),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       'Loading map...',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.grey,
+                        color: colorScheme.onSurface.withOpacity(0.7),
                       ),
                     ),
                   ],
@@ -350,21 +351,21 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
               ? Container(
                   height: 200,
                   margin: const EdgeInsets.all(20),
-                  child: const Center(
+                  child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.map_outlined,
                           size: 64,
-                          color: Colors.grey,
+                          color: colorScheme.onSurface.withOpacity(0.5),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Text(
                           'No map images found',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey,
+                            color: colorScheme.onSurface.withOpacity(0.7),
                           ),
                         ),
                       ],
@@ -389,11 +390,11 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                             vertical: 10,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: colorScheme.surface,
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.1),
+                                color: colorScheme.shadow.withOpacity(0.1),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               ),
@@ -410,20 +411,13 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                                     vertical: 8,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: AppColors.goldSoft,
+                                    color: Color.lerp(colorScheme.primary,
+                                        Colors.black, 0.45),
                                     borderRadius: BorderRadius.circular(25),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            AppColors.goldSoft.withOpacity(0.3),
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
                                   ),
                                   child: Text(
                                     'Level $levelLabel',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.white,
@@ -439,7 +433,8 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                                       borderRadius: BorderRadius.circular(16),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black.withOpacity(0.1),
+                                          color: colorScheme.shadow
+                                              .withOpacity(0.2),
                                           blurRadius: 15,
                                           offset: const Offset(0, 5),
                                         ),

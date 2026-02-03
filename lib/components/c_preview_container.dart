@@ -22,28 +22,25 @@ class CcontainerPreview extends StatelessWidget {
       controller:
           overlayPortalController, // Pasamos el controlador al OverlayPortal
       overlayChildBuilder: (BuildContext context) {
-        // Creamos un widget dentro del overlay
+        final colorScheme = Theme.of(context).colorScheme;
         return Positioned(
-          left: position.dx, // Posición X calculada en el controlador
-          top: position.dy, // Posición Y calculada en el controlador
+          left: position.dx,
+          top: position.dy,
           child: Container(
-            padding: const EdgeInsets.all(16), // Espaciado interno
-            constraints: const BoxConstraints(
-              maxWidth: 300, // Ancho máximo del contenedor
-            ),
+            padding: const EdgeInsets.all(16),
+            constraints: const BoxConstraints(maxWidth: 300),
             decoration: BoxDecoration(
-              color: Colors.white, // Color de fondo
-              borderRadius: BorderRadius.circular(12), // Bordes redondeados
+              color: colorScheme.surface,
+              borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2), // Sombra del contenedor
-                  blurRadius: 8, // Difusión de la sombra
-                  offset: const Offset(0, 4), // Desplazamiento de la sombra
+                  color: colorScheme.shadow.withOpacity(0.2),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
-            child:
-                content, // Se coloca el contenido dinámico dentro del contenedor
+            child: content,
           ),
         );
       },

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
-import 'package:mhwilds_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 class ItemDetails extends StatelessWidget {
@@ -12,6 +11,7 @@ class ItemDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final allMonsters = context.watch<MonstersProvider>().allMonsters;
 
     final monstersWithItem = allMonsters.where((monster) {
@@ -41,7 +41,7 @@ class ItemDetails extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.goldSoft.withOpacity(0.3),
+                            color: colorScheme.primary.withOpacity(0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
@@ -56,10 +56,10 @@ class ItemDetails extends StatelessWidget {
                     // Nombre del item
                     Text(
                       item.name,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: colorScheme.onSurface,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -70,7 +70,7 @@ class ItemDetails extends StatelessWidget {
                         item.description,
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.grey[600],
+                          color: colorScheme.onSurface.withOpacity(0.8),
                           height: 1.4,
                         ),
                         textAlign: TextAlign.center,
@@ -90,7 +90,7 @@ class ItemDetails extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -99,11 +99,11 @@ class ItemDetails extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: colorScheme.surface,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
+                      color: colorScheme.shadow.withOpacity(0.1),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -117,7 +117,7 @@ class ItemDetails extends StatelessWidget {
                         Icon(
                           Icons.construction,
                           size: 20,
-                          color: AppColors.goldSoft,
+                          color: colorScheme.primary,
                         ),
                         const SizedBox(width: 8),
                         Text(
@@ -125,7 +125,7 @@ class ItemDetails extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: Colors.grey[700],
+                            color: colorScheme.onSurface.withOpacity(0.8),
                           ),
                         ),
                       ],
@@ -150,7 +150,7 @@ class ItemDetails extends StatelessWidget {
                                 height: 48,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: Colors.white,
+                                  color: colorScheme.surfaceContainerHighest,
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
@@ -163,9 +163,9 @@ class ItemDetails extends StatelessWidget {
                               // Nombre del material
                               Text(
                                 recipeItem.name,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 16,
-                                  color: Colors.black87,
+                                  color: colorScheme.onSurface,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -177,7 +177,8 @@ class ItemDetails extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.grey[600],
+                                    color:
+                                        colorScheme.onSurface.withOpacity(0.8),
                                   ),
                                 ),
                                 const SizedBox(width: 12),
@@ -202,7 +203,7 @@ class ItemDetails extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -216,11 +217,11 @@ class ItemDetails extends StatelessWidget {
                   margin:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: colorScheme.surface,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
+                        color: colorScheme.shadow.withOpacity(0.1),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -233,7 +234,7 @@ class ItemDetails extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: AppColors.goldSoft.withOpacity(0.1),
+                          color: colorScheme.primary.withOpacity(0.1),
                           borderRadius: const BorderRadius.vertical(
                             top: Radius.circular(20),
                           ),
@@ -246,7 +247,7 @@ class ItemDetails extends StatelessWidget {
                                 height: 40,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
+                                  color: colorScheme.surface,
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
@@ -260,10 +261,10 @@ class ItemDetails extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 monster.name,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
+                                  color: colorScheme.onSurface,
                                 ),
                               ),
                             ),
@@ -282,7 +283,7 @@ class ItemDetails extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.grey[700],
+                                color: colorScheme.onSurface.withOpacity(0.8),
                               ),
                             ),
                             const SizedBox(height: 16),
@@ -300,10 +301,10 @@ class ItemDetails extends StatelessWidget {
                                 margin: const EdgeInsets.only(bottom: 12),
                                 padding: const EdgeInsets.all(16),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey[50],
+                                  color: colorScheme.surfaceContainerHighest,
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
-                                    color: Colors.grey[200]!,
+                                    color: colorScheme.outlineVariant,
                                     width: 1,
                                   ),
                                 ),
@@ -315,15 +316,15 @@ class ItemDetails extends StatelessWidget {
                                         vertical: 6,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: AppColors.goldSoft,
+                                        color: colorScheme.primary,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Text(
                                         '${condition.chance}%',
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                          color: colorScheme.onPrimary,
                                         ),
                                       ),
                                     ),
@@ -331,9 +332,9 @@ class ItemDetails extends StatelessWidget {
                                     Expanded(
                                       child: Text(
                                         formattedKind,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 16,
-                                          color: Colors.black87,
+                                          color: colorScheme.onSurface,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),

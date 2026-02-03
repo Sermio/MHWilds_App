@@ -61,7 +61,8 @@ class AppUpdateChecker {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         title: Row(
           children: [
-            Icon(Icons.system_update, color: AppColors.goldSoft, size: 28),
+            Icon(Icons.system_update,
+                color: Theme.of(ctx).colorScheme.primary, size: 28),
             const SizedBox(width: 10),
             const Expanded(
               child: Text(
@@ -88,8 +89,8 @@ class AppUpdateChecker {
             icon: const Icon(Icons.store, size: 20),
             label: const Text('Go to store'),
             style: FilledButton.styleFrom(
-              backgroundColor: AppColors.goldSoft,
-              foregroundColor: Colors.black87,
+              backgroundColor: Theme.of(ctx).colorScheme.primary,
+              foregroundColor: Theme.of(ctx).colorScheme.onPrimary,
             ),
           ),
         ],

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/screens/settings.dart';
 
 class Cappbar extends StatelessWidget implements PreferredSizeWidget {
-  const Cappbar({super.key, this.title = ""});
+  const Cappbar({super.key, this.title = "", this.actions});
 
   final String title;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +13,20 @@ class Cappbar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       centerTitle: true,
       elevation: 10,
+      actions: actions ??
+          [
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const SettingsScreen(),
+                  ),
+                );
+              },
+            ),
+          ],
       // backgroundColor: Colors.transparent,
       flexibleSpace: Stack(
         children: [

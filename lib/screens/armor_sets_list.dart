@@ -3,7 +3,6 @@ import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/screens/armor_piece_details.dart';
-import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 
@@ -57,11 +56,12 @@ class _ArmorSetListState extends State<ArmorSetList> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final armorSetProvider = Provider.of<ArmorSetProvider>(context);
     final filteredArmorSets = armorSetProvider.armorSets;
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
           // Filtros mejorados
@@ -70,11 +70,11 @@ class _ArmorSetListState extends State<ArmorSetList> {
               margin: const EdgeInsets.all(16),
               height: 350, // Altura fija para los filtros
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: colorScheme.shadow.withOpacity(0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -93,15 +93,14 @@ class _ArmorSetListState extends State<ArmorSetList> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.filter_list,
-                            color: AppColors.goldSoft),
+                        Icon(Icons.filter_list, color: colorScheme.primary),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           'Filters',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                            color: colorScheme.onSurface,
                           ),
                         ),
                         const Spacer(),
@@ -110,7 +109,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                           icon: const Icon(Icons.refresh, size: 18),
                           label: const Text('Reset'),
                           style: TextButton.styleFrom(
-                            foregroundColor: AppColors.goldSoft,
+                            foregroundColor: colorScheme.primary,
                           ),
                         ),
                       ],
@@ -136,31 +135,31 @@ class _ArmorSetListState extends State<ArmorSetList> {
                             decoration: InputDecoration(
                               labelText: 'Search by Name',
                               hintText: 'Enter armor set name...',
-                              prefixIcon: const Icon(Icons.search,
-                                  color: AppColors.goldSoft),
+                              prefixIcon: Icon(Icons.search,
+                                  color: colorScheme.primary),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide:
-                                    BorderSide(color: Colors.grey[300]!),
+                                borderSide: BorderSide(
+                                    color: colorScheme.outlineVariant),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(
-                                    color: AppColors.goldSoft, width: 2),
+                                    color: colorScheme.primary, width: 2),
                               ),
                               filled: true,
-                              fillColor: Colors.grey[50],
+                              fillColor: colorScheme.surfaceContainerHighest,
                             ),
                           ),
                           const SizedBox(height: 16),
 
                           // Filtro de tipo
-                          const Text(
+                          Text(
                             'Type',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              color: Colors.black87,
+                              color: colorScheme.onSurface,
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -174,8 +173,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                   kind,
                                   style: TextStyle(
                                     color: _selectedKind == kind
-                                        ? Colors.white
-                                        : Colors.black87,
+                                        ? colorScheme.onPrimary
+                                        : colorScheme.onSurface,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -199,12 +198,12 @@ class _ArmorSetListState extends State<ArmorSetList> {
                           const SizedBox(height: 16),
 
                           // Filtro de rareza
-                          const Text(
+                          Text(
                             'Rarity',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              color: Colors.black87,
+                              color: colorScheme.onSurface,
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -217,8 +216,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                   'Rarity $rarity',
                                   style: TextStyle(
                                     color: _selectedRarity == rarity
-                                        ? Colors.white
-                                        : Colors.black87,
+                                        ? colorScheme.onPrimary
+                                        : colorScheme.onSurface,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -256,17 +255,17 @@ class _ArmorSetListState extends State<ArmorSetList> {
           // Lista de sets de armadura
           Expanded(
             child: armorSetProvider.isLoading
-                ? const Center(
+                ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CircularProgressIndicator(color: AppColors.goldSoft),
-                        SizedBox(height: 16),
+                        CircularProgressIndicator(color: colorScheme.primary),
+                        const SizedBox(height: 16),
                         Text(
                           'Loading armor sets...',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey,
+                            color: colorScheme.onSurface.withOpacity(0.7),
                           ),
                         ),
                       ],
@@ -280,14 +279,14 @@ class _ArmorSetListState extends State<ArmorSetList> {
                             Icon(
                               Icons.search_off,
                               size: 64,
-                              color: Colors.grey[400],
+                              color: colorScheme.onSurface.withOpacity(0.5),
                             ),
                             const SizedBox(height: 16),
                             Text(
                               'No armor sets found',
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.grey[600],
+                                color: colorScheme.onSurface.withOpacity(0.8),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -296,7 +295,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                               'Try adjusting your filters',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Colors.grey[500],
+                                color: colorScheme.onSurface.withOpacity(0.6),
                               ),
                             ),
                           ],
@@ -318,10 +317,10 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                     horizontal: 16, vertical: 8),
                                 child: Text(
                                   armorSet.name,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
+                                    color: colorScheme.onSurface,
                                   ),
                                 ),
                               ),
@@ -332,11 +331,11 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                       horizontal: 16, vertical: 8),
                                   padding: const EdgeInsets.all(16),
                                   decoration: BoxDecoration(
-                                    color: AppColors.goldSoft.withOpacity(0.1),
+                                    color: colorScheme.primary.withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(16),
                                     border: Border.all(
                                       color:
-                                          AppColors.goldSoft.withOpacity(0.3),
+                                          colorScheme.primary.withOpacity(0.3),
                                       width: 1,
                                     ),
                                   ),
@@ -349,7 +348,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                           Icon(
                                             Icons.group_work,
                                             size: 20,
-                                            color: AppColors.goldSoft,
+                                            color: colorScheme.primary,
                                           ),
                                           const SizedBox(width: 8),
                                           Text(
@@ -357,7 +356,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.grey[800],
+                                              color: colorScheme.onSurface,
                                             ),
                                           ),
                                         ],
@@ -370,11 +369,11 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                 padding:
                                                     const EdgeInsets.all(12),
                                                 decoration: BoxDecoration(
-                                                  color: Colors.white,
+                                                  color: colorScheme.surface,
                                                   borderRadius:
                                                       BorderRadius.circular(8),
                                                   border: Border.all(
-                                                    color: AppColors.goldSoft
+                                                    color: colorScheme.primary
                                                         .withOpacity(0.2),
                                                     width: 1,
                                                   ),
@@ -389,16 +388,17 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                       ),
                                                       decoration: BoxDecoration(
                                                         color:
-                                                            AppColors.goldSoft,
+                                                            colorScheme.primary,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(12),
                                                       ),
                                                       child: Text(
                                                         '${rank.pieces} pieces',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                           fontSize: 12,
-                                                          color: Colors.white,
+                                                          color: colorScheme
+                                                              .onPrimary,
                                                           fontWeight:
                                                               FontWeight.bold,
                                                         ),
@@ -418,8 +418,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,
-                                                              color: Colors
-                                                                  .black87,
+                                                              color: colorScheme
+                                                                  .onSurface,
                                                             ),
                                                           ),
                                                           if (rank
@@ -433,8 +433,10 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                                   .description,
                                                               style: TextStyle(
                                                                 fontSize: 12,
-                                                                color: Colors
-                                                                    .grey[600],
+                                                                color: colorScheme
+                                                                    .onSurface
+                                                                    .withOpacity(
+                                                                        0.8),
                                                                 height: 1.3,
                                                               ),
                                                               maxLines: 2,
@@ -455,204 +457,186 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                 ),
                               ],
                               // Piezas del set
-                              ...armorSet.pieces.map((piece) => Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 16, vertical: 8),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(20),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.1),
-                                            blurRadius: 10,
-                                            offset: const Offset(0, 4),
-                                          ),
-                                        ],
+                              ...armorSet.pieces.map(
+                                (piece) => Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  decoration: BoxDecoration(
+                                    color: colorScheme.surface,
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            colorScheme.shadow.withOpacity(0.1),
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
                                       ),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        child: InkWell(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ArmorDetails(
-                                                  armor: piece,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(20),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                // Header de la pieza
-                                                Row(
-                                                  children: [
-                                                    // Imagen de la armadura
-                                                    Container(
-                                                      width: 35,
-                                                      height: 35,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: AppColors
-                                                                .goldSoft
-                                                                .withOpacity(
-                                                                    0.3),
-                                                            blurRadius: 6,
-                                                            offset:
-                                                                const Offset(
-                                                                    0, 2),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        child: Image.asset(
-                                                          'assets/imgs/armor/${piece.kind}/rarity${piece.rarity}.webp',
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(width: 16),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            piece.name,
-                                                            style:
-                                                                const TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 18,
-                                                              color: Colors
-                                                                  .black87,
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                              height: 4),
-                                                          Container(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                                    horizontal:
-                                                                        8,
-                                                                    vertical:
-                                                                        4),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: _getKindColor(
-                                                                      piece
-                                                                          .kind)
-                                                                  .withOpacity(
-                                                                      0.1),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              border:
-                                                                  Border.all(
-                                                                color: _getKindColor(
-                                                                        piece
-                                                                            .kind)
-                                                                    .withOpacity(
-                                                                        0.3),
-                                                              ),
-                                                            ),
-                                                            child: Text(
-                                                              piece.kind,
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                                color: _getKindColor(
-                                                                    piece.kind),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                              height: 8),
-                                                          // Indicador de rarity
-                                                          Container(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              horizontal: 8,
-                                                              vertical: 4,
-                                                            ),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: _getRarityColor(
-                                                                      piece
-                                                                          .rarity)
-                                                                  .withOpacity(
-                                                                      0.1),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              border:
-                                                                  Border.all(
-                                                                color: _getRarityColor(
-                                                                        piece
-                                                                            .rarity)
-                                                                    .withOpacity(
-                                                                        0.3),
-                                                              ),
-                                                            ),
-                                                            child: Text(
-                                                              'Rarity ${piece.rarity}',
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                                color: _getRarityColor(
-                                                                    piece
-                                                                        .rarity),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Icon(
-                                                      Icons.arrow_forward_ios,
-                                                      color: Colors.grey[400],
-                                                      size: 20,
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(height: 16),
-
-                                                // Habilidades
-                                                if (piece
-                                                    .skills.isNotEmpty) ...[
-                                                  _buildSkillsSection(piece),
-                                                ],
-                                              ],
+                                    ],
+                                  ),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      borderRadius: BorderRadius.circular(20),
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ArmorDetails(
+                                              armor: piece,
                                             ),
                                           ),
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            // Header de la pieza
+                                            Row(
+                                              children: [
+                                                // Imagen de la armadura
+                                                Container(
+                                                  width: 35,
+                                                  height: 35,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: colorScheme
+                                                            .primary
+                                                            .withOpacity(0.3),
+                                                        blurRadius: 6,
+                                                        offset:
+                                                            const Offset(0, 2),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    child: Image.asset(
+                                                      'assets/imgs/armor/${piece.kind}/rarity${piece.rarity}.webp',
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 16),
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        piece.name,
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 18,
+                                                          color: Colors.black87,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 4),
+                                                      Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 8,
+                                                                vertical: 4),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: _getKindColor(
+                                                                  piece.kind)
+                                                              .withOpacity(0.1),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                          border: Border.all(
+                                                            color: _getKindColor(
+                                                                    piece.kind)
+                                                                .withOpacity(
+                                                                    0.3),
+                                                          ),
+                                                        ),
+                                                        child: Text(
+                                                          piece.kind,
+                                                          style: TextStyle(
+                                                            fontSize: 12,
+                                                            color:
+                                                                _getKindColor(
+                                                                    piece.kind),
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 8),
+                                                      // Indicador de rarity
+                                                      Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                          horizontal: 8,
+                                                          vertical: 4,
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: _getRarityColor(
+                                                                  piece.rarity)
+                                                              .withOpacity(0.1),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                          border: Border.all(
+                                                            color: _getRarityColor(
+                                                                    piece
+                                                                        .rarity)
+                                                                .withOpacity(
+                                                                    0.3),
+                                                          ),
+                                                        ),
+                                                        child: Text(
+                                                          'Rarity ${piece.rarity}',
+                                                          style: TextStyle(
+                                                            fontSize: 12,
+                                                            color:
+                                                                _getRarityColor(
+                                                                    piece
+                                                                        .rarity),
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Icon(
+                                                  Icons.arrow_forward_ios,
+                                                  color: colorScheme.onSurface
+                                                      .withOpacity(0.6),
+                                                  size: 20,
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 16),
+
+                                            // Habilidades
+                                            if (piece.skills.isNotEmpty) ...[
+                                              _buildSkillsSection(piece),
+                                            ],
+                                          ],
                                         ),
                                       ),
                                     ),
                                   ),
+                                ),
+                              ),
                             ],
                           );
                         },
@@ -662,16 +646,17 @@ class _ArmorSetListState extends State<ArmorSetList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _toggleFiltersVisibility,
-        backgroundColor: AppColors.goldSoft,
+        backgroundColor: colorScheme.primary,
         child: Icon(
           _filtersVisible ? Icons.close : Icons.tune,
-          color: Colors.black,
+          color: colorScheme.onPrimary,
         ),
       ),
     );
   }
 
   Widget _buildSkillsSection(armor_models.ArmorPiece armorPiece) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -681,7 +666,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             Icon(
               Icons.shield,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -689,7 +674,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
             const Spacer(),
@@ -707,7 +692,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -721,7 +706,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             Icon(
               Icons.settings,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -729,7 +714,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],
@@ -743,7 +728,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             Icon(
               Icons.security,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -751,7 +736,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],
@@ -765,7 +750,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             Icon(
               Icons.flash_on,
               size: 16,
-              color: AppColors.goldSoft,
+              color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
             Text(
@@ -773,7 +758,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],
@@ -783,9 +768,9 @@ class _ArmorSetListState extends State<ArmorSetList> {
               margin: const EdgeInsets.only(bottom: 8),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.goldSoft.withOpacity(0.1),
+                color: colorScheme.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.goldSoft.withOpacity(0.3)),
+                border: Border.all(color: colorScheme.primary.withOpacity(0.3)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -806,14 +791,14 @@ class _ArmorSetListState extends State<ArmorSetList> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppColors.goldSoft,
+                          color: colorScheme.primary,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           '${skill.skill.name} +${skill.level}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
-                            color: Colors.white,
+                            color: colorScheme.onPrimary,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -826,7 +811,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                       skill.description,
                       style: TextStyle(
                         fontSize: 11,
-                        color: Colors.grey[600],
+                        color: colorScheme.onSurface.withOpacity(0.8),
                         height: 1.3,
                       ),
                       maxLines: 2,
@@ -841,19 +826,20 @@ class _ArmorSetListState extends State<ArmorSetList> {
   }
 
   Widget _buildSlotsWidget(armor_models.ArmorPiece armorPiece) {
+    final colorScheme = Theme.of(context).colorScheme;
     if (armorPiece.slots.isEmpty) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          color: colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.grey[300]!),
+          border: Border.all(color: colorScheme.outlineVariant),
         ),
         child: Text(
           'No slots',
           style: TextStyle(
             fontSize: 11,
-            color: Colors.grey[600],
+            color: colorScheme.onSurface.withOpacity(0.8),
             fontStyle: FontStyle.italic,
           ),
         ),
@@ -906,19 +892,20 @@ class _ArmorSetListState extends State<ArmorSetList> {
   }
 
   Widget _buildResistancesWidget(armor_models.ArmorPiece armorPiece) {
+    final colorScheme = Theme.of(context).colorScheme;
     if (armorPiece.resistances.isEmpty) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          color: colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.grey[300]!),
+          border: Border.all(color: colorScheme.outlineVariant),
         ),
         child: Text(
           'No resistances',
           style: TextStyle(
             fontSize: 11,
-            color: Colors.grey[600],
+            color: colorScheme.onSurface.withOpacity(0.8),
             fontStyle: FontStyle.italic,
           ),
         ),
@@ -947,7 +934,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black87,
+                  color: colorScheme.onSurface,
                 ),
               ),
             ],

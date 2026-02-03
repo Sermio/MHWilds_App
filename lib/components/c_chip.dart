@@ -24,15 +24,17 @@ class Cchip<T> extends StatelessWidget {
       onTap: onTap,
       child: Chip(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-        elevation: 5,
-        shadowColor: Colors.black,
+        elevation: 0,
         backgroundColor: getItemColor(itemName),
         label: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               itemName.isNotEmpty ? itemName : "Unknown",
-              style: const TextStyle(color: Colors.black, fontSize: 12),
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+              ),
             ),
             if (optionalWidget != null) ...[
               const SizedBox(width: 6),

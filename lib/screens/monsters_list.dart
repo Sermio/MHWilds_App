@@ -67,22 +67,22 @@ class _MonstersListState extends State<MonstersList> {
     final monstersProvider = Provider.of<MonstersProvider>(context);
     final zonesProvider = Provider.of<LocationsProvider>(context);
     final monsters = monstersProvider.filteredMonsters;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
-          // Filtros mejorados
           if (_filtersVisible) ...[
             Container(
               margin: const EdgeInsets.all(16),
-              height: 300, // Altura fija para los filtros
+              height: 300,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: colorScheme.shadow.withOpacity(0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -90,7 +90,6 @@ class _MonstersListState extends State<MonstersList> {
               ),
               child: Column(
                 children: [
-                  // Header de filtros (fijo)
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: const BoxDecoration(
@@ -101,15 +100,14 @@ class _MonstersListState extends State<MonstersList> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.filter_list,
-                            color: AppColors.goldSoft),
+                        Icon(Icons.filter_list, color: colorScheme.primary),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           'Filters',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                            color: colorScheme.onSurface,
                           ),
                         ),
                         const Spacer(),
@@ -118,20 +116,18 @@ class _MonstersListState extends State<MonstersList> {
                           icon: const Icon(Icons.refresh, size: 18),
                           label: const Text('Reset'),
                           style: TextButton.styleFrom(
-                            foregroundColor: AppColors.goldSoft,
+                            foregroundColor: colorScheme.primary,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  // Contenido de filtros con scroll
                   Expanded(
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Campo de búsqueda por nombre
                           TextField(
                             controller: _searchNameController,
                             onChanged: (query) {
@@ -147,20 +143,20 @@ class _MonstersListState extends State<MonstersList> {
                             decoration: InputDecoration(
                               labelText: 'Search by Name',
                               hintText: 'Enter monster name...',
-                              prefixIcon: const Icon(Icons.search,
-                                  color: AppColors.goldSoft),
+                              prefixIcon: Icon(Icons.search,
+                                  color: colorScheme.primary),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide:
-                                    BorderSide(color: Colors.grey[300]!),
+                                borderSide: BorderSide(
+                                    color: colorScheme.outlineVariant),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(
-                                    color: AppColors.goldSoft, width: 2),
+                                    color: colorScheme.primary, width: 2),
                               ),
                               filled: true,
-                              fillColor: Colors.grey[50],
+                              fillColor: colorScheme.surfaceContainerHighest,
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -181,31 +177,31 @@ class _MonstersListState extends State<MonstersList> {
                             decoration: InputDecoration(
                               labelText: 'Search by Species',
                               hintText: 'Enter species...',
-                              prefixIcon: const Icon(Icons.category,
-                                  color: AppColors.goldSoft),
+                              prefixIcon: Icon(Icons.category,
+                                  color: colorScheme.primary),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide:
-                                    BorderSide(color: Colors.grey[300]!),
+                                borderSide: BorderSide(
+                                    color: colorScheme.outlineVariant),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(
-                                    color: AppColors.goldSoft, width: 2),
+                                    color: colorScheme.primary, width: 2),
                               ),
                               filled: true,
-                              fillColor: Colors.grey[50],
+                              fillColor: colorScheme.surfaceContainerHighest,
                             ),
                           ),
                           const SizedBox(height: 16),
 
                           // Filtros de ubicación
-                          const Text(
+                          Text(
                             'Locations',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              color: Colors.black87,
+                              color: colorScheme.onSurface,
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -221,14 +217,14 @@ class _MonstersListState extends State<MonstersList> {
                                         style: TextStyle(
                                           color: _selectedLocations
                                                   .contains(zone.name)
-                                              ? Colors.white
-                                              : Colors.black87,
+                                              ? colorScheme.onPrimary
+                                              : colorScheme.onSurface,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                       backgroundColor:
                                           zoneBackgroundColor(zone.name!),
-                                      selectedColor: AppColors.goldSoft,
+                                      selectedColor: colorScheme.primary,
                                       selected: _selectedLocations
                                           .contains(zone.name),
                                       onSelected: (isSelected) {
@@ -265,17 +261,17 @@ class _MonstersListState extends State<MonstersList> {
           // Lista de monstruos
           Expanded(
             child: monstersProvider.isLoading
-                ? const Center(
+                ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CircularProgressIndicator(color: AppColors.goldSoft),
-                        SizedBox(height: 16),
+                        CircularProgressIndicator(color: colorScheme.primary),
+                        const SizedBox(height: 16),
                         Text(
                           'Loading monsters...',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey,
+                            color: colorScheme.onSurface.withOpacity(0.7),
                           ),
                         ),
                       ],
@@ -289,14 +285,14 @@ class _MonstersListState extends State<MonstersList> {
                             Icon(
                               Icons.search_off,
                               size: 64,
-                              color: Colors.grey[400],
+                              color: colorScheme.onSurface.withOpacity(0.5),
                             ),
                             const SizedBox(height: 16),
                             Text(
                               'No monsters found',
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.grey[600],
+                                color: colorScheme.onSurface.withOpacity(0.8),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -305,7 +301,7 @@ class _MonstersListState extends State<MonstersList> {
                               'Try adjusting your filters',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Colors.grey[500],
+                                color: colorScheme.onSurface.withOpacity(0.6),
                               ),
                             ),
                           ],
@@ -321,11 +317,11 @@ class _MonstersListState extends State<MonstersList> {
                           return Container(
                             margin: const EdgeInsets.only(bottom: 16),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: colorScheme.surface,
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
+                                  color: colorScheme.shadow.withOpacity(0.1),
                                   blurRadius: 10,
                                   offset: const Offset(0, 4),
                                 ),
@@ -400,10 +396,11 @@ class _MonstersListState extends State<MonstersList> {
                                               children: [
                                                 Text(
                                                   monster.name,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
-                                                    color: Colors.black87,
+                                                    color:
+                                                        colorScheme.onSurface,
                                                   ),
                                                 ),
                                                 const SizedBox(height: 4),
@@ -413,13 +410,13 @@ class _MonstersListState extends State<MonstersList> {
                                                       horizontal: 8,
                                                       vertical: 4),
                                                   decoration: BoxDecoration(
-                                                    color: AppColors.goldSoft
+                                                    color: colorScheme.primary
                                                         .withOpacity(0.1),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8),
                                                     border: Border.all(
-                                                      color: AppColors.goldSoft
+                                                      color: colorScheme.primary
                                                           .withOpacity(0.3),
                                                     ),
                                                   ),
@@ -427,7 +424,8 @@ class _MonstersListState extends State<MonstersList> {
                                                     monster.species,
                                                     style: TextStyle(
                                                       fontSize: 12,
-                                                      color: AppColors.goldSoft,
+                                                      color:
+                                                          colorScheme.primary,
                                                       fontWeight:
                                                           FontWeight.w600,
                                                     ),
@@ -438,7 +436,8 @@ class _MonstersListState extends State<MonstersList> {
                                           ),
                                           Icon(
                                             Icons.arrow_forward_ios,
-                                            color: Colors.grey[400],
+                                            color: colorScheme.onSurface
+                                                .withOpacity(0.5),
                                             size: 20,
                                           ),
                                         ],
@@ -451,7 +450,8 @@ class _MonstersListState extends State<MonstersList> {
                                           monster.description,
                                           style: TextStyle(
                                             fontSize: 14,
-                                            color: Colors.grey[600],
+                                            color: colorScheme.onSurface
+                                                .withOpacity(0.7),
                                             height: 1.4,
                                           ),
                                           maxLines: 2,
@@ -461,7 +461,7 @@ class _MonstersListState extends State<MonstersList> {
                                       ],
 
                                       // Ubicaciones
-                                      _buildLocationsSection(monster),
+                                      _buildLocationsSection(context, monster),
                                     ],
                                   ),
                                 ),
@@ -475,10 +475,10 @@ class _MonstersListState extends State<MonstersList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _toggleFiltersVisibility,
-        backgroundColor: AppColors.goldSoft,
+        backgroundColor: colorScheme.primary,
         child: Icon(
           _filtersVisible ? Icons.close : Icons.tune,
-          color: Colors.black,
+          color: colorScheme.onPrimary,
         ),
       ),
     );
@@ -547,7 +547,8 @@ class _MonstersListState extends State<MonstersList> {
     }
   }
 
-  Widget _buildWeaknessesSection(Monster monster) {
+  Widget _buildWeaknessesSection(BuildContext context, Monster monster) {
+    final colorScheme = Theme.of(context).colorScheme;
     final weaknessesLevel1 = monster.weaknesses.where((w) {
       return (w.kind == 'element' || w.kind == 'status') && w.level == 1;
     }).toList();
@@ -564,7 +565,7 @@ class _MonstersListState extends State<MonstersList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],
@@ -595,9 +596,9 @@ class _MonstersListState extends State<MonstersList> {
     );
   }
 
-  Widget _buildLocationsSection(Monster monster) {
+  Widget _buildLocationsSection(BuildContext context, Monster monster) {
     if (monster.locations.isEmpty) return const SizedBox.shrink();
-
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -608,7 +609,7 @@ class _MonstersListState extends State<MonstersList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
           ],

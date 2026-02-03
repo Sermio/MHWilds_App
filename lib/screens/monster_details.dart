@@ -57,15 +57,16 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
   // Sección de información básica del monstruo
   Widget _buildMonsterInfoSection(Monster monster) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppColors.goldSoft.withOpacity(0.2),
+            color: colorScheme.primary.withOpacity(0.2),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -78,15 +79,15 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Text(
+            child: Text(
               'Monster Information',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.orange,
+                color: colorScheme.primary,
               ),
             ),
           ),
@@ -236,11 +237,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
   // Sección de estadísticas
   Widget _buildStatsSection(Monster monster) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -259,12 +261,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               color: AppColors.goldSoft.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Text(
+            child: Text(
               'Statistics',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.orange,
+                color: colorScheme.primary,
               ),
             ),
           ),
@@ -293,11 +295,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
   // Sección de debilidades y resistencias
   Widget _buildWeaknessesResistancesSection(Monster monster) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -320,12 +323,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                   color: AppColors.goldSoft.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Text(
+                child: Text(
                   'Weaknesses and Resistances',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.orange,
+                    color: colorScheme.primary,
                   ),
                 ),
               ),
@@ -344,7 +347,8 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               if (monster.resistances.isNotEmpty) ...[
                 const SizedBox(width: 16),
                 Expanded(
-                  child: _buildResistancesColumn(monster.resistances),
+                  child:
+                      _buildResistancesColumn(monster.resistances, colorScheme),
                 ),
               ],
             ],
@@ -356,11 +360,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
   // Sección de partes rompibles
   Widget _buildBreakablePartsSection(Monster monster) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -379,12 +384,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               color: AppColors.goldSoft.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Text(
+            child: Text(
               'Breakable Parts',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.orange,
+                color: colorScheme.primary,
               ),
             ),
           ),
@@ -394,9 +399,9 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               margin: const EdgeInsets.only(bottom: 8),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.grey[50],
+                color: colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey[200]!),
+                border: Border.all(color: colorScheme.outlineVariant),
               ),
               child: Row(
                 children: [
@@ -405,9 +410,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                   Expanded(
                     child: Text(
                       part.name,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -423,15 +429,16 @@ class _MonsterDetailsState extends State<MonsterDetails> {
   // Widgets auxiliares
   Widget _buildInfoRow(String label, String value,
       {bool isDescription = false}) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,
-            color: Colors.black87,
+            color: colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 4),
@@ -439,7 +446,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           value,
           style: TextStyle(
             fontSize: isDescription ? 13 : 14,
-            color: Colors.black54,
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
           softWrap: true,
         ),
@@ -448,6 +455,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
   }
 
   Widget _buildStatCard(String label, String value, IconData icon) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -461,19 +469,19 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           const SizedBox(height: 8),
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: Colors.black87,
+              color: colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: colorScheme.onSurface,
             ),
           ),
         ],
@@ -516,7 +524,8 @@ class _MonsterDetailsState extends State<MonsterDetails> {
     );
   }
 
-  Widget _buildResistancesColumn(List<Resistance> resistances) {
+  Widget _buildResistancesColumn(
+      List<Resistance> resistances, ColorScheme colorScheme) {
     // Filtrar solo las resistencias elementales que tienen elementos válidos
     final validResistances = resistances
         .where((r) => r.kind == 'element' && r.element.isNotEmpty)
@@ -538,15 +547,15 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: Colors.grey[100],
+              color: colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.grey[300]!),
+              border: Border.all(color: colorScheme.outlineVariant),
             ),
             child: Text(
               'No known resistances',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey[600],
+                color: colorScheme.onSurface.withOpacity(0.7),
                 fontStyle: FontStyle.italic,
               ),
             ),
@@ -603,13 +612,14 @@ class _MonsterDetailsState extends State<MonsterDetails> {
       return const SizedBox.shrink(); // No mostrar la sección si no hay datos
     }
 
+    final colorScheme = Theme.of(context).colorScheme;
     final sizes = monster.size!;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -628,12 +638,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               color: AppColors.goldSoft.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Text(
+            child: Text(
               'Crown Sizes',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.orange,
+                color: colorScheme.primary,
               ),
             ),
           ),
@@ -641,6 +651,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
           // Tamaño base
           _buildSizeRow(
+            colorScheme,
             'Base size',
             '${(sizes.base / 100).toStringAsFixed(2)} m',
             Icons.height,
@@ -650,6 +661,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
           // Mini crown
           _buildSizeRow(
+            colorScheme,
             'Mini crown',
             '< ${(sizes.mini / 100).toStringAsFixed(2)} m',
             Icons.keyboard_arrow_down,
@@ -659,15 +671,17 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
           // Silver crown
           _buildSizeRow(
+            colorScheme,
             'Silver crown',
             '≥ ${(sizes.silver / 100).toStringAsFixed(2)} m',
             Icons.keyboard_arrow_up,
-            Colors.grey[600]!,
+            Colors.grey,
           ),
           const SizedBox(height: 8),
 
           // Gold crown
           _buildSizeRow(
+            colorScheme,
             'Gold crown',
             '≥ ${(sizes.gold / 100).toStringAsFixed(2)} m',
             Icons.keyboard_arrow_up,
@@ -678,7 +692,8 @@ class _MonsterDetailsState extends State<MonsterDetails> {
     );
   }
 
-  Widget _buildSizeRow(String label, String size, IconData icon, Color color) {
+  Widget _buildSizeRow(ColorScheme colorScheme, String label, String size,
+      IconData icon, Color color) {
     return Row(
       children: [
         Icon(icon, color: color, size: 20),
@@ -686,10 +701,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         Expanded(
           child: Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 14,
-              color: Colors.black87,
+              color: colorScheme.onSurface,
             ),
           ),
         ),
@@ -734,6 +749,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
         final monster = snapshot.data!;
         checkAvailableRanks(monster);
+        final colorScheme = Theme.of(context).colorScheme;
 
         return Scaffold(
           appBar: AppBar(
@@ -784,9 +800,9 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: ToggleButtons(
-                    fillColor: AppColors.goldSoft,
+                    fillColor: colorScheme.primary,
                     borderRadius: BorderRadius.circular(10),
-                    disabledColor: Colors.grey,
+                    disabledColor: colorScheme.onSurface.withOpacity(0.5),
                     isSelected: [
                       selectedRank == 'low' && isLowRankAvailable,
                       selectedRank == 'high' && isHighRankAvailable,
@@ -803,8 +819,9 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                         child: Text(
                           'Low Rank',
                           style: TextStyle(
-                            color:
-                                isLowRankAvailable ? Colors.black : Colors.grey,
+                            color: isLowRankAvailable
+                                ? colorScheme.onPrimary
+                                : colorScheme.onSurface.withOpacity(0.6),
                           ),
                         ),
                       ),
@@ -814,8 +831,8 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                           'High Rank',
                           style: TextStyle(
                             color: isHighRankAvailable
-                                ? Colors.black
-                                : Colors.grey,
+                                ? colorScheme.onPrimary
+                                : colorScheme.onSurface.withOpacity(0.6),
                           ),
                         ),
                       ),
@@ -852,6 +869,7 @@ class MonsterRewards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     List<Reward> filteredRewards = rewards
         .where((reward) => reward.conditions
             .any((condition) => condition.rank == selectedRank))
@@ -876,7 +894,7 @@ class MonsterRewards extends StatelessWidget {
                 margin:
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: colorScheme.surface,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -918,7 +936,7 @@ class MonsterRewards extends StatelessWidget {
                                 height: 40,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: Colors.white,
+                                  color: colorScheme.surfaceContainerHighest,
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
@@ -932,10 +950,10 @@ class MonsterRewards extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   reward.item.name,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
-                                    color: Colors.black87,
+                                    color: colorScheme.onSurface,
                                   ),
                                   overflow: TextOverflow.visible,
                                   softWrap: true,
@@ -976,9 +994,10 @@ class MonsterRewards extends StatelessWidget {
                               borderColor = Colors.purple.withOpacity(0.6);
                               backgroundColor = Colors.purple.withOpacity(0.1);
                             } else {
-                              conditionColor = Colors.grey[700]!;
-                              borderColor = Colors.grey[200]!;
-                              backgroundColor = Colors.grey[50]!;
+                              conditionColor = colorScheme.onSurface;
+                              borderColor = colorScheme.outlineVariant;
+                              backgroundColor =
+                                  colorScheme.surfaceContainerHighest;
                             }
 
                             return Container(
@@ -1013,10 +1032,13 @@ class MonsterRewards extends StatelessWidget {
                                     ),
                                     child: Text(
                                       "${condition.chance}%",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                        color: colorScheme.brightness ==
+                                                Brightness.dark
+                                            ? colorScheme.onSurface
+                                            : Colors.black87,
                                       ),
                                     ),
                                   ),
