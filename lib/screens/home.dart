@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_appbar.dart';
 import 'package:mhwilds_app/components/c_drawer.dart';
 import 'package:mhwilds_app/screens/talismans_list.dart';
+import 'package:mhwilds_app/utils/update_checker.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
@@ -20,6 +21,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   Widget _selectedScreen = const MonstersList();
   String _appBarTitle = "Monsters";
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppUpdateChecker.checkAndShowUpdateDialog(context);
+    });
+  }
 
   void _changeScreen(Widget newScreen) {
     setState(() {
