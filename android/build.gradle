@@ -16,6 +16,9 @@ subprojects { subproject ->
                 sourceCompatibility = JavaVersion.VERSION_17
                 targetCompatibility = JavaVersion.VERSION_17
             }
+            if (subproject.plugins.hasPlugin("org.jetbrains.kotlin.android")) {
+                subproject.android.kotlinOptions.jvmTarget = "17"
+            }
         }
     }
     project.evaluationDependsOn(":app")
