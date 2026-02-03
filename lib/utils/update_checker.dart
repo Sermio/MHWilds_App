@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_update_checker/flutter_update_checker.dart';
 import 'package:mhwilds_app/utils/colors.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Comprueba si hay una nueva versión en la tienda (Google Play / App Store)
@@ -46,6 +47,12 @@ class AppUpdateChecker {
       } catch (_) {}
     }
 
+    String currentVersion = '';
+    try {
+      final info = await PackageInfo.fromPlatform();
+      currentVersion = info.version;
+    } catch (_) {}
+
     if (!context.mounted) return;
     showDialog(
       context: context,
@@ -65,11 +72,8 @@ class AppUpdateChecker {
           ],
         ),
         content: Text(
-          storeVersion != null && storeVersion.isNotEmpty
-              ? 'A new version ($storeVersion) is available in the store. '
-                  'Update to get the latest improvements and fixes.'
-              : 'A new version is available in the store. '
-                  'Update to get the latest improvements and fixes.',
+          _buildUpdateMessage(
+              currentVersion: currentVersion, newVersion: storeVersion),
         ),
         actions: [
           TextButton(
@@ -91,6 +95,30 @@ class AppUpdateChecker {
         ],
       ),
     );
+  }
+
+  static String _buildUpdateMessage({
+    required String currentVersion,
+    String? newVersion,
+  }) {
+    final hasCurrent = currentVersion.isNotEmpty;
+    final hasNew = newVersion != null && newVersion.isNotEmpty;
+    if (hasCurrent && hasNew) {
+      return 'You have version $currentVersion. '
+          'A new version ($newVersion) is available in the store. '
+          'Update to get the latest improvements and fixes.';
+    }
+    if (hasCurrent) {
+      return 'You have version $currentVersion. '
+          'A new version is available in the store. '
+          'Update to get the latest improvements and fixes.';
+    }
+    if (hasNew) {
+      return 'A new version ($newVersion) is available in the store. '
+          'Update to get the latest improvements and fixes.';
+    }
+    return 'A new version is available in the store. '
+        'Update to get the latest improvements and fixes.';
   }
 
   /// Opens the app page in the store (Play Store / App Store).
