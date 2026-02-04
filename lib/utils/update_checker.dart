@@ -1,12 +1,13 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_update_checker/flutter_update_checker.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/utils/colors.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 /// Comprueba si hay una nueva versión en la tienda (Google Play / App Store)
 /// y muestra un modal para informar al usuario.
@@ -44,8 +45,20 @@ class AppUpdateChecker {
     String? storeVersion = storeVersionOverride;
     if (storeVersion == null) {
       try {
-        storeVersion = await _checker.getStoreVersion();
-      } catch (_) {}
+        // Intentar obtener el versionName desde Google Play Store
+        final versionName = await _getStoreVersionName();
+        // Si falla, usar el método del paquete como fallback
+        if (versionName != null && versionName.isNotEmpty) {
+          storeVersion = versionName;
+        } else {
+          storeVersion = await _checker.getStoreVersion();
+        }
+      } catch (_) {
+        // Si todo falla, intentar con el método del paquete
+        try {
+          storeVersion = await _checker.getStoreVersion();
+        } catch (_) {}
+      }
     }
 
     String currentVersion = '';
@@ -123,6 +136,73 @@ class AppUpdateChecker {
       return l10n.updateMessageNewOnly(newVersion);
     }
     return l10n.updateMessageGeneric;
+  }
+
+  /// Obtiene el versionName desde Google Play Store mediante scraping de la página.
+  /// Retorna null si no se puede obtener.
+  static Future<String?> _getStoreVersionName() async {
+    if (!Platform.isAndroid) return null;
+
+    try {
+      final url =
+          'https://play.google.com/store/apps/details?id=$_androidPackageName';
+      final response = await http.get(Uri.parse(url)).timeout(
+            const Duration(seconds: 5),
+          );
+
+      if (response.statusCode == 200) {
+        final html = response.body;
+
+        // Buscar el versionName en el JSON-LD estructurado
+        // Google Play Store incluye información estructurada en JSON-LD
+        final jsonLdPattern = RegExp(
+          r'<script type="application/ld\+json">(.*?)</script>',
+          dotAll: true,
+        );
+        final jsonLdMatch = jsonLdPattern.firstMatch(html);
+
+        if (jsonLdMatch != null) {
+          try {
+            final jsonData =
+                json.decode(jsonLdMatch.group(1)!) as Map<String, dynamic>?;
+            final version = jsonData?['softwareVersion'];
+            if (version is String && version.isNotEmpty) {
+              return version;
+            }
+          } catch (_) {}
+        }
+
+        // Buscar en el HTML directamente usando patrones comunes
+        // Patrón 1: "Current Version" seguido del número de versión
+        final versionPattern1 = RegExp(
+          r'Current Version</div>\s*<div[^>]*>([^<]+)</div>',
+          caseSensitive: false,
+        );
+        final match1 = versionPattern1.firstMatch(html);
+        if (match1 != null) {
+          final version = match1.group(1)?.trim();
+          if (version != null && version.isNotEmpty) {
+            return version;
+          }
+        }
+
+        // Patrón 2: versión tipo X.Y o X.Y.Z (evitar solo dígitos = versionCode)
+        final versionPattern2 = RegExp(
+          r'(\d+\.\d+(?:\.\d+)?)',
+        );
+        final match2 = versionPattern2.firstMatch(html);
+        if (match2 != null) {
+          final version = match2.group(1)?.trim();
+          if (version != null && version.isNotEmpty) {
+            return version;
+          }
+        }
+      }
+    } catch (_) {
+      // Silenciar errores de red o parsing
+    }
+
+    return null;
   }
 
   /// Opens the app page in the store (Play Store / App Store).
