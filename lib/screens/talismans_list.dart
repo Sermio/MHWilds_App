@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/filter_panel.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/providers/talismans_provider.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
@@ -61,144 +62,88 @@ class _AmuletListState extends State<AmuletList> {
       body: Column(
         children: [
           if (_filtersVisible) ...[
-            Container(
-              margin: const EdgeInsets.all(16),
+            FilterPanel(
               height: 250,
-              decoration: BoxDecoration(
-                color: colorScheme.surface,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: colorScheme.shadow.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
+              onReset: _resetFilters,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Header de filtros (fijo)
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
+                  // Campo de búsqueda por nombre
+                  TextField(
+                    controller: _searchNameController,
+                    onChanged: (query) {
+                      setState(() {
+                        _searchNameQuery = query;
+                      });
+                      talismansProvider.applyFilters(
+                        name: _searchNameQuery,
+                        rarity: _selectedRarity,
+                      );
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Search by Name',
+                      hintText: 'Enter talisman name...',
+                      prefixIcon:
+                          Icon(Icons.search, color: colorScheme.primary),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide:
+                            BorderSide(color: colorScheme.outlineVariant),
                       ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.filter_list, color: colorScheme.primary),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Filters',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: colorScheme.onSurface,
-                          ),
-                        ),
-                        const Spacer(),
-                        TextButton.icon(
-                          onPressed: _resetFilters,
-                          icon: const Icon(Icons.refresh, size: 18),
-                          label: const Text('Reset'),
-                          style: TextButton.styleFrom(
-                            foregroundColor: colorScheme.primary,
-                          ),
-                        ),
-                      ],
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide:
+                            BorderSide(color: colorScheme.primary, width: 2),
+                      ),
+                      filled: true,
+                      fillColor: colorScheme.surfaceContainerHighest,
                     ),
                   ),
-                  // Contenido de filtros con scroll
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Campo de búsqueda por nombre
-                          TextField(
-                            controller: _searchNameController,
-                            onChanged: (query) {
-                              setState(() {
-                                _searchNameQuery = query;
-                              });
-                              talismansProvider.applyFilters(
-                                name: _searchNameQuery,
-                                rarity: _selectedRarity,
-                              );
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'Search by Name',
-                              hintText: 'Enter talisman name...',
-                              prefixIcon: Icon(Icons.search,
-                                  color: colorScheme.primary),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                    color: colorScheme.outlineVariant),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                    color: colorScheme.primary, width: 2),
-                              ),
-                              filled: true,
-                              fillColor: colorScheme.surfaceContainerHighest,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
-                          // Filtro de rareza
-                          Text(
-                            'Rarity',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: colorScheme.onSurface,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Wrap(
-                            spacing: 8.0,
-                            runSpacing: 8.0,
-                            children: [1, 2, 3, 4, 5, 6, 7].map((rarity) {
-                              return FilterChip(
-                                label: Text(
-                                  'Rarity $rarity',
-                                  style: TextStyle(
-                                    color: _selectedRarity == rarity
-                                        ? colorScheme.onPrimary
-                                        : colorScheme.onSurface,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                backgroundColor:
-                                    _getRarityColor(rarity).withOpacity(0.2),
-                                selectedColor: _getRarityColor(rarity),
-                                selected: _selectedRarity == rarity,
-                                onSelected: (isSelected) {
-                                  setState(() {
-                                    _selectedRarity =
-                                        isSelected ? rarity : null;
-                                  });
-                                  talismansProvider.applyFilters(
-                                    name: _searchNameQuery,
-                                    rarity: _selectedRarity,
-                                  );
-                                },
-                                elevation: 2,
-                                pressElevation: 4,
-                              );
-                            }).toList(),
-                          ),
-                          const SizedBox(
-                              height: 20), // Espacio al final para scroll
-                        ],
-                      ),
+                  // Filtro de rareza
+                  Text(
+                    'Rarity',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
                     ),
                   ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: [1, 2, 3, 4, 5, 6, 7].map((rarity) {
+                      return FilterChip(
+                        label: Text(
+                          'Rarity $rarity',
+                          style: TextStyle(
+                            color: _selectedRarity == rarity
+                                ? colorScheme.onPrimary
+                                : colorScheme.onSurface,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        backgroundColor:
+                            _getRarityColor(rarity).withOpacity(0.2),
+                        selectedColor: _getRarityColor(rarity),
+                        selected: _selectedRarity == rarity,
+                        onSelected: (isSelected) {
+                          setState(() {
+                            _selectedRarity = isSelected ? rarity : null;
+                          });
+                          talismansProvider.applyFilters(
+                            name: _searchNameQuery,
+                            rarity: _selectedRarity,
+                          );
+                        },
+                        elevation: 2,
+                        pressElevation: 4,
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 20), // Espacio al final para scroll
                 ],
               ),
             ),

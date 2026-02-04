@@ -1,0 +1,15 @@
+{
+  "@@locale": "pl",
+  "appTitle": "Asystent MHWilds",
+  "settings": "Ustawienia",
+  "darkMode": "Tryb ciemny",
+  "language": "Język",
+  "locations": "Lokalizacje",
+  "monsters": "Potwory",
+  "weapons": "Broń",
+  "armor": "Zbroja",
+  "items": "Przedmioty",
+  "decorations": "Dekoracje",
+  "skills": "Umiejętności",
+  "talismans": "Talismany"
+}

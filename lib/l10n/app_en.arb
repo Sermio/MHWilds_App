@@ -1,0 +1,15 @@
+{
+  "@@locale": "en",
+  "appTitle": "MHWilds Assistant",
+  "settings": "Settings",
+  "darkMode": "Dark mode",
+  "language": "Language",
+  "locations": "Locations",
+  "monsters": "Monsters",
+  "weapons": "Weapons",
+  "armor": "Armor",
+  "items": "Items",
+  "decorations": "Decorations",
+  "skills": "Skills",
+  "talismans": "Talismans"
+}
