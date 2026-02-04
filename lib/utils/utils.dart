@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 import 'package:image/image.dart' as img;
-import 'package:mhwilds_app/components/monster_details_card.dart';
 
 final Map<String, String?> _skillImageUrlCache = {};
 
@@ -133,18 +132,20 @@ int countRomanNumerals(String skillName) {
   return 0;
 }
 
-Color zoneBackgroundColor(String zone) {
-  switch (zone) {
-    case 'Scarlet Forest':
-      return Colors.green.shade700;
-    case 'Oilwell Basin':
-      return const Color.fromARGB(242, 142, 141, 141);
-    case 'Ruins of Wyveria':
-      return const Color.fromARGB(221, 141, 110, 99);
-    case "Windward Plains":
-      return const Color.fromARGB(255, 249, 207, 37);
-    case "Iceshard Cliffs":
-      return const Color.fromARGB(167, 1, 150, 170);
+/// Asigna un color de fondo según el ID del mapa (location/map id de la API).
+/// IDs: 1 Oilwell Basin, 2 Windward Plains, 3 Scarlet Forest, 4 Ruins of Wyveria, 5 Iceshard Cliffs.
+Color zoneBackgroundColor(int mapId) {
+  switch (mapId) {
+    case 1:
+      return const Color.fromARGB(242, 142, 141, 141); // Oilwell Basin
+    case 2:
+      return const Color.fromARGB(255, 249, 207, 37); // Windward Plains
+    case 3:
+      return Colors.green.shade700; // Scarlet Forest
+    case 4:
+      return const Color.fromARGB(221, 141, 110, 99); // Ruins of Wyveria
+    case 5:
+      return const Color.fromARGB(167, 1, 150, 170); // Iceshard Cliffs
     default:
       return Colors.white;
   }

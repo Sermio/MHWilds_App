@@ -14,6 +14,15 @@ class TalismansProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasData => _allAmulets.isNotEmpty;
 
+  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
+  void invalidate() {
+    _allAmulets = [];
+    _filteredAmulets = [];
+    _nameFilter = '';
+    _rarityFilter = null;
+    notifyListeners();
+  }
+
   Future<void> fetchAmulets() async {
     if (_allAmulets.isNotEmpty) return;
 

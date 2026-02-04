@@ -2,7 +2,7 @@ part of '../weapons_list.dart';
 
 // Clase estática para métodos auxiliares reutilizables
 class WeaponDisplayUtils {
-  static Widget buildElementalDamageRow(Weapon weapon) {
+  static Widget buildElementalDamageRow(BuildContext context, Weapon weapon) {
     // Buscar specials con daño elemental o de status, y también daño de phial
     if (weapon.specials is List) {
       final specials = weapon.specials as List;
@@ -56,7 +56,9 @@ class WeaponDisplayUtils {
               ),
               const SizedBox(width: 6),
               Text(
-                special['kind'] == 'element' ? 'Element:' : 'Status Effect:',
+                special['kind'] == 'element'
+                    ? '${AppLocalizations.of(context)!.element}:'
+                    : '${AppLocalizations.of(context)!.statusEffect}:',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -127,7 +129,7 @@ class WeaponDisplayUtils {
               ),
               const SizedBox(width: 6),
               Text(
-                'Phial:',
+                '${AppLocalizations.of(context)!.phial}:',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -171,30 +173,30 @@ class WeaponDisplayUtils {
     return const SizedBox.shrink();
   }
 
-  static Widget buildAdditionalDamageInfo(Weapon weapon) {
+  static Widget buildAdditionalDamageInfo(BuildContext context, Weapon weapon) {
     // Solo manejar información específica del tipo de arma (no daño elemental)
     switch (weapon.kind) {
       case 'bow':
-        return buildBowDamageInfo(weapon);
+        return buildBowDamageInfo(context, weapon);
       case 'charge-blade':
-        return buildChargeBladeDamageInfo(weapon);
+        return buildChargeBladeDamageInfo(context, weapon);
       case 'gunlance':
-        return buildGunlanceDamageInfo(weapon);
+        return buildGunlanceDamageInfo(context, weapon);
       case 'switch-axe':
-        return buildSwitchAxeDamageInfo(weapon);
+        return buildSwitchAxeDamageInfo(context, weapon);
       case 'hunting-horn':
-        return buildHuntingHornDamageInfo(weapon);
+        return buildHuntingHornDamageInfo(context, weapon);
       case 'heavy-bowgun':
       case 'light-bowgun':
-        return buildBowgunDamageInfo(weapon);
+        return buildBowgunDamageInfo(context, weapon);
       case 'insect-glaive':
-        return buildInsectGlaiveDamageInfo(weapon);
+        return buildInsectGlaiveDamageInfo(context, weapon);
       default:
         return const SizedBox.shrink();
     }
   }
 
-  static Widget buildBowDamageInfo(Weapon weapon) {
+  static Widget buildBowDamageInfo(BuildContext context, Weapon weapon) {
     // Para bows, mostrar información sobre coatings si están disponibles
     try {
       if (weapon.coatings != null && weapon.coatings!.isNotEmpty) {
@@ -203,7 +205,7 @@ class WeaponDisplayUtils {
             Icon(Icons.arrow_upward, size: 16, color: Colors.amber[400]),
             const SizedBox(width: 6),
             Text(
-              'Coatings:',
+              '${AppLocalizations.of(context)!.coatings}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -260,7 +262,8 @@ class WeaponDisplayUtils {
     return const SizedBox.shrink();
   }
 
-  static Widget buildChargeBladeDamageInfo(Weapon weapon) {
+  static Widget buildChargeBladeDamageInfo(
+      BuildContext context, Weapon weapon) {
     if (weapon.phial == null) return const SizedBox.shrink();
 
     final phialKind = weapon.phial!.kind;
@@ -269,7 +272,7 @@ class WeaponDisplayUtils {
         Icon(Icons.flash_on, size: 16, color: Colors.blue[400]),
         const SizedBox(width: 6),
         Text(
-          'Phial:',
+          '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -321,7 +324,7 @@ class WeaponDisplayUtils {
     );
   }
 
-  static Widget buildGunlanceDamageInfo(Weapon weapon) {
+  static Widget buildGunlanceDamageInfo(BuildContext context, Weapon weapon) {
     if (weapon.shell == null || weapon.shellLevel == null) {
       return const SizedBox.shrink();
     }
@@ -331,7 +334,7 @@ class WeaponDisplayUtils {
         Icon(Icons.local_fire_department, size: 16, color: Colors.red[400]),
         const SizedBox(width: 6),
         Text(
-          'Shell:',
+          '${AppLocalizations.of(context)!.shell}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -358,7 +361,7 @@ class WeaponDisplayUtils {
     );
   }
 
-  static Widget buildSwitchAxeDamageInfo(Weapon weapon) {
+  static Widget buildSwitchAxeDamageInfo(BuildContext context, Weapon weapon) {
     if (weapon.phial == null) return const SizedBox.shrink();
 
     final phialKind = weapon.phial!.kind;
@@ -367,7 +370,7 @@ class WeaponDisplayUtils {
         Icon(Icons.transform, size: 16, color: Colors.orange[400]),
         const SizedBox(width: 6),
         Text(
-          'Phial:',
+          '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -419,7 +422,8 @@ class WeaponDisplayUtils {
     );
   }
 
-  static Widget buildHuntingHornDamageInfo(Weapon weapon) {
+  static Widget buildHuntingHornDamageInfo(
+      BuildContext context, Weapon weapon) {
     final List<Widget> sections = [];
 
     if (weapon.melody != null) {
@@ -428,7 +432,7 @@ class WeaponDisplayUtils {
           Icon(Icons.music_note, size: 16, color: Colors.teal[400]),
           const SizedBox(width: 6),
           Text(
-            'Melody:',
+            '${AppLocalizations.of(context)!.melody}:',
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
@@ -441,7 +445,7 @@ class WeaponDisplayUtils {
               Icon(Icons.music_note, size: 16, color: Colors.teal[600]),
               const SizedBox(width: 4),
               Text(
-                '${weapon.melody!.songs.length} songs',
+                '${weapon.melody!.songs.length} ${AppLocalizations.of(context)!.songs}',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
@@ -460,7 +464,7 @@ class WeaponDisplayUtils {
           Icon(Icons.bubble_chart, size: 16, color: Colors.indigo[400]),
           const SizedBox(width: 6),
           Text(
-            'Echo Bubble:',
+            '${AppLocalizations.of(context)!.echoBubble}:',
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
@@ -492,7 +496,7 @@ class WeaponDisplayUtils {
           Icon(Icons.waves, size: 16, color: Colors.orange[400]),
           const SizedBox(width: 6),
           Text(
-            'Echo Wave:',
+            '${AppLocalizations.of(context)!.echoWave}:',
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
@@ -525,7 +529,7 @@ class WeaponDisplayUtils {
     return Column(children: sections);
   }
 
-  static Widget buildBowgunDamageInfo(Weapon weapon) {
+  static Widget buildBowgunDamageInfo(BuildContext context, Weapon weapon) {
     if (weapon.ammo == null || weapon.ammo!.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -541,7 +545,7 @@ class WeaponDisplayUtils {
         ),
         const SizedBox(width: 6),
         Text(
-          'Ammo:',
+          '${AppLocalizations.of(context)!.ammo}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -605,7 +609,8 @@ class WeaponDisplayUtils {
     );
   }
 
-  static Widget buildInsectGlaiveDamageInfo(Weapon weapon) {
+  static Widget buildInsectGlaiveDamageInfo(
+      BuildContext context, Weapon weapon) {
     if (weapon.kinsectLevel == null || weapon.kinsectLevel! <= 0) {
       return const SizedBox.shrink();
     }
@@ -615,7 +620,7 @@ class WeaponDisplayUtils {
         Icon(Icons.flutter_dash, size: 16, color: Colors.lime[400]),
         const SizedBox(width: 6),
         Text(
-          'Kinsect:',
+          '${AppLocalizations.of(context)!.kinsect}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,

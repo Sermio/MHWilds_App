@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -39,9 +41,10 @@ class _SkillDetailsState extends State<SkillDetails> {
         .where((skill) => widget.skillsIds.contains(skill.id))
         .toList();
 
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Skill Details'),
+        title: Text(l10n.skillDetails),
         centerTitle: true,
       ),
       body: skillsProvider.isLoading
@@ -52,7 +55,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                   CircularProgressIndicator(color: colorScheme.primary),
                   const SizedBox(height: 16),
                   Text(
-                    'Loading skills...',
+                    l10n.loadingSkills,
                     style: TextStyle(
                       fontSize: 16,
                       color: colorScheme.onSurface.withOpacity(0.7),
@@ -113,7 +116,12 @@ class _SkillDetailsState extends State<SkillDetails> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(15),
                                     child: UrlImageLoader(
-                                      itemName: skill.name,
+                                      itemName: (Provider.of<EnNamesCache>(
+                                                  context,
+                                                  listen: false)
+                                              .nameForSkillImage(
+                                                  skill.id, skill.name) ??
+                                          skill.name),
                                       loadImageUrlFunction:
                                           getValidSkillImageUrl,
                                     ),
@@ -155,7 +163,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Skill Ranks:',
+                                  AppLocalizations.of(context)!.skillRanks,
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -206,7 +214,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                                                     BorderRadius.circular(20),
                                               ),
                                               child: Text(
-                                                'Level ${rank.level}',
+                                                '${AppLocalizations.of(context)!.level} ${rank.level}',
                                                 style: TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.bold,

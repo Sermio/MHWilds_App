@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class Cchip<T> extends StatelessWidget {
-  // final T item;
-  // final T chipItem;
   final String itemName;
-  final Color Function(String) getItemColor;
+
+  /// ID del mapa/zona para asignar color (p. ej. 1-5). Se usa con [getItemColor].
+  final int itemIdForColor;
+  final Color Function(int) getItemColor;
   final Widget? optionalWidget;
   final VoidCallback? onTap;
 
   const Cchip({
     super.key,
-    // required this.item,
-    // required this.chipItem,
     required this.itemName,
+    required this.itemIdForColor,
     required this.getItemColor,
     this.optionalWidget,
     this.onTap,
@@ -25,7 +25,7 @@ class Cchip<T> extends StatelessWidget {
       child: Chip(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         elevation: 0,
-        backgroundColor: getItemColor(itemName),
+        backgroundColor: getItemColor(itemIdForColor),
         label: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

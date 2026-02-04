@@ -13,6 +13,13 @@ class DecorationsProvider with ChangeNotifier {
   bool get hasData => _decorations.isNotEmpty;
   bool get isLoading => _isLoading;
 
+  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
+  void invalidate() {
+    _decorations = [];
+    _filteredDecorations = [];
+    notifyListeners();
+  }
+
   Future<void> fetchDecorations() async {
     if (_decorations.isNotEmpty) return;
 

@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/models/location.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 
 class MonsterMapDetails extends StatefulWidget {
   const MonsterMapDetails({super.key, required this.mapId});
@@ -36,13 +38,22 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
       (element) => element.id == widget.mapId,
       orElse: () => MapData(
         id: widget.mapId,
-        name: 'Unknown Map',
+        name: AppLocalizations.of(context)!.unknownMap,
         gameId: 0,
         zoneCount: 0,
         camps: [],
       ),
     );
-    loadImages(mapData!.name);
+    // Obtener el nombre en inglés del mapa para cargar las imágenes
+    final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
+    final l10n = AppLocalizations.of(context)!;
+    final englishMapName = enNamesCache.nameForMapImage(
+          widget.mapId,
+          mapData!.name ?? l10n.unknownMap,
+        ) ??
+        mapData!.name ??
+        l10n.unknownMap;
+    loadImages(englishMapName);
   }
 
   Future<void> loadImages(String? mapName) async {
@@ -187,7 +198,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              'Camps of Level ${floor + 1}',
+              AppLocalizations.of(context)!.campsOfLevel(floor + 1),
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -251,13 +262,13 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                           Row(
                             children: [
                               _buildInfoChip(
-                                'Risk',
+                                AppLocalizations.of(context)!.risk,
                                 '${camp.risk}',
                                 _getRiskColor(camp.risk),
                               ),
                               const SizedBox(width: 12),
                               _buildInfoChip(
-                                'Zone',
+                                AppLocalizations.of(context)!.zone,
                                 '${camp.zone}',
                                 colorScheme.primary,
                               ),
@@ -317,7 +328,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
       appBar: AppBar(
-        title: Text(mapData?.name ?? 'Map'),
+        title: Text(mapData?.name ?? AppLocalizations.of(context)!.map),
         centerTitle: true,
         elevation: 10,
         backgroundColor: colorScheme.primary,
@@ -337,7 +348,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Loading map...',
+                      AppLocalizations.of(context)!.loadingMap,
                       style: TextStyle(
                         fontSize: 16,
                         color: colorScheme.onSurface.withOpacity(0.7),
@@ -362,7 +373,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'No map images found',
+                          AppLocalizations.of(context)!.noMapImagesFound,
                           style: TextStyle(
                             fontSize: 16,
                             color: colorScheme.onSurface.withOpacity(0.7),
@@ -416,7 +427,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                   child: Text(
-                                    'Level $levelLabel',
+                                    '${AppLocalizations.of(context)!.level} $levelLabel',
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700,

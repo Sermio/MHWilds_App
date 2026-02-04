@@ -11,6 +11,12 @@ class LocationsProvider with ChangeNotifier {
 
   bool get hasData => _zones.isNotEmpty;
 
+  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
+  void invalidate() {
+    _zones = [];
+    notifyListeners();
+  }
+
   Future<void> fetchZones() async {
     if (_zones.isNotEmpty) return;
 

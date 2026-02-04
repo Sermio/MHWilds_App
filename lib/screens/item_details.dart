@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/item.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 
 class ItemDetails extends StatelessWidget {
   const ItemDetails({super.key, required this.item});
@@ -49,7 +51,11 @@ class ItemDetails extends StatelessWidget {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: MaterialImage(materialName: item.name),
+                        child: MaterialImage(
+                            materialName: Provider.of<EnNamesCache>(context,
+                                        listen: false)
+                                    .nameForItemImage(item.id, item.name) ??
+                                item.name),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -86,7 +92,7 @@ class ItemDetails extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  'Crafting Recipe:',
+                  AppLocalizations.of(context)!.craftingRecipe,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -121,7 +127,7 @@ class ItemDetails extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'Required Materials:',
+                          AppLocalizations.of(context)!.requiredMaterials,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -155,7 +161,12 @@ class ItemDetails extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: MaterialImage(
-                                    materialName: recipeItem.name,
+                                    materialName: Provider.of<EnNamesCache>(
+                                                context,
+                                                listen: false)
+                                            .nameForItemImage(recipeItem.id,
+                                                recipeItem.name) ??
+                                        recipeItem.name,
                                   ),
                                 ),
                               ),
@@ -199,7 +210,7 @@ class ItemDetails extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  'Monsters that drop this item:',
+                  AppLocalizations.of(context)!.monstersThatDropThisItem,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -251,10 +262,8 @@ class ItemDetails extends StatelessWidget {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset(
-                                    'assets/imgs/monster_icons/${monster.name.toLowerCase().replaceAll(' ', '_')}.png',
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: _buildMonsterIcon(
+                                      context, monster.id, monster.name),
                                 ),
                               ),
                             const SizedBox(width: 16),
@@ -279,7 +288,7 @@ class ItemDetails extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Drop Conditions:',
+                              AppLocalizations.of(context)!.dropConditions,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -356,6 +365,36 @@ class ItemDetails extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildMonsterIcon(
+      BuildContext context, int monsterId, String monsterName) {
+    final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
+    final imageName = enNamesCache.nameForMonsterImage(monsterId, monsterName);
+
+    if (imageName == null) {
+      // Cache no cargado, mostrar placeholder
+      return Container(
+        color: Colors.grey[300],
+        child:
+            Icon(Icons.image_not_supported, color: Colors.grey[600], size: 20),
+      );
+    }
+
+    final imagePath =
+        'assets/imgs/monster_icons/${imageName.toLowerCase().replaceAll(' ', '_')}.png';
+    return Image.asset(
+      imagePath,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        // Si la imagen no existe, mostrar placeholder
+        return Container(
+          color: Colors.grey[300],
+          child: Icon(Icons.image_not_supported,
+              color: Colors.grey[600], size: 20),
+        );
+      },
     );
   }
 }

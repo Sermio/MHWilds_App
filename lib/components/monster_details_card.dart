@@ -255,6 +255,7 @@ class MonsterDetailsCard extends StatelessWidget {
                     delay: Duration(milliseconds: index * 150),
                     child: Cchip(
                       itemName: loc,
+                      itemIdForColor: location.value.id,
                       getItemColor: zoneBackgroundColor,
                       optionalWidget: Image.asset(
                         'assets/imgs/maps/map.png',

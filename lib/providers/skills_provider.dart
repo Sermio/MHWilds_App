@@ -15,6 +15,15 @@ class SkillsProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasData => _allSkills.isNotEmpty;
 
+  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
+  void invalidate() {
+    _allSkills = [];
+    _filteredSkills = [];
+    _nameFilter = '';
+    _kindFilter = '';
+    notifyListeners();
+  }
+
   Future<void> fetchSkills() async {
     if (_allSkills.isNotEmpty) return;
 

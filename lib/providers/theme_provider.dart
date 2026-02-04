@@ -6,7 +6,7 @@ enum AppThemeMode { light, dark, system }
 class ThemeProvider extends ChangeNotifier {
   static const String _keyThemeMode = 'app_theme_mode';
 
-  AppThemeMode _mode = AppThemeMode.system;
+  AppThemeMode _mode = AppThemeMode.light;
 
   AppThemeMode get mode => _mode;
 
@@ -30,6 +30,10 @@ class ThemeProvider extends ChangeNotifier {
     final index = prefs.getInt(_keyThemeMode);
     if (index != null && index >= 0 && index < AppThemeMode.values.length) {
       _mode = AppThemeMode.values[index];
+      notifyListeners();
+    } else {
+      // Si no hay valor guardado, usar modo claro por defecto
+      _mode = AppThemeMode.light;
       notifyListeners();
     }
   }

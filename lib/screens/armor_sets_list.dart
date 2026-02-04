@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/screens/armor_piece_details.dart';
@@ -60,6 +62,13 @@ class _ArmorSetListState extends State<ArmorSetList> {
     final armorSetProvider = Provider.of<ArmorSetProvider>(context);
     final filteredArmorSets = armorSetProvider.armorSets;
 
+    if (!armorSetProvider.hasData && !armorSetProvider.isLoading) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final p = Provider.of<ArmorSetProvider>(context, listen: false);
+        if (!p.hasData && !p.isLoading) p.fetchArmorSets();
+      });
+    }
+
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
@@ -96,7 +105,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                         Icon(Icons.filter_list, color: colorScheme.primary),
                         const SizedBox(width: 8),
                         Text(
-                          'Filters',
+                          AppLocalizations.of(context)!.filters,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -107,7 +116,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                         TextButton.icon(
                           onPressed: _resetFilters,
                           icon: const Icon(Icons.refresh, size: 18),
-                          label: const Text('Reset'),
+                          label: Text(AppLocalizations.of(context)!.reset),
                           style: TextButton.styleFrom(
                             foregroundColor: colorScheme.primary,
                           ),
@@ -133,8 +142,10 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                   name: _searchNameQuery, kind: _selectedKind);
                             },
                             decoration: InputDecoration(
-                              labelText: 'Search by Name',
-                              hintText: 'Enter armor set name...',
+                              labelText:
+                                  AppLocalizations.of(context)!.searchByName,
+                              hintText: AppLocalizations.of(context)!
+                                  .enterArmorSetName,
                               prefixIcon: Icon(Icons.search,
                                   color: colorScheme.primary),
                               border: OutlineInputBorder(
@@ -155,7 +166,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
 
                           // Filtro de tipo
                           Text(
-                            'Type',
+                            AppLocalizations.of(context)!.type,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -170,7 +181,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                 .map((kind) {
                               return FilterChip(
                                 label: Text(
-                                  kind,
+                                  _getArmorSlotLabel(context, kind),
                                   style: TextStyle(
                                     color: _selectedKind == kind
                                         ? colorScheme.onPrimary
@@ -199,7 +210,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
 
                           // Filtro de rareza
                           Text(
-                            'Rarity',
+                            AppLocalizations.of(context)!.rarity,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -213,7 +224,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
                             children: [1, 2, 3, 4, 5, 6, 7].map((rarity) {
                               return FilterChip(
                                 label: Text(
-                                  'Rarity $rarity',
+                                  AppLocalizations.of(context)!
+                                      .rarityLevel(rarity),
                                   style: TextStyle(
                                     color: _selectedRarity == rarity
                                         ? colorScheme.onPrimary
@@ -262,7 +274,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                         CircularProgressIndicator(color: colorScheme.primary),
                         const SizedBox(height: 16),
                         Text(
-                          'Loading armor sets...',
+                          AppLocalizations.of(context)!.loadingArmorSets,
                           style: TextStyle(
                             fontSize: 16,
                             color: colorScheme.onSurface.withOpacity(0.7),
@@ -283,7 +295,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'No armor sets found',
+                              AppLocalizations.of(context)!.noArmorSetsFound,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: colorScheme.onSurface.withOpacity(0.8),
@@ -292,7 +304,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Try adjusting your filters',
+                              AppLocalizations.of(context)!.tryAdjustingFilters,
                               style: TextStyle(
                                 fontSize: 14,
                                 color: colorScheme.onSurface.withOpacity(0.6),
@@ -352,7 +364,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                           ),
                                           const SizedBox(width: 8),
                                           Text(
-                                            'Set Bonus: ${armorSet.groupBonus.skill.name}',
+                                            '${AppLocalizations.of(context)!.setBonus} ${armorSet.groupBonus.skill.name}',
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
@@ -394,7 +406,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                                 .circular(12),
                                                       ),
                                                       child: Text(
-                                                        '${rank.pieces} pieces',
+                                                        '${rank.pieces} ${AppLocalizations.of(context)!.pieces}',
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           color: colorScheme
@@ -412,7 +424,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            'Level ${rank.skill.level}',
+                                                            '${AppLocalizations.of(context)!.level} ${rank.skill.level}',
                                                             style: TextStyle(
                                                               fontSize: 14,
                                                               fontWeight:
@@ -564,7 +576,9 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                           ),
                                                         ),
                                                         child: Text(
-                                                          piece.kind,
+                                                          _getArmorSlotLabel(
+                                                              context,
+                                                              piece.kind),
                                                           style: TextStyle(
                                                             fontSize: 12,
                                                             color:
@@ -601,7 +615,10 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                           ),
                                                         ),
                                                         child: Text(
-                                                          'Rarity ${piece.rarity}',
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .rarityLevel(
+                                                                  piece.rarity),
                                                           style: TextStyle(
                                                             fontSize: 12,
                                                             color:
@@ -670,7 +687,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Defense:',
+              '${AppLocalizations.of(context)!.defense}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -710,7 +727,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Slots:',
+              '${AppLocalizations.of(context)!.slots}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -732,7 +749,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Resistances:',
+              '${AppLocalizations.of(context)!.resistances}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -754,7 +771,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Skills:',
+              '${AppLocalizations.of(context)!.skills}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -783,7 +800,11 @@ class _ArmorSetListState extends State<ArmorSetList> {
                         height: 24,
                         margin: const EdgeInsets.only(right: 8),
                         child: UrlImageLoader(
-                          itemName: skill.skill.name,
+                          itemName:
+                              Provider.of<EnNamesCache>(context, listen: false)
+                                      .nameForSkillImage(
+                                          skill.skill.id, skill.skill.name) ??
+                                  skill.skill.name,
                           loadImageUrlFunction: getValidSkillImageUrl,
                         ),
                       ),
@@ -836,7 +857,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
           border: Border.all(color: colorScheme.outlineVariant),
         ),
         child: Text(
-          'No slots',
+          AppLocalizations.of(context)!.noSlots,
           style: TextStyle(
             fontSize: 11,
             color: colorScheme.onSurface.withOpacity(0.8),
@@ -902,7 +923,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
           border: Border.all(color: colorScheme.outlineVariant),
         ),
         child: Text(
-          'No resistances',
+          AppLocalizations.of(context)!.noResistances,
           style: TextStyle(
             fontSize: 11,
             color: colorScheme.onSurface.withOpacity(0.8),
@@ -942,6 +963,24 @@ class _ArmorSetListState extends State<ArmorSetList> {
         );
       }).toList(),
     );
+  }
+
+  String _getArmorSlotLabel(BuildContext context, String slot) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (slot) {
+      case 'head':
+        return l10n.armorSlotHead;
+      case 'chest':
+        return l10n.armorSlotChest;
+      case 'arms':
+        return l10n.armorSlotArms;
+      case 'waist':
+        return l10n.armorSlotWaist;
+      case 'legs':
+        return l10n.armorSlotLegs;
+      default:
+        return slot;
+    }
   }
 
   Color _getKindColor(String kind) {

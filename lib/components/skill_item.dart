@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/models/armor_set.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class SkillItem extends StatelessWidget {
   final Skill skill;
@@ -44,7 +46,9 @@ class SkillItem extends StatelessWidget {
               child: GestureDetector(
                 child: UrlImageLoader(
                   animate: true,
-                  itemName: skill.name,
+                  itemName: Provider.of<EnNamesCache>(context, listen: false)
+                          .nameForSkillImage(skill.id, skill.name) ??
+                      skill.name,
                   loadImageUrlFunction: getValidSkillImageUrl,
                 ),
               ),

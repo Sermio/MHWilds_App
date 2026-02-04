@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/filter_panel.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -53,9 +55,17 @@ class _SkillListState2 extends State<SkillList> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final skillsProvider = Provider.of<SkillsProvider>(context);
     final filteredSkills = skillsProvider.skills;
     final colorScheme = Theme.of(context).colorScheme;
+
+    if (!skillsProvider.hasData && !skillsProvider.isLoading) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final p = Provider.of<SkillsProvider>(context, listen: false);
+        if (!p.hasData && !p.isLoading) p.fetchSkills();
+      });
+    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
@@ -78,8 +88,8 @@ class _SkillListState2 extends State<SkillList> {
                       skillsProvider.applyFilters(name: _searchNameQuery);
                     },
                     decoration: InputDecoration(
-                      labelText: 'Search by Name',
-                      hintText: 'Enter skill name...',
+                      labelText: l10n.searchByName,
+                      hintText: l10n.enterSkillName,
                       prefixIcon:
                           Icon(Icons.search, color: colorScheme.primary),
                       border: OutlineInputBorder(
@@ -100,7 +110,7 @@ class _SkillListState2 extends State<SkillList> {
 
                   // Filtro de tipo
                   Text(
-                    'Type',
+                    l10n.type,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -114,7 +124,7 @@ class _SkillListState2 extends State<SkillList> {
                     children: ['Weapon', 'Armor', 'Group', 'Set'].map((type) {
                       return FilterChip(
                         label: Text(
-                          type,
+                          _getSkillTypeLabel(context, type),
                           style: TextStyle(
                             color: _selectedType == type
                                 ? colorScheme.onPrimary
@@ -153,7 +163,7 @@ class _SkillListState2 extends State<SkillList> {
                         CircularProgressIndicator(color: colorScheme.primary),
                         const SizedBox(height: 16),
                         Text(
-                          'Loading skills...',
+                          l10n.loadingSkills,
                           style: TextStyle(
                             fontSize: 16,
                             color: colorScheme.onSurface.withOpacity(0.7),
@@ -174,7 +184,7 @@ class _SkillListState2 extends State<SkillList> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'No skills found',
+                              l10n.noSkillsFound,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: colorScheme.onSurface.withOpacity(0.8),
@@ -183,7 +193,7 @@ class _SkillListState2 extends State<SkillList> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Try adjusting your filters',
+                              l10n.tryAdjustingFilters,
                               style: TextStyle(
                                 fontSize: 14,
                                 color: colorScheme.onSurface.withOpacity(0.6),
@@ -256,7 +266,14 @@ class _SkillListState2 extends State<SkillList> {
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                               child: UrlImageLoader(
-                                                itemName: skill.name,
+                                                itemName:
+                                                    (Provider.of<EnNamesCache>(
+                                                                context,
+                                                                listen: false)
+                                                            .nameForSkillImage(
+                                                                skill.id,
+                                                                skill.name) ??
+                                                        skill.name),
                                                 loadImageUrlFunction:
                                                     getValidSkillImageUrl,
                                               ),
@@ -297,7 +314,8 @@ class _SkillListState2 extends State<SkillList> {
                                                     ),
                                                   ),
                                                   child: Text(
-                                                    skill.kind,
+                                                    _getSkillTypeLabel(
+                                                        context, skill.kind),
                                                     style: TextStyle(
                                                       fontSize: 12,
                                                       color: _getTypeColor(
@@ -353,6 +371,22 @@ class _SkillListState2 extends State<SkillList> {
         ),
       ),
     );
+  }
+
+  String _getSkillTypeLabel(BuildContext context, String type) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (type.toLowerCase()) {
+      case 'weapon':
+        return l10n.typeWeapon;
+      case 'armor':
+        return l10n.typeArmor;
+      case 'group':
+        return l10n.typeGroup;
+      case 'set':
+        return l10n.typeSet;
+      default:
+        return type;
+    }
   }
 
   Color _getTypeColor(String type) {

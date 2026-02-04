@@ -16,6 +16,17 @@ class WeaponsProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasData => _allWeapons.isNotEmpty;
 
+  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
+  void invalidate() {
+    _allWeapons = [];
+    _originalWeapons = [];
+    _filteredWeapons = [];
+    _nameFilter = '';
+    _kindFilter = null;
+    _rarityFilter = null;
+    notifyListeners();
+  }
+
   Future<void> fetchWeapons() async {
     if (_allWeapons.isNotEmpty) return;
 

@@ -8,8 +8,11 @@ import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/utils/weapon_utils.dart';
 import 'package:mhwilds_app/components/sharpness_bar.dart';
 import 'package:mhwilds_app/components/material_image.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
+import 'package:provider/provider.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 
 class WeaponDetails extends StatefulWidget {
   final Weapon weapon;
@@ -179,7 +182,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'Statistics',
+                  AppLocalizations.of(context)!.statistics,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -195,10 +198,11 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                _buildStatRow("Rarity", widget.weapon.rarity.toString()),
+                _buildStatRow(AppLocalizations.of(context)!.rarity,
+                    widget.weapon.rarity.toString()),
                 const Divider(height: 24),
-                _buildStatRow(
-                    "Type", WeaponUtils.formatWeaponKind(widget.weapon.kind)),
+                _buildStatRow(AppLocalizations.of(context)!.type,
+                    WeaponUtils.formatWeaponKind(widget.weapon.kind)),
                 const Divider(height: 24),
                 Row(
                   children: [
@@ -209,7 +213,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      'Physical Damage:',
+                      '${AppLocalizations.of(context)!.physicalDamage}:',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -239,21 +243,23 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 ),
                 if (widget.weapon.affinity != 0) ...[
                   const SizedBox(height: 12),
-                  _buildStatRow("Affinity",
+                  _buildStatRow(AppLocalizations.of(context)!.affinity,
                       "${widget.weapon.affinity > 0 ? '+' : ''}${widget.weapon.affinity}%"),
                 ],
                 if (widget.weapon.defenseBonus > 0) ...[
                   const Divider(height: 24),
-                  _buildStatRow(
-                      "Defense Bonus", "+${widget.weapon.defenseBonus}"),
+                  _buildStatRow(AppLocalizations.of(context)!.defenseBonus,
+                      "+${widget.weapon.defenseBonus}"),
                 ],
                 if (widget.weapon.elderseal != null) ...[
                   const Divider(height: 24),
-                  _buildStatRow("Elderseal", widget.weapon.elderseal!),
+                  _buildStatRow(AppLocalizations.of(context)!.elderseal,
+                      widget.weapon.elderseal!),
                 ],
                 if (widget.weapon.slots.isNotEmpty) ...[
                   const Divider(height: 24),
-                  _buildStatRow("Slots", _buildSlotsDisplay()),
+                  _buildStatRow(AppLocalizations.of(context)!.slots,
+                      _buildSlotsDisplay()),
                 ],
 
                 // Información específica del tipo de arma
@@ -330,7 +336,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'Sharpness',
+                  AppLocalizations.of(context)!.sharpness,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -359,24 +365,38 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   children: [
                     if (widget.weapon.sharpness.red > 0)
                       _buildSharpnessLegend(
-                          'Red', Colors.red[400]!, widget.weapon.sharpness.red),
+                          AppLocalizations.of(context)!.sharpnessRed,
+                          Colors.red[400]!,
+                          widget.weapon.sharpness.red),
                     if (widget.weapon.sharpness.orange > 0)
-                      _buildSharpnessLegend('Orange', Colors.orange[400]!,
+                      _buildSharpnessLegend(
+                          AppLocalizations.of(context)!.sharpnessOrange,
+                          Colors.orange[400]!,
                           widget.weapon.sharpness.orange),
                     if (widget.weapon.sharpness.yellow > 0)
-                      _buildSharpnessLegend('Yellow', Colors.yellow[600]!,
+                      _buildSharpnessLegend(
+                          AppLocalizations.of(context)!.sharpnessYellow,
+                          Colors.yellow[600]!,
                           widget.weapon.sharpness.yellow),
                     if (widget.weapon.sharpness.green > 0)
-                      _buildSharpnessLegend('Green', Colors.green[400]!,
+                      _buildSharpnessLegend(
+                          AppLocalizations.of(context)!.sharpnessGreen,
+                          Colors.green[400]!,
                           widget.weapon.sharpness.green),
                     if (widget.weapon.sharpness.blue > 0)
-                      _buildSharpnessLegend('Blue', Colors.blue[400]!,
+                      _buildSharpnessLegend(
+                          AppLocalizations.of(context)!.sharpnessBlue,
+                          Colors.blue[400]!,
                           widget.weapon.sharpness.blue),
                     if (widget.weapon.sharpness.white > 0)
                       _buildSharpnessLegend(
-                          'White', Colors.white, widget.weapon.sharpness.white),
+                          AppLocalizations.of(context)!.sharpnessWhite,
+                          Colors.white,
+                          widget.weapon.sharpness.white),
                     if (widget.weapon.sharpness.purple > 0)
-                      _buildSharpnessLegend('Purple', Colors.purple[400]!,
+                      _buildSharpnessLegend(
+                          AppLocalizations.of(context)!.sharpnessPurple,
+                          Colors.purple[400]!,
                           widget.weapon.sharpness.purple),
                   ],
                 ),
@@ -461,7 +481,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'Skills',
+                  AppLocalizations.of(context)!.skills,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -491,7 +511,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     child: Padding(
                       padding: const EdgeInsets.all(20),
                       child: Text(
-                        "Error loading skills",
+                        AppLocalizations.of(context)!.errorLoadingSkills,
                         style: TextStyle(
                           fontSize: 16,
                           color: colorScheme.onSurface.withOpacity(0.8),
@@ -504,7 +524,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     child: Padding(
                       padding: const EdgeInsets.all(20),
                       child: Text(
-                        "No skills available",
+                        AppLocalizations.of(context)!.noSkillsAvailable,
                         style: TextStyle(
                           fontSize: 16,
                           color: colorScheme.onSurface.withOpacity(0.8),
@@ -541,7 +561,12 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
                                     child: UrlImageLoader(
-                                      itemName: skillInfo.name,
+                                      itemName: (Provider.of<EnNamesCache>(
+                                                  context,
+                                                  listen: false)
+                                              .nameForSkillImage(skillInfo.id,
+                                                  skillInfo.name) ??
+                                          skillInfo.name),
                                       loadImageUrlFunction:
                                           getValidSkillImageUrl,
                                     ),
@@ -616,7 +641,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: Text(
-                                        "Lv ${rank.level}",
+                                        "${AppLocalizations.of(context)!.lv} ${rank.level}",
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold,
@@ -696,7 +721,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'Crafting Materials',
+                  AppLocalizations.of(context)!.craftingMaterials,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -728,11 +753,11 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                       // Mostrar solo upgradeZennyCost si hay ambos, o el que esté disponible
                       if (_shouldShowUpgradeZennyCost()) ...[
                         if (widget.weapon.crafting.upgradeZennyCost > 0)
-                          _buildCostChip('Upgrade',
+                          _buildCostChip(AppLocalizations.of(context)!.upgrade,
                               widget.weapon.crafting.upgradeZennyCost),
                       ] else ...[
                         if (widget.weapon.crafting.craftingZennyCost > 0)
-                          _buildCostChip('Craft',
+                          _buildCostChip(AppLocalizations.of(context)!.craft,
                               widget.weapon.crafting.craftingZennyCost),
                       ],
                     ],
@@ -795,7 +820,11 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: MaterialImage(
-                      materialName: material.item.name,
+                      materialName:
+                          (Provider.of<EnNamesCache>(context, listen: false)
+                                  .nameForItemImage(
+                                      material.item.id, material.item.name) ??
+                              material.item.name),
                     ),
                   ),
                 ),
@@ -880,7 +909,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'Description',
+                  AppLocalizations.of(context)!.description,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -908,40 +937,6 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     );
   }
 
-  // Métodos auxiliares para el status de crafting
-  IconData _getCraftingStatusIcon() {
-    if (widget.weapon.crafting.craftable &&
-        widget.weapon.crafting.craftingMaterials.isNotEmpty) {
-      return Icons.check_circle;
-    } else if (widget.weapon.crafting.upgradeMaterials.isNotEmpty) {
-      return Icons.upgrade;
-    } else {
-      return Icons.cancel;
-    }
-  }
-
-  Color _getCraftingStatusColor() {
-    if (widget.weapon.crafting.craftable &&
-        widget.weapon.crafting.craftingMaterials.isNotEmpty) {
-      return Colors.green;
-    } else if (widget.weapon.crafting.upgradeMaterials.isNotEmpty) {
-      return Colors.blue;
-    } else {
-      return Colors.red;
-    }
-  }
-
-  String _getCraftingStatusText() {
-    if (widget.weapon.crafting.craftable &&
-        widget.weapon.crafting.craftingMaterials.isNotEmpty) {
-      return 'Craftable';
-    } else if (widget.weapon.crafting.upgradeMaterials.isNotEmpty) {
-      return 'Upgradeable';
-    } else {
-      return 'Not Available';
-    }
-  }
-
   // Método auxiliar para verificar si el weapon tiene datos de sharpness
   bool _hasSharpnessData() {
     return widget.weapon.sharpness.red > 0 ||
@@ -955,8 +950,8 @@ class _WeaponDetailsState extends State<WeaponDetails> {
 
   Widget _buildSlotsDisplay() {
     if (widget.weapon.slots.isEmpty) {
-      return const Text(
-        'No slots',
+      return Text(
+        AppLocalizations.of(context)!.noSlots,
         style: TextStyle(
           color: Colors.grey,
           fontStyle: FontStyle.italic,
@@ -1016,26 +1011,19 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     // Daño elemental/status si está disponible (mismo estilo que WeaponsList)
     if (widget.weapon.specials != null) {
       final elementalStats =
-          WeaponDisplayUtils.buildElementalDamageRow(widget.weapon);
-      if (elementalStats != null) {
-        if (hasContent) {
-          stats.add(const Divider(height: 24));
-        }
-        stats.add(elementalStats);
-        hasContent = true;
-      }
+          WeaponDisplayUtils.buildElementalDamageRow(context, widget.weapon);
+      stats.add(elementalStats);
+      hasContent = true;
     }
 
     // Información específica según el tipo de arma (mismo estilo que WeaponsList)
     final additionalInfo =
-        WeaponDisplayUtils.buildAdditionalDamageInfo(widget.weapon);
-    if (additionalInfo != null) {
-      if (hasContent) {
-        stats.add(const Divider(height: 24));
-      }
-      stats.add(additionalInfo);
-      hasContent = true;
+        WeaponDisplayUtils.buildAdditionalDamageInfo(context, widget.weapon);
+    if (hasContent) {
+      stats.add(const Divider(height: 24));
     }
+    stats.add(additionalInfo);
+    hasContent = true;
 
     return stats;
   }

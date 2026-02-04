@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/filter_panel.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/talismans_provider.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
 import 'package:provider/provider.dart';
@@ -53,9 +55,17 @@ class _AmuletListState extends State<AmuletList> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final talismansProvider = Provider.of<TalismansProvider>(context);
     List<Amulet> filteredAmulets = talismansProvider.filteredAmulets;
     final colorScheme = Theme.of(context).colorScheme;
+
+    if (!talismansProvider.hasData && !talismansProvider.isLoading) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final p = Provider.of<TalismansProvider>(context, listen: false);
+        if (!p.hasData && !p.isLoading) p.fetchAmulets();
+      });
+    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
@@ -81,8 +91,8 @@ class _AmuletListState extends State<AmuletList> {
                       );
                     },
                     decoration: InputDecoration(
-                      labelText: 'Search by Name',
-                      hintText: 'Enter talisman name...',
+                      labelText: l10n.searchByName,
+                      hintText: l10n.enterTalismanName,
                       prefixIcon:
                           Icon(Icons.search, color: colorScheme.primary),
                       border: OutlineInputBorder(
@@ -103,7 +113,7 @@ class _AmuletListState extends State<AmuletList> {
 
                   // Filtro de rareza
                   Text(
-                    'Rarity',
+                    l10n.rarity,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -117,7 +127,7 @@ class _AmuletListState extends State<AmuletList> {
                     children: [1, 2, 3, 4, 5, 6, 7].map((rarity) {
                       return FilterChip(
                         label: Text(
-                          'Rarity $rarity',
+                          l10n.rarityLevel(rarity),
                           style: TextStyle(
                             color: _selectedRarity == rarity
                                 ? colorScheme.onPrimary
@@ -159,7 +169,7 @@ class _AmuletListState extends State<AmuletList> {
                         CircularProgressIndicator(color: colorScheme.primary),
                         const SizedBox(height: 16),
                         Text(
-                          'Loading talismans...',
+                          l10n.loadingTalismans,
                           style: TextStyle(
                             fontSize: 16,
                             color: colorScheme.onSurface.withOpacity(0.7),
@@ -180,7 +190,7 @@ class _AmuletListState extends State<AmuletList> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'No talismans found',
+                              l10n.noTalismansFound,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: colorScheme.onSurface.withOpacity(0.8),
@@ -189,7 +199,7 @@ class _AmuletListState extends State<AmuletList> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Try adjusting your filters',
+                              l10n.tryAdjustingFilters,
                               style: TextStyle(
                                 fontSize: 14,
                                 color: colorScheme.onSurface.withOpacity(0.6),
@@ -285,7 +295,10 @@ class _AmuletListState extends State<AmuletList> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  firstRank?.name ?? 'Unknown',
+                                                  firstRank?.name ??
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .unknown,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 18,
@@ -315,7 +328,8 @@ class _AmuletListState extends State<AmuletList> {
                                                       ),
                                                     ),
                                                     child: Text(
-                                                      'Rarity ${firstRank.rarity}',
+                                                      l10n.rarityLevel(
+                                                          firstRank.rarity),
                                                       style: TextStyle(
                                                         fontSize: 12,
                                                         color: _getRarityColor(
@@ -381,7 +395,7 @@ class _AmuletListState extends State<AmuletList> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Skills:',
+              '${AppLocalizations.of(context)!.skills}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -410,7 +424,11 @@ class _AmuletListState extends State<AmuletList> {
                         height: 24,
                         margin: const EdgeInsets.only(right: 8),
                         child: UrlImageLoader(
-                          itemName: skill.skill.name,
+                          itemName:
+                              (Provider.of<EnNamesCache>(context, listen: false)
+                                      .nameForSkillImage(
+                                          skill.skill.id, skill.skill.name) ??
+                                  skill.skill.name),
                           loadImageUrlFunction: getValidSkillImageUrl,
                         ),
                       ),

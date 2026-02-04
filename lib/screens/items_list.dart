@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/components/filter_panel.dart';
 import 'package:provider/provider.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
 
 class ItemList extends StatefulWidget {
@@ -53,9 +55,17 @@ class _ItemListState extends State<ItemList> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final itemsProvider = Provider.of<ItemsProvider>(context);
     final filteredItems = itemsProvider.items;
     final colorScheme = Theme.of(context).colorScheme;
+
+    if (!itemsProvider.hasData && !itemsProvider.isLoading) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final p = Provider.of<ItemsProvider>(context, listen: false);
+        if (!p.hasData && !p.isLoading) p.fetchItems();
+      });
+    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
@@ -78,8 +88,8 @@ class _ItemListState extends State<ItemList> {
                       itemsProvider.applyFilters(name: _searchNameQuery);
                     },
                     decoration: InputDecoration(
-                      labelText: 'Search by Name',
-                      hintText: 'Enter item name...',
+                      labelText: l10n.searchByName,
+                      hintText: l10n.enterItemName,
                       prefixIcon:
                           Icon(Icons.search, color: colorScheme.primary),
                       border: OutlineInputBorder(
@@ -100,7 +110,7 @@ class _ItemListState extends State<ItemList> {
 
                   // Filtro de rareza
                   Text(
-                    'Rarity',
+                    l10n.rarity,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -114,7 +124,7 @@ class _ItemListState extends State<ItemList> {
                     children: [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
                       return FilterChip(
                         label: Text(
-                          'Rarity $rarity',
+                          l10n.rarityLevel(rarity),
                           style: TextStyle(
                             color: _selectedRarity == rarity
                                 ? colorScheme.onPrimary
@@ -153,7 +163,7 @@ class _ItemListState extends State<ItemList> {
                         CircularProgressIndicator(color: colorScheme.primary),
                         const SizedBox(height: 16),
                         Text(
-                          'Loading items...',
+                          l10n.loadingItems,
                           style: TextStyle(
                             fontSize: 16,
                             color: colorScheme.onSurface.withOpacity(0.7),
@@ -174,7 +184,7 @@ class _ItemListState extends State<ItemList> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'No items found',
+                              l10n.noItemsFound,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: colorScheme.onSurface.withOpacity(0.8),
@@ -183,7 +193,7 @@ class _ItemListState extends State<ItemList> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Try adjusting your filters',
+                              l10n.tryAdjustingFilters,
                               style: TextStyle(
                                 fontSize: 14,
                                 color: colorScheme.onSurface.withOpacity(0.6),
@@ -255,7 +265,14 @@ class _ItemListState extends State<ItemList> {
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                               child: MaterialImage(
-                                                materialName: item.name,
+                                                materialName:
+                                                    (Provider.of<EnNamesCache>(
+                                                                context,
+                                                                listen: false)
+                                                            .nameForItemImage(
+                                                                item.id,
+                                                                item.name) ??
+                                                        item.name),
                                               ),
                                             ),
                                           ),
@@ -294,7 +311,8 @@ class _ItemListState extends State<ItemList> {
                                                     ),
                                                   ),
                                                   child: Text(
-                                                    'Rarity ${item.rarity}',
+                                                    l10n.rarityLevel(
+                                                        item.rarity),
                                                     style: TextStyle(
                                                       fontSize: 12,
                                                       color: _getRarityColor(
@@ -373,7 +391,7 @@ class _ItemListState extends State<ItemList> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Crafting Recipe:',
+              AppLocalizations.of(context)!.craftingRecipe,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -402,7 +420,11 @@ class _ItemListState extends State<ItemList> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(6),
                       child: MaterialImage(
-                        materialName: recipeItem.name,
+                        materialName:
+                            (Provider.of<EnNamesCache>(context, listen: false)
+                                    .nameForItemImage(
+                                        recipeItem.id, recipeItem.name) ??
+                                recipeItem.name),
                       ),
                     ),
                   ),

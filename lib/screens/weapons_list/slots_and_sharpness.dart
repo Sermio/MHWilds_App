@@ -15,7 +15,7 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
             ),
             const SizedBox(width: 6),
             Text(
-              'Slots:',
+              '${AppLocalizations.of(context)!.slots}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -41,7 +41,7 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
           border: Border.all(color: colorScheme.outlineVariant),
         ),
         child: Text(
-          'No slots',
+          AppLocalizations.of(context)!.noSlots,
           style: TextStyle(
             fontSize: 11,
             color: colorScheme.onSurface.withOpacity(0.8),
@@ -122,7 +122,7 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
             ),
             const SizedBox(width: 8),
             Text(
-              'Sharpness',
+              AppLocalizations.of(context)!.sharpness,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_update_checker/flutter_update_checker.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -57,69 +58,71 @@ class AppUpdateChecker {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        title: Row(
-          children: [
-            Icon(Icons.system_update,
-                color: Theme.of(ctx).colorScheme.primary, size: 28),
-            const SizedBox(width: 10),
-            const Expanded(
-              child: Text(
-                'New version available',
-                style: TextStyle(fontSize: 18),
+      builder: (ctx) {
+        final l10n = AppLocalizations.of(ctx)!;
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          title: Row(
+            children: [
+              Icon(Icons.system_update,
+                  color: Theme.of(ctx).colorScheme.primary, size: 28),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  l10n.newVersionAvailable,
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            _buildUpdateMessage(
+              l10n: l10n,
+              currentVersion: currentVersion,
+              newVersion: storeVersion,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: Text(l10n.close),
+            ),
+            FilledButton.icon(
+              onPressed: () async {
+                Navigator.of(ctx).pop();
+                await _openStore();
+              },
+              icon: const Icon(Icons.store, size: 20),
+              label: Text(l10n.goToStore),
+              style: FilledButton.styleFrom(
+                backgroundColor: Theme.of(ctx).colorScheme.primary,
+                foregroundColor: Theme.of(ctx).colorScheme.onPrimary,
               ),
             ),
           ],
-        ),
-        content: Text(
-          _buildUpdateMessage(
-              currentVersion: currentVersion, newVersion: storeVersion),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Close'),
-          ),
-          FilledButton.icon(
-            onPressed: () async {
-              Navigator.of(ctx).pop();
-              await _openStore();
-            },
-            icon: const Icon(Icons.store, size: 20),
-            label: const Text('Go to store'),
-            style: FilledButton.styleFrom(
-              backgroundColor: Theme.of(ctx).colorScheme.primary,
-              foregroundColor: Theme.of(ctx).colorScheme.onPrimary,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
   static String _buildUpdateMessage({
+    required AppLocalizations l10n,
     required String currentVersion,
     String? newVersion,
   }) {
     final hasCurrent = currentVersion.isNotEmpty;
     final hasNew = newVersion != null && newVersion.isNotEmpty;
     if (hasCurrent && hasNew) {
-      return 'You have version $currentVersion. '
-          'A new version ($newVersion) is available in the store. '
-          'Update to get the latest improvements and fixes.';
+      return l10n.updateMessageWithBoth(currentVersion, newVersion);
     }
     if (hasCurrent) {
-      return 'You have version $currentVersion. '
-          'A new version is available in the store. '
-          'Update to get the latest improvements and fixes.';
+      return l10n.updateMessageCurrentOnly(currentVersion);
     }
     if (hasNew) {
-      return 'A new version ($newVersion) is available in the store. '
-          'Update to get the latest improvements and fixes.';
+      return l10n.updateMessageNewOnly(newVersion);
     }
-    return 'A new version is available in the store. '
-        'Update to get the latest improvements and fixes.';
+    return l10n.updateMessageGeneric;
   }
 
   /// Opens the app page in the store (Play Store / App Store).

@@ -64,7 +64,7 @@ extension WeaponsListDamageInfo on _WeaponsListState {
         Icon(Icons.music_note, size: 16, color: colorScheme.primary),
         const SizedBox(width: 6),
         Text(
-          'Melody:',
+          '${AppLocalizations.of(context)!.melody}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -91,7 +91,7 @@ extension WeaponsListDamageInfo on _WeaponsListState {
         Icon(Icons.bubble_chart, size: 16, color: colorScheme.primary),
         const SizedBox(width: 6),
         Text(
-          'Echo Bubble:',
+          '${AppLocalizations.of(context)!.echoBubble}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -118,7 +118,7 @@ extension WeaponsListDamageInfo on _WeaponsListState {
         Icon(Icons.waves, size: 16, color: colorScheme.primary),
         const SizedBox(width: 6),
         Text(
-          'Echo Wave:',
+          '${AppLocalizations.of(context)!.echoWave}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -147,7 +147,7 @@ extension WeaponsListDamageInfo on _WeaponsListState {
             Icon(Icons.gps_fixed, size: 16, color: colorScheme.primary),
             const SizedBox(width: 6),
             Text(
-              'Ammo:',
+              '${AppLocalizations.of(context)!.ammo}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -214,7 +214,7 @@ extension WeaponsListDamageInfo on _WeaponsListState {
             Icon(Icons.flutter_dash, size: 16, color: colorScheme.primary),
             const SizedBox(width: 6),
             Text(
-              'Kinsect:',
+              '${AppLocalizations.of(context)!.kinsect}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -251,7 +251,7 @@ extension WeaponsListDamageInfo on _WeaponsListState {
             ),
             const SizedBox(width: 6),
             Text(
-              'Coatings:',
+              '${AppLocalizations.of(context)!.coatings}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -322,7 +322,7 @@ extension WeaponsListDamageInfo on _WeaponsListState {
         ),
         const SizedBox(width: 6),
         Text(
-          'Phial:',
+          '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -353,7 +353,7 @@ extension WeaponsListDamageInfo on _WeaponsListState {
         Icon(Icons.local_fire_department, size: 16, color: colorScheme.primary),
         const SizedBox(width: 6),
         Text(
-          'Shell:',
+          '${AppLocalizations.of(context)!.shell}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -383,7 +383,7 @@ extension WeaponsListDamageInfo on _WeaponsListState {
         Icon(Icons.transform, size: 16, color: colorScheme.primary),
         const SizedBox(width: 6),
         Text(
-          'Phial:',
+          '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,

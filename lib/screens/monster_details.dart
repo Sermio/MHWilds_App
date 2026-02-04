@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/api/monsters_api.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
 import 'package:mhwilds_app/components/material_image.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
-import 'package:mhwilds_app/widgets/custom_card.dart';
+import 'package:provider/provider.dart';
 
 class MonsterDetails extends StatefulWidget {
   final int monsterId;
@@ -83,7 +85,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              'Monster Information',
+              AppLocalizations.of(context)!.monsterInformation,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -97,10 +99,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           Row(
             children: [
               Expanded(
-                child: _buildInfoRow('Type', monster.kind),
+                child: _buildInfoRow(
+                    AppLocalizations.of(context)!.type, monster.kind),
               ),
               Expanded(
-                child: _buildInfoRow('Species', monster.species),
+                child: _buildInfoRow(
+                    AppLocalizations.of(context)!.species, monster.species),
               ),
             ],
           ),
@@ -108,20 +112,25 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
           // Descripción
           if (monster.description.isNotEmpty) ...[
-            _buildInfoRow('Description', monster.description,
+            _buildInfoRow(
+                AppLocalizations.of(context)!.description, monster.description,
                 isDescription: true),
             const SizedBox(height: 12),
           ],
 
           // Características
           if (monster.features.isNotEmpty) ...[
-            _buildInfoRow('Features', monster.features, isDescription: true),
+            _buildInfoRow(
+                AppLocalizations.of(context)!.features, monster.features,
+                isDescription: true),
             const SizedBox(height: 12),
           ],
 
           // Consejos de caza
           if (monster.tips.isNotEmpty) ...[
-            _buildInfoRow('Hunting Tips', monster.tips, isDescription: true),
+            _buildInfoRow(
+                AppLocalizations.of(context)!.huntingTips, monster.tips,
+                isDescription: true),
             const SizedBox(height: 12),
           ],
 
@@ -149,7 +158,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'Monster Variants',
+                        AppLocalizations.of(context)!.monsterVariants,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -262,7 +271,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              'Statistics',
+              AppLocalizations.of(context)!.statistics,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -274,19 +283,20 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           Row(
             children: [
               Expanded(
-                child: _buildStatCard(
-                    'Base Health', '${monster.baseHealth}', Icons.favorite),
+                child: _buildStatCard(AppLocalizations.of(context)!.baseHealth,
+                    '${monster.baseHealth}', Icons.favorite),
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: _buildStatCard(
-                    'Size Range', _formatSizeRange(monster), Icons.height),
+                child: _buildStatCard(AppLocalizations.of(context)!.sizeRange,
+                    _formatSizeRange(monster), Icons.height),
               ),
             ],
           ),
           if (monster.elements.isNotEmpty) ...[
             const SizedBox(height: 16),
-            _buildInfoRow('Elements', monster.elements.join(', ')),
+            _buildInfoRow(AppLocalizations.of(context)!.elements,
+                monster.elements.join(', ')),
           ],
         ],
       ),
@@ -324,7 +334,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  'Weaknesses and Resistances',
+                  AppLocalizations.of(context)!.weaknessesAndResistances,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -385,7 +395,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              'Breakable Parts',
+              AppLocalizations.of(context)!.breakableParts,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -493,8 +503,8 @@ class _MonsterDetailsState extends State<MonsterDetails> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Weaknesses',
+        Text(
+          AppLocalizations.of(context)!.weaknesses,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,
@@ -534,8 +544,8 @@ class _MonsterDetailsState extends State<MonsterDetails> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Resistances',
+        Text(
+          AppLocalizations.of(context)!.resistances,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,
@@ -552,7 +562,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               border: Border.all(color: colorScheme.outlineVariant),
             ),
             child: Text(
-              'No known resistances',
+              AppLocalizations.of(context)!.noKnownResistances,
               style: TextStyle(
                 fontSize: 12,
                 color: colorScheme.onSurface.withOpacity(0.7),
@@ -574,19 +584,6 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           ),
       ],
     );
-  }
-
-  String _formatSize(Monster monster) {
-    // Usar el tamaño real del monstruo si está disponible, sino usar baseHealth como fallback
-    if (monster.size != null) {
-      final baseSize =
-          monster.size!.base / 100; // Convertir de centímetros a metros
-      return '${baseSize.toStringAsFixed(2)} m';
-    } else {
-      // Fallback: usar baseHealth como aproximación
-      final baseSize = monster.baseHealth / 100;
-      return '${baseSize.toStringAsFixed(2)} m';
-    }
   }
 
   String _formatSizeRange(Monster monster) {
@@ -639,7 +636,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              'Crown Sizes',
+              AppLocalizations.of(context)!.crownSizes,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -652,7 +649,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           // Tamaño base
           _buildSizeRow(
             colorScheme,
-            'Base size',
+            AppLocalizations.of(context)!.baseSize,
             '${(sizes.base / 100).toStringAsFixed(2)} m',
             Icons.height,
             Colors.blue,
@@ -662,7 +659,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           // Mini crown
           _buildSizeRow(
             colorScheme,
-            'Mini crown',
+            AppLocalizations.of(context)!.miniCrown,
             '< ${(sizes.mini / 100).toStringAsFixed(2)} m',
             Icons.keyboard_arrow_down,
             Colors.green,
@@ -672,7 +669,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           // Silver crown
           _buildSizeRow(
             colorScheme,
-            'Silver crown',
+            AppLocalizations.of(context)!.silverCrown,
             '≥ ${(sizes.silver / 100).toStringAsFixed(2)} m',
             Icons.keyboard_arrow_up,
             Colors.grey,
@@ -682,7 +679,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           // Gold crown
           _buildSizeRow(
             colorScheme,
-            'Gold crown',
+            AppLocalizations.of(context)!.goldCrown,
             '≥ ${(sizes.gold / 100).toStringAsFixed(2)} m',
             Icons.keyboard_arrow_up,
             AppColors.goldSoft,
@@ -738,12 +735,15 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             body: Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasError) {
+          final l10n = AppLocalizations.of(context)!;
           return Scaffold(
-            body: Center(child: Text('Error: ${snapshot.error}')),
+            body: Center(
+                child: Text(l10n.errorWithMessage(snapshot.error.toString()))),
           );
         } else if (!snapshot.hasData) {
-          return const Scaffold(
-            body: Center(child: Text('No se encontró el monstruo')),
+          final l10n = AppLocalizations.of(context)!;
+          return Scaffold(
+            body: Center(child: Text(l10n.monsterNotFound)),
           );
         }
 
@@ -761,12 +761,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               children: [
                 Hero(
                   tag: monster.name,
-                  child: Image.asset(
-                    'assets/imgs/monsters/${monster.name.toLowerCase().replaceAll(' ', '_')}.png',
-                    width: 380,
-                    height: 250,
-                    fit: BoxFit.fill,
-                  ),
+                  child: _buildMonsterImage(context, monster.id, monster.name),
                 ),
                 const SizedBox(height: 20),
 
@@ -817,7 +812,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          'Low Rank',
+                          AppLocalizations.of(context)!.lowRank,
                           style: TextStyle(
                             color: isLowRankAvailable
                                 ? colorScheme.onPrimary
@@ -828,7 +823,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          'High Rank',
+                          AppLocalizations.of(context)!.highRank,
                           style: TextStyle(
                             color: isHighRankAvailable
                                 ? colorScheme.onPrimary
@@ -851,6 +846,42 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               ],
             ),
           ),
+        );
+      },
+    );
+  }
+
+  Widget _buildMonsterImage(
+      BuildContext context, int monsterId, String monsterName) {
+    final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
+    final imageName = enNamesCache.nameForMonsterImage(monsterId, monsterName);
+
+    if (imageName == null) {
+      // Cache no cargado, mostrar placeholder
+      return Container(
+        width: 380,
+        height: 250,
+        color: Colors.grey[300],
+        child:
+            Icon(Icons.image_not_supported, color: Colors.grey[600], size: 64),
+      );
+    }
+
+    final imagePath =
+        'assets/imgs/monsters/${imageName.toLowerCase().replaceAll(' ', '_')}.png';
+    return Image.asset(
+      imagePath,
+      width: 380,
+      height: 250,
+      fit: BoxFit.fill,
+      errorBuilder: (context, error, stackTrace) {
+        // Si la imagen no existe, mostrar placeholder
+        return Container(
+          width: 380,
+          height: 250,
+          color: Colors.grey[300],
+          child: Icon(Icons.image_not_supported,
+              color: Colors.grey[600], size: 64),
         );
       },
     );
@@ -941,7 +972,12 @@ class MonsterRewards extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: MaterialImage(
-                                    materialName: reward.item.name,
+                                    materialName: (Provider.of<EnNamesCache>(
+                                                context,
+                                                listen: false)
+                                            .nameForItemImage(reward.item.id,
+                                                reward.item.name) ??
+                                        reward.item.name),
                                   ),
                                 ),
                               ),

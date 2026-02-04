@@ -14,6 +14,15 @@ class ItemsProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasData => _allItems.isNotEmpty;
 
+  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
+  void invalidate() {
+    _allItems = [];
+    _filteredItems = [];
+    _nameFilter = '';
+    _rarityFilter = -1;
+    notifyListeners();
+  }
+
   Future<void> fetchItems() async {
     if (_allItems.isNotEmpty) return;
 

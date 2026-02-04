@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mhwilds_app/api/api_config.dart';
 import 'package:mhwilds_app/models/weapon.dart';
 
 class WeaponsApi {
-  static const String baseUrl = 'https://wilds.mhdb.io/en';
-
   static Future<List<Weapon>> fetchWeapons() async {
     try {
-      final response = await http.get(Uri.parse('$baseUrl/weapons'));
+      final response = await http.get(Uri.parse(ApiConfig.url('weapons')));
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = json.decode(response.body);
@@ -37,7 +36,7 @@ class WeaponsApi {
 
   static Future<Weapon> fetchWeaponById(int id) async {
     try {
-      final response = await http.get(Uri.parse('$baseUrl/weapons/$id'));
+      final response = await http.get(Uri.parse(ApiConfig.url('weapons/$id')));
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonData = json.decode(response.body);

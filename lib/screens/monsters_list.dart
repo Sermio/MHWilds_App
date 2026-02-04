@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/components/filter_panel.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/screens/monster_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
-import 'package:mhwilds_app/widgets/custom_card.dart';
 import 'package:provider/provider.dart';
 
 class MonstersList extends StatefulWidget {
@@ -65,10 +66,26 @@ class _MonstersListState extends State<MonstersList> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final monstersProvider = Provider.of<MonstersProvider>(context);
     final zonesProvider = Provider.of<LocationsProvider>(context);
     final monsters = monstersProvider.filteredMonsters;
     final colorScheme = Theme.of(context).colorScheme;
+
+    // Tras cambiar idioma se invalida la caché; al volver a esta pantalla
+    // initState no se ejecuta de nuevo, así que forzamos recarga si no hay datos.
+    if (!monstersProvider.hasData && !monstersProvider.isLoading) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final p = Provider.of<MonstersProvider>(context, listen: false);
+        if (!p.hasData && !p.isLoading) p.fetchMonsters();
+      });
+    }
+    if (!zonesProvider.hasData && !zonesProvider.isLoading) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final p = Provider.of<LocationsProvider>(context, listen: false);
+        if (!p.hasData && !p.isLoading) p.fetchZones();
+      });
+    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
@@ -94,8 +111,8 @@ class _MonstersListState extends State<MonstersList> {
                       );
                     },
                     decoration: InputDecoration(
-                      labelText: 'Search by Name',
-                      hintText: 'Enter monster name...',
+                      labelText: l10n.searchByName,
+                      hintText: l10n.enterMonsterName,
                       prefixIcon:
                           Icon(Icons.search, color: colorScheme.primary),
                       border: OutlineInputBorder(
@@ -128,8 +145,8 @@ class _MonstersListState extends State<MonstersList> {
                       );
                     },
                     decoration: InputDecoration(
-                      labelText: 'Search by Species',
-                      hintText: 'Enter species...',
+                      labelText: l10n.searchBySpecies,
+                      hintText: l10n.enterSpecies,
                       prefixIcon:
                           Icon(Icons.category, color: colorScheme.primary),
                       border: OutlineInputBorder(
@@ -150,7 +167,7 @@ class _MonstersListState extends State<MonstersList> {
 
                   // Filtros de ubicación
                   Text(
-                    'Locations',
+                    l10n.locations,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -174,7 +191,8 @@ class _MonstersListState extends State<MonstersList> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              backgroundColor: zoneBackgroundColor(zone.name!),
+                              backgroundColor:
+                                  zoneBackgroundColor(zone.id ?? 0),
                               selectedColor: colorScheme.primary,
                               selected: _selectedLocations.contains(zone.name),
                               onSelected: (isSelected) {
@@ -212,7 +230,7 @@ class _MonstersListState extends State<MonstersList> {
                         CircularProgressIndicator(color: colorScheme.primary),
                         const SizedBox(height: 16),
                         Text(
-                          'Loading monsters...',
+                          l10n.loadingMonsters,
                           style: TextStyle(
                             fontSize: 16,
                             color: colorScheme.onSurface.withOpacity(0.7),
@@ -233,7 +251,7 @@ class _MonstersListState extends State<MonstersList> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'No monsters found',
+                              l10n.noMonstersFound,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: colorScheme.onSurface.withOpacity(0.8),
@@ -242,7 +260,7 @@ class _MonstersListState extends State<MonstersList> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Try adjusting your filters',
+                              l10n.tryAdjustingFilters,
                               style: TextStyle(
                                 fontSize: 14,
                                 color: colorScheme.onSurface.withOpacity(0.6),
@@ -320,9 +338,10 @@ class _MonstersListState extends State<MonstersList> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15),
-                                                    child: Image.asset(
-                                                      'assets/imgs/monster_icons/${monster.name.toLowerCase().replaceAll(' ', '_')}.png',
-                                                      fit: BoxFit.cover,
+                                                    child: _buildMonsterIcon(
+                                                      context,
+                                                      monster.id,
+                                                      monster.name,
                                                     ),
                                                   ),
                                                 ),
@@ -464,82 +483,6 @@ class _MonstersListState extends State<MonstersList> {
     return overlays;
   }
 
-  Color _getElementColor(String element) {
-    switch (element) {
-      case 'fire':
-        return Colors.red;
-      case 'water':
-        return Colors.blue;
-      case 'ice':
-        return Colors.lightBlue;
-      case 'thunder':
-        return Colors.yellow;
-      case 'dragon':
-        return Colors.purple;
-      case 'poison':
-        return Colors.green;
-      case 'sleep':
-        return Colors.indigo;
-      case 'paralysis':
-        return Colors.orange;
-      case 'blast':
-        return Colors.deepOrange;
-      case 'bleeding':
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  Widget _buildWeaknessesSection(BuildContext context, Monster monster) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final weaknessesLevel1 = monster.weaknesses.where((w) {
-      return (w.kind == 'element' || w.kind == 'status') && w.level == 1;
-    }).toList();
-
-    if (weaknessesLevel1.isEmpty) return const SizedBox.shrink();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              'Weaknesses:',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          children: weaknessesLevel1.map((w) {
-            if (w.kind == 'element') {
-              return Image.asset(
-                'assets/imgs/elements/${w.element!.toLowerCase()}.webp',
-                width: 16,
-                height: 16,
-              );
-            } else if (w.kind == 'status') {
-              return Image.asset(
-                'assets/imgs/elements/${w.status!.toLowerCase()}.webp',
-                width: 16,
-                height: 16,
-              );
-            } else {
-              return const SizedBox.shrink();
-            }
-          }).toList(),
-        ),
-        const SizedBox(height: 16),
-      ],
-    );
-  }
-
   Widget _buildLocationsSection(BuildContext context, Monster monster) {
     if (monster.locations.isEmpty) return const SizedBox.shrink();
     final colorScheme = Theme.of(context).colorScheme;
@@ -549,7 +492,7 @@ class _MonstersListState extends State<MonstersList> {
         Row(
           children: [
             Text(
-              'Locations:',
+              AppLocalizations.of(context)!.locationsLabel,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -563,9 +506,9 @@ class _MonstersListState extends State<MonstersList> {
           spacing: 6,
           runSpacing: 6,
           children: monster.locations.map((loc) {
-            final name = (loc is Location) ? loc.name : '-';
             return Cchip(
-              itemName: name,
+              itemName: loc.name,
+              itemIdForColor: loc.id,
               getItemColor: zoneBackgroundColor,
               onTap: () {
                 Navigator.push(
@@ -579,6 +522,34 @@ class _MonstersListState extends State<MonstersList> {
           }).toList(),
         ),
       ],
+    );
+  }
+
+  Widget _buildMonsterIcon(
+      BuildContext context, int monsterId, String monsterName) {
+    final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
+    final imageName = enNamesCache.nameForMonsterImage(monsterId, monsterName);
+
+    if (imageName == null) {
+      // Cache no cargado, mostrar placeholder
+      return Container(
+        color: Colors.grey[300],
+        child: Icon(Icons.image_not_supported, color: Colors.grey[600]),
+      );
+    }
+
+    final imagePath =
+        'assets/imgs/monster_icons/${imageName.toLowerCase().replaceAll(' ', '_')}.png';
+    return Image.asset(
+      imagePath,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        // Si la imagen no existe, mostrar placeholder
+        return Container(
+          color: Colors.grey[300],
+          child: Icon(Icons.image_not_supported, color: Colors.grey[600]),
+        );
+      },
     );
   }
 }

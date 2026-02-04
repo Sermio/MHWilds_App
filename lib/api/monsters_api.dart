@@ -1,12 +1,12 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:mhwilds_app/api/api_config.dart';
 import 'package:mhwilds_app/models/monster.dart';
 
 class MonstersApi {
   static Future<List<Monster>> fetchMonsters() async {
-    final response =
-        await http.get(Uri.parse('https://wilds.mhdb.io/en/monsters'));
+    final response = await http.get(Uri.parse(ApiConfig.url('monsters')));
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
@@ -22,8 +22,8 @@ class MonstersApi {
   }
 
   static Future<Monster> fetchMonsterById(int monsterId) async {
-    final response = await http
-        .get(Uri.parse('https://wilds.mhdb.io/en/monsters/$monsterId'));
+    final response =
+        await http.get(Uri.parse(ApiConfig.url('monsters/$monsterId')));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonData = json.decode(response.body);

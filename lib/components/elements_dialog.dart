@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 
 class ElementsDialog extends StatelessWidget {
   const ElementsDialog({super.key});
@@ -59,7 +60,7 @@ class ElementsDialog extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Elements and Ailments',
+                          AppLocalizations.of(context)!.elementsAndAilments,
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,

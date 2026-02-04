@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/weapon.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/weapons_provider.dart';
 import 'package:mhwilds_app/screens/weapon_details.dart';
 import 'package:mhwilds_app/utils/weapon_utils.dart';
@@ -68,6 +70,13 @@ class _WeaponsListState extends State<WeaponsList> {
     final weaponsProvider = Provider.of<WeaponsProvider>(context);
     final filteredWeapons = weaponsProvider.weapons;
 
+    if (!weaponsProvider.hasData && !weaponsProvider.isLoading) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final p = Provider.of<WeaponsProvider>(context, listen: false);
+        if (!p.hasData && !p.isLoading) p.fetchWeapons();
+      });
+    }
+
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
@@ -122,7 +131,7 @@ class _WeaponsListState extends State<WeaponsList> {
                 Icon(Icons.filter_list, color: colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
-                  'Filters',
+                  AppLocalizations.of(context)!.filters,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -133,7 +142,7 @@ class _WeaponsListState extends State<WeaponsList> {
                 TextButton.icon(
                   onPressed: _resetFilters,
                   icon: const Icon(Icons.refresh, size: 18),
-                  label: const Text('Reset'),
+                  label: Text(AppLocalizations.of(context)!.reset),
                   style: TextButton.styleFrom(
                       foregroundColor: colorScheme.primary),
                 ),
@@ -178,8 +187,8 @@ class _WeaponsListState extends State<WeaponsList> {
         );
       },
       decoration: InputDecoration(
-        labelText: 'Search by Name',
-        hintText: 'Enter weapon name...',
+        labelText: AppLocalizations.of(context)!.searchByName,
+        hintText: AppLocalizations.of(context)!.enterWeaponName,
         prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -219,7 +228,7 @@ class _WeaponsListState extends State<WeaponsList> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Type',
+          AppLocalizations.of(context)!.type,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
@@ -233,7 +242,7 @@ class _WeaponsListState extends State<WeaponsList> {
           children: weaponTypes.map((kind) {
             return FilterChip(
               label: Text(
-                _formatWeaponKind(kind),
+                _getWeaponKindLabel(context, kind),
                 style: TextStyle(
                   color: _selectedKind == kind
                       ? colorScheme.onPrimary
@@ -270,7 +279,7 @@ class _WeaponsListState extends State<WeaponsList> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Rarity',
+          AppLocalizations.of(context)!.rarity,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
@@ -284,7 +293,7 @@ class _WeaponsListState extends State<WeaponsList> {
           children: [1, 2, 3, 4, 5, 6, 7].map((rarity) {
             return FilterChip(
               label: Text(
-                'Rarity $rarity',
+                AppLocalizations.of(context)!.rarityLevel(rarity),
                 style: TextStyle(
                   color: _selectedRarity == rarity
                       ? colorScheme.onPrimary
@@ -325,7 +334,7 @@ class _WeaponsListState extends State<WeaponsList> {
             CircularProgressIndicator(color: colorScheme.primary),
             const SizedBox(height: 16),
             Text(
-              'Loading weapons...',
+              AppLocalizations.of(context)!.loadingWeapons,
               style: TextStyle(
                   fontSize: 16, color: colorScheme.onSurface.withOpacity(0.7)),
             ),
@@ -343,7 +352,7 @@ class _WeaponsListState extends State<WeaponsList> {
                 size: 64, color: colorScheme.onSurface.withOpacity(0.5)),
             const SizedBox(height: 16),
             Text(
-              'No weapons found',
+              AppLocalizations.of(context)!.noWeaponsFound,
               style: TextStyle(
                 fontSize: 18,
                 color: colorScheme.onSurface.withOpacity(0.8),
@@ -352,7 +361,7 @@ class _WeaponsListState extends State<WeaponsList> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Try adjusting your filters',
+              AppLocalizations.of(context)!.tryAdjustingFilters,
               style: TextStyle(
                   fontSize: 14, color: colorScheme.onSurface.withOpacity(0.6)),
             ),
@@ -484,7 +493,7 @@ class _WeaponsListState extends State<WeaponsList> {
         border: Border.all(color: _getKindColor(kind).withOpacity(0.3)),
       ),
       child: Text(
-        _formatWeaponKind(kind),
+        _getWeaponKindLabel(context, kind),
         style: TextStyle(
           fontSize: 12,
           color: _getKindColor(kind),
@@ -503,7 +512,7 @@ class _WeaponsListState extends State<WeaponsList> {
         border: Border.all(color: _getRarityColor(rarity).withOpacity(0.3)),
       ),
       child: Text(
-        'Rarity $rarity',
+        AppLocalizations.of(context)!.rarityLevel(rarity),
         style: TextStyle(
           fontSize: 12,
           color: _getRarityColor(rarity),
@@ -528,7 +537,7 @@ class _WeaponsListState extends State<WeaponsList> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Physical Damage:',
+              '${AppLocalizations.of(context)!.physicalDamage}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -569,7 +578,7 @@ class _WeaponsListState extends State<WeaponsList> {
               ),
               const SizedBox(width: 6),
               Text(
-                'Affinity:',
+                '${AppLocalizations.of(context)!.affinity}:',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -596,7 +605,7 @@ class _WeaponsListState extends State<WeaponsList> {
         ],
         // Sección de daño elemental si está disponible
         if (weapon.specials != null) ...[
-          WeaponDisplayUtils.buildElementalDamageRow(weapon),
+          WeaponDisplayUtils.buildElementalDamageRow(context, weapon),
         ],
         // Solo añadir espacio si hay daño elemental
         if (weapon.specials != null && _hasElementalDamage(weapon)) ...[
@@ -613,7 +622,7 @@ class _WeaponsListState extends State<WeaponsList> {
               ),
               const SizedBox(width: 6),
               Text(
-                'Defense:',
+                '${AppLocalizations.of(context)!.defense}:',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -708,7 +717,7 @@ class _WeaponsListState extends State<WeaponsList> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Skills:',
+              '${AppLocalizations.of(context)!.skills}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -737,7 +746,11 @@ class _WeaponsListState extends State<WeaponsList> {
                         height: 24,
                         margin: const EdgeInsets.only(right: 8),
                         child: UrlImageLoader(
-                          itemName: skill.skill.name,
+                          itemName:
+                              (Provider.of<EnNamesCache>(context, listen: false)
+                                      .nameForSkillImage(
+                                          skill.skill.id, skill.skill.name) ??
+                                  skill.skill.name),
                           loadImageUrlFunction: getValidSkillImageUrl,
                         ),
                       ),
@@ -779,11 +792,40 @@ class _WeaponsListState extends State<WeaponsList> {
     );
   }
 
-  String _formatWeaponKind(String kind) {
-    return kind
-        .split('-')
-        .map((word) => word[0].toUpperCase() + word.substring(1))
-        .join(' ');
+  String _getWeaponKindLabel(BuildContext context, String kind) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (kind) {
+      case 'great-sword':
+        return l10n.weaponKindGreatSword;
+      case 'long-sword':
+        return l10n.weaponKindLongSword;
+      case 'sword-shield':
+        return l10n.weaponKindSwordShield;
+      case 'dual-blades':
+        return l10n.weaponKindDualBlades;
+      case 'hammer':
+        return l10n.weaponKindHammer;
+      case 'hunting-horn':
+        return l10n.weaponKindHuntingHorn;
+      case 'lance':
+        return l10n.weaponKindLance;
+      case 'gunlance':
+        return l10n.weaponKindGunlance;
+      case 'switch-axe':
+        return l10n.weaponKindSwitchAxe;
+      case 'charge-blade':
+        return l10n.weaponKindChargeBlade;
+      case 'insect-glaive':
+        return l10n.weaponKindInsectGlaive;
+      case 'bow':
+        return l10n.weaponKindBow;
+      case 'light-bowgun':
+        return l10n.weaponKindLightBowgun;
+      case 'heavy-bowgun':
+        return l10n.weaponKindHeavyBowgun;
+      default:
+        return kind;
+    }
   }
 
   IconData _getWeaponIcon(String kind) {

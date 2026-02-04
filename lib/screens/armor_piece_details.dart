@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/elements_dialog.dart';
 import 'package:mhwilds_app/components/material_image.dart';
-import 'package:mhwilds_app/components/monster_details_card.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/api/skills_api.dart';
-import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/utils/utils.dart';
-import 'package:mhwilds_app/widgets/custom_card.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
+import 'package:provider/provider.dart';
 
 class ArmorDetails extends StatefulWidget {
   final armor_models.ArmorPiece armor;
@@ -170,7 +169,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'Statistics',
+                  AppLocalizations.of(context)!.statistics,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -186,14 +185,17 @@ class _ArmorDetailsState extends State<ArmorDetails> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                _buildStatRow("Rarity", widget.armor.rarity.toString()),
+                _buildStatRow(AppLocalizations.of(context)!.rarity,
+                    widget.armor.rarity.toString()),
                 const Divider(height: 24),
-                _buildStatRow("Rank", widget.armor.rank),
+                _buildStatRow(
+                    AppLocalizations.of(context)!.rank, widget.armor.rank),
                 const Divider(height: 24),
-                _buildStatRow("Slots", "",
+                _buildStatRow(AppLocalizations.of(context)!.slots, "",
                     trailing: ArmorPieceSlotsWidget(armorPiece: widget.armor)),
                 const Divider(height: 24),
-                _buildStatRow("Base Defense", "${widget.armor.defense['base']}",
+                _buildStatRow(AppLocalizations.of(context)!.baseDefense,
+                    "${widget.armor.defense['base']}",
                     trailing: ArmorBaseDefense(
                         baseDefense: widget.armor.defense['base']!)),
                 const Divider(height: 24),
@@ -248,19 +250,6 @@ class _ArmorDetailsState extends State<ArmorDetails> {
     return content;
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
-      child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-
   Widget _buildSkillsSection() {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
@@ -297,7 +286,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'Skills',
+                  AppLocalizations.of(context)!.skills,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -327,7 +316,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                     child: Padding(
                       padding: const EdgeInsets.all(20),
                       child: Text(
-                        "Error loading skills",
+                        AppLocalizations.of(context)!.errorLoadingSkills,
                         style: TextStyle(
                           fontSize: 16,
                           color: colorScheme.onSurface.withOpacity(0.8),
@@ -340,7 +329,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                     child: Padding(
                       padding: const EdgeInsets.all(20),
                       child: Text(
-                        "No skills available",
+                        AppLocalizations.of(context)!.noSkillsAvailable,
                         style: TextStyle(
                           fontSize: 16,
                           color: colorScheme.onSurface.withOpacity(0.8),
@@ -377,7 +366,12 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
                                     child: UrlImageLoader(
-                                      itemName: skillInfo.name,
+                                      itemName: (Provider.of<EnNamesCache>(
+                                                  context,
+                                                  listen: false)
+                                              .nameForSkillImage(skillInfo.id,
+                                                  skillInfo.name) ??
+                                          skillInfo.name),
                                       loadImageUrlFunction:
                                           getValidSkillImageUrl,
                                     ),
@@ -452,7 +446,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: Text(
-                                        "Lv ${rank.level}",
+                                        "${AppLocalizations.of(context)!.lv} ${rank.level}",
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold,
@@ -529,7 +523,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'Crafting Materials',
+                  AppLocalizations.of(context)!.craftingMaterials,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -559,7 +553,8 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                 // Costo de Zenny como etiqueta amarilla separada
                 if (widget.armor.crafting.zennyCost > 0) ...[
                   const SizedBox(height: 20),
-                  _buildCostChip('Craft', widget.armor.crafting.zennyCost),
+                  _buildCostChip(AppLocalizations.of(context)!.craft,
+                      widget.armor.crafting.zennyCost),
                 ],
               ],
             ),
@@ -618,7 +613,11 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: MaterialImage(
-                      materialName: material.item.name,
+                      materialName:
+                          Provider.of<EnNamesCache>(context, listen: false)
+                                  .nameForItemImage(
+                                      material.item.id, material.item.name) ??
+                              material.item.name,
                     ),
                   ),
                 ),
@@ -691,51 +690,6 @@ class ArmorBaseDefense extends StatelessWidget {
   }
 }
 
-class _ArmorResistancesRow extends StatelessWidget {
-  final armor_models.ArmorPiece armor;
-
-  const _ArmorResistancesRow({super.key, required this.armor});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildResistancesWidget(),
-      ],
-    );
-  }
-
-  Widget _buildResistancesWidget() {
-    return Row(
-      children: [
-        ...armor.resistances.entries.map(
-          (entry) {
-            final resistanceType = entry.key;
-            final resistanceValue = entry.value;
-
-            return Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: Row(
-                children: [
-                  SizedBox(
-                    height: 20,
-                    child: Image.asset(
-                      'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  Text(resistanceValue.toString()),
-                ],
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
 class ArmorResistancesWidget extends StatelessWidget {
   final armor_models.ArmorPiece armor;
 
@@ -750,7 +704,7 @@ class ArmorResistancesWidget extends StatelessWidget {
         Row(
           children: [
             Text(
-              'Resistances:',
+              '${AppLocalizations.of(context)!.resistances}:',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -799,8 +753,8 @@ class ArmorPieceSlotsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (armorPiece.slots.isEmpty) {
-      return const Text(
-        'No slots',
+      return Text(
+        AppLocalizations.of(context)!.noSlots,
         style: TextStyle(
           color: Colors.grey,
           fontStyle: FontStyle.italic,

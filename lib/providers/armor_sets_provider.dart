@@ -16,6 +16,17 @@ class ArmorSetProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasData => _allArmorSets.isNotEmpty;
 
+  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
+  void invalidate() {
+    _allArmorSets = [];
+    _originalArmorSets = [];
+    _filteredArmorSets = [];
+    _nameFilter = '';
+    _kindFilter = null;
+    _rarityFilter = null;
+    notifyListeners();
+  }
+
   Future<void> fetchArmorSets() async {
     if (_allArmorSets.isNotEmpty) return;
 

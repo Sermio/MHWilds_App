@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/filter_panel.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/decoration.dart';
+import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -53,9 +55,17 @@ class _DecorationsListState extends State<DecorationsList> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final decorationsProvider = Provider.of<DecorationsProvider>(context);
     final filteredDecorations = decorationsProvider.filteredDecorations;
     final colorScheme = Theme.of(context).colorScheme;
+
+    if (!decorationsProvider.hasData && !decorationsProvider.isLoading) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final p = Provider.of<DecorationsProvider>(context, listen: false);
+        if (!p.hasData && !p.isLoading) p.fetchDecorations();
+      });
+    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
@@ -79,8 +89,8 @@ class _DecorationsListState extends State<DecorationsList> {
                           name: _searchNameQuery, type: _selectedType);
                     },
                     decoration: InputDecoration(
-                      labelText: 'Search by Name',
-                      hintText: 'Enter decoration name...',
+                      labelText: l10n.searchByName,
+                      hintText: l10n.enterDecorationName,
                       prefixIcon:
                           Icon(Icons.search, color: colorScheme.primary),
                       border: OutlineInputBorder(
@@ -100,7 +110,7 @@ class _DecorationsListState extends State<DecorationsList> {
 
                   // Filtro de tipo
                   Text(
-                    'Type',
+                    l10n.type,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -114,7 +124,7 @@ class _DecorationsListState extends State<DecorationsList> {
                     children: ['Weapon', 'Armor'].map((type) {
                       return FilterChip(
                         label: Text(
-                          type,
+                          _getDecorationTypeLabel(context, type),
                           style: TextStyle(
                             color: _selectedType == type
                                 ? colorScheme.onPrimary
@@ -153,7 +163,7 @@ class _DecorationsListState extends State<DecorationsList> {
                         CircularProgressIndicator(color: colorScheme.primary),
                         const SizedBox(height: 16),
                         Text(
-                          'Loading decorations...',
+                          l10n.loadingDecorations,
                           style: TextStyle(
                             fontSize: 16,
                             color: colorScheme.onSurface.withOpacity(0.7),
@@ -174,7 +184,7 @@ class _DecorationsListState extends State<DecorationsList> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'No decorations found',
+                              l10n.noDecorationsFound,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: colorScheme.onSurface.withOpacity(0.8),
@@ -183,7 +193,7 @@ class _DecorationsListState extends State<DecorationsList> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Try adjusting your filters',
+                              l10n.tryAdjustingFilters,
                               style: TextStyle(
                                 fontSize: 14,
                                 color: colorScheme.onSurface.withOpacity(0.6),
@@ -304,7 +314,9 @@ class _DecorationsListState extends State<DecorationsList> {
                                                     ),
                                                   ),
                                                   child: Text(
-                                                    decoration.kind,
+                                                    _getDecorationTypeLabel(
+                                                        context,
+                                                        decoration.kind),
                                                     style: TextStyle(
                                                       fontSize: 12,
                                                       color: _getTypeColor(
@@ -367,7 +379,7 @@ class _DecorationsListState extends State<DecorationsList> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Skills:',
+              '${AppLocalizations.of(context)!.skills}:',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -396,7 +408,11 @@ class _DecorationsListState extends State<DecorationsList> {
                         height: 24,
                         margin: const EdgeInsets.only(right: 8),
                         child: UrlImageLoader(
-                          itemName: skill.skill.name,
+                          itemName:
+                              (Provider.of<EnNamesCache>(context, listen: false)
+                                      .nameForSkillImage(
+                                          skill.skill.id, skill.skill.name) ??
+                                  skill.skill.name),
                           loadImageUrlFunction: getValidSkillImageUrl,
                         ),
                       ),
@@ -449,6 +465,18 @@ class _DecorationsListState extends State<DecorationsList> {
     if (maxLevel <= 2) return 2;
     if (maxLevel <= 3) return 3;
     return 4;
+  }
+
+  String _getDecorationTypeLabel(BuildContext context, String type) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (type.toLowerCase()) {
+      case 'weapon':
+        return l10n.typeWeapon;
+      case 'armor':
+        return l10n.typeArmor;
+      default:
+        return type;
+    }
   }
 
   Color _getTypeColor(String type) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_appbar.dart';
 import 'package:mhwilds_app/components/c_drawer.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/screens/talismans_list.dart';
 import 'package:mhwilds_app/utils/update_checker.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
@@ -20,7 +21,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Widget _selectedScreen = const MonstersList();
-  String _appBarTitle = "Monsters";
 
   @override
   void initState() {
@@ -30,25 +30,20 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  String _titleForScreen(BuildContext context, Widget screen) {
+    final l10n = AppLocalizations.of(context)!;
+    if (screen is MonstersList) return l10n.monsters;
+    if (screen is DecorationsList) return l10n.decorations;
+    if (screen is ArmorSetList) return l10n.armorSets;
+    if (screen is SkillList) return l10n.skills;
+    if (screen is AmuletList) return l10n.talismans;
+    if (screen is ItemList) return l10n.items;
+    if (screen is WeaponsList) return l10n.weapons;
+    return l10n.monsters;
+  }
+
   void _changeScreen(Widget newScreen) {
-    setState(() {
-      if (newScreen is MonstersList) {
-        _appBarTitle = "Monsters";
-      } else if (newScreen is DecorationsList) {
-        _appBarTitle = "Decorations";
-      } else if (newScreen is ArmorSetList) {
-        _appBarTitle = "Armor Sets";
-      } else if (newScreen is SkillList) {
-        _appBarTitle = "Skills";
-      } else if (newScreen is AmuletList) {
-        _appBarTitle = "Talismans";
-      } else if (newScreen is ItemList) {
-        _appBarTitle = "Items";
-      } else if (newScreen is WeaponsList) {
-        _appBarTitle = "Weapons";
-      }
-      _selectedScreen = newScreen;
-    });
+    setState(() => _selectedScreen = newScreen);
     Navigator.pop(context);
   }
 
@@ -56,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Cappbar(
-        title: _appBarTitle,
+        title: _titleForScreen(context, _selectedScreen),
       ),
       drawer: Cdrawer(onItemSelected: _changeScreen),
       body: _selectedScreen,

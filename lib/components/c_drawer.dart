@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
@@ -107,14 +108,15 @@ class Cdrawer extends StatelessWidget {
   }
 
   Widget menuItems(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
       child: Column(
         children: [
           _buildMenuItem(
             context,
-            title: 'Monsters',
-            subtitle: 'Database of all monsters',
+            title: l10n.monsters,
+            subtitle: l10n.menuMonstersSubtitle,
             icon: Icons.pets,
             iconColor: Colors.red[400]!,
             onTap: () => onItemSelected(const MonstersList()),
@@ -122,8 +124,8 @@ class Cdrawer extends StatelessWidget {
           const SizedBox(height: 8),
           _buildMenuItem(
             context,
-            title: 'Items',
-            subtitle: 'Materials and resources',
+            title: l10n.items,
+            subtitle: l10n.menuItemsSubtitle,
             icon: Icons.inventory_2,
             iconColor: Colors.orange[600]!,
             onTap: () => onItemSelected(const ItemList()),
@@ -131,8 +133,8 @@ class Cdrawer extends StatelessWidget {
           const SizedBox(height: 8),
           _buildMenuItem(
             context,
-            title: 'Decorations',
-            subtitle: 'Skill gems and jewels',
+            title: l10n.decorations,
+            subtitle: l10n.menuDecorationsSubtitle,
             icon: Icons.diamond,
             iconColor: Colors.purple[400]!,
             onTap: () => onItemSelected(const DecorationsList()),
@@ -140,8 +142,8 @@ class Cdrawer extends StatelessWidget {
           const SizedBox(height: 8),
           _buildMenuItem(
             context,
-            title: 'Talismans',
-            subtitle: 'Powerful accessories',
+            title: l10n.talismans,
+            subtitle: l10n.menuTalismansSubtitle,
             icon: Icons.workspace_premium,
             iconColor: AppColors.goldSoft,
             onTap: () => onItemSelected(const AmuletList()),
@@ -149,8 +151,8 @@ class Cdrawer extends StatelessWidget {
           const SizedBox(height: 8),
           _buildMenuItem(
             context,
-            title: 'Armor Sets',
-            subtitle: 'Complete armor collections',
+            title: l10n.armorSets,
+            subtitle: l10n.menuArmorSetsSubtitle,
             icon: Icons.shield,
             iconColor: Colors.blue[600]!,
             onTap: () => onItemSelected(const ArmorSetList()),
@@ -158,8 +160,8 @@ class Cdrawer extends StatelessWidget {
           const SizedBox(height: 8),
           _buildMenuItem(
             context,
-            title: 'Weapons',
-            subtitle: 'Combat weapons and tools',
+            title: l10n.weapons,
+            subtitle: l10n.menuWeaponsSubtitle,
             icon: Icons.gps_fixed,
             iconColor: Colors.indigo[600]!,
             onTap: () => onItemSelected(const WeaponsList()),
@@ -167,8 +169,8 @@ class Cdrawer extends StatelessWidget {
           const SizedBox(height: 8),
           _buildMenuItem(
             context,
-            title: 'Skills',
-            subtitle: 'Combat abilities and effects',
+            title: l10n.skills,
+            subtitle: l10n.menuSkillsSubtitle,
             icon: Icons.flash_on,
             iconColor: Colors.green[600]!,
             onTap: () => onItemSelected(const SkillList()),

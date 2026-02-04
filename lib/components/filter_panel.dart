@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 
 /// Panel reutilizable para filtros: contenedor con header fijo y contenido con scroll.
 ///
@@ -9,17 +10,19 @@ class FilterPanel extends StatelessWidget {
     required this.height,
     required this.onReset,
     required this.child,
-    this.title = 'Filters',
+    this.title,
   });
 
   final double height;
   final VoidCallback onReset;
   final Widget child;
-  final String title;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
+    final panelTitle = title ?? l10n.filters;
 
     return Container(
       margin: const EdgeInsets.all(16),
@@ -51,7 +54,7 @@ class FilterPanel extends StatelessWidget {
                 Icon(Icons.filter_list, color: colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
-                  title,
+                  panelTitle,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -62,7 +65,7 @@ class FilterPanel extends StatelessWidget {
                 TextButton.icon(
                   onPressed: onReset,
                   icon: const Icon(Icons.refresh, size: 18),
-                  label: const Text('Reset'),
+                  label: Text(l10n.reset),
                   style: TextButton.styleFrom(
                     foregroundColor: colorScheme.primary,
                   ),

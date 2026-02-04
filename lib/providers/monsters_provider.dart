@@ -14,6 +14,15 @@ class MonstersProvider with ChangeNotifier {
   List<Monster> get filteredMonsters => _filteredMonsters;
   bool get hasData => _monsters.isNotEmpty;
 
+  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
+  void invalidate() {
+    _monsters = [];
+    _filteredMonsters = [];
+    _selectedLocations.clear();
+    _hasLocationFilter = false;
+    notifyListeners();
+  }
+
   Future<void> fetchMonsters() async {
     if (_monsters.isNotEmpty) return;
 
