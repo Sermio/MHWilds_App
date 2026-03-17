@@ -224,4 +224,9 @@ class AppUpdateChecker {
       await _checker.update();
     }
   }
+
+  /// Public helper to open the app store page from other screens/dialogs.
+  static Future<void> openStorePage() async {
+    await _openStore();
+  }
 }

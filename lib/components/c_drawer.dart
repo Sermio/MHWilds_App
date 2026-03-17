@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/screens/talismans_list.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
@@ -7,6 +8,7 @@ import 'package:mhwilds_app/screens/items_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
+import 'package:mhwilds_app/screens/build_optimizer_screen.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 
 class Cdrawer extends StatelessWidget {
@@ -40,7 +42,7 @@ class Cdrawer extends StatelessWidget {
           child: Column(
             children: [
               menuHeader(),
-              Expanded(child: SingleChildScrollView(child: menuItems())),
+              Expanded(child: SingleChildScrollView(child: menuItems(context))),
             ],
           ),
         ),
@@ -112,7 +114,8 @@ class Cdrawer extends StatelessWidget {
     );
   }
 
-  Widget menuItems() {
+  Widget menuItems(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
       child: Column(
@@ -244,6 +247,20 @@ class Cdrawer extends StatelessWidget {
             iconColor: Colors.green[600]!,
             isSelected: selectedScreen is SkillList,
             onTap: () => onItemSelected(const SkillList()),
+          ),
+          const SizedBox(height: 8),
+          _buildMenuItem(
+            title: l10n.buildOptimizer,
+            subtitle: l10n.buildOptimizerMenuSubtitle,
+            leadingIcon: Icon(
+              Icons.auto_graph,
+              color: Colors.teal[600],
+              size: 30,
+            ),
+            icon: Icons.auto_graph,
+            iconColor: Colors.teal[600]!,
+            isSelected: selectedScreen is BuildOptimizerScreen,
+            onTap: () => onItemSelected(const BuildOptimizerScreen()),
           ),
         ],
       ),

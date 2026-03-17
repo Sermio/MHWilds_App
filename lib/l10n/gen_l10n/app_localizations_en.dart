@@ -104,6 +104,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String get menuSkillsSubtitle => 'Combat abilities and effects';
 
   @override
+  String get buildOptimizer => 'Build optimizer';
+
+  @override
+  String get buildOptimizerMenuSubtitle => 'Optimize your build and skills';
+
+  @override
+  String get buildOptimizerCreditsIntro =>
+      'This screen integrates MH Wilds Build Optimizer as an external collaboration.';
+
+  @override
+  String get buildOptimizerCreditsCreator => 'Created by Nenrikido (Nenri).';
+
+  @override
+  String get buildOptimizerNewsTitle => 'What\'s new';
+
+  @override
+  String get buildOptimizerNewsMessage =>
+      'Thanks to a collaboration with Nenri, MHWilds Assistant now includes a build optimizer. Check it out in the menu options.';
+
+  @override
+  String get rateAppReminder => 'Don\'t forget to rate the app if you like it.';
+
+  @override
+  String get understood => 'Understood';
+
+  @override
+  String get web => 'Web';
+
+  @override
   String updateMessageWithBoth(String currentVersion, String newVersion) {
     return 'You have version $currentVersion. A new version ($newVersion) is available in the store. Update to get the latest improvements and fixes.';
   }

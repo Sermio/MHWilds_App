@@ -36,6 +36,15 @@
   "menuArmorSetsSubtitle": "Pełne kolekcje zbroi",
   "menuWeaponsSubtitle": "Broń i narzędzia bojowe",
   "menuSkillsSubtitle": "Umiejętności i efekty bojowe",
+  "buildOptimizer": "Optymalizator buildu",
+  "buildOptimizerMenuSubtitle": "Optymalizuj swój build i umiejętności",
+  "buildOptimizerCreditsIntro": "Ten ekran integruje MH Wilds Build Optimizer jako zewnętrzną współpracę.",
+  "buildOptimizerCreditsCreator": "Stworzony przez Nenrikido (Nenri).",
+  "buildOptimizerNewsTitle": "Nowości",
+  "buildOptimizerNewsMessage": "Dzięki współpracy z Nenri, MHWilds Assistant ma teraz optymalizator buildu. Sprawdź go w opcjach menu.",
+  "rateAppReminder": "Nie zapomnij ocenić aplikacji, jeśli Ci się podoba.",
+  "understood": "Rozumiem",
+  "web": "Web",
   "updateMessageWithBoth": "Masz wersję {currentVersion}. Nowa wersja ({newVersion}) jest dostępna w sklepie. Zaktualizuj, aby uzyskać najnowsze ulepszenia i poprawki.",
   "@updateMessageWithBoth": {
     "placeholders": {
@@ -154,6 +163,7 @@
   "elements": "Żywioły",
   "weaknessesAndResistances": "Słabości i Odporności",
   "weaknesses": "Słabości",
+  "noKnownWeaknesses": "Brak znanych słabości",
   "noKnownResistances": "Brak znanych odporności",
   "highRank": "Wysoka Ranga",
   "lowRank": "Niska Ranga",

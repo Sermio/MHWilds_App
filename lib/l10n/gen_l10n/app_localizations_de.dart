@@ -104,6 +104,37 @@ class AppLocalizationsDe extends AppLocalizations {
   String get menuSkillsSubtitle => 'Kampffähigkeiten und -effekte';
 
   @override
+  String get buildOptimizer => 'Build-Optimierer';
+
+  @override
+  String get buildOptimizerMenuSubtitle =>
+      'Optimiere dein Build und deine Fähigkeiten';
+
+  @override
+  String get buildOptimizerCreditsIntro =>
+      'Dieser Bildschirm integriert den MH Wilds Build Optimizer als externe Zusammenarbeit.';
+
+  @override
+  String get buildOptimizerCreditsCreator => 'Erstellt von Nenrikido (Nenri).';
+
+  @override
+  String get buildOptimizerNewsTitle => 'Neuigkeiten';
+
+  @override
+  String get buildOptimizerNewsMessage =>
+      'Dank einer Zusammenarbeit mit Nenri hat MHWilds Assistant jetzt einen Build-Optimierer. Schau ihn dir in den Menüoptionen an.';
+
+  @override
+  String get rateAppReminder =>
+      'Vergiss nicht, die App zu bewerten, wenn sie dir gefällt.';
+
+  @override
+  String get understood => 'Verstanden';
+
+  @override
+  String get web => 'Web';
+
+  @override
   String updateMessageWithBoth(String currentVersion, String newVersion) {
     return 'Sie haben Version $currentVersion. Eine neue Version ($newVersion) ist im Store verfügbar. Aktualisieren Sie für die neuesten Verbesserungen und Korrekturen.';
   }
@@ -400,7 +431,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get weaknesses => 'Schwächen';
 
   @override
-  String get noKnownWeaknesses => 'No known weaknesses';
+  String get noKnownWeaknesses => 'Keine bekannten Schwächen';
 
   @override
   String get noKnownResistances => 'Keine bekannten Widerstände';

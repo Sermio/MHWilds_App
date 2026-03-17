@@ -297,6 +297,60 @@ abstract class AppLocalizations {
   /// **'Combat abilities and effects'**
   String get menuSkillsSubtitle;
 
+  /// No description provided for @buildOptimizer.
+  ///
+  /// In en, this message translates to:
+  /// **'Build optimizer'**
+  String get buildOptimizer;
+
+  /// No description provided for @buildOptimizerMenuSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimize your build and skills'**
+  String get buildOptimizerMenuSubtitle;
+
+  /// No description provided for @buildOptimizerCreditsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'This screen integrates MH Wilds Build Optimizer as an external collaboration.'**
+  String get buildOptimizerCreditsIntro;
+
+  /// No description provided for @buildOptimizerCreditsCreator.
+  ///
+  /// In en, this message translates to:
+  /// **'Created by Nenrikido (Nenri).'**
+  String get buildOptimizerCreditsCreator;
+
+  /// No description provided for @buildOptimizerNewsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s new'**
+  String get buildOptimizerNewsTitle;
+
+  /// No description provided for @buildOptimizerNewsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks to a collaboration with Nenri, MHWilds Assistant now includes a build optimizer. Check it out in the menu options.'**
+  String get buildOptimizerNewsMessage;
+
+  /// No description provided for @rateAppReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t forget to rate the app if you like it.'**
+  String get rateAppReminder;
+
+  /// No description provided for @understood.
+  ///
+  /// In en, this message translates to:
+  /// **'Understood'**
+  String get understood;
+
+  /// No description provided for @web.
+  ///
+  /// In en, this message translates to:
+  /// **'Web'**
+  String get web;
+
   /// No description provided for @updateMessageWithBoth.
   ///
   /// In en, this message translates to:

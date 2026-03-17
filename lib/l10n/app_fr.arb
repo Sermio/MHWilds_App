@@ -36,6 +36,15 @@
   "menuArmorSetsSubtitle": "Collections d'armure complètes",
   "menuWeaponsSubtitle": "Armes et outils de combat",
   "menuSkillsSubtitle": "Capacités et effets de combat",
+  "buildOptimizer": "Optimiseur de build",
+  "buildOptimizerMenuSubtitle": "Optimisez votre build et vos compétences",
+  "buildOptimizerCreditsIntro": "Cet écran intègre MH Wilds Build Optimizer dans le cadre d'une collaboration externe.",
+  "buildOptimizerCreditsCreator": "Créé par Nenrikido (Nenri).",
+  "buildOptimizerNewsTitle": "Nouveautés",
+  "buildOptimizerNewsMessage": "Grâce à une collaboration avec Nenri, MHWilds Assistant inclut désormais un optimiseur de build. Découvrez-le dans les options du menu.",
+  "rateAppReminder": "N'oubliez pas de noter l'application si elle vous plaît.",
+  "understood": "Compris",
+  "web": "Web",
   "updateMessageWithBoth": "Vous avez la version {currentVersion}. Une nouvelle version ({newVersion}) est disponible sur le store. Mettez à jour pour les dernières améliorations et corrections.",
   "@updateMessageWithBoth": {
     "placeholders": {

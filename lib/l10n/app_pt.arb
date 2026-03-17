@@ -36,6 +36,15 @@
   "menuArmorSetsSubtitle": "Coleções de armadura completas",
   "menuWeaponsSubtitle": "Armas e ferramentas de combate",
   "menuSkillsSubtitle": "Habilidades e efeitos de combate",
+  "buildOptimizer": "Otimizador de build",
+  "buildOptimizerMenuSubtitle": "Otimize sua build e habilidades",
+  "buildOptimizerCreditsIntro": "Esta tela integra o MH Wilds Build Optimizer como uma colaboração externa.",
+  "buildOptimizerCreditsCreator": "Criado por Nenrikido (Nenri).",
+  "buildOptimizerNewsTitle": "Novidades",
+  "buildOptimizerNewsMessage": "Graças a uma colaboração com Nenri, o MHWilds Assistant agora tem um otimizador de build. Confira nas opções do menu.",
+  "rateAppReminder": "Não se esqueça de avaliar o app se você gostar.",
+  "understood": "Entendi",
+  "web": "Web",
   "updateMessageWithBoth": "Tem a versão {currentVersion}. Uma nova versão ({newVersion}) está disponível na loja. Atualize para as últimas melhorias e correções.",
   "@updateMessageWithBoth": {
     "placeholders": {
@@ -154,6 +163,7 @@
   "elements": "Elementos",
   "weaknessesAndResistances": "Fraquezas e Resistências",
   "weaknesses": "Fraquezas",
+  "noKnownWeaknesses": "Nenhuma fraqueza conhecida",
   "noKnownResistances": "Nenhuma resistência conhecida",
   "highRank": "Alto Rank",
   "lowRank": "Baixo Rank",

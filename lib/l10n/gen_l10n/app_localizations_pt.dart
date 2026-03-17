@@ -104,6 +104,36 @@ class AppLocalizationsPt extends AppLocalizations {
   String get menuSkillsSubtitle => 'Habilidades e efeitos de combate';
 
   @override
+  String get buildOptimizer => 'Otimizador de build';
+
+  @override
+  String get buildOptimizerMenuSubtitle => 'Otimize sua build e habilidades';
+
+  @override
+  String get buildOptimizerCreditsIntro =>
+      'Esta tela integra o MH Wilds Build Optimizer como uma colaboração externa.';
+
+  @override
+  String get buildOptimizerCreditsCreator => 'Criado por Nenrikido (Nenri).';
+
+  @override
+  String get buildOptimizerNewsTitle => 'Novidades';
+
+  @override
+  String get buildOptimizerNewsMessage =>
+      'Graças a uma colaboração com Nenri, o MHWilds Assistant agora tem um otimizador de build. Confira nas opções do menu.';
+
+  @override
+  String get rateAppReminder =>
+      'Não se esqueça de avaliar o app se você gostar.';
+
+  @override
+  String get understood => 'Entendi';
+
+  @override
+  String get web => 'Web';
+
+  @override
   String updateMessageWithBoth(String currentVersion, String newVersion) {
     return 'Tem a versão $currentVersion. Uma nova versão ($newVersion) está disponível na loja. Atualize para as últimas melhorias e correções.';
   }
@@ -400,7 +430,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get weaknesses => 'Fraquezas';
 
   @override
-  String get noKnownWeaknesses => 'No known weaknesses';
+  String get noKnownWeaknesses => 'Nenhuma fraqueza conhecida';
 
   @override
   String get noKnownResistances => 'Nenhuma resistência conhecida';
@@ -609,6 +639,36 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get menuSkillsSubtitle => 'Habilidades e efeitos de combate';
+
+  @override
+  String get buildOptimizer => 'Otimizador de build';
+
+  @override
+  String get buildOptimizerMenuSubtitle => 'Otimize sua build e habilidades';
+
+  @override
+  String get buildOptimizerCreditsIntro =>
+      'Esta tela integra o MH Wilds Build Optimizer como uma colaboração externa.';
+
+  @override
+  String get buildOptimizerCreditsCreator => 'Criado por Nenrikido (Nenri).';
+
+  @override
+  String get buildOptimizerNewsTitle => 'Novidades';
+
+  @override
+  String get buildOptimizerNewsMessage =>
+      'Graças a uma colaboração com Nenri, o MHWilds Assistant agora tem um otimizador de build. Confira nas opções do menu.';
+
+  @override
+  String get rateAppReminder =>
+      'Não se esqueça de avaliar o app se você gostar.';
+
+  @override
+  String get understood => 'Entendi';
+
+  @override
+  String get web => 'Web';
 
   @override
   String updateMessageWithBoth(String currentVersion, String newVersion) {
@@ -905,6 +965,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get weaknesses => 'Fraquezas';
+
+  @override
+  String get noKnownWeaknesses => 'Nenhuma fraqueza conhecida';
 
   @override
   String get noKnownResistances => 'Nenhuma resistência conhecida';
