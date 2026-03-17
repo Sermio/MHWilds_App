@@ -400,6 +400,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get weaknesses => 'Debilidades';
 
   @override
+  String get noKnownWeaknesses => 'No se conocen debilidades';
+
+  @override
   String get noKnownResistances => 'No se conocen resistencias';
 
   @override
@@ -904,6 +907,9 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
   String get weaknesses => 'Debilidades';
 
   @override
+  String get noKnownWeaknesses => 'No se conocen debilidades';
+
+  @override
   String get noKnownResistances => 'No se conocen resistencias';
 
   @override
@@ -1406,6 +1412,9 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
   @override
   String get weaknesses => 'Debilidades';
+
+  @override
+  String get noKnownWeaknesses => 'No se conocen debilidades';
 
   @override
   String get noKnownResistances => 'No se conocen resistencias';

@@ -867,6 +867,12 @@ abstract class AppLocalizations {
   /// **'Weaknesses'**
   String get weaknesses;
 
+  /// No description provided for @noKnownWeaknesses.
+  ///
+  /// In en, this message translates to:
+  /// **'No known weaknesses'**
+  String get noKnownWeaknesses;
+
   /// No description provided for @noKnownResistances.
   ///
   /// In en, this message translates to:

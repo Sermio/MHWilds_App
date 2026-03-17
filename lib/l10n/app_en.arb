@@ -160,6 +160,7 @@
   "elements": "Elements",
   "weaknessesAndResistances": "Weaknesses and Resistances",
   "weaknesses": "Weaknesses",
+  "noKnownWeaknesses": "No known weaknesses",
   "noKnownResistances": "No known resistances",
   "highRank": "High Rank",
   "lowRank": "Low Rank",

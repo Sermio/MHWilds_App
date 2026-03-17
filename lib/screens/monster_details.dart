@@ -500,6 +500,11 @@ class _MonsterDetailsState extends State<MonsterDetails> {
   }
 
   Widget _buildWeaknessesColumn(List<Weakness> weaknesses) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final elementalWeaknesses = weaknesses
+        .where((w) => w.kind == 'element' && w.level == 1)
+        .toList();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -512,24 +517,40 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           ),
         ),
         const SizedBox(height: 8),
-        Row(
-          children: [
-            ...weaknesses
-                .where((w) => w.kind == 'element' && w.level == 1)
-                .map((w) {
-              final element = w.element ?? '';
-              if (element.isEmpty) return const SizedBox.shrink();
+        if (elementalWeaknesses.isEmpty)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: colorScheme.outlineVariant),
+            ),
+            child: Text(
+              AppLocalizations.of(context)!.noKnownWeaknesses,
+              style: TextStyle(
+                fontSize: 12,
+                color: colorScheme.onSurface.withOpacity(0.7),
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          )
+        else
+          Row(
+            children: [
+              ...elementalWeaknesses.map((w) {
+                final element = w.element ?? '';
+                if (element.isEmpty) return const SizedBox.shrink();
 
-              return Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: Image.asset(
-                  'assets/imgs/elements/${element.toLowerCase()}.webp',
-                  height: 25,
-                ),
-              );
-            }),
-          ],
-        ),
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Image.asset(
+                    'assets/imgs/elements/${element.toLowerCase()}.webp',
+                    height: 25,
+                  ),
+                );
+              }),
+            ],
+          ),
       ],
     );
   }

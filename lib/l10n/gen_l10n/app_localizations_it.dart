@@ -400,6 +400,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get weaknesses => 'Debolezze';
 
   @override
+  String get noKnownWeaknesses => 'No known weaknesses';
+
+  @override
   String get noKnownResistances => 'Nessuna resistenza nota';
 
   @override

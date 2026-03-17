@@ -158,6 +158,7 @@
   "elements": "Elementos",
   "weaknessesAndResistances": "Debilidades y Resistencias",
   "weaknesses": "Debilidades",
+  "noKnownWeaknesses": "No se conocen debilidades",
   "noKnownResistances": "No se conocen resistencias",
   "highRank": "Rango Alto",
   "lowRank": "Rango Bajo",

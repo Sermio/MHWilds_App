@@ -145,6 +145,7 @@
   "elements": "Éléments",
   "weaknessesAndResistances": "Faiblesses et Résistances",
   "weaknesses": "Faiblesses",
+  "noKnownWeaknesses": "Aucune faiblesse connue",
   "noKnownResistances": "Aucune résistance connue",
   "highRank": "Rang Élevé",
   "lowRank": "Rang Bas",
