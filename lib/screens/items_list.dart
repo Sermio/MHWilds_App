@@ -58,6 +58,9 @@ class _ItemListState extends State<ItemList> {
     final l10n = AppLocalizations.of(context)!;
     final itemsProvider = Provider.of<ItemsProvider>(context);
     final filteredItems = itemsProvider.items;
+    final Map<int, Item> itemsById = {
+      for (final itemData in itemsProvider.allItems) itemData.id: itemData,
+    };
     final colorScheme = Theme.of(context).colorScheme;
 
     if (!itemsProvider.hasData && !itemsProvider.isLoading) {
@@ -265,6 +268,7 @@ class _ItemListState extends State<ItemList> {
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                               child: MaterialImage(
+                                                item: item,
                                                 materialName:
                                                     (Provider.of<EnNamesCache>(
                                                                 context,
@@ -353,7 +357,8 @@ class _ItemListState extends State<ItemList> {
 
                                       // Recetas
                                       if (item.recipes.isNotEmpty) ...[
-                                        _buildRecipesSection(context, item),
+                                        _buildRecipesSection(
+                                            context, item, itemsById),
                                       ],
                                     ],
                                   ),
@@ -377,7 +382,8 @@ class _ItemListState extends State<ItemList> {
     );
   }
 
-  Widget _buildRecipesSection(BuildContext context, Item item) {
+  Widget _buildRecipesSection(
+      BuildContext context, Item item, Map<int, Item> itemsById) {
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -420,6 +426,7 @@ class _ItemListState extends State<ItemList> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(6),
                       child: MaterialImage(
+                        item: itemsById[recipeItem.id],
                         materialName:
                             (Provider.of<EnNamesCache>(context, listen: false)
                                     .nameForItemImage(

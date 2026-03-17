@@ -626,6 +626,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: MaterialImage(
+                      item: material.item,
                       materialName:
                           Provider.of<EnNamesCache>(context, listen: false)
                                   .nameForItemImage(

@@ -11,6 +11,7 @@ class ItemsProvider with ChangeNotifier {
   int _rarityFilter = -1;
 
   List<Item> get items => _filteredItems;
+  List<Item> get allItems => _allItems;
   bool get isLoading => _isLoading;
   bool get hasData => _allItems.isNotEmpty;
 

@@ -7,6 +7,7 @@ class Item {
   final int value;
   final int carryLimit;
   final List<Recipe> recipes;
+  final ItemIcon? icon;
 
   Item({
     required this.id,
@@ -17,6 +18,7 @@ class Item {
     required this.value,
     required this.carryLimit,
     required this.recipes,
+    this.icon,
   });
 
   factory Item.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,30 @@ class Item {
       recipes: json['recipes'] != null
           ? (json['recipes'] as List).map((e) => Recipe.fromJson(e)).toList()
           : [],
+      icon: json['icon'] != null ? ItemIcon.fromJson(json['icon']) : null,
+    );
+  }
+}
+
+class ItemIcon {
+  final int id;
+  final String kind;
+  final int colorId;
+  final String color;
+
+  ItemIcon({
+    required this.id,
+    required this.kind,
+    required this.colorId,
+    required this.color,
+  });
+
+  factory ItemIcon.fromJson(Map<String, dynamic> json) {
+    return ItemIcon(
+      id: json['id'] ?? 0,
+      kind: json['kind'] ?? '',
+      colorId: json['colorId'] ?? 0,
+      color: json['color'] ?? '',
     );
   }
 }

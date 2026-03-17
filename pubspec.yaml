@@ -87,6 +87,7 @@ flutter:
     - assets/imgs/monster_icons/
     - assets/imgs/elements/
     - assets/imgs/materials/
+    - assets/imgs/item_icons/
     - assets/imgs/armor/
     - assets/imgs/armor/arms/
     - assets/imgs/armor/chest/

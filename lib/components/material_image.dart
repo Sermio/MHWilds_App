@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/models/item.dart';
+import 'package:mhwilds_app/utils/item_icon_asset_resolver.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 
 class MaterialImage extends StatelessWidget {
   const MaterialImage({
     super.key,
     required this.materialName,
+    this.item,
     this.width = 50,
     this.height = 50,
   });
 
   final String materialName;
+  final Item? item;
   final double width;
   final double height;
 
   static final Map<String, String?> _urlCache = {};
+  static final Map<String, String?> _assetCache = {};
 
   String get formattedMaterialName {
     return materialName
@@ -33,10 +38,26 @@ class MaterialImage extends StatelessWidget {
     return url;
   }
 
+  Future<String?> _getAssetPath() async {
+    final icon = item?.icon;
+    if (icon == null) return null;
+    final key = '${icon.kind}|${icon.color}';
+    if (_assetCache.containsKey(key)) {
+      return _assetCache[key];
+    }
+
+    final assetPath = await ItemIconAssetResolver.resolve(
+      apiKind: icon.kind,
+      apiColor: icon.color,
+    );
+    _assetCache[key] = assetPath;
+    return assetPath;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<String?>(
-      future: _getImageUrl(),
+    return FutureBuilder<List<String?>>(
+      future: Future.wait([_getAssetPath(), _getImageUrl()]),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SizedBox(
@@ -51,32 +72,57 @@ class MaterialImage extends StatelessWidget {
             height: height,
           );
         } else {
-          return Image.network(
-            snapshot.data!,
-            height: height,
-            width: width,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) return child;
-              return SizedBox(
-                height: height,
-                width: width,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            (loadingProgress.expectedTotalBytes ?? 1)
-                        : null,
-                  ),
-                ),
-              );
-            },
-            errorBuilder: (context, error, stackTrace) {
-              return Image.asset(
+          final assetPath = snapshot.data![0];
+          final networkUrl = snapshot.data![1];
+
+          if (assetPath != null) {
+            return Image.asset(
+              assetPath,
+              width: width,
+              height: height,
+              fit: BoxFit.contain,
+              errorBuilder: (_, __, ___) => Image.asset(
                 'assets/imgs/materials/default_material.webp',
                 width: width,
                 height: height,
-              );
-            },
+              ),
+            );
+          }
+
+          if (networkUrl != null) {
+            return Image.network(
+              networkUrl,
+              height: height,
+              width: width,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return SizedBox(
+                  height: height,
+                  width: width,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              (loadingProgress.expectedTotalBytes ?? 1)
+                          : null,
+                    ),
+                  ),
+                );
+              },
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  'assets/imgs/materials/default_material.webp',
+                  width: width,
+                  height: height,
+                );
+              },
+            );
+          }
+
+          return Image.asset(
+            'assets/imgs/materials/default_material.webp',
+            width: width,
+            height: height,
           );
         }
       },

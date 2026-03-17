@@ -993,6 +993,7 @@ class MonsterRewards extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: MaterialImage(
+                                    item: reward.item,
                                     materialName: (Provider.of<EnNamesCache>(
                                                 context,
                                                 listen: false)

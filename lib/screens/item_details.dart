@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
+import 'package:mhwilds_app/providers/items_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
@@ -15,6 +16,16 @@ class ItemDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final allMonsters = context.watch<MonstersProvider>().allMonsters;
+    final itemsProvider = context.watch<ItemsProvider>();
+
+    if (!itemsProvider.hasData && !itemsProvider.isLoading) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<ItemsProvider>().fetchItems();
+      });
+    }
+    final Map<int, Item> itemsById = {
+      for (final itemData in itemsProvider.allItems) itemData.id: itemData,
+    };
 
     final monstersWithItem = allMonsters.where((monster) {
       return monster.rewards.any((reward) => reward.item.id == item.id);
@@ -52,6 +63,7 @@ class ItemDetails extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: MaterialImage(
+                            item: item,
                             materialName: Provider.of<EnNamesCache>(context,
                                         listen: false)
                                     .nameForItemImage(item.id, item.name) ??
@@ -161,6 +173,7 @@ class ItemDetails extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: MaterialImage(
+                                    item: itemsById[recipeItem.id],
                                     materialName: Provider.of<EnNamesCache>(
                                                 context,
                                                 listen: false)
