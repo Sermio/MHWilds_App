@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String _keyLocale = 'app_locale';
+const String _systemLocaleSentinel = 'system';
 
 /// Provider que guarda el idioma actual de la app (es, en, etc.)
 /// y lo persiste en SharedPreferences.
@@ -26,12 +27,21 @@ class LocaleProvider extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       final saved = prefs.getString(_keyLocale);
-      if (saved != null && saved.isNotEmpty) {
-        final parts = saved.split('_');
-        _locale =
-            parts.length > 1 ? Locale(parts[0], parts[1]) : Locale(parts[0]);
+      if (saved == null) {
+        _locale = const Locale('en');
         notifyListeners();
+        return;
       }
+
+      if (saved == _systemLocaleSentinel || saved.isEmpty) {
+        _locale = null;
+        notifyListeners();
+        return;
+      }
+
+      final parts = saved.split('_');
+      _locale = parts.length > 1 ? Locale(parts[0], parts[1]) : Locale(parts[0]);
+      notifyListeners();
     } finally {
       if (!_localeReadyCompleter.isCompleted) {
         _localeReadyCompleter.complete();
@@ -47,7 +57,7 @@ class LocaleProvider extends ChangeNotifier {
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     if (locale == null) {
-      await prefs.remove(_keyLocale);
+      await prefs.setString(_keyLocale, _systemLocaleSentinel);
     } else {
       final value = locale.countryCode != null && locale.countryCode!.isNotEmpty
           ? '${locale.languageCode}_${locale.countryCode}'

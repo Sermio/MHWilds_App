@@ -8,6 +8,7 @@ import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/utils/weapon_utils.dart';
 import 'package:mhwilds_app/components/sharpness_bar.dart';
 import 'package:mhwilds_app/components/material_image.dart';
+import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
@@ -81,6 +82,8 @@ class _WeaponDetailsState extends State<WeaponDetails> {
 
   Widget _buildWeaponHeader() {
     final colorScheme = Theme.of(context).colorScheme;
+    final int? spriteColumn = weaponColumnByKind[widget.weapon.kind];
+
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(24),
@@ -111,11 +114,22 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 ),
               ],
             ),
-            child: Icon(
-              WeaponUtils.getWeaponIcon(widget.weapon.kind),
-              color: WeaponUtils.getKindColor(widget.weapon.kind),
-              size: 40,
-            ),
+            child: spriteColumn != null
+                ? GearSpriteIcon(
+                    column: spriteColumn,
+                    rarity: widget.weapon.rarity,
+                    size: 80,
+                    fallback: Icon(
+                      WeaponUtils.getWeaponIcon(widget.weapon.kind),
+                      color: WeaponUtils.getKindColor(widget.weapon.kind),
+                      size: 40,
+                    ),
+                  )
+                : Icon(
+                    WeaponUtils.getWeaponIcon(widget.weapon.kind),
+                    color: WeaponUtils.getKindColor(widget.weapon.kind),
+                    size: 40,
+                  ),
           ),
           const SizedBox(height: 16),
           // Nombre del weapon

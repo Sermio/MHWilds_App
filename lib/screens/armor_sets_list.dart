@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
@@ -221,7 +222,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                           Wrap(
                             spacing: 8.0,
                             runSpacing: 8.0,
-                            children: [1, 2, 3, 4, 5, 6, 7].map((rarity) {
+                            children: [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
                               return FilterChip(
                                 label: Text(
                                   AppLocalizations.of(context)!
@@ -531,10 +532,26 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
-                                                    child: Image.asset(
-                                                      'assets/imgs/armor/${piece.kind}/rarity${piece.rarity}.webp',
-                                                      fit: BoxFit.cover,
-                                                    ),
+                                                    child: armorColumnByKind
+                                                                .containsKey(
+                                                                    piece.kind)
+                                                        ? GearSpriteIcon(
+                                                            column:
+                                                                armorColumnByKind[
+                                                                    piece.kind]!,
+                                                            rarity:
+                                                                piece.rarity,
+                                                            size: 35,
+                                                            fallback:
+                                                                Image.asset(
+                                                              'assets/imgs/armor/${piece.kind}/rarity${piece.rarity}.webp',
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          )
+                                                        : Image.asset(
+                                                            'assets/imgs/armor/${piece.kind}/rarity${piece.rarity}.webp',
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                   ),
                                                 ),
                                                 const SizedBox(width: 16),
@@ -1001,23 +1018,6 @@ class _ArmorSetListState extends State<ArmorSetList> {
   }
 
   Color _getRarityColor(int rarity) {
-    switch (rarity) {
-      case 1:
-        return Colors.grey[400]!;
-      case 2:
-        return Colors.green[400]!;
-      case 3:
-        return Colors.blue[400]!;
-      case 4:
-        return Colors.purple[400]!;
-      case 5:
-        return Colors.orange[400]!;
-      case 6:
-        return Colors.red[400]!;
-      case 7:
-        return Colors.amber[400]!;
-      default:
-        return Colors.grey[400]!;
-    }
+    return rarityColorFromSprite(rarity);
   }
 }

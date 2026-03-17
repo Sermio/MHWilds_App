@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/filter_panel.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
@@ -273,9 +274,13 @@ class _DecorationsListState extends State<DecorationsList> {
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              child: Image.asset(
-                                                'assets/imgs/decorations/gem_level_${_getDecorationLevel(decoration.skills)}.png',
-                                                fit: BoxFit.cover,
+                                              child: DecorationSpriteIcon(
+                                                slot: decoration.slot,
+                                                size: 35,
+                                                fallback: Image.asset(
+                                                  'assets/imgs/decorations/gem_level_${_getDecorationLevel(decoration.skills)}.png',
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                           ),

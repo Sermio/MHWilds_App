@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/filter_panel.dart';
+import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
@@ -124,7 +125,7 @@ class _AmuletListState extends State<AmuletList> {
                   Wrap(
                     spacing: 8.0,
                     runSpacing: 8.0,
-                    children: [1, 2, 3, 4, 5, 6, 7].map((rarity) {
+                    children: [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
                       return FilterChip(
                         label: Text(
                           l10n.rarityLevel(rarity),
@@ -282,9 +283,14 @@ class _AmuletListState extends State<AmuletList> {
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              child: Image.asset(
-                                                'assets/imgs/amulets/rarity${firstRank?.rarity ?? 1}.webp',
-                                                fit: BoxFit.cover,
+                                              child: GearSpriteIcon(
+                                                column: talismanColumn,
+                                                rarity: firstRank?.rarity ?? 0,
+                                                size: 35,
+                                                fallback: Image.asset(
+                                                  'assets/imgs/amulets/rarity${firstRank?.rarity ?? 1}.webp',
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -471,26 +477,6 @@ class _AmuletListState extends State<AmuletList> {
   }
 
   Color _getRarityColor(int rarity) {
-    final colorScheme = Theme.of(context).colorScheme;
-    switch (rarity) {
-      case 1:
-        return Colors.grey[400]!;
-      case 2:
-        return Colors.green[400]!;
-      case 3:
-        return Colors.blue[400]!;
-      case 4:
-        return Colors.purple[400]!;
-      case 5:
-        return Colors.orange[400]!;
-      case 6:
-        return Colors.red[400]!;
-      case 7:
-        return colorScheme.primary;
-      case 8:
-        return Colors.pink[400]!;
-      default:
-        return Colors.grey[400]!;
-    }
+    return rarityColorFromSprite(rarity);
   }
 }

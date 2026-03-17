@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
@@ -83,10 +84,22 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        'assets/imgs/armor/${widget.armor.kind.toString().toLowerCase()}/rarity${widget.armor.rarity}.webp',
-                        fit: BoxFit.cover,
-                      ),
+                      child: armorColumnByKind
+                                  .containsKey(widget.armor.kind.toLowerCase())
+                          ? GearSpriteIcon(
+                              column: armorColumnByKind[
+                                  widget.armor.kind.toLowerCase()]!,
+                              rarity: widget.armor.rarity,
+                              size: 80,
+                              fallback: Image.asset(
+                                'assets/imgs/armor/${widget.armor.kind.toString().toLowerCase()}/rarity${widget.armor.rarity}.webp',
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : Image.asset(
+                              'assets/imgs/armor/${widget.armor.kind.toString().toLowerCase()}/rarity${widget.armor.rarity}.webp',
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                   const SizedBox(height: 16),

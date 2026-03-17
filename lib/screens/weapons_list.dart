@@ -8,6 +8,7 @@ import 'package:mhwilds_app/utils/weapon_utils.dart';
 import 'package:mhwilds_app/components/sharpness_bar.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:provider/provider.dart';
 
 part 'weapons_list/display_utils.dart';
@@ -290,7 +291,7 @@ class _WeaponsListState extends State<WeaponsList> {
         Wrap(
           spacing: 8.0,
           runSpacing: 8.0,
-          children: [1, 2, 3, 4, 5, 6, 7].map((rarity) {
+          children: [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
             return FilterChip(
               label: Text(
                 AppLocalizations.of(context)!.rarityLevel(rarity),
@@ -436,6 +437,8 @@ class _WeaponsListState extends State<WeaponsList> {
 
   Widget _buildWeaponHeader(Weapon weapon) {
     final colorScheme = Theme.of(context).colorScheme;
+    final int? spriteColumn = weaponColumnByKind[weapon.kind];
+
     return Row(
       children: [
         Container(
@@ -452,11 +455,22 @@ class _WeaponsListState extends State<WeaponsList> {
               ),
             ],
           ),
-          child: Icon(
-            _getWeaponIcon(weapon.kind),
-            color: _getKindColor(weapon.kind),
-            size: 20,
-          ),
+          child: spriteColumn != null
+              ? GearSpriteIcon(
+                  column: spriteColumn,
+                  rarity: weapon.rarity,
+                  size: 20,
+                  fallback: Icon(
+                    _getWeaponIcon(weapon.kind),
+                    color: _getKindColor(weapon.kind),
+                    size: 20,
+                  ),
+                )
+              : Icon(
+                  _getWeaponIcon(weapon.kind),
+                  color: _getKindColor(weapon.kind),
+                  size: 20,
+                ),
         ),
         const SizedBox(width: 16),
         Expanded(
@@ -890,23 +904,6 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   Color _getRarityColor(int rarity) {
-    switch (rarity) {
-      case 1:
-        return Colors.grey[400]!;
-      case 2:
-        return Colors.green[400]!;
-      case 3:
-        return Colors.blue[400]!;
-      case 4:
-        return Colors.purple[400]!;
-      case 5:
-        return Colors.orange[400]!;
-      case 6:
-        return Colors.red[400]!;
-      case 7:
-        return Colors.amber[400]!;
-      default:
-        return Colors.grey[400]!;
-    }
+    return rarityColorFromSprite(rarity);
   }
 }
