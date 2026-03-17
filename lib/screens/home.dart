@@ -53,7 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: Cappbar(
         title: _titleForScreen(context, _selectedScreen),
       ),
-      drawer: Cdrawer(onItemSelected: _changeScreen),
+      drawer: Cdrawer(
+        onItemSelected: _changeScreen,
+        selectedScreen: _selectedScreen,
+      ),
       body: _selectedScreen,
     );
   }

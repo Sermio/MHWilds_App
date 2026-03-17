@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/components/gear_sprite_icon.dart';
+import 'package:mhwilds_app/screens/talismans_list.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
-import 'package:mhwilds_app/screens/talismans_list.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 
 class Cdrawer extends StatelessWidget {
   final Function(Widget) onItemSelected;
+  final Widget selectedScreen;
+  static final Color _selectedHighlightColor = Colors.orange[600]!;
 
-  const Cdrawer({super.key, required this.onItemSelected});
+  const Cdrawer({
+    super.key,
+    required this.onItemSelected,
+    required this.selectedScreen,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     return Drawer(
       child: SafeArea(
         top: false,
@@ -27,15 +32,15 @@ class Cdrawer extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                colorScheme.surfaceContainerHighest,
-                colorScheme.surface,
+                Colors.grey[50]!,
+                Colors.white,
               ],
             ),
           ),
           child: Column(
             children: [
-              menuHeader(context),
-              Expanded(child: SingleChildScrollView(child: menuItems(context))),
+              menuHeader(),
+              Expanded(child: SingleChildScrollView(child: menuItems())),
             ],
           ),
         ),
@@ -43,8 +48,7 @@ class Cdrawer extends StatelessWidget {
     );
   }
 
-  Widget menuHeader(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+  Widget menuHeader() {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -69,15 +73,16 @@ class Cdrawer extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
+              // Logo principal
               Container(
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: colorScheme.surface,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: colorScheme.shadow.withOpacity(0.1),
+                      color: Colors.black.withOpacity(0.1),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -92,12 +97,12 @@ class Cdrawer extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              Text(
+              const Text(
                 'MHWilds Assistant',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: colorScheme.onPrimary,
+                  color: Colors.black,
                 ),
               ),
             ],
@@ -107,72 +112,137 @@ class Cdrawer extends StatelessWidget {
     );
   }
 
-  Widget menuItems(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+  Widget menuItems() {
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
       child: Column(
         children: [
           _buildMenuItem(
-            context,
-            title: l10n.monsters,
-            subtitle: l10n.menuMonstersSubtitle,
+            title: 'Monsters',
+            subtitle: 'Database of all monsters',
+            leadingIcon: Image.asset(
+              'assets/imgs/monster_icons/arkveld.png',
+              fit: BoxFit.contain,
+              errorBuilder: (_, __, ___) => Icon(
+                Icons.pets,
+                color: Colors.red[400],
+                size: 30,
+              ),
+            ),
             icon: Icons.pets,
             iconColor: Colors.red[400]!,
+            isSelected: selectedScreen is MonstersList,
             onTap: () => onItemSelected(const MonstersList()),
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            context,
-            title: l10n.items,
-            subtitle: l10n.menuItemsSubtitle,
+            title: 'Items',
+            subtitle: 'Materials and resources',
+            leadingIcon: Image.asset(
+              'assets/imgs/drawer/potion.png',
+              fit: BoxFit.contain,
+              errorBuilder: (_, __, ___) => Icon(
+                Icons.inventory_2,
+                color: Colors.orange[600],
+                size: 30,
+              ),
+            ),
             icon: Icons.inventory_2,
             iconColor: Colors.orange[600]!,
+            isSelected: selectedScreen is ItemList,
             onTap: () => onItemSelected(const ItemList()),
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            context,
-            title: l10n.decorations,
-            subtitle: l10n.menuDecorationsSubtitle,
+            title: 'Decorations',
+            subtitle: 'Skill gems and jewels',
+            leadingIcon: Image.asset(
+              'assets/imgs/decorations/gem_level_1.webp',
+              fit: BoxFit.contain,
+              errorBuilder: (_, __, ___) => Icon(
+                Icons.diamond,
+                color: Colors.purple[400],
+                size: 30,
+              ),
+            ),
             icon: Icons.diamond,
             iconColor: Colors.purple[400]!,
+            isSelected: selectedScreen is DecorationsList,
             onTap: () => onItemSelected(const DecorationsList()),
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            context,
-            title: l10n.talismans,
-            subtitle: l10n.menuTalismansSubtitle,
+            title: 'Talismans',
+            subtitle: 'Powerful accessories',
+            leadingIcon: GearSpriteIcon(
+              column: talismanColumn,
+              rarity: 1,
+              size: 30,
+              fallback: Icon(
+                Icons.workspace_premium,
+                color: AppColors.goldSoft,
+                size: 30,
+              ),
+            ),
             icon: Icons.workspace_premium,
             iconColor: AppColors.goldSoft,
+            isSelected: selectedScreen is AmuletList,
             onTap: () => onItemSelected(const AmuletList()),
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            context,
-            title: l10n.armorSets,
-            subtitle: l10n.menuArmorSetsSubtitle,
+            title: 'Armor Sets',
+            subtitle: 'Complete armor collections',
+            leadingIcon: GearSpriteIcon(
+              column: armorColumnByKind['head']!,
+              rarity: 1,
+              size: 30,
+              fallback: Icon(
+                Icons.shield,
+                color: Colors.blue[600],
+                size: 30,
+              ),
+            ),
             icon: Icons.shield,
             iconColor: Colors.blue[600]!,
+            isSelected: selectedScreen is ArmorSetList,
             onTap: () => onItemSelected(const ArmorSetList()),
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            context,
-            title: l10n.weapons,
-            subtitle: l10n.menuWeaponsSubtitle,
+            title: 'Weapons',
+            subtitle: 'Combat weapons and tools',
+            leadingIcon: GearSpriteIcon(
+              column: weaponColumnByKind['great-sword']!,
+              rarity: 1,
+              size: 30,
+              fallback: Icon(
+                Icons.gps_fixed,
+                color: Colors.indigo[600],
+                size: 30,
+              ),
+            ),
             icon: Icons.gps_fixed,
             iconColor: Colors.indigo[600]!,
+            isSelected: selectedScreen is WeaponsList,
             onTap: () => onItemSelected(const WeaponsList()),
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            context,
-            title: l10n.skills,
-            subtitle: l10n.menuSkillsSubtitle,
+            title: 'Skills',
+            subtitle: 'Combat abilities and effects',
+            leadingIcon: Image.asset(
+              'assets/imgs/drawer/skill.webp',
+              fit: BoxFit.contain,
+              errorBuilder: (_, __, ___) => Icon(
+                Icons.flash_on,
+                color: Colors.green[600],
+                size: 30,
+              ),
+            ),
             icon: Icons.flash_on,
             iconColor: Colors.green[600]!,
+            isSelected: selectedScreen is SkillList,
             onTap: () => onItemSelected(const SkillList()),
           ),
         ],
@@ -180,28 +250,32 @@ class Cdrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuItem(
-    BuildContext context, {
+  Widget _buildMenuItem({
     required String title,
     required String subtitle,
     required IconData icon,
     required Color iconColor,
     required VoidCallback onTap,
+    required bool isSelected,
+    Widget? leadingIcon,
   }) {
-    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       decoration: BoxDecoration(
-        color: colorScheme.surface,
+        color: isSelected
+            ? _selectedHighlightColor.withOpacity(0.12)
+            : Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: Colors.grey.withOpacity(0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
         ],
         border: Border.all(
-          color: colorScheme.outlineVariant,
+          color: isSelected
+              ? _selectedHighlightColor.withOpacity(0.35)
+              : Colors.grey[200]!,
           width: 1,
         ),
       ),
@@ -214,34 +288,36 @@ class Cdrawer extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
+                // Icono con fondo circular
                 Container(
-                  width: 50,
-                  height: 50,
+                  width: 56,
+                  height: 56,
                   decoration: BoxDecoration(
-                    color: iconColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(
-                      color: iconColor.withOpacity(0.3),
-                      width: 2,
-                    ),
+                    borderRadius: BorderRadius.circular(18),
                   ),
-                  child: Icon(
-                    icon,
-                    color: iconColor,
-                    size: 24,
+                  child: Padding(
+                    padding: const EdgeInsets.all(6),
+                    child: leadingIcon ??
+                        Icon(
+                          icon,
+                          color: iconColor,
+                          size: 30,
+                        ),
                   ),
                 ),
                 const SizedBox(width: 16),
+
+                // Texto del menú
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
+                          color: Colors.black87,
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -249,16 +325,18 @@ class Cdrawer extends StatelessWidget {
                         subtitle,
                         style: TextStyle(
                           fontSize: 13,
-                          color: colorScheme.onSurface.withOpacity(0.7),
+                          color: Colors.grey[600],
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
                   ),
                 ),
+
+                // Flecha de navegación
                 Icon(
                   Icons.arrow_forward_ios,
-                  color: colorScheme.onSurface.withOpacity(0.5),
+                  color: isSelected ? _selectedHighlightColor : Colors.grey[400],
                   size: 18,
                 ),
               ],

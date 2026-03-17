@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/filter_panel.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
@@ -274,11 +273,12 @@ class _DecorationsListState extends State<DecorationsList> {
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              child: DecorationSpriteIcon(
-                                                slot: decoration.slot,
-                                                size: 35,
-                                                fallback: Image.asset(
-                                                  'assets/imgs/decorations/gem_level_${_getDecorationLevel(decoration.skills)}.png',
+                                              child: Image.asset(
+                                                'assets/imgs/decorations/gem_level_${_getDecorationLevel(decoration)}.webp',
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (_, __, ___) =>
+                                                    Image.asset(
+                                                  'assets/imgs/decorations/default_jewel.webp',
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -459,13 +459,14 @@ class _DecorationsListState extends State<DecorationsList> {
     );
   }
 
-  int _getDecorationLevel(List<DecorationSkill> skills) {
-    if (skills.isEmpty) return 1;
+  int _getDecorationLevel(DecorationItem decoration) {
+    if (decoration.slot >= 1 && decoration.slot <= 4) {
+      return decoration.slot;
+    }
 
-    // Obtener el nivel más alto de las habilidades
-    int maxLevel = skills.map((s) => s.level).reduce((a, b) => a > b ? a : b);
-
-    // Mapear a los niveles de gemas disponibles (1-4)
+    if (decoration.skills.isEmpty) return 1;
+    final int maxLevel =
+        decoration.skills.map((s) => s.level).reduce((a, b) => a > b ? a : b);
     if (maxLevel <= 1) return 1;
     if (maxLevel <= 2) return 2;
     if (maxLevel <= 3) return 3;
