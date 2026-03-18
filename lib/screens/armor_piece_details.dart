@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/material_image.dart';
-import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/api/skills_api.dart';
-import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:provider/provider.dart';
@@ -74,13 +74,6 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                     height: 80,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: colorScheme.primary.withOpacity(0.3),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
@@ -378,15 +371,15 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
-                                    child: UrlImageLoader(
-                                      itemName: (Provider.of<EnNamesCache>(
-                                                  context,
-                                                  listen: false)
-                                              .nameForSkillImage(skillInfo.id,
-                                                  skillInfo.name) ??
-                                          skillInfo.name),
-                                      loadImageUrlFunction:
-                                          getValidSkillImageUrl,
+                                    child: SkillSpriteIcon(
+                                      iconId: skillInfo.icon?.id,
+                                      iconKind: skillInfo.icon?.kind,
+                                      size: 40,
+                                      fallback: Icon(
+                                        Icons.auto_awesome,
+                                        size: 22,
+                                        color: colorScheme.primary,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -788,45 +781,47 @@ class ArmorPieceSlotsWidget extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: armorPiece.slots.map((slot) {
-        Color slotColor;
-        switch (slot) {
-          case 1:
-            slotColor = Colors.green;
-            break;
-          case 2:
-            slotColor = Colors.blue;
-            break;
-          case 3:
-            slotColor = Colors.purple;
-            break;
-          case 4:
-            slotColor = Colors.orange;
-            break;
-          default:
-            slotColor = Colors.grey;
-        }
-
-        return Container(
-          margin: const EdgeInsets.only(left: 4),
-          width: 20,
-          height: 20,
-          decoration: BoxDecoration(
-            color: slotColor.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: slotColor, width: 1),
-          ),
-          child: Center(
-            child: Text(
-              slot.toString(),
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-                color: slotColor,
+        final Color slotColor = _slotColor(slot);
+        return Padding(
+          padding: const EdgeInsets.only(left: 4),
+          child: DecorationSpriteIcon(
+            slot: slot,
+            size: 20,
+            fallback: Container(
+              decoration: BoxDecoration(
+                color: slotColor.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: slotColor, width: 1),
+              ),
+              child: Center(
+                child: Text(
+                  slot.toString(),
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: slotColor,
+                  ),
+                ),
               ),
             ),
           ),
         );
       }).toList(),
     );
+  }
+
+  Color _slotColor(int slot) {
+    switch (slot) {
+      case 1:
+        return Colors.green;
+      case 2:
+        return Colors.blue;
+      case 3:
+        return Colors.purple;
+      case 4:
+        return Colors.orange;
+      default:
+        return Colors.grey;
+    }
   }
 }

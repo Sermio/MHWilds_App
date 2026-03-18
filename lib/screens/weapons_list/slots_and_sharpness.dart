@@ -54,46 +54,48 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: slots.map((slot) {
-        Color slotColor;
-        switch (slot) {
-          case 1:
-            slotColor = Colors.green;
-            break;
-          case 2:
-            slotColor = Colors.blue;
-            break;
-          case 3:
-            slotColor = Colors.purple;
-            break;
-          case 4:
-            slotColor = Colors.orange;
-            break;
-          default:
-            slotColor = Colors.grey;
-        }
-
-        return Container(
-          margin: const EdgeInsets.only(right: 6),
-          width: 18,
-          height: 18,
-          decoration: BoxDecoration(
-            color: slotColor.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: slotColor, width: 1),
-          ),
-          child: Center(
-            child: Text(
-              slot.toString(),
-              style: TextStyle(
-                fontSize: 9,
-                fontWeight: FontWeight.bold,
-                color: slotColor,
+        final Color slotColor = _slotColor(slot);
+        return Padding(
+          padding: const EdgeInsets.only(right: 6),
+          child: DecorationSpriteIcon(
+            slot: slot,
+            size: 18,
+            fallback: Container(
+              decoration: BoxDecoration(
+                color: slotColor.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: slotColor, width: 1),
+              ),
+              child: Center(
+                child: Text(
+                  slot.toString(),
+                  style: TextStyle(
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                    color: slotColor,
+                  ),
+                ),
               ),
             ),
           ),
         );
       }).toList(),
     );
+  }
+
+  Color _slotColor(int slot) {
+    switch (slot) {
+      case 1:
+        return Colors.green;
+      case 2:
+        return Colors.blue;
+      case 3:
+        return Colors.purple;
+      case 4:
+        return Colors.orange;
+      default:
+        return Colors.grey;
+    }
   }
 
   // Método auxiliar para verificar si el weapon tiene datos de sharpness

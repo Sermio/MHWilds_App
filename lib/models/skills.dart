@@ -5,6 +5,7 @@ class Skills {
   final String kind;
   final String description;
   final List<Rank> ranks;
+  final SkillIcon? icon;
 
   Skills({
     required this.id,
@@ -13,6 +14,7 @@ class Skills {
     required this.kind,
     required this.description,
     required this.ranks,
+    this.icon,
   });
 
   factory Skills.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,26 @@ class Skills {
               ?.map((rank) => Rank.fromJson(rank as Map<String, dynamic>))
               .toList() ??
           [],
+      icon: json['icon'] != null
+          ? SkillIcon.fromJson(json['icon'] as Map<String, dynamic>)
+          : null,
+    );
+  }
+}
+
+class SkillIcon {
+  final int id;
+  final String kind;
+
+  SkillIcon({
+    required this.id,
+    required this.kind,
+  });
+
+  factory SkillIcon.fromJson(Map<String, dynamic> json) {
+    return SkillIcon(
+      id: json['id'] is int ? json['id'] as int : 0,
+      kind: json['kind'] as String? ?? '',
     );
   }
 }

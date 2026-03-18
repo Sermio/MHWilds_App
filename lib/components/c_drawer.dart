@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
+import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/screens/talismans_list.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
@@ -234,10 +235,10 @@ class Cdrawer extends StatelessWidget {
           _buildMenuItem(
             title: 'Skills',
             subtitle: 'Combat abilities and effects',
-            leadingIcon: Image.asset(
-              'assets/imgs/drawer/skill.webp',
-              fit: BoxFit.contain,
-              errorBuilder: (_, __, ___) => Icon(
+            leadingIcon: SkillSpriteIcon(
+              iconId: 1,
+              size: 30,
+              fallback: Icon(
                 Icons.flash_on,
                 color: Colors.green[600],
                 size: 30,

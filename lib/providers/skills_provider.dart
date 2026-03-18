@@ -25,7 +25,14 @@ class SkillsProvider with ChangeNotifier {
   }
 
   Future<void> fetchSkills() async {
-    if (_allSkills.isNotEmpty) return;
+    if (_allSkills.isNotEmpty) {
+      final hasIconData = _allSkills.any(
+        (skill) =>
+            skill.icon != null &&
+            (skill.icon!.id > 0 || skill.icon!.kind.isNotEmpty),
+      );
+      if (hasIconData) return;
+    }
 
     _isLoading = true;
     notifyListeners();

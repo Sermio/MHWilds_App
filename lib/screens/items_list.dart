@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
-import 'package:mhwilds_app/utils/colors.dart';
-import 'package:mhwilds_app/components/filter_panel.dart';
+import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
@@ -74,87 +74,7 @@ class _ItemListState extends State<ItemList> {
       backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
-          if (_filtersVisible) ...[
-            FilterPanel(
-              height: 250,
-              onReset: _resetFilters,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Campo de búsqueda por nombre
-                  TextField(
-                    controller: _searchNameController,
-                    onChanged: (query) {
-                      setState(() {
-                        _searchNameQuery = query;
-                      });
-                      itemsProvider.applyFilters(name: _searchNameQuery);
-                    },
-                    decoration: InputDecoration(
-                      labelText: l10n.searchByName,
-                      hintText: l10n.enterItemName,
-                      prefixIcon:
-                          Icon(Icons.search, color: colorScheme.primary),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.outlineVariant),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.primary, width: 2),
-                      ),
-                      filled: true,
-                      fillColor: colorScheme.surfaceContainerHighest,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Filtro de rareza
-                  Text(
-                    l10n.rarity,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8.0,
-                    runSpacing: 8.0,
-                    children: [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
-                      return FilterChip(
-                        label: Text(
-                          l10n.rarityLevel(rarity),
-                          style: TextStyle(
-                            color: _selectedRarity == rarity
-                                ? colorScheme.onPrimary
-                                : colorScheme.onSurface,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        backgroundColor:
-                            _getRarityColor(rarity).withOpacity(0.2),
-                        selectedColor: _getRarityColor(rarity),
-                        selected: _selectedRarity == rarity,
-                        onSelected: (isSelected) {
-                          setState(() {
-                            _selectedRarity = isSelected ? rarity : null;
-                          });
-                          itemsProvider.applyFilters(rarity: _selectedRarity);
-                        },
-                        elevation: 2,
-                        pressElevation: 4,
-                      );
-                    }).toList(),
-                  ),
-                  const SizedBox(height: 20), // Espacio al final para scroll
-                ],
-              ),
-            ),
-          ],
+          if (_filtersVisible) _buildFiltersSection(context, itemsProvider),
 
           // Lista de items
           Expanded(
@@ -255,14 +175,6 @@ class _ItemListState extends State<ItemList> {
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(15),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: colorScheme.primary
-                                                      .withOpacity(0.3),
-                                                  blurRadius: 8,
-                                                  offset: const Offset(0, 2),
-                                                ),
-                                              ],
                                             ),
                                             child: ClipRRect(
                                               borderRadius:
@@ -382,6 +294,70 @@ class _ItemListState extends State<ItemList> {
     );
   }
 
+  Widget _buildFiltersSection(
+    BuildContext context,
+    ItemsProvider itemsProvider,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return ListFiltersPanel(
+      height: 250,
+      title: l10n.filters,
+      resetLabel: l10n.reset,
+      onReset: _resetFilters,
+      fields: [
+        ListFilterFieldConfig.text(
+          id: 'name',
+          label: l10n.searchByName,
+          controller: _searchNameController,
+          onTextChanged: (query) {
+            setState(() {
+              _searchNameQuery = query;
+            });
+            _applyFilters(itemsProvider);
+          },
+          hintText: l10n.enterItemName,
+          prefixIcon: Icon(Icons.search, color: colorScheme.primary),
+        ),
+        ListFilterFieldConfig.select(
+          id: 'rarity',
+          label: l10n.rarity,
+          value: _selectedRarity,
+          onSelectChanged: (selectedRarity) {
+            setState(() {
+              _selectedRarity = selectedRarity as int?;
+            });
+            _applyFilters(itemsProvider);
+          },
+          options: [1, 2, 3, 4, 5, 6, 7, 8]
+              .map(
+                (rarity) => ListFilterOption(
+                  value: rarity,
+                  label: rarity.toString(),
+                  leading: Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      color: _getRarityColor(rarity),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      ],
+    );
+  }
+
+  void _applyFilters(ItemsProvider itemsProvider) {
+    itemsProvider.applyFilters(
+      name: _searchNameQuery,
+      rarity: _selectedRarity,
+    );
+  }
+
   Widget _buildRecipesSection(
       BuildContext context, Item item, Map<int, Item> itemsById) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -466,25 +442,6 @@ class _ItemListState extends State<ItemList> {
   }
 
   Color _getRarityColor(int rarity) {
-    switch (rarity) {
-      case 1:
-        return Colors.grey[400]!;
-      case 2:
-        return Colors.green[400]!;
-      case 3:
-        return Colors.blue[400]!;
-      case 4:
-        return Colors.purple[400]!;
-      case 5:
-        return Colors.orange[400]!;
-      case 6:
-        return Colors.red[400]!;
-      case 7:
-        return AppColors.goldSoft;
-      case 8:
-        return Colors.pink[400]!;
-      default:
-        return Colors.grey[400]!;
-    }
+    return rarityColorFromSprite(rarity);
   }
 }

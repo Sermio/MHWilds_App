@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
+import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
@@ -75,195 +77,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
       body: Column(
         children: [
           // Filtros mejorados
-          if (_filtersVisible) ...[
-            Container(
-              margin: const EdgeInsets.all(16),
-              height: 350, // Altura fija para los filtros
-              decoration: BoxDecoration(
-                color: colorScheme.surface,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: colorScheme.shadow.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  // Header de filtros (fijo)
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.filter_list, color: colorScheme.primary),
-                        const SizedBox(width: 8),
-                        Text(
-                          AppLocalizations.of(context)!.filters,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: colorScheme.onSurface,
-                          ),
-                        ),
-                        const Spacer(),
-                        TextButton.icon(
-                          onPressed: _resetFilters,
-                          icon: const Icon(Icons.refresh, size: 18),
-                          label: Text(AppLocalizations.of(context)!.reset),
-                          style: TextButton.styleFrom(
-                            foregroundColor: colorScheme.primary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Contenido de filtros con scroll
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Campo de búsqueda por nombre
-                          TextField(
-                            controller: _searchNameController,
-                            onChanged: (query) {
-                              setState(() {
-                                _searchNameQuery = query;
-                              });
-                              armorSetProvider.applyFilters(
-                                  name: _searchNameQuery, kind: _selectedKind);
-                            },
-                            decoration: InputDecoration(
-                              labelText:
-                                  AppLocalizations.of(context)!.searchByName,
-                              hintText: AppLocalizations.of(context)!
-                                  .enterArmorSetName,
-                              prefixIcon: Icon(Icons.search,
-                                  color: colorScheme.primary),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                    color: colorScheme.outlineVariant),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                    color: colorScheme.primary, width: 2),
-                              ),
-                              filled: true,
-                              fillColor: colorScheme.surfaceContainerHighest,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-
-                          // Filtro de tipo
-                          Text(
-                            AppLocalizations.of(context)!.type,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: colorScheme.onSurface,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Wrap(
-                            spacing: 8.0,
-                            runSpacing: 8.0,
-                            children: ['head', 'chest', 'arms', 'waist', 'legs']
-                                .map((kind) {
-                              return FilterChip(
-                                label: Text(
-                                  _getArmorSlotLabel(context, kind),
-                                  style: TextStyle(
-                                    color: _selectedKind == kind
-                                        ? colorScheme.onPrimary
-                                        : colorScheme.onSurface,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                backgroundColor:
-                                    _getKindColor(kind).withOpacity(0.2),
-                                selectedColor: _getKindColor(kind),
-                                selected: _selectedKind == kind,
-                                onSelected: (isSelected) {
-                                  setState(() {
-                                    _selectedKind = isSelected ? kind : null;
-                                  });
-                                  armorSetProvider.applyFilters(
-                                      name: _searchNameQuery,
-                                      kind: _selectedKind);
-                                },
-                                elevation: 2,
-                                pressElevation: 4,
-                              );
-                            }).toList(),
-                          ),
-                          const SizedBox(height: 16),
-
-                          // Filtro de rareza
-                          Text(
-                            AppLocalizations.of(context)!.rarity,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: colorScheme.onSurface,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Wrap(
-                            spacing: 8.0,
-                            runSpacing: 8.0,
-                            children: [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
-                              return FilterChip(
-                                label: Text(
-                                  AppLocalizations.of(context)!
-                                      .rarityLevel(rarity),
-                                  style: TextStyle(
-                                    color: _selectedRarity == rarity
-                                        ? colorScheme.onPrimary
-                                        : colorScheme.onSurface,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                backgroundColor:
-                                    _getRarityColor(rarity).withOpacity(0.2),
-                                selectedColor: _getRarityColor(rarity),
-                                selected: _selectedRarity == rarity,
-                                onSelected: (isSelected) {
-                                  setState(() {
-                                    _selectedRarity =
-                                        isSelected ? rarity : null;
-                                  });
-                                  armorSetProvider.applyFilters(
-                                    name: _searchNameQuery,
-                                    kind: _selectedKind,
-                                    rarity: _selectedRarity,
-                                  );
-                                },
-                                elevation: 2,
-                                pressElevation: 4,
-                              );
-                            }).toList(),
-                          ),
-                          const SizedBox(
-                              height: 20), // Espacio al final para scroll
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          if (_filtersVisible) _buildFiltersSection(context, armorSetProvider),
 
           // Lista de sets de armadura
           Expanded(
@@ -635,6 +449,108 @@ class _ArmorSetListState extends State<ArmorSetList> {
     );
   }
 
+  Widget _buildFiltersSection(
+      BuildContext context, ArmorSetProvider armorSetProvider) {
+    final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return ListFiltersPanel(
+      title: l10n.filters,
+      resetLabel: l10n.reset,
+      onReset: _resetFilters,
+      fields: [
+        ListFilterFieldConfig.text(
+          id: 'name',
+          label: l10n.searchByName,
+          controller: _searchNameController,
+          onTextChanged: (query) {
+            setState(() {
+              _searchNameQuery = query;
+            });
+            _applyFilters(armorSetProvider);
+          },
+          hintText: l10n.enterArmorSetName,
+          prefixIcon: Icon(Icons.search, color: colorScheme.primary),
+        ),
+        ListFilterFieldConfig.select(
+          id: 'type',
+          label: l10n.type,
+          value: _selectedKind,
+          onSelectChanged: (selectedKind) {
+            setState(() {
+              _selectedKind = selectedKind as String?;
+            });
+            _applyFilters(armorSetProvider);
+          },
+          options: _armorTypeOptions(context),
+        ),
+        ListFilterFieldConfig.select(
+          id: 'rarity',
+          label: l10n.rarity,
+          value: _selectedRarity,
+          onSelectChanged: (selectedRarity) {
+            setState(() {
+              _selectedRarity = selectedRarity as int?;
+            });
+            _applyFilters(armorSetProvider);
+          },
+          options: _rarityOptions(),
+        ),
+      ],
+    );
+  }
+
+  void _applyFilters(ArmorSetProvider armorSetProvider) {
+    armorSetProvider.applyFilters(
+      name: _searchNameQuery,
+      kind: _selectedKind,
+      rarity: _selectedRarity,
+    );
+  }
+
+  List<ListFilterOption> _armorTypeOptions(BuildContext context) {
+    return ['head', 'chest', 'arms', 'waist', 'legs'].map((kind) {
+      final int? spriteColumn = armorColumnByKind[kind];
+      return ListFilterOption(
+        value: kind,
+        label: _getArmorSlotLabel(context, kind),
+        leading: spriteColumn != null
+            ? GearSpriteIcon(
+                column: spriteColumn,
+                rarity: 1,
+                size: 20,
+                fallback: Icon(
+                  Icons.shield,
+                  color: _getKindColor(kind),
+                  size: 20,
+                ),
+              )
+            : Icon(
+                Icons.shield,
+                color: _getKindColor(kind),
+                size: 20,
+              ),
+      );
+    }).toList();
+  }
+
+  List<ListFilterOption> _rarityOptions() {
+    return [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
+      return ListFilterOption(
+        value: rarity,
+        label: rarity.toString(),
+        leading: Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(
+            color: _getRarityColor(rarity),
+            shape: BoxShape.circle,
+          ),
+        ),
+      );
+    }).toList();
+  }
+
   Widget _buildSkillsSection(armor_models.ArmorPiece armorPiece) {
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
@@ -833,46 +749,48 @@ class _ArmorSetListState extends State<ArmorSetList> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: armorPiece.slots.map((slot) {
-        Color slotColor;
-        switch (slot) {
-          case 1:
-            slotColor = Colors.green;
-            break;
-          case 2:
-            slotColor = Colors.blue;
-            break;
-          case 3:
-            slotColor = Colors.purple;
-            break;
-          case 4:
-            slotColor = Colors.orange;
-            break;
-          default:
-            slotColor = Colors.grey;
-        }
-
-        return Container(
-          margin: const EdgeInsets.only(right: 6),
-          width: 18,
-          height: 18,
-          decoration: BoxDecoration(
-            color: slotColor.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: slotColor, width: 1),
-          ),
-          child: Center(
-            child: Text(
-              slot.toString(),
-              style: TextStyle(
-                fontSize: 9,
-                fontWeight: FontWeight.bold,
-                color: slotColor,
+        final Color slotColor = _slotColor(slot);
+        return Padding(
+          padding: const EdgeInsets.only(right: 6),
+          child: DecorationSpriteIcon(
+            slot: slot,
+            size: 18,
+            fallback: Container(
+              decoration: BoxDecoration(
+                color: slotColor.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: slotColor, width: 1),
+              ),
+              child: Center(
+                child: Text(
+                  slot.toString(),
+                  style: TextStyle(
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                    color: slotColor,
+                  ),
+                ),
               ),
             ),
           ),
         );
       }).toList(),
     );
+  }
+
+  Color _slotColor(int slot) {
+    switch (slot) {
+      case 1:
+        return Colors.green;
+      case 2:
+        return Colors.blue;
+      case 3:
+        return Colors.purple;
+      case 4:
+        return Colors.orange;
+      default:
+        return Colors.grey;
+    }
   }
 
   Widget _buildResistancesWidget(armor_models.ArmorPiece armorPiece) {

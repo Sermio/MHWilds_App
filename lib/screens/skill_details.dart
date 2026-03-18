@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/url_image_loader.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
+import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
-import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class SkillDetails extends StatefulWidget {
@@ -91,7 +89,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                           Container(
                             padding: const EdgeInsets.all(24),
                             decoration: BoxDecoration(
-                              color: colorScheme.primary.withOpacity(0.1),
+                              color: colorScheme.surface,
                               borderRadius: const BorderRadius.vertical(
                                 top: Radius.circular(20),
                               ),
@@ -104,26 +102,18 @@ class _SkillDetailsState extends State<SkillDetails> {
                                   height: 80,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: colorScheme.primary
-                                            .withOpacity(0.3),
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(15),
-                                    child: UrlImageLoader(
-                                      itemName: (Provider.of<EnNamesCache>(
-                                                  context,
-                                                  listen: false)
-                                              .nameForSkillImage(
-                                                  skill.id, skill.name) ??
-                                          skill.name),
-                                      loadImageUrlFunction:
-                                          getValidSkillImageUrl,
+                                    child: SkillSpriteIcon(
+                                      iconId: skill.icon?.id,
+                                      iconKind: skill.icon?.kind,
+                                      size: 80,
+                                      fallback: Icon(
+                                        Icons.auto_awesome,
+                                        size: 40,
+                                        color: colorScheme.primary,
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/decoration_image.dart';
-import 'package:mhwilds_app/components/filter_panel.dart';
+import 'package:mhwilds_app/components/gear_sprite_icon.dart';
+import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/decoration.dart';
@@ -72,87 +73,8 @@ class _DecorationsListState extends State<DecorationsList> {
       backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
-          if (_filtersVisible) ...[
-            FilterPanel(
-              height: 250,
-              onReset: _resetFilters,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Campo de búsqueda por nombre
-                  TextField(
-                    controller: _searchNameController,
-                    onChanged: (query) {
-                      setState(() {
-                        _searchNameQuery = query;
-                      });
-                      decorationsProvider.applyFilters(
-                          name: _searchNameQuery, type: _selectedType);
-                    },
-                    decoration: InputDecoration(
-                      labelText: l10n.searchByName,
-                      hintText: l10n.enterDecorationName,
-                      prefixIcon:
-                          Icon(Icons.search, color: colorScheme.primary),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.grey[300]!),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.primary, width: 2),
-                      ),
-                      filled: true,
-                      fillColor: colorScheme.surfaceContainerHighest,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Filtro de tipo
-                  Text(
-                    l10n.type,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8.0,
-                    runSpacing: 8.0,
-                    children: ['Weapon', 'Armor'].map((type) {
-                      return FilterChip(
-                        label: Text(
-                          _getDecorationTypeLabel(context, type),
-                          style: TextStyle(
-                            color: _selectedType == type
-                                ? colorScheme.onPrimary
-                                : colorScheme.onSurface,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        backgroundColor: _getTypeColor(type).withOpacity(0.2),
-                        selectedColor: _getTypeColor(type),
-                        selected: _selectedType == type,
-                        onSelected: (isSelected) {
-                          setState(() {
-                            _selectedType = isSelected ? type : null;
-                          });
-                          decorationsProvider.applyFilters(
-                              name: _searchNameQuery, type: _selectedType);
-                        },
-                        elevation: 2,
-                        pressElevation: 4,
-                      );
-                    }).toList(),
-                  ),
-                  const SizedBox(height: 20), // Espacio al final para scroll
-                ],
-              ),
-            ),
-          ],
+          if (_filtersVisible)
+            _buildFiltersSection(context, decorationsProvider),
 
           // Lista de decoraciones
           Expanded(
@@ -321,6 +243,99 @@ class _DecorationsListState extends State<DecorationsList> {
           color: colorScheme.onPrimary,
         ),
       ),
+    );
+  }
+
+  Widget _buildFiltersSection(
+    BuildContext context,
+    DecorationsProvider decorationsProvider,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return ListFiltersPanel(
+      height: 250,
+      title: l10n.filters,
+      resetLabel: l10n.reset,
+      onReset: _resetFilters,
+      fields: [
+        ListFilterFieldConfig.text(
+          id: 'name',
+          label: l10n.searchByName,
+          controller: _searchNameController,
+          onTextChanged: (query) {
+            setState(() {
+              _searchNameQuery = query;
+            });
+            _applyFilters(decorationsProvider);
+          },
+          hintText: l10n.enterDecorationName,
+          prefixIcon: Icon(Icons.search, color: colorScheme.primary),
+        ),
+        ListFilterFieldConfig.custom(
+          id: 'type',
+          label: l10n.type,
+          customBuilder: (_) =>
+              _buildTypeQuickFilter(context, decorationsProvider),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTypeQuickFilter(
+    BuildContext context,
+    DecorationsProvider decorationsProvider,
+  ) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 8.0,
+      children: ['Weapon', 'Armor'].map((type) {
+        final bool isWeapon = type == 'Weapon';
+        return FilterChip(
+          showCheckmark: false,
+          avatar: GearSpriteIcon(
+            column: isWeapon
+                ? weaponColumnByKind['great-sword']!
+                : armorColumnByKind['head']!,
+            rarity: 1,
+            size: 18,
+            fallback: Icon(
+              isWeapon ? Icons.gps_fixed : Icons.shield,
+              size: 18,
+              color: _selectedType == type
+                  ? colorScheme.onPrimary
+                  : _getTypeColor(type),
+            ),
+          ),
+          label: Text(
+            _getDecorationTypeLabel(context, type),
+            style: TextStyle(
+              color:
+                  _selectedType == type ? colorScheme.onPrimary : colorScheme.onSurface,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          backgroundColor: _getTypeColor(type).withOpacity(0.2),
+          selectedColor: _getTypeColor(type),
+          selected: _selectedType == type,
+          onSelected: (isSelected) {
+            setState(() {
+              _selectedType = isSelected ? type : null;
+            });
+            _applyFilters(decorationsProvider);
+          },
+          elevation: 2,
+          pressElevation: 4,
+        );
+      }).toList(),
+    );
+  }
+
+  void _applyFilters(DecorationsProvider decorationsProvider) {
+    decorationsProvider.applyFilters(
+      name: _searchNameQuery,
+      type: _selectedType,
     );
   }
 

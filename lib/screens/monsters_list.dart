@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
-import 'package:mhwilds_app/components/filter_panel.dart';
+import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
@@ -8,7 +8,6 @@ import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/screens/monster_details.dart';
-import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 
@@ -91,134 +90,8 @@ class _MonstersListState extends State<MonstersList> {
       backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
-          if (_filtersVisible) ...[
-            FilterPanel(
-              height: 300,
-              onReset: _resetFilters,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextField(
-                    controller: _searchNameController,
-                    onChanged: (query) {
-                      setState(() {
-                        _searchNameQuery = query;
-                      });
-                      monstersProvider.applyFilters(
-                        name: _searchNameQuery,
-                        species: _searchSpeciesQuery,
-                        locations: _selectedLocations,
-                      );
-                    },
-                    decoration: InputDecoration(
-                      labelText: l10n.searchByName,
-                      hintText: l10n.enterMonsterName,
-                      prefixIcon:
-                          Icon(Icons.search, color: colorScheme.primary),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.outlineVariant),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.primary, width: 2),
-                      ),
-                      filled: true,
-                      fillColor: colorScheme.surfaceContainerHighest,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Campo de búsqueda por especie
-                  TextField(
-                    controller: _searchSpeciesController,
-                    onChanged: (query) {
-                      setState(() {
-                        _searchSpeciesQuery = query;
-                      });
-                      monstersProvider.applyFilters(
-                        name: _searchNameQuery,
-                        species: _searchSpeciesQuery,
-                        locations: _selectedLocations,
-                      );
-                    },
-                    decoration: InputDecoration(
-                      labelText: l10n.searchBySpecies,
-                      hintText: l10n.enterSpecies,
-                      prefixIcon:
-                          Icon(Icons.category, color: colorScheme.primary),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.outlineVariant),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.primary, width: 2),
-                      ),
-                      filled: true,
-                      fillColor: colorScheme.surfaceContainerHighest,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Filtros de ubicación
-                  Text(
-                    l10n.locations,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  zonesProvider.isLoading
-                      ? const Center(child: CircularProgressIndicator())
-                      : Wrap(
-                          spacing: 8.0,
-                          runSpacing: 8.0,
-                          children: zonesProvider.zones.map((zone) {
-                            return FilterChip(
-                              label: Text(
-                                zone.name!,
-                                style: TextStyle(
-                                  color: _selectedLocations.contains(zone.name)
-                                      ? colorScheme.onPrimary
-                                      : colorScheme.onSurface,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              backgroundColor:
-                                  zoneBackgroundColor(zone.id ?? 0),
-                              selectedColor: colorScheme.primary,
-                              selected: _selectedLocations.contains(zone.name),
-                              onSelected: (isSelected) {
-                                setState(() {
-                                  if (isSelected) {
-                                    _selectedLocations.add(zone.name!);
-                                  } else {
-                                    _selectedLocations.remove(zone.name);
-                                  }
-                                });
-                                monstersProvider.applyFilters(
-                                  name: _searchNameQuery,
-                                  species: _searchSpeciesQuery,
-                                  locations: _selectedLocations,
-                                );
-                              },
-                              elevation: 2,
-                              pressElevation: 4,
-                            );
-                          }).toList(),
-                        ),
-                  const SizedBox(height: 20), // Espacio al final para scroll
-                ],
-              ),
-            ),
-          ],
+          if (_filtersVisible)
+            _buildFiltersSection(context, monstersProvider, zonesProvider),
 
           // Lista de monstruos
           Expanded(
@@ -323,16 +196,6 @@ class _MonstersListState extends State<MonstersList> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: AppColors
-                                                            .goldSoft
-                                                            .withOpacity(0.3),
-                                                        blurRadius: 8,
-                                                        offset:
-                                                            const Offset(0, 2),
-                                                      ),
-                                                    ],
                                                   ),
                                                   child: ClipRRect(
                                                     borderRadius:
@@ -444,6 +307,112 @@ class _MonstersListState extends State<MonstersList> {
           color: colorScheme.onPrimary,
         ),
       ),
+    );
+  }
+
+  Widget _buildFiltersSection(
+    BuildContext context,
+    MonstersProvider monstersProvider,
+    LocationsProvider zonesProvider,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return ListFiltersPanel(
+      title: l10n.filters,
+      resetLabel: l10n.reset,
+      onReset: _resetFilters,
+      height: 300,
+      fields: [
+        ListFilterFieldConfig.text(
+          id: 'name',
+          label: l10n.searchByName,
+          controller: _searchNameController,
+          onTextChanged: (query) {
+            setState(() {
+              _searchNameQuery = query;
+            });
+            _applyFilters(monstersProvider);
+          },
+          hintText: l10n.enterMonsterName,
+          prefixIcon: Icon(Icons.search, color: colorScheme.primary),
+        ),
+        ListFilterFieldConfig.text(
+          id: 'species',
+          label: l10n.searchBySpecies,
+          controller: _searchSpeciesController,
+          onTextChanged: (query) {
+            setState(() {
+              _searchSpeciesQuery = query;
+            });
+            _applyFilters(monstersProvider);
+          },
+          hintText: l10n.enterSpecies,
+          prefixIcon: Icon(Icons.category, color: colorScheme.primary),
+        ),
+        ListFilterFieldConfig.custom(
+          id: 'locations',
+          label: l10n.locations,
+          customBuilder: (_) => _buildLocationsFilter(
+            context,
+            monstersProvider,
+            zonesProvider,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLocationsFilter(
+    BuildContext context,
+    MonstersProvider monstersProvider,
+    LocationsProvider zonesProvider,
+  ) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    if (zonesProvider.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 8.0,
+      children: zonesProvider.zones.map((zone) {
+        return FilterChip(
+          label: Text(
+            zone.name!,
+            style: TextStyle(
+              color: _selectedLocations.contains(zone.name)
+                  ? colorScheme.onPrimary
+                  : colorScheme.onSurface,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          backgroundColor: zoneBackgroundColor(zone.id ?? 0),
+          selectedColor: colorScheme.primary,
+          selected: _selectedLocations.contains(zone.name),
+          onSelected: (isSelected) {
+            setState(() {
+              if (isSelected) {
+                _selectedLocations.add(zone.name!);
+              } else {
+                _selectedLocations.remove(zone.name);
+              }
+            });
+            _applyFilters(monstersProvider);
+          },
+          elevation: 2,
+          pressElevation: 4,
+        );
+      }).toList(),
+    );
+  }
+
+  void _applyFilters(MonstersProvider monstersProvider) {
+    monstersProvider.applyFilters(
+      name: _searchNameQuery,
+      species: _searchSpeciesQuery,
+      locations: _selectedLocations,
     );
   }
 

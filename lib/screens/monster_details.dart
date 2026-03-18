@@ -950,13 +950,13 @@ class MonsterRewards extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.goldSoft.withOpacity(0.3),
+                      color: colorScheme.shadow.withOpacity(0.1),
                       blurRadius: 8,
                       offset: const Offset(0, 4),
                     ),
                   ],
                   border: Border.all(
-                    color: AppColors.goldSoft.withOpacity(0.2),
+                    color: colorScheme.outlineVariant,
                     width: 1,
                   ),
                 ),
@@ -988,7 +988,6 @@ class MonsterRewards extends StatelessWidget {
                                 height: 40,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: colorScheme.surfaceContainerHighest,
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),

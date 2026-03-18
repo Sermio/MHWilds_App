@@ -8,6 +8,8 @@ import 'package:mhwilds_app/utils/weapon_utils.dart';
 import 'package:mhwilds_app/components/sharpness_bar.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/components/list_filters_panel.dart';
+import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:provider/provider.dart';
 
@@ -101,113 +103,64 @@ class _WeaponsListState extends State<WeaponsList> {
 
   Widget _buildFiltersSection(
       BuildContext context, WeaponsProvider weaponsProvider) {
+    final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      margin: const EdgeInsets.all(16),
-      height: 350, // Altura fija para los filtros
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          // Header de filtros (fijo)
-          Container(
-            padding: const EdgeInsets.all(20),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.filter_list, color: colorScheme.primary),
-                const SizedBox(width: 8),
-                Text(
-                  AppLocalizations.of(context)!.filters,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-                const Spacer(),
-                TextButton.icon(
-                  onPressed: _resetFilters,
-                  icon: const Icon(Icons.refresh, size: 18),
-                  label: Text(AppLocalizations.of(context)!.reset),
-                  style: TextButton.styleFrom(
-                      foregroundColor: colorScheme.primary),
-                ),
-              ],
-            ),
-          ),
-          // Contenido de filtros con scroll
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSearchField(context, weaponsProvider),
-                  const SizedBox(height: 16),
-                  _buildTypeFilter(context, weaponsProvider),
-                  const SizedBox(height: 16),
-                  _buildRarityFilter(context, weaponsProvider),
-                  const SizedBox(height: 20), // Espacio al final para scroll
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+
+    return ListFiltersPanel(
+      title: l10n.filters,
+      resetLabel: l10n.reset,
+      onReset: _resetFilters,
+      fields: [
+        ListFilterFieldConfig.text(
+          id: 'name',
+          label: l10n.searchByName,
+          controller: _searchNameController,
+          onTextChanged: (query) {
+            setState(() {
+              _searchNameQuery = query;
+            });
+            _applyFilters(weaponsProvider);
+          },
+          hintText: l10n.enterWeaponName,
+          prefixIcon: Icon(Icons.search, color: colorScheme.primary),
+        ),
+        ListFilterFieldConfig.select(
+          id: 'type',
+          label: l10n.type,
+          value: _selectedKind,
+          onSelectChanged: (selectedKind) {
+            setState(() {
+              _selectedKind = selectedKind as String?;
+            });
+            _applyFilters(weaponsProvider);
+          },
+          options: _weaponTypeOptions(context),
+        ),
+        ListFilterFieldConfig.select(
+          id: 'rarity',
+          label: l10n.rarity,
+          value: _selectedRarity,
+          onSelectChanged: (selectedRarity) {
+            setState(() {
+              _selectedRarity = selectedRarity as int?;
+            });
+            _applyFilters(weaponsProvider);
+          },
+          options: _rarityOptions(),
+        ),
+      ],
     );
   }
 
-  Widget _buildSearchField(
-      BuildContext context, WeaponsProvider weaponsProvider) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return TextField(
-      controller: _searchNameController,
-      onChanged: (query) {
-        setState(() {
-          _searchNameQuery = query;
-        });
-        weaponsProvider.applyFilters(
-          name: _searchNameQuery,
-          kind: _selectedKind,
-          rarity: _selectedRarity,
-        );
-      },
-      decoration: InputDecoration(
-        labelText: AppLocalizations.of(context)!.searchByName,
-        hintText: AppLocalizations.of(context)!.enterWeaponName,
-        prefixIcon: Icon(Icons.search, color: colorScheme.primary),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: colorScheme.outlineVariant),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: colorScheme.primary, width: 2),
-        ),
-        filled: true,
-        fillColor: colorScheme.surfaceContainerHighest,
-      ),
+  void _applyFilters(WeaponsProvider weaponsProvider) {
+    weaponsProvider.applyFilters(
+      name: _searchNameQuery,
+      kind: _selectedKind,
+      rarity: _selectedRarity,
     );
   }
 
-  Widget _buildTypeFilter(
-      BuildContext context, WeaponsProvider weaponsProvider) {
-    final colorScheme = Theme.of(context).colorScheme;
+  List<ListFilterOption> _weaponTypeOptions(BuildContext context) {
     final weaponTypes = [
       'great-sword',
       'long-sword',
@@ -225,103 +178,46 @@ class _WeaponsListState extends State<WeaponsList> {
       'heavy-bowgun'
     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppLocalizations.of(context)!.type,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8.0,
-          runSpacing: 8.0,
-          children: weaponTypes.map((kind) {
-            return FilterChip(
-              label: Text(
-                _getWeaponKindLabel(context, kind),
-                style: TextStyle(
-                  color: _selectedKind == kind
-                      ? colorScheme.onPrimary
-                      : colorScheme.onSurface,
-                  fontWeight: FontWeight.w500,
+    return weaponTypes.map((kind) {
+      final int? spriteColumn = weaponColumnByKind[kind];
+      return ListFilterOption(
+        value: kind,
+        label: _getWeaponKindLabel(context, kind),
+        leading: spriteColumn != null
+            ? GearSpriteIcon(
+                column: spriteColumn,
+                rarity: 1,
+                size: 20,
+                fallback: Icon(
+                  _getWeaponIcon(kind),
+                  color: _getKindColor(kind),
+                  size: 20,
                 ),
+              )
+            : Icon(
+                _getWeaponIcon(kind),
+                color: _getKindColor(kind),
+                size: 20,
               ),
-              backgroundColor: _getKindColor(kind).withOpacity(0.2),
-              selectedColor: _getKindColor(kind),
-              selected: _selectedKind == kind,
-              onSelected: (isSelected) {
-                setState(() {
-                  _selectedKind = isSelected ? kind : null;
-                });
-                weaponsProvider.applyFilters(
-                  name: _searchNameQuery,
-                  kind: _selectedKind,
-                  rarity: _selectedRarity,
-                );
-              },
-              elevation: 2,
-              pressElevation: 4,
-            );
-          }).toList(),
-        ),
-      ],
-    );
+      );
+    }).toList();
   }
 
-  Widget _buildRarityFilter(
-      BuildContext context, WeaponsProvider weaponsProvider) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppLocalizations.of(context)!.rarity,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface,
+  List<ListFilterOption> _rarityOptions() {
+    return [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
+      return ListFilterOption(
+        value: rarity,
+        label: rarity.toString(),
+        leading: Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(
+            color: _getRarityColor(rarity),
+            shape: BoxShape.circle,
           ),
         ),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8.0,
-          runSpacing: 8.0,
-          children: [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
-            return FilterChip(
-              label: Text(
-                AppLocalizations.of(context)!.rarityLevel(rarity),
-                style: TextStyle(
-                  color: _selectedRarity == rarity
-                      ? colorScheme.onPrimary
-                      : colorScheme.onSurface,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              backgroundColor: _getRarityColor(rarity).withOpacity(0.2),
-              selectedColor: _getRarityColor(rarity),
-              selected: _selectedRarity == rarity,
-              onSelected: (isSelected) {
-                setState(() {
-                  _selectedRarity = isSelected ? rarity : null;
-                });
-                weaponsProvider.applyFilters(
-                  name: _searchNameQuery,
-                  kind: _selectedKind,
-                  rarity: _selectedRarity,
-                );
-              },
-              elevation: 2,
-              pressElevation: 4,
-            );
-          }).toList(),
-        ),
-      ],
-    );
+      );
+    }).toList();
   }
 
   Widget _buildWeaponsList(BuildContext context,

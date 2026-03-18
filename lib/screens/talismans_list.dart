@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/filter_panel.dart';
+import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
-import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
+import 'package:mhwilds_app/models/skills.dart';
+import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/providers/talismans_provider.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/models/talisman.dart';
-import 'package:mhwilds_app/utils/utils.dart';
 
 class AmuletList extends StatefulWidget {
   const AmuletList({super.key});
@@ -31,9 +31,13 @@ class _AmuletListState extends State<AmuletList> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final talismansProvider =
           Provider.of<TalismansProvider>(context, listen: false);
+      final skillsProvider = Provider.of<SkillsProvider>(context, listen: false);
 
       if (!talismansProvider.hasData) {
         talismansProvider.fetchAmulets();
+      }
+      if (!skillsProvider.hasData && !skillsProvider.isLoading) {
+        skillsProvider.fetchSkills();
       }
       _resetFilters();
     });
@@ -58,6 +62,7 @@ class _AmuletListState extends State<AmuletList> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final talismansProvider = Provider.of<TalismansProvider>(context);
+    final skillsProvider = Provider.of<SkillsProvider>(context);
     List<Amulet> filteredAmulets = talismansProvider.filteredAmulets;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -72,93 +77,7 @@ class _AmuletListState extends State<AmuletList> {
       backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
-          if (_filtersVisible) ...[
-            FilterPanel(
-              height: 250,
-              onReset: _resetFilters,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Campo de búsqueda por nombre
-                  TextField(
-                    controller: _searchNameController,
-                    onChanged: (query) {
-                      setState(() {
-                        _searchNameQuery = query;
-                      });
-                      talismansProvider.applyFilters(
-                        name: _searchNameQuery,
-                        rarity: _selectedRarity,
-                      );
-                    },
-                    decoration: InputDecoration(
-                      labelText: l10n.searchByName,
-                      hintText: l10n.enterTalismanName,
-                      prefixIcon:
-                          Icon(Icons.search, color: colorScheme.primary),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.outlineVariant),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.primary, width: 2),
-                      ),
-                      filled: true,
-                      fillColor: colorScheme.surfaceContainerHighest,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Filtro de rareza
-                  Text(
-                    l10n.rarity,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8.0,
-                    runSpacing: 8.0,
-                    children: [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
-                      return FilterChip(
-                        label: Text(
-                          l10n.rarityLevel(rarity),
-                          style: TextStyle(
-                            color: _selectedRarity == rarity
-                                ? colorScheme.onPrimary
-                                : colorScheme.onSurface,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        backgroundColor:
-                            _getRarityColor(rarity).withOpacity(0.2),
-                        selectedColor: _getRarityColor(rarity),
-                        selected: _selectedRarity == rarity,
-                        onSelected: (isSelected) {
-                          setState(() {
-                            _selectedRarity = isSelected ? rarity : null;
-                          });
-                          talismansProvider.applyFilters(
-                            name: _searchNameQuery,
-                            rarity: _selectedRarity,
-                          );
-                        },
-                        elevation: 2,
-                        pressElevation: 4,
-                      );
-                    }).toList(),
-                  ),
-                  const SizedBox(height: 20), // Espacio al final para scroll
-                ],
-              ),
-            ),
-          ],
+          if (_filtersVisible) _buildFiltersSection(context, talismansProvider),
 
           // Lista de talismanes
           Expanded(
@@ -348,7 +267,10 @@ class _AmuletListState extends State<AmuletList> {
                                       // Habilidades del primer rango
                                       if (firstRank != null &&
                                           firstRank.skills.isNotEmpty) ...[
-                                        _buildSkillsSection(firstRank),
+                                        _buildSkillsSection(
+                                          firstRank,
+                                          skillsProvider,
+                                        ),
                                       ],
                                     ],
                                   ),
@@ -373,7 +295,71 @@ class _AmuletListState extends State<AmuletList> {
     );
   }
 
-  Widget _buildSkillsSection(AmuletRank rank) {
+  Widget _buildFiltersSection(
+    BuildContext context,
+    TalismansProvider talismansProvider,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return ListFiltersPanel(
+      height: 250,
+      title: l10n.filters,
+      resetLabel: l10n.reset,
+      onReset: _resetFilters,
+      fields: [
+        ListFilterFieldConfig.text(
+          id: 'name',
+          label: l10n.searchByName,
+          controller: _searchNameController,
+          onTextChanged: (query) {
+            setState(() {
+              _searchNameQuery = query;
+            });
+            _applyFilters(talismansProvider);
+          },
+          hintText: l10n.enterTalismanName,
+          prefixIcon: Icon(Icons.search, color: colorScheme.primary),
+        ),
+        ListFilterFieldConfig.select(
+          id: 'rarity',
+          label: l10n.rarity,
+          value: _selectedRarity,
+          onSelectChanged: (selectedRarity) {
+            setState(() {
+              _selectedRarity = selectedRarity as int?;
+            });
+            _applyFilters(talismansProvider);
+          },
+          options: [1, 2, 3, 4, 5, 6, 7, 8]
+              .map(
+                (rarity) => ListFilterOption(
+                  value: rarity,
+                  label: rarity.toString(),
+                  leading: Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      color: _getRarityColor(rarity),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      ],
+    );
+  }
+
+  void _applyFilters(TalismansProvider talismansProvider) {
+    talismansProvider.applyFilters(
+      name: _searchNameQuery,
+      rarity: _selectedRarity,
+    );
+  }
+
+  Widget _buildSkillsSection(AmuletRank rank, SkillsProvider skillsProvider) {
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -415,13 +401,16 @@ class _AmuletListState extends State<AmuletList> {
                         width: 24,
                         height: 24,
                         margin: const EdgeInsets.only(right: 8),
-                        child: UrlImageLoader(
-                          itemName:
-                              (Provider.of<EnNamesCache>(context, listen: false)
-                                      .nameForSkillImage(
-                                          skill.skill.id, skill.skill.name) ??
-                                  skill.skill.name),
-                          loadImageUrlFunction: getValidSkillImageUrl,
+                        child: SkillSpriteIcon(
+                          iconId: _skillIconForId(skillsProvider, skill.skill.id)?.id,
+                          iconKind:
+                              _skillIconForId(skillsProvider, skill.skill.id)?.kind,
+                          size: 24,
+                          fallback: Icon(
+                            Icons.auto_awesome,
+                            size: 14,
+                            color: colorScheme.primary,
+                          ),
                         ),
                       ),
                       Container(
@@ -464,5 +453,14 @@ class _AmuletListState extends State<AmuletList> {
 
   Color _getRarityColor(int rarity) {
     return rarityColorFromSprite(rarity);
+  }
+
+  SkillIcon? _skillIconForId(SkillsProvider skillsProvider, int skillId) {
+    for (final skill in skillsProvider.allSkills) {
+      if (skill.id == skillId) {
+        return skill.icon;
+      }
+    }
+    return null;
   }
 }

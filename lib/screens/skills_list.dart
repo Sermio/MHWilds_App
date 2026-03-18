@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/filter_panel.dart';
-import 'package:mhwilds_app/components/url_image_loader.dart';
+import 'package:mhwilds_app/components/gear_sprite_icon.dart';
+import 'package:mhwilds_app/components/list_filters_panel.dart';
+import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
-import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
 
@@ -71,87 +70,7 @@ class _SkillListState2 extends State<SkillList> {
       backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
-          if (_filtersVisible) ...[
-            FilterPanel(
-              height: 250,
-              onReset: _resetFilters,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Campo de búsqueda por nombre
-                  TextField(
-                    controller: _searchNameController,
-                    onChanged: (query) {
-                      setState(() {
-                        _searchNameQuery = query;
-                      });
-                      skillsProvider.applyFilters(name: _searchNameQuery);
-                    },
-                    decoration: InputDecoration(
-                      labelText: l10n.searchByName,
-                      hintText: l10n.enterSkillName,
-                      prefixIcon:
-                          Icon(Icons.search, color: colorScheme.primary),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.outlineVariant),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: colorScheme.primary, width: 2),
-                      ),
-                      filled: true,
-                      fillColor: colorScheme.surfaceContainerHighest,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Filtro de tipo
-                  Text(
-                    l10n.type,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8.0,
-                    runSpacing: 8.0,
-                    children: ['Weapon', 'Armor', 'Group', 'Set'].map((type) {
-                      return FilterChip(
-                        label: Text(
-                          _getSkillTypeLabel(context, type),
-                          style: TextStyle(
-                            color: _selectedType == type
-                                ? colorScheme.onPrimary
-                                : colorScheme.onSurface,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        backgroundColor: _getTypeColor(type).withOpacity(0.2),
-                        selectedColor: _getTypeColor(type),
-                        selected: _selectedType == type,
-                        onSelected: (isSelected) {
-                          setState(() {
-                            _selectedType = isSelected ? type : null;
-                          });
-                          skillsProvider.applyFilters(
-                              kind: _selectedType?.toLowerCase());
-                        },
-                        elevation: 2,
-                        pressElevation: 4,
-                      );
-                    }).toList(),
-                  ),
-                  const SizedBox(height: 20), // Espacio al final para scroll
-                ],
-              ),
-            ),
-          ],
+          if (_filtersVisible) _buildFiltersSection(context, skillsProvider),
 
           // Lista de habilidades
           Expanded(
@@ -251,17 +170,15 @@ class _SkillListState2 extends State<SkillList> {
                                             width: 60,
                                             height: 60,
                                             child: Center(
-                                              child: UrlImageLoader(
-                                                itemName:
-                                                    (Provider.of<EnNamesCache>(
-                                                                context,
-                                                                listen: false)
-                                                            .nameForSkillImage(
-                                                                skill.id,
-                                                                skill.name) ??
-                                                        skill.name),
-                                                loadImageUrlFunction:
-                                                    getValidSkillImageUrl,
+                                              child: SkillSpriteIcon(
+                                                iconId: skill.icon?.id,
+                                                iconKind: skill.icon?.kind,
+                                                size: 60,
+                                                fallback: Icon(
+                                                  Icons.auto_awesome,
+                                                  color: _getTypeColor(skill.kind),
+                                                  size: 32,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -299,16 +216,9 @@ class _SkillListState2 extends State<SkillList> {
                                                           .withOpacity(0.3),
                                                     ),
                                                   ),
-                                                  child: Text(
-                                                    _getSkillTypeLabel(
-                                                        context, skill.kind),
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: _getTypeColor(
-                                                          skill.kind),
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
+                                                  child: _buildSkillTypeBadge(
+                                                    context,
+                                                    skill.kind,
                                                   ),
                                                 ),
                                               ],
@@ -356,6 +266,168 @@ class _SkillListState2 extends State<SkillList> {
           color: Colors.black,
         ),
       ),
+    );
+  }
+
+  Widget _buildFiltersSection(
+    BuildContext context,
+    SkillsProvider skillsProvider,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return ListFiltersPanel(
+      height: 250,
+      title: l10n.filters,
+      resetLabel: l10n.reset,
+      onReset: _resetFilters,
+      fields: [
+        ListFilterFieldConfig.text(
+          id: 'name',
+          label: l10n.searchByName,
+          controller: _searchNameController,
+          onTextChanged: (query) {
+            setState(() {
+              _searchNameQuery = query;
+            });
+            _applyFilters(skillsProvider);
+          },
+          hintText: l10n.enterSkillName,
+          prefixIcon: Icon(Icons.search, color: colorScheme.primary),
+        ),
+        ListFilterFieldConfig.select(
+          id: 'type',
+          label: l10n.type,
+          value: _selectedType,
+          onSelectChanged: (selectedType) {
+            setState(() {
+              _selectedType = selectedType as String?;
+            });
+            _applyFilters(skillsProvider);
+          },
+          options: ['Weapon', 'Armor', 'Group', 'Set']
+              .map(
+                (type) => ListFilterOption(
+                  value: type,
+                  label: _getSkillTypeLabel(context, type),
+                  leading: _buildSkillTypeFilterIcon(type),
+                ),
+              )
+              .toList(),
+        ),
+      ],
+    );
+  }
+
+  void _applyFilters(SkillsProvider skillsProvider) {
+    skillsProvider.applyFilters(
+      name: _searchNameQuery,
+      kind: _selectedType?.toLowerCase(),
+    );
+  }
+
+  Widget _buildSkillTypeFilterIcon(String type) {
+    final kindLower = type.toLowerCase();
+    final color = _getTypeColor(type);
+
+    switch (kindLower) {
+      case 'weapon':
+        return GearSpriteIcon(
+          column: weaponColumnByKind['great-sword']!,
+          rarity: 1,
+          size: 18,
+          fallback: Icon(
+            Icons.gps_fixed,
+            size: 18,
+            color: color,
+          ),
+        );
+      case 'armor':
+        return GearSpriteIcon(
+          column: armorColumnByKind['head']!,
+          rarity: 1,
+          size: 18,
+          fallback: Icon(
+            Icons.shield,
+            size: 18,
+            color: color,
+          ),
+        );
+      case 'group':
+      case 'set':
+        return SkillSpriteIcon(
+          iconKind: kindLower,
+          size: 18,
+          fallback: Icon(
+            Icons.category,
+            size: 18,
+            color: color,
+          ),
+        );
+      default:
+        return Icon(
+          Icons.category,
+          size: 18,
+          color: color,
+        );
+    }
+  }
+
+  Widget _buildSkillTypeBadge(BuildContext context, String kind) {
+    final typeColor = _getTypeColor(kind);
+    final kindLower = kind.toLowerCase();
+
+    Widget? leadingIcon;
+    if (kindLower == 'weapon') {
+      leadingIcon = GearSpriteIcon(
+        column: weaponColumnByKind['great-sword']!,
+        rarity: 1,
+        size: 14,
+        fallback: Icon(
+          Icons.gps_fixed,
+          size: 14,
+          color: typeColor,
+        ),
+      );
+    } else if (kindLower == 'armor') {
+      leadingIcon = GearSpriteIcon(
+        column: armorColumnByKind['head']!,
+        rarity: 1,
+        size: 14,
+        fallback: Icon(
+          Icons.shield,
+          size: 14,
+          color: typeColor,
+        ),
+      );
+    } else if (kindLower == 'group' || kindLower == 'set') {
+      leadingIcon = SkillSpriteIcon(
+        iconKind: kindLower,
+        size: 14,
+        fallback: Icon(
+          Icons.category,
+          size: 14,
+          color: typeColor,
+        ),
+      );
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (leadingIcon != null) ...[
+          leadingIcon,
+          const SizedBox(width: 6),
+        ],
+        Text(
+          _getSkillTypeLabel(context, kind),
+          style: TextStyle(
+            fontSize: 12,
+            color: typeColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
     );
   }
 

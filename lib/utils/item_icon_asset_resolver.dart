@@ -20,6 +20,43 @@ class ItemIconAssetResolver {
   }) async {
     await _ensureIndexLoaded();
 
+    // Excepción de negocio:
+    // Honey debe usar el icono tipo "webbing" manteniendo el color cuando exista.
+    final normalizedKind = _normalizeToken(apiKind);
+    if (normalizedKind == 'honey') {
+      final honeyColorCandidates = _colorCandidates(apiColor).toSet().toList();
+      for (final color in honeyColorCandidates) {
+        final byKindAndColor = _byKindColor['webbing|$color'];
+        if (byKindAndColor != null) return byKindAndColor;
+      }
+      final honeyOverride = _byKindFallback['webbing'];
+      if (honeyOverride != null) return honeyOverride;
+    }
+
+    // Excepción de negocio:
+    // Powder debe usar el icono tipo "sac" manteniendo el color cuando exista.
+    if (normalizedKind == 'powder') {
+      final powderColorCandidates = _colorCandidates(apiColor).toSet().toList();
+      for (final color in powderColorCandidates) {
+        final byKindAndColor = _byKindColor['sac|$color'];
+        if (byKindAndColor != null) return byKindAndColor;
+      }
+      final powderOverride = _byKindFallback['sac'];
+      if (powderOverride != null) return powderOverride;
+    }
+
+    // Excepción de negocio:
+    // Extract debe usar el icono tipo "chemical" manteniendo el color cuando exista.
+    if (normalizedKind == 'extract') {
+      final extractColorCandidates = _colorCandidates(apiColor).toSet().toList();
+      for (final color in extractColorCandidates) {
+        final byKindAndColor = _byKindColor['chemical|$color'];
+        if (byKindAndColor != null) return byKindAndColor;
+      }
+      final extractOverride = _byKindFallback['chemical'];
+      if (extractOverride != null) return extractOverride;
+    }
+
     final kindCandidates = _kindCandidates(apiKind);
     final colorCandidates = _colorCandidates(apiColor);
 
