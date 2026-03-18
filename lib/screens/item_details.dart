@@ -142,7 +142,10 @@ class ItemDetails extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    Row(
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 10,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         ...item.recipes.first.inputs
                             .asMap()
@@ -154,6 +157,7 @@ class ItemDetails extends StatelessWidget {
                               index == item.recipes.first.inputs.length - 1;
 
                           return Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               // Imagen del material
                               Container(
@@ -161,7 +165,6 @@ class ItemDetails extends StatelessWidget {
                                 height: 48,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: colorScheme.surfaceContainerHighest,
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
@@ -178,17 +181,22 @@ class ItemDetails extends StatelessWidget {
                               ),
                               const SizedBox(width: 8),
                               // Nombre del material
-                              Text(
-                                recipeItem.name,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: colorScheme.onSurface,
-                                  fontWeight: FontWeight.w500,
+                              ConstrainedBox(
+                                constraints: const BoxConstraints(maxWidth: 170),
+                                child: Text(
+                                  recipeItem.name,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: colorScheme.onSurface,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                               // Símbolo "+" si no es el último
                               if (!isLast) ...[
-                                const SizedBox(width: 12),
+                                const SizedBox(width: 8),
                                 Text(
                                   '+',
                                   style: TextStyle(
@@ -198,7 +206,7 @@ class ItemDetails extends StatelessWidget {
                                         colorScheme.onSurface.withOpacity(0.8),
                                   ),
                                 ),
-                                const SizedBox(width: 12),
+                                const SizedBox(width: 8),
                               ],
                             ],
                           );
@@ -264,7 +272,6 @@ class ItemDetails extends StatelessWidget {
                                 height: 40,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: colorScheme.surface,
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),

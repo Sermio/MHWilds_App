@@ -85,6 +85,7 @@ class ListFiltersPanel extends StatelessWidget {
     required this.onReset,
     required this.fields,
     this.height = 350,
+    this.dropdownMenuMaxHeight = 280,
   });
 
   final String title;
@@ -92,6 +93,7 @@ class ListFiltersPanel extends StatelessWidget {
   final VoidCallback onReset;
   final List<ListFilterFieldConfig> fields;
   final double height;
+  final double dropdownMenuMaxHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -252,6 +254,7 @@ class ListFiltersPanel extends StatelessWidget {
     return DropdownButtonFormField<dynamic>(
       value: field.value,
       isExpanded: true,
+      menuMaxHeight: dropdownMenuMaxHeight,
       items: items,
       onChanged: field.onSelectChanged,
       decoration: InputDecoration(
