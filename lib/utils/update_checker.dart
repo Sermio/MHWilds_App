@@ -49,14 +49,16 @@ class AppUpdateChecker {
         final versionName = await _getStoreVersionName();
         // Si falla, usar el método del paquete como fallback
         if (versionName != null && versionName.isNotEmpty) {
-          storeVersion = versionName;
+          storeVersion = _normalizeVersionForDisplay(versionName);
         } else {
-          storeVersion = await _checker.getStoreVersion();
+          final fallback = await _checker.getStoreVersion();
+          storeVersion = fallback != null ? _normalizeVersionForDisplay(fallback) : null;
         }
       } catch (_) {
         // Si todo falla, intentar con el método del paquete
         try {
-          storeVersion = await _checker.getStoreVersion();
+          final fallback = await _checker.getStoreVersion();
+          storeVersion = fallback != null ? _normalizeVersionForDisplay(fallback) : null;
         } catch (_) {}
       }
     }
@@ -64,7 +66,7 @@ class AppUpdateChecker {
     String currentVersion = '';
     try {
       final info = await PackageInfo.fromPlatform();
-      currentVersion = info.version;
+      currentVersion = _normalizeVersionForDisplay(info.version);
     } catch (_) {}
 
     if (!context.mounted) return;
@@ -117,6 +119,19 @@ class AppUpdateChecker {
         );
       },
     );
+  }
+
+  /// Devuelve solo el versionName (ej. 1.0.14), sin build number (+27) ni sufijos.
+  /// Si el valor es solo dígitos (versionCode), devuelve vacío para no mostrarlo.
+  static String _normalizeVersionForDisplay(String version) {
+    if (version.isEmpty) return version;
+    // Quitar sufijo +buildNumber (ej. 1.0.14+27 -> 1.0.14)
+    String normalized = version.split('+').first.trim();
+    // Quitar paréntesis y contenido (ej. 1.0.14 (27) -> 1.0.14)
+    normalized = normalized.replaceAll(RegExp(r'\s*\([^)]*\)\s*'), '').trim();
+    // Si queda solo dígitos (versionCode como "27"), no es versionName válido
+    if (RegExp(r'^\d+$').hasMatch(normalized)) return '';
+    return normalized;
   }
 
   static String _buildUpdateMessage({
@@ -187,8 +202,10 @@ class AppUpdateChecker {
         }
 
         // Patrón 2: versión tipo X.Y o X.Y.Z (evitar solo dígitos = versionCode)
+        // Buscar en la sección de "Current Version" para evitar capturar versiones del changelog
         final versionPattern2 = RegExp(
-          r'(\d+\.\d+(?:\.\d+)?)',
+          r'Current Version[\s\S]*?(\d+\.\d+(?:\.\d+)?)',
+          caseSensitive: false,
         );
         final match2 = versionPattern2.firstMatch(html);
         if (match2 != null) {
@@ -196,6 +213,12 @@ class AppUpdateChecker {
           if (version != null && version.isNotEmpty) {
             return version;
           }
+        }
+        // Último recurso: primera X.Y.Z en el HTML (puede ser impreciso)
+        final versionPattern3 = RegExp(r'\b(\d+\.\d+\.\d+)\b');
+        final match3 = versionPattern3.firstMatch(html);
+        if (match3 != null) {
+          return match3.group(1)!.trim();
         }
       }
     } catch (_) {
