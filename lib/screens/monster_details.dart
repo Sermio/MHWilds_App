@@ -835,9 +835,14 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                         child: Text(
                           AppLocalizations.of(context)!.lowRank,
                           style: TextStyle(
-                            color: isLowRankAvailable
-                                ? colorScheme.onPrimary
-                                : colorScheme.onSurface.withOpacity(0.6),
+                            color: !isLowRankAvailable
+                                ? colorScheme.onSurface.withOpacity(0.5)
+                                : (selectedRank == 'low'
+                                    ? colorScheme.onPrimary
+                                    : colorScheme.onSurface.withOpacity(0.9)),
+                            fontWeight: selectedRank == 'low'
+                                ? FontWeight.w700
+                                : FontWeight.w600,
                           ),
                         ),
                       ),
@@ -846,9 +851,14 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                         child: Text(
                           AppLocalizations.of(context)!.highRank,
                           style: TextStyle(
-                            color: isHighRankAvailable
-                                ? colorScheme.onPrimary
-                                : colorScheme.onSurface.withOpacity(0.6),
+                            color: !isHighRankAvailable
+                                ? colorScheme.onSurface.withOpacity(0.5)
+                                : (selectedRank == 'high'
+                                    ? colorScheme.onPrimary
+                                    : colorScheme.onSurface.withOpacity(0.9)),
+                            fontWeight: selectedRank == 'high'
+                                ? FontWeight.w700
+                                : FontWeight.w600,
                           ),
                         ),
                       ),
