@@ -383,14 +383,18 @@ class _ItemListState extends State<ItemList> {
           ],
         ),
         const SizedBox(height: 8),
-        Row(
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            ...item.recipes.first.inputs.asMap().entries.map((entry) {
+            ...item.recipes.first.inputs.asMap().entries.expand((entry) {
               final index = entry.key;
               final recipeItem = entry.value;
               final isLast = index == item.recipes.first.inputs.length - 1;
 
-              return Row(
+              final ingredientWidget = Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
                     width: 32,
@@ -406,35 +410,43 @@ class _ItemListState extends State<ItemList> {
                         materialName:
                             (Provider.of<EnNamesCache>(context, listen: false)
                                     .nameForItemImage(
-                                        recipeItem.id, recipeItem.name) ??
+                                      recipeItem.id,
+                                      recipeItem.name,
+                                    ) ??
                                 recipeItem.name),
                       ),
                     ),
                   ),
                   const SizedBox(width: 6),
-                  Text(
-                    recipeItem.name,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: colorScheme.onSurface,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  if (!isLast) ...[
-                    const SizedBox(width: 8),
-                    Text(
-                      '+',
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 130),
+                    child: Text(
+                      recipeItem.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface.withOpacity(0.6),
+                        fontSize: 12,
+                        color: colorScheme.onSurface,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(width: 8),
-                  ],
+                  ),
                 ],
               );
-            }).toList(),
+
+              if (isLast) return [ingredientWidget];
+              return [
+                ingredientWidget,
+                Text(
+                  '+',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.onSurface.withOpacity(0.6),
+                  ),
+                ),
+              ];
+            }),
           ],
         ),
       ],

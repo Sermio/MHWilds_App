@@ -182,12 +182,16 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                             color: colorScheme.primary,
                                           ),
                                           const SizedBox(width: 8),
-                                          Text(
-                                            '${AppLocalizations.of(context)!.setBonus} ${armorSet.groupBonus.skill.name}',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: colorScheme.onSurface,
+                                          Expanded(
+                                            child: Text(
+                                              '${AppLocalizations.of(context)!.setBonus} ${armorSet.groupBonus.skill.name}',
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                color: colorScheme.onSurface,
+                                              ),
                                             ),
                                           ),
                                         ],

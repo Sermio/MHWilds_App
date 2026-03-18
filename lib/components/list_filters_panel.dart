@@ -26,7 +26,7 @@ class ListFilterFieldConfig {
         value = null,
         onSelectChanged = null,
         options = const [],
-        allLabel = 'All',
+        allLabel = null,
         includeAllOption = false,
         customBuilder = null;
 
@@ -36,7 +36,7 @@ class ListFilterFieldConfig {
     required this.value,
     required this.onSelectChanged,
     required this.options,
-    this.allLabel = 'All',
+    this.allLabel,
     this.includeAllOption = true,
   })  : type = ListFilterFieldType.select,
         controller = null,
@@ -57,7 +57,7 @@ class ListFilterFieldConfig {
         value = null,
         onSelectChanged = null,
         options = const [],
-        allLabel = 'All',
+        allLabel = null,
         includeAllOption = false;
 
   final String id;
@@ -73,7 +73,7 @@ class ListFilterFieldConfig {
   final ValueChanged<dynamic>? onSelectChanged;
   final List<ListFilterOption> options;
   final bool includeAllOption;
-  final String allLabel;
+  final String? allLabel;
   final WidgetBuilder? customBuilder;
 }
 
@@ -216,13 +216,14 @@ class ListFiltersPanel extends StatelessWidget {
   Widget _buildSelectField(BuildContext context, ListFilterFieldConfig field) {
     final colorScheme = Theme.of(context).colorScheme;
     final items = <DropdownMenuItem<dynamic>>[];
+    final allLabel = field.allLabel ?? _localizedAllLabel(context);
 
     if (field.includeAllOption) {
       items.add(
         DropdownMenuItem<dynamic>(
           value: null,
           child: Text(
-            field.allLabel,
+            allLabel,
             style: TextStyle(color: colorScheme.onSurface),
           ),
         ),
@@ -270,5 +271,25 @@ class ListFiltersPanel extends StatelessWidget {
         fillColor: colorScheme.surfaceContainerHighest,
       ),
     );
+  }
+
+  String _localizedAllLabel(BuildContext context) {
+    final locale = Localizations.localeOf(context).languageCode.toLowerCase();
+    switch (locale) {
+      case 'es':
+        return 'Todos';
+      case 'pt':
+        return 'Todos';
+      case 'fr':
+        return 'Tous';
+      case 'it':
+        return 'Tutti';
+      case 'de':
+        return 'Alle';
+      case 'pl':
+        return 'Wszystkie';
+      default:
+        return 'All';
+    }
   }
 }

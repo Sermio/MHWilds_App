@@ -265,7 +265,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get typeGroup => 'Grupo';
 
   @override
-  String get typeSet => 'Set';
+  String get typeSet => 'Conjunto';
 
   @override
   String get weaponKindGreatSword => 'Gran espada';
@@ -801,7 +801,7 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
   String get typeGroup => 'Grupo';
 
   @override
-  String get typeSet => 'Set';
+  String get typeSet => 'Conjunto';
 
   @override
   String get weaponKindGreatSword => 'Gran espada';
@@ -1337,7 +1337,7 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
   String get typeGroup => 'Grupo';
 
   @override
-  String get typeSet => 'Set';
+  String get typeSet => 'Conjunto';
 
   @override
   String get weaponKindGreatSword => 'Gran espada';
