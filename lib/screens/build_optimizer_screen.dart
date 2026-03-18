@@ -20,6 +20,7 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
   late final bool _isWebViewSupported;
   WebViewController? _controller;
   bool _isLoading = true;
+  bool _hasSyncedPreferences = false;
 
   @override
   void initState() {
@@ -36,6 +37,7 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
             },
             onPageFinished: (_) {
               if (!mounted) return;
+              _syncWebViewPreferences();
               setState(() => _isLoading = false);
             },
           ),
@@ -44,6 +46,24 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
     } else {
       _isLoading = false;
     }
+  }
+
+  void _syncWebViewPreferences() {
+    if (!mounted || _controller == null || _hasSyncedPreferences) return;
+    _hasSyncedPreferences = true;
+    final brightness = Theme.of(context).brightness;
+    final langCode = Localizations.localeOf(context).languageCode.toLowerCase();
+    final themeMode = brightness == Brightness.dark ? 'dark' : 'light';
+    final js = '''
+      (function() {
+        try {
+          localStorage.setItem('mh_opti_theme_mode', '$themeMode');
+          localStorage.setItem('mh_opti_lang', '$langCode');
+          window.location.reload();
+        } catch (e) { console.error(e); }
+      })();
+    ''';
+    _controller!.runJavaScript(js);
   }
 
   Future<void> _openOptimizerExternal() async {
