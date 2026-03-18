@@ -42,7 +42,7 @@ class Cdrawer extends StatelessWidget {
           ),
           child: Column(
             children: [
-              menuHeader(),
+              menuHeader(context),
               Expanded(child: SingleChildScrollView(child: menuItems(context))),
             ],
           ),
@@ -51,7 +51,8 @@ class Cdrawer extends StatelessWidget {
     );
   }
 
-  Widget menuHeader() {
+  Widget menuHeader(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -119,10 +120,10 @@ class Cdrawer extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 14),
-              const Text(
-                'MHWilds Assistant',
+              Text(
+                l10n.appTitle,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
                   color: Colors.black87,
@@ -152,8 +153,8 @@ class Cdrawer extends StatelessWidget {
       child: Column(
         children: [
           _buildMenuItem(
-            title: 'Monsters',
-            subtitle: 'Database of all monsters',
+            title: l10n.monsters,
+            subtitle: l10n.menuMonstersSubtitle,
             leadingIcon: Image.asset(
               'assets/imgs/monster_icons/arkveld.png',
               fit: BoxFit.contain,
@@ -170,8 +171,8 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            title: 'Items',
-            subtitle: 'Materials and resources',
+            title: l10n.items,
+            subtitle: l10n.menuItemsSubtitle,
             leadingIcon: Image.asset(
               'assets/imgs/drawer/potion.png',
               fit: BoxFit.contain,
@@ -188,8 +189,8 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            title: 'Decorations',
-            subtitle: 'Skill gems and jewels',
+            title: l10n.decorations,
+            subtitle: l10n.menuDecorationsSubtitle,
             leadingIcon: Image.asset(
               'assets/imgs/drawer/decoration.png',
               fit: BoxFit.contain,
@@ -206,8 +207,8 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            title: 'Talismans',
-            subtitle: 'Powerful accessories',
+            title: l10n.talismans,
+            subtitle: l10n.menuTalismansSubtitle,
             leadingIcon: GearSpriteIcon(
               column: talismanColumn,
               rarity: 1,
@@ -225,8 +226,8 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            title: 'Armor Sets',
-            subtitle: 'Complete armor collections',
+            title: l10n.armorSets,
+            subtitle: l10n.menuArmorSetsSubtitle,
             leadingIcon: GearSpriteIcon(
               column: armorColumnByKind['head']!,
               rarity: 1,
@@ -244,8 +245,8 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            title: 'Weapons',
-            subtitle: 'Combat weapons and tools',
+            title: l10n.weapons,
+            subtitle: l10n.menuWeaponsSubtitle,
             leadingIcon: GearSpriteIcon(
               column: weaponColumnByKind['great-sword']!,
               rarity: 1,
@@ -263,8 +264,8 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
-            title: 'Skills',
-            subtitle: 'Combat abilities and effects',
+            title: l10n.skills,
+            subtitle: l10n.menuSkillsSubtitle,
             leadingIcon: SkillSpriteIcon(
               iconId: 1,
               size: 30,

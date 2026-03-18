@@ -9,7 +9,7 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get appTitle => 'Asistente MHWilds';
+  String get appTitle => 'MHWilds Assistant';
 
   @override
   String get settings => 'Ajustes';
@@ -545,7 +545,7 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
   AppLocalizationsEs419() : super('es_419');
 
   @override
-  String get appTitle => 'Asistente MHWilds';
+  String get appTitle => 'MHWilds Assistant';
 
   @override
   String get settings => 'Ajustes';
@@ -1081,7 +1081,7 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
   AppLocalizationsEsEs() : super('es_ES');
 
   @override
-  String get appTitle => 'Asistente MHWilds';
+  String get appTitle => 'MHWilds Assistant';
 
   @override
   String get settings => 'Ajustes';

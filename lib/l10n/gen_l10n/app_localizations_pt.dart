@@ -9,7 +9,7 @@ class AppLocalizationsPt extends AppLocalizations {
   AppLocalizationsPt([String locale = 'pt']) : super(locale);
 
   @override
-  String get appTitle => 'Assistente MHWilds';
+  String get appTitle => 'MHWilds Assistant';
 
   @override
   String get settings => 'Configurações';
@@ -546,7 +546,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   AppLocalizationsPtBr() : super('pt_BR');
 
   @override
-  String get appTitle => 'Assistente MHWilds';
+  String get appTitle => 'MHWilds Assistant';
 
   @override
   String get settings => 'Configurações';

@@ -9,7 +9,7 @@ class AppLocalizationsPl extends AppLocalizations {
   AppLocalizationsPl([String locale = 'pl']) : super(locale);
 
   @override
-  String get appTitle => 'Asystent MHWilds';
+  String get appTitle => 'MHWilds Assistant';
 
   @override
   String get settings => 'Ustawienia';
