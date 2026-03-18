@@ -52,13 +52,16 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
     if (!mounted || _controller == null || _hasSyncedPreferences) return;
     _hasSyncedPreferences = true;
     final brightness = Theme.of(context).brightness;
-    final langCode = Localizations.localeOf(context).languageCode.toLowerCase();
+    final locale = Localizations.localeOf(context);
+    final langKey = locale.countryCode != null
+        ? '${locale.languageCode.toLowerCase()}-${locale.countryCode!.toUpperCase()}'
+        : locale.languageCode.toLowerCase();
     final themeMode = brightness == Brightness.dark ? 'dark' : 'light';
     final js = '''
       (function() {
         try {
           localStorage.setItem('mh_opti_theme_mode', '$themeMode');
-          localStorage.setItem('mh_opti_lang', '$langCode');
+          localStorage.setItem('mh_opti_lang', '$langKey');
           window.location.reload();
         } catch (e) { console.error(e); }
       })();

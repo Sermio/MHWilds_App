@@ -25,20 +25,14 @@ class Cdrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Drawer(
       child: SafeArea(
         top: false,
         bottom: true,
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.grey[50]!,
-                Colors.white,
-              ],
-            ),
+            color: colorScheme.surface,
           ),
           child: Column(
             children: [
@@ -53,6 +47,8 @@ class Cdrawer extends StatelessWidget {
 
   Widget menuHeader(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final accentColor = isDark ? Colors.white : Colors.black87;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -66,7 +62,7 @@ class Cdrawer extends StatelessWidget {
         ),
         border: Border(
           bottom: BorderSide(
-            color: Colors.white.withOpacity(0.35),
+            color: (isDark ? Colors.black : Colors.white).withOpacity(0.35),
             width: 1,
           ),
         ),
@@ -90,20 +86,20 @@ class Cdrawer extends StatelessWidget {
                   height: 92,
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.25),
+                    color: (isDark ? Colors.black : Colors.white).withOpacity(0.25),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.55),
+                      color: (isDark ? Colors.black : Colors.white).withOpacity(0.55),
                       width: 1,
                     ),
                   ),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: isDark ? Colors.grey[900] : Colors.white,
                       borderRadius: BorderRadius.circular(18),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withOpacity(isDark ? 0.3 : 0.1),
                           blurRadius: 10,
                           offset: const Offset(0, 3),
                         ),
@@ -123,10 +119,10 @@ class Cdrawer extends StatelessWidget {
               Text(
                 l10n.appTitle,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
-                  color: Colors.black87,
+                  color: accentColor,
                   letterSpacing: 0.2,
                 ),
               ),
@@ -135,7 +131,7 @@ class Cdrawer extends StatelessWidget {
                 width: 56,
                 height: 3,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.2),
+                  color: accentColor.withOpacity(0.4),
                   borderRadius: BorderRadius.circular(99),
                 ),
               ),
@@ -153,6 +149,7 @@ class Cdrawer extends StatelessWidget {
       child: Column(
         children: [
           _buildMenuItem(
+            context: context,
             title: l10n.monsters,
             subtitle: l10n.menuMonstersSubtitle,
             leadingIcon: Image.asset(
@@ -171,6 +168,7 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
+            context: context,
             title: l10n.items,
             subtitle: l10n.menuItemsSubtitle,
             leadingIcon: Image.asset(
@@ -189,6 +187,7 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
+            context: context,
             title: l10n.decorations,
             subtitle: l10n.menuDecorationsSubtitle,
             leadingIcon: Image.asset(
@@ -207,6 +206,7 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
+            context: context,
             title: l10n.talismans,
             subtitle: l10n.menuTalismansSubtitle,
             leadingIcon: GearSpriteIcon(
@@ -226,6 +226,7 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
+            context: context,
             title: l10n.armorSets,
             subtitle: l10n.menuArmorSetsSubtitle,
             leadingIcon: GearSpriteIcon(
@@ -245,6 +246,7 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
+            context: context,
             title: l10n.weapons,
             subtitle: l10n.menuWeaponsSubtitle,
             leadingIcon: GearSpriteIcon(
@@ -264,6 +266,7 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
+            context: context,
             title: l10n.skills,
             subtitle: l10n.menuSkillsSubtitle,
             leadingIcon: SkillSpriteIcon(
@@ -282,6 +285,7 @@ class Cdrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
+            context: context,
             title: l10n.buildOptimizer,
             subtitle: l10n.buildOptimizerMenuSubtitle,
             leadingIcon: Icon(
@@ -300,6 +304,7 @@ class Cdrawer extends StatelessWidget {
   }
 
   Widget _buildMenuItem({
+    required BuildContext context,
     required String title,
     required String subtitle,
     required IconData icon,
@@ -308,15 +313,16 @@ class Cdrawer extends StatelessWidget {
     required bool isSelected,
     Widget? leadingIcon,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       decoration: BoxDecoration(
         color: isSelected
             ? _selectedHighlightColor.withOpacity(0.12)
-            : Colors.white,
+            : colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: colorScheme.shadow.withOpacity(0.08),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -324,7 +330,7 @@ class Cdrawer extends StatelessWidget {
         border: Border.all(
           color: isSelected
               ? _selectedHighlightColor.withOpacity(0.35)
-              : Colors.grey[200]!,
+              : colorScheme.outlineVariant,
           width: 1,
         ),
       ),
@@ -363,10 +369,10 @@ class Cdrawer extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black87,
+                          color: colorScheme.onSurface,
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -374,7 +380,7 @@ class Cdrawer extends StatelessWidget {
                         subtitle,
                         style: TextStyle(
                           fontSize: 13,
-                          color: Colors.grey[600],
+                          color: colorScheme.onSurfaceVariant,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -385,7 +391,9 @@ class Cdrawer extends StatelessWidget {
                 // Flecha de navegación
                 Icon(
                   Icons.arrow_forward_ios,
-                  color: isSelected ? _selectedHighlightColor : Colors.grey[400],
+                  color: isSelected
+                      ? _selectedHighlightColor
+                      : colorScheme.onSurfaceVariant,
                   size: 18,
                 ),
               ],
