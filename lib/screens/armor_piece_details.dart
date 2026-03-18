@@ -367,7 +367,6 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                   height: 40,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: colorScheme.surface,
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),

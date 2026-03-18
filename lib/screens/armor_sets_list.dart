@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
+import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
-import 'package:mhwilds_app/components/url_image_loader.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
+import 'package:mhwilds_app/models/skills.dart' as skills_model;
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
+import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/screens/armor_piece_details.dart';
-import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class ArmorSetList extends StatefulWidget {
@@ -33,9 +33,13 @@ class _ArmorSetListState extends State<ArmorSetList> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final armorSetProvider =
           Provider.of<ArmorSetProvider>(context, listen: false);
+      final skillsProvider = Provider.of<SkillsProvider>(context, listen: false);
 
       if (!armorSetProvider.hasData) {
         armorSetProvider.fetchArmorSets();
+      }
+      if (!skillsProvider.hasData && !skillsProvider.isLoading) {
+        skillsProvider.fetchSkills();
       }
       _resetFilters();
     });
@@ -678,13 +682,17 @@ class _ArmorSetListState extends State<ArmorSetList> {
                         width: 24,
                         height: 24,
                         margin: const EdgeInsets.only(right: 8),
-                        child: UrlImageLoader(
-                          itemName:
-                              Provider.of<EnNamesCache>(context, listen: false)
-                                      .nameForSkillImage(
-                                          skill.skill.id, skill.skill.name) ??
-                                  skill.skill.name,
-                          loadImageUrlFunction: getValidSkillImageUrl,
+                        child: SkillSpriteIcon(
+                          iconId:
+                              _skillIconForId(skill.skill.id, context)?.id,
+                          iconKind:
+                              _skillIconForId(skill.skill.id, context)?.kind,
+                          size: 24,
+                          fallback: Icon(
+                            Icons.auto_awesome,
+                            size: 14,
+                            color: colorScheme.primary,
+                          ),
                         ),
                       ),
                       Container(
@@ -883,5 +891,15 @@ class _ArmorSetListState extends State<ArmorSetList> {
 
   Color _getRarityColor(int rarity) {
     return rarityColorFromSprite(rarity);
+  }
+
+  skills_model.SkillIcon? _skillIconForId(int skillId, BuildContext context) {
+    final skillsProvider = Provider.of<SkillsProvider>(context, listen: false);
+    for (final skill in skillsProvider.allSkills) {
+      if (skill.id == skillId) {
+        return skill.icon;
+      }
+    }
+    return null;
   }
 }
