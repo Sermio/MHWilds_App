@@ -67,7 +67,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             if (widget.weapon.skills.isNotEmpty) _buildSkillsSection(),
 
             // Crafting
-            _buildCraftingSection(),
+            if (_hasCraftingData()) _buildCraftingSection(),
 
             // Descripción
             if (widget.weapon.description.isNotEmpty)
@@ -751,29 +751,41 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                // if (widget.weapon.crafting.craftingMaterials.isNotEmpty) ...[
-                //   _buildMaterialsSection(
-                //       widget.weapon.crafting.craftingMaterials),
-                // ],
-                if (widget.weapon.crafting.upgradeMaterials.isNotEmpty) ...[
+                if (widget.weapon.crafting.craftingMaterials.isNotEmpty) ...[
+                  _buildCostLabel(AppLocalizations.of(context)!.craft),
+                  const SizedBox(height: 8),
                   _buildMaterialsSection(
-                      widget.weapon.crafting.upgradeMaterials),
+                    widget.weapon.crafting.craftingMaterials,
+                  ),
+                ],
+                if (widget.weapon.crafting.craftingMaterials.isNotEmpty &&
+                    widget.weapon.crafting.upgradeMaterials.isNotEmpty) ...[
+                  const SizedBox(height: 16),
+                ],
+                if (widget.weapon.crafting.upgradeMaterials.isNotEmpty) ...[
+                  _buildCostLabel(AppLocalizations.of(context)!.upgrade),
+                  const SizedBox(height: 8),
+                  _buildMaterialsSection(
+                    widget.weapon.crafting.upgradeMaterials,
+                  ),
                 ],
                 if (widget.weapon.crafting.craftingZennyCost > 0 ||
                     widget.weapon.crafting.upgradeZennyCost > 0) ...[
                   const SizedBox(height: 20),
-                  Row(
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
                     children: [
-                      // Mostrar solo upgradeZennyCost si hay ambos, o el que esté disponible
-                      if (_shouldShowUpgradeZennyCost()) ...[
-                        if (widget.weapon.crafting.upgradeZennyCost > 0)
-                          _buildCostChip(AppLocalizations.of(context)!.upgrade,
-                              widget.weapon.crafting.upgradeZennyCost),
-                      ] else ...[
-                        if (widget.weapon.crafting.craftingZennyCost > 0)
-                          _buildCostChip(AppLocalizations.of(context)!.craft,
-                              widget.weapon.crafting.craftingZennyCost),
-                      ],
+                      if (widget.weapon.crafting.craftingZennyCost > 0)
+                        _buildCostChip(
+                          AppLocalizations.of(context)!.craft,
+                          widget.weapon.crafting.craftingZennyCost,
+                        ),
+                      if (widget.weapon.crafting.upgradeZennyCost > 0)
+                        _buildCostChip(
+                          AppLocalizations.of(context)!.upgrade,
+                          widget.weapon.crafting.upgradeZennyCost,
+                        ),
                     ],
                   ),
                 ],
@@ -791,6 +803,21 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       children: [
         ...materials.map((material) => _buildMaterialItem(material)).toList(),
       ],
+    );
+  }
+
+  Widget _buildCostLabel(String label) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w700,
+          color: colorScheme.primary,
+        ),
+      ),
     );
   }
 
@@ -1043,20 +1070,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     return stats;
   }
 
-  // Método auxiliar para determinar si mostrar upgradeZennyCost
-  bool _shouldShowUpgradeZennyCost() {
-    final hasCraftingCost = widget.weapon.crafting.craftingZennyCost > 0;
-    final hasUpgradeCost = widget.weapon.crafting.upgradeZennyCost > 0;
-
-    // Si tiene ambos, mostrar solo upgrade
-    if (hasCraftingCost && hasUpgradeCost) {
-      return true;
-    }
-    // Si solo tiene upgrade, mostrarlo
-    if (hasUpgradeCost) {
-      return true;
-    }
-    // Si solo tiene crafting, no mostrar upgrade
-    return false;
+  bool _hasCraftingData() {
+    return widget.weapon.crafting.craftingMaterials.isNotEmpty ||
+        widget.weapon.crafting.upgradeMaterials.isNotEmpty ||
+        widget.weapon.crafting.craftingZennyCost > 0 ||
+        widget.weapon.crafting.upgradeZennyCost > 0;
   }
 }

@@ -6,6 +6,7 @@ class DecorationItem {
   final int rarity;
   final String kind;
   final List<DecorationSkill> skills;
+  final DecorationIcon icon;
   final int id;
   final int gameId;
 
@@ -17,6 +18,7 @@ class DecorationItem {
     required this.rarity,
     required this.kind,
     required this.skills,
+    required this.icon,
     required this.id,
     required this.gameId,
   });
@@ -34,8 +36,29 @@ class DecorationItem {
               .map((e) => DecorationSkill.fromJson(e))
               .toList()
           : [],
+      icon: DecorationIcon.fromJson(json['icon']),
       id: json['id'] ?? 0,
       gameId: json['gameId'] ?? 0,
+    );
+  }
+}
+
+class DecorationIcon {
+  final String color;
+  final int colorId;
+
+  DecorationIcon({
+    required this.color,
+    required this.colorId,
+  });
+
+  factory DecorationIcon.fromJson(dynamic json) {
+    if (json is! Map<String, dynamic>) {
+      return DecorationIcon(color: '', colorId: 0);
+    }
+    return DecorationIcon(
+      color: json['color'] ?? '',
+      colorId: json['colorId'] ?? 0,
     );
   }
 }

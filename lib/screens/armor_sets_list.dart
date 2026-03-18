@@ -510,28 +510,10 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                             Row(
                                               children: [
                                                 // Imagen de la armadura
-                                                Container(
-                                                  width: 35,
-                                                  height: 35,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: colorScheme
-                                                            .primary
-                                                            .withOpacity(0.3),
-                                                        blurRadius: 6,
-                                                        offset:
-                                                            const Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                                SizedBox(
+                                                  width: 60,
+                                                  height: 60,
+                                                  child: Center(
                                                     child: armorColumnByKind
                                                                 .containsKey(
                                                                     piece.kind)
@@ -541,16 +523,16 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                                     piece.kind]!,
                                                             rarity:
                                                                 piece.rarity,
-                                                            size: 35,
+                                                            size: 42,
                                                             fallback:
                                                                 Image.asset(
                                                               'assets/imgs/armor/${piece.kind}/rarity${piece.rarity}.webp',
-                                                              fit: BoxFit.cover,
+                                                              fit: BoxFit.contain,
                                                             ),
                                                           )
                                                         : Image.asset(
                                                             'assets/imgs/armor/${piece.kind}/rarity${piece.rarity}.webp',
-                                                            fit: BoxFit.cover,
+                                                            fit: BoxFit.contain,
                                                           ),
                                                   ),
                                                 ),
@@ -568,42 +550,6 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                               FontWeight.bold,
                                                           fontSize: 18,
                                                           color: Colors.black87,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(height: 4),
-                                                      Container(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 8,
-                                                                vertical: 4),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: _getKindColor(
-                                                                  piece.kind)
-                                                              .withOpacity(0.1),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          border: Border.all(
-                                                            color: _getKindColor(
-                                                                    piece.kind)
-                                                                .withOpacity(
-                                                                    0.3),
-                                                          ),
-                                                        ),
-                                                        child: Text(
-                                                          _getArmorSlotLabel(
-                                                              context,
-                                                              piece.kind),
-                                                          style: TextStyle(
-                                                            fontSize: 12,
-                                                            color:
-                                                                _getKindColor(
-                                                                    piece.kind),
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                          ),
                                                         ),
                                                       ),
                                                       const SizedBox(height: 8),

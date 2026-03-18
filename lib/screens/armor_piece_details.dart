@@ -137,7 +137,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
             _buildSkillsSection(),
 
             // Sección de materiales de crafting
-            _buildCraftingSection(),
+            if (_hasCraftingData()) _buildCraftingSection(),
 
             const SizedBox(height: 40),
           ],
@@ -502,6 +502,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
 
   Widget _buildCraftingSection() {
     final colorScheme = Theme.of(context).colorScheme;
+    final filteredMaterials = _recipeMaterials();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
@@ -553,13 +554,9 @@ class _ArmorDetailsState extends State<ArmorDetails> {
             child: Column(
               children: [
                 // Materiales (excluyendo Zenny si está en la lista)
-                if (widget.armor.crafting.materials.isNotEmpty) ...[
+                if (filteredMaterials.isNotEmpty) ...[
                   _buildMaterialsSection(
-                    widget.armor.crafting.materials
-                        .where((material) =>
-                            material.item.name.toLowerCase() != 'zenny' &&
-                            material.item.name.toLowerCase() != 'zenny cost')
-                        .toList(),
+                    filteredMaterials,
                   ),
                 ],
 
@@ -584,6 +581,18 @@ class _ArmorDetailsState extends State<ArmorDetails> {
         ...materials.map((material) => _buildMaterialItem(material)).toList(),
       ],
     );
+  }
+
+  List<dynamic> _recipeMaterials() {
+    return widget.armor.crafting.materials
+        .where((material) =>
+            material.item.name.toLowerCase() != 'zenny' &&
+            material.item.name.toLowerCase() != 'zenny cost')
+        .toList();
+  }
+
+  bool _hasCraftingData() {
+    return _recipeMaterials().isNotEmpty || widget.armor.crafting.zennyCost > 0;
   }
 
   Widget _buildMaterialItem(dynamic material) {

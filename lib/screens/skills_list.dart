@@ -247,24 +247,10 @@ class _SkillListState2 extends State<SkillList> {
                                       Row(
                                         children: [
                                           // Icono de la habilidad
-                                          Container(
+                                          SizedBox(
                                             width: 60,
                                             height: 60,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: colorScheme.primary
-                                                      .withOpacity(0.3),
-                                                  blurRadius: 8,
-                                                  offset: const Offset(0, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
+                                            child: Center(
                                               child: UrlImageLoader(
                                                 itemName:
                                                     (Provider.of<EnNamesCache>(

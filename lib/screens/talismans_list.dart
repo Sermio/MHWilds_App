@@ -265,31 +265,17 @@ class _AmuletListState extends State<AmuletList> {
                                       Row(
                                         children: [
                                           // Imagen del talisman
-                                          Container(
-                                            width: 35,
-                                            height: 35,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: colorScheme.primary
-                                                      .withOpacity(0.3),
-                                                  blurRadius: 6,
-                                                  offset: const Offset(0, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
+                                          SizedBox(
+                                            width: 60,
+                                            height: 60,
+                                            child: Center(
                                               child: GearSpriteIcon(
                                                 column: talismanColumn,
                                                 rarity: firstRank?.rarity ?? 0,
-                                                size: 35,
+                                                size: 42,
                                                 fallback: Image.asset(
                                                   'assets/imgs/amulets/rarity${firstRank?.rarity ?? 1}.webp',
-                                                  fit: BoxFit.cover,
+                                                  fit: BoxFit.contain,
                                                 ),
                                               ),
                                             ),

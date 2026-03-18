@@ -160,7 +160,7 @@ class Cdrawer extends StatelessWidget {
             title: 'Decorations',
             subtitle: 'Skill gems and jewels',
             leadingIcon: Image.asset(
-              'assets/imgs/decorations/gem_level_1.webp',
+              'assets/imgs/drawer/decoration.png',
               fit: BoxFit.contain,
               errorBuilder: (_, __, ___) => Icon(
                 Icons.diamond,

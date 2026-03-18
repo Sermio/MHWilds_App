@@ -441,36 +441,27 @@ class _WeaponsListState extends State<WeaponsList> {
 
     return Row(
       children: [
-        Container(
-          width: 35,
-          height: 35,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: _getKindColor(weapon.kind).withOpacity(0.2),
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.primary.withOpacity(0.3),
-                blurRadius: 6,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: spriteColumn != null
-              ? GearSpriteIcon(
-                  column: spriteColumn,
-                  rarity: weapon.rarity,
-                  size: 20,
-                  fallback: Icon(
+        SizedBox(
+          width: 60,
+          height: 60,
+          child: Center(
+            child: spriteColumn != null
+                ? GearSpriteIcon(
+                    column: spriteColumn,
+                    rarity: weapon.rarity,
+                    size: 42,
+                    fallback: Icon(
+                      _getWeaponIcon(weapon.kind),
+                      color: _getKindColor(weapon.kind),
+                      size: 42,
+                    ),
+                  )
+                : Icon(
                     _getWeaponIcon(weapon.kind),
                     color: _getKindColor(weapon.kind),
-                    size: 20,
+                    size: 42,
                   ),
-                )
-              : Icon(
-                  _getWeaponIcon(weapon.kind),
-                  color: _getKindColor(weapon.kind),
-                  size: 20,
-                ),
+          ),
         ),
         const SizedBox(width: 16),
         Expanded(
@@ -485,8 +476,6 @@ class _WeaponsListState extends State<WeaponsList> {
                   color: colorScheme.onSurface,
                 ),
               ),
-              const SizedBox(height: 4),
-              _buildWeaponTypeChip(weapon.kind),
               const SizedBox(height: 8),
               _buildRarityChip(weapon.rarity),
             ],
@@ -495,25 +484,6 @@ class _WeaponsListState extends State<WeaponsList> {
         Icon(Icons.arrow_forward_ios,
             color: colorScheme.onSurface.withOpacity(0.6), size: 20),
       ],
-    );
-  }
-
-  Widget _buildWeaponTypeChip(String kind) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: _getKindColor(kind).withOpacity(0.1),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: _getKindColor(kind).withOpacity(0.3)),
-      ),
-      child: Text(
-        _getWeaponKindLabel(context, kind),
-        style: TextStyle(
-          fontSize: 12,
-          color: _getKindColor(kind),
-          fontWeight: FontWeight.w600,
-        ),
-      ),
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/decoration_image.dart';
 import 'package:mhwilds_app/components/filter_panel.dart';
 import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
@@ -255,32 +256,17 @@ class _DecorationsListState extends State<DecorationsList> {
                                       Row(
                                         children: [
                                           // Imagen de la decoración
-                                          Container(
-                                            width: 35,
-                                            height: 35,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: colorScheme.primary
-                                                      .withOpacity(0.3),
-                                                  blurRadius: 6,
-                                                  offset: const Offset(0, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              child: Image.asset(
-                                                'assets/imgs/decorations/gem_level_${_getDecorationLevel(decoration)}.webp',
-                                                fit: BoxFit.cover,
-                                                errorBuilder: (_, __, ___) =>
-                                                    Image.asset(
-                                                  'assets/imgs/decorations/default_jewel.webp',
-                                                  fit: BoxFit.cover,
-                                                ),
+                                          SizedBox(
+                                            width: 60,
+                                            height: 60,
+                                            child: Center(
+                                              child: DecorationAssetImage(
+                                                decoration: decoration,
+                                                width: 42,
+                                                height: 42,
+                                                fallbackLevel:
+                                                    _getDecorationLevel(
+                                                        decoration),
                                               ),
                                             ),
                                           ),
@@ -297,38 +283,6 @@ class _DecorationsListState extends State<DecorationsList> {
                                                     fontSize: 18,
                                                     color:
                                                         colorScheme.onSurface,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 4),
-                                                Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 8,
-                                                      vertical: 4),
-                                                  decoration: BoxDecoration(
-                                                    color: _getTypeColor(
-                                                            decoration.kind)
-                                                        .withOpacity(0.1),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    border: Border.all(
-                                                      color: _getTypeColor(
-                                                              decoration.kind)
-                                                          .withOpacity(0.3),
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    _getDecorationTypeLabel(
-                                                        context,
-                                                        decoration.kind),
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: _getTypeColor(
-                                                          decoration.kind),
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
                                                   ),
                                                 ),
                                               ],
