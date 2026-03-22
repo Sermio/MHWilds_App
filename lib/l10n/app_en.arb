@@ -43,7 +43,16 @@
   "buildOptimizerCreditsIntro": "This screen integrates MH Wilds Build Optimizer as an external collaboration.",
   "buildOptimizerCreditsCreator": "Created by Nenrikido (Nenri).",
   "buildOptimizerNewsTitle": "What's new",
-  "buildOptimizerNewsMessage": "Thanks to a collaboration with Nenri, MHWilds Assistant now includes a build optimizer. Check it out in the menu options.",
+  "buildOptimizerNewsMessage": "Thanks to a collaboration with Cay, MHWilds Assistant now includes a Build crafter. Check it out in the menu options.",
+  "buildCrafter": "Build crafter",
+  "@buildCrafter": {
+    "description": "Menu title for the embedded MH Wilds Build Crafter web tool."
+  },
+  "buildCrafterMenuSubtitle": "Plan and craft builds",
+  "buildCrafterCreditsIntro": "This screen integrates MH Wilds Build Crafter as an external collaboration.",
+  "buildCrafterCreditsCreator": "Created by Cay.",
+  "buildCrafterWebViewUnavailable": "WebView is not available on this platform.",
+  "buildCrafterOpenInBrowser": "Open in browser",
   "rateAppReminder": "Don't forget to rate the app if you like it.",
   "understood": "Understood",
   "web": "Web",

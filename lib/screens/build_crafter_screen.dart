@@ -2,25 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/utils/update_checker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
-class BuildOptimizerScreen extends StatefulWidget {
-  const BuildOptimizerScreen({super.key});
+/// Pantalla embebida para [MH Wilds Build Crafter](https://mhwilds-build-crafter.vercel.app/builder).
+/// Misma idea que [BuildOptimizerScreen], sin inyectar localStorage de mh-opti.
+class BuildCrafterScreen extends StatefulWidget {
+  const BuildCrafterScreen({super.key});
 
   @override
-  State<BuildOptimizerScreen> createState() => _BuildOptimizerScreenState();
+  State<BuildCrafterScreen> createState() => _BuildCrafterScreenState();
 }
 
-class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
-  static final Uri _optimizerUri = Uri.parse('https://mh-opti.nenri.fr/');
+class _BuildCrafterScreenState extends State<BuildCrafterScreen> {
+  static final Uri _crafterUri =
+      Uri.parse('https://mhwilds-build-crafter.vercel.app/builder');
 
   late final bool _isWebViewSupported;
   WebViewController? _controller;
   bool _isLoading = true;
-  bool _hasSyncedPreferences = false;
 
   @override
   void initState() {
@@ -37,40 +37,18 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
             },
             onPageFinished: (_) {
               if (!mounted) return;
-              _syncWebViewPreferences();
               setState(() => _isLoading = false);
             },
           ),
         )
-        ..loadRequest(_optimizerUri);
+        ..loadRequest(_crafterUri);
     } else {
       _isLoading = false;
     }
   }
 
-  void _syncWebViewPreferences() {
-    if (!mounted || _controller == null || _hasSyncedPreferences) return;
-    _hasSyncedPreferences = true;
-    final brightness = Theme.of(context).brightness;
-    final locale = Localizations.localeOf(context);
-    final langKey = locale.countryCode != null
-        ? '${locale.languageCode.toLowerCase()}-${locale.countryCode!.toUpperCase()}'
-        : locale.languageCode.toLowerCase();
-    final themeMode = brightness == Brightness.dark ? 'dark' : 'light';
-    final js = '''
-      (function() {
-        try {
-          localStorage.setItem('mh_opti_theme_mode', '$themeMode');
-          localStorage.setItem('mh_opti_lang', '$langKey');
-          window.location.reload();
-        } catch (e) { console.error(e); }
-      })();
-    ''';
-    _controller!.runJavaScript(js);
-  }
-
-  Future<void> _openOptimizerExternal() async {
-    await launchUrl(_optimizerUri, mode: LaunchMode.externalApplication);
+  Future<void> _openCrafterExternal() async {
+    await launchUrl(_crafterUri, mode: LaunchMode.externalApplication);
   }
 
   bool _supportsWebView() {
@@ -83,6 +61,7 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       children: [
@@ -110,7 +89,7 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          'WebView no disponible en esta plataforma.',
+                          l10n.buildCrafterWebViewUnavailable,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -118,20 +97,11 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Puedes abrir el optimizador en tu navegador.',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
                         const SizedBox(height: 16),
                         FilledButton.icon(
-                          onPressed: _openOptimizerExternal,
+                          onPressed: _openCrafterExternal,
                           icon: const Icon(Icons.launch),
-                          label: const Text('Abrir optimizador'),
+                          label: Text(l10n.buildCrafterOpenInBrowser),
                         ),
                       ],
                     ),
@@ -143,10 +113,10 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
   }
 }
 
-Future<void> showBuildOptimizerCreditsDialog(BuildContext context) async {
+Future<void> showBuildCrafterCreditsDialog(BuildContext context) async {
   final l10n = AppLocalizations.of(context)!;
-  const githubUrl = 'https://github.com/Nenrikido/MH-Optimizer';
-  const websiteUrl = 'https://mh-opti.nenri.fr/';
+  const websiteUrl = 'https://mhwilds-build-crafter.vercel.app/builder';
+  const githubUrl = 'https://github.com/Caydonst/mhwilds-build-crafter';
 
   return showDialog<void>(
     context: context,
@@ -161,7 +131,7 @@ Future<void> showBuildOptimizerCreditsDialog(BuildContext context) async {
         backgroundColor: cs.surfaceContainerHighest,
         surfaceTintColor: Colors.transparent,
         title: Text(
-          l10n.buildOptimizer,
+          l10n.buildCrafter,
           style: TextStyle(
             color: cs.onSurface,
             fontSize: 22,
@@ -173,12 +143,12 @@ Future<void> showBuildOptimizerCreditsDialog(BuildContext context) async {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.buildOptimizerCreditsIntro,
+              l10n.buildCrafterCreditsIntro,
               style: bodyStyle,
             ),
             const SizedBox(height: 8),
             Text(
-              l10n.buildOptimizerCreditsCreator,
+              l10n.buildCrafterCreditsCreator,
               style: bodyStyle.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
@@ -219,53 +189,7 @@ Future<void> showBuildOptimizerCreditsDialog(BuildContext context) async {
         actions: [
           FilledButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('OK'),
-          ),
-        ],
-      );
-    },
-  );
-}
-
-/// Modal de novedades / colaboración (una vez por clave en [HomeScreen]).
-Future<void> showCollaborationNewsDialog(BuildContext context) async {
-  final l10n = AppLocalizations.of(context)!;
-  return showDialog<void>(
-    context: context,
-    builder: (dialogContext) {
-      final cs = Theme.of(dialogContext).colorScheme;
-      final bodyStyle = TextStyle(
-        color: cs.onSurface,
-        fontSize: 16,
-        height: 1.4,
-      );
-      return AlertDialog(
-        backgroundColor: cs.surfaceContainerHighest,
-        surfaceTintColor: Colors.transparent,
-        title: Text(
-          l10n.buildOptimizerNewsTitle,
-          style: TextStyle(
-            color: cs.onSurface,
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        content: Text(
-          '${l10n.buildOptimizerNewsMessage}\n\n${l10n.rateAppReminder}',
-          style: bodyStyle,
-        ),
-        actions: [
-          TextButton.icon(
-            onPressed: () async {
-              await AppUpdateChecker.openStorePage();
-            },
-            style: TextButton.styleFrom(foregroundColor: cs.primary),
-            icon: Icon(Icons.store, size: 18, color: cs.primary),
-            label: Text(l10n.goToStore),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('OK'),
+            child: Text(l10n.understood),
           ),
         ],
       );

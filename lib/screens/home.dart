@@ -12,6 +12,7 @@ import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/screens/build_optimizer_screen.dart';
+import 'package:mhwilds_app/screens/build_crafter_screen.dart';
 import 'package:mhwilds_app/screens/settings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,8 +24,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const String _buildOptimizerNewsSeenKey =
-      'build_optimizer_news_seen_v1';
+  /// Nueva clave → usuarios que ya vieron el modal de Nenri/optimizer lo verán otra vez (Cay / Build crafter).
+  static const String _collaborationNewsSeenKey =
+      'collab_news_cay_build_crafter_v1';
   Widget _selectedScreen = const MonstersList();
 
   @override
@@ -32,17 +34,17 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await AppUpdateChecker.checkAndShowUpdateDialog(context);
-      await _showBuildOptimizerNewsOnce();
+      await _showCollaborationNewsOnce();
     });
   }
 
-  Future<void> _showBuildOptimizerNewsOnce() async {
+  Future<void> _showCollaborationNewsOnce() async {
     final prefs = await SharedPreferences.getInstance();
-    final alreadySeen = prefs.getBool(_buildOptimizerNewsSeenKey) ?? false;
+    final alreadySeen = prefs.getBool(_collaborationNewsSeenKey) ?? false;
     if (alreadySeen || !mounted) return;
 
-    await showBuildOptimizerNewsDialog(context);
-    await prefs.setBool(_buildOptimizerNewsSeenKey, true);
+    await showCollaborationNewsDialog(context);
+    await prefs.setBool(_collaborationNewsSeenKey, true);
   }
 
   String _titleForScreen(BuildContext context, Widget screen) {
@@ -55,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (screen is ItemList) return l10n.items;
     if (screen is WeaponsList) return l10n.weapons;
     if (screen is BuildOptimizerScreen) return l10n.buildOptimizer;
+    if (screen is BuildCrafterScreen) return l10n.buildCrafter;
     return l10n.monsters;
   }
 
@@ -69,6 +72,25 @@ class _HomeScreenState extends State<HomeScreen> {
         IconButton(
           icon: const Icon(Icons.help_outline),
           onPressed: () => showBuildOptimizerCreditsDialog(context),
+        ),
+        IconButton(
+          icon: const Icon(Icons.settings),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const SettingsScreen(),
+              ),
+            );
+          },
+        ),
+      ];
+    }
+    if (_selectedScreen is BuildCrafterScreen) {
+      return [
+        IconButton(
+          icon: const Icon(Icons.help_outline),
+          onPressed: () => showBuildCrafterCreditsDialog(context),
         ),
         IconButton(
           icon: const Icon(Icons.settings),

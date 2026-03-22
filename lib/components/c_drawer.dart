@@ -10,6 +10,7 @@ import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/skills_list.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/screens/build_optimizer_screen.dart';
+import 'package:mhwilds_app/screens/build_crafter_screen.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 
 class Cdrawer extends StatelessWidget {
@@ -297,6 +298,21 @@ class Cdrawer extends StatelessWidget {
             iconColor: Colors.teal[600]!,
             isSelected: selectedScreen is BuildOptimizerScreen,
             onTap: () => onItemSelected(const BuildOptimizerScreen()),
+          ),
+          const SizedBox(height: 8),
+          _buildMenuItem(
+            context: context,
+            title: l10n.buildCrafter,
+            subtitle: l10n.buildCrafterMenuSubtitle,
+            leadingIcon: Icon(
+              Icons.handyman,
+              color: Colors.deepPurple.shade400,
+              size: 30,
+            ),
+            icon: Icons.handyman,
+            iconColor: Colors.deepPurple.shade400,
+            isSelected: selectedScreen is BuildCrafterScreen,
+            onTap: () => onItemSelected(const BuildCrafterScreen()),
           ),
         ],
       ),

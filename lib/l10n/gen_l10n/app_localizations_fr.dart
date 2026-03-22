@@ -122,7 +122,27 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get buildOptimizerNewsMessage =>
-      'Grâce à une collaboration avec Nenri, MHWilds Assistant inclut désormais un optimiseur de build. Découvrez-le dans les options du menu.';
+      'Grâce à une collaboration avec Cay, MHWilds Assistant inclut désormais un créateur de build. Découvrez-le dans les options du menu.';
+
+  @override
+  String get buildCrafter => 'Créateur de build';
+
+  @override
+  String get buildCrafterMenuSubtitle => 'Planifiez et créez vos builds';
+
+  @override
+  String get buildCrafterCreditsIntro =>
+      'Cet écran intègre MH Wilds Build Crafter dans le cadre d\'une collaboration externe.';
+
+  @override
+  String get buildCrafterCreditsCreator => 'Créé par Cay.';
+
+  @override
+  String get buildCrafterWebViewUnavailable =>
+      'WebView n\'est pas disponible sur cette plateforme.';
+
+  @override
+  String get buildCrafterOpenInBrowser => 'Ouvrir dans le navigateur';
 
   @override
   String get rateAppReminder =>

@@ -330,8 +330,44 @@ abstract class AppLocalizations {
   /// No description provided for @buildOptimizerNewsMessage.
   ///
   /// In en, this message translates to:
-  /// **'Thanks to a collaboration with Nenri, MHWilds Assistant now includes a build optimizer. Check it out in the menu options.'**
+  /// **'Thanks to a collaboration with Cay, MHWilds Assistant now includes a Build crafter. Check it out in the menu options.'**
   String get buildOptimizerNewsMessage;
+
+  /// Menu title for the embedded MH Wilds Build Crafter web tool.
+  ///
+  /// In en, this message translates to:
+  /// **'Build crafter'**
+  String get buildCrafter;
+
+  /// No description provided for @buildCrafterMenuSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan and craft builds'**
+  String get buildCrafterMenuSubtitle;
+
+  /// No description provided for @buildCrafterCreditsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'This screen integrates MH Wilds Build Crafter as an external collaboration.'**
+  String get buildCrafterCreditsIntro;
+
+  /// No description provided for @buildCrafterCreditsCreator.
+  ///
+  /// In en, this message translates to:
+  /// **'Created by Cay.'**
+  String get buildCrafterCreditsCreator;
+
+  /// No description provided for @buildCrafterWebViewUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'WebView is not available on this platform.'**
+  String get buildCrafterWebViewUnavailable;
+
+  /// No description provided for @buildCrafterOpenInBrowser.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in browser'**
+  String get buildCrafterOpenInBrowser;
 
   /// No description provided for @rateAppReminder.
   ///

@@ -121,7 +121,27 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get buildOptimizerNewsMessage =>
-      'Gracias a una colaboración con Nenri, MHWilds Assistant ahora tiene un optimizador de builds. Échale un vistazo en las opciones del menú.';
+      'Gracias a una colaboración con Cay, MHWilds Assistant ahora incluye un constructor de builds. Échale un vistazo en las opciones del menú.';
+
+  @override
+  String get buildCrafter => 'Constructor de builds';
+
+  @override
+  String get buildCrafterMenuSubtitle => 'Planifica y crea builds';
+
+  @override
+  String get buildCrafterCreditsIntro =>
+      'Esta pantalla integra MH Wilds Build Crafter como colaboración externa.';
+
+  @override
+  String get buildCrafterCreditsCreator => 'Creado por Cay.';
+
+  @override
+  String get buildCrafterWebViewUnavailable =>
+      'WebView no está disponible en esta plataforma.';
+
+  @override
+  String get buildCrafterOpenInBrowser => 'Abrir en el navegador';
 
   @override
   String get rateAppReminder => 'No olvides calificar la app si te gusta.';
@@ -657,7 +677,27 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
 
   @override
   String get buildOptimizerNewsMessage =>
-      'Gracias a una colaboración con Nenri, MHWilds Assistant ahora tiene un optimizador de builds. Échale un vistazo en las opciones del menú.';
+      'Gracias a una colaboración con Cay, MHWilds Assistant ahora incluye un constructor de builds. Échale un vistazo en las opciones del menú.';
+
+  @override
+  String get buildCrafter => 'Constructor de builds';
+
+  @override
+  String get buildCrafterMenuSubtitle => 'Planifica y crea builds';
+
+  @override
+  String get buildCrafterCreditsIntro =>
+      'Esta pantalla integra MH Wilds Build Crafter como colaboración externa.';
+
+  @override
+  String get buildCrafterCreditsCreator => 'Creado por Cay.';
+
+  @override
+  String get buildCrafterWebViewUnavailable =>
+      'WebView no está disponible en esta plataforma.';
+
+  @override
+  String get buildCrafterOpenInBrowser => 'Abrir en el navegador';
 
   @override
   String get rateAppReminder => 'No olvides calificar la app si te gusta.';
@@ -1193,7 +1233,27 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
   @override
   String get buildOptimizerNewsMessage =>
-      'Gracias a una colaboración con Nenri, MHWilds Assistant ahora tiene un optimizador de builds. Échale un vistazo en las opciones del menú.';
+      'Gracias a una colaboración con Cay, MHWilds Assistant ahora incluye un constructor de builds. Échale un vistazo en las opciones del menú.';
+
+  @override
+  String get buildCrafter => 'Constructor de builds';
+
+  @override
+  String get buildCrafterMenuSubtitle => 'Planifica y crea builds';
+
+  @override
+  String get buildCrafterCreditsIntro =>
+      'Esta pantalla integra MH Wilds Build Crafter como colaboración externa.';
+
+  @override
+  String get buildCrafterCreditsCreator => 'Creado por Cay.';
+
+  @override
+  String get buildCrafterWebViewUnavailable =>
+      'WebView no está disponible en esta plataforma.';
+
+  @override
+  String get buildCrafterOpenInBrowser => 'Abrir en el navegador';
 
   @override
   String get rateAppReminder => 'No olvides calificar la app si te gusta.';
