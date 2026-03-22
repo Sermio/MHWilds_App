@@ -735,7 +735,7 @@ abstract class AppLocalizations {
   /// **'Physical Damage'**
   String get physicalDamage;
 
-  /// No description provided for @affinity.
+  /// Weapon stat label: affinity / critical hit rate modifier (shown as a percentage in the UI).
   ///
   /// In en, this message translates to:
   /// **'Affinity'**

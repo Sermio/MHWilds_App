@@ -134,6 +134,9 @@
   "noResistances": "No resistances",
   "physicalDamage": "Physical Damage",
   "affinity": "Affinity",
+  "@affinity": {
+    "description": "Weapon stat label: affinity / critical hit rate modifier (shown as a percentage in the UI)."
+  },
   "sharpness": "Sharpness",
   "element": "Element",
   "statusEffect": "Status Effect",
