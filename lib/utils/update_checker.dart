@@ -75,18 +75,29 @@ class AppUpdateChecker {
       barrierDismissible: false,
       builder: (ctx) {
         final l10n = AppLocalizations.of(ctx)!;
+        final cs = Theme.of(ctx).colorScheme;
+        final bodyStyle = TextStyle(
+          color: cs.onSurface,
+          fontSize: 16,
+          height: 1.4,
+        );
         return AlertDialog(
+          backgroundColor: cs.surfaceContainerHighest,
+          surfaceTintColor: Colors.transparent,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           title: Row(
             children: [
-              Icon(Icons.system_update,
-                  color: Theme.of(ctx).colorScheme.primary, size: 28),
+              Icon(Icons.system_update, color: cs.primary, size: 28),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
                   l10n.newVersionAvailable,
-                  style: const TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: cs.onSurface,
+                  ),
                 ),
               ),
             ],
@@ -97,10 +108,12 @@ class AppUpdateChecker {
               currentVersion: currentVersion,
               newVersion: storeVersion,
             ),
+            style: bodyStyle,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(),
+              style: TextButton.styleFrom(foregroundColor: cs.primary),
               child: Text(l10n.close),
             ),
             FilledButton.icon(

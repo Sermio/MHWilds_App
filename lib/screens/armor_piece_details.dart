@@ -157,15 +157,9 @@ class _ArmorDetailsState extends State<ArmorDetails> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título de la sección
-          Container(
+          // Título de la sección (sin fondo dorado; alineado con otras pantallas)
+          Padding(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-            ),
             child: Row(
               children: [
                 Icon(
@@ -274,15 +268,9 @@ class _ArmorDetailsState extends State<ArmorDetails> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título de la sección
-          Container(
+          // Título de la sección (sin fondo dorado; alineado con otras pantallas)
+          Padding(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-            ),
             child: Row(
               children: [
                 Icon(
@@ -511,15 +499,9 @@ class _ArmorDetailsState extends State<ArmorDetails> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título de la sección
-          Container(
+          // Título de la sección (sin fondo dorado; alineado con otras pantallas)
+          Padding(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-            ),
             child: Row(
               children: [
                 Icon(
@@ -554,9 +536,21 @@ class _ArmorDetailsState extends State<ArmorDetails> {
 
                 // Costo de Zenny como etiqueta amarilla separada
                 if (widget.armor.crafting.zennyCost > 0) ...[
-                  const SizedBox(height: 20),
-                  _buildCostChip(AppLocalizations.of(context)!.craft,
-                      widget.armor.crafting.zennyCost),
+                  SizedBox(height: filteredMaterials.isEmpty ? 8 : 20),
+                  filteredMaterials.isEmpty
+                      ? SizedBox(
+                          width: double.infinity,
+                          child: Center(
+                            child: _buildCostChip(
+                              AppLocalizations.of(context)!.craft,
+                              widget.armor.crafting.zennyCost,
+                            ),
+                          ),
+                        )
+                      : _buildCostChip(
+                          AppLocalizations.of(context)!.craft,
+                          widget.armor.crafting.zennyCost,
+                        ),
                 ],
               ],
             ),
@@ -617,17 +611,15 @@ class _ArmorDetailsState extends State<ArmorDetails> {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                Container(
+                SizedBox(
                   width: 40,
                   height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: colorScheme.surface,
-                  ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: MaterialImage(
                       item: material.item,
+                      width: 40,
+                      height: 40,
                       materialName:
                           Provider.of<EnNamesCache>(context, listen: false)
                                   .nameForItemImage(

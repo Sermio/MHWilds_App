@@ -451,42 +451,35 @@ class _WeaponsListState extends State<WeaponsList> {
         ),
         const SizedBox(height: 12),
 
-        // Sección de affinity
-        if (weapon.affinity != 0) ...[
-          Row(
-            children: [
-              Icon(
-                Icons.trending_up,
-                size: 16,
-                color: colorScheme.primary,
+        // Afinidad (siempre visible, como el daño físico)
+        Row(
+          children: [
+            Icon(
+              Icons.trending_up,
+              size: 16,
+              color: colorScheme.primary,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              '${AppLocalizations.of(context)!.affinity}:',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
-              const SizedBox(width: 6),
-              Text(
-                '${AppLocalizations.of(context)!.affinity}:',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withOpacity(0.8),
-                ),
+            ),
+            const Spacer(),
+            Text(
+              '${weapon.affinity > 0 ? '+' : ''}${weapon.affinity}%',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: colorScheme.onSurface,
               ),
-              const Spacer(),
-              Row(
-                children: [
-                  const SizedBox(width: 4),
-                  Text(
-                    '${weapon.affinity > 0 ? '+' : ''}${weapon.affinity}%',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-        ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
         // Sección de daño elemental si está disponible
         if (weapon.specials != null) ...[
           WeaponDisplayUtils.buildElementalDamageRow(context, weapon),

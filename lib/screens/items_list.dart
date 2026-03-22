@@ -396,17 +396,15 @@ class _ItemListState extends State<ItemList> {
               final ingredientWidget = Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 32,
                     height: 32,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: colorScheme.surface,
-                    ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(6),
                       child: MaterialImage(
                         item: itemsById[recipeItem.id],
+                        width: 32,
+                        height: 32,
                         materialName:
                             (Provider.of<EnNamesCache>(context, listen: false)
                                     .nameForItemImage(

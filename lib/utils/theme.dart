@@ -34,7 +34,27 @@ class AppTheme {
         elevation: 10,
       ),
       textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: Colors.black87, fontSize: 16, height: 1.4),
         bodyMedium: TextStyle(color: Colors.black87),
+        titleLarge: TextStyle(
+          color: Colors.black87,
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: colorScheme.surface,
+        surfaceTintColor: Colors.transparent,
+        titleTextStyle: const TextStyle(
+          color: Colors.black87,
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+        ),
+        contentTextStyle: const TextStyle(
+          color: Colors.black87,
+          fontSize: 16,
+          height: 1.4,
+        ),
       ),
       cardTheme: CardThemeData(
         shadowColor: AppColors.goldSoft,
@@ -101,8 +121,32 @@ class AppTheme {
         foregroundColor: Colors.black87,
         elevation: 10,
       ),
-      textTheme: const TextTheme(
-        bodyMedium: TextStyle(color: Color(0xFFE0E0E0)),
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(
+          color: colorScheme.onSurface,
+          fontSize: 16,
+          height: 1.4,
+        ),
+        bodyMedium: TextStyle(color: colorScheme.onSurface),
+        titleLarge: TextStyle(
+          color: colorScheme.onSurface,
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: colorScheme.surfaceContainerHighest,
+        surfaceTintColor: Colors.transparent,
+        titleTextStyle: TextStyle(
+          color: colorScheme.onSurface,
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+        ),
+        contentTextStyle: TextStyle(
+          color: colorScheme.onSurface,
+          fontSize: 16,
+          height: 1.4,
+        ),
       ),
       cardTheme: CardThemeData(
         shadowColor: Colors.black54,

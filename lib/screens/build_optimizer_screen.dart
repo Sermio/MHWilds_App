@@ -145,30 +145,41 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
 
 Future<void> showBuildOptimizerCreditsDialog(BuildContext context) async {
   final l10n = AppLocalizations.of(context)!;
-  final colorScheme = Theme.of(context).colorScheme;
   const githubUrl = 'https://github.com/Nenrikido/MH-Optimizer';
   const websiteUrl = 'https://mh-opti.nenri.fr/';
 
   return showDialog<void>(
     context: context,
     builder: (dialogContext) {
+      final cs = Theme.of(dialogContext).colorScheme;
+      final bodyStyle = TextStyle(
+        color: cs.onSurface,
+        fontSize: 16,
+        height: 1.4,
+      );
       return AlertDialog(
-        title: Text(l10n.buildOptimizer),
+        backgroundColor: cs.surfaceContainerHighest,
+        surfaceTintColor: Colors.transparent,
+        title: Text(
+          l10n.buildOptimizer,
+          style: TextStyle(
+            color: cs.onSurface,
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               l10n.buildOptimizerCreditsIntro,
-              style: TextStyle(color: colorScheme.onSurface),
+              style: bodyStyle,
             ),
             const SizedBox(height: 8),
             Text(
               l10n.buildOptimizerCreditsCreator,
-              style: TextStyle(
-                color: colorScheme.onSurface,
-                fontWeight: FontWeight.w600,
-              ),
+              style: bodyStyle.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
             Row(
@@ -218,22 +229,37 @@ Future<void> showBuildOptimizerCreditsDialog(BuildContext context) async {
 
 Future<void> showBuildOptimizerNewsDialog(BuildContext context) async {
   final l10n = AppLocalizations.of(context)!;
-  final colorScheme = Theme.of(context).colorScheme;
   return showDialog<void>(
     context: context,
     builder: (dialogContext) {
+      final cs = Theme.of(dialogContext).colorScheme;
+      final bodyStyle = TextStyle(
+        color: cs.onSurface,
+        fontSize: 16,
+        height: 1.4,
+      );
       return AlertDialog(
-        title: Text(l10n.buildOptimizerNewsTitle),
+        backgroundColor: cs.surfaceContainerHighest,
+        surfaceTintColor: Colors.transparent,
+        title: Text(
+          l10n.buildOptimizerNewsTitle,
+          style: TextStyle(
+            color: cs.onSurface,
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         content: Text(
           '${l10n.buildOptimizerNewsMessage}\n\n${l10n.rateAppReminder}',
-          style: TextStyle(color: colorScheme.onSurface, height: 1.4),
+          style: bodyStyle,
         ),
         actions: [
           TextButton.icon(
             onPressed: () async {
               await AppUpdateChecker.openStorePage();
             },
-            icon: const Icon(Icons.store, size: 18),
+            style: TextButton.styleFrom(foregroundColor: cs.primary),
+            icon: Icon(Icons.store, size: 18, color: cs.primary),
             label: Text(l10n.goToStore),
           ),
           FilledButton(

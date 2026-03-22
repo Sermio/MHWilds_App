@@ -159,17 +159,16 @@ class ItemDetails extends StatelessWidget {
                           return Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              // Imagen del material
-                              Container(
+                              // Sin fondo opaco: los PNG llevan transparencia
+                              SizedBox(
                                 width: 48,
                                 height: 48,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: MaterialImage(
                                     item: itemsById[recipeItem.id],
+                                    width: 48,
+                                    height: 48,
                                     materialName: Provider.of<EnNamesCache>(
                                                 context,
                                                 listen: false)

@@ -171,15 +171,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título de la sección
-          Container(
+          // Título de la sección (sin fondo dorado; alineado con otras pantallas)
+          Padding(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-            ),
             child: Row(
               children: [
                 Icon(
@@ -248,11 +242,11 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     ),
                   ],
                 ),
-                if (widget.weapon.affinity != 0) ...[
-                  const SizedBox(height: 12),
-                  _buildStatRow(AppLocalizations.of(context)!.affinity,
-                      "${widget.weapon.affinity > 0 ? '+' : ''}${widget.weapon.affinity}%"),
-                ],
+                const Divider(height: 24),
+                _buildStatRow(
+                  AppLocalizations.of(context)!.affinity,
+                  '${widget.weapon.affinity > 0 ? '+' : ''}${widget.weapon.affinity}%',
+                ),
                 if (widget.weapon.defenseBonus > 0) ...[
                   const Divider(height: 24),
                   _buildStatRow(AppLocalizations.of(context)!.defenseBonus,
@@ -325,15 +319,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título de la sección
-          Container(
+          // Título de la sección (sin fondo dorado; alineado con otras pantallas)
+          Padding(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-            ),
             child: Row(
               children: [
                 Icon(
@@ -470,15 +458,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título de la sección
-          Container(
+          // Título de la sección (sin fondo dorado; alineado con otras pantallas)
+          Padding(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-            ),
             child: Row(
               children: [
                 Icon(
@@ -694,6 +676,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
 
   Widget _buildCraftingSection() {
     final colorScheme = Theme.of(context).colorScheme;
+    final hasCraftingMaterialRows =
+        widget.weapon.crafting.craftingMaterials.isNotEmpty ||
+            widget.weapon.crafting.upgradeMaterials.isNotEmpty;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
@@ -710,15 +695,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título de la sección
-          Container(
+          // Título de la sección (sin fondo dorado; alineado con otras pantallas)
+          Padding(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-            ),
             child: Row(
               children: [
                 Icon(
@@ -743,6 +722,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if (widget.weapon.crafting.craftingMaterials.isNotEmpty) ...[
                   _buildCostLabel(AppLocalizations.of(context)!.craft),
@@ -765,21 +745,36 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 if (widget.weapon.crafting.craftingZennyCost > 0 ||
                     widget.weapon.crafting.upgradeZennyCost > 0) ...[
                   const SizedBox(height: 20),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: [
-                      if (widget.weapon.crafting.craftingZennyCost > 0)
-                        _buildCostChip(
-                          AppLocalizations.of(context)!.craft,
-                          widget.weapon.crafting.craftingZennyCost,
-                        ),
-                      if (widget.weapon.crafting.upgradeZennyCost > 0)
-                        _buildCostChip(
-                          AppLocalizations.of(context)!.upgrade,
-                          widget.weapon.crafting.upgradeZennyCost,
-                        ),
-                    ],
+                  // Lista vacía: ancho completo para centrar chips. Con materiales: Wrap
+                  // estrecho para que la Column (crossAxis por defecto) lo centre como antes.
+                  Builder(
+                    builder: (context) {
+                      final chips = <Widget>[
+                        if (widget.weapon.crafting.craftingZennyCost > 0)
+                          _buildCostChip(
+                            AppLocalizations.of(context)!.craft,
+                            widget.weapon.crafting.craftingZennyCost,
+                          ),
+                        if (widget.weapon.crafting.upgradeZennyCost > 0)
+                          _buildCostChip(
+                            AppLocalizations.of(context)!.upgrade,
+                            widget.weapon.crafting.upgradeZennyCost,
+                          ),
+                      ];
+                      final wrap = Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        alignment: WrapAlignment.center,
+                        children: chips,
+                      );
+                      if (hasCraftingMaterialRows) {
+                        return wrap;
+                      }
+                      return SizedBox(
+                        width: double.infinity,
+                        child: wrap,
+                      );
+                    },
                   ),
                 ],
               ],
@@ -844,17 +839,15 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                Container(
+                SizedBox(
                   width: 40,
                   height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: colorScheme.surface,
-                  ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: MaterialImage(
                       item: material.item,
+                      width: 40,
+                      height: 40,
                       materialName:
                           (Provider.of<EnNamesCache>(context, listen: false)
                                   .nameForItemImage(
@@ -926,15 +919,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título de la sección
-          Container(
+          // Título de la sección (sin fondo dorado; alineado con otras pantallas)
+          Padding(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-            ),
             child: Row(
               children: [
                 Icon(
