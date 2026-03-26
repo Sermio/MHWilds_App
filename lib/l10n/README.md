@@ -42,5 +42,4 @@ El idioma se controla con `LocaleProvider` (en ajustes o donde quieras):
 
 ```dart
 context.read<LocaleProvider>().setLocale(const Locale('es'));
-context.read<LocaleProvider>().setLocale(null);  // usar idioma del sistema
 ```

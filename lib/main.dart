@@ -64,8 +64,7 @@ class MyApp extends StatelessWidget {
         }
         return Consumer2<ThemeProvider, LocaleProvider>(
           builder: (context, themeProvider, localeProvider, _) {
-            ApiConfig.languageCode = localeProvider.locale?.languageCode ??
-                WidgetsBinding.instance.platformDispatcher.locale.languageCode;
+            ApiConfig.languageCode = localeProvider.locale.languageCode;
             return MaterialApp(
               title: 'MHWilds Assistant',
               theme: AppTheme.lightTheme,

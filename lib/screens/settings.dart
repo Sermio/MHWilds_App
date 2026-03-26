@@ -49,10 +49,7 @@ class SettingsScreen extends StatelessWidget {
                 Consumer<LocaleProvider>(
                   builder: (context, localeProvider, _) {
                     final currentLocale = localeProvider.locale;
-                    final subtitle = getLocaleDisplayName(
-                      currentLocale,
-                      l10n.systemDefault,
-                    );
+                    final subtitle = getLocaleDisplayName(currentLocale, '');
                     return ListTile(
                       title: Text(l10n.language),
                       subtitle: Text(
@@ -140,26 +137,13 @@ class SettingsScreen extends StatelessWidget {
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      ListTile(
-                        title: Text(l10n.systemDefault),
-                        trailing: currentLocale == null
-                            ? Icon(Icons.check, color: colorScheme.primary)
-                            : null,
-                        onTap: () {
-                          ApiConfig.languageCode = WidgetsBinding
-                              .instance.platformDispatcher.locale.languageCode;
-                          localeProvider.setLocale(null);
-                          _invalidateDataProviders(ctx);
-                          Navigator.pop(ctx);
-                        },
-                      ),
                       ...supportedLocales.map((locale) {
-                        final isSelected = currentLocale != null &&
+                        final isSelected =
                             currentLocale.languageCode == locale.languageCode &&
-                            currentLocale.countryCode == locale.countryCode;
+                                currentLocale.countryCode == locale.countryCode;
                         return ListTile(
                           title: Text(
-                              getLocaleDisplayName(locale, l10n.systemDefault)),
+                              getLocaleDisplayName(locale, '')),
                           trailing: isSelected
                               ? Icon(Icons.check, color: colorScheme.primary)
                               : null,
