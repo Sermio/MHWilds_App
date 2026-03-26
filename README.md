@@ -52,31 +52,39 @@
   Here are some images of the application screens with some of the functionalities.
 </p>
 
-
-Monsters list, filters and monster details:
+Drawer menu,Monsters list, Monster details:
 <div style="display: flex; justify-content: space-around;">
-  <img src="https://github.com/user-attachments/assets/fbd09192-5fd0-47b1-a0ee-89c87a881f5e" alt="Registro 1" width="200" hspace="30"/>
-  <img src="https://github.com/user-attachments/assets/4be5ede5-7e0c-47b1-8dc3-2d50c11e6382" alt="Registro 2" width="200" hspace="30"/>
-  <img src="https://github.com/user-attachments/assets/09456f31-78c0-439b-9fa6-e688a3eeb442" alt="Registro 2" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/ba18fe63-909a-4ada-b599-4ca4f280dd3b" alt="Registro 1" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/c2f559fc-f1fc-4bc1-81c6-9f1882734ec7" alt="Registro 2" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/aebbcbb0-8a5e-4e89-bb36-79626b2c9ef5" alt="Registro 2" width="200" hspace="30"/>
 </div>
 
-Weaknesses guide, materials and maps details:
+Ailments, Maps, Items:
 <div style="display: flex; justify-content: space-around;">
-  <img src="https://github.com/user-attachments/assets/75cb5870-82e6-417a-b74f-f58857f2f3ab" alt="Registro 1" width="200" hspace="30"/>
-  <img src="https://github.com/user-attachments/assets/f3b5ee21-8d0d-4a18-a9e9-6199a76a7bfe" alt="Registro 2" width="200" hspace="30"/>
-  <img src="https://github.com/user-attachments/assets/dfd8779a-1b41-4a4c-b674-73c5f0eaed70" alt="Registro 2" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/c1e0f0c0-2081-4b87-b556-85af4ada1392" alt="Registro 1" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/8ca55435-5b32-4a59-b704-a25560f15712" alt="Registro 2" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/4193bab6-bb3f-40f8-b120-fef3b51efea5" alt="Registro 2" width="200" hspace="30"/>
 </div>
 
-Drawer, armors list and skill information:
+Decorations, Talismans, Skills:
 <div style="display: flex; justify-content: space-around;">
-  <img src="https://github.com/user-attachments/assets/e4a3eda0-9986-4c74-a0c5-f7948e05ff55" alt="Registro 1" width="200" hspace="30"/>
-  <img src="https://github.com/user-attachments/assets/217d50e2-474f-47b4-af1d-48154b6d8463" alt="Registro 2" width="200" hspace="30"/>
-  <img src="https://github.com/user-attachments/assets/a3ecf9e5-0c45-4b29-82fb-89cbd18211ca" alt="Registro 2" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/c92262bb-bfcf-4749-931e-acd69ff3b514" alt="Registro 1" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/e39ff4be-c2a9-4df3-9e23-2b16104a50c8" alt="Registro 2" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/6c368b9c-1387-4616-b752-240ae2edee5a" alt="Registro 2" width="200" hspace="30"/>
+</div>
+
+Armor, Weapons, Build Optimizer:
+<div style="display: flex; justify-content: space-around;">
+  <img src="https://github.com/user-attachments/assets/92ce25c3-391c-420c-8e80-a4b7c1ff4804" alt="Registro 1" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/8cdc5370-4fca-4802-8b79-6a050626ed8b" alt="Registro 2" width="200" hspace="30"/>
+  <img src="https://github.com/user-attachments/assets/c45524bc-abbb-44f8-abb5-ceffca685c4c" alt="Registro 2" width="200" hspace="30"/>
 </div>
 
 
-
-
+Build Crafter:
+<div style="display: flex; justify-content: space-around;">
+  <img src="https://github.com/user-attachments/assets/76f01902-5bb1-45dd-9b0f-c99b43ea55a8" alt="Registro 1" width="200" hspace="30"/>
+</div>
 
 
 
