@@ -43,31 +43,44 @@ class AppUpdateChecker {
   static Future<void> _showUpdateDialog(BuildContext context,
       {String? storeVersionOverride}) async {
     String? storeVersion = storeVersionOverride;
+    String currentVersion = '';
+    try {
+      final info = await PackageInfo.fromPlatform();
+      currentVersion = _normalizeVersionForDisplay(info.version);
+    } catch (_) {}
+
     if (storeVersion == null) {
       try {
         // Intentar obtener el versionName desde Google Play Store
         final versionName = await _getStoreVersionName();
         // Si falla, usar el método del paquete como fallback
         if (versionName != null && versionName.isNotEmpty) {
-          storeVersion = _normalizeVersionForDisplay(versionName);
+          storeVersion = _sanitizeStoreVersionForDisplay(
+            versionName,
+            currentVersion: currentVersion,
+          );
         } else {
           final fallback = await _checker.getStoreVersion();
-          storeVersion = fallback != null ? _normalizeVersionForDisplay(fallback) : null;
+          storeVersion = fallback != null
+              ? _sanitizeStoreVersionForDisplay(
+                  fallback,
+                  currentVersion: currentVersion,
+                )
+              : null;
         }
       } catch (_) {
         // Si todo falla, intentar con el método del paquete
         try {
           final fallback = await _checker.getStoreVersion();
-          storeVersion = fallback != null ? _normalizeVersionForDisplay(fallback) : null;
+          storeVersion = fallback != null
+              ? _sanitizeStoreVersionForDisplay(
+                  fallback,
+                  currentVersion: currentVersion,
+                )
+              : null;
         } catch (_) {}
       }
     }
-
-    String currentVersion = '';
-    try {
-      final info = await PackageInfo.fromPlatform();
-      currentVersion = _normalizeVersionForDisplay(info.version);
-    } catch (_) {}
 
     if (!context.mounted) return;
     showDialog(
@@ -147,21 +160,47 @@ class AppUpdateChecker {
     return normalized;
   }
 
+  /// Evita mostrar versiones "basura" que a veces devuelve Play/HTML
+  /// (ej. capturas de chunks JS como 1.43.35).
+  static String _sanitizeStoreVersionForDisplay(
+    String version, {
+    required String currentVersion,
+  }) {
+    final normalized = _normalizeVersionForDisplay(version);
+    if (normalized.isEmpty) return '';
+
+    // Solo aceptar formatos numéricos de versión habituales.
+    if (!RegExp(r'^\d+(?:\.\d+){1,2}$').hasMatch(normalized)) return '';
+
+    final parts = normalized.split('.').map(int.parse).toList();
+    if (parts.length >= 2 && parts[1] > 20) return '';
+    if (parts.length >= 3 && parts[2] > 200) return '';
+
+    if (currentVersion.isNotEmpty &&
+        RegExp(r'^\d+(?:\.\d+){1,2}$').hasMatch(currentVersion)) {
+      final currentParts = currentVersion.split('.').map(int.parse).toList();
+      final currentMajor = currentParts[0];
+      final currentMinor = currentParts.length > 1 ? currentParts[1] : 0;
+      final major = parts[0];
+      final minor = parts.length > 1 ? parts[1] : 0;
+
+      // Si mantiene major pero cambia demasiado el minor, suele ser ruido.
+      if (major == currentMajor && (minor - currentMinor).abs() > 10) {
+        return '';
+      }
+    }
+
+    return normalized;
+  }
+
   static String _buildUpdateMessage({
     required AppLocalizations l10n,
     required String currentVersion,
     String? newVersion,
   }) {
-    final hasCurrent = currentVersion.isNotEmpty;
-    final hasNew = newVersion != null && newVersion.isNotEmpty;
-    if (hasCurrent && hasNew) {
-      return l10n.updateMessageWithBoth(currentVersion, newVersion);
-    }
-    if (hasCurrent) {
+    // UX solicitado: mostrar solo la versión actual del usuario (sin versión nueva).
+    if (currentVersion.isNotEmpty) {
       return l10n.updateMessageCurrentOnly(currentVersion);
-    }
-    if (hasNew) {
-      return l10n.updateMessageNewOnly(newVersion);
     }
     return l10n.updateMessageGeneric;
   }
@@ -200,38 +239,15 @@ class AppUpdateChecker {
           } catch (_) {}
         }
 
-        // Buscar en el HTML directamente usando patrones comunes
-        // Patrón 1: "Current Version" seguido del número de versión
-        final versionPattern1 = RegExp(
-          r'Current Version</div>\s*<div[^>]*>([^<]+)</div>',
-          caseSensitive: false,
-        );
-        final match1 = versionPattern1.firstMatch(html);
-        if (match1 != null) {
-          final version = match1.group(1)?.trim();
+        // Fallback robusto: softwareVersion en metadatos/JSON embebido.
+        final softwareVersionPattern =
+            RegExp(r'"softwareVersion"\s*:\s*"([^"]+)"');
+        final softwareVersionMatch = softwareVersionPattern.firstMatch(html);
+        if (softwareVersionMatch != null) {
+          final version = softwareVersionMatch.group(1)?.trim();
           if (version != null && version.isNotEmpty) {
             return version;
           }
-        }
-
-        // Patrón 2: versión tipo X.Y o X.Y.Z (evitar solo dígitos = versionCode)
-        // Buscar en la sección de "Current Version" para evitar capturar versiones del changelog
-        final versionPattern2 = RegExp(
-          r'Current Version[\s\S]*?(\d+\.\d+(?:\.\d+)?)',
-          caseSensitive: false,
-        );
-        final match2 = versionPattern2.firstMatch(html);
-        if (match2 != null) {
-          final version = match2.group(1)?.trim();
-          if (version != null && version.isNotEmpty) {
-            return version;
-          }
-        }
-        // Último recurso: primera X.Y.Z en el HTML (puede ser impreciso)
-        final versionPattern3 = RegExp(r'\b(\d+\.\d+\.\d+)\b');
-        final match3 = versionPattern3.firstMatch(html);
-        if (match3 != null) {
-          return match3.group(1)!.trim();
         }
       }
     } catch (_) {
