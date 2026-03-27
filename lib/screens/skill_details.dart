@@ -214,6 +214,34 @@ class _SkillDetailsState extends State<SkillDetails> {
                                                 ),
                                               ),
                                             ),
+                                            if (rank.setPiecesRequired > 0) ...[
+                                              const SizedBox(width: 8),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                  horizontal: 10,
+                                                  vertical: 6,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: colorScheme
+                                                      .surfaceContainerHighest,
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  border: Border.all(
+                                                    color:
+                                                        colorScheme.outlineVariant,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  '${rank.setPiecesRequired} ${AppLocalizations.of(context)!.pieces}',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: colorScheme.onSurface,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ],
                                         ),
                                         const SizedBox(height: 12),

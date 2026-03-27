@@ -32,7 +32,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   Future<List<Skills>> fetchSkillsForArmor(
       armor_models.ArmorPiece armor) async {
     List<Skills> skills = [];
-    for (var skillInfo in armor.skills) {
+    for (var skillInfo in armor.displaySkills) {
       int skillId = skillInfo.skill.id;
       skills.add(await SkillsApi.fetchSkillById(skillId));
     }
@@ -404,6 +404,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                             ...skillInfo.ranks.map((rank) {
                               bool isCurrentLevel = widget.armor.skills.any(
                                 (armorSkill) =>
+                                    !armorSkill.isSetOrGroupBonus &&
                                     armorSkill.skill.id == skillInfo.id &&
                                     armorSkill.level == rank.level,
                               );

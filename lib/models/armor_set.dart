@@ -18,15 +18,18 @@ class ArmorSet {
   });
 
   factory ArmorSet.fromJson(Map<String, dynamic> json) {
+    final rawBonus = json['bonus'] ?? json['setBonus'] ?? json['set_bonus'];
+    final rawGroupBonus =
+        json['groupBonus'] ?? json['group_bonus'] ?? json['groupbonus'];
     return ArmorSet(
       name: json['name'] as String? ?? '',
       pieces: (json['pieces'] as List? ?? [])
           .map((piece) => ArmorPiece.fromJson(piece))
           .toList(),
-      bonus: Bonus.fromJson(json['bonus'] ?? {}),
-      groupBonus: GroupBonus.fromJson(json['groupBonus'] ?? {}),
+      bonus: Bonus.fromJson(rawBonus ?? {}),
+      groupBonus: GroupBonus.fromJson(rawGroupBonus ?? {}),
       id: json['id'] as int? ?? 0,
-      gameId: json['gameId'] as int? ?? 0,
+      gameId: json['gameId'] as int? ?? (json['game_id'] as int? ?? 0),
     );
   }
 }
@@ -37,8 +40,9 @@ class Bonus {
   Bonus({required this.id});
 
   factory Bonus.fromJson(Map<String, dynamic> json) {
+    final skillId = json['skillId'] ?? json['skill_id'];
     return Bonus(
-      id: json['id'] as int? ?? 0,
+      id: json['id'] as int? ?? (skillId as int? ?? 0),
     );
   }
 }
@@ -56,7 +60,9 @@ class GroupBonus {
 
   factory GroupBonus.fromJson(Map<String, dynamic> json) {
     return GroupBonus(
-      id: json['id'] as int? ?? 0,
+      id: json['id'] as int? ??
+          (json['groupBonusId'] as int? ??
+              (json['group_bonus_id'] as int? ?? 0)),
       skill: Skill.fromJson(json['skill'] ?? {}),
       ranks: (json['ranks'] as List? ?? [])
           .map((rankJson) => Rank.fromJson(rankJson))
@@ -98,7 +104,9 @@ class Rank {
   factory Rank.fromJson(Map<String, dynamic> json) {
     return Rank(
       bonus: Bonus.fromJson(json['bonus'] ?? {}),
-      pieces: json['pieces'] as int? ?? 0,
+      pieces: json['pieces'] as int? ??
+          (json['set_pieces_required'] as int? ??
+              (json['setPiecesRequired'] as int? ?? 0)),
       skill: SkillWithLevel.fromJson(json['skill'] ?? {}),
       id: json['id'] as int? ?? 0,
     );

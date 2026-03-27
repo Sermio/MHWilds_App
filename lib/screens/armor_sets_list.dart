@@ -429,7 +429,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                             const SizedBox(height: 16),
 
                                             // Habilidades
-                                            if (piece.skills.isNotEmpty) ...[
+                                            if (piece.displaySkills.isNotEmpty) ...[
                                               _buildSkillsSection(piece),
                                             ],
                                           ],
@@ -668,7 +668,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
           ],
         ),
         const SizedBox(height: 8),
-        ...armorPiece.skills.map((skill) => Container(
+        ...armorPiece.displaySkills.map((skill) => Container(
               margin: const EdgeInsets.only(bottom: 8),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
