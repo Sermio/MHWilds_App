@@ -14,6 +14,8 @@ class ArmorPiece {
   final ArmorSet armorSet;
   final Crafting crafting;
   final int id;
+  List<SkillInfo> get displaySkills =>
+      skills.where((skillInfo) => !skillInfo.isSetOrGroupBonus).toList();
 
   ArmorPiece({
     required this.kind,
@@ -39,9 +41,7 @@ class ArmorPiece {
       rarity: json['rarity'] as int? ?? 0,
       resistances: Map<String, int>.from(json['resistances'] ?? {}),
       defense: Map<String, int>.from(json['defense'] ?? {}),
-      skills: (json['skills'] as List? ?? [])
-          .map((skillJson) => SkillInfo.fromJson(skillJson))
-          .toList(),
+      skills: SkillInfo.listFromJson(json['skills']),
       slots: (json['slots'] as List? ?? []).map((e) => e as int).toList(),
       armorSet: ArmorSet.fromJson(json['armorSet'] ?? {}),
       crafting: Crafting.fromJson(json['crafting'] ?? {}),
@@ -55,6 +55,10 @@ class SkillInfo {
   final int level;
   final String description;
   final int id;
+  bool get isSetOrGroupBonus {
+    final kind = skill.kind.toLowerCase();
+    return kind == 'set' || kind == 'group';
+  }
 
   SkillInfo({
     required this.skill,
@@ -70,6 +74,45 @@ class SkillInfo {
       description: json['description'] as String? ?? '',
       id: json['id'] as int? ?? 0,
     );
+  }
+
+  /// Compatibilidad:
+  /// - Formato actual API: List<{skill, level, description, id}>
+  /// - Nuevo formato de archivos mergeados: Map<skillId, level>
+  static List<SkillInfo> listFromJson(dynamic rawSkills) {
+    if (rawSkills is List) {
+      return rawSkills
+          .whereType<Map>()
+          .map((e) => SkillInfo.fromJson(Map<String, dynamic>.from(e)))
+          .toList();
+    }
+
+    if (rawSkills is Map) {
+      final result = <SkillInfo>[];
+      rawSkills.forEach((key, value) {
+        final parsedId = int.tryParse(key.toString()) ?? 0;
+        final parsedLevel = value is int ? value : int.tryParse('$value') ?? 0;
+        result.add(
+          SkillInfo(
+            id: 0,
+            level: parsedLevel,
+            description: '',
+            skill: Skills(
+              id: parsedId,
+              gameId: 0,
+              name: 'Unknown',
+              kind: '',
+              description: '',
+              ranks: const [],
+              icon: null,
+            ),
+          ),
+        );
+      });
+      return result;
+    }
+
+    return const [];
   }
 }
 
