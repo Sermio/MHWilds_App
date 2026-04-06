@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/utils/update_checker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
+import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 class BuildOptimizerScreen extends StatefulWidget {
   const BuildOptimizerScreen({super.key});
@@ -27,7 +28,7 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
     super.initState();
     _isWebViewSupported = _supportsWebView();
     if (_isWebViewSupported) {
-      _controller = WebViewController()
+      _controller = _createController()
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
         ..setNavigationDelegate(
           NavigationDelegate(
@@ -46,6 +47,31 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
     } else {
       _isLoading = false;
     }
+  }
+
+  WebViewController _createController() {
+    final controller = WebViewController.fromPlatformCreationParams(
+      const PlatformWebViewControllerCreationParams(),
+    );
+
+    final platformController = controller.platform;
+    if (platformController is AndroidWebViewController) {
+      platformController.setOnShowFileSelector((params) async {
+        final allowMultiple = switch (params.mode) {
+          FileSelectorMode.openMultiple => true,
+          _ => false,
+        };
+
+        final result = await FilePicker.platform.pickFiles(
+          allowMultiple: allowMultiple,
+        );
+
+        final paths = result?.paths.whereType<String>().toList() ?? const [];
+        return paths.map((p) => Uri.file(p).toString()).toList();
+      });
+    }
+
+    return controller;
   }
 
   void _syncWebViewPreferences() {
