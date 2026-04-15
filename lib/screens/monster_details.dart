@@ -99,12 +99,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           Row(
             children: [
               Expanded(
-                child: _buildInfoRow(
-                    AppLocalizations.of(context)!.type, monster.kind),
+                child: _buildInfoRow(AppLocalizations.of(context)!.type,
+                    monster.displayKind(AppLocalizations.of(context)!)),
               ),
               Expanded(
-                child: _buildInfoRow(
-                    AppLocalizations.of(context)!.species, monster.species),
+                child: _buildInfoRow(AppLocalizations.of(context)!.species,
+                    monster.displaySpecies(AppLocalizations.of(context)!)),
               ),
             ],
           ),

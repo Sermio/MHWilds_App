@@ -197,5 +197,20 @@
   "breakableParts": "Parties Cassables",
   "unknown": "Inconnu",
   "unknownMap": "Carte Inconnue",
-  "map": "Carte"
+  "map": "Carte",
+  "speciesFangedWyvern": "Wyverne à crocs",
+  "speciesFlyingWyvern": "Wyverne volante",
+  "speciesBruteWyvern": "Wyverne brute",
+  "speciesBirdWyvern": "Wyverne rapace",
+  "speciesPiscineWyvern": "Wyverne pisciforme",
+  "speciesFangedBeast": "Bête à crocs",
+  "speciesElderDragon": "Dragon ancien",
+  "speciesRelicat": "Relicat",
+  "speciesNeopteron": "Néoptéron",
+  "speciesTemnoceran": "Temnocérane",
+  "speciesLeviathan": "Léviathan",
+  "speciesAmphibian": "Amphibien",
+  "speciesSnakeWyvern": "Wyverne serpent",
+  "monsterKindLarge": "Grand monstre",
+  "monsterKindSmall": "Petit monstre"
 }

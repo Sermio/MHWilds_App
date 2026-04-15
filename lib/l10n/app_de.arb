@@ -206,5 +206,20 @@
   "breakableParts": "Zerbrechbare Teile",
   "unknown": "Unbekannt",
   "unknownMap": "Unbekannte Karte",
-  "map": "Karte"
+  "map": "Karte",
+  "speciesFangedWyvern": "Reißzahn-Wyvern",
+  "speciesFlyingWyvern": "Flug-Wyvern",
+  "speciesBruteWyvern": "Brute-Wyvern",
+  "speciesBirdWyvern": "Vogel-Wyvern",
+  "speciesPiscineWyvern": "Fisch-Wyvern",
+  "speciesFangedBeast": "Reißzahn-Bestie",
+  "speciesElderDragon": "Drachenältester",
+  "speciesRelicat": "Relicat",
+  "speciesNeopteron": "Neopteron",
+  "speciesTemnoceran": "Temnoceran",
+  "speciesLeviathan": "Leviathan",
+  "speciesAmphibian": "Amphibie",
+  "speciesSnakeWyvern": "Schlangen-Wyvern",
+  "monsterKindLarge": "Großes Monster",
+  "monsterKindSmall": "Kleines Monster"
 }

@@ -1196,6 +1196,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rate application'**
   String get rateAppAction;
+
+  /// No description provided for @speciesFangedWyvern.
+  ///
+  /// In en, this message translates to:
+  /// **'Fanged Wyvern'**
+  String get speciesFangedWyvern;
+
+  /// No description provided for @speciesFlyingWyvern.
+  ///
+  /// In en, this message translates to:
+  /// **'Flying Wyvern'**
+  String get speciesFlyingWyvern;
+
+  /// No description provided for @speciesBruteWyvern.
+  ///
+  /// In en, this message translates to:
+  /// **'Brute Wyvern'**
+  String get speciesBruteWyvern;
+
+  /// No description provided for @speciesBirdWyvern.
+  ///
+  /// In en, this message translates to:
+  /// **'Bird Wyvern'**
+  String get speciesBirdWyvern;
+
+  /// No description provided for @speciesPiscineWyvern.
+  ///
+  /// In en, this message translates to:
+  /// **'Piscine Wyvern'**
+  String get speciesPiscineWyvern;
+
+  /// No description provided for @speciesFangedBeast.
+  ///
+  /// In en, this message translates to:
+  /// **'Fanged Beast'**
+  String get speciesFangedBeast;
+
+  /// No description provided for @speciesElderDragon.
+  ///
+  /// In en, this message translates to:
+  /// **'Elder Dragon'**
+  String get speciesElderDragon;
+
+  /// No description provided for @speciesRelicat.
+  ///
+  /// In en, this message translates to:
+  /// **'Relicat'**
+  String get speciesRelicat;
+
+  /// No description provided for @speciesNeopteron.
+  ///
+  /// In en, this message translates to:
+  /// **'Neopteron'**
+  String get speciesNeopteron;
+
+  /// No description provided for @speciesTemnoceran.
+  ///
+  /// In en, this message translates to:
+  /// **'Temnoceran'**
+  String get speciesTemnoceran;
+
+  /// No description provided for @speciesLeviathan.
+  ///
+  /// In en, this message translates to:
+  /// **'Leviathan'**
+  String get speciesLeviathan;
+
+  /// No description provided for @speciesAmphibian.
+  ///
+  /// In en, this message translates to:
+  /// **'Amphibian'**
+  String get speciesAmphibian;
+
+  /// No description provided for @speciesSnakeWyvern.
+  ///
+  /// In en, this message translates to:
+  /// **'Snake Wyvern'**
+  String get speciesSnakeWyvern;
+
+  /// No description provided for @monsterKindLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Large Monster'**
+  String get monsterKindLarge;
+
+  /// No description provided for @monsterKindSmall.
+  ///
+  /// In en, this message translates to:
+  /// **'Small Monster'**
+  String get monsterKindSmall;
 }
 
 class _AppLocalizationsDelegate
