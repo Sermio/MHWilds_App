@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/api/monsters_api.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/utils/utils.dart';
 
 class MonstersProvider with ChangeNotifier {
   List<Monster> _monsters = [];
@@ -41,15 +43,27 @@ class MonstersProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void applyFilters({String? name, String? species, List<String>? locations}) {
+  void applyFilters(
+      {String? name,
+      String? species,
+      List<String>? locations,
+      required AppLocalizations l10n}) {
     _selectedLocations = locations ?? [];
     _hasLocationFilter = _selectedLocations.isNotEmpty;
 
     _filteredMonsters = _monsters.where((monster) {
-      bool matchesName = name == null ||
-          monster.name.toLowerCase().contains(name.toLowerCase());
+      final searchName = removeDiacritics(name ?? '');
+      final monsterName = removeDiacritics(monster.name);
+
+      bool matchesName = name == null || monsterName.contains(searchName);
+
+      final displaySpecies = removeDiacritics(monster.displaySpecies(l10n));
+      final rawSpecies = removeDiacritics(monster.species.replaceAll('-', '_'));
+      final searchSpecies = removeDiacritics(species ?? '');
+
       bool matchesSpecies = species == null ||
-          monster.species.toLowerCase().contains(species.toLowerCase());
+          displaySpecies.contains(searchSpecies) ||
+          rawSpecies.contains(searchSpecies);
 
       bool matchesLocation = _hasLocationFilter
           ? monster.locations.any((location) {

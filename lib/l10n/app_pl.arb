@@ -206,5 +206,20 @@
   "breakableParts": "Łamiące Się Części",
   "unknown": "Nieznane",
   "unknownMap": "Nieznana Mapa",
-  "map": "Mapa"
+  "map": "Mapa",
+  "speciesFangedWyvern": "Wyverna kłowa",
+  "speciesFlyingWyvern": "Wyverna latająca",
+  "speciesBruteWyvern": "Wyverna brutalna",
+  "speciesBirdWyvern": "Wyverna ptasia",
+  "speciesPiscineWyvern": "Wyverna rybia",
+  "speciesFangedBeast": "Kłowa bestia",
+  "speciesElderDragon": "Starszy smok",
+  "speciesRelicat": "Relicat",
+  "speciesNeopteron": "Neopteron",
+  "speciesTemnoceran": "Temnoceran",
+  "speciesLeviathan": "Lewiatan",
+  "speciesAmphibian": "Płaz",
+  "speciesSnakeWyvern": "Wyverna wężowa",
+  "monsterKindLarge": "Duży potwór",
+  "monsterKindSmall": "Mały potwór"
 }

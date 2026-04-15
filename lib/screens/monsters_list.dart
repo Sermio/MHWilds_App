@@ -247,7 +247,7 @@ class _MonstersListState extends State<MonstersList> {
                                                     ),
                                                   ),
                                                   child: Text(
-                                                    monster.species,
+                                                    monster.displaySpecies(l10n),
                                                     style: TextStyle(
                                                       fontSize: 12,
                                                       color:
@@ -413,6 +413,7 @@ class _MonstersListState extends State<MonstersList> {
       name: _searchNameQuery,
       species: _searchSpeciesQuery,
       locations: _selectedLocations,
+      l10n: AppLocalizations.of(context)!,
     );
   }
 

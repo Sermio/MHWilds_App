@@ -570,4 +570,49 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get rateAppAction => 'Rate application';
+
+  @override
+  String get speciesFangedWyvern => 'Wyverne à crocs';
+
+  @override
+  String get speciesFlyingWyvern => 'Wyverne volante';
+
+  @override
+  String get speciesBruteWyvern => 'Wyverne brute';
+
+  @override
+  String get speciesBirdWyvern => 'Wyverne rapace';
+
+  @override
+  String get speciesPiscineWyvern => 'Wyverne pisciforme';
+
+  @override
+  String get speciesFangedBeast => 'Bête à crocs';
+
+  @override
+  String get speciesElderDragon => 'Dragon ancien';
+
+  @override
+  String get speciesRelicat => 'Relicat';
+
+  @override
+  String get speciesNeopteron => 'Néoptéron';
+
+  @override
+  String get speciesTemnoceran => 'Temnocérane';
+
+  @override
+  String get speciesLeviathan => 'Léviathan';
+
+  @override
+  String get speciesAmphibian => 'Amphibien';
+
+  @override
+  String get speciesSnakeWyvern => 'Wyverne serpent';
+
+  @override
+  String get monsterKindLarge => 'Grand monstre';
+
+  @override
+  String get monsterKindSmall => 'Petit monstre';
 }

@@ -1,4 +1,5 @@
 import 'package:mhwilds_app/models/item.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 
 class Monster {
   final int id;
@@ -350,5 +351,56 @@ class MonsterSize {
       silver: (json['silver'] ?? 0.0).toDouble(),
       gold: (json['gold'] ?? 0.0).toDouble(),
     );
+  }
+}
+
+extension MonsterDisplay on Monster {
+  String displaySpecies(AppLocalizations l10n) {
+    final normalized = species.toLowerCase().replaceAll('-', '_');
+    switch (normalized) {
+      case 'fanged_wyvern':
+        return l10n.speciesFangedWyvern;
+      case 'flying_wyvern':
+        return l10n.speciesFlyingWyvern;
+      case 'brute_wyvern':
+        return l10n.speciesBruteWyvern;
+      case 'bird_wyvern':
+        return l10n.speciesBirdWyvern;
+      case 'piscine_wyvern':
+        return l10n.speciesPiscineWyvern;
+      case 'fanged_beast':
+        return l10n.speciesFangedBeast;
+      case 'elder_dragon':
+        return l10n.speciesElderDragon;
+      case 'relicat':
+        return l10n.speciesRelicat;
+      case 'neopteron':
+        return l10n.speciesNeopteron;
+      case 'temnoceran':
+        return l10n.speciesTemnoceran;
+      case 'leviathan':
+        return l10n.speciesLeviathan;
+      case 'amphibian':
+        return l10n.speciesAmphibian;
+      case 'snake_wyvern':
+        return l10n.speciesSnakeWyvern;
+      default:
+        return normalized
+            .replaceAll('_', ' ')
+            .split(' ')
+            .map((s) => s.isNotEmpty ? s[0].toUpperCase() + s.substring(1) : s)
+            .join(' ');
+    }
+  }
+
+  String displayKind(AppLocalizations l10n) {
+    switch (kind.toLowerCase()) {
+      case 'large':
+        return l10n.monsterKindLarge;
+      case 'small':
+        return l10n.monsterKindSmall;
+      default:
+        return kind;
+    }
   }
 }

@@ -281,3 +281,12 @@ String getKindImage(String skillKind) {
       return 'assets/imgs/armor/chest/rarity8.webp';
   }
 }
+
+String removeDiacritics(String text) {
+  var withDia = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ';
+  var withoutDia = 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn';
+  for (int i = 0; i < withDia.length; i++) {
+    text = text.replaceAll(withDia[i], withoutDia[i]);
+  }
+  return text.toLowerCase().trim();
+}

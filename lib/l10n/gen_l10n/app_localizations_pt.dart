@@ -568,6 +568,51 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get rateAppAction => 'Rate application';
+
+  @override
+  String get speciesFangedWyvern => 'Wyvern de Presas';
+
+  @override
+  String get speciesFlyingWyvern => 'Wyvern Voador';
+
+  @override
+  String get speciesBruteWyvern => 'Wyvern Bruto';
+
+  @override
+  String get speciesBirdWyvern => 'Wyvern Pássaro';
+
+  @override
+  String get speciesPiscineWyvern => 'Wyvern Piscino';
+
+  @override
+  String get speciesFangedBeast => 'Fera de Presas';
+
+  @override
+  String get speciesElderDragon => 'Dragão Ancião';
+
+  @override
+  String get speciesRelicat => 'Relicat';
+
+  @override
+  String get speciesNeopteron => 'Neopteron';
+
+  @override
+  String get speciesTemnoceran => 'Temnoceran';
+
+  @override
+  String get speciesLeviathan => 'Leviatã';
+
+  @override
+  String get speciesAmphibian => 'Anfíbio';
+
+  @override
+  String get speciesSnakeWyvern => 'Wyvern Serpente';
+
+  @override
+  String get monsterKindLarge => 'Monstro Grande';
+
+  @override
+  String get monsterKindSmall => 'Monstro Pequeno';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -1118,4 +1163,49 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get map => 'Mapa';
+
+  @override
+  String get speciesFangedWyvern => 'Wyvern de Presas';
+
+  @override
+  String get speciesFlyingWyvern => 'Wyvern Voador';
+
+  @override
+  String get speciesBruteWyvern => 'Wyvern Bruto';
+
+  @override
+  String get speciesBirdWyvern => 'Wyvern Pássaro';
+
+  @override
+  String get speciesPiscineWyvern => 'Wyvern Piscino';
+
+  @override
+  String get speciesFangedBeast => 'Fera de Presas';
+
+  @override
+  String get speciesElderDragon => 'Dragão Ancião';
+
+  @override
+  String get speciesRelicat => 'Relicat';
+
+  @override
+  String get speciesNeopteron => 'Neopteron';
+
+  @override
+  String get speciesTemnoceran => 'Temnoceran';
+
+  @override
+  String get speciesLeviathan => 'Leviatã';
+
+  @override
+  String get speciesAmphibian => 'Anfíbio';
+
+  @override
+  String get speciesSnakeWyvern => 'Wyvern Serpente';
+
+  @override
+  String get monsterKindLarge => 'Monstro Grande';
+
+  @override
+  String get monsterKindSmall => 'Monstro Pequeno';
 }

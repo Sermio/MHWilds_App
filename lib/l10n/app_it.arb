@@ -197,5 +197,20 @@
   "breakableParts": "Parti Rompibili",
   "unknown": "Sconosciuto",
   "unknownMap": "Mappa Sconosciuta",
-  "map": "Mappa"
+  "map": "Mappa",
+  "speciesFangedWyvern": "Wyvern zannuto",
+  "speciesFlyingWyvern": "Wyvern volante",
+  "speciesBruteWyvern": "Wyvern bruto",
+  "speciesBirdWyvern": "Wyvern rapace",
+  "speciesPiscineWyvern": "Wyvern ittico",
+  "speciesFangedBeast": "Bestia zannuta",
+  "speciesElderDragon": "Drago anziano",
+  "speciesRelicat": "Relicat",
+  "speciesNeopteron": "Neopteron",
+  "speciesTemnoceran": "Temnoceran",
+  "speciesLeviathan": "Leviathan",
+  "speciesAmphibian": "Anfibio",
+  "speciesSnakeWyvern": "Wyvern serpente",
+  "monsterKindLarge": "Mostro grande",
+  "monsterKindSmall": "Mostro piccolo"
 }

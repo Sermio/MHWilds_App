@@ -221,5 +221,20 @@
   "rateAppMessage": "Are you enjoying MHWilds Assistant? Your review helps us keep improving.",
   "rateAppYes": "Yes, I love it!",
   "rateAppNo": "Not now / No",
-  "rateAppAction": "Rate application"
+  "rateAppAction": "Rate application",
+  "speciesFangedWyvern": "Fanged Wyvern",
+  "speciesFlyingWyvern": "Flying Wyvern",
+  "speciesBruteWyvern": "Brute Wyvern",
+  "speciesBirdWyvern": "Bird Wyvern",
+  "speciesPiscineWyvern": "Piscine Wyvern",
+  "speciesFangedBeast": "Fanged Beast",
+  "speciesElderDragon": "Elder Dragon",
+  "speciesRelicat": "Relicat",
+  "speciesNeopteron": "Neopteron",
+  "speciesTemnoceran": "Temnoceran",
+  "speciesLeviathan": "Leviathan",
+  "speciesAmphibian": "Amphibian",
+  "speciesSnakeWyvern": "Snake Wyvern",
+  "monsterKindLarge": "Large Monster",
+  "monsterKindSmall": "Small Monster"
 }

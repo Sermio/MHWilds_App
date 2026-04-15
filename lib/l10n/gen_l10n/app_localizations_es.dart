@@ -567,6 +567,51 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get rateAppAction => 'Valorar aplicación';
+
+  @override
+  String get speciesFangedWyvern => 'Wyvern de colmillos';
+
+  @override
+  String get speciesFlyingWyvern => 'Wyvern volador';
+
+  @override
+  String get speciesBruteWyvern => 'Wyvern bruto';
+
+  @override
+  String get speciesBirdWyvern => 'Wyvern pájaro';
+
+  @override
+  String get speciesPiscineWyvern => 'Wyvern piscino';
+
+  @override
+  String get speciesFangedBeast => 'Bestia de colmillos';
+
+  @override
+  String get speciesElderDragon => 'Dragón anciano';
+
+  @override
+  String get speciesRelicat => 'Relicat';
+
+  @override
+  String get speciesNeopteron => 'Neopterón';
+
+  @override
+  String get speciesTemnoceran => 'Temnocerán';
+
+  @override
+  String get speciesLeviathan => 'Leviatán';
+
+  @override
+  String get speciesAmphibian => 'Anfibio';
+
+  @override
+  String get speciesSnakeWyvern => 'Wyvern serpiente';
+
+  @override
+  String get monsterKindLarge => 'Monstruo grande';
+
+  @override
+  String get monsterKindSmall => 'Monstruo pequeño';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -1132,6 +1177,51 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
 
   @override
   String get rateAppAction => 'Valorar aplicación';
+
+  @override
+  String get speciesFangedWyvern => 'Wyvern de colmillos';
+
+  @override
+  String get speciesFlyingWyvern => 'Wyvern volador';
+
+  @override
+  String get speciesBruteWyvern => 'Wyvern bruto';
+
+  @override
+  String get speciesBirdWyvern => 'Wyvern pájaro';
+
+  @override
+  String get speciesPiscineWyvern => 'Wyvern piscino';
+
+  @override
+  String get speciesFangedBeast => 'Bestia de colmillos';
+
+  @override
+  String get speciesElderDragon => 'Dragón anciano';
+
+  @override
+  String get speciesRelicat => 'Relicat';
+
+  @override
+  String get speciesNeopteron => 'Neopterón';
+
+  @override
+  String get speciesTemnoceran => 'Temnocerán';
+
+  @override
+  String get speciesLeviathan => 'Leviatán';
+
+  @override
+  String get speciesAmphibian => 'Anfibio';
+
+  @override
+  String get speciesSnakeWyvern => 'Wyvern serpiente';
+
+  @override
+  String get monsterKindLarge => 'Monstruo grande';
+
+  @override
+  String get monsterKindSmall => 'Monstruo pequeño';
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -1697,4 +1787,49 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
   @override
   String get rateAppAction => 'Valorar aplicación';
+
+  @override
+  String get speciesFangedWyvern => 'Wyvern de colmillos';
+
+  @override
+  String get speciesFlyingWyvern => 'Wyvern volador';
+
+  @override
+  String get speciesBruteWyvern => 'Wyvern bruto';
+
+  @override
+  String get speciesBirdWyvern => 'Wyvern pájaro';
+
+  @override
+  String get speciesPiscineWyvern => 'Wyvern piscino';
+
+  @override
+  String get speciesFangedBeast => 'Bestia de colmillos';
+
+  @override
+  String get speciesElderDragon => 'Dragón anciano';
+
+  @override
+  String get speciesRelicat => 'Relicat';
+
+  @override
+  String get speciesNeopteron => 'Neopterón';
+
+  @override
+  String get speciesTemnoceran => 'Temnocerán';
+
+  @override
+  String get speciesLeviathan => 'Leviatán';
+
+  @override
+  String get speciesAmphibian => 'Anfibio';
+
+  @override
+  String get speciesSnakeWyvern => 'Wyvern serpiente';
+
+  @override
+  String get monsterKindLarge => 'Monstruo grande';
+
+  @override
+  String get monsterKindSmall => 'Monstruo pequeño';
 }
