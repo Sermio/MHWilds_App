@@ -12,6 +12,7 @@ import 'package:mhwilds_app/providers/talismans_provider.dart';
 import 'package:mhwilds_app/providers/theme_provider.dart';
 import 'package:mhwilds_app/providers/weapons_provider.dart';
 import 'package:mhwilds_app/utils/locale_utils.dart';
+import 'package:mhwilds_app/utils/review_service.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -95,6 +96,29 @@ class SettingsScreen extends StatelessWidget {
                   },
                 ),
               ],
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            l10n.rateAppAction,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSurface.withOpacity(0.7),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: colorScheme.outlineVariant),
+            ),
+            child: ListTile(
+              leading: Icon(Icons.star_outline, color: colorScheme.primary),
+              title: Text(l10n.rateAppAction),
+              trailing: const Icon(Icons.open_in_new, size: 16),
+              onTap: () => ReviewService.openStore(),
             ),
           ),
         ],

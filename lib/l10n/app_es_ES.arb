@@ -206,5 +206,10 @@
   "breakableParts": "Partes Rompibles",
   "unknown": "Desconocido",
   "unknownMap": "Mapa Desconocido",
-  "map": "Mapa"
+  "map": "Mapa",
+  "rateAppTitle": "¿Te gusta la app?",
+  "rateAppMessage": "¿Estás disfrutando de MHWilds Assistant? Tu valoración nos ayuda mucho a seguir mejorando.",
+  "rateAppYes": "¡Sí, me encanta!",
+  "rateAppNo": "Ahora no / No",
+  "rateAppAction": "Valorar aplicación"
 }

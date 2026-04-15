@@ -119,13 +119,6 @@ class AppLocalizationsPl extends AppLocalizations {
       'Stworzony przez Nenrikido (Nenri).';
 
   @override
-  String get buildOptimizerNewsTitle => 'Nowości';
-
-  @override
-  String get buildOptimizerNewsMessage =>
-      'Dzięki współpracy z Cay, MHWilds Assistant ma teraz kreator buildu. Sprawdź go w opcjach menu.';
-
-  @override
   String get buildCrafter => 'Kreator buildu';
 
   @override
@@ -562,4 +555,20 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get map => 'Mapa';
+
+  @override
+  String get rateAppTitle => 'Enjoying the app?';
+
+  @override
+  String get rateAppMessage =>
+      'Are you enjoying MHWilds Assistant? Your review helps us keep improving.';
+
+  @override
+  String get rateAppYes => 'Yes, I love it!';
+
+  @override
+  String get rateAppNo => 'Not now / No';
+
+  @override
+  String get rateAppAction => 'Rate application';
 }

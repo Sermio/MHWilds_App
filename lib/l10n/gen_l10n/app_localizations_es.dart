@@ -117,13 +117,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get buildOptimizerCreditsCreator => 'Creado por Nenrikido (Nenri).';
 
   @override
-  String get buildOptimizerNewsTitle => 'Novedades';
-
-  @override
-  String get buildOptimizerNewsMessage =>
-      'Gracias a una colaboración con Cay, MHWilds Assistant ahora incluye un constructor de builds. Échale un vistazo en las opciones del menú.';
-
-  @override
   String get buildCrafter => 'Constructor de builds';
 
   @override
@@ -558,6 +551,22 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get map => 'Mapa';
+
+  @override
+  String get rateAppTitle => '¿Te gusta la app?';
+
+  @override
+  String get rateAppMessage =>
+      '¿Estás disfrutando de MHWilds Assistant? Tu valoración nos ayuda mucho a seguir mejorando.';
+
+  @override
+  String get rateAppYes => '¡Sí, me encanta!';
+
+  @override
+  String get rateAppNo => 'Ahora no / No';
+
+  @override
+  String get rateAppAction => 'Valorar aplicación';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -673,13 +682,6 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
   String get buildOptimizerCreditsCreator => 'Creado por Nenrikido (Nenri).';
 
   @override
-  String get buildOptimizerNewsTitle => 'Novedades';
-
-  @override
-  String get buildOptimizerNewsMessage =>
-      'Gracias a una colaboración con Cay, MHWilds Assistant ahora incluye un constructor de builds. Échale un vistazo en las opciones del menú.';
-
-  @override
   String get buildCrafter => 'Constructor de builds';
 
   @override
@@ -1114,6 +1116,22 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
 
   @override
   String get map => 'Mapa';
+
+  @override
+  String get rateAppTitle => '¿Te gusta la app?';
+
+  @override
+  String get rateAppMessage =>
+      '¿Estás disfrutando de MHWilds Assistant? Tu valoración nos ayuda mucho a seguir mejorando.';
+
+  @override
+  String get rateAppYes => '¡Sí, me encanta!';
+
+  @override
+  String get rateAppNo => 'Ahora no / No';
+
+  @override
+  String get rateAppAction => 'Valorar aplicación';
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -1229,13 +1247,6 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
   String get buildOptimizerCreditsCreator => 'Creado por Nenrikido (Nenri).';
 
   @override
-  String get buildOptimizerNewsTitle => 'Novedades';
-
-  @override
-  String get buildOptimizerNewsMessage =>
-      'Gracias a una colaboración con Cay, MHWilds Assistant ahora incluye un constructor de builds. Échale un vistazo en las opciones del menú.';
-
-  @override
   String get buildCrafter => 'Constructor de builds';
 
   @override
@@ -1670,4 +1681,20 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
   @override
   String get map => 'Mapa';
+
+  @override
+  String get rateAppTitle => '¿Te gusta la app?';
+
+  @override
+  String get rateAppMessage =>
+      '¿Estás disfrutando de MHWilds Assistant? Tu valoración nos ayuda mucho a seguir mejorando.';
+
+  @override
+  String get rateAppYes => '¡Sí, me encanta!';
+
+  @override
+  String get rateAppNo => 'Ahora no / No';
+
+  @override
+  String get rateAppAction => 'Valorar aplicación';
 }

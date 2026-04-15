@@ -707,7 +707,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          '${skill.skill.name} +${skill.level}',
+                          '${skill.name ?? skill.skill.name} +${skill.level}',
                           style: TextStyle(
                             fontSize: 12,
                             color: colorScheme.onPrimary,
@@ -715,6 +715,26 @@ class _ArmorSetListState extends State<ArmorSetList> {
                           ),
                         ),
                       ),
+                      if (skill.setPiecesRequired != null)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: colorScheme.onPrimary.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              '${skill.setPiecesRequired} ${AppLocalizations.of(context)!.pieces}',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: colorScheme.onPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                   if (skill.description.isNotEmpty) ...[

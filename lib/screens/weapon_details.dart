@@ -69,9 +69,6 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             // Crafting
             if (_hasCraftingData()) _buildCraftingSection(),
 
-            // Descripción
-            if (widget.weapon.description.isNotEmpty)
-              _buildDescriptionSection(),
 
             const SizedBox(height: 40),
           ],
@@ -901,63 +898,6 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     );
   }
 
-  Widget _buildDescriptionSection() {
-    final colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Título de la sección (sin fondo dorado; alineado con otras pantallas)
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.description,
-                  color: colorScheme.primary,
-                  size: 24,
-                ),
-                const SizedBox(width: 12),
-                Text(
-                  AppLocalizations.of(context)!.description,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Contenido de descripción
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Text(
-              widget.weapon.description,
-              style: TextStyle(
-                fontSize: 16,
-                color: colorScheme.onSurface.withOpacity(0.8),
-                height: 1.5,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   // Método auxiliar para verificar si el weapon tiene datos de sharpness
   bool _hasSharpnessData() {
