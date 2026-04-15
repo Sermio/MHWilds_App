@@ -32,8 +32,8 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   Future<List<Skills>> fetchSkillsForArmor(
       armor_models.ArmorPiece armor) async {
     List<Skills> skills = [];
-    for (var skillInfo in armor.displaySkills) {
-      int skillId = skillInfo.skill.id;
+    final skillIds = armor.skills.map((s) => s.skill.id).toSet();
+    for (var skillId in skillIds) {
       skills.add(await SkillsApi.fetchSkillById(skillId));
     }
     return skills;
@@ -377,7 +377,16 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        skillInfo.name,
+                                        widget.armor.skills.any((as) =>
+                                                as.skill.id == skillInfo.id &&
+                                                as.name != null)
+                                            ? widget.armor.skills
+                                                .firstWhere((as) =>
+                                                    as.skill.id ==
+                                                        skillInfo.id &&
+                                                    as.name != null)
+                                                .name!
+                                            : skillInfo.name,
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
@@ -404,7 +413,6 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                             ...skillInfo.ranks.map((rank) {
                               bool isCurrentLevel = widget.armor.skills.any(
                                 (armorSkill) =>
-                                    !armorSkill.isSetOrGroupBonus &&
                                     armorSkill.skill.id == skillInfo.id &&
                                     armorSkill.level == rank.level,
                               );
@@ -450,6 +458,36 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                         ),
                                       ),
                                     ),
+                                    if (widget.armor.skills.any((as) =>
+                                        as.skill.id == skillInfo.id &&
+                                        as.level == rank.level &&
+                                        as.setPiecesRequired != null))
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 6, vertical: 2),
+                                          decoration: BoxDecoration(
+                                            color: (isCurrentLevel
+                                                    ? colorScheme.onPrimary
+                                                    : colorScheme.primary)
+                                                .withOpacity(0.2),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          child: Text(
+                                            "${widget.armor.skills.firstWhere((as) => as.skill.id == skillInfo.id && as.level == rank.level).setPiecesRequired} ${AppLocalizations.of(context)!.pieces}",
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                              color: isCurrentLevel
+                                                  ? colorScheme.onPrimary
+                                                  : colorScheme.primary,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Text(

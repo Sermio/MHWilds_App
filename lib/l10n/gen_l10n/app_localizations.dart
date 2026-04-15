@@ -321,18 +321,6 @@ abstract class AppLocalizations {
   /// **'Created by Nenrikido (Nenri).'**
   String get buildOptimizerCreditsCreator;
 
-  /// No description provided for @buildOptimizerNewsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'What\'s new'**
-  String get buildOptimizerNewsTitle;
-
-  /// No description provided for @buildOptimizerNewsMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Thanks to a collaboration with Cay, MHWilds Assistant now includes a Build crafter. Check it out in the menu options.'**
-  String get buildOptimizerNewsMessage;
-
   /// Menu title for the embedded MH Wilds Build Crafter web tool.
   ///
   /// In en, this message translates to:
@@ -1178,6 +1166,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Map'**
   String get map;
+
+  /// No description provided for @rateAppTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enjoying the app?'**
+  String get rateAppTitle;
+
+  /// No description provided for @rateAppMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you enjoying MHWilds Assistant? Your review helps us keep improving.'**
+  String get rateAppMessage;
+
+  /// No description provided for @rateAppYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, I love it!'**
+  String get rateAppYes;
+
+  /// No description provided for @rateAppNo.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now / No'**
+  String get rateAppNo;
+
+  /// No description provided for @rateAppAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate application'**
+  String get rateAppAction;
 }
 
 class _AppLocalizationsDelegate

@@ -14,8 +14,7 @@ class ArmorPiece {
   final ArmorSet armorSet;
   final Crafting crafting;
   final int id;
-  List<SkillInfo> get displaySkills =>
-      skills.where((skillInfo) => !skillInfo.isSetOrGroupBonus).toList();
+  List<SkillInfo> get displaySkills => skills;
 
   ArmorPiece({
     required this.kind,
@@ -55,6 +54,9 @@ class SkillInfo {
   final int level;
   final String description;
   final int id;
+  final String? name;
+  final int? setPiecesRequired;
+
   bool get isSetOrGroupBonus {
     final kind = skill.kind.toLowerCase();
     return kind == 'set' || kind == 'group';
@@ -65,6 +67,8 @@ class SkillInfo {
     required this.level,
     required this.description,
     required this.id,
+    this.name,
+    this.setPiecesRequired,
   });
 
   factory SkillInfo.fromJson(Map<String, dynamic> json) {
@@ -73,6 +77,9 @@ class SkillInfo {
       level: json['level'] as int? ?? 0,
       description: json['description'] as String? ?? '',
       id: json['id'] as int? ?? 0,
+      name: json['name'] as String?,
+      setPiecesRequired: json['setPiecesRequired'] as int? ??
+          json['set_pieces_required'] as int?,
     );
   }
 
@@ -97,6 +104,8 @@ class SkillInfo {
             id: 0,
             level: parsedLevel,
             description: '',
+            name: null,
+            setPiecesRequired: null,
             skill: Skills(
               id: parsedId,
               gameId: 0,

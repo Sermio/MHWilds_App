@@ -42,8 +42,6 @@
   "buildOptimizerMenuSubtitle": "Optimize your build and skills",
   "buildOptimizerCreditsIntro": "This screen integrates MH Wilds Build Optimizer as an external collaboration.",
   "buildOptimizerCreditsCreator": "Created by Nenrikido (Nenri).",
-  "buildOptimizerNewsTitle": "What's new",
-  "buildOptimizerNewsMessage": "Thanks to a collaboration with Cay, MHWilds Assistant now includes a Build crafter. Check it out in the menu options.",
   "buildCrafter": "Build crafter",
   "@buildCrafter": {
     "description": "Menu title for the embedded MH Wilds Build Crafter web tool."
@@ -218,5 +216,10 @@
   "breakableParts": "Breakable Parts",
   "unknown": "Unknown",
   "unknownMap": "Unknown Map",
-  "map": "Map"
+  "map": "Map",
+  "rateAppTitle": "Enjoying the app?",
+  "rateAppMessage": "Are you enjoying MHWilds Assistant? Your review helps us keep improving.",
+  "rateAppYes": "Yes, I love it!",
+  "rateAppNo": "Not now / No",
+  "rateAppAction": "Rate application"
 }

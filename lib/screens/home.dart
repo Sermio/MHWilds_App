@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_appbar.dart';
 import 'package:mhwilds_app/components/c_drawer.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mhwilds_app/screens/talismans_list.dart';
 import 'package:mhwilds_app/utils/update_checker.dart';
+import 'package:mhwilds_app/utils/review_service.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/screens/decorations_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
@@ -24,28 +24,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  /// Nueva clave → usuarios que ya vieron el modal de Nenri/optimizer lo verán otra vez (Cay / Build crafter).
-  static const String _collaborationNewsSeenKey =
-      'collab_news_cay_build_crafter_v1';
   Widget _selectedScreen = const MonstersList();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await ReviewService.trackOpening();
+      if (!mounted) return;
       await AppUpdateChecker.checkAndShowUpdateDialog(context);
-      await _showCollaborationNewsOnce();
+      if (!mounted) return;
+      await ReviewService.checkAndShowReview(context);
     });
   }
 
-  Future<void> _showCollaborationNewsOnce() async {
-    final prefs = await SharedPreferences.getInstance();
-    final alreadySeen = prefs.getBool(_collaborationNewsSeenKey) ?? false;
-    if (alreadySeen || !mounted) return;
-
-    await showCollaborationNewsDialog(context);
-    await prefs.setBool(_collaborationNewsSeenKey, true);
-  }
 
   String _titleForScreen(BuildContext context, Widget screen) {
     final l10n = AppLocalizations.of(context)!;

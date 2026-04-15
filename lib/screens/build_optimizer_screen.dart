@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/utils/update_checker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -253,48 +252,3 @@ Future<void> showBuildOptimizerCreditsDialog(BuildContext context) async {
   );
 }
 
-/// Modal de novedades / colaboración (una vez por clave en [HomeScreen]).
-Future<void> showCollaborationNewsDialog(BuildContext context) async {
-  final l10n = AppLocalizations.of(context)!;
-  return showDialog<void>(
-    context: context,
-    builder: (dialogContext) {
-      final cs = Theme.of(dialogContext).colorScheme;
-      final bodyStyle = TextStyle(
-        color: cs.onSurface,
-        fontSize: 16,
-        height: 1.4,
-      );
-      return AlertDialog(
-        backgroundColor: cs.surfaceContainerHighest,
-        surfaceTintColor: Colors.transparent,
-        title: Text(
-          l10n.buildOptimizerNewsTitle,
-          style: TextStyle(
-            color: cs.onSurface,
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        content: Text(
-          '${l10n.buildOptimizerNewsMessage}\n\n${l10n.rateAppReminder}',
-          style: bodyStyle,
-        ),
-        actions: [
-          TextButton.icon(
-            onPressed: () async {
-              await AppUpdateChecker.openStorePage();
-            },
-            style: TextButton.styleFrom(foregroundColor: cs.primary),
-            icon: Icon(Icons.store, size: 18, color: cs.primary),
-            label: Text(l10n.goToStore),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('OK'),
-          ),
-        ],
-      );
-    },
-  );
-}
