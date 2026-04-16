@@ -408,67 +408,56 @@ class _WeaponsListState extends State<WeaponsList> {
 
   Widget _buildWeaponStats(Weapon weapon) {
     final colorScheme = Theme.of(context).colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    final List<Widget> statRows = [];
+
+    // Sección de daño físico
+    statRows.add(Row(
       children: [
-        // Sección de daño físico
+        Text(
+          '${AppLocalizations.of(context)!.physicalDamage}:',
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: colorScheme.onSurface.withOpacity(0.8),
+          ),
+        ),
+        const Spacer(),
         Row(
           children: [
-            Icon(
-              Icons.flash_on,
-              size: 16,
-              color: colorScheme.primary,
-            ),
-            const SizedBox(width: 6),
             Text(
-              '${AppLocalizations.of(context)!.physicalDamage}:',
+              '${weapon.damage.display}',
               style: TextStyle(
                 fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
+                fontWeight: FontWeight.bold,
+                color: colorScheme.onSurface,
               ),
             ),
-            const Spacer(),
-            Row(
-              children: [
-                Icon(
-                  Icons.gps_fixed,
-                  size: 16,
-                  color: Colors.red[400],
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  '${weapon.damage.display}',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-              ],
+            const SizedBox(width: 4),
+            Icon(
+              Icons.gps_fixed,
+              size: 16,
+              color: Colors.red[400],
             ),
           ],
         ),
-        const SizedBox(height: 12),
+      ],
+    ));
 
-        // Afinidad (siempre visible, como el daño físico)
+    // Afinidad
+    statRows.add(const SizedBox(height: 12));
+    statRows.add(Row(
+      children: [
+        Text(
+          '${AppLocalizations.of(context)!.affinity}:',
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: colorScheme.onSurface.withOpacity(0.8),
+          ),
+        ),
+        const Spacer(),
         Row(
           children: [
-            Icon(
-              Icons.trending_up,
-              size: 16,
-              color: colorScheme.primary,
-            ),
-            const SizedBox(width: 6),
-            Text(
-              '${AppLocalizations.of(context)!.affinity}:',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
-              ),
-            ),
-            const Spacer(),
             Text(
               '${weapon.affinity > 0 ? '+' : ''}${weapon.affinity}%',
               style: TextStyle(
@@ -477,64 +466,106 @@ class _WeaponsListState extends State<WeaponsList> {
                 color: colorScheme.onSurface,
               ),
             ),
+            const SizedBox(width: 4),
+            Icon(
+              Icons.trending_up,
+              size: 16,
+              color: colorScheme.primary,
+            ),
           ],
         ),
-        const SizedBox(height: 12),
-        // Sección de daño elemental si está disponible
-        if (weapon.specials != null) ...[
-          WeaponDisplayUtils.buildElementalDamageRow(context, weapon),
-        ],
-        // Solo añadir espacio si hay daño elemental
-        if (weapon.specials != null && _hasElementalDamage(weapon)) ...[
-          const SizedBox(height: 12),
-        ],
-        // Sección de defense bonus
-        if (weapon.defenseBonus > 0) ...[
+      ],
+    ));
+
+    // Sección de daño elemental
+    if (weapon.specials != null && _hasElementalDamage(weapon)) {
+      statRows.add(const SizedBox(height: 12));
+      statRows.add(WeaponDisplayUtils.buildElementalDamageRow(context, weapon));
+    }
+
+    // Información adicional específica por arma
+    final additionalInfo =
+        WeaponDisplayUtils.buildAdditionalDamageInfo(context, weapon);
+    if (additionalInfo is! SizedBox) {
+      statRows.add(const SizedBox(height: 12));
+      statRows.add(additionalInfo);
+    }
+
+    // Sección de defense bonus
+    if (weapon.defenseBonus > 0) {
+      statRows.add(const SizedBox(height: 12));
+      statRows.add(Row(
+        children: [
+          Text(
+            '${AppLocalizations.of(context)!.defense}:',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSurface.withOpacity(0.8),
+            ),
+          ),
+          const Spacer(),
           Row(
             children: [
+              Text(
+                '+${weapon.defenseBonus}',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
+                ),
+              ),
+              const SizedBox(width: 4),
               Icon(
                 Icons.shield,
                 size: 16,
                 color: colorScheme.primary,
               ),
-              const SizedBox(width: 6),
+            ],
+          ),
+        ],
+      ));
+    }
+
+    // Elderseal
+    if (weapon.elderseal != null) {
+      statRows.add(const SizedBox(height: 12));
+      statRows.add(Row(
+        children: [
+          Text(
+            'Elderseal:',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSurface.withOpacity(0.8),
+            ),
+          ),
+          const Spacer(),
+          Row(
+            children: [
               Text(
-                '${AppLocalizations.of(context)!.defense}:',
+                weapon.elderseal![0].toUpperCase() + weapon.elderseal!.substring(1),
                 style: TextStyle(
                   fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withOpacity(0.8),
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
                 ),
               ),
-              const Spacer(),
-              Row(
-                children: [
-                  Icon(
-                    Icons.add_circle,
-                    size: 16,
-                    color: Colors.green[400],
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    '+${weapon.defenseBonus}',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                ],
+              const SizedBox(width: 4),
+              Icon(
+                Icons.auto_awesome,
+                size: 16,
+                color: colorScheme.primary,
               ),
             ],
           ),
-          const SizedBox(height: 12),
         ],
-        // Sección de información adicional específica del tipo de arma
-        if (_hasAdditionalDamageInfo(weapon)) ...[
-          const SizedBox(height: 12),
-          _buildAdditionalDamageInfo(weapon),
-        ],
-      ],
+      ));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: statRows,
     );
   }
 

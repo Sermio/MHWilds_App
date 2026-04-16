@@ -539,12 +539,6 @@ class _ArmorSetListState extends State<ArmorSetList> {
         // Sección de defensa
         Row(
           children: [
-            Icon(
-              Icons.shield,
-              size: 16,
-              color: colorScheme.primary,
-            ),
-            const SizedBox(width: 6),
             Text(
               '${AppLocalizations.of(context)!.defense}:',
               style: TextStyle(
@@ -556,19 +550,19 @@ class _ArmorSetListState extends State<ArmorSetList> {
             const Spacer(),
             Row(
               children: [
-                SizedBox(
-                  height: 16,
-                  child: Image.asset(
-                    'assets/imgs/armor/armor.webp',
-                  ),
-                ),
-                const SizedBox(width: 4),
                 Text(
                   '${armorPiece.defense['base']}',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: colorScheme.onSurface,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                SizedBox(
+                  height: 16,
+                  child: Image.asset(
+                    'assets/imgs/armor/armor.webp',
                   ),
                 ),
               ],
@@ -579,12 +573,6 @@ class _ArmorSetListState extends State<ArmorSetList> {
         // Sección de slots
         Row(
           children: [
-            Icon(
-              Icons.settings,
-              size: 16,
-              color: colorScheme.primary,
-            ),
-            const SizedBox(width: 6),
             Text(
               '${AppLocalizations.of(context)!.slots}:',
               style: TextStyle(
@@ -602,12 +590,6 @@ class _ArmorSetListState extends State<ArmorSetList> {
         // Sección de resistencias
         Row(
           children: [
-            Icon(
-              Icons.security,
-              size: 16,
-              color: colorScheme.primary,
-            ),
-            const SizedBox(width: 6),
             Text(
               '${AppLocalizations.of(context)!.resistances}:',
               style: TextStyle(
@@ -624,12 +606,6 @@ class _ArmorSetListState extends State<ArmorSetList> {
         // Sección de skills
         Row(
           children: [
-            Icon(
-              Icons.flash_on,
-              size: 16,
-              color: colorScheme.primary,
-            ),
-            const SizedBox(width: 6),
             Text(
               '${AppLocalizations.of(context)!.skills}:',
               style: TextStyle(
@@ -814,19 +790,19 @@ class _ArmorSetListState extends State<ArmorSetList> {
           margin: const EdgeInsets.only(right: 8),
           child: Row(
             children: [
-              SizedBox(
-                height: 16,
-                child: Image.asset(
-                  'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
-                ),
-              ),
-              const SizedBox(width: 4),
               Text(
                 resistanceValue.toString(),
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
                   color: colorScheme.onSurface,
+                ),
+              ),
+              const SizedBox(width: 4),
+              SizedBox(
+                height: 16,
+                child: Image.asset(
+                  'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
                 ),
               ),
             ],

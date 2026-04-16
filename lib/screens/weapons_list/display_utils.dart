@@ -2,7 +2,8 @@ part of '../weapons_list.dart';
 
 // Clase estática para métodos auxiliares reutilizables
 class WeaponDisplayUtils {
-  static Widget buildElementalDamageRow(BuildContext context, Weapon weapon) {
+  static Widget buildElementalDamageRow(BuildContext context, Weapon weapon,
+      {bool isDetailView = false}) {
     // Buscar specials con daño elemental o de status, y también daño de phial
     if (weapon.specials is List) {
       final specials = weapon.specials as List;
@@ -36,59 +37,58 @@ class WeaponDisplayUtils {
         final damageValue = damage?['display'] ?? damage?['raw'] ?? 0;
 
         if (damageValue > 0) {
+          final colorScheme = Theme.of(context).colorScheme;
           return Row(
             children: [
-              // Icono representativo antes del texto
-              SizedBox(
-                width: 16,
-                height: 16,
-                child: Image.asset(
-                  'assets/imgs/elements/${elementOrStatus.toLowerCase()}.webp',
-                  errorBuilder: (context, error, stackTrace) {
-                    // Fallback a icono si no existe la imagen
-                    return Icon(
-                      WeaponUtils.getElementIcon(elementOrStatus),
-                      size: 16,
-                      color: WeaponUtils.getElementColor(elementOrStatus),
-                    );
-                  },
+              if (!isDetailView) ...[
+                // Icono representativo antes del texto (solo en lista)
+                SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: Image.asset(
+                    'assets/imgs/elements/${elementOrStatus.toLowerCase()}.webp',
+                    errorBuilder: (context, error, stackTrace) {
+                      return Icon(
+                        WeaponUtils.getElementIcon(elementOrStatus),
+                        size: 16,
+                        color: WeaponUtils.getElementColor(elementOrStatus),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              const SizedBox(width: 6),
+                const SizedBox(width: 6),
+              ],
               Text(
                 special['kind'] == 'element'
                     ? '${AppLocalizations.of(context)!.element}:'
                     : '${AppLocalizations.of(context)!.statusEffect}:',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: isDetailView ? 16 : 12,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey[700],
+                  color: colorScheme.onSurface.withOpacity(0.8),
                 ),
               ),
               const Spacer(),
               Row(
                 children: [
-                  // Quitar el icono de flash y mostrar solo el valor
                   Text(
                     '$damageValue',
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: isDetailView ? 16 : 12,
                       fontWeight: FontWeight.bold,
                       color: WeaponUtils.getElementColor(elementOrStatus),
                     ),
                   ),
-                  const SizedBox(width: 4),
-                  // Poner el icono del elemento después del valor
+                  const SizedBox(width: 6),
                   SizedBox(
-                    width: 16,
-                    height: 16,
+                    width: isDetailView ? 18 : 16,
+                    height: isDetailView ? 18 : 16,
                     child: Image.asset(
                       'assets/imgs/elements/${elementOrStatus.toLowerCase()}.webp',
                       errorBuilder: (context, error, stackTrace) {
-                        // Fallback a icono si no existe la imagen
                         return Icon(
                           WeaponUtils.getElementIcon(elementOrStatus),
-                          size: 16,
+                          size: isDetailView ? 18 : 16,
                           color: WeaponUtils.getElementColor(elementOrStatus),
                         );
                       },
@@ -109,54 +109,38 @@ class WeaponDisplayUtils {
             phialDamage?['display'] ?? phialDamage?['raw'] ?? 0;
 
         if (phialDamageValue > 0) {
+          final colorScheme = Theme.of(context).colorScheme;
           return Row(
             children: [
-              // Icono representativo para phial
-              SizedBox(
-                width: 16,
-                height: 16,
-                child: Image.asset(
-                  'assets/imgs/elements/${phialKind.toLowerCase()}.webp',
-                  errorBuilder: (context, error, stackTrace) {
-                    // Fallback a icono si no existe la imagen
-                    return Icon(
-                      WeaponUtils.getElementIcon(phialKind),
-                      size: 16,
-                      color: WeaponUtils.getElementColor(phialKind),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(width: 6),
               Text(
                 '${AppLocalizations.of(context)!.phial}:',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey[700],
+                  color: colorScheme.onSurface.withOpacity(0.8),
                 ),
               ),
-              const SizedBox(width: 4),
+              const Spacer(),
               Row(
                 children: [
                   Text(
                     '$phialDamageValue',
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: WeaponUtils.getElementColor(phialKind),
                     ),
                   ),
-                  const SizedBox(width: 4),
+                  const SizedBox(width: 6),
                   SizedBox(
-                    width: 16,
-                    height: 16,
+                    width: 18,
+                    height: 18,
                     child: Image.asset(
                       'assets/imgs/elements/${phialKind.toLowerCase()}.webp',
                       errorBuilder: (context, error, stackTrace) {
                         return Icon(
                           WeaponUtils.getElementIcon(phialKind),
-                          size: 16,
+                          size: 18,
                           color: WeaponUtils.getElementColor(phialKind),
                         );
                       },
@@ -173,43 +157,50 @@ class WeaponDisplayUtils {
     return const SizedBox.shrink();
   }
 
-  static Widget buildAdditionalDamageInfo(BuildContext context, Weapon weapon) {
+  static Widget buildAdditionalDamageInfo(BuildContext context, Weapon weapon,
+      {bool isDetailView = false}) {
     // Solo manejar información específica del tipo de arma (no daño elemental)
     switch (weapon.kind) {
       case 'bow':
-        return buildBowDamageInfo(context, weapon);
+        return buildBowDamageInfo(context, weapon, isDetailView: isDetailView);
       case 'charge-blade':
-        return buildChargeBladeDamageInfo(context, weapon);
+        return buildChargeBladeDamageInfo(context, weapon,
+            isDetailView: isDetailView);
       case 'gunlance':
-        return buildGunlanceDamageInfo(context, weapon);
+        return buildGunlanceDamageInfo(context, weapon,
+            isDetailView: isDetailView);
       case 'switch-axe':
-        return buildSwitchAxeDamageInfo(context, weapon);
+        return buildSwitchAxeDamageInfo(context, weapon,
+            isDetailView: isDetailView);
       case 'hunting-horn':
-        return buildHuntingHornDamageInfo(context, weapon);
+        return buildHuntingHornDamageInfo(context, weapon,
+            isDetailView: isDetailView);
       case 'heavy-bowgun':
       case 'light-bowgun':
-        return buildBowgunDamageInfo(context, weapon);
+        return buildBowgunDamageInfo(context, weapon,
+            isDetailView: isDetailView);
       case 'insect-glaive':
-        return buildInsectGlaiveDamageInfo(context, weapon);
+        return buildInsectGlaiveDamageInfo(context, weapon,
+            isDetailView: isDetailView);
       default:
         return const SizedBox.shrink();
     }
   }
 
-  static Widget buildBowDamageInfo(BuildContext context, Weapon weapon) {
+  static Widget buildBowDamageInfo(BuildContext context, Weapon weapon,
+      {bool isDetailView = false}) {
     // Para bows, mostrar información sobre coatings si están disponibles
     try {
       if (weapon.coatings != null && weapon.coatings!.isNotEmpty) {
+        final colorScheme = Theme.of(context).colorScheme;
         return Row(
           children: [
-            Icon(Icons.arrow_upward, size: 16, color: Colors.amber[400]),
-            const SizedBox(width: 6),
             Text(
               '${AppLocalizations.of(context)!.coatings}:',
               style: TextStyle(
-                fontSize: 12,
+                fontSize: isDetailView ? 16 : 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+                color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
             const Spacer(),
@@ -226,8 +217,17 @@ class WeaponDisplayUtils {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Icono del elemento/status si existe
+                      Text(
+                        coating[0].toUpperCase() + coating.substring(1),
+                        style: const TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      // Icono del elemento/status si existe después del texto
                       if (_hasElementIcon(coating)) ...[
+                        const SizedBox(width: 4),
                         Image.asset(
                           'assets/imgs/elements/${_getElementAssetName(coating)}.webp',
                           width: 12,
@@ -240,16 +240,7 @@ class WeaponDisplayUtils {
                             );
                           },
                         ),
-                        const SizedBox(width: 4),
                       ],
-                      Text(
-                        coating[0].toUpperCase() + coating.substring(1),
-                        style: const TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
                     ],
                   ),
                 );
@@ -263,25 +254,36 @@ class WeaponDisplayUtils {
   }
 
   static Widget buildChargeBladeDamageInfo(
-      BuildContext context, Weapon weapon) {
+      BuildContext context, Weapon weapon,
+      {bool isDetailView = false}) {
     if (weapon.phial == null) return const SizedBox.shrink();
 
     final phialKind = weapon.phial!.kind;
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        Icon(Icons.flash_on, size: 16, color: Colors.blue[400]),
-        const SizedBox(width: 6),
         Text(
           '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
-            fontSize: 12,
+            fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
         Row(
           children: [
+            Text(
+              phialKind[0].toUpperCase() + phialKind.substring(1),
+              style: TextStyle(
+                fontSize: isDetailView ? 16 : 12,
+                fontWeight: FontWeight.bold,
+                color: phialKind == 'impact'
+                    ? Colors.blue[600]!
+                    : Colors.orange[600]!,
+              ),
+            ),
+            const SizedBox(width: 4),
             if (_hasElementIcon(phialKind)) ...[
               Image.asset(
                 'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
@@ -297,7 +299,6 @@ class WeaponDisplayUtils {
                   );
                 },
               ),
-              const SizedBox(width: 4),
             ] else ...[
               Icon(
                 Icons.electric_bolt,
@@ -306,80 +307,80 @@ class WeaponDisplayUtils {
                     ? Colors.blue[600]!
                     : Colors.orange[600]!,
               ),
-              const SizedBox(width: 4),
             ],
-            Text(
-              phialKind[0].toUpperCase() + phialKind.substring(1),
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: phialKind == 'impact'
-                    ? Colors.blue[600]!
-                    : Colors.orange[600]!,
-              ),
-            ),
           ],
         ),
       ],
     );
   }
 
-  static Widget buildGunlanceDamageInfo(BuildContext context, Weapon weapon) {
+  static Widget buildGunlanceDamageInfo(BuildContext context, Weapon weapon,
+      {bool isDetailView = false}) {
     if (weapon.shell == null || weapon.shellLevel == null) {
       return const SizedBox.shrink();
     }
 
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        Icon(Icons.local_fire_department, size: 16, color: Colors.red[400]),
-        const SizedBox(width: 6),
         Text(
           '${AppLocalizations.of(context)!.shell}:',
           style: TextStyle(
-            fontSize: 12,
+            fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
         Row(
           children: [
-            Icon(Icons.local_fire_department,
-                size: 16, color: Colors.red[600]!),
-            const SizedBox(width: 4),
             Text(
               '${weapon.shell![0].toUpperCase() + weapon.shell!.substring(1)} Lv${weapon.shellLevel}',
               style: TextStyle(
-                fontSize: 12,
+                fontSize: isDetailView ? 16 : 12,
                 fontWeight: FontWeight.bold,
                 color: Colors.red[600]!,
               ),
             ),
+            const SizedBox(width: 4),
+            Icon(Icons.local_fire_department,
+                size: 16, color: Colors.red[600]!),
           ],
         ),
       ],
     );
   }
 
-  static Widget buildSwitchAxeDamageInfo(BuildContext context, Weapon weapon) {
+  static Widget buildSwitchAxeDamageInfo(BuildContext context, Weapon weapon,
+      {bool isDetailView = false}) {
     if (weapon.phial == null) return const SizedBox.shrink();
 
     final phialKind = weapon.phial!.kind;
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        Icon(Icons.transform, size: 16, color: Colors.orange[400]),
-        const SizedBox(width: 6),
         Text(
           '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
-            fontSize: 12,
+            fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
         Row(
           children: [
+            Text(
+              phialKind[0].toUpperCase() + phialKind.substring(1),
+              style: TextStyle(
+                fontSize: isDetailView ? 16 : 12,
+                fontWeight: FontWeight.bold,
+                color: phialKind == 'impact'
+                    ? Colors.blue[600]!
+                    : Colors.orange[600]!,
+              ),
+            ),
+            const SizedBox(width: 4),
             if (_hasElementIcon(phialKind)) ...[
               Image.asset(
                 'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
@@ -395,7 +396,6 @@ class WeaponDisplayUtils {
                   );
                 },
               ),
-              const SizedBox(width: 4),
             ] else ...[
               Icon(
                 Icons.electric_bolt,
@@ -404,18 +404,7 @@ class WeaponDisplayUtils {
                     ? Colors.blue[600]!
                     : Colors.orange[600]!,
               ),
-              const SizedBox(width: 4),
             ],
-            Text(
-              phialKind[0].toUpperCase() + phialKind.substring(1),
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: phialKind == 'impact'
-                    ? Colors.blue[600]!
-                    : Colors.orange[600]!,
-              ),
-            ),
           ],
         ),
       ],
@@ -423,35 +412,35 @@ class WeaponDisplayUtils {
   }
 
   static Widget buildHuntingHornDamageInfo(
-      BuildContext context, Weapon weapon) {
+      BuildContext context, Weapon weapon,
+      {bool isDetailView = false}) {
     final List<Widget> sections = [];
 
+    final colorScheme = Theme.of(context).colorScheme;
     if (weapon.melody != null) {
       sections.add(Row(
         children: [
-          Icon(Icons.music_note, size: 16, color: Colors.teal[400]),
-          const SizedBox(width: 6),
           Text(
             '${AppLocalizations.of(context)!.melody}:',
             style: TextStyle(
-              fontSize: 12,
+              fontSize: isDetailView ? 16 : 12,
               fontWeight: FontWeight.w600,
-              color: Colors.grey[700],
+              color: colorScheme.onSurface.withOpacity(0.8),
             ),
           ),
           const Spacer(),
           Row(
             children: [
-              Icon(Icons.music_note, size: 16, color: Colors.teal[600]),
-              const SizedBox(width: 4),
               Text(
                 '${weapon.melody!.songs.length} ${AppLocalizations.of(context)!.songs}',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: isDetailView ? 16 : 12,
                   fontWeight: FontWeight.bold,
                   color: Colors.amber[600],
                 ),
               ),
+              const SizedBox(width: 4),
+              Icon(Icons.music_note, size: 16, color: Colors.teal[600]),
             ],
           ),
         ],
@@ -461,29 +450,27 @@ class WeaponDisplayUtils {
     if (weapon.echoBubble != null) {
       sections.add(Row(
         children: [
-          Icon(Icons.bubble_chart, size: 16, color: Colors.indigo[400]),
-          const SizedBox(width: 6),
           Text(
             '${AppLocalizations.of(context)!.echoBubble}:',
             style: TextStyle(
-              fontSize: 12,
+              fontSize: isDetailView ? 16 : 12,
               fontWeight: FontWeight.w600,
-              color: Colors.grey[700],
+              color: colorScheme.onSurface.withOpacity(0.8),
             ),
           ),
           const Spacer(),
           Row(
             children: [
-              Icon(Icons.bubble_chart, size: 16, color: Colors.indigo[600]),
-              const SizedBox(width: 4),
               Text(
                 weapon.echoBubble!.name,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: isDetailView ? 16 : 12,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue[600],
                 ),
               ),
+              const SizedBox(width: 4),
+              Icon(Icons.bubble_chart, size: 16, color: Colors.indigo[600]),
             ],
           ),
         ],
@@ -493,29 +480,27 @@ class WeaponDisplayUtils {
     if (weapon.echoWave != null) {
       sections.add(Row(
         children: [
-          Icon(Icons.waves, size: 16, color: Colors.orange[400]),
-          const SizedBox(width: 6),
           Text(
             '${AppLocalizations.of(context)!.echoWave}:',
             style: TextStyle(
-              fontSize: 12,
+              fontSize: isDetailView ? 16 : 12,
               fontWeight: FontWeight.w600,
-              color: Colors.grey[700],
+              color: colorScheme.onSurface.withOpacity(0.8),
             ),
           ),
           const Spacer(),
           Row(
             children: [
-              Icon(Icons.waves, size: 16, color: Colors.orange[600]),
-              const SizedBox(width: 4),
               Text(
                 weapon.echoWave!.name,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: isDetailView ? 16 : 12,
                   fontWeight: FontWeight.bold,
                   color: Colors.green[600],
                 ),
               ),
+              const SizedBox(width: 4),
+              Icon(Icons.waves, size: 16, color: Colors.orange[600]),
             ],
           ),
         ],
@@ -529,27 +514,21 @@ class WeaponDisplayUtils {
     return Column(children: sections);
   }
 
-  static Widget buildBowgunDamageInfo(BuildContext context, Weapon weapon) {
+  static Widget buildBowgunDamageInfo(BuildContext context, Weapon weapon,
+      {bool isDetailView = false}) {
     if (weapon.ammo == null || weapon.ammo!.isEmpty) {
       return const SizedBox.shrink();
     }
 
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        Icon(
-          weapon.kind == 'heavy-bowgun' ? Icons.gps_fixed : Icons.speed,
-          size: 16,
-          color: weapon.kind == 'heavy-bowgun'
-              ? Colors.purple[400]
-              : Colors.green[400],
-        ),
-        const SizedBox(width: 6),
         Text(
           '${AppLocalizations.of(context)!.ammo}:',
           style: TextStyle(
-            fontSize: 12,
+            fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
@@ -573,7 +552,18 @@ class WeaponDisplayUtils {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Text(
+                    '${ammo.kind[0].toUpperCase() + ammo.kind.substring(1)} Lv${ammo.level}',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: weapon.kind == 'heavy-bowgun'
+                          ? Colors.purple[800]
+                          : Colors.green[800],
+                    ),
+                  ),
                   if (_hasElementIcon(ammo.kind)) ...[
+                    const SizedBox(width: 4),
                     Image.asset(
                       'assets/imgs/elements/${_getElementAssetName(ammo.kind)}.webp',
                       width: 12,
@@ -588,18 +578,7 @@ class WeaponDisplayUtils {
                         );
                       },
                     ),
-                    const SizedBox(width: 4),
                   ],
-                  Text(
-                    '${ammo.kind[0].toUpperCase() + ammo.kind.substring(1)} Lv${ammo.level}',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: weapon.kind == 'heavy-bowgun'
-                          ? Colors.purple[800]
-                          : Colors.green[800],
-                    ),
-                  ),
                 ],
               ),
             );
@@ -610,36 +589,36 @@ class WeaponDisplayUtils {
   }
 
   static Widget buildInsectGlaiveDamageInfo(
-      BuildContext context, Weapon weapon) {
+      BuildContext context, Weapon weapon,
+      {bool isDetailView = false}) {
     if (weapon.kinsectLevel == null || weapon.kinsectLevel! <= 0) {
       return const SizedBox.shrink();
     }
 
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        Icon(Icons.flutter_dash, size: 16, color: Colors.lime[400]),
-        const SizedBox(width: 6),
         Text(
           '${AppLocalizations.of(context)!.kinsect}:',
           style: TextStyle(
-            fontSize: 12,
+            fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
+            color: colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
         const Spacer(),
         Row(
           children: [
-            Icon(Icons.flutter_dash, size: 16, color: Colors.lime[600]),
-            const SizedBox(width: 4),
             Text(
               'Lv${weapon.kinsectLevel}',
               style: TextStyle(
-                fontSize: 12,
+                fontSize: isDetailView ? 16 : 12,
                 fontWeight: FontWeight.bold,
                 color: Colors.green[600],
               ),
             ),
+            const SizedBox(width: 4),
+            Icon(Icons.flutter_dash, size: 16, color: Colors.lime[600]),
           ],
         ),
       ],

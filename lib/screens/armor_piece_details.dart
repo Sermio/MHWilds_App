@@ -753,15 +753,14 @@ class ArmorBaseDefense extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        Text(baseDefense.toString()),
+        const SizedBox(width: 5),
         SizedBox(
           height: 20,
           child: Image.asset(
             'assets/imgs/armor/armor.webp',
           ),
         ),
-        const SizedBox(width: 5),
-        Text(baseDefense.toString()),
-        // const SizedBox(width: 10),
       ],
     );
   }
@@ -802,14 +801,14 @@ class ArmorResistancesWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Row(
                     children: [
+                      Text(resistanceValue.toString()),
+                      const SizedBox(width: 5),
                       SizedBox(
                         height: 20,
                         child: Image.asset(
                           'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
                         ),
                       ),
-                      const SizedBox(width: 5),
-                      Text(resistanceValue.toString()),
                     ],
                   ),
                 );
