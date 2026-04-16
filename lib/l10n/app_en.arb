@@ -236,5 +236,7 @@
   "speciesAmphibian": "Amphibian",
   "speciesSnakeWyvern": "Snake Wyvern",
   "monsterKindLarge": "Large Monster",
-  "monsterKindSmall": "Small Monster"
+  "monsterKindSmall": "Small Monster",
+  "showMore": "Show more",
+  "showLess": "Show less"
 }

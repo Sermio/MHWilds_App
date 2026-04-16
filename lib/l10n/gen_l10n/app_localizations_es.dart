@@ -612,6 +612,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get monsterKindSmall => 'Monstruo pequeño';
+
+  @override
+  String get showMore => 'Ver más';
+
+  @override
+  String get showLess => 'Ver menos';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).

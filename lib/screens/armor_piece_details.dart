@@ -234,8 +234,11 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                       ),
                     )),
                 const Divider(height: 24),
-                _buildStatRow(
-                    AppLocalizations.of(context)!.rank, widget.armor.rank),
+                _buildStatRow(AppLocalizations.of(context)!.rank,
+                    widget.armor.rank.isNotEmpty
+                        ? widget.armor.rank[0].toUpperCase() +
+                            widget.armor.rank.substring(1).toLowerCase()
+                        : ""),
                 const Divider(height: 24),
                 _buildStatRow(AppLocalizations.of(context)!.slots, "",
                     trailing: ArmorPieceSlotsWidget(armorPiece: widget.armor)),
@@ -439,7 +442,9 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                           color: colorScheme.onSurface,
                                         ),
                                       ),
-                                      if (skillInfo.description.isNotEmpty) ...[
+                                      if (skillInfo.description.isNotEmpty &&
+                                          skillInfo.description !=
+                                              'No description available') ...[
                                         const SizedBox(height: 4),
                                         Text(
                                           skillInfo.description,
@@ -450,6 +455,23 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                           ),
                                         ),
                                       ],
+                                      if (widget.armor.skills.any((as) =>
+                                          as.skill.id == skillInfo.id &&
+                                          (as.setPiecesRequired != null ||
+                                              as.isSetOrGroupBonus)))
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 8.0),
+                                          child: SetPieceTag(
+                                            count: widget.armor.skills
+                                                .firstWhere((as) =>
+                                                    as.skill.id ==
+                                                        skillInfo.id &&
+                                                    as.setPiecesRequired !=
+                                                        null)
+                                                .setPiecesRequired!,
+                                          ),
+                                        ),
                                     ],
                                   ),
                                 ),
@@ -504,21 +526,6 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                         ),
                                       ),
                                     ),
-                                    if (widget.armor.skills.any((as) =>
-                                        as.skill.id == skillInfo.id &&
-                                        as.level == rank.level &&
-                                        as.setPiecesRequired != null))
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: SetPieceTag(
-                                          count: widget.armor.skills
-                                              .firstWhere((as) =>
-                                                  as.skill.id == skillInfo.id &&
-                                                  as.level == rank.level)
-                                              .setPiecesRequired!,
-                                        ),
-                                      ),
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Text(

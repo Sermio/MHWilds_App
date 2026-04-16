@@ -5,12 +5,6 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
     final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        Icon(
-          Icons.settings,
-          size: 16,
-          color: colorScheme.primary,
-        ),
-        const SizedBox(width: 6),
         Text(
           '${AppLocalizations.of(context)!.slots}:',
           style: TextStyle(
@@ -52,7 +46,7 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
       children: slots.map((slot) {
         final Color slotColor = _slotColor(slot);
         return Padding(
-          padding: const EdgeInsets.only(right: 6),
+          padding: const EdgeInsets.only(left: 6),
           child: DecorationSpriteIcon(
             slot: slot,
             size: 18,
@@ -113,12 +107,6 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
       children: [
         Row(
           children: [
-            Icon(
-              Icons.content_cut,
-              color: colorScheme.primary,
-              size: 16,
-            ),
-            const SizedBox(width: 8),
             Text(
               AppLocalizations.of(context)!.sharpness,
               style: TextStyle(

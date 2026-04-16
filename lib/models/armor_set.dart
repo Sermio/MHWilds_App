@@ -30,6 +30,13 @@ class ArmorSet {
         json['group_bonus'] ??
         json['groupbonus'];
 
+    // Robustez: si la API envía un bono bajo el nombre 'setBonus' pero contiene 'ranks', 
+    // lo tratamos como un 'groupBonus' para no perder la información detallada.
+    if ((rawBonus is Map && rawBonus.containsKey('ranks')) && 
+        !(rawGroupBonus is Map && rawGroupBonus.containsKey('ranks'))) {
+      rawGroupBonus = rawBonus;
+    }
+
     // Robustez: si la API envía un ID numérico directamente
     if (rawBonus is int) {
       rawBonus = {'id': rawBonus};

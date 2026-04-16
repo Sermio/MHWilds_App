@@ -315,13 +315,13 @@ class _WeaponsListState extends State<WeaponsList> {
                 _buildWeaponHeader(weapon),
                 const SizedBox(height: 16),
                 _buildWeaponStats(weapon),
-                if (_hasSharpnessData(weapon)) ...[
-                  const SizedBox(height: 16),
-                  _buildSharpnessSection(weapon),
-                ],
                 if (weapon.slots.isNotEmpty) ...[
                   const SizedBox(height: 16),
                   _buildWeaponSlots(weapon),
+                ],
+                if (_hasSharpnessData(weapon)) ...[
+                  const SizedBox(height: 16),
+                  _buildSharpnessSection(weapon),
                 ],
                 if (weapon.skills.isNotEmpty) ...[
                   const SizedBox(height: 16),
