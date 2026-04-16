@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
+import 'package:mhwilds_app/components/set_piece_tag.dart';
 import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
@@ -184,45 +185,72 @@ class _SkillListState2 extends State<SkillList> {
                                           ),
                                           const SizedBox(width: 16),
                                           Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  skill.name,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color:
-                                                        colorScheme.onSurface,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            child: Text(
+                                                              skill.name,
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 20,
+                                                                color:
+                                                                    colorScheme
+                                                                        .onSurface,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          if (skill.ranks.any((r) =>
+                                                              r.setPiecesRequired >
+                                                              0))
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 8),
+                                                              child: SetPieceTag(
+                                                                count: skill
+                                                                    .ranks
+                                                                    .firstWhere((r) =>
+                                                                        r.setPiecesRequired >
+                                                                        0)
+                                                                    .setPiecesRequired,
+                                                              ),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(height: 4),
+                                                      Container(
+                                                        padding: const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 4),
+                                                        decoration: BoxDecoration(
+                                                          color: _getTypeColor(
+                                                                  skill.kind)
+                                                              .withOpacity(0.1),
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  8),
+                                                          border: Border.all(
+                                                            color: _getTypeColor(
+                                                                    skill.kind)
+                                                                .withOpacity(0.3),
+                                                          ),
+                                                        ),
+                                                        child:
+                                                            _buildSkillTypeBadge(
+                                                          context,
+                                                          skill.kind,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                                const SizedBox(height: 4),
-                                                Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 8,
-                                                      vertical: 4),
-                                                  decoration: BoxDecoration(
-                                                    color: _getTypeColor(
-                                                            skill.kind)
-                                                        .withOpacity(0.1),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    border: Border.all(
-                                                      color: _getTypeColor(
-                                                              skill.kind)
-                                                          .withOpacity(0.3),
-                                                    ),
-                                                  ),
-                                                  child: _buildSkillTypeBadge(
-                                                    context,
-                                                    skill.kind,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
                                           ),
                                           Icon(
                                             Icons.arrow_forward_ios,

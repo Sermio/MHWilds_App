@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/material_image.dart';
+import 'package:mhwilds_app/components/set_piece_tag.dart';
 import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
@@ -9,6 +10,7 @@ import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/api/skills_api.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 class ArmorDetails extends StatefulWidget {
@@ -107,6 +109,30 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
+                  // Indicador de rareza en el header
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: rarityColorFromSprite(widget.armor.rarity)
+                          .withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: rarityColorFromSprite(widget.armor.rarity)
+                            .withOpacity(0.3),
+                      ),
+                    ),
+                    child: Text(
+                      AppLocalizations.of(context)!
+                          .rarityLevel(widget.armor.rarity),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: rarityColorFromSprite(widget.armor.rarity),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   // Descripción de la pieza
                   if (widget.armor.description.isNotEmpty) ...[
                     Text(
@@ -185,8 +211,28 @@ class _ArmorDetailsState extends State<ArmorDetails> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                _buildStatRow(AppLocalizations.of(context)!.rarity,
-                    widget.armor.rarity.toString()),
+                _buildStatRow(AppLocalizations.of(context)!.rarity, "",
+                    trailing: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: rarityColorFromSprite(widget.armor.rarity)
+                            .withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(
+                          color: rarityColorFromSprite(widget.armor.rarity)
+                              .withOpacity(0.3),
+                        ),
+                      ),
+                      child: Text(
+                        widget.armor.rarity.toString(),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: rarityColorFromSprite(widget.armor.rarity),
+                        ),
+                      ),
+                    )),
                 const Divider(height: 24),
                 _buildStatRow(
                     AppLocalizations.of(context)!.rank, widget.armor.rank),
@@ -445,7 +491,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                             ? colorScheme.primary
                                             : colorScheme
                                                 .surfaceContainerHighest,
-                                        borderRadius: BorderRadius.circular(12),
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Text(
                                         "${AppLocalizations.of(context)!.lv} ${rank.level}",
@@ -465,27 +511,12 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 6, vertical: 2),
-                                          decoration: BoxDecoration(
-                                            color: (isCurrentLevel
-                                                    ? colorScheme.onPrimary
-                                                    : colorScheme.primary)
-                                                .withOpacity(0.2),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          child: Text(
-                                            "${widget.armor.skills.firstWhere((as) => as.skill.id == skillInfo.id && as.level == rank.level).setPiecesRequired} ${AppLocalizations.of(context)!.pieces}",
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold,
-                                              color: isCurrentLevel
-                                                  ? colorScheme.onPrimary
-                                                  : colorScheme.primary,
-                                            ),
-                                          ),
+                                        child: SetPieceTag(
+                                          count: widget.armor.skills
+                                              .firstWhere((as) =>
+                                                  as.skill.id == skillInfo.id &&
+                                                  as.level == rank.level)
+                                              .setPiecesRequired!,
                                         ),
                                       ),
                                     const SizedBox(width: 12),

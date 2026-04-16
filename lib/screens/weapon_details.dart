@@ -122,7 +122,6 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   ),
           ),
           const SizedBox(height: 16),
-          // Nombre del weapon
           Text(
             widget.weapon.name,
             style: TextStyle(
@@ -131,6 +130,28 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               color: colorScheme.onSurface,
             ),
             textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          // Indicador de rareza en el header
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+            decoration: BoxDecoration(
+              color: rarityColorFromSprite(widget.weapon.rarity)
+                  .withOpacity(0.1),
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(
+                color: rarityColorFromSprite(widget.weapon.rarity)
+                    .withOpacity(0.3),
+              ),
+            ),
+            child: Text(
+              AppLocalizations.of(context)!.rarityLevel(widget.weapon.rarity),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: rarityColorFromSprite(widget.weapon.rarity),
+              ),
+            ),
           ),
           const SizedBox(height: 8),
           // Descripción del weapon
@@ -196,11 +217,30 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                _buildStatRow(AppLocalizations.of(context)!.rarity,
-                    widget.weapon.rarity.toString()),
-                const Divider(height: 24),
-                _buildStatRow(AppLocalizations.of(context)!.type,
-                    WeaponUtils.formatWeaponKind(widget.weapon.kind)),
+                _buildStatRow(
+                  AppLocalizations.of(context)!.rarity,
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: rarityColorFromSprite(widget.weapon.rarity)
+                          .withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: rarityColorFromSprite(widget.weapon.rarity)
+                            .withOpacity(0.3),
+                      ),
+                    ),
+                    child: Text(
+                      widget.weapon.rarity.toString(),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: rarityColorFromSprite(widget.weapon.rarity),
+                      ),
+                    ),
+                  ),
+                ),
                 const Divider(height: 24),
                 Row(
                   children: [

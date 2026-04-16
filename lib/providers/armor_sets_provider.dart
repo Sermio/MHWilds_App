@@ -72,8 +72,8 @@ class ArmorSetProvider with ChangeNotifier {
                 id: set.id,
                 name: set.name,
                 gameId: set.gameId,
-                groupBonus: set.groupBonus,
-                bonus: set.bonus,
+                groupBonusSkill: set.groupBonusSkill,
+                setBonusSkill: set.setBonusSkill,
                 pieces: filteredPieces,
               );
             } else {

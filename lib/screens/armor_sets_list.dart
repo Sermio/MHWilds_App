@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
+import 'package:mhwilds_app/components/set_piece_tag.dart';
 import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
@@ -156,7 +157,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                 ),
                               ),
                               // Skills de grupo
-                              if (armorSet.groupBonus.ranks.isNotEmpty) ...[
+                              if (armorSet.groupBonusSkill.ranks.isNotEmpty) ...[
                                 Container(
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 8),
@@ -184,7 +185,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                           const SizedBox(width: 8),
                                           Expanded(
                                             child: Text(
-                                              '${AppLocalizations.of(context)!.setBonus} ${armorSet.groupBonus.skill.name}',
+                                              '${AppLocalizations.of(context)!.setBonus}: '
+                                              '${armorSet.groupBonusSkill.name.isNotEmpty ? armorSet.groupBonusSkill.name : (armorSet.groupBonusSkill.skill.name.isNotEmpty ? armorSet.groupBonusSkill.skill.name : armorSet.setBonusSkill.name)}',
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
@@ -197,7 +199,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                         ],
                                       ),
                                       const SizedBox(height: 12),
-                                      ...armorSet.groupBonus.ranks
+                                      ...armorSet.groupBonusSkill.ranks
                                           .map((rank) => Container(
                                                 margin: const EdgeInsets.only(
                                                     bottom: 8),
@@ -215,31 +217,12 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                 ),
                                                 child: Row(
                                                   children: [
-                                                    Container(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        horizontal: 8,
-                                                        vertical: 4,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            colorScheme.primary,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12),
-                                                      ),
-                                                      child: Text(
-                                                        '${rank.pieces} ${AppLocalizations.of(context)!.pieces}',
-                                                        style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: colorScheme
-                                                              .onPrimary,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
+                                                    SetPieceTag(
+                                                      count: rank.pieces,
+                                                      variant:
+                                                          SetPieceTagVariant.gold,
                                                     ),
-                                                    const SizedBox(width: 12),
+                                                    const SizedBox(width: 16),
                                                     Expanded(
                                                       child: Column(
                                                         crossAxisAlignment:
@@ -247,37 +230,25 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            '${AppLocalizations.of(context)!.level} ${rank.skill.level}',
+                                                            '${AppLocalizations.of(context)!.level} ${rank.level}',
                                                             style: TextStyle(
                                                               fontSize: 14,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .w600,
+                                                                      .bold,
                                                               color: colorScheme
                                                                   .onSurface,
                                                             ),
                                                           ),
-                                                          if (rank
-                                                              .skill
-                                                              .description
-                                                              .isNotEmpty) ...[
-                                                            const SizedBox(
-                                                                height: 4),
+                                                          if (rank.description.isNotEmpty) ...[
+                                                            const SizedBox(height: 4),
                                                             Text(
-                                                              rank.skill
-                                                                  .description,
+                                                              rank.description,
                                                               style: TextStyle(
                                                                 fontSize: 12,
-                                                                color: colorScheme
-                                                                    .onSurface
-                                                                    .withOpacity(
-                                                                        0.8),
+                                                                color: colorScheme.onSurface.withOpacity(0.8),
                                                                 height: 1.3,
                                                               ),
-                                                              maxLines: 2,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
                                                             ),
                                                           ],
                                                         ],
@@ -365,56 +336,57 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Text(
-                                                        piece.name,
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 18,
-                                                          color: Colors.black87,
+                                                        Text(
+                                                          piece.name,
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 18,
+                                                            color: colorScheme
+                                                                .onSurface,
+                                                          ),
                                                         ),
-                                                      ),
                                                       const SizedBox(height: 8),
                                                       // Indicador de rarity
-                                                      Container(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          horizontal: 8,
-                                                          vertical: 4,
-                                                        ),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: _getRarityColor(
-                                                                  piece.rarity)
-                                                              .withOpacity(0.1),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          border: Border.all(
+                                                        Container(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 4,
+                                                          ),
+                                                          decoration:
+                                                              BoxDecoration(
                                                             color: _getRarityColor(
-                                                                    piece
-                                                                        .rarity)
-                                                                .withOpacity(
-                                                                    0.3),
+                                                                    piece.rarity)
+                                                                .withOpacity(0.1),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(8),
+                                                            border: Border.all(
+                                                              color: _getRarityColor(
+                                                                      piece
+                                                                          .rarity)
+                                                                  .withOpacity(
+                                                                      0.3),
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            AppLocalizations.of(
+                                                                    context)!
+                                                                .rarityLevel(
+                                                                    piece.rarity),
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              color:
+                                                                  _getRarityColor(
+                                                                      piece
+                                                                          .rarity),
+                                                              fontWeight:
+                                                                  FontWeight.w600,
+                                                            ),
                                                           ),
                                                         ),
-                                                        child: Text(
-                                                          AppLocalizations.of(
-                                                                  context)!
-                                                              .rarityLevel(
-                                                                  piece.rarity),
-                                                          style: TextStyle(
-                                                            fontSize: 12,
-                                                            color:
-                                                                _getRarityColor(
-                                                                    piece
-                                                                        .rarity),
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                          ),
-                                                        ),
-                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -621,10 +593,11 @@ class _ArmorSetListState extends State<ArmorSetList> {
                 color: colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
+            const SizedBox(width: 8),
+            const Spacer(),
+            _buildSlotsWidget(armorPiece),
           ],
         ),
-        const SizedBox(height: 8),
-        _buildSlotsWidget(armorPiece),
         const SizedBox(height: 12),
         // Sección de resistencias
         Row(
@@ -704,7 +677,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                             horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: colorScheme.primary,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
                           '${skill.name ?? skill.skill.name} +${skill.level}',
@@ -718,21 +691,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
                       if (skill.setPiecesRequired != null)
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: colorScheme.onPrimary.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text(
-                              '${skill.setPiecesRequired} ${AppLocalizations.of(context)!.pieces}',
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: colorScheme.onPrimary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                          child: SetPieceTag(
+                            count: skill.setPiecesRequired!,
                           ),
                         ),
                     ],
@@ -746,8 +706,6 @@ class _ArmorSetListState extends State<ArmorSetList> {
                         color: colorScheme.onSurface.withOpacity(0.8),
                         height: 1.3,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ],

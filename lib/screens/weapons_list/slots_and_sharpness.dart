@@ -3,28 +3,24 @@ part of '../weapons_list.dart';
 extension WeaponsListSlotsAndSharpness on _WeaponsListState {
   Widget _buildWeaponSlots(Weapon weapon) {
     final colorScheme = Theme.of(context).colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
-        Row(
-          children: [
-            Icon(
-              Icons.settings,
-              size: 16,
-              color: colorScheme.primary,
-            ),
-            const SizedBox(width: 6),
-            Text(
-              '${AppLocalizations.of(context)!.slots}:',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
-              ),
-            ),
-          ],
+        Icon(
+          Icons.settings,
+          size: 16,
+          color: colorScheme.primary,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(width: 6),
+        Text(
+          '${AppLocalizations.of(context)!.slots}:',
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: colorScheme.onSurface.withOpacity(0.8),
+          ),
+        ),
+        const SizedBox(width: 8),
+        const Spacer(),
         _buildSlotsWidget(weapon.slots),
       ],
     );
