@@ -40,24 +40,7 @@ class WeaponDisplayUtils {
           final colorScheme = Theme.of(context).colorScheme;
           return Row(
             children: [
-              if (!isDetailView) ...[
-                // Icono representativo antes del texto (solo en lista)
-                SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: Image.asset(
-                    'assets/imgs/elements/${elementOrStatus.toLowerCase()}.webp',
-                    errorBuilder: (context, error, stackTrace) {
-                      return Icon(
-                        WeaponUtils.getElementIcon(elementOrStatus),
-                        size: 16,
-                        color: WeaponUtils.getElementColor(elementOrStatus),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(width: 6),
-              ],
+
               Text(
                 special['kind'] == 'element'
                     ? '${AppLocalizations.of(context)!.element}:'
