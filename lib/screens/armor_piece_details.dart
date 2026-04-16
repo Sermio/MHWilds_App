@@ -109,30 +109,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
-                  // Indicador de rareza en el header
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: rarityColorFromSprite(widget.armor.rarity)
-                          .withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                        color: rarityColorFromSprite(widget.armor.rarity)
-                            .withOpacity(0.3),
-                      ),
-                    ),
-                    child: Text(
-                      AppLocalizations.of(context)!
-                          .rarityLevel(widget.armor.rarity),
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: rarityColorFromSprite(widget.armor.rarity),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
+
                   // Descripción de la pieza
                   if (widget.armor.description.isNotEmpty) ...[
                     Text(

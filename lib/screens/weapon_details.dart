@@ -132,28 +132,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
-          // Indicador de rareza en el header
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-            decoration: BoxDecoration(
-              color: rarityColorFromSprite(widget.weapon.rarity)
-                  .withOpacity(0.1),
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(
-                color: rarityColorFromSprite(widget.weapon.rarity)
-                    .withOpacity(0.3),
-              ),
-            ),
-            child: Text(
-              AppLocalizations.of(context)!.rarityLevel(widget.weapon.rarity),
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: rarityColorFromSprite(widget.weapon.rarity),
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
+
           // Descripción del weapon
           if (widget.weapon.description.isNotEmpty) ...[
             Text(
