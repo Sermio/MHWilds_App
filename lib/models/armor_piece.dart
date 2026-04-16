@@ -128,16 +128,39 @@ class SkillInfo {
 class ArmorSet {
   final int id;
   final String name;
+  final int? setBonusSkillId;
+  final int? groupBonusSkillId;
 
   ArmorSet({
     required this.id,
     required this.name,
+    this.setBonusSkillId,
+    this.groupBonusSkillId,
   });
 
   factory ArmorSet.fromJson(Map<String, dynamic> json) {
+    final rawBonus = json['setBonusSkill'] ??
+        json['set_bonus_skill'] ??
+        json['bonus'] ??
+        json['setBonus'] ??
+        json['set_bonus'];
+    final rawGroupBonus = json['groupBonusSkill'] ??
+        json['group_bonus_skill'] ??
+        json['groupBonus'] ??
+        json['group_bonus'] ??
+        json['groupbonus'];
+
+    int? parseId(dynamic val) {
+      if (val is int) return val;
+      if (val is Map) return val['id'] as int? ?? val['skillId'] as int?;
+      return null;
+    }
+
     return ArmorSet(
       id: json['id'] as int? ?? 0,
       name: json['name'] as String? ?? '',
+      setBonusSkillId: parseId(rawBonus),
+      groupBonusSkillId: parseId(rawGroupBonus),
     );
   }
 }

@@ -122,7 +122,6 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   ),
           ),
           const SizedBox(height: 16),
-          // Nombre del weapon
           Text(
             widget.weapon.name,
             style: TextStyle(
@@ -133,6 +132,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
+
           // Descripción del weapon
           if (widget.weapon.description.isNotEmpty) ...[
             Text(
@@ -196,20 +196,33 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                _buildStatRow(AppLocalizations.of(context)!.rarity,
-                    widget.weapon.rarity.toString()),
-                const Divider(height: 24),
-                _buildStatRow(AppLocalizations.of(context)!.type,
-                    WeaponUtils.formatWeaponKind(widget.weapon.kind)),
+                _buildStatRow(
+                  AppLocalizations.of(context)!.rarity,
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: rarityColorFromSprite(widget.weapon.rarity)
+                          .withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: rarityColorFromSprite(widget.weapon.rarity)
+                            .withOpacity(0.3),
+                      ),
+                    ),
+                    child: Text(
+                      widget.weapon.rarity.toString(),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: rarityColorFromSprite(widget.weapon.rarity),
+                      ),
+                    ),
+                  ),
+                ),
                 const Divider(height: 24),
                 Row(
                   children: [
-                    Icon(
-                      Icons.flash_on,
-                      size: 16,
-                      color: colorScheme.primary,
-                    ),
-                    const SizedBox(width: 6),
                     Text(
                       '${AppLocalizations.of(context)!.physicalDamage}:',
                       style: TextStyle(
@@ -221,12 +234,6 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     const Spacer(),
                     Row(
                       children: [
-                        Icon(
-                          Icons.gps_fixed,
-                          size: 16,
-                          color: Colors.red[400],
-                        ),
-                        const SizedBox(width: 4),
                         Text(
                           '${widget.weapon.damage.display}',
                           style: TextStyle(
@@ -235,6 +242,12 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                             color: colorScheme.onSurface,
                           ),
                         ),
+                        const SizedBox(width: 4),
+                        Icon(
+                          Icons.gps_fixed,
+                          size: 18,
+                          color: Colors.red[400],
+                        ),
                       ],
                     ),
                   ],
@@ -242,17 +255,67 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 const Divider(height: 24),
                 _buildStatRow(
                   AppLocalizations.of(context)!.affinity,
-                  '${widget.weapon.affinity > 0 ? '+' : ''}${widget.weapon.affinity}%',
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        '${widget.weapon.affinity > 0 ? '+' : ''}${widget.weapon.affinity}%',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Icon(Icons.trending_up,
+                          size: 18, color: colorScheme.primary),
+                    ],
+                  ),
                 ),
                 if (widget.weapon.defenseBonus > 0) ...[
                   const Divider(height: 24),
-                  _buildStatRow(AppLocalizations.of(context)!.defenseBonus,
-                      "+${widget.weapon.defenseBonus}"),
+                  _buildStatRow(
+                    AppLocalizations.of(context)!.defenseBonus,
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "+${widget.weapon.defenseBonus}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: colorScheme.onSurface,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Icon(Icons.shield,
+                            size: 18, color: colorScheme.primary),
+                      ],
+                    ),
+                  ),
                 ],
                 if (widget.weapon.elderseal != null) ...[
                   const Divider(height: 24),
-                  _buildStatRow(AppLocalizations.of(context)!.elderseal,
-                      widget.weapon.elderseal!),
+                  _buildStatRow(
+                    AppLocalizations.of(context)!.elderseal,
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          widget.weapon.elderseal![0].toUpperCase() +
+                              widget.weapon.elderseal!.substring(1),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: colorScheme.onSurface,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Icon(Icons.auto_awesome,
+                            size: 18, color: colorScheme.primary),
+                      ],
+                    ),
+                  ),
                 ],
                 if (widget.weapon.slots.isNotEmpty) ...[
                   const Divider(height: 24),
@@ -970,24 +1033,24 @@ class _WeaponDetailsState extends State<WeaponDetails> {
 
   List<Widget> _buildWeaponTypeSpecificStats() {
     final List<Widget> stats = [];
-    bool hasContent = false;
 
-    // Daño elemental/status si está disponible (mismo estilo que WeaponsList)
-    if (widget.weapon.specials != null) {
-      final elementalStats =
-          WeaponDisplayUtils.buildElementalDamageRow(context, widget.weapon);
-      stats.add(elementalStats);
-      hasContent = true;
-    }
-
-    // Información específica según el tipo de arma (mismo estilo que WeaponsList)
-    final additionalInfo =
-        WeaponDisplayUtils.buildAdditionalDamageInfo(context, widget.weapon);
-    if (hasContent) {
+    // Daño elemental/status si está disponible
+    final elementalStats = WeaponDisplayUtils.buildElementalDamageRow(
+        context, widget.weapon,
+        isDetailView: true);
+    if (elementalStats is! SizedBox) {
       stats.add(const Divider(height: 24));
+      stats.add(elementalStats);
     }
-    stats.add(additionalInfo);
-    hasContent = true;
+
+    // Información específica según el tipo de arma
+    final additionalInfo = WeaponDisplayUtils.buildAdditionalDamageInfo(
+        context, widget.weapon,
+        isDetailView: true);
+    if (additionalInfo is! SizedBox) {
+      stats.add(const Divider(height: 24));
+      stats.add(additionalInfo);
+    }
 
     return stats;
   }

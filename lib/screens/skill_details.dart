@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/set_piece_tag.dart';
 import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
@@ -216,30 +217,8 @@ class _SkillDetailsState extends State<SkillDetails> {
                                             ),
                                             if (rank.setPiecesRequired > 0) ...[
                                               const SizedBox(width: 8),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 6,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  color: colorScheme
-                                                      .surfaceContainerHighest,
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  border: Border.all(
-                                                    color:
-                                                        colorScheme.outlineVariant,
-                                                  ),
-                                                ),
-                                                child: Text(
-                                                  '${rank.setPiecesRequired} ${AppLocalizations.of(context)!.pieces}',
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: colorScheme.onSurface,
-                                                  ),
-                                                ),
+                                              SetPieceTag(
+                                                count: rank.setPiecesRequired,
                                               ),
                                             ],
                                           ],

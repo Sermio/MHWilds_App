@@ -615,4 +615,10 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get monsterKindSmall => 'Mostro piccolo';
+
+  @override
+  String get showMore => 'Show more';
+
+  @override
+  String get showLess => 'Show less';
 }

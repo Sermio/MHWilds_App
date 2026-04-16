@@ -613,6 +613,12 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get monsterKindSmall => 'Monstro Pequeno';
+
+  @override
+  String get showMore => 'Show more';
+
+  @override
+  String get showLess => 'Show less';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).

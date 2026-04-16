@@ -228,5 +228,7 @@
   "speciesAmphibian": "Anfibio",
   "speciesSnakeWyvern": "Wyvern serpiente",
   "monsterKindLarge": "Monstruo grande",
-  "monsterKindSmall": "Monstruo pequeño"
+  "monsterKindSmall": "Monstruo pequeño",
+  "showMore": "Ver más",
+  "showLess": "Ver menos"
 }
