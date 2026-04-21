@@ -159,11 +159,13 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                 ),
                               ),
                               // Skills de grupo / set
-                              if (armorSet.groupBonusSkill.ranks.isNotEmpty || 
-                                  armorSet.pieces.any((p) => p.skills.any((s) => s.isSetOrGroupBonus))) ...[
+                              if (armorSet.groupBonusSkill.ranks.isNotEmpty ||
+                                  armorSet.pieces.any((p) => p.skills
+                                      .any((s) => s.isSetOrGroupBonus))) ...[
                                 ArmorSetBonusSection(
                                   armorSet: armorSet,
-                                  onSkillIconRequest: (id) => _skillIconForId(id, context),
+                                  onSkillIconRequest: (id) =>
+                                      _skillIconForId(id, context),
                                 ),
                               ],
                               // Piezas del set
@@ -787,12 +789,12 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    
+
     // Título del bono para comparar
-    final String bonusTitleName = widget.armorSet.setBonusSkill.name.isNotEmpty 
-        ? widget.armorSet.setBonusSkill.name 
-        : (widget.armorSet.groupBonusSkill.name.isNotEmpty 
-            ? widget.armorSet.groupBonusSkill.name 
+    final String bonusTitleName = widget.armorSet.setBonusSkill.name.isNotEmpty
+        ? widget.armorSet.setBonusSkill.name
+        : (widget.armorSet.groupBonusSkill.name.isNotEmpty
+            ? widget.armorSet.groupBonusSkill.name
             : widget.armorSet.groupBonusSkill.skill.name);
 
     // Agrupar habilidades
@@ -802,10 +804,11 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
         if (skillInfo.isSetOrGroupBonus) {
           // Priorizar descripción de la habilidad si no es la genérica
           String bestDescription = skillInfo.skill.description;
-          if (bestDescription == 'No description available' || bestDescription.isEmpty) {
+          if (bestDescription == 'No description available' ||
+              bestDescription.isEmpty) {
             bestDescription = skillInfo.description;
           }
-          
+
           bonusSkills[skillInfo.skill.id] = {
             'skill': skillInfo.skill,
             'description': bestDescription,
@@ -821,8 +824,8 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
     // 1. Intentar coincidir por nombre Y que sea tipo 'set'
     int primaryIndex = allSkills.indexWhere((s) {
       final skill = s['skill'] as skills_model.Skills;
-      return skill.name.toLowerCase() == bonusTitleName.toLowerCase() && 
-             skill.kind.toLowerCase() == 'set';
+      return skill.name.toLowerCase() == bonusTitleName.toLowerCase() &&
+          skill.kind.toLowerCase() == 'set';
     });
 
     // 2. Si no, intentar coincidir solo por nombre
@@ -889,17 +892,19 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
             ],
           ),
           const SizedBox(height: 12),
-          
+
           // Bono primario (siempre visible)
-          _buildSkillCard(context, primarySkill['skill'], primarySkill['description']),
-          
+          _buildSkillCard(
+              context, primarySkill['skill'], primarySkill['description']),
+
           // Otros bonos (colapsables)
           if (extraSkills.isNotEmpty) ...[
             if (_isExpanded)
-              ...extraSkills.map((s) => _buildSkillCard(context, s['skill'], s['description']))
+              ...extraSkills.map(
+                  (s) => _buildSkillCard(context, s['skill'], s['description']))
             else
               const SizedBox.shrink(),
-            
+
             // Botón de expansión centrando
             Center(
               child: TextButton.icon(
@@ -909,10 +914,11 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
                   size: 18,
                 ),
                 label: Text(
-                  _isExpanded 
-                    ? AppLocalizations.of(context)!.showLess
-                    : '${AppLocalizations.of(context)!.showMore} (${extraSkills.length})',
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  _isExpanded
+                      ? AppLocalizations.of(context)!.showLess
+                      : '${AppLocalizations.of(context)!.showMore} (${extraSkills.length})',
+                  style: const TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.bold),
                 ),
                 style: TextButton.styleFrom(
                   foregroundColor: colorScheme.primary,
@@ -926,7 +932,8 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
     );
   }
 
-  Widget _buildSkillCard(BuildContext context, skills_model.Skills skill, String description) {
+  Widget _buildSkillCard(
+      BuildContext context, skills_model.Skills skill, String description) {
     final colorScheme = Theme.of(context).colorScheme;
     final iconData = widget.onSkillIconRequest(skill.id);
 
@@ -964,7 +971,8 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFC5A35C).withOpacity(0.8), // Dorado/Beige solicitado
+                  color: const Color(0xFFC5A35C)
+                      .withOpacity(0.8), // Dorado/Beige solicitado
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -978,7 +986,8 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
               ),
             ],
           ),
-          if (description.isNotEmpty && description != 'No description available') ...[
+          if (description.isNotEmpty &&
+              description != 'No description available') ...[
             const SizedBox(height: 8),
             Text(
               description,

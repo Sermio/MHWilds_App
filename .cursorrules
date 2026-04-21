@@ -1,0 +1,15 @@
+# AI Rules Router
+
+This project uses modular AI instructions located in the .skills/ directory. 
+Always refer to the relevant skill folder before performing tasks:
+
+- **Core Dart & Style**: See @.skills/effective-dart/SKILL.md
+- **Flutter Architecture**: See @.skills/flutter-app-architecture/SKILL.md
+- **State Management**: 
+    - Provider: @.skills/provider/SKILL.md
+    - BLoC: @.skills/bloc/SKILL.md
+    - Riverpod: @.skills/riverpod/SKILL.md
+- **Firebase**: See @.skills/firebase-*/SKILL.md
+- **Testing**: See @.skills/testing/SKILL.md
+
+When working on a specific feature, read the relevant skill first to ensure compliance with the documented best practices.
