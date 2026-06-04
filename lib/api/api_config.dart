@@ -14,7 +14,11 @@ class ApiConfig {
   /// Código de idioma ISO 639-1 usado en las peticiones a la API.
   /// Debe asignarse desde la app (p. ej. desde [LocaleProvider.locale?.languageCode]).
   static set languageCode(String? code) {
-    _languageCode = code ?? 'en';
+    if (code != null && code.startsWith('pt')) {
+      _languageCode = 'pt-BR';
+    } else {
+      _languageCode = code ?? 'en';
+    }
   }
 
   static String get languageCode => _languageCode;
