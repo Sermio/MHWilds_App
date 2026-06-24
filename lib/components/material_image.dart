@@ -33,9 +33,13 @@ class MaterialImage extends StatelessWidget {
       return _urlCache[formattedMaterialName];
     }
 
-    final url = await getValidItemImageUrl(formattedMaterialName);
-    _urlCache[formattedMaterialName] = url;
-    return url;
+    try {
+      final url = await getValidItemImageUrl(formattedMaterialName);
+      _urlCache[formattedMaterialName] = url;
+      return url;
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<String?> _getAssetPath() async {

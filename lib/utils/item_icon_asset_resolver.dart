@@ -132,9 +132,25 @@ class ItemIconAssetResolver {
     if (_loaded) return;
 
     try {
-      final rawManifest = await rootBundle.loadString('AssetManifest.json');
-      final Map<String, dynamic> manifest = json.decode(rawManifest);
-      final assets = manifest.keys.where((a) => a.startsWith(_assetsBase));
+      Iterable<String> assets;
+      try {
+        // Modern Flutter 3.22+ / 3.10+ way
+        final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+        assets = manifest.listAssets().where((a) => a.startsWith(_assetsBase));
+        print('MHWilds DEBUG: Assets from manifest: ${assets.length}');
+      } catch (e) {
+        print('MHWilds DEBUG: Failed AssetManifest.loadFromAssetBundle: $e');
+        try {
+          // Fallback legacy way
+          final manifestContent = await rootBundle.loadString('AssetManifest.json');
+          final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+          assets = manifestMap.keys.where((a) => a.startsWith(_assetsBase));
+          print('MHWilds DEBUG: Assets from legacy json: ${assets.length}');
+        } catch (e2) {
+          print('MHWilds DEBUG: Failed legacy json: $e2');
+          return;
+        }
+      }
 
       final genericRegex = RegExp(
         r'^MHWilds-(.+?)_Icon_([A-Za-z]+(?:_[A-Za-z]+)?)_',

@@ -180,10 +180,16 @@ Future<String?> getValidItemImageUrl(String materialName) async {
   ];
 
   for (String url in urlVariations) {
-    final response = await http.head(Uri.parse(url));
+    try {
+      final response = await http.head(Uri.parse(url));
 
-    if (response.statusCode == 200) {
-      return url;
+      if (response.statusCode == 200) {
+        return url;
+      }
+    } catch (e) {
+      // Si falla (ej. CORS en Web, sin internet), ignoramos esta URL
+      // ignore: avoid_print
+      print('Network error for $url: $e');
     }
   }
 
