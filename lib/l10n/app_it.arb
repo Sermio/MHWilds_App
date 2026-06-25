@@ -19,7 +19,9 @@
   "errorWithMessage": "Errore: {message}",
   "@errorWithMessage": {
     "placeholders": {
-      "message": { "type": "String" }
+      "message": {
+        "type": "String"
+      }
     }
   },
   "close": "Chiudi",
@@ -30,6 +32,7 @@
   "offDefault": "Disattivato (predefinito)",
   "armorSets": "Set di armatura",
   "menuMonstersSubtitle": "Database di tutti i mostri",
+  "menuLocationsSubtitle": "Esplora le mappe e gli accampamenti",
   "menuItemsSubtitle": "Materiali e risorse",
   "menuDecorationsSubtitle": "Gemme e gioielli abilità",
   "menuTalismansSubtitle": "Accessori potenti",
@@ -54,20 +57,28 @@
   "updateMessageWithBoth": "Hai la versione {currentVersion}. Una nuova versione ({newVersion}) è disponibile nello store. Aggiorna per le ultime migliorie e correzioni.",
   "@updateMessageWithBoth": {
     "placeholders": {
-      "currentVersion": { "type": "String" },
-      "newVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      },
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageCurrentOnly": "Hai la versione {currentVersion}. Una nuova versione è disponibile nello store. Aggiorna per le ultime migliorie e correzioni.",
   "@updateMessageCurrentOnly": {
     "placeholders": {
-      "currentVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageNewOnly": "Una nuova versione ({newVersion}) è disponibile nello store. Aggiorna per le ultime migliorie e correzioni.",
   "@updateMessageNewOnly": {
     "placeholders": {
-      "newVersion": { "type": "String" }
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageGeneric": "Una nuova versione è disponibile nello store. Aggiorna per le ultime migliorie e correzioni.",
@@ -83,7 +94,13 @@
   "type": "Tipo",
   "rarity": "Rarità",
   "rarityLevel": "Rarità {n}",
-  "@rarityLevel": { "placeholders": { "n": { "type": "int" } } },
+  "@rarityLevel": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "enterWeaponName": "Inserisci il nome dell'arma...",
   "enterItemName": "Inserisci il nome dell'oggetto...",
   "enterArmorSetName": "Inserisci il nome del set armatura...",
@@ -106,7 +123,6 @@
   "baseDefense": "Difesa base",
   "slots": "Slot",
   "resistances": "Resistenze",
-  "skills": "Abilità",
   "noSlots": "Nessuno slot",
   "noResistances": "Nessuna resistenza",
   "physicalDamage": "Danno fisico",
@@ -141,7 +157,9 @@
   "campsOfLevel": "Accampamenti di Livello {n}",
   "@campsOfLevel": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "risk": "Rischio",
@@ -175,7 +193,6 @@
   "craftingRecipe": "Ricetta di Creazione:",
   "requiredMaterials": "Materiali Richiesti:",
   "skillRanks": "Ranghi di Abilità:",
-  "rarity": "Rarità",
   "rank": "Rango",
   "errorLoadingSkills": "Errore nel caricamento delle abilità",
   "noSkillsAvailable": "Nessuna abilità disponibile",
@@ -212,5 +229,10 @@
   "speciesAmphibian": "Anfibio",
   "speciesSnakeWyvern": "Wyvern serpente",
   "monsterKindLarge": "Mostro grande",
-  "monsterKindSmall": "Mostro piccolo"
+  "monsterKindSmall": "Mostro piccolo",
+  "camps": "Accampamenti",
+  "openOptimizer": "Apri ottimizzatore",
+  "ok": "OK",
+  "webViewNotSupported": "WebView non è disponibile su questa piattaforma.",
+  "openInBrowserHint": "Puoi aprire l'ottimizzatore nel tuo browser."
 }

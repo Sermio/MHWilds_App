@@ -11,6 +11,7 @@ import 'package:mhwilds_app/screens/skills_list.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/screens/build_optimizer_screen.dart';
 import 'package:mhwilds_app/screens/build_crafter_screen.dart';
+import 'package:mhwilds_app/screens/maps_list.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 
 class Cdrawer extends StatelessWidget {
@@ -170,21 +171,42 @@ class Cdrawer extends StatelessWidget {
           const SizedBox(height: 8),
           _buildMenuItem(
             context: context,
-            title: l10n.items,
-            subtitle: l10n.menuItemsSubtitle,
-            leadingIcon: Image.asset(
-              'assets/imgs/drawer/potion.png',
-              fit: BoxFit.contain,
-              errorBuilder: (_, __, ___) => Icon(
-                Icons.inventory_2,
-                color: Colors.orange[600],
+            title: l10n.weapons,
+            subtitle: l10n.menuWeaponsSubtitle,
+            leadingIcon: GearSpriteIcon(
+              column: weaponColumnByKind['great-sword']!,
+              rarity: 1,
+              size: 30,
+              fallback: Icon(
+                Icons.gps_fixed,
+                color: Colors.indigo[600],
                 size: 30,
               ),
             ),
-            icon: Icons.inventory_2,
-            iconColor: Colors.orange[600]!,
-            isSelected: selectedScreen is ItemList,
-            onTap: () => onItemSelected(const ItemList()),
+            icon: Icons.gps_fixed,
+            iconColor: Colors.indigo[600]!,
+            isSelected: selectedScreen is WeaponsList,
+            onTap: () => onItemSelected(const WeaponsList()),
+          ),
+          const SizedBox(height: 8),
+          _buildMenuItem(
+            context: context,
+            title: l10n.armorSets,
+            subtitle: l10n.menuArmorSetsSubtitle,
+            leadingIcon: GearSpriteIcon(
+              column: armorColumnByKind['head']!,
+              rarity: 1,
+              size: 30,
+              fallback: Icon(
+                Icons.shield,
+                color: Colors.blue[600],
+                size: 30,
+              ),
+            ),
+            icon: Icons.shield,
+            iconColor: Colors.blue[600]!,
+            isSelected: selectedScreen is ArmorSetList,
+            onTap: () => onItemSelected(const ArmorSetList()),
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
@@ -228,46 +250,6 @@ class Cdrawer extends StatelessWidget {
           const SizedBox(height: 8),
           _buildMenuItem(
             context: context,
-            title: l10n.armorSets,
-            subtitle: l10n.menuArmorSetsSubtitle,
-            leadingIcon: GearSpriteIcon(
-              column: armorColumnByKind['head']!,
-              rarity: 1,
-              size: 30,
-              fallback: Icon(
-                Icons.shield,
-                color: Colors.blue[600],
-                size: 30,
-              ),
-            ),
-            icon: Icons.shield,
-            iconColor: Colors.blue[600]!,
-            isSelected: selectedScreen is ArmorSetList,
-            onTap: () => onItemSelected(const ArmorSetList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.weapons,
-            subtitle: l10n.menuWeaponsSubtitle,
-            leadingIcon: GearSpriteIcon(
-              column: weaponColumnByKind['great-sword']!,
-              rarity: 1,
-              size: 30,
-              fallback: Icon(
-                Icons.gps_fixed,
-                color: Colors.indigo[600],
-                size: 30,
-              ),
-            ),
-            icon: Icons.gps_fixed,
-            iconColor: Colors.indigo[600]!,
-            isSelected: selectedScreen is WeaponsList,
-            onTap: () => onItemSelected(const WeaponsList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
             title: l10n.skills,
             subtitle: l10n.menuSkillsSubtitle,
             leadingIcon: SkillSpriteIcon(
@@ -287,17 +269,40 @@ class Cdrawer extends StatelessWidget {
           const SizedBox(height: 8),
           _buildMenuItem(
             context: context,
-            title: l10n.buildOptimizer,
-            subtitle: l10n.buildOptimizerMenuSubtitle,
-            leadingIcon: Icon(
-              Icons.auto_graph,
-              color: Colors.teal[600],
-              size: 30,
+            title: l10n.items,
+            subtitle: l10n.menuItemsSubtitle,
+            leadingIcon: Image.asset(
+              'assets/imgs/drawer/potion.png',
+              fit: BoxFit.contain,
+              errorBuilder: (_, __, ___) => Icon(
+                Icons.inventory_2,
+                color: Colors.orange[600],
+                size: 30,
+              ),
             ),
-            icon: Icons.auto_graph,
-            iconColor: Colors.teal[600]!,
-            isSelected: selectedScreen is BuildOptimizerScreen,
-            onTap: () => onItemSelected(const BuildOptimizerScreen()),
+            icon: Icons.inventory_2,
+            iconColor: Colors.orange[600]!,
+            isSelected: selectedScreen is ItemList,
+            onTap: () => onItemSelected(const ItemList()),
+          ),
+          const SizedBox(height: 8),
+          _buildMenuItem(
+            context: context,
+            title: l10n.locations,
+            subtitle: l10n.menuLocationsSubtitle,
+            leadingIcon: Image.asset(
+              'assets/imgs/maps/map.png',
+              fit: BoxFit.contain,
+              errorBuilder: (_, __, ___) => Icon(
+                Icons.map,
+                color: Colors.blue[400],
+                size: 30,
+              ),
+            ),
+            icon: Icons.map,
+            iconColor: Colors.blue[400]!,
+            isSelected: selectedScreen is MapsList,
+            onTap: () => onItemSelected(const MapsList()),
           ),
           const SizedBox(height: 8),
           _buildMenuItem(
@@ -313,6 +318,21 @@ class Cdrawer extends StatelessWidget {
             iconColor: Colors.deepPurple.shade400,
             isSelected: selectedScreen is BuildCrafterScreen,
             onTap: () => onItemSelected(const BuildCrafterScreen()),
+          ),
+          const SizedBox(height: 8),
+          _buildMenuItem(
+            context: context,
+            title: l10n.buildOptimizer,
+            subtitle: l10n.buildOptimizerMenuSubtitle,
+            leadingIcon: Icon(
+              Icons.auto_graph,
+              color: Colors.teal[600],
+              size: 30,
+            ),
+            icon: Icons.auto_graph,
+            iconColor: Colors.teal[600]!,
+            isSelected: selectedScreen is BuildOptimizerScreen,
+            onTap: () => onItemSelected(const BuildOptimizerScreen()),
           ),
         ],
       ),

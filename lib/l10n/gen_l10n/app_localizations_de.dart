@@ -86,6 +86,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get menuMonstersSubtitle => 'Datenbank aller Monster';
 
   @override
+  String get menuLocationsSubtitle => 'Entdecke Karten und Lager';
+
+  @override
   String get menuItemsSubtitle => 'Materialien und Ressourcen';
 
   @override
@@ -621,4 +624,21 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get showLess => 'Show less';
+
+  @override
+  String get camps => 'Lager';
+
+  @override
+  String get openOptimizer => 'Optimierer öffnen';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get webViewNotSupported =>
+      'WebView ist auf dieser Plattform nicht verfügbar.';
+
+  @override
+  String get openInBrowserHint =>
+      'Sie können den Optimierer in Ihrem Browser öffnen.';
 }

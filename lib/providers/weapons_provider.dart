@@ -46,6 +46,14 @@ class WeaponsProvider with ChangeNotifier {
       final switchAxeWeapons =
           _allWeapons.where((w) => w.kind == 'switch-axe').toList();
 
+      _allWeapons.sort((a, b) {
+        final kindComp = a.kind.toLowerCase().compareTo(b.kind.toLowerCase());
+        if (kindComp != 0) return kindComp;
+        final rarityComp = b.rarity.compareTo(a.rarity);
+        if (rarityComp != 0) return rarityComp;
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
+
       _originalWeapons = List.from(_allWeapons);
       _filteredWeapons = List.from(_allWeapons);
     } catch (e) {

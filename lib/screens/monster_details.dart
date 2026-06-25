@@ -498,11 +498,13 @@ class _MonsterDetailsState extends State<MonsterDetails> {
       ),
     );
   }
-
   Widget _buildWeaknessesColumn(List<Weakness> weaknesses) {
     final colorScheme = Theme.of(context).colorScheme;
-    final elementalWeaknesses = weaknesses
-        .where((w) => w.kind == 'element' && w.level == 1)
+    final validWeaknesses = weaknesses
+        .where((w) =>
+            w.level >= 1 &&
+            ((w.kind == 'element' && w.element != null && w.element!.isNotEmpty) ||
+             (w.kind == 'status' && w.status != null && w.status!.isNotEmpty)))
         .toList();
 
     return Column(
@@ -510,14 +512,14 @@ class _MonsterDetailsState extends State<MonsterDetails> {
       children: [
         Text(
           AppLocalizations.of(context)!.weaknesses,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,
             color: Colors.red,
           ),
         ),
         const SizedBox(height: 8),
-        if (elementalWeaknesses.isEmpty)
+        if (validWeaknesses.isEmpty)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
@@ -535,21 +537,40 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             ),
           )
         else
-          Row(
-            children: [
-              ...elementalWeaknesses.map((w) {
-                final element = w.element ?? '';
-                if (element.isEmpty) return const SizedBox.shrink();
+          Wrap(
+            spacing: 12,
+            runSpacing: 8,
+            children: validWeaknesses.map((w) {
+              final name = (w.kind == 'element' ? w.element : w.status) ?? '';
+              if (name.isEmpty) return const SizedBox.shrink();
 
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Image.asset(
-                    'assets/imgs/elements/${element.toLowerCase()}.webp',
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset(
+                    'assets/imgs/elements/${name.toLowerCase()}.webp',
                     height: 25,
+                    errorBuilder: (_, __, ___) => Icon(
+                      Icons.help_outline,
+                      size: 25,
+                      color: colorScheme.onSurface.withOpacity(0.5),
+                    ),
                   ),
-                );
-              }),
-            ],
+                  const SizedBox(height: 2),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(
+                      (4 - w.level).clamp(1, 3),
+                      (index) => const Icon(
+                        Icons.star,
+                        size: 10,
+                        color: Colors.amber,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }).toList(),
           ),
       ],
     );

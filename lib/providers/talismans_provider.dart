@@ -30,9 +30,36 @@ class TalismansProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      _allAmulets = await AmuletsApi.fetchAmulets();
+      final rawAmulets = await AmuletsApi.fetchAmulets();
+      final List<Amulet> flattened = [];
+      for (final amulet in rawAmulets) {
+        for (final rank in amulet.ranks) {
+          flattened.add(Amulet(
+            id: rank.id, // Usar el ID del rank como ID del amuleto
+            gameId: amulet.gameId,
+            ranks: [rank], // Solo este rank específico
+          ));
+        }
+      }
+      _allAmulets = flattened;
+
+      _allAmulets.sort((a, b) {
+        final aRank = a.ranks.isNotEmpty ? a.ranks.first : null;
+        final bRank = b.ranks.isNotEmpty ? b.ranks.first : null;
+        final aRarity = aRank?.rarity ?? 0;
+        final bRarity = bRank?.rarity ?? 0;
+        final rarityComp = bRarity.compareTo(aRarity);
+        if (rarityComp != 0) return rarityComp;
+        final aName = aRank?.name ?? '';
+        final bName = bRank?.name ?? '';
+        return aName.toLowerCase().compareTo(bName.toLowerCase());
+      });
+
       _filteredAmulets = List.from(_allAmulets);
-    } catch (e) {}
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
 
     _isLoading = false;
     notifyListeners();
@@ -46,32 +73,32 @@ class TalismansProvider with ChangeNotifier {
       return;
     }
 
-    List<AmuletRank> allRanks = [];
-    for (var amulet in _allAmulets) {
-      allRanks.addAll(amulet.ranks);
-    }
+    _filteredAmulets = _allAmulets.where((amulet) {
+      final rank = amulet.ranks.isNotEmpty ? amulet.ranks.first : null;
+      if (rank == null) return false;
 
-    // Filtrar los ranks por nombre y rarity
-    List<AmuletRank> filteredRanks = allRanks.where((rank) {
       // Filtro por nombre
-      bool nameMatches = _nameFilter.isEmpty ||
+      final nameMatches = _nameFilter.isEmpty ||
           rank.name.toLowerCase().contains(_nameFilter.toLowerCase());
 
       // Filtro por rarity
-      bool rarityMatches =
+      final rarityMatches =
           _rarityFilter == null || rank.rarity == _rarityFilter;
 
       return nameMatches && rarityMatches;
     }).toList();
 
-    // Crear amuletos individuales para cada rank filtrado
-    _filteredAmulets = filteredRanks.map((rank) {
-      return Amulet(
-        id: rank.id, // Usar el ID del rank como ID del amuleto
-        gameId: -1, // ID temporal
-        ranks: [rank], // Solo este rank específico
-      );
-    }).toList();
+    _filteredAmulets.sort((a, b) {
+      final aRank = a.ranks.isNotEmpty ? a.ranks.first : null;
+      final bRank = b.ranks.isNotEmpty ? b.ranks.first : null;
+      final aRarity = aRank?.rarity ?? 0;
+      final bRarity = bRank?.rarity ?? 0;
+      final rarityComp = bRarity.compareTo(aRarity);
+      if (rarityComp != 0) return rarityComp;
+      final aName = aRank?.name ?? '';
+      final bName = bRank?.name ?? '';
+      return aName.toLowerCase().compareTo(bName.toLowerCase());
+    });
 
     notifyListeners();
   }

@@ -39,6 +39,7 @@ class SkillsProvider with ChangeNotifier {
 
     try {
       _allSkills = await SkillsApi.fetchSkills();
+      _allSkills.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       _filteredSkills = List.from(_allSkills);
     } catch (e) {
       // ignore: avoid_print

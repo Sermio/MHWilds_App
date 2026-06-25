@@ -32,6 +32,11 @@ class ItemsProvider with ChangeNotifier {
 
     try {
       _allItems = await ItemsApi.fetchItems();
+      _allItems.sort((a, b) {
+        final rarityCompare = b.rarity.compareTo(a.rarity);
+        if (rarityCompare != 0) return rarityCompare;
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
       _filteredItems = List.from(_allItems);
     } catch (e) {
       // ignore: avoid_print

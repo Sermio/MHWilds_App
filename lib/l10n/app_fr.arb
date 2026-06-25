@@ -19,7 +19,9 @@
   "errorWithMessage": "Erreur : {message}",
   "@errorWithMessage": {
     "placeholders": {
-      "message": { "type": "String" }
+      "message": {
+        "type": "String"
+      }
     }
   },
   "close": "Fermer",
@@ -30,6 +32,7 @@
   "offDefault": "Désactivé (par défaut)",
   "armorSets": "Ensembles d'armure",
   "menuMonstersSubtitle": "Base de données de tous les monstres",
+  "menuLocationsSubtitle": "Explorez les cartes et les camps",
   "menuItemsSubtitle": "Matériaux et ressources",
   "menuDecorationsSubtitle": "Gemmes et bijoux de compétences",
   "menuTalismansSubtitle": "Accessoires puissants",
@@ -54,20 +57,28 @@
   "updateMessageWithBoth": "Vous avez la version {currentVersion}. Une nouvelle version ({newVersion}) est disponible sur le store. Mettez à jour pour les dernières améliorations et corrections.",
   "@updateMessageWithBoth": {
     "placeholders": {
-      "currentVersion": { "type": "String" },
-      "newVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      },
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageCurrentOnly": "Vous avez la version {currentVersion}. Une nouvelle version est disponible sur le store. Mettez à jour pour les dernières améliorations et corrections.",
   "@updateMessageCurrentOnly": {
     "placeholders": {
-      "currentVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageNewOnly": "Une nouvelle version ({newVersion}) est disponible sur le store. Mettez à jour pour les dernières améliorations et corrections.",
   "@updateMessageNewOnly": {
     "placeholders": {
-      "newVersion": { "type": "String" }
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageGeneric": "Une nouvelle version est disponible sur le store. Mettez à jour pour les dernières améliorations et corrections.",
@@ -83,7 +94,13 @@
   "type": "Type",
   "rarity": "Rareté",
   "rarityLevel": "Rareté {n}",
-  "@rarityLevel": { "placeholders": { "n": { "type": "int" } } },
+  "@rarityLevel": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "enterWeaponName": "Entrez le nom de l'arme...",
   "enterItemName": "Entrez le nom de l'objet...",
   "enterArmorSetName": "Entrez le nom de l'ensemble d'armure...",
@@ -106,7 +123,6 @@
   "baseDefense": "Défense de base",
   "slots": "Emplacements",
   "resistances": "Résistances",
-  "skills": "Compétences",
   "noSlots": "Aucun emplacement",
   "noResistances": "Aucune résistance",
   "physicalDamage": "Dégâts physiques",
@@ -141,7 +157,9 @@
   "campsOfLevel": "Camps du Niveau {n}",
   "@campsOfLevel": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "risk": "Risque",
@@ -175,7 +193,6 @@
   "craftingRecipe": "Recette de Fabrication:",
   "requiredMaterials": "Matériaux Requis:",
   "skillRanks": "Rangs de Compétence:",
-  "rarity": "Rareté",
   "rank": "Rang",
   "errorLoadingSkills": "Erreur lors du chargement des compétences",
   "noSkillsAvailable": "Aucune compétence disponible",
@@ -212,5 +229,10 @@
   "speciesAmphibian": "Amphibien",
   "speciesSnakeWyvern": "Wyverne serpent",
   "monsterKindLarge": "Grand monstre",
-  "monsterKindSmall": "Petit monstre"
+  "monsterKindSmall": "Petit monstre",
+  "camps": "Camps",
+  "openOptimizer": "Ouvrir l'optimiseur",
+  "ok": "OK",
+  "webViewNotSupported": "WebView n'est pas disponible sur cette plateforme.",
+  "openInBrowserHint": "Vous pouvez ouvrir l'optimiseur dans votre navigateur."
 }
