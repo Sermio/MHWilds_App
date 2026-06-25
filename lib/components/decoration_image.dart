@@ -18,13 +18,13 @@ class DecorationAssetImage extends StatelessWidget {
 
   static final Map<String, String?> _assetCache = {};
 
-  Future<String?> _getAssetPath() async {
+  String? _getAssetPathSync() {
     final color = decoration.icon.color;
     final kind = decoration.kind;
     final key = '${decoration.name}|${kind}|${color}|${decoration.slot}';
     if (_assetCache.containsKey(key)) return _assetCache[key];
 
-    final assetPath = await ItemIconAssetResolver.resolveDecoration(
+    final assetPath = ItemIconAssetResolver.resolveDecorationSync(
       apiColor: color,
       decorationName: decoration.name,
       apiKind: kind,
@@ -36,43 +36,16 @@ class DecorationAssetImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<String?>(
-      future: _getAssetPath(),
-      builder: (context, snapshot) {
-        final fallbackPath =
-            'assets/imgs/decorations/gem_level_$fallbackLevel.webp';
+    final fallbackPath = 'assets/imgs/decorations/gem_level_$fallbackLevel.webp';
+    final assetPath = _getAssetPathSync();
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return SizedBox(
-            width: width,
-            height: height,
-            child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
-          );
-        }
-
-        final assetPath = snapshot.data;
-        if (assetPath != null) {
-          return Image.asset(
-            assetPath,
-            width: width,
-            height: height,
-            fit: BoxFit.contain,
-            errorBuilder: (_, __, ___) => Image.asset(
-              fallbackPath,
-              width: width,
-              height: height,
-              fit: BoxFit.contain,
-              errorBuilder: (_, __, ___) => Image.asset(
-                'assets/imgs/decorations/default_jewel.webp',
-                width: width,
-                height: height,
-                fit: BoxFit.contain,
-              ),
-            ),
-          );
-        }
-
-        return Image.asset(
+    if (assetPath != null) {
+      return Image.asset(
+        assetPath,
+        width: width,
+        height: height,
+        fit: BoxFit.contain,
+        errorBuilder: (_, __, ___) => Image.asset(
           fallbackPath,
           width: width,
           height: height,
@@ -83,8 +56,21 @@ class DecorationAssetImage extends StatelessWidget {
             height: height,
             fit: BoxFit.contain,
           ),
-        );
-      },
+        ),
+      );
+    }
+
+    return Image.asset(
+      fallbackPath,
+      width: width,
+      height: height,
+      fit: BoxFit.contain,
+      errorBuilder: (_, __, ___) => Image.asset(
+        'assets/imgs/decorations/default_jewel.webp',
+        width: width,
+        height: height,
+        fit: BoxFit.contain,
+      ),
     );
   }
 }

@@ -14,140 +14,20 @@ class ItemIconAssetResolver {
   static final Map<String, String> _decorationBySlotColor = {};
   static final Map<String, String> _decorationByKindColor = {};
 
-  static Future<String?> resolve({
-    required String apiKind,
-    required String apiColor,
-  }) async {
-    await _ensureIndexLoaded();
-
-    // Excepción de negocio:
-    // Honey debe usar el icono tipo "webbing" manteniendo el color cuando exista.
-    final normalizedKind = _normalizeToken(apiKind);
-    if (normalizedKind == 'honey') {
-      final honeyColorCandidates = _colorCandidates(apiColor).toSet().toList();
-      for (final color in honeyColorCandidates) {
-        final byKindAndColor = _byKindColor['webbing|$color'];
-        if (byKindAndColor != null) return byKindAndColor;
-      }
-      final honeyOverride = _byKindFallback['webbing'];
-      if (honeyOverride != null) return honeyOverride;
-    }
-
-    // Excepción de negocio:
-    // Powder debe usar el icono tipo "sac" manteniendo el color cuando exista.
-    if (normalizedKind == 'powder') {
-      final powderColorCandidates = _colorCandidates(apiColor).toSet().toList();
-      for (final color in powderColorCandidates) {
-        final byKindAndColor = _byKindColor['sac|$color'];
-        if (byKindAndColor != null) return byKindAndColor;
-      }
-      final powderOverride = _byKindFallback['sac'];
-      if (powderOverride != null) return powderOverride;
-    }
-
-    // Excepción de negocio:
-    // Extract debe usar el icono tipo "chemical" manteniendo el color cuando exista.
-    if (normalizedKind == 'extract') {
-      final extractColorCandidates = _colorCandidates(apiColor).toSet().toList();
-      for (final color in extractColorCandidates) {
-        final byKindAndColor = _byKindColor['chemical|$color'];
-        if (byKindAndColor != null) return byKindAndColor;
-      }
-      final extractOverride = _byKindFallback['chemical'];
-      if (extractOverride != null) return extractOverride;
-    }
-
-    final kindCandidates = _kindCandidates(apiKind);
-    final colorCandidates = _colorCandidates(apiColor);
-
-    return _resolveByCandidates(
-      kindCandidates: kindCandidates,
-      colorCandidates: colorCandidates,
-    );
-  }
-
-  static Future<String?> resolveDecoration({
-    required String apiColor,
-    required String decorationName,
-    String? apiKind,
-    int? slot,
-  }) async {
-    await _ensureIndexLoaded();
-
-    final resolvedSlot = _resolveDecorationSlot(slot, decorationName);
-    final kindCandidates = _decorationKindCandidates(apiKind);
-    final colorCandidates = _colorCandidates(apiColor).toSet().toList();
-
-    if (resolvedSlot != null && resolvedSlot > 0) {
-      for (final kind in kindCandidates) {
-        for (final color in colorCandidates) {
-          final exact = _decorationBySlotKindColor['$resolvedSlot|$kind|$color'];
-          if (exact != null) return exact;
-        }
-      }
-      for (final color in colorCandidates) {
-        final bySlotColor = _decorationBySlotColor['$resolvedSlot|$color'];
-        if (bySlotColor != null) return bySlotColor;
-      }
-    }
-
-    for (final kind in kindCandidates) {
-      for (final color in colorCandidates) {
-        final byKindColor = _decorationByKindColor['$kind|$color'];
-        if (byKindColor != null) return byKindColor;
-      }
-    }
-
-    // Fallback final al resolver genérico (solo si existe).
-    return _resolveByCandidates(
-      kindCandidates: kindCandidates,
-      colorCandidates: colorCandidates,
-    );
-  }
-
-  static String? _resolveByCandidates({
-    required List<String> kindCandidates,
-    required List<String> colorCandidates,
-  }) {
-    final uniqueKinds = kindCandidates.toSet().toList();
-    final uniqueColors = colorCandidates.toSet().toList();
-
-    for (final kind in uniqueKinds) {
-      for (final color in uniqueColors) {
-        final key = '$kind|$color';
-        final match = _byKindColor[key];
-        if (match != null) return match;
-      }
-    }
-
-    for (final kind in uniqueKinds) {
-      final fallback = _byKindFallback[kind];
-      if (fallback != null) return fallback;
-    }
-
-    return null;
-  }
-
-  static Future<void> _ensureIndexLoaded() async {
+  static Future<void> ensureIndexLoaded() async {
     if (_loaded) return;
 
     try {
       Iterable<String> assets;
       try {
-        // Modern Flutter 3.22+ / 3.10+ way
         final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
         assets = manifest.listAssets().where((a) => a.startsWith(_assetsBase));
-        print('MHWilds DEBUG: Assets from manifest: ${assets.length}');
       } catch (e) {
-        print('MHWilds DEBUG: Failed AssetManifest.loadFromAssetBundle: $e');
         try {
-          // Fallback legacy way
           final manifestContent = await rootBundle.loadString('AssetManifest.json');
           final Map<String, dynamic> manifestMap = json.decode(manifestContent);
           assets = manifestMap.keys.where((a) => a.startsWith(_assetsBase));
-          print('MHWilds DEBUG: Assets from legacy json: ${assets.length}');
         } catch (e2) {
-          print('MHWilds DEBUG: Failed legacy json: $e2');
           return;
         }
       }
@@ -193,10 +73,131 @@ class ItemIconAssetResolver {
         }
       }
     } catch (_) {
-      // If asset manifest can't be loaded, resolver will gracefully fallback.
     } finally {
       _loaded = true;
     }
+  }
+
+  static String? resolveSync({
+    required String apiKind,
+    required String apiColor,
+  }) {
+    if (!_loaded) return null;
+
+    final normalizedKind = _normalizeToken(apiKind);
+    if (normalizedKind == 'honey') {
+      final honeyColorCandidates = _colorCandidates(apiColor).toSet().toList();
+      for (final color in honeyColorCandidates) {
+        final byKindAndColor = _byKindColor['webbing|$color'];
+        if (byKindAndColor != null) return byKindAndColor;
+      }
+      final honeyOverride = _byKindFallback['webbing'];
+      if (honeyOverride != null) return honeyOverride;
+    }
+
+    if (normalizedKind == 'powder') {
+      final powderColorCandidates = _colorCandidates(apiColor).toSet().toList();
+      for (final color in powderColorCandidates) {
+        final byKindAndColor = _byKindColor['sac|$color'];
+        if (byKindAndColor != null) return byKindAndColor;
+      }
+      final powderOverride = _byKindFallback['sac'];
+      if (powderOverride != null) return powderOverride;
+    }
+
+    if (normalizedKind == 'extract') {
+      final extractColorCandidates = _colorCandidates(apiColor).toSet().toList();
+      for (final color in extractColorCandidates) {
+        final byKindAndColor = _byKindColor['chemical|$color'];
+        if (byKindAndColor != null) return byKindAndColor;
+      }
+      final extractOverride = _byKindFallback['chemical'];
+      if (extractOverride != null) return extractOverride;
+    }
+
+    return _resolveByCandidates(
+      kindCandidates: _kindCandidates(apiKind),
+      colorCandidates: _colorCandidates(apiColor),
+    );
+  }
+
+  static String? resolveDecorationSync({
+    required String apiColor,
+    required String decorationName,
+    String? apiKind,
+    int? slot,
+  }) {
+    if (!_loaded) return null;
+
+    final resolvedSlot = _resolveDecorationSlot(slot, decorationName);
+    final kindCandidates = _decorationKindCandidates(apiKind);
+    final colorCandidates = _colorCandidates(apiColor).toSet().toList();
+
+    if (resolvedSlot != null && resolvedSlot > 0) {
+      for (final kind in kindCandidates) {
+        for (final color in colorCandidates) {
+          final exact = _decorationBySlotKindColor['$resolvedSlot|$kind|$color'];
+          if (exact != null) return exact;
+        }
+      }
+      for (final color in colorCandidates) {
+        final bySlotColor = _decorationBySlotColor['$resolvedSlot|$color'];
+        if (bySlotColor != null) return bySlotColor;
+      }
+    }
+
+    for (final kind in kindCandidates) {
+      for (final color in colorCandidates) {
+        final byKindColor = _decorationByKindColor['$kind|$color'];
+        if (byKindColor != null) return byKindColor;
+      }
+    }
+
+    return _resolveByCandidates(
+      kindCandidates: kindCandidates,
+      colorCandidates: colorCandidates,
+    );
+  }
+
+  static String? _resolveByCandidates({
+    required List<String> kindCandidates,
+    required List<String> colorCandidates,
+  }) {
+    final uniqueKinds = kindCandidates.toSet().toList();
+    final uniqueColors = colorCandidates.toSet().toList();
+
+    for (final kind in uniqueKinds) {
+      for (final color in uniqueColors) {
+        final key = '$kind|$color';
+        final match = _byKindColor[key];
+        if (match != null) return match;
+      }
+    }
+
+    for (final kind in uniqueKinds) {
+      final fallback = _byKindFallback[kind];
+      if (fallback != null) return fallback;
+    }
+
+    return null;
+  }
+
+  static Future<String?> resolve({
+    required String apiKind,
+    required String apiColor,
+  }) async {
+    await ensureIndexLoaded();
+    return resolveSync(apiKind: apiKind, apiColor: apiColor);
+  }
+
+  static Future<String?> resolveDecoration({
+    required String apiColor,
+    required String decorationName,
+    String? apiKind,
+    int? slot,
+  }) async {
+    await ensureIndexLoaded();
+    return resolveDecorationSync(apiColor: apiColor, decorationName: decorationName, apiKind: apiKind, slot: slot);
   }
 
   static List<String> _kindCandidates(String apiKind) {
