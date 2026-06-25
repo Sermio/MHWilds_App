@@ -14,6 +14,7 @@ import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
+import 'package:mhwilds_app/components/rarity_chip.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:provider/provider.dart';
@@ -1138,7 +1139,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: _isTreeView
-                  ? _buildVisualTree(rootNode)
+                  ? SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: _buildVisualTree(rootNode),
+                    )
                   : _buildVisualTable(WeaponTreeBuilder.flattenTree(rootNode)),
             ),
           ],
@@ -1182,53 +1186,77 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   ),
                 ),
               // Node content
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 4, top: 4, left: 4),
-                  decoration: BoxDecoration(
-                    color: isCurrentWeapon
-                        ? colorScheme.primaryContainer.withValues(alpha: 0.3)
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                    border: isCurrentWeapon
-                        ? Border.all(color: colorScheme.primary, width: 1)
-                        : null,
-                  ),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(8),
-                    onTap: () {
-                      if (!isCurrentWeapon) {
-                        _navigateToWeaponById(node.weapon.id);
-                      }
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                      child: Row(
-                        children: [
-                          GearSpriteIcon(
-                            column: weaponColumnByKind[node.weapon.kind] ?? 0,
-                            rarity: node.weapon.rarity,
-                            size: 24,
-                            fallback: Icon(
-                              WeaponUtils.getWeaponIcon(node.weapon.kind),
-                              color: WeaponUtils.getKindColor(node.weapon.kind),
-                              size: 16,
-                            ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 4, top: 4, left: 4),
+                decoration: BoxDecoration(
+                  color: isCurrentWeapon
+                      ? colorScheme.primaryContainer.withValues(alpha: 0.3)
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                  border: isCurrentWeapon
+                      ? Border.all(color: colorScheme.primary, width: 1)
+                      : null,
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(8),
+                  onTap: () {
+                    if (!isCurrentWeapon) {
+                      _navigateToWeaponById(node.weapon.id);
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    child: Row(
+                      children: [
+                        GearSpriteIcon(
+                          column: weaponColumnByKind[node.weapon.kind] ?? 0,
+                          rarity: node.weapon.rarity,
+                          size: 24,
+                          fallback: Icon(
+                            WeaponUtils.getWeaponIcon(node.weapon.kind),
+                            color: WeaponUtils.getKindColor(node.weapon.kind),
+                            size: 16,
                           ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              node.weapon.name,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: isCurrentWeapon ? FontWeight.bold : FontWeight.w500,
-                                color: isCurrentWeapon ? colorScheme.primary : colorScheme.onSurface,
+                        ),
+                        const SizedBox(width: 8),
+                        SizedBox(
+                          width: 140,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                node.weapon.name,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: isCurrentWeapon ? FontWeight.bold : FontWeight.w500,
+                                  color: isCurrentWeapon ? colorScheme.primary : colorScheme.onSurface,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            ),
+                            if (_hasSharpnessDataForWeapon(node.weapon)) ...[
+                              const SizedBox(height: 4),
+                              SizedBox(
+                                width: 80,
+                                child: SharpnessBar(
+                                  sharpness: node.weapon.sharpness,
+                                  height: 6,
+                                  borderRadius: 2,
+                                ),
+                              ),
+                              ],
+                              const SizedBox(height: 4),
+                              RarityChip(
+                                rarity: node.weapon.rarity,
+                                fontSize: 10,
+                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              ),
+                            ],
                           ),
-                          _buildMiniStats(node.weapon),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(width: 12),
+                        _buildMiniStats(node.weapon),
+                      ],
                     ),
                   ),
                 ),
@@ -1306,7 +1334,11 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                           ),
                           const SizedBox(height: 4),
                         ],
-                        Text('Rarity ${w.rarity}', style: TextStyle(color: WeaponUtils.getRarityColor(w.rarity), fontSize: 11)),
+                        RarityChip(
+                          rarity: w.rarity,
+                          fontSize: 10,
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        ),
                       ],
                     ),
                   ),
@@ -1337,26 +1369,40 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       } catch (_) {}
     }
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    return Wrap(
+      spacing: 6,
+      runSpacing: 4,
+      alignment: WrapAlignment.end,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        Icon(Icons.gps_fixed, size: 14, color: Colors.red[400]),
-        const SizedBox(width: 2),
-        Text('${w.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-        const SizedBox(width: 6),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.gps_fixed, size: 14, color: Colors.red[400]),
+            const SizedBox(width: 2),
+            Text('${w.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+          ],
+        ),
         
-        if (w.affinity != 0) ...[
-          Icon(Icons.trending_up, size: 14, color: colorScheme.primary),
-          const SizedBox(width: 2),
-          Text('${w.affinity}%', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-          const SizedBox(width: 6),
-        ],
+        if (w.affinity != 0)
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.trending_up, size: 14, color: colorScheme.primary),
+              const SizedBox(width: 2),
+              Text('${w.affinity}%', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+            ],
+          ),
         
-        if (special != null && special.damage.display > 0) ...[
-          Icon(WeaponUtils.getElementIcon(special.element), size: 14, color: WeaponUtils.getElementColor(special.element)),
-          const SizedBox(width: 2),
-          Text('${special.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-        ],
+        if (special != null && special.damage.display > 0)
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(WeaponUtils.getElementIcon(special.element), size: 14, color: WeaponUtils.getElementColor(special.element)),
+              const SizedBox(width: 2),
+              Text('${special.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+            ],
+          ),
       ],
     );
   }

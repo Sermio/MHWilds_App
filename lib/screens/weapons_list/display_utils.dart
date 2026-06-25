@@ -413,6 +413,7 @@ class WeaponDisplayUtils {
           ),
           const Spacer(),
           Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 '${weapon.melody!.songs.length} ${AppLocalizations.of(context)!.songs}',
@@ -441,20 +442,27 @@ class WeaponDisplayUtils {
               color: colorScheme.onSurface.withOpacity(0.8),
             ),
           ),
-          const Spacer(),
-          Row(
-            children: [
-              Text(
-                weapon.echoBubble!.name,
-                style: TextStyle(
-                  fontSize: isDetailView ? 16 : 12,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue[600],
+          const SizedBox(width: 8),
+          Flexible(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Flexible(
+                  child: Text(
+                    weapon.echoBubble!.name,
+                    style: TextStyle(
+                      fontSize: isDetailView ? 16 : 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[600],
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.right,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 4),
-              Icon(Icons.bubble_chart, size: 16, color: Colors.indigo[600]),
-            ],
+                const SizedBox(width: 4),
+                Icon(Icons.bubble_chart, size: 16, color: Colors.indigo[600]),
+              ],
+            ),
           ),
         ],
       ));
@@ -471,20 +479,27 @@ class WeaponDisplayUtils {
               color: colorScheme.onSurface.withOpacity(0.8),
             ),
           ),
-          const Spacer(),
-          Row(
-            children: [
-              Text(
-                weapon.echoWave!.name,
-                style: TextStyle(
-                  fontSize: isDetailView ? 16 : 12,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green[600],
+          const SizedBox(width: 8),
+          Flexible(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Flexible(
+                  child: Text(
+                    weapon.echoWave!.name,
+                    style: TextStyle(
+                      fontSize: isDetailView ? 16 : 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green[600],
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.right,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 4),
-              Icon(Icons.waves, size: 16, color: Colors.orange[600]),
-            ],
+                const SizedBox(width: 4),
+                Icon(Icons.waves, size: 16, color: Colors.orange[600]),
+              ],
+            ),
           ),
         ],
       ));

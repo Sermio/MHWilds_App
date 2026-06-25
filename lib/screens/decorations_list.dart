@@ -80,14 +80,10 @@ class _DecorationsListState extends State<DecorationsList> {
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
-      body: Column(
+      body: Stack(
         children: [
-          if (_filtersVisible)
-            _buildFiltersSection(context, decorationsProvider),
-
           // Lista de decoraciones
-          Expanded(
-            child: decorationsProvider.isLoading
+          decorationsProvider.isLoading
                 ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -98,51 +94,54 @@ class _DecorationsListState extends State<DecorationsList> {
                           l10n.loadingDecorations,
                           style: TextStyle(
                             fontSize: 16,
-                            color: colorScheme.onSurface.withOpacity(0.7),
+                            color: colorScheme.onSurface.withValues(alpha: 0.7),
                           ),
                         ),
                       ],
                     ),
                   )
-                : filteredDecorations.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.search_off,
-                              size: 64,
-                              color: colorScheme.onSurface.withOpacity(0.5),
+                : ListView.builder(
+                    padding: const EdgeInsets.only(bottom: 120, top: 16),
+                    itemCount: filteredDecorations.isEmpty ? 1 : filteredDecorations.length,
+                    itemBuilder: (context, index) {                      if (filteredDecorations.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 64),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.search_off,
+                                  size: 64,
+                                  color: colorScheme.onSurface.withValues(alpha: 0.5),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  l10n.noDecorationsFound,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: colorScheme.onSurface.withValues(alpha: 0.8),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  l10n.tryAdjustingFilters,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: colorScheme.onSurface.withValues(alpha: 0.6),
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 16),
-                            Text(
-                              l10n.noDecorationsFound,
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: colorScheme.onSurface.withOpacity(0.8),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              l10n.tryAdjustingFilters,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: colorScheme.onSurface.withOpacity(0.6),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        itemCount: filteredDecorations.length,
-                        itemBuilder: (context, index) {
-                          final decoration = filteredDecorations[index];
+                          ),
+                        );
+                      }
+
+                      final decoration = filteredDecorations[index];
 
                           return Container(
-                            margin: const EdgeInsets.only(bottom: 16),
+                            margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
                             decoration: BoxDecoration(
                               color: colorScheme.surface,
                               borderRadius: BorderRadius.circular(20),
@@ -240,7 +239,18 @@ class _DecorationsListState extends State<DecorationsList> {
                           );
                         },
                       ),
-          ),
+          if (_filtersVisible)
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Material(
+                elevation: 8,
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                clipBehavior: Clip.antiAlias,
+                child: _buildFiltersSection(context, decorationsProvider),
+              ),
+            ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -262,7 +272,7 @@ class _DecorationsListState extends State<DecorationsList> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ListFiltersPanel(
-      height: 250,
+      maxHeight: 250,
       title: l10n.filters,
       resetLabel: l10n.reset,
       onReset: _resetFilters,

@@ -54,9 +54,9 @@ class ArmorSetProvider with ChangeNotifier {
   }
 
   void applyFilters({String? name, String? kind, int? rarity}) {
-    _nameFilter = name ?? _nameFilter;
-    _kindFilter = kind ?? _kindFilter;
-    _rarityFilter = rarity ?? _rarityFilter;
+    _nameFilter = name ?? '';
+    _kindFilter = kind;
+    _rarityFilter = rarity;
 
     if (_nameFilter.isEmpty && _kindFilter == null && _rarityFilter == null) {
       _filteredArmorSets = List.from(_allArmorSets);

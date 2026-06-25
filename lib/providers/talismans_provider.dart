@@ -66,8 +66,8 @@ class TalismansProvider with ChangeNotifier {
   }
 
   void applyFilters({String? name, int? rarity}) {
-    _nameFilter = name ?? _nameFilter;
-    _rarityFilter = rarity ?? _rarityFilter;
+    _nameFilter = name ?? '';
+    _rarityFilter = rarity;
 
     if (_allAmulets.isEmpty) {
       return;

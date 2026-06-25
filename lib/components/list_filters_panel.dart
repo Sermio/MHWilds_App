@@ -99,7 +99,7 @@ class ListFiltersPanel extends StatelessWidget {
     required this.resetLabel,
     required this.onReset,
     required this.fields,
-    this.height = 350,
+    this.maxHeight,
     this.dropdownMenuMaxHeight = 280,
   });
 
@@ -107,78 +107,70 @@ class ListFiltersPanel extends StatelessWidget {
   final String resetLabel;
   final VoidCallback onReset;
   final List<ListFilterFieldConfig> fields;
-  final double height;
+  final double? maxHeight;
   final double dropdownMenuMaxHeight;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
-      margin: const EdgeInsets.all(16),
-      height: height,
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+    final header = Container(
+      padding: const EdgeInsets.fromLTRB(20, 4, 12, 0),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          TextButton.icon(
+            onPressed: onReset,
+            icon: const Icon(Icons.refresh, size: 18),
+            label: Text(resetLabel),
+            style: TextButton.styleFrom(
+              foregroundColor: colorScheme.primary,
+            ),
           ),
         ],
       ),
+    );
+
+    final fieldsContent = SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.filter_list, color: colorScheme.primary),
-                const SizedBox(width: 8),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-                const Spacer(),
-                TextButton.icon(
-                  onPressed: onReset,
-                  icon: const Icon(Icons.refresh, size: 18),
-                  label: Text(resetLabel),
-                  style: TextButton.styleFrom(
-                    foregroundColor: colorScheme.primary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(20, 6, 20, 20),
+          for (int i = 0; i < fields.length; i++) ...[
+            _buildField(context, fields[i]),
+            if (i != fields.length - 1) const SizedBox(height: 16),
+          ],
+          const SizedBox(height: 20),
+        ],
+      ),
+    );
+
+    return Material(
+      color: colorScheme.surface,
+      child: maxHeight != null
+          ? ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: maxHeight!),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  for (int i = 0; i < fields.length; i++) ...[
-                    _buildField(context, fields[i]),
-                    if (i != fields.length - 1) const SizedBox(height: 16),
-                  ],
-                  const SizedBox(height: 20),
+                  header,
+                  Flexible(child: fieldsContent),
                 ],
               ),
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                header,
+                fieldsContent,
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -291,10 +283,34 @@ class ListFiltersPanel extends StatelessWidget {
   }
 
   Widget _buildGridMenuField(BuildContext context, ListFilterFieldConfig field) {
+    return _GridMenuWidget(
+      field: field,
+      allLabel: field.allLabel ?? _localizedAllLabel(context),
+    );
+  }
+}
+
+class _GridMenuWidget extends StatefulWidget {
+  final ListFilterFieldConfig field;
+  final String allLabel;
+
+  const _GridMenuWidget({required this.field, required this.allLabel});
+
+  @override
+  State<_GridMenuWidget> createState() => _GridMenuWidgetState();
+}
+
+class _GridMenuWidgetState extends State<_GridMenuWidget> {
+  final MenuController _controller = MenuController();
+
+  @override
+  Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final allLabel = field.allLabel ?? _localizedAllLabel(context);
+    final field = widget.field;
+    final allLabel = widget.allLabel;
 
     return MenuAnchor(
+      controller: _controller,
       style: MenuStyle(
         backgroundColor: WidgetStateProperty.all(colorScheme.surface),
         elevation: WidgetStateProperty.all(8),
@@ -366,6 +382,7 @@ class ListFiltersPanel extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     field.onSelectChanged?.call(null);
+                    _controller.close();
                   },
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
@@ -397,6 +414,7 @@ class ListFiltersPanel extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         field.onSelectChanged?.call(option.value);
+                        _controller.close();
                       },
                       borderRadius: BorderRadius.circular(8),
                       child: Container(
@@ -440,26 +458,24 @@ class ListFiltersPanel extends StatelessWidget {
       ],
     );
   }
+}
 
-
-
-  String _localizedAllLabel(BuildContext context) {
-    final locale = Localizations.localeOf(context).languageCode.toLowerCase();
-    switch (locale) {
-      case 'es':
-        return 'Todos';
-      case 'pt':
-        return 'Todos';
-      case 'fr':
-        return 'Tous';
-      case 'it':
-        return 'Tutti';
-      case 'de':
-        return 'Alle';
-      case 'pl':
-        return 'Wszystkie';
-      default:
-        return 'All';
-    }
+String _localizedAllLabel(BuildContext context) {
+  final locale = Localizations.localeOf(context).languageCode.toLowerCase();
+  switch (locale) {
+    case 'es':
+      return 'Todos';
+    case 'pt':
+      return 'Todos';
+    case 'fr':
+      return 'Tous';
+    case 'it':
+      return 'Tutti';
+    case 'de':
+      return 'Alle';
+    case 'pl':
+      return 'Wszystkie';
+    default:
+      return 'All';
   }
 }

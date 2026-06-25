@@ -75,70 +75,71 @@ class _AmuletListState extends State<AmuletList> {
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
-      body: Column(
+      body: Stack(
         children: [
-          if (_filtersVisible) _buildFiltersSection(context, talismansProvider),
-
           // Lista de talismanes
-          Expanded(
-            child: talismansProvider.isLoading
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(color: colorScheme.primary),
-                        const SizedBox(height: 16),
-                        Text(
-                          l10n.loadingTalismans,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: colorScheme.onSurface.withOpacity(0.7),
+          talismansProvider.isLoading
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(color: colorScheme.primary),
+                      const SizedBox(height: 16),
+                      Text(
+                        l10n.loadingTalismans,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: colorScheme.onSurface.withValues(alpha: 0.7),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+                : ListView.builder(
+                    padding: const EdgeInsets.only(bottom: 120, top: 16),
+                    itemCount: filteredAmulets.isEmpty ? 1 : filteredAmulets.length,
+                    itemBuilder: (context, index) {
+                      if (filteredAmulets.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 64),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.search_off,
+                                  size: 64,
+                                  color: colorScheme.onSurface.withValues(alpha: 0.5),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  l10n.noTalismansFound,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: colorScheme.onSurface.withValues(alpha: 0.8),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  l10n.tryAdjustingFilters,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: colorScheme.onSurface.withValues(alpha: 0.6),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                : filteredAmulets.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.search_off,
-                              size: 64,
-                              color: colorScheme.onSurface.withOpacity(0.5),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              l10n.noTalismansFound,
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: colorScheme.onSurface.withOpacity(0.8),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              l10n.tryAdjustingFilters,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: colorScheme.onSurface.withOpacity(0.6),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        itemCount: filteredAmulets.length,
-                        itemBuilder: (context, index) {
-                          var amulet = filteredAmulets[index];
-                          var ranks = amulet.ranks;
-                          var firstRank = ranks.isNotEmpty ? ranks[0] : null;
+                        );
+                      }
 
-                          return Container(
-                            margin: const EdgeInsets.only(bottom: 16),
+                      var amulet = filteredAmulets[index];
+                      var ranks = amulet.ranks;
+                      var firstRank = ranks.isNotEmpty ? ranks[0] : null;
+
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
                             decoration: BoxDecoration(
                               color: colorScheme.surface,
                               borderRadius: BorderRadius.circular(20),
@@ -280,7 +281,18 @@ class _AmuletListState extends State<AmuletList> {
                           );
                         },
                       ),
-          ),
+          if (_filtersVisible)
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Material(
+                elevation: 8,
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                clipBehavior: Clip.antiAlias,
+                child: _buildFiltersSection(context, talismansProvider),
+              ),
+            ),
         ],
       ),
       // Botón flotante para mostrar/ocultar filtros
@@ -303,7 +315,7 @@ class _AmuletListState extends State<AmuletList> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ListFiltersPanel(
-      height: 260,
+      maxHeight: 260,
       title: l10n.filters,
       resetLabel: l10n.reset,
       onReset: _resetFilters,

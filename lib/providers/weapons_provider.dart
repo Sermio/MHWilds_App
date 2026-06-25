@@ -67,10 +67,10 @@ class WeaponsProvider with ChangeNotifier {
   }
 
   void applyFilters({String? name, String? series, String? kind, int? rarity}) {
-    _nameFilter = name ?? _nameFilter;
-    _seriesFilter = series ?? _seriesFilter;
-    _kindFilter = kind ?? _kindFilter;
-    _rarityFilter = rarity ?? _rarityFilter;
+    _nameFilter = name ?? '';
+    _seriesFilter = series ?? '';
+    _kindFilter = kind;
+    _rarityFilter = rarity;
 
     // Debug específico para switch-axe
     if (_kindFilter == 'switch-axe') {

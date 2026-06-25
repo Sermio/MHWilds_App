@@ -87,14 +87,10 @@ class _MonstersListState extends State<MonstersList> {
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
-      body: Column(
+      body: Stack(
         children: [
-          if (_filtersVisible)
-            _buildFiltersSection(context, monstersProvider, zonesProvider),
-
           // Lista de monstruos
-          Expanded(
-            child: monstersProvider.isLoading
+          monstersProvider.isLoading
                 ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -105,51 +101,54 @@ class _MonstersListState extends State<MonstersList> {
                           l10n.loadingMonsters,
                           style: TextStyle(
                             fontSize: 16,
-                            color: colorScheme.onSurface.withOpacity(0.7),
+                            color: colorScheme.onSurface.withValues(alpha: 0.7),
                           ),
                         ),
                       ],
                     ),
                   )
-                : monsters.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.search_off,
-                              size: 64,
-                              color: colorScheme.onSurface.withOpacity(0.5),
+                : ListView.builder(
+                    padding: const EdgeInsets.only(bottom: 120, top: 16),
+                    itemCount: monsters.isEmpty ? 1 : monsters.length,
+                    itemBuilder: (context, index) {                      if (monsters.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 64),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.search_off,
+                                  size: 64,
+                                  color: colorScheme.onSurface.withValues(alpha: 0.5),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  l10n.noMonstersFound,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: colorScheme.onSurface.withValues(alpha: 0.8),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  l10n.tryAdjustingFilters,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: colorScheme.onSurface.withValues(alpha: 0.6),
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 16),
-                            Text(
-                              l10n.noMonstersFound,
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: colorScheme.onSurface.withOpacity(0.8),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              l10n.tryAdjustingFilters,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: colorScheme.onSurface.withOpacity(0.6),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        itemCount: monsters.length,
-                        itemBuilder: (context, index) {
-                          var monster = monsters[index];
+                          ),
+                        );
+                      }
+
+                      final monster = monsters[index];
 
                           return Container(
-                            margin: const EdgeInsets.only(bottom: 16),
+                            margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
                             decoration: BoxDecoration(
                               color: colorScheme.surface,
                               borderRadius: BorderRadius.circular(20),
@@ -297,7 +296,18 @@ class _MonstersListState extends State<MonstersList> {
                           );
                         },
                       ),
-          ),
+          if (_filtersVisible)
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Material(
+                elevation: 8,
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                clipBehavior: Clip.antiAlias,
+                child: _buildFiltersSection(context, monstersProvider, zonesProvider),
+              ),
+            ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -362,7 +372,7 @@ class _MonstersListState extends State<MonstersList> {
       title: l10n.filters,
       resetLabel: l10n.reset,
       onReset: _resetFilters,
-      height: 300,
+      maxHeight: 300,
       fields: [
         ListFilterFieldConfig.text(
           id: 'name',

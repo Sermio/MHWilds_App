@@ -107,7 +107,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
+                        color: Colors.black.withValues(alpha: 0.3),
                         blurRadius: 20,
                         spreadRadius: 5,
                       ),
@@ -194,7 +194,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
+              color: colorScheme.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -216,7 +216,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: colorScheme.shadow.withOpacity(0.1),
+                    color: colorScheme.shadow.withValues(alpha: 0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -254,14 +254,15 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Row(
+                          Wrap(
+                            spacing: 12,
+                            runSpacing: 8,
                             children: [
                               _buildInfoChip(
                                 AppLocalizations.of(context)!.risk,
                                 '${camp.risk}',
                                 _getRiskColor(camp.risk),
                               ),
-                              const SizedBox(width: 12),
                               _buildInfoChip(
                                 AppLocalizations.of(context)!.zone,
                                 '${camp.zone}',
@@ -286,10 +287,10 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: color.withOpacity(0.3),
+          color: color.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
@@ -301,7 +302,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: color.withOpacity(0.8),
+              color: color.withValues(alpha: 0.8),
             ),
           ),
           Text(
@@ -346,7 +347,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                       AppLocalizations.of(context)!.loadingMap,
                       style: TextStyle(
                         fontSize: 16,
-                        color: colorScheme.onSurface.withOpacity(0.7),
+                        color: colorScheme.onSurface.withValues(alpha: 0.7),
                       ),
                     ),
                   ],
@@ -364,14 +365,14 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                         Icon(
                           Icons.map_outlined,
                           size: 64,
-                          color: colorScheme.onSurface.withOpacity(0.5),
+                          color: colorScheme.onSurface.withValues(alpha: 0.5),
                         ),
                         const SizedBox(height: 16),
                         Text(
                           AppLocalizations.of(context)!.noMapImagesFound,
                           style: TextStyle(
                             fontSize: 16,
-                            color: colorScheme.onSurface.withOpacity(0.7),
+                            color: colorScheme.onSurface.withValues(alpha: 0.7),
                           ),
                         ),
                       ],
@@ -400,7 +401,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
-                                color: colorScheme.shadow.withOpacity(0.1),
+                                color: colorScheme.shadow.withValues(alpha: 0.1),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               ),
@@ -440,7 +441,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                                       boxShadow: [
                                         BoxShadow(
                                           color: colorScheme.shadow
-                                              .withOpacity(0.2),
+                                              .withValues(alpha: 0.2),
                                           blurRadius: 15,
                                           offset: const Offset(0, 5),
                                         ),
