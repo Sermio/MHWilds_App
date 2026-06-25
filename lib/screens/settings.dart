@@ -15,6 +15,8 @@ import 'package:mhwilds_app/utils/locale_utils.dart';
 import 'package:mhwilds_app/utils/review_service.dart';
 import 'package:provider/provider.dart';
 
+import 'package:package_info_plus/package_info_plus.dart';
+
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
@@ -120,6 +122,25 @@ class SettingsScreen extends StatelessWidget {
               trailing: const Icon(Icons.open_in_new, size: 16),
               onTap: () => ReviewService.openStore(),
             ),
+          ),
+          const SizedBox(height: 32),
+          FutureBuilder<PackageInfo>(
+            future: PackageInfo.fromPlatform(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final packageInfo = snapshot.data!;
+                return Center(
+                  child: Text(
+                    'v${packageInfo.version}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: colorScheme.onSurface.withOpacity(0.5),
+                    ),
+                  ),
+                );
+              }
+              return const SizedBox.shrink();
+            },
           ),
         ],
       ),
