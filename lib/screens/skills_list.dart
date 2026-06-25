@@ -323,7 +323,7 @@ class _SkillListState2 extends State<SkillList> {
           hintText: l10n.enterSkillName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
-        ListFilterFieldConfig.select(
+        ListFilterFieldConfig.gridMenu(
           id: 'type',
           label: l10n.type,
           value: _selectedType,

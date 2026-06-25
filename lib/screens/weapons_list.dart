@@ -11,6 +11,8 @@ import 'package:mhwilds_app/components/sharpness_bar.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
+import 'package:mhwilds_app/components/tree_connector_painter.dart';
+import 'package:mhwilds_app/utils/weapon_tree_builder.dart';
 import 'package:provider/provider.dart';
 
 part 'weapons_list/display_utils.dart';
@@ -27,10 +29,13 @@ class WeaponsList extends StatefulWidget {
 
 class _WeaponsListState extends State<WeaponsList> {
   final TextEditingController _searchNameController = TextEditingController();
+  final TextEditingController _searchSeriesController = TextEditingController();
   String _searchNameQuery = '';
+  String _searchSeriesQuery = '';
   String? _selectedKind;
   int? _selectedRarity;
   bool _filtersVisible = false;
+  bool _isTreeView = false;
 
   @override
   void initState() {
@@ -58,9 +63,11 @@ class _WeaponsListState extends State<WeaponsList> {
   void _resetFilters() {
     setState(() {
       _searchNameQuery = '';
+      _searchSeriesQuery = '';
       _selectedKind = null;
       _selectedRarity = null;
       _searchNameController.clear();
+      _searchSeriesController.clear();
     });
     print('WeaponsList: _selectedKind reset to: "$_selectedKind"');
     final provider = Provider.of<WeaponsProvider>(context, listen: false);
@@ -89,6 +96,35 @@ class _WeaponsListState extends State<WeaponsList> {
       body: Column(
         children: [
           if (_filtersVisible) _buildFiltersSection(context, weaponsProvider),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SegmentedButton<bool>(
+                  segments: const [
+                    ButtonSegment(
+                      value: false,
+                      icon: Icon(Icons.view_list),
+                      label: Text('List'),
+                    ),
+                    ButtonSegment(
+                      value: true,
+                      icon: Icon(Icons.account_tree),
+                      label: Text('Tree'),
+                    ),
+                  ],
+                  selected: {_isTreeView},
+                  onSelectionChanged: (Set<bool> newSelection) {
+                    setState(() {
+                      _isTreeView = newSelection.first;
+                    });
+                  },
+                  showSelectedIcon: false,
+                ),
+              ],
+            ),
+          ),
           Expanded(
               child:
                   _buildWeaponsList(context, weaponsProvider, filteredWeapons)),
@@ -111,6 +147,7 @@ class _WeaponsListState extends State<WeaponsList> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ListFiltersPanel(
+      height: 400,
       title: l10n.filters,
       resetLabel: l10n.reset,
       onReset: _resetFilters,
@@ -128,7 +165,20 @@ class _WeaponsListState extends State<WeaponsList> {
           hintText: l10n.enterWeaponName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
-        ListFilterFieldConfig.select(
+        ListFilterFieldConfig.text(
+          id: 'series',
+          label: 'Tree Series', // Temporal label until localizations are updated
+          controller: _searchSeriesController,
+          onTextChanged: (query) {
+            setState(() {
+              _searchSeriesQuery = query;
+            });
+            _applyFilters(weaponsProvider);
+          },
+          hintText: 'Enter series name...',
+          prefixIcon: Icon(Icons.account_tree, color: colorScheme.primary),
+        ),
+        ListFilterFieldConfig.gridMenu(
           id: 'type',
           label: l10n.type,
           value: _selectedKind,
@@ -140,7 +190,7 @@ class _WeaponsListState extends State<WeaponsList> {
           },
           options: _weaponTypeOptions(context),
         ),
-        ListFilterFieldConfig.select(
+        ListFilterFieldConfig.gridMenu(
           id: 'rarity',
           label: l10n.rarity,
           value: _selectedRarity,
@@ -150,7 +200,7 @@ class _WeaponsListState extends State<WeaponsList> {
             });
             _applyFilters(weaponsProvider);
           },
-          options: _rarityOptions(),
+          options: _rarityOptions(l10n),
         ),
       ],
     );
@@ -159,6 +209,7 @@ class _WeaponsListState extends State<WeaponsList> {
   void _applyFilters(WeaponsProvider weaponsProvider) {
     weaponsProvider.applyFilters(
       name: _searchNameQuery,
+      series: _searchSeriesQuery,
       kind: _selectedKind,
       rarity: _selectedRarity,
     );
@@ -207,24 +258,22 @@ class _WeaponsListState extends State<WeaponsList> {
     }).toList();
   }
 
-  List<ListFilterOption> _rarityOptions() {
+  List<ListFilterOption> _rarityOptions(AppLocalizations l10n) {
     return [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
       return ListFilterOption(
         value: rarity,
-        label: rarity.toString(),
+        label: l10n.rarityLevel(rarity),
         leading: Container(
-          width: 10,
-          height: 10,
+          width: 14,
+          height: 14,
           decoration: BoxDecoration(
             color: _getRarityColor(rarity),
-            shape: BoxShape.circle,
+            borderRadius: BorderRadius.circular(4),
           ),
         ),
       );
     }).toList();
-  }
-
-  Widget _buildWeaponsList(BuildContext context,
+  }  Widget _buildWeaponsList(BuildContext context,
       WeaponsProvider weaponsProvider, List<Weapon> filteredWeapons) {
     final colorScheme = Theme.of(context).colorScheme;
     if (weaponsProvider.isLoading) {
@@ -270,6 +319,9 @@ class _WeaponsListState extends State<WeaponsList> {
         ),
       );
     }
+    if (_isTreeView) {
+      return _buildGlobalTreeView(context, weaponsProvider, filteredWeapons);
+    }
 
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -277,6 +329,200 @@ class _WeaponsListState extends State<WeaponsList> {
       itemBuilder: (context, index) {
         return _buildWeaponCard(filteredWeapons[index], index);
       },
+    );
+  }
+
+  Widget _buildGlobalTreeView(BuildContext context, WeaponsProvider provider, List<Weapon> filteredWeapons) {
+    // Group weapons by series
+    final Map<String, List<Weapon>> seriesGroups = {};
+    for (final w in filteredWeapons) {
+      final seriesName = w.series?.name ?? 'No Series';
+      if (!seriesGroups.containsKey(seriesName)) {
+        seriesGroups[seriesName] = [];
+      }
+      seriesGroups[seriesName]!.add(w);
+    }
+
+    final seriesKeys = seriesGroups.keys.toList()..sort();
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      itemCount: seriesKeys.length,
+      itemBuilder: (context, index) {
+        final seriesName = seriesKeys[index];
+        final weaponsInSeries = seriesGroups[seriesName]!;
+
+        return Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            decoration: BoxDecoration(
+              color: colorScheme.surface,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: colorScheme.outlineVariant.withOpacity(0.5)),
+            ),
+            child: ExpansionTile(
+              initiallyExpanded: seriesKeys.length == 1,
+              title: Text(
+                seriesName,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: _buildSeriesTrees(weaponsInSeries)
+                        .map((node) => _buildVisualTree(node, context))
+                        .toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  List<TreeNode> _buildSeriesTrees(List<Weapon> seriesWeapons) {
+    final roots = seriesWeapons.where((w) {
+      if (w.crafting.previous == null) return true;
+      return !seriesWeapons.any((other) => other.id == w.crafting.previous?.id);
+    }).toList();
+
+    TreeNode buildNode(Weapon w) {
+      final children = seriesWeapons.where((child) => child.crafting.previous?.id == w.id).toList();
+      return TreeNode(
+        weapon: w,
+        children: children.map((c) => buildNode(c)).toList(),
+      );
+    }
+
+    return roots.map((r) => buildNode(r)).toList();
+  }
+
+  Widget _buildVisualTree(TreeNode node, BuildContext context, {int depth = 0, List<bool> isLastChildPath = const []}) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (int i = 0; i < depth - 1; i++)
+                SizedBox(
+                  width: 24,
+                  child: isLastChildPath[i]
+                      ? null
+                      : CustomPaint(
+                          painter: StraightLinePainter(
+                            color: colorScheme.outlineVariant,
+                          ),
+                        ),
+                ),
+              if (depth > 0)
+                SizedBox(
+                  width: 24,
+                  child: CustomPaint(
+                    painter: TreeConnectorPainter(
+                      isLastChild: isLastChildPath.last,
+                      color: colorScheme.outlineVariant,
+                    ),
+                  ),
+                ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 4, top: 4, left: 4),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: colorScheme.outlineVariant,
+                    ),
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(8),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => WeaponDetails(weapon: node.weapon)),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          GearSpriteIcon(
+                            column: weaponColumnByKind[node.weapon.kind] ?? 0,
+                            rarity: node.weapon.rarity,
+                            size: 32,
+                            fallback: Icon(_getWeaponIcon(node.weapon.kind), size: 24, color: _getKindColor(node.weapon.kind)),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            flex: 3,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(node.weapon.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                                if (_hasSharpnessData(node.weapon)) ...[
+                                  const SizedBox(height: 4),
+                                  SharpnessBar(
+                                    sharpness: node.weapon.sharpness,
+                                    height: 6,
+                                    borderRadius: 2,
+                                  ),
+                                  const SizedBox(height: 4),
+                                ],
+                                Text('Rarity ${node.weapon.rarity}', style: TextStyle(color: _getRarityColor(node.weapon.rarity), fontSize: 11)),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.gps_fixed, size: 14, color: Colors.red[400]),
+                                  const SizedBox(width: 2),
+                                  Text('${node.weapon.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                                  const SizedBox(width: 6),
+                                  
+                                  if (node.weapon.affinity != 0) ...[
+                                    Icon(Icons.trending_up, size: 14, color: colorScheme.primary),
+                                    const SizedBox(width: 2),
+                                    Text('${node.weapon.affinity}%', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (node.children.isNotEmpty)
+          ...node.children.asMap().entries.map((entry) {
+            final isLast = entry.key == node.children.length - 1;
+            return _buildVisualTree(
+              entry.value,
+              context,
+              depth: depth + 1,
+              isLastChildPath: [...isLastChildPath, isLast],
+            );
+          }),
+      ],
     );
   }
 

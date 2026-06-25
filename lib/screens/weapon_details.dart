@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/weapon.dart';
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/api/skills_api.dart';
+import 'package:mhwilds_app/api/weapons_api.dart';
+import 'package:mhwilds_app/utils/weapon_tree_builder.dart';
+import 'package:mhwilds_app/providers/weapons_provider.dart';
+import 'package:mhwilds_app/components/tree_connector_painter.dart';
 import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/utils/weapon_utils.dart';
@@ -26,6 +30,7 @@ class WeaponDetails extends StatefulWidget {
 
 class _WeaponDetailsState extends State<WeaponDetails> {
   late Future<List<Skills>> _skills;
+  bool _isTreeView = true;
 
   @override
   void initState() {
@@ -65,6 +70,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
 
             // Skills
             if (widget.weapon.skills.isNotEmpty) _buildSkillsSection(),
+
+            // Weapon Tree
+            if (_hasWeaponTreeData()) _buildWeaponTreeSection(),
 
             // Crafting
             if (_hasCraftingData()) _buildCraftingSection(),
@@ -752,38 +760,35 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Título de la sección (sin fondo dorado; alineado con otras pantallas)
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.build,
-                  color: colorScheme.primary,
-                  size: 24,
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+          initiallyExpanded: false,
+          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          title: Row(
+            children: [
+              Icon(
+                Icons.build,
+                color: colorScheme.primary,
+                size: 24,
+              ),
+              const SizedBox(width: 12),
+              Text(
+                AppLocalizations.of(context)!.craftingMaterials,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
                 ),
-                const SizedBox(width: 12),
-                Text(
-                  AppLocalizations.of(context)!.craftingMaterials,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-
-          // Contenido de crafting
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
                 if (widget.weapon.crafting.craftingMaterials.isNotEmpty) ...[
                   _buildCostLabel(AppLocalizations.of(context)!.craft),
                   const SizedBox(height: 8),
@@ -840,7 +845,8 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               ],
             ),
           ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -1053,6 +1059,416 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     }
 
     return stats;
+  }
+
+  bool _hasWeaponTreeData() {
+    return widget.weapon.crafting.previous != null ||
+        widget.weapon.crafting.branches.isNotEmpty;
+  }
+
+  Widget _buildWeaponTreeSection() {
+    final colorScheme = Theme.of(context).colorScheme;
+    final provider = Provider.of<WeaponsProvider>(context, listen: false);
+    
+    final rootNode = WeaponTreeBuilder.buildTree(widget.weapon, provider);
+    if (rootNode == null) return const SizedBox.shrink();
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+          initiallyExpanded: true,
+          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          title: Row(
+            children: [
+              Icon(
+                Icons.account_tree,
+                color: colorScheme.primary,
+                size: 24,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context)?.weaponTree ?? 'Weapon Tree',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.account_tree, color: _isTreeView ? colorScheme.primary : colorScheme.onSurface.withOpacity(0.5)),
+                    onPressed: () {
+                      setState(() {
+                        _isTreeView = true;
+                      });
+                    },
+                    tooltip: 'Tree View',
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.table_rows, color: !_isTreeView ? colorScheme.primary : colorScheme.onSurface.withOpacity(0.5)),
+                    onPressed: () {
+                      setState(() {
+                        _isTreeView = false;
+                      });
+                    },
+                    tooltip: 'Table View',
+                  ),
+                ],
+              )
+            ],
+          ),
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: _isTreeView
+                  ? _buildVisualTree(rootNode)
+                  : _buildVisualTable(WeaponTreeBuilder.flattenTree(rootNode)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVisualTree(TreeNode node, {int depth = 0, List<bool> isLastChildPath = const []}) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final bool isCurrentWeapon = node.weapon.id == widget.weapon.id;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Lines for previous depths
+              for (int i = 0; i < depth - 1; i++)
+                SizedBox(
+                  width: 24,
+                  child: isLastChildPath[i]
+                      ? null
+                      : CustomPaint(
+                          painter: StraightLinePainter(
+                            color: colorScheme.outlineVariant,
+                          ),
+                        ),
+                ),
+              // Line for current depth
+              if (depth > 0)
+                SizedBox(
+                  width: 24,
+                  child: CustomPaint(
+                    painter: TreeConnectorPainter(
+                      isLastChild: isLastChildPath.last,
+                      color: colorScheme.outlineVariant,
+                    ),
+                  ),
+                ),
+              // Node content
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 4, top: 4, left: 4),
+                  decoration: BoxDecoration(
+                    color: isCurrentWeapon
+                        ? colorScheme.primaryContainer.withValues(alpha: 0.3)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                    border: isCurrentWeapon
+                        ? Border.all(color: colorScheme.primary, width: 1)
+                        : null,
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(8),
+                    onTap: () {
+                      if (!isCurrentWeapon) {
+                        _navigateToWeaponById(node.weapon.id);
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                      child: Row(
+                        children: [
+                          GearSpriteIcon(
+                            column: weaponColumnByKind[node.weapon.kind] ?? 0,
+                            rarity: node.weapon.rarity,
+                            size: 24,
+                            fallback: Icon(
+                              WeaponUtils.getWeaponIcon(node.weapon.kind),
+                              color: WeaponUtils.getKindColor(node.weapon.kind),
+                              size: 16,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              node.weapon.name,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: isCurrentWeapon ? FontWeight.bold : FontWeight.w500,
+                                color: isCurrentWeapon ? colorScheme.primary : colorScheme.onSurface,
+                              ),
+                            ),
+                          ),
+                          _buildMiniStats(node.weapon),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (node.children.isNotEmpty)
+          ...node.children.asMap().entries.map((entry) {
+            final isLast = entry.key == node.children.length - 1;
+            return _buildVisualTree(
+              entry.value,
+              depth: depth + 1,
+              isLastChildPath: [...isLastChildPath, isLast],
+            );
+          }),
+      ],
+    );
+  }
+
+  Widget _buildVisualTable(List<Weapon> allWeapons) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: allWeapons.map((w) {
+        final bool isCurrent = w.id == widget.weapon.id;
+        return Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+            color: isCurrent ? colorScheme.primaryContainer.withOpacity(0.2) : colorScheme.surfaceContainerHighest,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: isCurrent ? colorScheme.primary : colorScheme.outlineVariant,
+            ),
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(8),
+            onTap: isCurrent ? null : () => _navigateToWeaponById(w.id),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  GearSpriteIcon(
+                    column: weaponColumnByKind[w.kind] ?? 0,
+                    rarity: w.rarity,
+                    size: 32,
+                    fallback: Icon(WeaponUtils.getWeaponIcon(w.kind), size: 24, color: WeaponUtils.getKindColor(w.kind)),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    flex: 3,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(child: Text(w.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13))),
+                            if (w.crafting.craftingMaterials.isNotEmpty || w.crafting.upgradeMaterials.isNotEmpty)
+                              InkWell(
+                                onTap: () => _showCraftingModal(w),
+                                borderRadius: BorderRadius.circular(12),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Icon(Icons.remove_red_eye, size: 18, color: colorScheme.primary),
+                                ),
+                              ),
+                          ],
+                        ),
+                        if (_hasSharpnessDataForWeapon(w)) ...[
+                          const SizedBox(height: 4),
+                          SharpnessBar(
+                            sharpness: w.sharpness,
+                            height: 6,
+                            borderRadius: 2,
+                          ),
+                          const SizedBox(height: 4),
+                        ],
+                        Text('Rarity ${w.rarity}', style: TextStyle(color: WeaponUtils.getRarityColor(w.rarity), fontSize: 11)),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: _buildMiniStats(w),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildMiniStats(Weapon w) {
+    final colorScheme = Theme.of(context).colorScheme;
+    
+    // Extraer especial si existe
+    WeaponSpecial? special;
+    if (w.specials is List && w.specials.isNotEmpty) {
+      try {
+        special = WeaponSpecial.fromJson(w.specials[0]);
+      } catch (_) {}
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(Icons.gps_fixed, size: 14, color: Colors.red[400]),
+        const SizedBox(width: 2),
+        Text('${w.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+        const SizedBox(width: 6),
+        
+        if (w.affinity != 0) ...[
+          Icon(Icons.trending_up, size: 14, color: colorScheme.primary),
+          const SizedBox(width: 2),
+          Text('${w.affinity}%', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+          const SizedBox(width: 6),
+        ],
+        
+        if (special != null && special.damage.display > 0) ...[
+          Icon(WeaponUtils.getElementIcon(special.element), size: 14, color: WeaponUtils.getElementColor(special.element)),
+          const SizedBox(width: 2),
+          Text('${special.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+        ],
+      ],
+    );
+  }
+
+  bool _hasSharpnessDataForWeapon(Weapon w) {
+    final s = w.sharpness;
+    return s.red > 0 || s.orange > 0 || s.yellow > 0 || s.green > 0 || s.blue > 0 || s.white > 0 || s.purple > 0;
+  }
+
+  void _showCraftingModal(Weapon w) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        final colorScheme = Theme.of(context).colorScheme;
+        return Container(
+          decoration: BoxDecoration(
+            color: colorScheme.surface,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          padding: const EdgeInsets.all(20),
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.8,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      '${AppLocalizations.of(context)!.craftingMaterials} - ${w.name}',
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (w.crafting.craftingMaterials.isNotEmpty) ...[
+                        _buildCostLabel(AppLocalizations.of(context)!.craft),
+                        const SizedBox(height: 8),
+                        _buildMaterialsSection(w.crafting.craftingMaterials),
+                      ],
+                      if (w.crafting.craftingMaterials.isNotEmpty && w.crafting.upgradeMaterials.isNotEmpty)
+                        const SizedBox(height: 16),
+                      if (w.crafting.upgradeMaterials.isNotEmpty) ...[
+                        _buildCostLabel(AppLocalizations.of(context)!.upgrade),
+                        const SizedBox(height: 8),
+                        _buildMaterialsSection(w.crafting.upgradeMaterials),
+                      ],
+                      if (w.crafting.craftingZennyCost > 0 || w.crafting.upgradeZennyCost > 0) ...[
+                        const SizedBox(height: 20),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          alignment: WrapAlignment.center,
+                          children: [
+                            if (w.crafting.craftingZennyCost > 0)
+                              _buildCostChip(AppLocalizations.of(context)!.craft, w.crafting.craftingZennyCost),
+                            if (w.crafting.upgradeZennyCost > 0)
+                              _buildCostChip(AppLocalizations.of(context)!.upgrade, w.crafting.upgradeZennyCost),
+                          ],
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _navigateToWeaponById(int id) async {
+    try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(child: CircularProgressIndicator()),
+      );
+      final weapon = await WeaponsApi.fetchWeaponById(id);
+      if (mounted) {
+        Navigator.pop(context); // close dialog
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WeaponDetails(weapon: weapon),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        Navigator.pop(context); // close dialog
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error loading weapon details')),
+        );
+      }
+    }
   }
 
   bool _hasCraftingData() {

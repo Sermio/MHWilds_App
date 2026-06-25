@@ -641,4 +641,13 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get openInBrowserHint =>
       'Sie können den Optimierer in Ihrem Browser öffnen.';
+
+  @override
+  String get weaponTree => 'Weapon Tree';
+
+  @override
+  String get previousWeapon => 'Upgrades from';
+
+  @override
+  String get upgradesTo => 'Upgrades to';
 }

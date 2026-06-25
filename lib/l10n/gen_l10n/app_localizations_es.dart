@@ -637,6 +637,15 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get openInBrowserHint =>
       'Puedes abrir el optimizador en tu navegador.';
+
+  @override
+  String get weaponTree => 'Árbol del arma';
+
+  @override
+  String get previousWeapon => 'Mejora de';
+
+  @override
+  String get upgradesTo => 'Mejora a';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).

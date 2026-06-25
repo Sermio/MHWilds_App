@@ -243,5 +243,8 @@
   "openOptimizer": "Abrir otimizador",
   "ok": "OK",
   "webViewNotSupported": "WebView não está disponível nesta plataforma.",
-  "openInBrowserHint": "Você pode abrir o otimizador no seu navegador."
+  "openInBrowserHint": "Você pode abrir o otimizador no seu navegador.",
+  "weaponTree": "Árvore de Armas",
+  "previousWeapon": "Evolui de",
+  "upgradesTo": "Evolui para"
 }

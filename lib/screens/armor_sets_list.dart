@@ -342,6 +342,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ListFiltersPanel(
+      height: 340,
       title: l10n.filters,
       resetLabel: l10n.reset,
       onReset: _resetFilters,
@@ -359,7 +360,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
           hintText: l10n.enterArmorSetName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
-        ListFilterFieldConfig.select(
+        ListFilterFieldConfig.gridMenu(
           id: 'type',
           label: l10n.type,
           value: _selectedKind,
@@ -371,7 +372,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
           },
           options: _armorTypeOptions(context),
         ),
-        ListFilterFieldConfig.select(
+        ListFilterFieldConfig.gridMenu(
           id: 'rarity',
           label: l10n.rarity,
           value: _selectedRarity,
@@ -381,7 +382,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             });
             _applyFilters(armorSetProvider);
           },
-          options: _rarityOptions(),
+          options: _rarityOptions(l10n),
         ),
       ],
     );
@@ -421,24 +422,22 @@ class _ArmorSetListState extends State<ArmorSetList> {
     }).toList();
   }
 
-  List<ListFilterOption> _rarityOptions() {
+  List<ListFilterOption> _rarityOptions(AppLocalizations l10n) {
     return [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
       return ListFilterOption(
         value: rarity,
-        label: rarity.toString(),
+        label: l10n.rarityLevel(rarity),
         leading: Container(
-          width: 10,
-          height: 10,
+          width: 14,
+          height: 14,
           decoration: BoxDecoration(
             color: _getRarityColor(rarity),
-            shape: BoxShape.circle,
+            borderRadius: BorderRadius.circular(4),
           ),
         ),
       );
     }).toList();
-  }
-
-  Widget _buildSkillsSection(armor_models.ArmorPiece armorPiece) {
+  }  Widget _buildSkillsSection(armor_models.ArmorPiece armorPiece) {
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

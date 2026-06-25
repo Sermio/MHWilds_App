@@ -254,5 +254,8 @@
   "openOptimizer": "Open optimizer",
   "ok": "OK",
   "webViewNotSupported": "WebView is not available on this platform.",
-  "openInBrowserHint": "You can open the optimizer in your browser."
+  "openInBrowserHint": "You can open the optimizer in your browser.",
+  "weaponTree": "Weapon Tree",
+  "previousWeapon": "Upgrades from",
+  "upgradesTo": "Upgrades to"
 }

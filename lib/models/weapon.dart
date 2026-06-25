@@ -19,6 +19,7 @@ class Weapon {
   final List<int> handicraft;
   final dynamic specials; // Cambiado a dynamic para manejar diferentes tipos
   final WeaponCrafting crafting;
+  final WeaponSeries? series;
 
   // Nuevos campos opcionales para estructuras especiales
   final HuntingHornMelody? melody;
@@ -50,6 +51,7 @@ class Weapon {
     required this.handicraft,
     required this.specials,
     required this.crafting,
+    this.series,
     // Nuevos campos opcionales
     this.melody,
     this.ammo,
@@ -120,6 +122,15 @@ class Weapon {
         );
       }
 
+      WeaponSeries? series;
+      if (json['series'] != null) {
+        try {
+          series = WeaponSeries.fromJson(json['series']);
+        } catch (e) {
+          print('Error parsing series: $e');
+        }
+      }
+
       final weapon = Weapon(
         id: json['id'] as int? ?? 0,
         gameId: json['gameId'] as int? ?? 0,
@@ -138,6 +149,7 @@ class Weapon {
             (json['handicraft'] as List? ?? []).map((e) => e as int).toList(),
         specials: _parseSpecials(json['specials'], json['kind']),
         crafting: crafting,
+        series: series,
         // Nuevos campos opcionales con manejo robusto de errores
         melody: _safeParseMelody(json['melody']),
         ammo: _safeParseAmmo(json['ammo']),
@@ -812,6 +824,26 @@ class WeaponReference {
     return WeaponReference(
       name: json['name'] as String? ?? '',
       id: json['id'] as int? ?? 0,
+    );
+  }
+}
+
+class WeaponSeries {
+  final int id;
+  final int gameId;
+  final String name;
+
+  WeaponSeries({
+    required this.id,
+    required this.gameId,
+    required this.name,
+  });
+
+  factory WeaponSeries.fromJson(Map<String, dynamic> json) {
+    return WeaponSeries(
+      id: json['id'] ?? 0,
+      gameId: json['gameId'] ?? 0,
+      name: json['name'] ?? '',
     );
   }
 }

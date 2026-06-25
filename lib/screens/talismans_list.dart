@@ -303,7 +303,7 @@ class _AmuletListState extends State<AmuletList> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ListFiltersPanel(
-      height: 250,
+      height: 260,
       title: l10n.filters,
       resetLabel: l10n.reset,
       onReset: _resetFilters,
@@ -321,7 +321,7 @@ class _AmuletListState extends State<AmuletList> {
           hintText: l10n.enterTalismanName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
-        ListFilterFieldConfig.select(
+        ListFilterFieldConfig.gridMenu(
           id: 'rarity',
           label: l10n.rarity,
           value: _selectedRarity,
@@ -331,22 +331,7 @@ class _AmuletListState extends State<AmuletList> {
             });
             _applyFilters(talismansProvider);
           },
-          options: [1, 2, 3, 4, 5, 6, 7, 8]
-              .map(
-                (rarity) => ListFilterOption(
-                  value: rarity,
-                  label: rarity.toString(),
-                  leading: Container(
-                    width: 10,
-                    height: 10,
-                    decoration: BoxDecoration(
-                      color: _getRarityColor(rarity),
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
+          options: _rarityOptions(l10n),
         ),
       ],
     );
@@ -449,6 +434,23 @@ class _AmuletListState extends State<AmuletList> {
             )),
       ],
     );
+  }
+
+  List<ListFilterOption> _rarityOptions(AppLocalizations l10n) {
+    return [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
+      return ListFilterOption(
+        value: rarity,
+        label: l10n.rarityLevel(rarity),
+        leading: Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+            color: _getRarityColor(rarity),
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+      );
+    }).toList();
   }
 
   Color _getRarityColor(int rarity) {

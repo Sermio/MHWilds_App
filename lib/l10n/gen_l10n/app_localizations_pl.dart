@@ -642,4 +642,13 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get openInBrowserHint =>
       'Możesz otworzyć optymalizator w przeglądarce.';
+
+  @override
+  String get weaponTree => 'Weapon Tree';
+
+  @override
+  String get previousWeapon => 'Upgrades from';
+
+  @override
+  String get upgradesTo => 'Upgrades to';
 }

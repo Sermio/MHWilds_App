@@ -639,6 +639,15 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get openInBrowserHint =>
       'Você pode abrir o otimizador no seu navegador.';
+
+  @override
+  String get weaponTree => 'Weapon Tree';
+
+  @override
+  String get previousWeapon => 'Upgrades from';
+
+  @override
+  String get upgradesTo => 'Upgrades to';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -1254,4 +1263,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get openInBrowserHint =>
       'Você pode abrir o otimizador no seu navegador.';
+
+  @override
+  String get weaponTree => 'Árvore de Armas';
+
+  @override
+  String get previousWeapon => 'Evolui de';
+
+  @override
+  String get upgradesTo => 'Evolui para';
 }

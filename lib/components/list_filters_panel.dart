@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum ListFilterFieldType { text, select, custom }
+enum ListFilterFieldType { text, select, gridMenu, custom }
 
 class ListFilterOption {
   const ListFilterOption({
@@ -39,6 +39,21 @@ class ListFilterFieldConfig {
     this.allLabel,
     this.includeAllOption = true,
   })  : type = ListFilterFieldType.select,
+        controller = null,
+        onTextChanged = null,
+        hintText = null,
+        prefixIcon = null,
+        customBuilder = null;
+
+  const ListFilterFieldConfig.gridMenu({
+    required this.id,
+    required this.label,
+    required this.value,
+    required this.onSelectChanged,
+    required this.options,
+    this.allLabel,
+    this.includeAllOption = true,
+  })  : type = ListFilterFieldType.gridMenu,
         controller = null,
         onTextChanged = null,
         hintText = null,
@@ -185,6 +200,8 @@ class ListFiltersPanel extends StatelessWidget {
           _buildTextField(context, field)
         else if (field.type == ListFilterFieldType.select)
           _buildSelectField(context, field)
+        else if (field.type == ListFilterFieldType.gridMenu)
+          _buildGridMenuField(context, field)
         else
           field.customBuilder!(context),
       ],
@@ -272,6 +289,159 @@ class ListFiltersPanel extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildGridMenuField(BuildContext context, ListFilterFieldConfig field) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final allLabel = field.allLabel ?? _localizedAllLabel(context);
+
+    return MenuAnchor(
+      style: MenuStyle(
+        backgroundColor: WidgetStateProperty.all(colorScheme.surface),
+        elevation: WidgetStateProperty.all(8),
+        padding: WidgetStateProperty.all(const EdgeInsets.all(8)),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        ),
+      ),
+      builder: (context, controller, child) {
+        final selectedOption = field.options.firstWhere(
+          (opt) => opt.value == field.value,
+          orElse: () => ListFilterOption(value: null, label: allLabel),
+        );
+
+        return InkWell(
+          onTap: () {
+            if (controller.isOpen) {
+              controller.close();
+            } else {
+              controller.open();
+            }
+          },
+          borderRadius: BorderRadius.circular(12),
+          child: InputDecorator(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: colorScheme.outlineVariant),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: colorScheme.primary, width: 2),
+              ),
+              filled: true,
+              fillColor: colorScheme.surfaceContainerHighest,
+              suffixIcon: Icon(
+                controller.isOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+            isEmpty: false,
+            child: Row(
+              children: [
+                if (selectedOption.leading != null) ...[
+                  selectedOption.leading!,
+                  const SizedBox(width: 10),
+                ],
+                Expanded(
+                  child: Text(
+                    selectedOption.label,
+                    style: TextStyle(color: colorScheme.onSurface),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      menuChildren: [
+        Container(
+          width: 280,
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (field.includeAllOption) ...[
+                InkWell(
+                  onTap: () {
+                    field.onSelectChanged?.call(null);
+                  },
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: field.value == null
+                          ? colorScheme.primaryContainer.withOpacity(0.5)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      allLabel,
+                      style: TextStyle(
+                        fontWeight: field.value == null ? FontWeight.bold : FontWeight.normal,
+                        color: field.value == null ? colorScheme.primary : colorScheme.onSurface,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+              ],
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: field.options.map((option) {
+                  final isSelected = field.value == option.value;
+                  return SizedBox(
+                    width: 128,
+                    child: InkWell(
+                      onTap: () {
+                        field.onSelectChanged?.call(option.value);
+                      },
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? colorScheme.primaryContainer.withOpacity(0.5)
+                              : colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: isSelected ? colorScheme.primary : colorScheme.outlineVariant.withOpacity(0.5),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            if (option.leading != null) ...[
+                              option.leading!,
+                              const SizedBox(width: 8),
+                            ],
+                            Expanded(
+                              child: Text(
+                                option.label,
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                                  color: isSelected ? colorScheme.primary : colorScheme.onSurface,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+
 
   String _localizedAllLabel(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode.toLowerCase();

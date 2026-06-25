@@ -46,6 +46,7 @@ class MonstersProvider with ChangeNotifier {
   void applyFilters(
       {String? name,
       String? species,
+      String? rank,
       List<String>? locations,
       required AppLocalizations l10n}) {
     _selectedLocations = locations ?? [];
@@ -57,13 +58,9 @@ class MonstersProvider with ChangeNotifier {
 
       bool matchesName = name == null || monsterName.contains(searchName);
 
-      final displaySpecies = removeDiacritics(monster.displaySpecies(l10n));
-      final rawSpecies = removeDiacritics(monster.species.replaceAll('-', '_'));
-      final searchSpecies = removeDiacritics(species ?? '');
-
-      bool matchesSpecies = species == null ||
-          displaySpecies.contains(searchSpecies) ||
-          rawSpecies.contains(searchSpecies);
+      bool matchesSpecies = species == null || monster.species == species;
+      
+      bool matchesRank = rank == null || monster.availableRanks.contains(rank);
 
       bool matchesLocation = _hasLocationFilter
           ? monster.locations.any((location) {
@@ -72,7 +69,7 @@ class MonstersProvider with ChangeNotifier {
             })
           : true;
 
-      return matchesName && matchesSpecies && matchesLocation;
+      return matchesName && matchesSpecies && matchesRank && matchesLocation;
     }).toList();
 
     notifyListeners();

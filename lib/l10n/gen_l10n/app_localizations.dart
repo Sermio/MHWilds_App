@@ -1334,6 +1334,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You can open the optimizer in your browser.'**
   String get openInBrowserHint;
+
+  /// No description provided for @weaponTree.
+  ///
+  /// In en, this message translates to:
+  /// **'Weapon Tree'**
+  String get weaponTree;
+
+  /// No description provided for @previousWeapon.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrades from'**
+  String get previousWeapon;
+
+  /// No description provided for @upgradesTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrades to'**
+  String get upgradesTo;
 }
 
 class _AppLocalizationsDelegate
