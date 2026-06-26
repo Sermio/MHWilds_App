@@ -1120,7 +1120,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                         _isTreeView = true;
                       });
                     },
-                    tooltip: 'Tree View',
+                    tooltip: AppLocalizations.of(context)?.treeViewTooltip ?? 'Tree View',
                   ),
                   IconButton(
                     icon: Icon(Icons.table_rows, color: !_isTreeView ? colorScheme.primary : colorScheme.onSurface.withOpacity(0.5)),
@@ -1129,10 +1129,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                         _isTreeView = false;
                       });
                     },
-                    tooltip: 'Table View',
+                    tooltip: AppLocalizations.of(context)?.tableViewTooltip ?? 'Table View',
                   ),
                 ],
-              )
+              ),
             ],
           ),
           children: [
@@ -1511,7 +1511,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       if (mounted) {
         Navigator.pop(context); // close dialog
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error loading weapon details')),
+          SnackBar(content: Text(AppLocalizations.of(context)?.errorLoadingWeaponDetails ?? 'Error loading weapon details')),
         );
       }
     }

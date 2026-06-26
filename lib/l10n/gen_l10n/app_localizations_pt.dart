@@ -648,6 +648,33 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get upgradesTo => 'Upgrades to';
+
+  @override
+  String get listView => 'Lista';
+
+  @override
+  String get treeView => 'Árvore';
+
+  @override
+  String get treeSeries => 'Séries da árvore';
+
+  @override
+  String get enterSeriesName => 'Insira o nome da série...';
+
+  @override
+  String get noSeries => 'Sem série';
+
+  @override
+  String get treeViewTooltip => 'Vista de árvore';
+
+  @override
+  String get tableViewTooltip => 'Vista de tabela';
+
+  @override
+  String get errorLoadingWeaponDetails => 'Erro ao carregar detalhes da arma';
+
+  @override
+  String get masterRank => 'Rank Mestre';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -1272,4 +1299,31 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get upgradesTo => 'Evolui para';
+
+  @override
+  String get listView => 'Lista';
+
+  @override
+  String get treeView => 'Árvore';
+
+  @override
+  String get treeSeries => 'Séries da árvore';
+
+  @override
+  String get enterSeriesName => 'Insira o nome da série...';
+
+  @override
+  String get noSeries => 'Sem série';
+
+  @override
+  String get treeViewTooltip => 'Vista de árvore';
+
+  @override
+  String get tableViewTooltip => 'Vista de tabela';
+
+  @override
+  String get errorLoadingWeaponDetails => 'Erro ao carregar detalhes da arma';
+
+  @override
+  String get masterRank => 'Rank Mestre';
 }

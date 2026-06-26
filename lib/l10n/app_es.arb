@@ -251,5 +251,14 @@
   "openInBrowserHint": "Puedes abrir el optimizador en tu navegador.",
   "weaponTree": "Árbol del arma",
   "previousWeapon": "Mejora de",
-  "upgradesTo": "Mejora a"
+  "upgradesTo": "Mejora a",
+  "listView": "Lista",
+  "treeView": "Árbol",
+  "treeSeries": "Series del árbol",
+  "enterSeriesName": "Introducir nombre de la serie...",
+  "noSeries": "Sin serie",
+  "treeViewTooltip": "Vista de árbol",
+  "tableViewTooltip": "Vista de tabla",
+  "errorLoadingWeaponDetails": "Error al cargar los detalles del arma",
+  "masterRank": "Rango Maestro"
 }

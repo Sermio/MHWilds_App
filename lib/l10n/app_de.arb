@@ -243,5 +243,14 @@
   "openOptimizer": "Optimierer öffnen",
   "ok": "OK",
   "webViewNotSupported": "WebView ist auf dieser Plattform nicht verfügbar.",
-  "openInBrowserHint": "Sie können den Optimierer in Ihrem Browser öffnen."
+  "openInBrowserHint": "Sie können den Optimierer in Ihrem Browser öffnen.",
+  "listView": "Liste",
+  "treeView": "Baum",
+  "treeSeries": "Baumserie",
+  "enterSeriesName": "Seriennamen eingeben...",
+  "noSeries": "Keine Serie",
+  "treeViewTooltip": "Baumansicht",
+  "tableViewTooltip": "Tabellenansicht",
+  "errorLoadingWeaponDetails": "Fehler beim Laden der Waffendetails",
+  "masterRank": "Meisterrang"
 }

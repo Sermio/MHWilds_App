@@ -646,6 +646,34 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get upgradesTo => 'Mejora a';
+
+  @override
+  String get listView => 'Lista';
+
+  @override
+  String get treeView => 'Árbol';
+
+  @override
+  String get treeSeries => 'Series del árbol';
+
+  @override
+  String get enterSeriesName => 'Introducir nombre de la serie...';
+
+  @override
+  String get noSeries => 'Sin serie';
+
+  @override
+  String get treeViewTooltip => 'Vista de árbol';
+
+  @override
+  String get tableViewTooltip => 'Vista de tabla';
+
+  @override
+  String get errorLoadingWeaponDetails =>
+      'Error al cargar los detalles del arma';
+
+  @override
+  String get masterRank => 'Rango Maestro';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -1275,6 +1303,34 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
   @override
   String get openInBrowserHint =>
       'Puedes abrir el optimizador en tu navegador.';
+
+  @override
+  String get listView => 'Lista';
+
+  @override
+  String get treeView => 'Árbol';
+
+  @override
+  String get treeSeries => 'Series del árbol';
+
+  @override
+  String get enterSeriesName => 'Introducir nombre de la serie...';
+
+  @override
+  String get noSeries => 'Sin serie';
+
+  @override
+  String get treeViewTooltip => 'Vista de árbol';
+
+  @override
+  String get tableViewTooltip => 'Vista de tabla';
+
+  @override
+  String get errorLoadingWeaponDetails =>
+      'Error al cargar los detalles del arma';
+
+  @override
+  String get masterRank => 'Rango Maestro';
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -1904,4 +1960,32 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
   @override
   String get openInBrowserHint =>
       'Puedes abrir el optimizador en tu navegador.';
+
+  @override
+  String get listView => 'Lista';
+
+  @override
+  String get treeView => 'Árbol';
+
+  @override
+  String get treeSeries => 'Series del árbol';
+
+  @override
+  String get enterSeriesName => 'Introducir nombre de la serie...';
+
+  @override
+  String get noSeries => 'Sin serie';
+
+  @override
+  String get treeViewTooltip => 'Vista de árbol';
+
+  @override
+  String get tableViewTooltip => 'Vista de tabla';
+
+  @override
+  String get errorLoadingWeaponDetails =>
+      'Error al cargar los detalles del arma';
+
+  @override
+  String get masterRank => 'Rango Maestro';
 }
