@@ -257,5 +257,14 @@
   "openInBrowserHint": "You can open the optimizer in your browser.",
   "weaponTree": "Weapon Tree",
   "previousWeapon": "Upgrades from",
-  "upgradesTo": "Upgrades to"
+  "upgradesTo": "Upgrades to",
+  "listView": "List",
+  "treeView": "Tree",
+  "treeSeries": "Tree Series",
+  "enterSeriesName": "Enter series name...",
+  "noSeries": "No Series",
+  "treeViewTooltip": "Tree View",
+  "tableViewTooltip": "Table View",
+  "errorLoadingWeaponDetails": "Error loading weapon details",
+  "masterRank": "Master Rank"
 }

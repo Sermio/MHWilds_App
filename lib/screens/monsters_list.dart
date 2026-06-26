@@ -341,20 +341,21 @@ class _MonstersListState extends State<MonstersList> {
   }
 
   List<ListFilterOption> _rankOptions() {
+    final l10n = AppLocalizations.of(context)!;
     return [
       ListFilterOption(
         value: 'low',
-        label: 'Low Rank',
+        label: l10n.lowRank,
         leading: Icon(Icons.star_outline, size: 20, color: Colors.blue[400]),
       ),
       ListFilterOption(
         value: 'high',
-        label: 'High Rank',
+        label: l10n.highRank,
         leading: Icon(Icons.star_half, size: 20, color: Colors.orange[400]),
       ),
       ListFilterOption(
         value: 'master',
-        label: 'Master Rank',
+        label: l10n.masterRank,
         leading: Icon(Icons.star, size: 20, color: Colors.purple[400]),
       ),
     ];
@@ -401,7 +402,7 @@ class _MonstersListState extends State<MonstersList> {
         ),
         ListFilterFieldConfig.select(
           id: 'rank',
-          label: 'Rank', // TODO: Add localization for rank search
+          label: l10n.rank,
           value: _selectedRank,
           onSelectChanged: (selectedRank) {
             setState(() {

@@ -646,4 +646,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get upgradesTo => 'Upgrades to';
+
+  @override
+  String get listView => 'List';
+
+  @override
+  String get treeView => 'Tree';
+
+  @override
+  String get treeSeries => 'Tree Series';
+
+  @override
+  String get enterSeriesName => 'Enter series name...';
+
+  @override
+  String get noSeries => 'No Series';
+
+  @override
+  String get treeViewTooltip => 'Tree View';
+
+  @override
+  String get tableViewTooltip => 'Table View';
+
+  @override
+  String get errorLoadingWeaponDetails => 'Error loading weapon details';
+
+  @override
+  String get masterRank => 'Master Rank';
 }

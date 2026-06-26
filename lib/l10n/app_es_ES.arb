@@ -248,5 +248,14 @@
   "openOptimizer": "Abrir optimizador",
   "ok": "OK",
   "webViewNotSupported": "WebView no disponible en esta plataforma.",
-  "openInBrowserHint": "Puedes abrir el optimizador en tu navegador."
+  "openInBrowserHint": "Puedes abrir el optimizador en tu navegador.",
+  "listView": "Lista",
+  "treeView": "Árbol",
+  "treeSeries": "Series del árbol",
+  "enterSeriesName": "Introducir nombre de la serie...",
+  "noSeries": "Sin serie",
+  "treeViewTooltip": "Vista de árbol",
+  "tableViewTooltip": "Vista de tabla",
+  "errorLoadingWeaponDetails": "Error al cargar los detalles del arma",
+  "masterRank": "Rango Maestro"
 }

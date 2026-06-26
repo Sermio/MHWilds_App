@@ -1352,6 +1352,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Upgrades to'**
   String get upgradesTo;
+
+  /// No description provided for @listView.
+  ///
+  /// In en, this message translates to:
+  /// **'List'**
+  String get listView;
+
+  /// No description provided for @treeView.
+  ///
+  /// In en, this message translates to:
+  /// **'Tree'**
+  String get treeView;
+
+  /// No description provided for @treeSeries.
+  ///
+  /// In en, this message translates to:
+  /// **'Tree Series'**
+  String get treeSeries;
+
+  /// No description provided for @enterSeriesName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter series name...'**
+  String get enterSeriesName;
+
+  /// No description provided for @noSeries.
+  ///
+  /// In en, this message translates to:
+  /// **'No Series'**
+  String get noSeries;
+
+  /// No description provided for @treeViewTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Tree View'**
+  String get treeViewTooltip;
+
+  /// No description provided for @tableViewTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Table View'**
+  String get tableViewTooltip;
+
+  /// No description provided for @errorLoadingWeaponDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading weapon details'**
+  String get errorLoadingWeaponDetails;
+
+  /// No description provided for @masterRank.
+  ///
+  /// In en, this message translates to:
+  /// **'Master Rank'**
+  String get masterRank;
 }
 
 class _AppLocalizationsDelegate

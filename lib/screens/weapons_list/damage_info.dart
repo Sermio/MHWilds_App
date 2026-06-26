@@ -73,7 +73,7 @@ extension WeaponsListDamageInfo on _WeaponsListState {
         ),
         const Spacer(),
         Text(
-          '${melody.songs.length} songs',
+          '${melody.songs.length} ${AppLocalizations.of(context)!.songs}',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,

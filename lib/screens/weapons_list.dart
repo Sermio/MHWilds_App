@@ -3,7 +3,6 @@ import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/skills.dart' as skills_model;
 import 'package:mhwilds_app/models/weapon.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/components/rarity_chip.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/providers/weapons_provider.dart';
@@ -103,16 +102,16 @@ class _WeaponsListState extends State<WeaponsList> {
             top: 8,
             right: 16,
             child: SegmentedButton<bool>(
-              segments: const [
+              segments: [
                 ButtonSegment(
                   value: false,
-                  icon: Icon(Icons.view_list),
-                  label: Text('List'),
+                  icon: const Icon(Icons.view_list),
+                  label: Text(AppLocalizations.of(context)!.listView),
                 ),
                 ButtonSegment(
                   value: true,
-                  icon: Icon(Icons.account_tree),
-                  label: Text('Tree'),
+                  icon: const Icon(Icons.account_tree),
+                  label: Text(AppLocalizations.of(context)!.treeView),
                 ),
               ],
               selected: {_isTreeView},
@@ -185,7 +184,7 @@ class _WeaponsListState extends State<WeaponsList> {
         ),
         ListFilterFieldConfig.text(
           id: 'series',
-          label: 'Tree Series', // Temporal label until localizations are updated
+          label: l10n.treeSeries,
           controller: _searchSeriesController,
           onTextChanged: (query) {
             setState(() {
@@ -193,7 +192,7 @@ class _WeaponsListState extends State<WeaponsList> {
             });
             _applyFilters(weaponsProvider);
           },
-          hintText: 'Enter series name...',
+          hintText: l10n.enterSeriesName,
           prefixIcon: Icon(Icons.account_tree, color: colorScheme.primary),
         ),
         ListFilterFieldConfig.gridMenu(
@@ -314,7 +313,7 @@ class _WeaponsListState extends State<WeaponsList> {
     final Map<String, List<Weapon>> seriesGroups = {};
     if (_isTreeView) {
       for (final w in filteredWeapons) {
-        final seriesName = w.series?.name ?? 'No Series';
+        final seriesName = w.series?.name ?? AppLocalizations.of(context)!.noSeries;
         if (!seriesGroups.containsKey(seriesName)) {
           seriesGroups[seriesName] = [];
         }

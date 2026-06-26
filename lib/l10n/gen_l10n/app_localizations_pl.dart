@@ -651,4 +651,32 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get upgradesTo => 'Upgrades to';
+
+  @override
+  String get listView => 'Lista';
+
+  @override
+  String get treeView => 'Drzewo';
+
+  @override
+  String get treeSeries => 'Serie drzewa';
+
+  @override
+  String get enterSeriesName => 'Wpisz nazwę serii...';
+
+  @override
+  String get noSeries => 'Brak serii';
+
+  @override
+  String get treeViewTooltip => 'Widok drzewa';
+
+  @override
+  String get tableViewTooltip => 'Widok tabeli';
+
+  @override
+  String get errorLoadingWeaponDetails =>
+      'Błąd podczas ładowania szczegółów broni';
+
+  @override
+  String get masterRank => 'Mistrzowska ranga';
 }
