@@ -19,7 +19,9 @@
   "errorWithMessage": "Fehler: {message}",
   "@errorWithMessage": {
     "placeholders": {
-      "message": { "type": "String" }
+      "message": {
+        "type": "String"
+      }
     }
   },
   "close": "Schließen",
@@ -30,6 +32,7 @@
   "offDefault": "Aus (Standard)",
   "armorSets": "Rüstungssets",
   "menuMonstersSubtitle": "Datenbank aller Monster",
+  "menuLocationsSubtitle": "Entdecke Karten und Lager",
   "menuItemsSubtitle": "Materialien und Ressourcen",
   "menuDecorationsSubtitle": "Fähigkeits-Edelsteine und Juwelen",
   "menuTalismansSubtitle": "Mächtige Accessoires",
@@ -54,20 +57,28 @@
   "updateMessageWithBoth": "Sie haben Version {currentVersion}. Eine neue Version ({newVersion}) ist im Store verfügbar. Aktualisieren Sie für die neuesten Verbesserungen und Korrekturen.",
   "@updateMessageWithBoth": {
     "placeholders": {
-      "currentVersion": { "type": "String" },
-      "newVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      },
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageCurrentOnly": "Sie haben Version {currentVersion}. Eine neue Version ist im Store verfügbar. Aktualisieren Sie für die neuesten Verbesserungen und Korrekturen.",
   "@updateMessageCurrentOnly": {
     "placeholders": {
-      "currentVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageNewOnly": "Eine neue Version ({newVersion}) ist im Store verfügbar. Aktualisieren Sie für die neuesten Verbesserungen und Korrekturen.",
   "@updateMessageNewOnly": {
     "placeholders": {
-      "newVersion": { "type": "String" }
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageGeneric": "Eine neue Version ist im Store verfügbar. Aktualisieren Sie für die neuesten Verbesserungen und Korrekturen.",
@@ -83,7 +94,13 @@
   "type": "Typ",
   "rarity": "Seltenheit",
   "rarityLevel": "Seltenheit {n}",
-  "@rarityLevel": { "placeholders": { "n": { "type": "int" } } },
+  "@rarityLevel": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "enterWeaponName": "Waffenname eingeben...",
   "enterItemName": "Gegenstandsname eingeben...",
   "enterArmorSetName": "Rüstungsset-Name eingeben...",
@@ -129,7 +146,6 @@
   "baseDefense": "Grundverteidigung",
   "slots": "Steckplätze",
   "resistances": "Resistenzen",
-  "skills": "Fertigkeiten",
   "noSlots": "Keine Steckplätze",
   "noResistances": "Keine Resistenzen",
   "physicalDamage": "Physischer Schaden",
@@ -150,7 +166,9 @@
   "campsOfLevel": "Lager der Stufe {n}",
   "@campsOfLevel": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "risk": "Risiko",
@@ -184,7 +202,6 @@
   "craftingRecipe": "Herstellungsrezept:",
   "requiredMaterials": "Benötigte Materialien:",
   "skillRanks": "Fähigkeitsränge:",
-  "rarity": "Seltenheit",
   "rank": "Rang",
   "errorLoadingSkills": "Fehler beim Laden der Fähigkeiten",
   "noSkillsAvailable": "Keine Fähigkeiten verfügbar",
@@ -221,5 +238,10 @@
   "speciesAmphibian": "Amphibie",
   "speciesSnakeWyvern": "Schlangen-Wyvern",
   "monsterKindLarge": "Großes Monster",
-  "monsterKindSmall": "Kleines Monster"
+  "monsterKindSmall": "Kleines Monster",
+  "camps": "Lager",
+  "openOptimizer": "Optimierer öffnen",
+  "ok": "OK",
+  "webViewNotSupported": "WebView ist auf dieser Plattform nicht verfügbar.",
+  "openInBrowserHint": "Sie können den Optimierer in Ihrem Browser öffnen."
 }

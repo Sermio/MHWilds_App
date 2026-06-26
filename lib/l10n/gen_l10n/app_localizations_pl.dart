@@ -86,6 +86,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get menuMonstersSubtitle => 'Baza wszystkich potworów';
 
   @override
+  String get menuLocationsSubtitle => 'Eksploruj mapy i obozy';
+
+  @override
   String get menuItemsSubtitle => 'Materiały i zasoby';
 
   @override
@@ -622,4 +625,30 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get showLess => 'Show less';
+
+  @override
+  String get camps => 'Obozy';
+
+  @override
+  String get openOptimizer => 'Otwórz optymalizator';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get webViewNotSupported =>
+      'WebView nie jest dostępne na tej platformie.';
+
+  @override
+  String get openInBrowserHint =>
+      'Możesz otworzyć optymalizator w przeglądarce.';
+
+  @override
+  String get weaponTree => 'Weapon Tree';
+
+  @override
+  String get previousWeapon => 'Upgrades from';
+
+  @override
+  String get upgradesTo => 'Upgrades to';
 }

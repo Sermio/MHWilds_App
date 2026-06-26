@@ -261,6 +261,12 @@ abstract class AppLocalizations {
   /// **'Database of all monsters'**
   String get menuMonstersSubtitle;
 
+  /// No description provided for @menuLocationsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore maps and camp sites'**
+  String get menuLocationsSubtitle;
+
   /// No description provided for @menuItemsSubtitle.
   ///
   /// In en, this message translates to:
@@ -1298,6 +1304,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show less'**
   String get showLess;
+
+  /// No description provided for @camps.
+  ///
+  /// In en, this message translates to:
+  /// **'Camps'**
+  String get camps;
+
+  /// No description provided for @openOptimizer.
+  ///
+  /// In en, this message translates to:
+  /// **'Open optimizer'**
+  String get openOptimizer;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// No description provided for @webViewNotSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'WebView is not available on this platform.'**
+  String get webViewNotSupported;
+
+  /// No description provided for @openInBrowserHint.
+  ///
+  /// In en, this message translates to:
+  /// **'You can open the optimizer in your browser.'**
+  String get openInBrowserHint;
+
+  /// No description provided for @weaponTree.
+  ///
+  /// In en, this message translates to:
+  /// **'Weapon Tree'**
+  String get weaponTree;
+
+  /// No description provided for @previousWeapon.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrades from'**
+  String get previousWeapon;
+
+  /// No description provided for @upgradesTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrades to'**
+  String get upgradesTo;
 }
 
 class _AppLocalizationsDelegate

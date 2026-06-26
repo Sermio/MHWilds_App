@@ -86,6 +86,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get menuMonstersSubtitle => 'Database di tutti i mostri';
 
   @override
+  String get menuLocationsSubtitle => 'Esplora le mappe e gli accampamenti';
+
+  @override
   String get menuItemsSubtitle => 'Materiali e risorse';
 
   @override
@@ -621,4 +624,30 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get showLess => 'Show less';
+
+  @override
+  String get camps => 'Accampamenti';
+
+  @override
+  String get openOptimizer => 'Apri ottimizzatore';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get webViewNotSupported =>
+      'WebView non è disponibile su questa piattaforma.';
+
+  @override
+  String get openInBrowserHint =>
+      'Puoi aprire l\'ottimizzatore nel tuo browser.';
+
+  @override
+  String get weaponTree => 'Weapon Tree';
+
+  @override
+  String get previousWeapon => 'Upgrades from';
+
+  @override
+  String get upgradesTo => 'Upgrades to';
 }

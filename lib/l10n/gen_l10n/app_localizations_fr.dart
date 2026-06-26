@@ -86,6 +86,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get menuMonstersSubtitle => 'Base de données de tous les monstres';
 
   @override
+  String get menuLocationsSubtitle => 'Explorez les cartes et les camps';
+
+  @override
   String get menuItemsSubtitle => 'Matériaux et ressources';
 
   @override
@@ -621,4 +624,30 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get showLess => 'Show less';
+
+  @override
+  String get camps => 'Camps';
+
+  @override
+  String get openOptimizer => 'Ouvrir l\'optimiseur';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get webViewNotSupported =>
+      'WebView n\'est pas disponible sur cette plateforme.';
+
+  @override
+  String get openInBrowserHint =>
+      'Vous pouvez ouvrir l\'optimiseur dans votre navigateur.';
+
+  @override
+  String get weaponTree => 'Weapon Tree';
+
+  @override
+  String get previousWeapon => 'Upgrades from';
+
+  @override
+  String get upgradesTo => 'Upgrades to';
 }

@@ -403,4 +403,24 @@ extension MonsterDisplay on Monster {
         return kind;
     }
   }
+
+  /// Returns a sorted list of unique ranks (e.g., "low", "high", "master") based on the monster's rewards.
+  List<String> get availableRanks {
+    final Set<String> ranks = {};
+    for (final reward in rewards) {
+      for (final condition in reward.conditions) {
+        if (condition.rank.isNotEmpty) {
+          ranks.add(condition.rank.toLowerCase());
+        }
+      }
+    }
+    final List<String> sorted = ranks.toList();
+    final rankWeights = {'low': 1, 'high': 2, 'master': 3};
+    sorted.sort((a, b) {
+      final weightA = rankWeights[a] ?? 99;
+      final weightB = rankWeights[b] ?? 99;
+      return weightA.compareTo(weightB);
+    });
+    return sorted;
+  }
 }

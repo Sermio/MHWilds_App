@@ -20,10 +20,9 @@ class MonstersList extends StatefulWidget {
 
 class _MonstersListState extends State<MonstersList> {
   final TextEditingController _searchNameController = TextEditingController();
-  final TextEditingController _searchSpeciesController =
-      TextEditingController();
   String _searchNameQuery = '';
-  String _searchSpeciesQuery = '';
+  String? _selectedSpecies;
+  String? _selectedRank;
   final List<String> _selectedLocations = [];
   bool _filtersVisible = false;
 
@@ -55,10 +54,10 @@ class _MonstersListState extends State<MonstersList> {
   void _resetFilters() {
     setState(() {
       _searchNameQuery = '';
-      _searchSpeciesQuery = '';
+      _selectedSpecies = null;
+      _selectedRank = null;
       _selectedLocations.clear();
       _searchNameController.clear();
-      _searchSpeciesController.clear();
     });
     Provider.of<MonstersProvider>(context, listen: false).clearFilters();
   }
@@ -88,14 +87,10 @@ class _MonstersListState extends State<MonstersList> {
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
-      body: Column(
+      body: Stack(
         children: [
-          if (_filtersVisible)
-            _buildFiltersSection(context, monstersProvider, zonesProvider),
-
           // Lista de monstruos
-          Expanded(
-            child: monstersProvider.isLoading
+          monstersProvider.isLoading
                 ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -106,51 +101,54 @@ class _MonstersListState extends State<MonstersList> {
                           l10n.loadingMonsters,
                           style: TextStyle(
                             fontSize: 16,
-                            color: colorScheme.onSurface.withOpacity(0.7),
+                            color: colorScheme.onSurface.withValues(alpha: 0.7),
                           ),
                         ),
                       ],
                     ),
                   )
-                : monsters.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.search_off,
-                              size: 64,
-                              color: colorScheme.onSurface.withOpacity(0.5),
+                : ListView.builder(
+                    padding: const EdgeInsets.only(bottom: 120, top: 16),
+                    itemCount: monsters.isEmpty ? 1 : monsters.length,
+                    itemBuilder: (context, index) {                      if (monsters.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 64),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.search_off,
+                                  size: 64,
+                                  color: colorScheme.onSurface.withValues(alpha: 0.5),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  l10n.noMonstersFound,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: colorScheme.onSurface.withValues(alpha: 0.8),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  l10n.tryAdjustingFilters,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: colorScheme.onSurface.withValues(alpha: 0.6),
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 16),
-                            Text(
-                              l10n.noMonstersFound,
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: colorScheme.onSurface.withOpacity(0.8),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              l10n.tryAdjustingFilters,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: colorScheme.onSurface.withOpacity(0.6),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        itemCount: monsters.length,
-                        itemBuilder: (context, index) {
-                          var monster = monsters[index];
+                          ),
+                        );
+                      }
+
+                      final monster = monsters[index];
 
                           return Container(
-                            margin: const EdgeInsets.only(bottom: 16),
+                            margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
                             decoration: BoxDecoration(
                               color: colorScheme.surface,
                               borderRadius: BorderRadius.circular(20),
@@ -257,6 +255,8 @@ class _MonstersListState extends State<MonstersList> {
                                                     ),
                                                   ),
                                                 ),
+                                                const SizedBox(height: 8),
+                                                _buildRankBadges(monster, context),
                                               ],
                                             ),
                                           ),
@@ -296,7 +296,18 @@ class _MonstersListState extends State<MonstersList> {
                           );
                         },
                       ),
-          ),
+          if (_filtersVisible)
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Material(
+                elevation: 8,
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                clipBehavior: Clip.antiAlias,
+                child: _buildFiltersSection(context, monstersProvider, zonesProvider),
+              ),
+            ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -308,6 +319,45 @@ class _MonstersListState extends State<MonstersList> {
         ),
       ),
     );
+  }
+
+  List<ListFilterOption> _speciesOptions(MonstersProvider monstersProvider, AppLocalizations l10n) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final speciesSet = <String, String>{}; // rawSpecies -> displaySpecies
+    for (final monster in monstersProvider.allMonsters) {
+      if (monster.species.isNotEmpty) {
+        speciesSet[monster.species] = monster.displaySpecies(l10n);
+      }
+    }
+    final options = speciesSet.entries.map((e) {
+      return ListFilterOption(
+        value: e.key,
+        label: e.value,
+        leading: Icon(Icons.category, size: 20, color: colorScheme.primary),
+      );
+    }).toList();
+    options.sort((a, b) => a.label.compareTo(b.label));
+    return options;
+  }
+
+  List<ListFilterOption> _rankOptions() {
+    return [
+      ListFilterOption(
+        value: 'low',
+        label: 'Low Rank',
+        leading: Icon(Icons.star_outline, size: 20, color: Colors.blue[400]),
+      ),
+      ListFilterOption(
+        value: 'high',
+        label: 'High Rank',
+        leading: Icon(Icons.star_half, size: 20, color: Colors.orange[400]),
+      ),
+      ListFilterOption(
+        value: 'master',
+        label: 'Master Rank',
+        leading: Icon(Icons.star, size: 20, color: Colors.purple[400]),
+      ),
+    ];
   }
 
   Widget _buildFiltersSection(
@@ -322,7 +372,7 @@ class _MonstersListState extends State<MonstersList> {
       title: l10n.filters,
       resetLabel: l10n.reset,
       onReset: _resetFilters,
-      height: 300,
+      maxHeight: 300,
       fields: [
         ListFilterFieldConfig.text(
           id: 'name',
@@ -337,18 +387,29 @@ class _MonstersListState extends State<MonstersList> {
           hintText: l10n.enterMonsterName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
-        ListFilterFieldConfig.text(
+        ListFilterFieldConfig.select(
           id: 'species',
           label: l10n.searchBySpecies,
-          controller: _searchSpeciesController,
-          onTextChanged: (query) {
+          value: _selectedSpecies,
+          onSelectChanged: (selectedSpecies) {
             setState(() {
-              _searchSpeciesQuery = query;
+              _selectedSpecies = selectedSpecies as String?;
             });
             _applyFilters(monstersProvider);
           },
-          hintText: l10n.enterSpecies,
-          prefixIcon: Icon(Icons.category, color: colorScheme.primary),
+          options: _speciesOptions(monstersProvider, l10n),
+        ),
+        ListFilterFieldConfig.select(
+          id: 'rank',
+          label: 'Rank', // TODO: Add localization for rank search
+          value: _selectedRank,
+          onSelectChanged: (selectedRank) {
+            setState(() {
+              _selectedRank = selectedRank as String?;
+            });
+            _applyFilters(monstersProvider);
+          },
+          options: _rankOptions(),
         ),
         ListFilterFieldConfig.custom(
           id: 'locations',
@@ -411,9 +472,57 @@ class _MonstersListState extends State<MonstersList> {
   void _applyFilters(MonstersProvider monstersProvider) {
     monstersProvider.applyFilters(
       name: _searchNameQuery,
-      species: _searchSpeciesQuery,
+      species: _selectedSpecies,
+      rank: _selectedRank,
       locations: _selectedLocations,
       l10n: AppLocalizations.of(context)!,
+    );
+  }
+
+  Widget _buildRankBadges(Monster monster, BuildContext context) {
+    if (monster.availableRanks.isEmpty) return const SizedBox.shrink();
+    
+    return Wrap(
+      spacing: 4,
+      runSpacing: 4,
+      children: monster.availableRanks.map((rank) {
+        Color bgColor;
+        String label;
+        switch (rank) {
+          case 'low':
+            bgColor = Colors.blue[400]!;
+            label = 'LR';
+            break;
+          case 'high':
+            bgColor = Colors.orange[400]!;
+            label = 'HR';
+            break;
+          case 'master':
+            bgColor = Colors.purple[400]!;
+            label = 'MR';
+            break;
+          default:
+            bgColor = Colors.grey;
+            label = rank.toUpperCase();
+        }
+        
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+          decoration: BoxDecoration(
+            color: bgColor.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: bgColor.withValues(alpha: 0.5)),
+          ),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              color: bgColor,
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 

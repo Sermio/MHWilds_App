@@ -135,7 +135,7 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          'WebView no disponible en esta plataforma.',
+                          AppLocalizations.of(context)!.webViewNotSupported,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -145,7 +145,7 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Puedes abrir el optimizador en tu navegador.',
+                          AppLocalizations.of(context)!.openInBrowserHint,
                           style: TextStyle(
                             fontSize: 13,
                             color: colorScheme.onSurfaceVariant,
@@ -156,7 +156,7 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
                         FilledButton.icon(
                           onPressed: _openOptimizerExternal,
                           icon: const Icon(Icons.launch),
-                          label: const Text('Abrir optimizador'),
+                          label: Text(AppLocalizations.of(context)!.openOptimizer),
                         ),
                       ],
                     ),
@@ -244,7 +244,7 @@ Future<void> showBuildOptimizerCreditsDialog(BuildContext context) async {
         actions: [
           FilledButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('OK'),
+            child: Text(AppLocalizations.of(dialogContext)!.ok),
           ),
         ],
       );

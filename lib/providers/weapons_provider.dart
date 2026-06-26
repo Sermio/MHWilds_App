@@ -9,6 +9,7 @@ class WeaponsProvider with ChangeNotifier {
   bool _isLoading = false;
 
   String _nameFilter = '';
+  String _seriesFilter = '';
   String? _kindFilter;
   int? _rarityFilter;
 
@@ -22,6 +23,7 @@ class WeaponsProvider with ChangeNotifier {
     _originalWeapons = [];
     _filteredWeapons = [];
     _nameFilter = '';
+    _seriesFilter = '';
     _kindFilter = null;
     _rarityFilter = null;
     notifyListeners();
@@ -46,6 +48,14 @@ class WeaponsProvider with ChangeNotifier {
       final switchAxeWeapons =
           _allWeapons.where((w) => w.kind == 'switch-axe').toList();
 
+      _allWeapons.sort((a, b) {
+        final kindComp = a.kind.toLowerCase().compareTo(b.kind.toLowerCase());
+        if (kindComp != 0) return kindComp;
+        final rarityComp = b.rarity.compareTo(a.rarity);
+        if (rarityComp != 0) return rarityComp;
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
+
       _originalWeapons = List.from(_allWeapons);
       _filteredWeapons = List.from(_allWeapons);
     } catch (e) {
@@ -56,10 +66,11 @@ class WeaponsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void applyFilters({String? name, String? kind, int? rarity}) {
-    _nameFilter = name ?? _nameFilter;
-    _kindFilter = kind ?? _kindFilter;
-    _rarityFilter = rarity ?? _rarityFilter;
+  void applyFilters({String? name, String? series, String? kind, int? rarity}) {
+    _nameFilter = name ?? '';
+    _seriesFilter = series ?? '';
+    _kindFilter = kind;
+    _rarityFilter = rarity;
 
     // Debug específico para switch-axe
     if (_kindFilter == 'switch-axe') {
@@ -69,19 +80,22 @@ class WeaponsProvider with ChangeNotifier {
       for (final weapon in switchAxeWeapons) {}
     }
 
-    if (_nameFilter.isEmpty && _kindFilter == null && _rarityFilter == null) {
+    if (_nameFilter.isEmpty && _seriesFilter.isEmpty && _kindFilter == null && _rarityFilter == null) {
       _filteredWeapons = List.from(_allWeapons);
     } else {
       _filteredWeapons = _allWeapons.where((weapon) {
         final matchesName = _nameFilter.isEmpty ||
             weapon.name.toLowerCase().contains(_nameFilter.toLowerCase());
 
+        final matchesSeries = _seriesFilter.isEmpty ||
+            (weapon.series != null && weapon.series!.name.toLowerCase().contains(_seriesFilter.toLowerCase()));
+
         final matchesKind = _kindFilter == null || weapon.kind == _kindFilter;
 
         final matchesRarity =
             _rarityFilter == null || weapon.rarity == _rarityFilter;
 
-        return matchesName && matchesKind && matchesRarity;
+        return matchesName && matchesSeries && matchesKind && matchesRarity;
       }).toList();
     }
 
@@ -90,11 +104,20 @@ class WeaponsProvider with ChangeNotifier {
 
   void clearFilters() {
     _nameFilter = '';
+    _seriesFilter = '';
     _kindFilter = null;
     _rarityFilter = null;
 
     _filteredWeapons = List.from(_originalWeapons);
 
     notifyListeners();
+  }
+
+  Weapon? getWeaponById(int id) {
+    try {
+      return _allWeapons.firstWhere((w) => w.id == id);
+    } catch (e) {
+      return null;
+    }
   }
 }

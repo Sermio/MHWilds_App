@@ -14,6 +14,7 @@ import 'package:mhwilds_app/providers/theme_provider.dart';
 import 'package:mhwilds_app/providers/weapons_provider.dart';
 import 'package:mhwilds_app/screens/home.dart';
 import 'package:mhwilds_app/utils/theme.dart';
+import 'package:mhwilds_app/utils/item_icon_asset_resolver.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
       future: Future.wait([
         localeProvider.localeReady,
         enNamesCache.cacheReady,
+        ItemIconAssetResolver.ensureIndexLoaded(),
       ]),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {

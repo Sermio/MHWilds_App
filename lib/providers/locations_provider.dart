@@ -25,6 +25,7 @@ class LocationsProvider with ChangeNotifier {
 
     try {
       _zones = await LocationsApi.fetchLocations();
+      _zones.sort((a, b) => (a.name ?? '').toLowerCase().compareTo((b.name ?? '').toLowerCase()));
     } catch (e) {
       // ignore: avoid_print
       print("Error fetching zones: $e");

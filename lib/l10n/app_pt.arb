@@ -19,7 +19,9 @@
   "errorWithMessage": "Erro: {message}",
   "@errorWithMessage": {
     "placeholders": {
-      "message": { "type": "String" }
+      "message": {
+        "type": "String"
+      }
     }
   },
   "close": "Fechar",
@@ -30,6 +32,7 @@
   "offDefault": "Desligado (predefinido)",
   "armorSets": "Conjuntos de armadura",
   "menuMonstersSubtitle": "Base de dados de todos os monstros",
+  "menuLocationsSubtitle": "Explore mapas e acampamentos",
   "menuItemsSubtitle": "Materiais e recursos",
   "menuDecorationsSubtitle": "Gemas e joias de habilidades",
   "menuTalismansSubtitle": "Acessórios poderosos",
@@ -54,20 +57,28 @@
   "updateMessageWithBoth": "Tem a versão {currentVersion}. Uma nova versão ({newVersion}) está disponível na loja. Atualize para as últimas melhorias e correções.",
   "@updateMessageWithBoth": {
     "placeholders": {
-      "currentVersion": { "type": "String" },
-      "newVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      },
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageCurrentOnly": "Tem a versão {currentVersion}. Uma nova versão está disponível na loja. Atualize para as últimas melhorias e correções.",
   "@updateMessageCurrentOnly": {
     "placeholders": {
-      "currentVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageNewOnly": "Uma nova versão ({newVersion}) está disponível na loja. Atualize para as últimas melhorias e correções.",
   "@updateMessageNewOnly": {
     "placeholders": {
-      "newVersion": { "type": "String" }
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageGeneric": "Uma nova versão está disponível na loja. Atualize para as últimas melhorias e correções.",
@@ -83,7 +94,13 @@
   "type": "Tipo",
   "rarity": "Raridade",
   "rarityLevel": "Raridade {n}",
-  "@rarityLevel": { "placeholders": { "n": { "type": "int" } } },
+  "@rarityLevel": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "enterWeaponName": "Introduza o nome da arma...",
   "enterItemName": "Introduza o nome do item...",
   "enterArmorSetName": "Introduza o nome do conjunto de armadura...",
@@ -106,7 +123,6 @@
   "baseDefense": "Defesa base",
   "slots": "Encantos",
   "resistances": "Resistências",
-  "skills": "Habilidades",
   "noSlots": "Sem encantos",
   "noResistances": "Sem resistências",
   "physicalDamage": "Dano físico",
@@ -150,7 +166,9 @@
   "campsOfLevel": "Acampamentos do Nível {n}",
   "@campsOfLevel": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "risk": "Risco",
@@ -184,7 +202,6 @@
   "craftingRecipe": "Receita de Criação:",
   "requiredMaterials": "Materiais Necessários:",
   "skillRanks": "Níveis de Habilidade:",
-  "rarity": "Raridade",
   "rank": "Rank",
   "errorLoadingSkills": "Erro ao carregar habilidades",
   "noSkillsAvailable": "Nenhuma habilidade disponível",
@@ -221,5 +238,10 @@
   "speciesAmphibian": "Anfíbio",
   "speciesSnakeWyvern": "Wyvern Serpente",
   "monsterKindLarge": "Monstro Grande",
-  "monsterKindSmall": "Monstro Pequeno"
+  "monsterKindSmall": "Monstro Pequeno",
+  "camps": "Acampamentos",
+  "openOptimizer": "Abrir otimizador",
+  "ok": "OK",
+  "webViewNotSupported": "WebView não está disponível nesta plataforma.",
+  "openInBrowserHint": "Você pode abrir o otimizador no seu navegador."
 }

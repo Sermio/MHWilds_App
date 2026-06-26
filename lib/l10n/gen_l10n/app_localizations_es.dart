@@ -86,6 +86,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get menuMonstersSubtitle => 'Base de datos de monstruos';
 
   @override
+  String get menuLocationsSubtitle => 'Explora los mapas y campamentos';
+
+  @override
   String get menuItemsSubtitle => 'Materiales y recursos';
 
   @override
@@ -618,6 +621,31 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get showLess => 'Ver menos';
+
+  @override
+  String get camps => 'Campamentos';
+
+  @override
+  String get openOptimizer => 'Abrir optimizador';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get webViewNotSupported => 'WebView no disponible en esta plataforma.';
+
+  @override
+  String get openInBrowserHint =>
+      'Puedes abrir el optimizador en tu navegador.';
+
+  @override
+  String get weaponTree => 'Árbol del arma';
+
+  @override
+  String get previousWeapon => 'Mejora de';
+
+  @override
+  String get upgradesTo => 'Mejora a';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -702,6 +730,9 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
   String get menuMonstersSubtitle => 'Base de datos de monstruos';
 
   @override
+  String get menuLocationsSubtitle => 'Explora los mapas y campamentos';
+
+  @override
   String get menuItemsSubtitle => 'Materiales y recursos';
 
   @override
@@ -1228,6 +1259,22 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
 
   @override
   String get monsterKindSmall => 'Monstruo pequeño';
+
+  @override
+  String get camps => 'Campamentos';
+
+  @override
+  String get openOptimizer => 'Abrir optimizador';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get webViewNotSupported => 'WebView no disponible en esta plataforma.';
+
+  @override
+  String get openInBrowserHint =>
+      'Puedes abrir el optimizador en tu navegador.';
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -1312,6 +1359,9 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
   String get menuMonstersSubtitle => 'Base de datos de monstruos';
 
   @override
+  String get menuLocationsSubtitle => 'Explora los mapas y campamentos';
+
+  @override
   String get menuItemsSubtitle => 'Materiales y recursos';
 
   @override
@@ -1838,4 +1888,20 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
   @override
   String get monsterKindSmall => 'Monstruo pequeño';
+
+  @override
+  String get camps => 'Campamentos';
+
+  @override
+  String get openOptimizer => 'Abrir optimizador';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get webViewNotSupported => 'WebView no disponible en esta plataforma.';
+
+  @override
+  String get openInBrowserHint =>
+      'Puedes abrir el optimizador en tu navegador.';
 }

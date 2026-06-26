@@ -33,20 +33,24 @@ class MaterialImage extends StatelessWidget {
       return _urlCache[formattedMaterialName];
     }
 
-    final url = await getValidItemImageUrl(formattedMaterialName);
-    _urlCache[formattedMaterialName] = url;
-    return url;
+    try {
+      final url = await getValidItemImageUrl(formattedMaterialName);
+      _urlCache[formattedMaterialName] = url;
+      return url;
+    } catch (e) {
+      return null;
+    }
   }
 
-  Future<String?> _getAssetPath() async {
+  String? _getAssetPathSync() {
     final icon = item?.icon;
     if (icon == null) return null;
-    final key = '${icon.kind}|${icon.color}';
+    final key = '\${icon.kind}|\${icon.color}';
     if (_assetCache.containsKey(key)) {
       return _assetCache[key];
     }
 
-    final assetPath = await ItemIconAssetResolver.resolve(
+    final assetPath = ItemIconAssetResolver.resolveSync(
       apiKind: icon.kind,
       apiColor: icon.color,
     );
@@ -56,8 +60,24 @@ class MaterialImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<String?>>(
-      future: Future.wait([_getAssetPath(), _getImageUrl()]),
+    final assetPath = _getAssetPathSync();
+
+    if (assetPath != null) {
+      return Image.asset(
+        assetPath,
+        width: width,
+        height: height,
+        fit: BoxFit.contain,
+        errorBuilder: (_, __, ___) => Image.asset(
+          'assets/imgs/materials/default_material.webp',
+          width: width,
+          height: height,
+        ),
+      );
+    }
+
+    return FutureBuilder<String?>(
+      future: _getImageUrl(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SizedBox(
@@ -72,57 +92,33 @@ class MaterialImage extends StatelessWidget {
             height: height,
           );
         } else {
-          final assetPath = snapshot.data![0];
-          final networkUrl = snapshot.data![1];
-
-          if (assetPath != null) {
-            return Image.asset(
-              assetPath,
-              width: width,
-              height: height,
-              fit: BoxFit.contain,
-              errorBuilder: (_, __, ___) => Image.asset(
+          final networkUrl = snapshot.data!;
+          return Image.network(
+            networkUrl,
+            height: height,
+            width: width,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return SizedBox(
+                height: height,
+                width: width,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            (loadingProgress.expectedTotalBytes ?? 1)
+                        : null,
+                  ),
+                ),
+              );
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return Image.asset(
                 'assets/imgs/materials/default_material.webp',
                 width: width,
                 height: height,
-              ),
-            );
-          }
-
-          if (networkUrl != null) {
-            return Image.network(
-              networkUrl,
-              height: height,
-              width: width,
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return SizedBox(
-                  height: height,
-                  width: width,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              (loadingProgress.expectedTotalBytes ?? 1)
-                          : null,
-                    ),
-                  ),
-                );
-              },
-              errorBuilder: (context, error, stackTrace) {
-                return Image.asset(
-                  'assets/imgs/materials/default_material.webp',
-                  width: width,
-                  height: height,
-                );
-              },
-            );
-          }
-
-          return Image.asset(
-            'assets/imgs/materials/default_material.webp',
-            width: width,
-            height: height,
+              );
+            },
           );
         }
       },

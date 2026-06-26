@@ -86,6 +86,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get menuMonstersSubtitle => 'Base de dados de todos os monstros';
 
   @override
+  String get menuLocationsSubtitle => 'Explore mapas e acampamentos';
+
+  @override
   String get menuItemsSubtitle => 'Materiais e recursos';
 
   @override
@@ -619,6 +622,32 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get showLess => 'Show less';
+
+  @override
+  String get camps => 'Acampamentos';
+
+  @override
+  String get openOptimizer => 'Abrir otimizador';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get webViewNotSupported =>
+      'WebView não está disponível nesta plataforma.';
+
+  @override
+  String get openInBrowserHint =>
+      'Você pode abrir o otimizador no seu navegador.';
+
+  @override
+  String get weaponTree => 'Weapon Tree';
+
+  @override
+  String get previousWeapon => 'Upgrades from';
+
+  @override
+  String get upgradesTo => 'Upgrades to';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -701,6 +730,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get menuMonstersSubtitle => 'Banco de dados de todos os monstros';
+
+  @override
+  String get menuLocationsSubtitle => 'Explore mapas e acampamentos';
 
   @override
   String get menuItemsSubtitle => 'Materiais e recursos';
@@ -1214,4 +1246,30 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get monsterKindSmall => 'Monstro Pequeno';
+
+  @override
+  String get camps => 'Acampamentos';
+
+  @override
+  String get openOptimizer => 'Abrir otimizador';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get webViewNotSupported =>
+      'WebView não está disponível nesta plataforma.';
+
+  @override
+  String get openInBrowserHint =>
+      'Você pode abrir o otimizador no seu navegador.';
+
+  @override
+  String get weaponTree => 'Árvore de Armas';
+
+  @override
+  String get previousWeapon => 'Evolui de';
+
+  @override
+  String get upgradesTo => 'Evolui para';
 }

@@ -81,66 +81,65 @@ class _ArmorSetListState extends State<ArmorSetList> {
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
-      body: Column(
+      body: Stack(
         children: [
-          // Filtros mejorados
-          if (_filtersVisible) _buildFiltersSection(context, armorSetProvider),
-
           // Lista de sets de armadura
-          Expanded(
-            child: armorSetProvider.isLoading
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(color: colorScheme.primary),
-                        const SizedBox(height: 16),
-                        Text(
-                          AppLocalizations.of(context)!.loadingArmorSets,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: colorScheme.onSurface.withOpacity(0.7),
+          armorSetProvider.isLoading
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(color: colorScheme.primary),
+                      const SizedBox(height: 16),
+                      Text(
+                        AppLocalizations.of(context)!.loadingArmorSets,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: colorScheme.onSurface.withValues(alpha: 0.7),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+                : ListView.builder(
+                    padding: const EdgeInsets.only(bottom: 120, top: 16),
+                    itemCount: filteredArmorSets.isEmpty ? 1 : filteredArmorSets.length,
+                    itemBuilder: (context, index) {                      if (filteredArmorSets.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 64),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.search_off,
+                                  size: 64,
+                                  color: colorScheme.onSurface.withValues(alpha: 0.5),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  AppLocalizations.of(context)!.noArmorSetsFound,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: colorScheme.onSurface.withValues(alpha: 0.8),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  AppLocalizations.of(context)!.tryAdjustingFilters,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: colorScheme.onSurface.withValues(alpha: 0.6),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                : filteredArmorSets.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.search_off,
-                              size: 64,
-                              color: colorScheme.onSurface.withOpacity(0.5),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              AppLocalizations.of(context)!.noArmorSetsFound,
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: colorScheme.onSurface.withOpacity(0.8),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              AppLocalizations.of(context)!.tryAdjustingFilters,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: colorScheme.onSurface.withOpacity(0.6),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        itemCount: filteredArmorSets.length,
-                        itemBuilder: (context, index) {
-                          final armorSet = filteredArmorSets[index];
+                        );
+                      }
+                      
+                      final armorSet = filteredArmorSets[index];
 
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -324,7 +323,18 @@ class _ArmorSetListState extends State<ArmorSetList> {
                           );
                         },
                       ),
-          ),
+          if (_filtersVisible)
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Material(
+                elevation: 8,
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                clipBehavior: Clip.antiAlias,
+                child: _buildFiltersSection(context, armorSetProvider),
+              ),
+            ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -344,6 +354,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ListFiltersPanel(
+      maxHeight: 340,
       title: l10n.filters,
       resetLabel: l10n.reset,
       onReset: _resetFilters,
@@ -361,7 +372,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
           hintText: l10n.enterArmorSetName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
-        ListFilterFieldConfig.select(
+        ListFilterFieldConfig.gridMenu(
           id: 'type',
           label: l10n.type,
           value: _selectedKind,
@@ -373,7 +384,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
           },
           options: _armorTypeOptions(context),
         ),
-        ListFilterFieldConfig.select(
+        ListFilterFieldConfig.gridMenu(
           id: 'rarity',
           label: l10n.rarity,
           value: _selectedRarity,
@@ -383,7 +394,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             });
             _applyFilters(armorSetProvider);
           },
-          options: _rarityOptions(),
+          options: _rarityOptions(l10n),
         ),
       ],
     );
@@ -423,24 +434,22 @@ class _ArmorSetListState extends State<ArmorSetList> {
     }).toList();
   }
 
-  List<ListFilterOption> _rarityOptions() {
+  List<ListFilterOption> _rarityOptions(AppLocalizations l10n) {
     return [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
       return ListFilterOption(
         value: rarity,
-        label: rarity.toString(),
+        label: l10n.rarityLevel(rarity),
         leading: Container(
-          width: 10,
-          height: 10,
+          width: 14,
+          height: 14,
           decoration: BoxDecoration(
             color: _getRarityColor(rarity),
-            shape: BoxShape.circle,
+            borderRadius: BorderRadius.circular(4),
           ),
         ),
       );
     }).toList();
-  }
-
-  Widget _buildSkillsSection(armor_models.ArmorPiece armorPiece) {
+  }  Widget _buildSkillsSection(armor_models.ArmorPiece armorPiece) {
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -35,6 +35,13 @@ class ArmorSetProvider with ChangeNotifier {
 
     try {
       _allArmorSets = await ArmorsApi.fetchArmorSets();
+      _allArmorSets.sort((a, b) {
+        final aRarity = a.pieces.isNotEmpty ? a.pieces.first.rarity : 0;
+        final bRarity = b.pieces.isNotEmpty ? b.pieces.first.rarity : 0;
+        final rarityComp = bRarity.compareTo(aRarity);
+        if (rarityComp != 0) return rarityComp;
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
       _originalArmorSets = List.from(_allArmorSets);
       _filteredArmorSets = List.from(_allArmorSets);
     } catch (e) {
@@ -47,9 +54,9 @@ class ArmorSetProvider with ChangeNotifier {
   }
 
   void applyFilters({String? name, String? kind, int? rarity}) {
-    _nameFilter = name ?? _nameFilter;
-    _kindFilter = kind ?? _kindFilter;
-    _rarityFilter = rarity ?? _rarityFilter;
+    _nameFilter = name ?? '';
+    _kindFilter = kind;
+    _rarityFilter = rarity;
 
     if (_nameFilter.isEmpty && _kindFilter == null && _rarityFilter == null) {
       _filteredArmorSets = List.from(_allArmorSets);

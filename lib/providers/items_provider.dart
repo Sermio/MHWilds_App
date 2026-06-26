@@ -8,7 +8,7 @@ class ItemsProvider with ChangeNotifier {
   bool _isLoading = false;
 
   String _nameFilter = '';
-  int _rarityFilter = -1;
+  int? _rarityFilter;
 
   List<Item> get items => _filteredItems;
   List<Item> get allItems => _allItems;
@@ -20,7 +20,7 @@ class ItemsProvider with ChangeNotifier {
     _allItems = [];
     _filteredItems = [];
     _nameFilter = '';
-    _rarityFilter = -1;
+    _rarityFilter = null;
     notifyListeners();
   }
 
@@ -32,6 +32,11 @@ class ItemsProvider with ChangeNotifier {
 
     try {
       _allItems = await ItemsApi.fetchItems();
+      _allItems.sort((a, b) {
+        final rarityCompare = b.rarity.compareTo(a.rarity);
+        if (rarityCompare != 0) return rarityCompare;
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
       _filteredItems = List.from(_allItems);
     } catch (e) {
       // ignore: avoid_print
@@ -43,14 +48,14 @@ class ItemsProvider with ChangeNotifier {
   }
 
   void applyFilters({String? name, int? rarity}) {
-    _nameFilter = name ?? _nameFilter;
-    _rarityFilter = rarity ?? _rarityFilter;
+    _nameFilter = name ?? '';
+    _rarityFilter = rarity;
 
     _filteredItems = _allItems.where((item) {
       final matchesName = _nameFilter.isEmpty ||
           item.name.toLowerCase().contains(_nameFilter.toLowerCase());
 
-      final matchesRarity = _rarityFilter == -1 || item.rarity == _rarityFilter;
+      final matchesRarity = _rarityFilter == null || item.rarity == _rarityFilter;
 
       return matchesName && matchesRarity;
     }).toList();
@@ -60,7 +65,7 @@ class ItemsProvider with ChangeNotifier {
 
   void clearFilters() {
     _nameFilter = '';
-    _rarityFilter = -1;
+    _rarityFilter = null;
     _filteredItems = List.from(_allItems);
     notifyListeners();
   }

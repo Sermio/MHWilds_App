@@ -19,7 +19,9 @@
   "errorWithMessage": "Błąd: {message}",
   "@errorWithMessage": {
     "placeholders": {
-      "message": { "type": "String" }
+      "message": {
+        "type": "String"
+      }
     }
   },
   "close": "Zamknij",
@@ -30,6 +32,7 @@
   "offDefault": "Wył. (domyślnie)",
   "armorSets": "Zestawy zbroi",
   "menuMonstersSubtitle": "Baza wszystkich potworów",
+  "menuLocationsSubtitle": "Eksploruj mapy i obozy",
   "menuItemsSubtitle": "Materiały i zasoby",
   "menuDecorationsSubtitle": "Klejnoty i kamienie umiejętności",
   "menuTalismansSubtitle": "Potężne akcesoria",
@@ -54,20 +57,28 @@
   "updateMessageWithBoth": "Masz wersję {currentVersion}. Nowa wersja ({newVersion}) jest dostępna w sklepie. Zaktualizuj, aby uzyskać najnowsze ulepszenia i poprawki.",
   "@updateMessageWithBoth": {
     "placeholders": {
-      "currentVersion": { "type": "String" },
-      "newVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      },
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageCurrentOnly": "Masz wersję {currentVersion}. Nowa wersja jest dostępna w sklepie. Zaktualizuj, aby uzyskać najnowsze ulepszenia i poprawki.",
   "@updateMessageCurrentOnly": {
     "placeholders": {
-      "currentVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageNewOnly": "Nowa wersja ({newVersion}) jest dostępna w sklepie. Zaktualizuj, aby uzyskać najnowsze ulepszenia i poprawki.",
   "@updateMessageNewOnly": {
     "placeholders": {
-      "newVersion": { "type": "String" }
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageGeneric": "Nowa wersja jest dostępna w sklepie. Zaktualizuj, aby uzyskać najnowsze ulepszenia i poprawki.",
@@ -83,7 +94,13 @@
   "type": "Typ",
   "rarity": "Rzadkość",
   "rarityLevel": "Rzadkość {n}",
-  "@rarityLevel": { "placeholders": { "n": { "type": "int" } } },
+  "@rarityLevel": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "enterWeaponName": "Wprowadź nazwę broni...",
   "enterItemName": "Wprowadź nazwę przedmiotu...",
   "enterArmorSetName": "Wprowadź nazwę zestawu zbroi...",
@@ -106,7 +123,6 @@
   "baseDefense": "Obrona bazowa",
   "slots": "Gniazda",
   "resistances": "Odporności",
-  "skills": "Umiejętności",
   "noSlots": "Brak gniazd",
   "noResistances": "Brak odporności",
   "physicalDamage": "Obrażenia fizyczne",
@@ -150,7 +166,9 @@
   "campsOfLevel": "Obozy Poziomu {n}",
   "@campsOfLevel": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "risk": "Ryzyko",
@@ -184,7 +202,6 @@
   "craftingRecipe": "Przepis na Wytworzenie:",
   "requiredMaterials": "Wymagane Materiały:",
   "skillRanks": "Rangi Umiejętności:",
-  "rarity": "Rzadkość",
   "rank": "Ranga",
   "errorLoadingSkills": "Błąd podczas ładowania umiejętności",
   "noSkillsAvailable": "Brak dostępnych umiejętności",
@@ -221,5 +238,10 @@
   "speciesAmphibian": "Płaz",
   "speciesSnakeWyvern": "Wyverna wężowa",
   "monsterKindLarge": "Duży potwór",
-  "monsterKindSmall": "Mały potwór"
+  "monsterKindSmall": "Mały potwór",
+  "camps": "Obozy",
+  "openOptimizer": "Otwórz optymalizator",
+  "ok": "OK",
+  "webViewNotSupported": "WebView nie jest dostępne na tej platformie.",
+  "openInBrowserHint": "Możesz otworzyć optymalizator w przeglądarce."
 }

@@ -13,6 +13,7 @@ import 'package:mhwilds_app/screens/skills_list.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/screens/build_optimizer_screen.dart';
 import 'package:mhwilds_app/screens/build_crafter_screen.dart';
+import 'package:mhwilds_app/screens/maps_list.dart';
 import 'package:mhwilds_app/screens/settings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -48,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (screen is AmuletList) return l10n.talismans;
     if (screen is ItemList) return l10n.items;
     if (screen is WeaponsList) return l10n.weapons;
+    if (screen is MapsList) return l10n.locations;
     if (screen is BuildOptimizerScreen) return l10n.buildOptimizer;
     if (screen is BuildCrafterScreen) return l10n.buildCrafter;
     return l10n.monsters;

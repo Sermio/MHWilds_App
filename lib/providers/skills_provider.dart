@@ -8,7 +8,7 @@ class SkillsProvider with ChangeNotifier {
   bool _isLoading = false;
 
   String _nameFilter = '';
-  String _kindFilter = '';
+  String? _kindFilter;
 
   List<Skills> get allSkills => _allSkills;
   List<Skills> get skills => _filteredSkills;
@@ -20,7 +20,7 @@ class SkillsProvider with ChangeNotifier {
     _allSkills = [];
     _filteredSkills = [];
     _nameFilter = '';
-    _kindFilter = '';
+    _kindFilter = null;
     notifyListeners();
   }
 
@@ -39,6 +39,7 @@ class SkillsProvider with ChangeNotifier {
 
     try {
       _allSkills = await SkillsApi.fetchSkills();
+      _allSkills.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       _filteredSkills = List.from(_allSkills);
     } catch (e) {
       // ignore: avoid_print
@@ -50,14 +51,14 @@ class SkillsProvider with ChangeNotifier {
   }
 
   void applyFilters({String? name, String? kind}) {
-    _nameFilter = name ?? _nameFilter;
-    _kindFilter = kind ?? _kindFilter;
+    _nameFilter = name ?? '';
+    _kindFilter = kind;
 
     _filteredSkills = _allSkills.where((skill) {
       final matchesName = _nameFilter.isEmpty ||
           skill.name.toLowerCase().contains(_nameFilter.toLowerCase());
 
-      final matchesKind = _kindFilter.isEmpty || skill.kind == _kindFilter;
+      final matchesKind = _kindFilter == null || skill.kind == _kindFilter;
 
       return matchesName && matchesKind;
     }).toList();
@@ -67,7 +68,7 @@ class SkillsProvider with ChangeNotifier {
 
   void clearFilters() {
     _nameFilter = '';
-    _kindFilter = '';
+    _kindFilter = null;
     _filteredSkills = List.from(_allSkills);
     notifyListeners();
   }

@@ -191,39 +191,63 @@ class MonsterDetailsCard extends StatelessWidget {
             ],
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MonsterAttributes(
-                  attributeType: "Weaknesses",
-                  children: monster.weaknesses
-                      .where((w) =>
-                          w.kind == 'element' &&
-                          w.element != null &&
-                          w.element!.isNotEmpty)
-                      .map((w) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/imgs/elements/${w.element!.toLowerCase()}.webp',
-                            height: 25,
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                ),
-                MonsterAttributes(
-                  attributeType: "Resistances",
-                  children: monster.resistances
-                      .where((w) => w.kind == 'element' && w.element.isNotEmpty)
-                      .map(
-                        (w) => Image.asset(
-                          'assets/imgs/elements/${w.element.toLowerCase()}.webp',
-                          height: 25,
+                Expanded(
+                  child: MonsterAttributes(
+                    attributeType: "Weaknesses",
+                    children: monster.weaknesses
+                        .where((w) =>
+                            w.level >= 1 &&
+                            ((w.kind == 'element' && w.element != null && w.element!.isNotEmpty) ||
+                             (w.kind == 'status' && w.status != null && w.status!.isNotEmpty)))
+                        .map((w) {
+                      final name = (w.kind == 'element' ? w.element : w.status) ?? '';
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              'assets/imgs/elements/${name.toLowerCase()}.webp',
+                              height: 25,
+                              errorBuilder: (_, __, ___) => const SizedBox(height: 25),
+                            ),
+                            const SizedBox(height: 2),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: List.generate(
+                                (4 - w.level).clamp(1, 3),
+                                (index) => const Icon(
+                                  Icons.star,
+                                  size: 8,
+                                  color: Colors.amber,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      )
-                      .toList(),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Expanded(
+                  child: MonsterAttributes(
+                    attributeType: "Resistances",
+                    children: monster.resistances
+                        .where((w) => w.element.isNotEmpty)
+                        .map(
+                          (w) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                            child: Image.asset(
+                              'assets/imgs/elements/${w.element.toLowerCase()}.webp',
+                              height: 25,
+                              errorBuilder: (_, __, ___) => const SizedBox(height: 25),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
               ],
             ),
@@ -419,9 +443,12 @@ class MonsterAttributes extends StatelessWidget {
           attributeType,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
+        const SizedBox(height: 4),
         hasContent
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+            ? Wrap(
+                spacing: 4,
+                runSpacing: 4,
+                alignment: WrapAlignment.center,
                 children: children!,
               )
             : const SizedBox(

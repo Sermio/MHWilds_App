@@ -32,6 +32,7 @@
   "offDefault": "Off (default)",
   "armorSets": "Armor Sets",
   "menuMonstersSubtitle": "Database of all monsters",
+  "menuLocationsSubtitle": "Explore maps and camp sites",
   "menuItemsSubtitle": "Materials and resources",
   "menuDecorationsSubtitle": "Skill gems and jewels",
   "menuTalismansSubtitle": "Powerful accessories",
@@ -57,20 +58,28 @@
   "updateMessageWithBoth": "You have version {currentVersion}. A new version ({newVersion}) is available in the store. Update to get the latest improvements and fixes.",
   "@updateMessageWithBoth": {
     "placeholders": {
-      "currentVersion": { "type": "String" },
-      "newVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      },
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageCurrentOnly": "You have version {currentVersion}. A new version is available in the store. Update to get the latest improvements and fixes.",
   "@updateMessageCurrentOnly": {
     "placeholders": {
-      "currentVersion": { "type": "String" }
+      "currentVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageNewOnly": "A new version ({newVersion}) is available in the store. Update to get the latest improvements and fixes.",
   "@updateMessageNewOnly": {
     "placeholders": {
-      "newVersion": { "type": "String" }
+      "newVersion": {
+        "type": "String"
+      }
     }
   },
   "updateMessageGeneric": "A new version is available in the store. Update to get the latest improvements and fixes.",
@@ -88,7 +97,9 @@
   "rarityLevel": "Rarity {n}",
   "@rarityLevel": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "enterWeaponName": "Enter weapon name...",
@@ -136,7 +147,6 @@
   "baseDefense": "Base Defense",
   "slots": "Slots",
   "resistances": "Resistances",
-  "skills": "Skills",
   "noSlots": "No slots",
   "noResistances": "No resistances",
   "physicalDamage": "Physical Damage",
@@ -160,7 +170,9 @@
   "campsOfLevel": "Camps of Level {n}",
   "@campsOfLevel": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "risk": "Risk",
@@ -194,7 +206,6 @@
   "craftingRecipe": "Crafting Recipe:",
   "requiredMaterials": "Required Materials:",
   "skillRanks": "Skill Ranks:",
-  "rarity": "Rarity",
   "rank": "Rank",
   "errorLoadingSkills": "Error loading skills",
   "noSkillsAvailable": "No skills available",
@@ -238,5 +249,13 @@
   "monsterKindLarge": "Large Monster",
   "monsterKindSmall": "Small Monster",
   "showMore": "Show more",
-  "showLess": "Show less"
+  "showLess": "Show less",
+  "camps": "Camps",
+  "openOptimizer": "Open optimizer",
+  "ok": "OK",
+  "webViewNotSupported": "WebView is not available on this platform.",
+  "openInBrowserHint": "You can open the optimizer in your browser.",
+  "weaponTree": "Weapon Tree",
+  "previousWeapon": "Upgrades from",
+  "upgradesTo": "Upgrades to"
 }

@@ -41,6 +41,19 @@ class DecorationItem {
       gameId: json['gameId'] ?? 0,
     );
   }
+
+  int get displayLevel {
+    if (slot >= 1 && slot <= 4) {
+      return slot;
+    }
+    if (skills.isEmpty) return 1;
+    final int maxLevel =
+        skills.map((s) => s.level).reduce((a, b) => a > b ? a : b);
+    if (maxLevel <= 1) return 1;
+    if (maxLevel <= 2) return 2;
+    if (maxLevel <= 3) return 3;
+    return 4;
+  }
 }
 
 class DecorationIcon {

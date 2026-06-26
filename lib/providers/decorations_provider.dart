@@ -28,6 +28,11 @@ class DecorationsProvider with ChangeNotifier {
 
     try {
       _decorations = await DecorationsApi.fetchDecorations();
+      _decorations.sort((a, b) {
+        final slotCompare = b.displayLevel.compareTo(a.displayLevel);
+        if (slotCompare != 0) return slotCompare;
+        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      });
 
       _filteredDecorations = List.from(_decorations);
     } catch (e) {
@@ -47,6 +52,13 @@ class DecorationsProvider with ChangeNotifier {
           type == null || decoration.kind.toLowerCase() == type.toLowerCase();
       return matchesName && matchesType;
     }).toList();
+
+    _filteredDecorations.sort((a, b) {
+      final slotCompare = b.displayLevel.compareTo(a.displayLevel);
+      if (slotCompare != 0) return slotCompare;
+      return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+    });
+
     notifyListeners();
   }
 
