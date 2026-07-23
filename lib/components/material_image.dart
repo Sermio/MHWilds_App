@@ -45,7 +45,7 @@ class MaterialImage extends StatelessWidget {
   String? _getAssetPathSync() {
     final icon = item?.icon;
     if (icon == null) return null;
-    final key = '\${icon.kind}|\${icon.color}';
+    final key = '${icon.kind}|${icon.color}';
     if (_assetCache.containsKey(key)) {
       return _assetCache[key];
     }
