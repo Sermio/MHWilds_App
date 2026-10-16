@@ -12,6 +12,7 @@ import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class ArmorDetails extends StatefulWidget {
   final armor_models.ArmorPiece armor;
@@ -50,11 +51,11 @@ class _ArmorDetailsState extends State<ArmorDetails> {
           children: [
             // Header de la pieza de armadura
             Container(
-              margin: const EdgeInsets.all(16),
-              padding: const EdgeInsets.all(24),
+              margin: const EdgeInsets.all(AppSpacing.lg),
+              padding: const EdgeInsets.all(AppSpacing.xl),
               decoration: BoxDecoration(
                 color: colorScheme.surface,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(AppRadius.lg),
                 boxShadow: [
                   BoxShadow(
                     color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -70,10 +71,10 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(AppRadius.md),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(AppRadius.md),
                       child: armorColumnByKind
                                   .containsKey(widget.armor.kind.toLowerCase())
                           ? GearSpriteIcon(
@@ -132,10 +133,10 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   Widget _buildStatsSection() {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -254,10 +255,10 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   Widget _buildSkillsSection() {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -330,8 +331,8 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   return Column(
                     children: snapshot.data!.map((skillInfo) {
                       return Container(
-                        margin: const EdgeInsets.only(bottom: 16),
-                        padding: const EdgeInsets.all(16),
+                        margin: const EdgeInsets.only(bottom: AppSpacing.lg),
+                        padding: const EdgeInsets.all(AppSpacing.lg),
                         decoration: BoxDecoration(
                           color: colorScheme.surfaceContainerHighest,
                           borderRadius: BorderRadius.circular(12),
@@ -400,7 +401,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                               as.isSetOrGroupBonus)))
                                         Padding(
                                           padding:
-                                              const EdgeInsets.only(top: 8.0),
+                                              const EdgeInsets.only(top: AppSpacing.sm),
                                           child: SetPieceTag(
                                             count: widget.armor.skills
                                                 .firstWhere((as) =>
@@ -425,8 +426,8 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                               );
 
                               return Container(
-                                margin: const EdgeInsets.only(bottom: 8),
-                                padding: const EdgeInsets.all(12),
+                                margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+                                padding: const EdgeInsets.all(AppSpacing.md),
                                 decoration: BoxDecoration(
                                   color: isCurrentLevel
                                       ? colorScheme.primary.withValues(alpha: 0.1)
@@ -444,15 +445,15 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 4,
+                                        horizontal: AppSpacing.sm,
+                                        vertical: AppSpacing.xs,
                                       ),
                                       decoration: BoxDecoration(
                                         color: isCurrentLevel
                                             ? colorScheme.primary
                                             : colorScheme
                                                 .surfaceContainerHighest,
-                                        borderRadius: BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(AppRadius.lg),
                                       ),
                                       child: Text(
                                         "${AppLocalizations.of(context)!.lv} ${rank.level}",
@@ -492,10 +493,10 @@ class _ArmorDetailsState extends State<ArmorDetails> {
     final colorScheme = Theme.of(context).colorScheme;
     final filteredMaterials = _recipeMaterials();
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -592,7 +593,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   Widget _buildMaterialItem(armor_models.Material material) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: AppSpacing.md),
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(12),
@@ -616,7 +617,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
             );
           },
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppSpacing.lg),
             child: Row(
               children: [
                 SizedBox(
@@ -661,7 +662,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
 
   Widget _buildCostChip(String label, int cost) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
       decoration: BoxDecoration(
         color: Colors.amber[100],
         borderRadius: BorderRadius.circular(12),
@@ -773,7 +774,7 @@ class ArmorPieceSlotsWidget extends StatelessWidget {
       children: armorPiece.slots.map((slot) {
         final Color slotColor = _slotColor(slot);
         return Padding(
-          padding: const EdgeInsets.only(left: 4),
+          padding: const EdgeInsets.only(left: AppSpacing.xs),
           child: DecorationSpriteIcon(
             slot: slot,
             size: 20,

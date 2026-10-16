@@ -13,6 +13,7 @@ import 'package:mhwilds_app/screens/skill_details.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/models/talisman.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class AmuletList extends StatefulWidget {
   const AmuletList({super.key});
@@ -94,7 +95,7 @@ class _AmuletListState extends State<AmuletList> {
             isEmpty: (_) => filteredAmulets.isEmpty,
             builder: (context, _) => ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(bottom: 120, top: 16),
+              padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredAmulets.length,
               itemBuilder: (context, index) {
                 final amulet = filteredAmulets[index];
@@ -102,11 +103,11 @@ class _AmuletListState extends State<AmuletList> {
                 final firstRank = ranks.isNotEmpty ? ranks[0] : null;
 
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16)
+                  margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg)
                       .copyWith(bottom: 16),
                   decoration: BoxDecoration(
                     color: colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(AppRadius.lg),
                     boxShadow: [
                       BoxShadow(
                         color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -118,7 +119,7 @@ class _AmuletListState extends State<AmuletList> {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(AppRadius.lg),
                       onTap: () {
                         if (firstRank != null) {
                           final skillIds =
@@ -181,7 +182,8 @@ class _AmuletListState extends State<AmuletList> {
                                       if (firstRank != null) ...[
                                         Container(
                                           padding: const EdgeInsets.symmetric(
-                                              horizontal: 8, vertical: 4),
+                                              horizontal: AppSpacing.sm,
+                                              vertical: AppSpacing.xs),
                                           decoration: BoxDecoration(
                                             color: _getRarityColor(
                                                     firstRank.rarity)
@@ -335,8 +337,8 @@ class _AmuletListState extends State<AmuletList> {
         ),
         const SizedBox(height: 8),
         ...rank.skills.map((skill) => Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+              padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
                 color: colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
@@ -352,7 +354,7 @@ class _AmuletListState extends State<AmuletList> {
                       Container(
                         width: 24,
                         height: 24,
-                        margin: const EdgeInsets.only(right: 8),
+                        margin: const EdgeInsets.only(right: AppSpacing.sm),
                         child: SkillSpriteIcon(
                           iconId:
                               _skillIconForId(skillsProvider, skill.skill.id)
@@ -370,7 +372,7 @@ class _AmuletListState extends State<AmuletList> {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
+                            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
                         decoration: BoxDecoration(
                           color: colorScheme.primary,
                           borderRadius: BorderRadius.circular(12),

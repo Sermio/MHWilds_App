@@ -4,6 +4,7 @@ import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class SkillDetails extends StatefulWidget {
   const SkillDetails({super.key, required this.skillsIds, this.skillsLevels});
@@ -69,10 +70,10 @@ class _SkillDetailsState extends State<SkillDetails> {
 
                     return Container(
                       margin: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                          horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
                       decoration: BoxDecoration(
                         color: colorScheme.surface,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(AppRadius.lg),
                         boxShadow: [
                           BoxShadow(
                             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -85,7 +86,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                         children: [
                           // Header de la skill
                           Container(
-                            padding: const EdgeInsets.all(24),
+                            padding: const EdgeInsets.all(AppSpacing.xl),
                             decoration: BoxDecoration(
                               color: colorScheme.surface,
                               borderRadius: const BorderRadius.vertical(
@@ -99,10 +100,10 @@ class _SkillDetailsState extends State<SkillDetails> {
                                   width: 80,
                                   height: 80,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(AppRadius.md),
                                   ),
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(AppRadius.md),
                                     child: SkillSpriteIcon(
                                       iconId: skill.icon?.id,
                                       iconKind: skill.icon?.kind,
@@ -138,7 +139,7 @@ class _SkillDetailsState extends State<SkillDetails> {
 
                           // Sección de rangos
                           Padding(
-                            padding: const EdgeInsets.all(24),
+                            padding: const EdgeInsets.all(AppSpacing.xl),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -158,7 +159,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                                       rank.level == widget.skillsLevels![index];
 
                                   return Container(
-                                    margin: const EdgeInsets.only(bottom: 16),
+                                    margin: const EdgeInsets.only(bottom: AppSpacing.lg),
                                     padding: const EdgeInsets.all(20),
                                     decoration: BoxDecoration(
                                       color: isCurrentLevel
@@ -182,7 +183,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                                             Container(
                                               padding:
                                                   const EdgeInsets.symmetric(
-                                                horizontal: 12,
+                                                horizontal: AppSpacing.md,
                                                 vertical: 6,
                                               ),
                                               decoration: BoxDecoration(
@@ -191,7 +192,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                                                     : colorScheme.onSurface
                                                         .withValues(alpha: 0.4),
                                                 borderRadius:
-                                                    BorderRadius.circular(20),
+                                                    BorderRadius.circular(AppRadius.lg),
                                               ),
                                               child: Text(
                                                 '${AppLocalizations.of(context)!.level} ${rank.level}',

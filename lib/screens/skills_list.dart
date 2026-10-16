@@ -10,6 +10,7 @@ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class SkillList extends StatefulWidget {
   const SkillList({super.key});
@@ -84,17 +85,17 @@ class _SkillListState2 extends State<SkillList> {
             isEmpty: (_) => filteredSkills.isEmpty,
             builder: (context, _) => ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(bottom: 120, top: 16),
+              padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredSkills.length,
               itemBuilder: (context, index) {
                 final skill = filteredSkills[index];
 
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16)
+                  margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg)
                       .copyWith(bottom: 16),
                   decoration: BoxDecoration(
                     color: colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(AppRadius.lg),
                     boxShadow: [
                       BoxShadow(
                         color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -106,7 +107,7 @@ class _SkillListState2 extends State<SkillList> {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(AppRadius.lg),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -165,7 +166,7 @@ class _SkillListState2 extends State<SkillList> {
                                               (r) => r.setPiecesRequired > 0))
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  left: 8),
+                                                  left: AppSpacing.sm),
                                               child: SetPieceTag(
                                                 count: skill.ranks
                                                     .firstWhere((r) =>
@@ -178,7 +179,8 @@ class _SkillListState2 extends State<SkillList> {
                                       const SizedBox(height: 4),
                                       Container(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 4),
+                                            horizontal: AppSpacing.sm,
+                                            vertical: AppSpacing.xs),
                                         decoration: BoxDecoration(
                                           color: _getTypeColor(skill.kind)
                                               .withValues(alpha: 0.1),

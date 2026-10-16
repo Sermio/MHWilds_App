@@ -22,7 +22,8 @@ extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
     final colorScheme = Theme.of(context).colorScheme;
     if (slots.isEmpty) {
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(8),

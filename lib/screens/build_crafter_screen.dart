@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 /// Pantalla embebida para [MH Wilds Build Crafter](https://mhwilds-build-crafter.vercel.app/builder).
 /// Misma idea que [BuildOptimizerScreen], sin inyectar localStorage de mh-opti.
@@ -78,7 +79,7 @@ class _BuildCrafterScreenState extends State<BuildCrafterScreen> {
                 )
               : Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(AppSpacing.xl),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [

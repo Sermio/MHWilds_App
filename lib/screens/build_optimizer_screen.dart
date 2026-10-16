@@ -6,6 +6,7 @@ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class BuildOptimizerScreen extends StatefulWidget {
   const BuildOptimizerScreen({super.key});
@@ -124,7 +125,7 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
                 )
               : Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(AppSpacing.xl),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [

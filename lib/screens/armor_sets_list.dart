@@ -16,6 +16,7 @@ import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/screens/armor_piece_details.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class ArmorSetList extends StatefulWidget {
   const ArmorSetList({super.key});
@@ -100,7 +101,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             isEmpty: (_) => filteredArmorSets.isEmpty,
             builder: (context, _) => ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(bottom: 120, top: 16),
+              padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredArmorSets.length,
               itemBuilder: (context, index) {
                 final armorSet = filteredArmorSets[index];
@@ -111,7 +112,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                     // Título del set
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                          horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
                       child: Text(
                         armorSet.name,
                         style: TextStyle(
@@ -135,10 +136,10 @@ class _ArmorSetListState extends State<ArmorSetList> {
                     ...armorSet.pieces.map(
                       (piece) => Container(
                         margin: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
+                            horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
                         decoration: BoxDecoration(
                           color: colorScheme.surface,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(AppRadius.lg),
                           boxShadow: [
                             BoxShadow(
                               color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -150,7 +151,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(AppRadius.lg),
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -211,8 +212,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                             Container(
                                               padding:
                                                   const EdgeInsets.symmetric(
-                                                horizontal: 8,
-                                                vertical: 4,
+                                                horizontal: AppSpacing.sm,
+                                                vertical: AppSpacing.xs,
                                               ),
                                               decoration: BoxDecoration(
                                                 color: _getRarityColor(
@@ -472,8 +473,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
         ),
         const SizedBox(height: 8),
         ...armorPiece.displaySkills.map((skill) => Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+              padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
                 color: colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
@@ -489,7 +490,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                       Container(
                         width: 24,
                         height: 24,
-                        margin: const EdgeInsets.only(right: 8),
+                        margin: const EdgeInsets.only(right: AppSpacing.sm),
                         child: SkillSpriteIcon(
                           iconId: _skillIconForId(skill.skill.id, context)?.id,
                           iconKind:
@@ -504,10 +505,10 @@ class _ArmorSetListState extends State<ArmorSetList> {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
+                            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
                         decoration: BoxDecoration(
                           color: colorScheme.primary,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(AppRadius.lg),
                         ),
                         child: Text(
                           '${skill.name ?? skill.skill.name} +${skill.level}',
@@ -521,7 +522,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                       ),
                       if (skill.setPiecesRequired != null)
                         Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
+                          padding: const EdgeInsets.only(left: AppSpacing.sm),
                           child: SetPieceTag(
                             count: skill.setPiecesRequired!,
                           ),
@@ -550,7 +551,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
     final colorScheme = Theme.of(context).colorScheme;
     if (armorPiece.slots.isEmpty) {
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(8),
@@ -618,7 +620,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
     final colorScheme = Theme.of(context).colorScheme;
     if (armorPiece.resistances.isEmpty) {
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(8),
@@ -642,7 +645,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
         final resistanceValue = entry.value;
 
         return Container(
-          margin: const EdgeInsets.only(right: 8),
+          margin: const EdgeInsets.only(right: AppSpacing.sm),
           child: Row(
             children: [
               Text(
@@ -789,8 +792,9 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
     }
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: colorScheme.primary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
@@ -855,7 +859,8 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
                 ),
                 style: TextButton.styleFrom(
                   foregroundColor: colorScheme.primary,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                 ),
               ),
             ),
@@ -871,8 +876,8 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
     final iconData = widget.onSkillIconRequest(skill.id);
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.only(bottom: AppSpacing.md),
+      padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
         color: colorScheme.primary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
@@ -889,7 +894,7 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
               Container(
                 width: 24,
                 height: 24,
-                margin: const EdgeInsets.only(right: 8),
+                margin: const EdgeInsets.only(right: AppSpacing.sm),
                 child: SkillSpriteIcon(
                   iconId: iconData?.id,
                   iconKind: iconData?.kind,
@@ -902,11 +907,12 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
                 decoration: BoxDecoration(
                   color: const Color(0xFFC5A35C)
                       .withValues(alpha: 0.8), // Dorado/Beige solicitado
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(AppRadius.lg),
                 ),
                 child: Text(
                   skill.name,

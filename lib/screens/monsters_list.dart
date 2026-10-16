@@ -13,6 +13,7 @@ import 'package:mhwilds_app/screens/monster_details.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class MonstersList extends StatefulWidget {
   const MonstersList({super.key});
@@ -104,17 +105,17 @@ class _MonstersListState extends State<MonstersList> {
             isEmpty: (_) => monsters.isEmpty,
             builder: (context, _) => ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(bottom: 120, top: 16),
+              padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: monsters.length,
               itemBuilder: (context, index) {
                 final monster = monsters[index];
 
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16)
+                  margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg)
                       .copyWith(bottom: 16),
                   decoration: BoxDecoration(
                     color: colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(AppRadius.lg),
                     boxShadow: [
                       BoxShadow(
                         color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -126,7 +127,7 @@ class _MonstersListState extends State<MonstersList> {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(AppRadius.lg),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -153,12 +154,12 @@ class _MonstersListState extends State<MonstersList> {
                                         width: 100,
                                         height: 100,
                                         decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
+                                          borderRadius: BorderRadius.circular(
+                                              AppRadius.md),
                                         ),
                                         child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
+                                          borderRadius: BorderRadius.circular(
+                                              AppRadius.md),
                                           child: _buildMonsterIcon(
                                             context,
                                             monster.id,
@@ -189,7 +190,8 @@ class _MonstersListState extends State<MonstersList> {
                                       const SizedBox(height: 4),
                                       Container(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 4),
+                                            horizontal: AppSpacing.sm,
+                                            vertical: AppSpacing.xs),
                                         decoration: BoxDecoration(
                                           color: colorScheme.primary
                                               .withValues(alpha: 0.1),

@@ -23,6 +23,7 @@ import 'package:mhwilds_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class WeaponDetails extends StatefulWidget {
   final Weapon weapon;
@@ -90,11 +91,11 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     final int? spriteColumn = weaponColumnByKind[widget.weapon.kind];
 
     return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(24),
+      margin: const EdgeInsets.all(AppSpacing.lg),
+      padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -110,7 +111,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(AppRadius.md),
             ),
             child: spriteColumn != null
                 ? GearSpriteIcon(
@@ -153,10 +154,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   Widget _buildMainStats() {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -332,10 +333,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   Widget _buildSharpnessSection() {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -467,10 +468,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   Widget _buildSkillsSection() {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -543,8 +544,8 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   return Column(
                     children: snapshot.data!.map((skillInfo) {
                       return Container(
-                        margin: const EdgeInsets.only(bottom: 16),
-                        padding: const EdgeInsets.all(16),
+                        margin: const EdgeInsets.only(bottom: AppSpacing.lg),
+                        padding: const EdgeInsets.all(AppSpacing.lg),
                         decoration: BoxDecoration(
                           color: colorScheme.surfaceContainerHighest,
                           borderRadius: BorderRadius.circular(12),
@@ -611,8 +612,8 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                               );
 
                               return Container(
-                                margin: const EdgeInsets.only(bottom: 8),
-                                padding: const EdgeInsets.all(12),
+                                margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+                                padding: const EdgeInsets.all(AppSpacing.md),
                                 decoration: BoxDecoration(
                                   color: isCurrentLevel
                                       ? AppColors.goldSoft.withValues(alpha: 0.1)
@@ -630,8 +631,8 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 4,
+                                        horizontal: AppSpacing.sm,
+                                        vertical: AppSpacing.xs,
                                       ),
                                       decoration: BoxDecoration(
                                         color: isCurrentLevel
@@ -683,10 +684,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         widget.weapon.crafting.craftingMaterials.isNotEmpty ||
             widget.weapon.crafting.upgradeMaterials.isNotEmpty;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -699,7 +700,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
           initiallyExpanded: false,
-          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: AppSpacing.sm),
           title: Row(
             children: [
               Icon(
@@ -813,7 +814,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   Widget _buildMaterialItem(armor_models.Material material) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: AppSpacing.md),
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(12),
@@ -837,7 +838,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             );
           },
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppSpacing.lg),
             child: Row(
               children: [
                 SizedBox(
@@ -882,7 +883,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
 
   Widget _buildCostChip(String label, int cost) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
       decoration: BoxDecoration(
         color: Colors.amber[100],
         borderRadius: BorderRadius.circular(12),
@@ -926,7 +927,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       children: widget.weapon.slots.map((slot) {
         final Color slotColor = _slotColor(slot);
         return Padding(
-          padding: const EdgeInsets.only(left: 4),
+          padding: const EdgeInsets.only(left: AppSpacing.xs),
           child: DecorationSpriteIcon(
             slot: slot,
             size: 20,
@@ -1005,10 +1006,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     if (rootNode == null) return const SizedBox.shrink();
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -1021,7 +1022,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
           initiallyExpanded: true,
-          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: AppSpacing.sm),
           title: Row(
             children: [
               Icon(
@@ -1117,7 +1118,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 ),
               // Node content
               Container(
-                margin: const EdgeInsets.only(bottom: 4, top: 4, left: 4),
+                margin: const EdgeInsets.only(bottom: AppSpacing.xs, top: AppSpacing.xs, left: AppSpacing.xs),
                 decoration: BoxDecoration(
                   color: isCurrentWeapon
                       ? colorScheme.primaryContainer.withValues(alpha: 0.3)
@@ -1135,7 +1136,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     }
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 6),
                     child: Row(
                       children: [
                         GearSpriteIcon(
@@ -1210,7 +1211,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       children: allWeapons.map((w) {
         final bool isCurrent = w.id == widget.weapon.id;
         return Container(
-          margin: const EdgeInsets.only(bottom: 8),
+          margin: const EdgeInsets.only(bottom: AppSpacing.sm),
           decoration: BoxDecoration(
             color: isCurrent ? colorScheme.primaryContainer.withValues(alpha: 0.2) : colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(8),
@@ -1222,7 +1223,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             borderRadius: BorderRadius.circular(8),
             onTap: isCurrent ? null : () => _navigateToWeaponById(w.id),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(AppSpacing.sm),
               child: Row(
                 children: [
                   GearSpriteIcon(
@@ -1245,7 +1246,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                 onTap: () => _showCraftingModal(w),
                                 borderRadius: BorderRadius.circular(12),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
+                                  padding: const EdgeInsets.all(AppSpacing.xs),
                                   child: Icon(Icons.remove_red_eye, size: 18, color: colorScheme.primary),
                                 ),
                               ),

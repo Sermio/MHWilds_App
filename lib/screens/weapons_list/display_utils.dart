@@ -177,7 +177,7 @@ class WeaponDisplayUtils {
             Row(
               children: weapon.coatings!.map((coating) {
                 return Container(
-                  margin: const EdgeInsets.only(left: 4),
+                  margin: const EdgeInsets.only(left: AppSpacing.xs),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
@@ -518,7 +518,7 @@ class WeaponDisplayUtils {
         Row(
           children: weapon.ammo!.take(3).map((ammo) {
             return Container(
-              margin: const EdgeInsets.only(left: 4),
+              margin: const EdgeInsets.only(left: AppSpacing.xs),
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
                 color: weapon.kind == 'heavy-bowgun'

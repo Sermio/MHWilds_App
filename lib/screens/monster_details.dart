@@ -8,6 +8,7 @@ import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:provider/provider.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class MonsterDetails extends StatefulWidget {
   final int monsterId;
@@ -62,7 +63,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
   Widget _buildMonsterInfoSection(Monster monster) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: colorScheme.surface,
@@ -80,10 +81,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         children: [
           // Título de la sección
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
             decoration: BoxDecoration(
               color: colorScheme.primary.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(AppRadius.lg),
             ),
             child: Text(
               AppLocalizations.of(context)!.monsterInformation,
@@ -134,7 +135,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           // Variantes del monstruo
           if (monster.variants.isNotEmpty) ...[
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: BoxDecoration(
                 color: Colors.orange.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
@@ -195,7 +196,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
                       return Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8),
+                            horizontal: AppSpacing.md, vertical: AppSpacing.sm),
                         decoration: BoxDecoration(
                           color: backgroundColor,
                           borderRadius: BorderRadius.circular(12),
@@ -233,7 +234,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
   Widget _buildStatsSection(Monster monster) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: colorScheme.surface,
@@ -250,10 +251,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
             decoration: BoxDecoration(
               color: AppColors.goldSoft.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(AppRadius.lg),
             ),
             child: Text(
               AppLocalizations.of(context)!.statistics,
@@ -288,7 +289,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
   Widget _buildWeaknessesResistancesSection(Monster monster) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: colorScheme.surface,
@@ -309,10 +310,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             children: [
               Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
                 decoration: BoxDecoration(
                   color: AppColors.goldSoft.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(AppRadius.lg),
                 ),
                 child: Text(
                   AppLocalizations.of(context)!.weaknessesAndResistances,
@@ -349,7 +350,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
   Widget _buildBreakablePartsSection(Monster monster) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: colorScheme.surface,
@@ -366,10 +367,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
             decoration: BoxDecoration(
               color: AppColors.goldSoft.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(AppRadius.lg),
             ),
             child: Text(
               AppLocalizations.of(context)!.breakableParts,
@@ -379,8 +380,8 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           const SizedBox(height: 16),
           ...monster.breakableParts.map(
             (part) => Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+              padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
                 color: colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(8),
@@ -432,7 +433,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
   Widget _buildStatCard(String label, String value, IconData icon) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: AppColors.goldSoft.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
@@ -474,7 +475,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         const SizedBox(height: 8),
         if (validWeaknesses.isEmpty)
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(8),
@@ -542,7 +543,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         const SizedBox(height: 8),
         if (validResistances.isEmpty)
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(8),
@@ -557,7 +558,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           Row(
             children: [
               ...validResistances.map((r) => Padding(
-                    padding: const EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.only(right: AppSpacing.sm),
                     child: Image.asset(
                       'assets/imgs/elements/${r.element.toLowerCase()}.webp',
                       height: 25,
@@ -596,7 +597,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
     final sizes = monster.size!;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: colorScheme.surface,
@@ -613,10 +614,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
             decoration: BoxDecoration(
               color: AppColors.goldSoft.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(AppRadius.lg),
             ),
             child: Text(
               AppLocalizations.of(context)!.crownSizes,
@@ -681,7 +682,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
           decoration: BoxDecoration(
             color: color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(12),
@@ -767,7 +768,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: ToggleButtons(
                     fillColor: colorScheme.primary,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(AppRadius.sm),
                     disabledColor: colorScheme.onSurface.withValues(alpha: 0.5),
                     isSelected: [
                       selectedRank == 'low' && isLowRankAvailable,
@@ -904,7 +905,7 @@ class MonsterRewards extends StatelessWidget {
 
               return Container(
                 margin:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
                 decoration: BoxDecoration(
                   color: colorScheme.surface,
                   borderRadius: BorderRadius.circular(16),
@@ -1018,7 +1019,7 @@ class MonsterRewards extends StatelessWidget {
                             return Container(
                               margin: const EdgeInsets.only(bottom: 6),
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                                  horizontal: AppSpacing.md, vertical: AppSpacing.sm),
                               decoration: BoxDecoration(
                                 color: backgroundColor,
                                 borderRadius: BorderRadius.circular(8),

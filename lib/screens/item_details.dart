@@ -6,6 +6,7 @@ import 'package:mhwilds_app/providers/items_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class ItemDetails extends StatelessWidget {
   const ItemDetails({super.key, required this.item});
@@ -42,7 +43,7 @@ class ItemDetails extends StatelessWidget {
             // Header del item
             Center(
               child: Container(
-                margin: const EdgeInsets.all(16),
+                margin: const EdgeInsets.all(AppSpacing.lg),
                 constraints: const BoxConstraints(maxWidth: 400),
                 child: Column(
                   children: [
@@ -51,10 +52,10 @@ class ItemDetails extends StatelessWidget {
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(AppRadius.md),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(AppRadius.md),
                         child: MaterialImage(
                             item: item,
                             materialName: context.watch<EnNamesCache>()
@@ -86,7 +87,7 @@ class ItemDetails extends StatelessWidget {
             // Sección de recetas de crafting
             if (item.recipes.isNotEmpty) ...[
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                 child: Text(
                   AppLocalizations.of(context)!.craftingRecipe,
                   style: TextStyle(
@@ -98,11 +99,11 @@ class ItemDetails extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16),
+                margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: colorScheme.surface,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(AppRadius.lg),
                   boxShadow: [
                     BoxShadow(
                       color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -202,7 +203,7 @@ class ItemDetails extends StatelessWidget {
             // Sección de monstruos que dan este item
             if (monstersWithItem.isNotEmpty) ...[
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                 child: Text(
                   AppLocalizations.of(context)!.monstersThatDropThisItem,
                   style: TextStyle(
@@ -220,10 +221,10 @@ class ItemDetails extends StatelessWidget {
 
                 return Container(
                   margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
                   decoration: BoxDecoration(
                     color: colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(AppRadius.lg),
                     boxShadow: [
                       BoxShadow(
                         color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -251,10 +252,10 @@ class ItemDetails extends StatelessWidget {
                                 width: 40,
                                 height: 40,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(AppRadius.sm),
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(AppRadius.sm),
                                   child: _buildMonsterIcon(
                                       context, monster.id, monster.name),
                                 ),
@@ -296,8 +297,8 @@ class ItemDetails extends StatelessWidget {
                                   .join(' ');
 
                               return Container(
-                                margin: const EdgeInsets.only(bottom: 12),
-                                padding: const EdgeInsets.all(16),
+                                margin: const EdgeInsets.only(bottom: AppSpacing.md),
+                                padding: const EdgeInsets.all(AppSpacing.lg),
                                 decoration: BoxDecoration(
                                   color: colorScheme.surfaceContainerHighest,
                                   borderRadius: BorderRadius.circular(12),
@@ -310,12 +311,12 @@ class ItemDetails extends StatelessWidget {
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.symmetric(
-                                        horizontal: 12,
+                                        horizontal: AppSpacing.md,
                                         vertical: 6,
                                       ),
                                       decoration: BoxDecoration(
                                         color: colorScheme.primary,
-                                        borderRadius: BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(AppRadius.lg),
                                       ),
                                       child: Text(
                                         '${condition.chance}%',

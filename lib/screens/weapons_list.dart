@@ -19,6 +19,7 @@ import 'package:mhwilds_app/utils/weapon_tree_builder.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 part 'weapons_list/display_utils.dart';
 part 'weapons_list/weapon_card.dart';
@@ -335,11 +336,11 @@ class _WeaponsListState extends State<WeaponsList> {
                   final roots = _buildSeriesTrees(weaponsInSeries);
 
                   return Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.md, vertical: AppSpacing.sm),
                     decoration: BoxDecoration(
                       color: colorScheme.surface,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(AppRadius.lg),
                       boxShadow: [
                         BoxShadow(
                           color: colorScheme.shadow.withValues(alpha: 0.08),
@@ -356,11 +357,11 @@ class _WeaponsListState extends State<WeaponsList> {
                         collapsedBackgroundColor: Colors.transparent,
                         backgroundColor: Colors.transparent,
                         collapsedShape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(AppRadius.lg)),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(AppRadius.lg)),
                         tilePadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 4),
+                            horizontal: AppSpacing.lg, vertical: AppSpacing.xs),
                         title: Row(
                           children: [
                             Icon(Icons.account_tree_outlined,
@@ -377,7 +378,7 @@ class _WeaponsListState extends State<WeaponsList> {
                             ),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 2),
+                                  horizontal: AppSpacing.sm, vertical: 2),
                               decoration: BoxDecoration(
                                 color:
                                     colorScheme.primary.withValues(alpha: 0.1),
@@ -398,7 +399,10 @@ class _WeaponsListState extends State<WeaponsList> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                bottom: 24, left: 8, right: 8, top: 8),
+                                bottom: AppSpacing.xl,
+                                left: AppSpacing.sm,
+                                right: AppSpacing.sm,
+                                top: AppSpacing.sm),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Column(
@@ -474,7 +478,10 @@ class _WeaponsListState extends State<WeaponsList> {
                   ),
                 ),
               Container(
-                margin: const EdgeInsets.only(bottom: 4, top: 4, left: 4),
+                margin: const EdgeInsets.only(
+                    bottom: AppSpacing.xs,
+                    top: AppSpacing.xs,
+                    left: AppSpacing.xs),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(8),
@@ -490,7 +497,7 @@ class _WeaponsListState extends State<WeaponsList> {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(AppSpacing.sm),
                     child: Row(
                       children: [
                         GearSpriteIcon(
@@ -593,10 +600,10 @@ class _WeaponsListState extends State<WeaponsList> {
   Widget _buildWeaponCard(Weapon weapon, int index) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: AppSpacing.lg),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -608,7 +615,7 @@ class _WeaponsListState extends State<WeaponsList> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(AppRadius.lg),
           onTap: () {
             Navigator.push(
               context,
@@ -882,8 +889,8 @@ class _WeaponsListState extends State<WeaponsList> {
         ),
         const SizedBox(height: 8),
         ...weapon.skills.map((skill) => Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+              padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
                 color: colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
@@ -899,7 +906,7 @@ class _WeaponsListState extends State<WeaponsList> {
                       Container(
                         width: 24,
                         height: 24,
-                        margin: const EdgeInsets.only(right: 8),
+                        margin: const EdgeInsets.only(right: AppSpacing.sm),
                         child: SkillSpriteIcon(
                           iconId: _skillIconForId(skill.skill.id, context)?.id,
                           iconKind:
@@ -914,7 +921,7 @@ class _WeaponsListState extends State<WeaponsList> {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
+                            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
                         decoration: BoxDecoration(
                           color: colorScheme.primary,
                           borderRadius: BorderRadius.circular(12),

@@ -8,6 +8,7 @@ import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/location.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class MapsList extends StatefulWidget {
   const MapsList({super.key});
@@ -51,7 +52,8 @@ class _MapsListState extends State<MapsList> {
         onRefresh: () => provider.refresh(force: true),
         builder: (context, zones) => ListView.builder(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.lg, vertical: AppSpacing.md),
           itemCount: zones.length,
           itemBuilder: (context, index) => _buildMapCard(context, zones[index]),
         ),
@@ -79,10 +81,10 @@ class _MapsListState extends State<MapsList> {
     final zoneCount = zone.zoneCount ?? 0;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: AppSpacing.lg),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -94,7 +96,7 @@ class _MapsListState extends State<MapsList> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(AppRadius.lg),
           onTap: () {
             if (zone.id != null) {
               Navigator.push(
@@ -170,7 +172,7 @@ class _MapsListState extends State<MapsList> {
               ),
               // Body Info
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(AppSpacing.lg),
                 child: Row(
                   children: [
                     // Zonas chip

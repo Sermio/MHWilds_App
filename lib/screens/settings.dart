@@ -16,6 +16,7 @@ import 'package:mhwilds_app/utils/review_service.dart';
 import 'package:provider/provider.dart';
 
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -30,7 +31,7 @@ class SettingsScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         children: [
           Text(
             l10n.appearance,
@@ -155,7 +156,7 @@ class SettingsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(AppSpacing.lg),
                   child: Text(
                     l10n.language,
                     style: Theme.of(ctx).textTheme.titleLarge,

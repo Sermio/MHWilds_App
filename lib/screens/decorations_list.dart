@@ -13,6 +13,7 @@ import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/utils/skill_icons_map.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class DecorationsList extends StatefulWidget {
   const DecorationsList({super.key});
@@ -93,17 +94,17 @@ class _DecorationsListState extends State<DecorationsList> {
             isEmpty: (_) => filteredDecorations.isEmpty,
             builder: (context, _) => ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(bottom: 120, top: 16),
+              padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredDecorations.length,
               itemBuilder: (context, index) {
                 final decoration = filteredDecorations[index];
 
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16)
+                  margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg)
                       .copyWith(bottom: 16),
                   decoration: BoxDecoration(
                     color: colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(AppRadius.lg),
                     boxShadow: [
                       BoxShadow(
                         color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -115,7 +116,7 @@ class _DecorationsListState extends State<DecorationsList> {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(AppRadius.lg),
                       onTap: () {
                         // Navegar a la pantalla de detalles de habilidades
                         final skillIds =
@@ -352,8 +353,8 @@ class _DecorationsListState extends State<DecorationsList> {
           final int? iconId = staticIcon?['id'] ?? fullSkill.icon?.id;
           final String? iconKind = staticIcon?['kind'] ?? fullSkill.icon?.kind;
           return Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.all(12),
+            margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+            padding: const EdgeInsets.all(AppSpacing.md),
             decoration: BoxDecoration(
               color: colorScheme.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
@@ -369,7 +370,7 @@ class _DecorationsListState extends State<DecorationsList> {
                     Container(
                       width: 24,
                       height: 24,
-                      margin: const EdgeInsets.only(right: 8),
+                      margin: const EdgeInsets.only(right: AppSpacing.sm),
                       child: SkillSpriteIcon(
                         iconId: iconId,
                         iconKind: iconKind,
@@ -383,7 +384,7 @@ class _DecorationsListState extends State<DecorationsList> {
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
+                          horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
                       decoration: BoxDecoration(
                         color: colorScheme.primary,
                         borderRadius: BorderRadius.circular(12),

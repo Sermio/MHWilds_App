@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class ItemList extends StatefulWidget {
   const ItemList({super.key});
@@ -86,17 +87,17 @@ class _ItemListState extends State<ItemList> {
             isEmpty: (_) => filteredItems.isEmpty,
             builder: (context, _) => ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(bottom: 120, top: 16),
+              padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredItems.length,
               itemBuilder: (context, index) {
                 final item = filteredItems[index];
 
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16)
+                  margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg)
                       .copyWith(bottom: 16),
                   decoration: BoxDecoration(
                     color: colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(AppRadius.lg),
                     boxShadow: [
                       BoxShadow(
                         color: colorScheme.shadow.withValues(alpha: 0.1),
@@ -108,7 +109,7 @@ class _ItemListState extends State<ItemList> {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(AppRadius.lg),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -132,10 +133,10 @@ class _ItemListState extends State<ItemList> {
                                   width: 60,
                                   height: 60,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(AppRadius.md),
                                   ),
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(AppRadius.md),
                                     child: MaterialImage(
                                       item: item,
                                       materialName: (context.watch<EnNamesCache>()
@@ -162,7 +163,7 @@ class _ItemListState extends State<ItemList> {
                                       const SizedBox(height: 4),
                                       Container(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 4),
+                                            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
                                         decoration: BoxDecoration(
                                           color: _getRarityColor(item.rarity)
                                               .withValues(alpha: 0.1),
