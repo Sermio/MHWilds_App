@@ -1,18 +1,16 @@
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:mhwilds_app/api/api_config.dart';
+import 'package:mhwilds_app/api/cached_api.dart';
 import 'package:mhwilds_app/models/location.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 
 class LocationsApi {
-  static Future<List<MapData>> fetchLocations() async {
-    final response = await http.get(Uri.parse(ApiConfig.url('locations')));
+  static Stream<Data<List<MapData>>> watchLocations(
+          {bool force = false, CachedApi? api}) =>
+      (api ?? CachedApi.shared).watch('locations', _parse, force: force);
 
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonData = json.decode(response.body);
-      return jsonData.map((e) => MapData.fromJson(e)).toList();
-    } else {
-      throw Exception('Error al cargar locations: ${response.statusCode}');
-    }
-  }
+  static Future<List<MapData>> _parse(String body) async =>
+      (json.decode(body) as List<dynamic>)
+          .map((e) => MapData.fromJson(e))
+          .toList();
 }

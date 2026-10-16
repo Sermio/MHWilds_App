@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/asset_thumb.dart';
+import 'package:mhwilds_app/components/async_list_body.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
@@ -20,9 +23,7 @@ class _MapsListState extends State<MapsList> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<LocationsProvider>(context, listen: false);
-      if (!provider.hasData) {
-        provider.fetchZones();
-      }
+      provider.fetchZones();
     });
   }
 
@@ -30,65 +31,31 @@ class _MapsListState extends State<MapsList> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final provider = Provider.of<LocationsProvider>(context);
-    final zones = provider.zones;
     final colorScheme = Theme.of(context).colorScheme;
 
-    if (!provider.hasData && !provider.isLoading) {
+    if (provider.state is Idle) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final p = Provider.of<LocationsProvider>(context, listen: false);
-        if (!p.hasData && !p.isLoading) p.fetchZones();
+        if (p.state is Idle) p.fetchZones();
       });
     }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
-      body: provider.isLoading
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(color: colorScheme.primary),
-                  const SizedBox(height: 16),
-                  Text(
-                    l10n.loadingMap,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: colorScheme.onSurface.withOpacity(0.7),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : zones.isEmpty
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.map_outlined,
-                        size: 64,
-                        color: colorScheme.onSurface.withOpacity(0.5),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        l10n.noMapImagesFound, // Reutilizamos clave o mensaje similar
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: colorScheme.onSurface.withOpacity(0.8),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  itemCount: zones.length,
-                  itemBuilder: (context, index) {
-                    final zone = zones[index];
-                    return _buildMapCard(context, zone);
-                  },
-                ),
+      body: AsyncListBody<MapData>(
+        state: provider.state,
+        isOffline: provider.isOffline,
+        loadingLabel: l10n.loadingMap,
+        emptyTitle: l10n.noMapImagesFound,
+        onRetry: provider.fetchZones,
+        onRefresh: () => provider.refresh(force: true),
+        builder: (context, zones) => ListView.builder(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          itemCount: zones.length,
+          itemBuilder: (context, index) => _buildMapCard(context, zones[index]),
+        ),
+      ),
     );
   }
 
@@ -104,8 +71,9 @@ class _MapsListState extends State<MapsList> {
         zone.name ??
         '';
 
-    final folder = englishMapName.toLowerCase().replaceAll(' ', '_').replaceAll("'", '_');
-    final imagePath = 'assets/imgs/maps/$folder/${folder}1.png';
+    final folder =
+        englishMapName.toLowerCase().replaceAll(' ', '_').replaceAll("'", '_');
+    final imagePath = 'assets/imgs/maps/$folder/${folder}1.webp';
 
     final campCount = zone.camps?.length ?? 0;
     final zoneCount = zone.zoneCount ?? 0;
@@ -117,7 +85,7 @@ class _MapsListState extends State<MapsList> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -142,21 +110,22 @@ class _MapsListState extends State<MapsList> {
             children: [
               // Header Image
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(20)),
                 child: SizedBox(
                   height: 150,
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
-                      Image.asset(
+                      AssetThumb(
                         imagePath,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           // Fallback to static generic map image
-                          return Image.asset(
-                            'assets/imgs/maps/map.png',
+                          return AssetThumb(
+                            'assets/imgs/maps/map.webp',
                             fit: BoxFit.contain,
-                            color: colorScheme.primary.withOpacity(0.1),
+                            color: colorScheme.primary.withValues(alpha: 0.1),
                             colorBlendMode: BlendMode.dstATop,
                           );
                         },
@@ -168,8 +137,8 @@ class _MapsListState extends State<MapsList> {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              Colors.black.withOpacity(0.1),
-                              Colors.black.withOpacity(0.6),
+                              Colors.black.withValues(alpha: 0.1),
+                              Colors.black.withValues(alpha: 0.6),
                             ],
                           ),
                         ),
@@ -221,7 +190,7 @@ class _MapsListState extends State<MapsList> {
                     const Spacer(),
                     Icon(
                       Icons.arrow_forward_ios,
-                      color: colorScheme.onSurface.withOpacity(0.5),
+                      color: colorScheme.onSurface.withValues(alpha: 0.5),
                       size: 16,
                     ),
                   ],
@@ -234,14 +203,15 @@ class _MapsListState extends State<MapsList> {
     );
   }
 
-  Widget _buildInfoBadge(BuildContext context, IconData icon, String label, Color color) {
+  Widget _buildInfoBadge(
+      BuildContext context, IconData icon, String label, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: color.withOpacity(0.3),
+          color: color.withValues(alpha: 0.3),
           width: 1,
         ),
       ),

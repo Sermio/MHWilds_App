@@ -81,10 +81,10 @@ class _MonstersListState extends State<MonstersList> {
         if (p.state is Idle) p.fetchMonsters();
       });
     }
-    if (!zonesProvider.hasData && !zonesProvider.isLoading) {
+    if (zonesProvider.state is Idle) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final p = Provider.of<LocationsProvider>(context, listen: false);
-        if (!p.hasData && !p.isLoading) p.fetchZones();
+        if (p.state is Idle) p.fetchZones();
       });
     }
 
