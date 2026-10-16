@@ -1,17 +1,16 @@
-import 'package:http/http.dart' as http;
-import 'package:mhwilds_app/api/api_config.dart';
+import 'dart:isolate';
+import 'package:mhwilds_app/api/cached_api.dart';
 import 'package:mhwilds_app/models/talisman.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 import 'dart:convert';
 
 class AmuletsApi {
-  static Future<List<Amulet>> fetchAmulets() async {
-    final response = await http.get(Uri.parse(ApiConfig.url('charms')));
+  static Stream<Data<List<Amulet>>> watchAmulets(
+          {bool force = false, CachedApi? api}) =>
+      (api ?? CachedApi.shared).watch('charms', _parse, force: force);
 
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonData = json.decode(response.body);
-      return jsonData.map((e) => Amulet.fromJson(e)).toList();
-    } else {
-      throw Exception('Error al cargar talismans: ${response.statusCode}');
-    }
-  }
+  static Future<List<Amulet>> _parse(String body) => Isolate.run(() {
+        final List<dynamic> jsonData = json.decode(body);
+        return jsonData.map((e) => Amulet.fromJson(e)).toList();
+      });
 }
