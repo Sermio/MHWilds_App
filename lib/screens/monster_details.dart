@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/api/monsters_api.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
+import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class MonsterDetails extends StatefulWidget {
   const MonsterDetails({super.key, required this.monsterId});
 
   @override
-  _MonsterDetailsState createState() => _MonsterDetailsState();
+  State<MonsterDetails> createState() => _MonsterDetailsState();
 }
 
 class _MonsterDetailsState extends State<MonsterDetails> {
@@ -27,7 +27,8 @@ class _MonsterDetailsState extends State<MonsterDetails> {
   @override
   void initState() {
     super.initState();
-    _monsterFuture = MonstersApi.fetchMonsterById(widget.monsterId);
+    _monsterFuture =
+        context.read<MonstersProvider>().monsterById(widget.monsterId);
   }
 
   void checkAvailableRanks(Monster monster) {
@@ -68,7 +69,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.primary.withOpacity(0.2),
+            color: colorScheme.primary.withValues(alpha: 0.2),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -81,7 +82,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
+              color: colorScheme.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -139,10 +140,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.1),
+                color: Colors.orange.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: Colors.orange.withOpacity(0.3),
+                  color: Colors.orange.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -173,10 +174,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                     runSpacing: 8,
                     children: monster.variants.map((variant) {
                       // Determinar si es tempered o arch-tempered
-                      bool isTempered =
+                      final bool isTempered =
                           variant.kind.toLowerCase().contains('tempered') ||
                               variant.name.toLowerCase().contains('tempered');
-                      bool isArchTempered = variant.kind
+                      final bool isArchTempered = variant.kind
                               .toLowerCase()
                               .contains('arch-tempered') ||
                           variant.name.toLowerCase().contains('arch-tempered');
@@ -188,16 +189,16 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
                       if (isArchTempered) {
                         variantColor = Colors.orange[700]!;
-                        borderColor = Colors.orange.withOpacity(0.6);
-                        backgroundColor = Colors.orange.withOpacity(0.1);
+                        borderColor = Colors.orange.withValues(alpha: 0.6);
+                        backgroundColor = Colors.orange.withValues(alpha: 0.1);
                       } else if (isTempered) {
                         variantColor = Colors.purple[700]!;
-                        borderColor = Colors.purple.withOpacity(0.6);
-                        backgroundColor = Colors.purple.withOpacity(0.1);
+                        borderColor = Colors.purple.withValues(alpha: 0.6);
+                        backgroundColor = Colors.purple.withValues(alpha: 0.1);
                       } else {
                         variantColor = Colors.blue[700]!;
-                        borderColor = Colors.blue.withOpacity(0.6);
-                        backgroundColor = Colors.blue.withOpacity(0.1);
+                        borderColor = Colors.blue.withValues(alpha: 0.6);
+                        backgroundColor = Colors.blue.withValues(alpha: 0.1);
                       }
 
                       return Container(
@@ -255,7 +256,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppColors.goldSoft.withOpacity(0.2),
+            color: AppColors.goldSoft.withValues(alpha: 0.2),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -267,7 +268,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: AppColors.goldSoft.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -314,7 +315,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppColors.goldSoft.withOpacity(0.2),
+            color: AppColors.goldSoft.withValues(alpha: 0.2),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -330,7 +331,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: AppColors.goldSoft.withOpacity(0.1),
+                  color: AppColors.goldSoft.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -344,7 +345,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               ),
               const Spacer(),
               // ElementsInfo a la derecha
-              ElementsInfo(),
+              const ElementsInfo(),
             ],
           ),
           const SizedBox(height: 16),
@@ -379,7 +380,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppColors.goldSoft.withOpacity(0.2),
+            color: AppColors.goldSoft.withValues(alpha: 0.2),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -391,7 +392,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: AppColors.goldSoft.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -415,7 +416,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.construction, color: AppColors.goldSoft),
+                  const Icon(Icons.construction, color: AppColors.goldSoft),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
@@ -456,7 +457,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           value,
           style: TextStyle(
             fontSize: isDescription ? 13 : 14,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
           softWrap: true,
         ),
@@ -469,9 +470,9 @@ class _MonsterDetailsState extends State<MonsterDetails> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.goldSoft.withOpacity(0.1),
+        color: AppColors.goldSoft.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.goldSoft.withOpacity(0.3)),
+        border: Border.all(color: AppColors.goldSoft.withValues(alpha: 0.3)),
       ),
       child: Column(
         children: [
@@ -531,7 +532,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               AppLocalizations.of(context)!.noKnownWeaknesses,
               style: TextStyle(
                 fontSize: 12,
-                color: colorScheme.onSurface.withOpacity(0.7),
+                color: colorScheme.onSurface.withValues(alpha: 0.7),
                 fontStyle: FontStyle.italic,
               ),
             ),
@@ -553,7 +554,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                     errorBuilder: (_, __, ___) => Icon(
                       Icons.help_outline,
                       size: 25,
-                      color: colorScheme.onSurface.withOpacity(0.5),
+                      color: colorScheme.onSurface.withValues(alpha: 0.5),
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -588,7 +589,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
       children: [
         Text(
           AppLocalizations.of(context)!.resistances,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,
             color: Colors.blue,
@@ -607,7 +608,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               AppLocalizations.of(context)!.noKnownResistances,
               style: TextStyle(
                 fontSize: 12,
-                color: colorScheme.onSurface.withOpacity(0.7),
+                color: colorScheme.onSurface.withValues(alpha: 0.7),
                 fontStyle: FontStyle.italic,
               ),
             ),
@@ -662,7 +663,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppColors.goldSoft.withOpacity(0.2),
+            color: AppColors.goldSoft.withValues(alpha: 0.2),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -674,7 +675,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: AppColors.goldSoft.withOpacity(0.1),
+              color: AppColors.goldSoft.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -750,9 +751,9 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: color.withOpacity(0.3)),
+            border: Border.all(color: color.withValues(alpha: 0.3)),
           ),
           child: Text(
             size,
@@ -839,7 +840,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                   child: ToggleButtons(
                     fillColor: colorScheme.primary,
                     borderRadius: BorderRadius.circular(10),
-                    disabledColor: colorScheme.onSurface.withOpacity(0.5),
+                    disabledColor: colorScheme.onSurface.withValues(alpha: 0.5),
                     isSelected: [
                       selectedRank == 'low' && isLowRankAvailable,
                       selectedRank == 'high' && isHighRankAvailable,
@@ -857,10 +858,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                           AppLocalizations.of(context)!.lowRank,
                           style: TextStyle(
                             color: !isLowRankAvailable
-                                ? colorScheme.onSurface.withOpacity(0.5)
+                                ? colorScheme.onSurface.withValues(alpha: 0.5)
                                 : (selectedRank == 'low'
                                     ? colorScheme.onPrimary
-                                    : colorScheme.onSurface.withOpacity(0.9)),
+                                    : colorScheme.onSurface.withValues(alpha: 0.9)),
                             fontWeight: selectedRank == 'low'
                                 ? FontWeight.w700
                                 : FontWeight.w600,
@@ -873,10 +874,10 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                           AppLocalizations.of(context)!.highRank,
                           style: TextStyle(
                             color: !isHighRankAvailable
-                                ? colorScheme.onSurface.withOpacity(0.5)
+                                ? colorScheme.onSurface.withValues(alpha: 0.5)
                                 : (selectedRank == 'high'
                                     ? colorScheme.onPrimary
-                                    : colorScheme.onSurface.withOpacity(0.9)),
+                                    : colorScheme.onSurface.withValues(alpha: 0.9)),
                             fontWeight: selectedRank == 'high'
                                 ? FontWeight.w700
                                 : FontWeight.w600,
@@ -920,7 +921,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
     }
 
     final imagePath =
-        'assets/imgs/monsters/${imageName.toLowerCase().replaceAll(' ', '_')}.png';
+        'assets/imgs/monsters/${imageName.toLowerCase().replaceAll(' ', '_')}.webp';
     return Image.asset(
       imagePath,
       width: 380,
@@ -953,7 +954,7 @@ class MonsterRewards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    List<Reward> filteredRewards = rewards
+    final List<Reward> filteredRewards = rewards
         .where((reward) => reward.conditions
             .any((condition) => condition.rank == selectedRank))
         .toList();
@@ -966,12 +967,12 @@ class MonsterRewards extends StatelessWidget {
             itemBuilder: (context, index) {
               final reward = filteredRewards[index];
 
-              var uniqueConditions = <String, RewardCondition>{};
+              final uniqueConditions = <String, RewardCondition>{};
               for (var condition in reward.conditions) {
                 uniqueConditions[condition.kind] = condition;
               }
 
-              var filteredConditions = uniqueConditions.values.toList();
+              final filteredConditions = uniqueConditions.values.toList();
 
               return Container(
                 margin:
@@ -981,7 +982,7 @@ class MonsterRewards extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: colorScheme.shadow.withOpacity(0.1),
+                      color: colorScheme.shadow.withValues(alpha: 0.1),
                       blurRadius: 8,
                       offset: const Offset(0, 4),
                     ),
@@ -1053,7 +1054,7 @@ class MonsterRewards extends StatelessWidget {
 
                           // Lista de condiciones
                           ...filteredConditions.map<Widget>((condition) {
-                            String formattedKind = condition.kind
+                            final String formattedKind = condition.kind
                                 .replaceAll('-', ' ')
                                 .split(' ')
                                 .map((word) =>
@@ -1061,10 +1062,10 @@ class MonsterRewards extends StatelessWidget {
                                 .join(' ');
 
                             // Determinar si es tempered o arch-tempered
-                            bool isTempered = condition.kind
+                            final bool isTempered = condition.kind
                                 .toLowerCase()
                                 .contains('tempered');
-                            bool isArchTempered = condition.kind
+                            final bool isArchTempered = condition.kind
                                 .toLowerCase()
                                 .contains('arch-tempered');
 
@@ -1075,12 +1076,12 @@ class MonsterRewards extends StatelessWidget {
 
                             if (isArchTempered) {
                               conditionColor = Colors.orange[700]!;
-                              borderColor = Colors.orange.withOpacity(0.6);
-                              backgroundColor = Colors.orange.withOpacity(0.1);
+                              borderColor = Colors.orange.withValues(alpha: 0.6);
+                              backgroundColor = Colors.orange.withValues(alpha: 0.1);
                             } else if (isTempered) {
                               conditionColor = Colors.purple[700]!;
-                              borderColor = Colors.purple.withOpacity(0.6);
-                              backgroundColor = Colors.purple.withOpacity(0.1);
+                              borderColor = Colors.purple.withValues(alpha: 0.6);
+                              backgroundColor = Colors.purple.withValues(alpha: 0.1);
                             } else {
                               conditionColor = colorScheme.onSurface;
                               borderColor = colorScheme.outlineVariant;
@@ -1112,7 +1113,7 @@ class MonsterRewards extends StatelessWidget {
                                       boxShadow: [
                                         BoxShadow(
                                           color: AppColors.goldSoft
-                                              .withOpacity(0.3),
+                                              .withValues(alpha: 0.3),
                                           blurRadius: 4,
                                           offset: const Offset(0, 2),
                                         ),

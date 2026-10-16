@@ -1,10 +1,9 @@
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-const String kSkillsSpriteSheetAssetPath = 'assets/imgs/sprites/skills.png';
+const String kSkillsSpriteSheetAssetPath = 'assets/imgs/sprites/skills.webp';
 const int _skillsSpriteColumns = 14;
 
 const Map<String, int> skillIconIdByKind = {
@@ -64,7 +63,8 @@ class _SkillSpriteIconState extends State<SkillSpriteIcon> {
   Widget build(BuildContext context) {
     final int? column = _resolveColumn(widget.iconId, widget.iconKind);
     if (column == null) {
-      return SizedBox(width: widget.size, height: widget.size, child: widget.fallback);
+      return SizedBox(
+          width: widget.size, height: widget.size, child: widget.fallback);
     }
 
     return SizedBox(

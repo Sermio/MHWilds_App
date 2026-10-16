@@ -1,0 +1,96 @@
+[
+  {
+    "rarity": 1,
+    "name": "Potion",
+    "description": "Restores a small amount of health.",
+    "value": 8,
+    "carryLimit": 10,
+    "recipes": [
+      {
+        "output": {
+          "id": 1
+        },
+        "amount": 1,
+        "inputs": [
+          {
+            "name": "Herb",
+            "id": 24
+          }
+        ],
+        "id": 1321
+      }
+    ],
+    "icon": {
+      "id": 10,
+      "kind": "potion",
+      "colorId": 14,
+      "color": "green"
+    },
+    "id": 1,
+    "gameId": 2
+  },
+  {
+    "rarity": 2,
+    "name": "Mega Potion",
+    "description": "Restores a moderate amount of health.",
+    "value": 16,
+    "carryLimit": 10,
+    "recipes": [
+      {
+        "output": {
+          "id": 2
+        },
+        "amount": 1,
+        "inputs": [
+          {
+            "name": "Potion",
+            "id": 1
+          },
+          {
+            "name": "Honey",
+            "id": 26
+          }
+        ],
+        "id": 1322
+      }
+    ],
+    "icon": {
+      "id": 10,
+      "kind": "potion",
+      "colorId": 14,
+      "color": "green"
+    },
+    "id": 2,
+    "gameId": 3
+  },
+  {
+    "rarity": 1,
+    "name": "Antidote",
+    "description": "A cure for poison.",
+    "value": 6,
+    "carryLimit": 10,
+    "recipes": [
+      {
+        "output": {
+          "id": 3
+        },
+        "amount": 1,
+        "inputs": [
+          {
+            "name": "Antidote Herb",
+            "id": 25
+          }
+        ],
+        "id": 1323
+      }
+    ],
+    "icon": {
+      "id": 71,
+      "kind": "curative",
+      "colorId": 17,
+      "color": "blue"
+    },
+    "id": 3,
+    "gameId": 4
+  }
+]

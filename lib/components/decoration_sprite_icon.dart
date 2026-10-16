@@ -1,11 +1,10 @@
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 const String kDecorationsSpriteSheetAssetPath =
-    'assets/imgs/sprites/decorations.png';
+    'assets/imgs/sprites/decorations.webp';
 const int _decorationsSpriteColumns = 20;
 
 const Map<int, int> decorationColumnBySlot = {
@@ -53,7 +52,8 @@ class _DecorationSpriteIconState extends State<DecorationSpriteIcon> {
   Widget build(BuildContext context) {
     final int? column = decorationColumnBySlot[widget.slot];
     if (column == null) {
-      return SizedBox(width: widget.size, height: widget.size, child: widget.fallback);
+      return SizedBox(
+          width: widget.size, height: widget.size, child: widget.fallback);
     }
 
     return SizedBox(
@@ -96,7 +96,8 @@ class _DecorationSpriteIconState extends State<DecorationSpriteIcon> {
   }
 
   int _safeRowCount(ui.Image image) {
-    final int estimatedRows = (image.height / (image.width / _decorationsSpriteColumns)).round();
+    final int estimatedRows =
+        (image.height / (image.width / _decorationsSpriteColumns)).round();
     return estimatedRows > 0 ? estimatedRows : 1;
   }
 }

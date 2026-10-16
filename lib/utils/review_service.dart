@@ -18,7 +18,7 @@ class ReviewService {
     final lastOpenDate = prefs.getString(_keyLastOpenDate);
 
     if (today != lastOpenDate) {
-      int count = prefs.getInt(_keyUniqueDays) ?? 0;
+      final int count = prefs.getInt(_keyUniqueDays) ?? 0;
       await prefs.setInt(_keyUniqueDays, count + 1);
       await prefs.setString(_keyLastOpenDate, today);
     }

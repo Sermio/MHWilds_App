@@ -674,6 +674,25 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get masterRank => 'Rango Maestro';
+
+  @override
+  String get retry => 'Reintentar';
+
+  @override
+  String get errorOffline =>
+      'Sin conexión. Revisa tu internet e inténtalo de nuevo.';
+
+  @override
+  String get errorLoadingData =>
+      'No se pudieron cargar los datos. Inténtalo de nuevo.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Sin conexión · datos del $dateString';
+  }
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -1331,6 +1350,25 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
 
   @override
   String get masterRank => 'Rango Maestro';
+
+  @override
+  String get retry => 'Reintentar';
+
+  @override
+  String get errorOffline =>
+      'Sin conexión. Revisa tu internet e inténtalo de nuevo.';
+
+  @override
+  String get errorLoadingData =>
+      'No se pudieron cargar los datos. Inténtalo de nuevo.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Sin conexión · datos del $dateString';
+  }
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -1988,4 +2026,23 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
   @override
   String get masterRank => 'Rango Maestro';
+
+  @override
+  String get retry => 'Reintentar';
+
+  @override
+  String get errorOffline =>
+      'Sin conexión. Revisa tu internet e inténtalo de nuevo.';
+
+  @override
+  String get errorLoadingData =>
+      'No se pudieron cargar los datos. Inténtalo de nuevo.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Sin conexión · datos del $dateString';
+  }
 }

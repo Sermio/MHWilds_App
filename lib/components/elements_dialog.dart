@@ -55,11 +55,10 @@ class ElementsDialog extends StatelessWidget {
                 ],
               ),
             ),
-
-            Expanded(
+            const Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 12, 12, 16),
-                child: const ElementsAndAilments(),
+                padding: EdgeInsets.fromLTRB(12, 12, 12, 16),
+                child: ElementsAndAilments(),
               ),
             ),
           ],

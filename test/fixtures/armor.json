@@ -1,0 +1,462 @@
+[
+  {
+    "kind": "head",
+    "name": "Conga Helm α",
+    "description": "Head armor made from Congalala materials. Remember: it's \"feral,\" not \"unkempt.\"",
+    "rank": "high",
+    "rarity": 5,
+    "resistances": {
+      "fire": -3,
+      "water": 1,
+      "ice": -1,
+      "thunder": 1,
+      "dragon": 2
+    },
+    "defense": {
+      "base": 36,
+      "max": 76
+    },
+    "skills": [
+      {
+        "skill": {
+          "id": 111,
+          "gameId": 850626240,
+          "name": "Free Meal",
+          "kind": "armor",
+          "icon": {
+            "id": 11,
+            "kind": "item"
+          }
+        },
+        "level": 1,
+        "name": null,
+        "description": "Activates 10% of the time.",
+        "setPiecesRequired": null,
+        "id": 279
+      },
+      {
+        "skill": {
+          "id": 130,
+          "gameId": 1472632704,
+          "name": "Intimidator",
+          "kind": "armor",
+          "icon": {
+            "id": 10,
+            "kind": "utility"
+          }
+        },
+        "level": 1,
+        "name": null,
+        "description": "Discourages monsters from engaging you even if you've been spotted.",
+        "setPiecesRequired": null,
+        "id": 341
+      },
+      {
+        "skill": {
+          "id": 150,
+          "gameId": 1998066176,
+          "name": "Fortifying Pelt",
+          "kind": "group",
+          "icon": {
+            "id": 13,
+            "kind": "group"
+          }
+        },
+        "level": 1,
+        "name": "Fortify",
+        "description": "Increases attack and defense after fainting during a quest. (Can be used twice.)",
+        "setPiecesRequired": 3,
+        "id": 394
+      }
+    ],
+    "slots": [
+      1
+    ],
+    "armorSet": {
+      "id": 1,
+      "name": "Conga α"
+    },
+    "crafting": {
+      "armor": {
+        "id": 1
+      },
+      "materials": [
+        {
+          "item": {
+            "id": 467,
+            "gameId": 509,
+            "rarity": 6,
+            "name": "Congalala Pelt+",
+            "description": "High-quality Congalala fur. Stout and resilient, an important crafting material once processed.",
+            "value": 930,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 44,
+              "kind": "hide",
+              "colorId": 4,
+              "color": "pink"
+            }
+          },
+          "quantity": 2,
+          "id": 1
+        },
+        {
+          "item": {
+            "id": 469,
+            "gameId": 511,
+            "rarity": 6,
+            "name": "Congalala Fang+",
+            "description": "An extra large Congalala fang. Its sturdiness is better suited for crushing than tearing.",
+            "value": 1674,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 45,
+              "kind": "claw",
+              "colorId": 4,
+              "color": "pink"
+            }
+          },
+          "quantity": 1,
+          "id": 2
+        },
+        {
+          "item": {
+            "id": 604,
+            "gameId": 657,
+            "rarity": 6,
+            "name": "Stoutbone",
+            "description": "The bone of a large, high ranking monster. Very sturdy.",
+            "value": 800,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 42,
+              "kind": "bone",
+              "colorId": 2,
+              "color": "gray"
+            }
+          },
+          "quantity": 1,
+          "id": 3
+        }
+      ],
+      "zennyCost": 3000,
+      "id": 1
+    },
+    "id": 1
+  },
+  {
+    "kind": "chest",
+    "name": "Conga Mail α",
+    "description": "Chest armor made from Congalala materials. The shocks of monster fur help hunters keep it wild.",
+    "rank": "high",
+    "rarity": 5,
+    "resistances": {
+      "fire": -3,
+      "water": 1,
+      "ice": -1,
+      "thunder": 1,
+      "dragon": 2
+    },
+    "defense": {
+      "base": 36,
+      "max": 76
+    },
+    "skills": [
+      {
+        "skill": {
+          "id": 95,
+          "gameId": 565867136,
+          "name": "Burst",
+          "kind": "armor",
+          "icon": {
+            "id": 9,
+            "kind": "offense"
+          }
+        },
+        "level": 1,
+        "name": null,
+        "description": "On first hit, gain a small temporary attack and element boost, replaced by a larger boost after the fifth hit.",
+        "setPiecesRequired": null,
+        "id": 236
+      },
+      {
+        "skill": {
+          "id": 130,
+          "gameId": 1472632704,
+          "name": "Intimidator",
+          "kind": "armor",
+          "icon": {
+            "id": 10,
+            "kind": "utility"
+          }
+        },
+        "level": 2,
+        "name": null,
+        "description": "Highly discourages monsters from engaging you even if you've been spotted.",
+        "setPiecesRequired": null,
+        "id": 342
+      },
+      {
+        "skill": {
+          "id": 150,
+          "gameId": 1998066176,
+          "name": "Fortifying Pelt",
+          "kind": "group",
+          "icon": {
+            "id": 13,
+            "kind": "group"
+          }
+        },
+        "level": 1,
+        "name": "Fortify",
+        "description": "Increases attack and defense after fainting during a quest. (Can be used twice.)",
+        "setPiecesRequired": 3,
+        "id": 394
+      }
+    ],
+    "slots": [],
+    "armorSet": {
+      "id": 1,
+      "name": "Conga α"
+    },
+    "crafting": {
+      "armor": {
+        "id": 2
+      },
+      "materials": [
+        {
+          "item": {
+            "id": 467,
+            "gameId": 509,
+            "rarity": 6,
+            "name": "Congalala Pelt+",
+            "description": "High-quality Congalala fur. Stout and resilient, an important crafting material once processed.",
+            "value": 930,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 44,
+              "kind": "hide",
+              "colorId": 4,
+              "color": "pink"
+            }
+          },
+          "quantity": 2,
+          "id": 4
+        },
+        {
+          "item": {
+            "id": 468,
+            "gameId": 510,
+            "rarity": 6,
+            "name": "Congalala Claw+",
+            "description": "A long, hard, sharp claw from the wildest of Congalala, and no less tricky to manage than its source.",
+            "value": 1395,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 45,
+              "kind": "claw",
+              "colorId": 4,
+              "color": "pink"
+            }
+          },
+          "quantity": 2,
+          "id": 5
+        },
+        {
+          "item": {
+            "id": 469,
+            "gameId": 511,
+            "rarity": 6,
+            "name": "Congalala Fang+",
+            "description": "An extra large Congalala fang. Its sturdiness is better suited for crushing than tearing.",
+            "value": 1674,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 45,
+              "kind": "claw",
+              "colorId": 4,
+              "color": "pink"
+            }
+          },
+          "quantity": 1,
+          "id": 6
+        },
+        {
+          "item": {
+            "id": 470,
+            "gameId": 512,
+            "rarity": 6,
+            "name": "Vibrant Pelt+",
+            "description": "Vibrant hair from a Congalala's head. The tuft works as crown of sorts, establishing its status as leader.",
+            "value": 2046,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 44,
+              "kind": "hide",
+              "colorId": 10,
+              "color": "yellow"
+            }
+          },
+          "quantity": 1,
+          "id": 7
+        }
+      ],
+      "zennyCost": 3000,
+      "id": 2
+    },
+    "id": 2
+  },
+  {
+    "kind": "arms",
+    "name": "Conga Vambraces α",
+    "description": "Armguards made from Congalala materials. Crudely made but highly protective.",
+    "rank": "high",
+    "rarity": 5,
+    "resistances": {
+      "fire": -3,
+      "water": 1,
+      "ice": -1,
+      "thunder": 1,
+      "dragon": 2
+    },
+    "defense": {
+      "base": 36,
+      "max": 76
+    },
+    "skills": [
+      {
+        "skill": {
+          "id": 52,
+          "gameId": -481419552,
+          "name": "Mushroomancer",
+          "kind": "armor",
+          "icon": {
+            "id": 11,
+            "kind": "item"
+          }
+        },
+        "level": 1,
+        "name": null,
+        "description": "Lets you digest blue mushrooms and toadstools.",
+        "setPiecesRequired": null,
+        "id": 125
+      },
+      {
+        "skill": {
+          "id": 100,
+          "gameId": 634068352,
+          "name": "Speed Eating",
+          "kind": "armor",
+          "icon": {
+            "id": 10,
+            "kind": "utility"
+          }
+        },
+        "level": 1,
+        "name": null,
+        "description": "Moderately increases eating speed.",
+        "setPiecesRequired": null,
+        "id": 249
+      },
+      {
+        "skill": {
+          "id": 150,
+          "gameId": 1998066176,
+          "name": "Fortifying Pelt",
+          "kind": "group",
+          "icon": {
+            "id": 13,
+            "kind": "group"
+          }
+        },
+        "level": 1,
+        "name": "Fortify",
+        "description": "Increases attack and defense after fainting during a quest. (Can be used twice.)",
+        "setPiecesRequired": 3,
+        "id": 394
+      }
+    ],
+    "slots": [],
+    "armorSet": {
+      "id": 1,
+      "name": "Conga α"
+    },
+    "crafting": {
+      "armor": {
+        "id": 3
+      },
+      "materials": [
+        {
+          "item": {
+            "id": 470,
+            "gameId": 512,
+            "rarity": 6,
+            "name": "Vibrant Pelt+",
+            "description": "Vibrant hair from a Congalala's head. The tuft works as crown of sorts, establishing its status as leader.",
+            "value": 2046,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 44,
+              "kind": "hide",
+              "colorId": 10,
+              "color": "yellow"
+            }
+          },
+          "quantity": 1,
+          "id": 8
+        },
+        {
+          "item": {
+            "id": 522,
+            "gameId": 572,
+            "rarity": 6,
+            "name": "Conga Pelt+",
+            "description": "A high-quality Conga pelt. The thick fur can be used to make long-lasting equipment.",
+            "value": 425,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 44,
+              "kind": "hide",
+              "colorId": 4,
+              "color": "pink"
+            }
+          },
+          "quantity": 2,
+          "id": 9
+        },
+        {
+          "item": {
+            "id": 535,
+            "gameId": 585,
+            "rarity": 6,
+            "name": "Congalala Certificate S",
+            "description": "A Guild certificate awarded to those who have hunted a Congalala. Used to make equipment.",
+            "value": 930,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 30,
+              "kind": "certificate",
+              "colorId": 4,
+              "color": "pink"
+            }
+          },
+          "quantity": 1,
+          "id": 10
+        }
+      ],
+      "zennyCost": 3000,
+      "id": 3
+    },
+    "id": 3
+  }
+]

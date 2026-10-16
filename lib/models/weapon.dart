@@ -1,4 +1,4 @@
-import 'package:mhwilds_app/models/item.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/models/armor_piece.dart';
 
@@ -73,7 +73,7 @@ class Weapon {
       try {
         damage = Damage.fromJson(json['damage'] ?? {});
       } catch (e) {
-        print('Error parsing damage: $e');
+        debugPrint('Error parsing damage: $e');
         damage = Damage(raw: 0, display: 0);
       }
 
@@ -84,7 +84,7 @@ class Weapon {
             .map((skillJson) => WeaponSkill.fromJson(skillJson))
             .toList();
       } catch (e) {
-        print('Error parsing skills: $e');
+        debugPrint('Error parsing skills: $e');
         skills = [];
       }
 
@@ -93,7 +93,7 @@ class Weapon {
       try {
         sharpness = Sharpness.fromJson(json['sharpness'] ?? {});
       } catch (e) {
-        print('Error parsing sharpness: $e');
+        debugPrint('Error parsing sharpness: $e');
         sharpness = Sharpness(
             red: 0,
             orange: 0,
@@ -109,7 +109,7 @@ class Weapon {
       try {
         crafting = WeaponCrafting.fromJson(json['crafting'] ?? {});
       } catch (e) {
-        print('Error parsing crafting: $e');
+        debugPrint('Error parsing crafting: $e');
         crafting = WeaponCrafting(
           weapon: WeaponReference(name: '', id: 0),
           craftable: false,
@@ -127,7 +127,7 @@ class Weapon {
         try {
           series = WeaponSeries.fromJson(json['series']);
         } catch (e) {
-          print('Error parsing series: $e');
+          debugPrint('Error parsing series: $e');
         }
       }
 
@@ -171,7 +171,7 @@ class Weapon {
       );
 
       return weapon;
-    } catch (e, stackTrace) {
+    } catch (e) {
       rethrow;
     }
   }
@@ -185,7 +185,7 @@ class Weapon {
       }
       return null;
     } catch (e) {
-      print('Error parsing melody: $e');
+      debugPrint('Error parsing melody: $e');
       return null;
     }
   }
@@ -199,7 +199,7 @@ class Weapon {
               try {
                 return BowgunAmmo.fromJson(ammoJson);
               } catch (e) {
-                print('Error parsing individual ammo: $e');
+                debugPrint('Error parsing individual ammo: $e');
                 return null;
               }
             })
@@ -208,7 +208,7 @@ class Weapon {
       }
       return null;
     } catch (e) {
-      print('Error parsing ammo list: $e');
+      debugPrint('Error parsing ammo list: $e');
       return null;
     }
   }
@@ -221,7 +221,7 @@ class Weapon {
       }
       return null;
     } catch (e) {
-      print('Error parsing echo bubble: $e');
+      debugPrint('Error parsing echo bubble: $e');
       return null;
     }
   }
@@ -234,7 +234,7 @@ class Weapon {
       }
       return null;
     } catch (e) {
-      print('Error parsing echo wave: $e');
+      debugPrint('Error parsing echo wave: $e');
       return null;
     }
   }
@@ -245,9 +245,11 @@ class Weapon {
       if (phialData is Map<String, dynamic>) {
         return SwitchAxePhial.fromJson(phialData);
       }
+      // La charge-blade manda el phial como String ("impact"/"element").
+      if (phialData is String) return SwitchAxePhial(kind: phialData);
       return null;
     } catch (e) {
-      print('Error parsing phial: $e');
+      debugPrint('Error parsing phial: $e');
       return null;
     }
   }
@@ -263,13 +265,11 @@ class Weapon {
         final hasElementalOrStatusDamage = specialsData.any((special) {
           if (special is Map<String, dynamic>) {
             final kind = special['kind'];
-            final damage = special['damage'];
-            final element = special['element'];
-            final status = special['status'];
+            final damage = special['damage'] as Map<String, dynamic>?;
 
             return (kind == 'element' || kind == 'status') &&
                 damage != null &&
-                damage['raw'] > 0;
+                ((damage['raw'] as num?) ?? 0) > 0;
           }
           return false;
         });
@@ -277,9 +277,9 @@ class Weapon {
         // También buscar phial damage si existe
         final hasPhialDamage = specialsData.any((special) {
           if (special is Map<String, dynamic>) {
-            return special['phial'] != null &&
-                special['phial']['damage'] != null &&
-                special['phial']['damage']['raw'] > 0;
+            final damage = (special['phial'] as Map<String, dynamic>?)?['damage']
+                as Map<String, dynamic>?;
+            return ((damage?['raw'] as num?) ?? 0) > 0;
           }
           return false;
         });
@@ -665,7 +665,7 @@ class WeaponSpecial {
         hidden: json['hidden'] as bool? ?? false,
       );
     } catch (e) {
-      print('Error parsing WeaponSpecial: $e');
+      debugPrint('Error parsing WeaponSpecial: $e');
       return WeaponSpecial(
         id: 0,
         element: 'unknown',
@@ -687,7 +687,7 @@ class WeaponSpecial {
   // Método para obtener la descripción del special
   String get description {
     if (damage.raw > 0) {
-      return '${damage.display} ${element} damage';
+      return '${damage.display} $element damage';
     }
     return element.isNotEmpty ? element : kind;
   }

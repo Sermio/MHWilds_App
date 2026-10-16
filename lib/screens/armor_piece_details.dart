@@ -7,10 +7,9 @@ import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/skills.dart';
-import 'package:mhwilds_app/api/skills_api.dart';
+import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
-import 'package:mhwilds_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 class ArmorDetails extends StatefulWidget {
@@ -19,7 +18,7 @@ class ArmorDetails extends StatefulWidget {
   const ArmorDetails({super.key, required this.armor});
 
   @override
-  _ArmorDetailsState createState() => _ArmorDetailsState();
+  State<ArmorDetails> createState() => _ArmorDetailsState();
 }
 
 class _ArmorDetailsState extends State<ArmorDetails> {
@@ -31,15 +30,10 @@ class _ArmorDetailsState extends State<ArmorDetails> {
     _skills = fetchSkillsForArmor(widget.armor);
   }
 
-  Future<List<Skills>> fetchSkillsForArmor(
-      armor_models.ArmorPiece armor) async {
-    List<Skills> skills = [];
-    final skillIds = armor.skills.map((s) => s.skill.id).toSet();
-    for (var skillId in skillIds) {
-      skills.add(await SkillsApi.fetchSkillById(skillId));
-    }
-    return skills;
-  }
+  Future<List<Skills>> fetchSkillsForArmor(armor_models.ArmorPiece armor) =>
+      context
+          .read<SkillsProvider>()
+          .skillsByIds(armor.skills.map((s) => s.skill.id).toSet());
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +56,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: colorScheme.shadow.withOpacity(0.1),
+                    color: colorScheme.shadow.withValues(alpha: 0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -116,7 +110,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                       widget.armor.description,
                       style: TextStyle(
                         fontSize: 16,
-                        color: colorScheme.onSurface.withOpacity(0.8),
+                        color: colorScheme.onSurface.withValues(alpha: 0.8),
                         height: 1.4,
                       ),
                       textAlign: TextAlign.center,
@@ -151,7 +145,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -194,11 +188,11 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                           horizontal: 10, vertical: 2),
                       decoration: BoxDecoration(
                         color: rarityColorFromSprite(widget.armor.rarity)
-                            .withOpacity(0.1),
+                            .withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                         border: Border.all(
                           color: rarityColorFromSprite(widget.armor.rarity)
-                              .withOpacity(0.3),
+                              .withValues(alpha: 0.3),
                         ),
                       ),
                       child: Text(
@@ -239,7 +233,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   Widget _buildStatRow(String title, String value,
       {Widget? trailing, VoidCallback? onTap}) {
     final colorScheme = Theme.of(context).colorScheme;
-    Widget content = Row(
+    final Widget content = Row(
       children: [
         Text(
           "$title:",
@@ -248,7 +242,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
             fontWeight: FontWeight.w600,
             color: onTap != null
                 ? colorScheme.primary
-                : colorScheme.onSurface.withOpacity(0.8),
+                : colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
         const Spacer(),
@@ -285,7 +279,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -339,7 +333,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                         AppLocalizations.of(context)!.errorLoadingSkills,
                         style: TextStyle(
                           fontSize: 16,
-                          color: colorScheme.onSurface.withOpacity(0.8),
+                          color: colorScheme.onSurface.withValues(alpha: 0.8),
                         ),
                       ),
                     ),
@@ -352,7 +346,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                         AppLocalizations.of(context)!.noSkillsAvailable,
                         style: TextStyle(
                           fontSize: 16,
-                          color: colorScheme.onSurface.withOpacity(0.8),
+                          color: colorScheme.onSurface.withValues(alpha: 0.8),
                         ),
                       ),
                     ),
@@ -428,7 +422,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                           style: TextStyle(
                                             fontSize: 14,
                                             color: colorScheme.onSurface
-                                                .withOpacity(0.8),
+                                                .withValues(alpha: 0.8),
                                           ),
                                         ),
                                       ],
@@ -456,7 +450,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                             ),
                             const SizedBox(height: 12),
                             ...skillInfo.ranks.map((rank) {
-                              bool isCurrentLevel = widget.armor.skills.any(
+                              final bool isCurrentLevel = widget.armor.skills.any(
                                 (armorSkill) =>
                                     armorSkill.skill.id == skillInfo.id &&
                                     armorSkill.level == rank.level,
@@ -467,12 +461,12 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   color: isCurrentLevel
-                                      ? colorScheme.primary.withOpacity(0.1)
+                                      ? colorScheme.primary.withValues(alpha: 0.1)
                                       : colorScheme.surfaceContainerHighest,
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
                                     color: isCurrentLevel
-                                        ? colorScheme.primary.withOpacity(0.3)
+                                        ? colorScheme.primary.withValues(alpha: 0.3)
                                         : colorScheme.outlineVariant,
                                     width: isCurrentLevel ? 2 : 1,
                                   ),
@@ -519,7 +513,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                   ],
                                 ),
                               );
-                            }).toList(),
+                            }),
                           ],
                         ),
                       );
@@ -544,7 +538,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -614,16 +608,16 @@ class _ArmorDetailsState extends State<ArmorDetails> {
     );
   }
 
-  Widget _buildMaterialsSection(List<dynamic> materials) {
+  Widget _buildMaterialsSection(List<armor_models.Material> materials) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ...materials.map((material) => _buildMaterialItem(material)).toList(),
+        ...materials.map((material) => _buildMaterialItem(material)),
       ],
     );
   }
 
-  List<dynamic> _recipeMaterials() {
+  List<armor_models.Material> _recipeMaterials() {
     return widget.armor.crafting.materials
         .where((material) =>
             material.item.name.toLowerCase() != 'zenny' &&
@@ -635,7 +629,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
     return _recipeMaterials().isNotEmpty || widget.armor.crafting.zennyCost > 0;
   }
 
-  Widget _buildMaterialItem(dynamic material) {
+  Widget _buildMaterialItem(armor_models.Material material) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -815,7 +809,7 @@ class ArmorPieceSlotsWidget extends StatelessWidget {
     if (armorPiece.slots.isEmpty) {
       return Text(
         AppLocalizations.of(context)!.noSlots,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.grey,
           fontStyle: FontStyle.italic,
         ),
@@ -833,7 +827,7 @@ class ArmorPieceSlotsWidget extends StatelessWidget {
             size: 20,
             fallback: Container(
               decoration: BoxDecoration(
-                color: slotColor.withOpacity(0.2),
+                color: slotColor.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(color: slotColor, width: 1),
               ),

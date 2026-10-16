@@ -57,14 +57,14 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
   }
 
   Future<void> loadImages(String? mapName) async {
-    List<String> loadedImages = [];
-    String folder =
+    final List<String> loadedImages = [];
+    final String folder =
         mapName!.toLowerCase().replaceAll(' ', '_').replaceAll("'", '_');
-    String baseName = folder;
+    final String baseName = folder;
 
     int index = 1;
     while (true) {
-      String assetPath = 'assets/imgs/maps/$folder/$baseName$index.png';
+      final String assetPath = 'assets/imgs/maps/$folder/$baseName$index.webp';
       try {
         await rootBundle.load(assetPath);
         loadedImages.add(assetPath);
@@ -130,7 +130,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
   Color _getRiskColor(String? risk) {
     if (risk == null) return Colors.grey;
 
-    String riskLower = risk.toLowerCase().trim();
+    final String riskLower = risk.toLowerCase().trim();
 
     // Riesgos bajos - Verde
     if (riskLower.contains('low') ||
@@ -235,7 +235,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
-                          'assets/imgs/item_icons/MHWilds-Tent_Icon_White_e15a70e45a.png',
+                          'assets/imgs/item_icons/MHWilds-Tent_Icon_White_e15a70e45a.webp',
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -278,7 +278,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
               ),
             ),
           );
-        }).toList(),
+        }),
       ],
     );
   }
@@ -384,10 +384,10 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: imageFiles.asMap().entries.map((entry) {
-                      int index = entry.key;
-                      String image = entry.value;
-                      int floorIndex = index;
-                      int levelLabel = index + 1;
+                      final int index = entry.key;
+                      final String image = entry.value;
+                      final int floorIndex = index;
+                      final int levelLabel = index + 1;
 
                       return FadeInUp(
                         duration: Duration(milliseconds: 600 + (index * 200)),
@@ -424,7 +424,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                                   ),
                                   child: Text(
                                     '${AppLocalizations.of(context)!.level} $levelLabel',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.white,

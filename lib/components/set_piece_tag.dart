@@ -22,12 +22,12 @@ class SetPieceTag extends StatelessWidget {
     if (count <= 0) return const SizedBox.shrink();
 
     final l10n = AppLocalizations.of(context)!;
-    
+
     // Colores basados en las capturas
-    final Color bgColor = variant == SetPieceTagVariant.gold 
+    final Color bgColor = variant == SetPieceTagVariant.gold
         ? const Color(0xFFB4964F) // Oro/Mostaza MH
         : const Color(0xFFB0B0B0); // Gris neutral
-    
+
     return Container(
       padding: padding,
       decoration: BoxDecoration(

@@ -77,7 +77,7 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: colorScheme.onSurface),
         fillColor: colorScheme.surfaceContainerHighest,
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.goldSoft),
         ),
         focusedBorder: const OutlineInputBorder(
@@ -169,7 +169,7 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: colorScheme.onSurface),
         fillColor: colorScheme.surfaceContainerHighest,
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.goldSoft),
         ),
         focusedBorder: const OutlineInputBorder(

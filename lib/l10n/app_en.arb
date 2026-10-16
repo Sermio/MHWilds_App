@@ -266,5 +266,15 @@
   "treeViewTooltip": "Tree View",
   "tableViewTooltip": "Table View",
   "errorLoadingWeaponDetails": "Error loading weapon details",
-  "masterRank": "Master Rank"
+  "masterRank": "Master Rank",
+  "retry": "Retry",
+  "errorOffline": "No connection. Check your internet and try again.",
+  "errorLoadingData": "Couldn't load the data. Please try again.",
+  "offlineDataFrom": "Offline · data from {date}",
+  "@offlineDataFrom": {
+    "description": "Banner over cached data that could not be refreshed. {date} is the day it was downloaded.",
+    "placeholders": {
+      "date": {"type": "DateTime", "format": "Md"}
+    }
+  }
 }

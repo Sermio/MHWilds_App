@@ -252,5 +252,9 @@
   "treeViewTooltip": "Baumansicht",
   "tableViewTooltip": "Tabellenansicht",
   "errorLoadingWeaponDetails": "Fehler beim Laden der Waffendetails",
-  "masterRank": "Meisterrang"
+  "masterRank": "Meisterrang",
+  "retry": "Erneut versuchen",
+  "errorOffline": "Keine Verbindung. Prüfe dein Internet und versuche es erneut.",
+  "errorLoadingData": "Die Daten konnten nicht geladen werden. Bitte versuche es erneut.",
+  "offlineDataFrom": "Offline · Daten vom {date}"
 }

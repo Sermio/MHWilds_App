@@ -1,0 +1,1133 @@
+[
+  {
+    "ranks": [
+      {
+        "charm": {
+          "id": 1
+        },
+        "name": "Windproof Charm I",
+        "description": "A charm that grants the Windproof skill.",
+        "level": 1,
+        "rarity": 4,
+        "skills": [
+          {
+            "skill": {
+              "id": 35,
+              "name": "Windproof"
+            },
+            "level": 1,
+            "name": null,
+            "description": "Negates minor wind pressure and halves the effects of major wind pressure.",
+            "setPiecesRequired": null,
+            "id": 79
+          }
+        ],
+        "crafting": {
+          "charmRank": {
+            "id": 1
+          },
+          "craftable": true,
+          "materials": [
+            {
+              "item": {
+                "id": 53,
+                "gameId": 55,
+                "rarity": 4,
+                "name": "Dragonite Ore",
+                "description": "Ore sourced from mining outcrops. A rare material coveted for its durability in armor crafting.",
+                "value": 480,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 38,
+                  "kind": "ore",
+                  "colorId": 14,
+                  "color": "green"
+                }
+              },
+              "quantity": 2,
+              "id": 1854
+            },
+            {
+              "item": {
+                "id": 358,
+                "gameId": 391,
+                "rarity": 4,
+                "name": "Guardian Doshaguma Hide",
+                "description": "The hide of a Guardian Doshaguma. It is especially thick and tough, with a distinctive white pattern.",
+                "value": 750,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 1,
+                  "color": "white"
+                }
+              },
+              "quantity": 2,
+              "id": 1855
+            },
+            {
+              "item": {
+                "id": 360,
+                "gameId": 393,
+                "rarity": 4,
+                "name": "Guardian Doshaguma Fang",
+                "description": "The fang of a Guardian Doshaguma. Tough enough to withstand the Doshaguma's fiercely acidic saliva.",
+                "value": 1100,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 1,
+                  "color": "white"
+                }
+              },
+              "quantity": 1,
+              "id": 1856
+            },
+            {
+              "item": {
+                "id": 462,
+                "gameId": 504,
+                "rarity": 4,
+                "name": "Congalala Pelt",
+                "description": "The pink fur of a Congalala. The tufts of fluffy hair are an ideal material for clothing.",
+                "value": 280,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 1,
+              "id": 1857
+            }
+          ],
+          "zennyCost": 1500,
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "charm": {
+          "id": 1
+        },
+        "name": "Windproof Charm II",
+        "description": "A charm that grants the Windproof skill.",
+        "level": 2,
+        "rarity": 5,
+        "skills": [
+          {
+            "skill": {
+              "id": 35,
+              "name": "Windproof"
+            },
+            "level": 2,
+            "name": null,
+            "description": "Negates minor and major wind pressure and halves the effects of dragon wind pressure.",
+            "setPiecesRequired": null,
+            "id": 80
+          }
+        ],
+        "crafting": {
+          "charmRank": {
+            "id": 2
+          },
+          "craftable": false,
+          "materials": [
+            {
+              "item": {
+                "id": 481,
+                "gameId": 523,
+                "rarity": 6,
+                "name": "Kut-Ku Carapace",
+                "description": "Unyielding Yian Kut-Ku carapace. Its vivid red hue won't dim even when exposed to intense heat.",
+                "value": 1455,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 46,
+                  "kind": "shell",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 6,
+              "id": 1858
+            },
+            {
+              "item": {
+                "id": 483,
+                "gameId": 525,
+                "rarity": 6,
+                "name": "Giant Beak",
+                "description": "The massive beak of a Yian Kut-Ku. Sturdy enough to peck through even the rockiest of terrain.",
+                "value": 1940,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 49,
+                  "kind": "skull",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 2,
+              "id": 1859
+            },
+            {
+              "item": {
+                "id": 484,
+                "gameId": 526,
+                "rarity": 6,
+                "name": "Kut-Ku Wing",
+                "description": "Quality Yian Kut-Ku wing membrane. A triple threat of sturdiness, flexibility, and fire resistance.",
+                "value": 1746,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 48,
+                  "kind": "wing",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 4,
+              "id": 1860
+            },
+            {
+              "item": {
+                "id": 492,
+                "gameId": 534,
+                "rarity": 7,
+                "name": "Bird Wyvern Gem",
+                "description": "A valuable gem that can be harvested from bird wyverns. Said to fetch a high price on the market.",
+                "value": 4000,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 20,
+                  "kind": "gem",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 1,
+              "id": 1861
+            }
+          ],
+          "zennyCost": 3000,
+          "id": 2
+        },
+        "id": 2
+      },
+      {
+        "charm": {
+          "id": 1
+        },
+        "name": "Windproof Charm III",
+        "description": "A charm that grants the Windproof skill.",
+        "level": 3,
+        "rarity": 6,
+        "skills": [
+          {
+            "skill": {
+              "id": 35,
+              "name": "Windproof"
+            },
+            "level": 3,
+            "name": null,
+            "description": "Negates all kinds of wind pressure.",
+            "setPiecesRequired": null,
+            "id": 81
+          }
+        ],
+        "crafting": {
+          "charmRank": {
+            "id": 3
+          },
+          "craftable": false,
+          "materials": [
+            {
+              "item": {
+                "id": 96,
+                "gameId": 105,
+                "rarity": 6,
+                "name": "Rathian Spike+",
+                "description": "Rathian hairs, keen as a sword. Longer and sturdier than normal, they also contain more poison.",
+                "value": 2400,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 41,
+                  "kind": "medulla",
+                  "colorId": 14,
+                  "color": "green"
+                }
+              },
+              "quantity": 3,
+              "id": 1862
+            },
+            {
+              "item": {
+                "id": 97,
+                "gameId": 106,
+                "rarity": 7,
+                "name": "Rathian Ruby",
+                "description": "A rare, precious gem from inside a Rathian. Almost too nice to use.",
+                "value": 7200,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 20,
+                  "kind": "gem",
+                  "colorId": 14,
+                  "color": "green"
+                }
+              },
+              "quantity": 1,
+              "id": 1863
+            },
+            {
+              "item": {
+                "id": 373,
+                "gameId": 407,
+                "rarity": 6,
+                "name": "Guardian Rathalos Carapace",
+                "description": "The tough carapace of a Guardian Rathalos. Durable enough to withstand even the fiercest flames.",
+                "value": 2550,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 46,
+                  "kind": "shell",
+                  "colorId": 1,
+                  "color": "white"
+                }
+              },
+              "quantity": 6,
+              "id": 1864
+            },
+            {
+              "item": {
+                "id": 374,
+                "gameId": 408,
+                "rarity": 6,
+                "name": "Guardian Rathalos Wing",
+                "description": "A wing from a Guardian Rathalos. Energy courses through each vein, producing gale-force winds.",
+                "value": 3060,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 48,
+                  "kind": "wing",
+                  "colorId": 1,
+                  "color": "white"
+                }
+              },
+              "quantity": 4,
+              "id": 1865
+            }
+          ],
+          "zennyCost": 6000,
+          "id": 3
+        },
+        "id": 3
+      }
+    ],
+    "random": false,
+    "id": 1,
+    "gameId": -2084662144
+  },
+  {
+    "ranks": [
+      {
+        "charm": {
+          "id": 2
+        },
+        "name": "Maintenance Charm I",
+        "description": "A charm that grants the Tool Specialist skill.",
+        "level": 1,
+        "rarity": 4,
+        "skills": [
+          {
+            "skill": {
+              "id": 90,
+              "name": "Tool Specialist"
+            },
+            "level": 1,
+            "name": null,
+            "description": "Shortens recharge time by 10%.",
+            "setPiecesRequired": null,
+            "id": 222
+          }
+        ],
+        "crafting": {
+          "charmRank": {
+            "id": 4
+          },
+          "craftable": true,
+          "materials": [
+            {
+              "item": {
+                "id": 52,
+                "gameId": 54,
+                "rarity": 4,
+                "name": "Machalite Ore",
+                "description": "Ore mined from mineral veins. Refined Machalite Steel is far sturdier than its iron cousin.",
+                "value": 160,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 38,
+                  "kind": "ore",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 2,
+              "id": 1866
+            },
+            {
+              "item": {
+                "id": 289,
+                "gameId": 322,
+                "rarity": 4,
+                "name": "Uth Duna Scale",
+                "description": "A scale from an Uth Duna. Glistens in a kaleidoscope of colors.",
+                "value": 600,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 19,
+                  "color": "blue-purple"
+                }
+              },
+              "quantity": 2,
+              "id": 1867
+            },
+            {
+              "item": {
+                "id": 291,
+                "gameId": 324,
+                "rarity": 4,
+                "name": "Uth Duna Cilia",
+                "description": "Extremely fine hair from an Uth Duna. When woven together, it forms a thin, watery membrane.",
+                "value": 1080,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 1,
+              "id": 1868
+            },
+            {
+              "item": {
+                "id": 454,
+                "gameId": 493,
+                "rarity": 4,
+                "name": "Piragill Fin",
+                "description": "A Piragill fin. Its sharp edge cuts into prey like a knife through butter.",
+                "value": 100,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 41,
+                  "kind": "medulla",
+                  "colorId": 5,
+                  "color": "red"
+                }
+              },
+              "quantity": 2,
+              "id": 1869
+            }
+          ],
+          "zennyCost": 1500,
+          "id": 4
+        },
+        "id": 4
+      },
+      {
+        "charm": {
+          "id": 2
+        },
+        "name": "Maintenance Charm II",
+        "description": "A charm that grants the Tool Specialist skill.",
+        "level": 2,
+        "rarity": 6,
+        "skills": [
+          {
+            "skill": {
+              "id": 90,
+              "name": "Tool Specialist"
+            },
+            "level": 2,
+            "name": null,
+            "description": "Shortens recharge time by 20%.",
+            "setPiecesRequired": null,
+            "id": 223
+          }
+        ],
+        "crafting": {
+          "charmRank": {
+            "id": 5
+          },
+          "craftable": false,
+          "materials": [
+            {
+              "item": {
+                "id": 470,
+                "gameId": 512,
+                "rarity": 6,
+                "name": "Vibrant Pelt+",
+                "description": "Vibrant hair from a Congalala's head. The tuft works as crown of sorts, establishing its status as leader.",
+                "value": 2046,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 10,
+                  "color": "yellow"
+                }
+              },
+              "quantity": 2,
+              "id": 1870
+            },
+            {
+              "item": {
+                "id": 500,
+                "gameId": 542,
+                "rarity": 6,
+                "name": "Gravios Carapace",
+                "description": "The sturdy carapace of a Gravios. Fused with ore by intense heat, it has grown abnormally tough.",
+                "value": 1460,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 46,
+                  "kind": "shell",
+                  "colorId": 1,
+                  "color": "white"
+                }
+              },
+              "quantity": 6,
+              "id": 1871
+            },
+            {
+              "item": {
+                "id": 501,
+                "gameId": 543,
+                "rarity": 6,
+                "name": "Gravios Skull",
+                "description": "The head armor of a Gravios, hardened by its own heat. Makes it hard to work with, too.",
+                "value": 3212,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 49,
+                  "kind": "skull",
+                  "colorId": 1,
+                  "color": "white"
+                }
+              },
+              "quantity": 3,
+              "id": 1872
+            },
+            {
+              "item": {
+                "id": 503,
+                "gameId": 545,
+                "rarity": 7,
+                "name": "Gravios Medulla",
+                "description": "Though hard to extract and hard to craft, the brain stem is an especially precious Gravios part.",
+                "value": 8760,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 41,
+                  "kind": "medulla",
+                  "colorId": 5,
+                  "color": "red"
+                }
+              },
+              "quantity": 1,
+              "id": 1873
+            }
+          ],
+          "zennyCost": 6000,
+          "id": 5
+        },
+        "id": 5
+      },
+      {
+        "charm": {
+          "id": 2
+        },
+        "name": "Maintenance Charm III",
+        "description": "A charm that grants the Tool Specialist skill.",
+        "level": 3,
+        "rarity": 7,
+        "skills": [
+          {
+            "skill": {
+              "id": 90,
+              "name": "Tool Specialist"
+            },
+            "level": 3,
+            "name": null,
+            "description": "Shortens recharge time by 30%.",
+            "setPiecesRequired": null,
+            "id": 224
+          }
+        ],
+        "crafting": {
+          "charmRank": {
+            "id": 6
+          },
+          "craftable": false,
+          "materials": [
+            {
+              "item": {
+                "id": 296,
+                "gameId": 329,
+                "rarity": 6,
+                "name": "Uth Duna Scale+",
+                "description": "A high-quality scale from an Uth Duna. Thin grooves allow it to store water to strengthen itself.",
+                "value": 2350,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 19,
+                  "color": "blue-purple"
+                }
+              },
+              "quantity": 4,
+              "id": 1874
+            },
+            {
+              "item": {
+                "id": 299,
+                "gameId": 332,
+                "rarity": 6,
+                "name": "Uth Duna Tentacle+",
+                "description": "An elegant and flexible tentacle from an Uth Duna. A membrane of water surrounds it like a veil.",
+                "value": 4700,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 41,
+                  "kind": "medulla",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 2,
+              "id": 1875
+            },
+            {
+              "item": {
+                "id": 301,
+                "gameId": 334,
+                "rarity": 7,
+                "name": "Uth Duna Watergem",
+                "description": "A rare jewel that developed within an Uth Duna. Said to wield the power of a devastating flood.",
+                "value": 14100,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 20,
+                  "kind": "gem",
+                  "colorId": 19,
+                  "color": "blue-purple"
+                }
+              },
+              "quantity": 1,
+              "id": 1876
+            },
+            {
+              "item": {
+                "id": 608,
+                "gameId": 661,
+                "rarity": 8,
+                "name": "Hunter Symbol III",
+                "description": "Proof that you've hunted a vicious tempered monster, certifying your heroism.",
+                "value": 3000,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 30,
+                  "kind": "certificate",
+                  "colorId": 11,
+                  "color": "lemon"
+                }
+              },
+              "quantity": 3,
+              "id": 1877
+            }
+          ],
+          "zennyCost": 9000,
+          "id": 6
+        },
+        "id": 6
+      },
+      {
+        "charm": {
+          "id": 2
+        },
+        "name": "Maintenance Charm IV",
+        "description": "A charm that grants the Tool Specialist skill.",
+        "level": 4,
+        "rarity": 8,
+        "skills": [
+          {
+            "skill": {
+              "id": 90,
+              "name": "Tool Specialist"
+            },
+            "level": 4,
+            "name": null,
+            "description": "Shortens recharge time by 40%.",
+            "setPiecesRequired": null,
+            "id": 225
+          }
+        ],
+        "crafting": {
+          "charmRank": {
+            "id": 168
+          },
+          "craftable": false,
+          "materials": [
+            {
+              "item": {
+                "id": 297,
+                "gameId": 330,
+                "rarity": 6,
+                "name": "Uth Duna Hide+",
+                "description": "A high-quality hide from an Uth Duna. Its pattern holds an almost divine beauty.",
+                "value": 3525,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 19,
+                  "color": "blue-purple"
+                }
+              },
+              "quantity": 6,
+              "id": 23559
+            },
+            {
+              "item": {
+                "id": 300,
+                "gameId": 333,
+                "rarity": 6,
+                "name": "Uth Duna Claw+",
+                "description": "A sharp claw from an Uth Duna. Heavy enough to easily crush even the thickest trees.",
+                "value": 4700,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 19,
+                  "color": "blue-purple"
+                }
+              },
+              "quantity": 4,
+              "id": 23560
+            },
+            {
+              "item": {
+                "id": 388,
+                "gameId": 424,
+                "rarity": 7,
+                "name": "Jin Dahaad Icegem",
+                "description": "A rare jewel developed within a Jin Dahaad. Said to wield the power to freeze entire cliffs.",
+                "value": 13800,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 20,
+                  "kind": "gem",
+                  "colorId": 16,
+                  "color": "sky"
+                }
+              },
+              "quantity": 1,
+              "id": 23561
+            },
+            {
+              "item": {
+                "id": 702,
+                "gameId": 759,
+                "rarity": 7,
+                "name": "Uth Duna Certificate γ",
+                "description": "A Guild certificate for hunting an Arch-tempered Uth Duna. Used to make equipment.",
+                "value": 3200,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 30,
+                  "kind": "certificate",
+                  "colorId": 19,
+                  "color": "blue-purple"
+                }
+              },
+              "quantity": 3,
+              "id": 23562
+            }
+          ],
+          "zennyCost": 16000,
+          "id": 168
+        },
+        "id": 168
+      }
+    ],
+    "random": false,
+    "id": 2,
+    "gameId": -1899364096
+  },
+  {
+    "ranks": [
+      {
+        "charm": {
+          "id": 3
+        },
+        "name": "Fire Charm I",
+        "description": "A charm that grants the Fire Resistance skill.",
+        "level": 1,
+        "rarity": 2,
+        "skills": [
+          {
+            "skill": {
+              "id": 125,
+              "name": "Fire Resistance"
+            },
+            "level": 1,
+            "name": null,
+            "description": "Fire resistance +6",
+            "setPiecesRequired": null,
+            "id": 327
+          }
+        ],
+        "crafting": {
+          "charmRank": {
+            "id": 7
+          },
+          "craftable": true,
+          "materials": [
+            {
+              "item": {
+                "id": 51,
+                "gameId": 53,
+                "rarity": 4,
+                "name": "Iron Ore",
+                "description": "Ore that can be smelted into a multi-purpose metal.",
+                "value": 60,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 38,
+                  "kind": "ore",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 2,
+              "id": 1878
+            },
+            {
+              "item": {
+                "id": 80,
+                "gameId": 88,
+                "rarity": 4,
+                "name": "Quematrice Scale",
+                "description": "The scale of a Quematrice. Its fine texture acts as a natural file used to grind and polish armor.",
+                "value": 220,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 2,
+              "id": 1879
+            },
+            {
+              "item": {
+                "id": 266,
+                "gameId": 299,
+                "rarity": 4,
+                "name": "Quematrice Igniter",
+                "description": "Flammable fluids from a Quematrice, expelled as a gas then ignited by sparks from its coarse tail.",
+                "value": 396,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 73,
+                  "kind": "extract",
+                  "colorId": 5,
+                  "color": "red"
+                }
+              },
+              "quantity": 1,
+              "id": 1880
+            }
+          ],
+          "zennyCost": 500,
+          "id": 7
+        },
+        "id": 7
+      },
+      {
+        "charm": {
+          "id": 3
+        },
+        "name": "Fire Charm II",
+        "description": "A charm that grants the Fire Resistance skill.",
+        "level": 2,
+        "rarity": 4,
+        "skills": [
+          {
+            "skill": {
+              "id": 125,
+              "name": "Fire Resistance"
+            },
+            "level": 2,
+            "name": null,
+            "description": "Fire resistance +12",
+            "setPiecesRequired": null,
+            "id": 328
+          }
+        ],
+        "crafting": {
+          "charmRank": {
+            "id": 8
+          },
+          "craftable": false,
+          "materials": [
+            {
+              "item": {
+                "id": 330,
+                "gameId": 363,
+                "rarity": 4,
+                "name": "Ajarakan Scale",
+                "description": "A scale from an Ajarakan.  Extremely resistant, not even the hardest of stone will scratch it.",
+                "value": 480,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 6,
+                  "color": "vermilion"
+                }
+              },
+              "quantity": 2,
+              "id": 1881
+            },
+            {
+              "item": {
+                "id": 334,
+                "gameId": 367,
+                "rarity": 4,
+                "name": "Ajarakan Jewel",
+                "description": "A rare jewel that developed in an Ajarakan's body. Said to wield enough force to explode bedrock.",
+                "value": 864,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 38,
+                  "kind": "ore",
+                  "colorId": 6,
+                  "color": "vermilion"
+                }
+              },
+              "quantity": 1,
+              "id": 1882
+            },
+            {
+              "item": {
+                "id": 456,
+                "gameId": 496,
+                "rarity": 4,
+                "name": "Kranodath Skull",
+                "description": "A Kranodath skull. Its incredible resilience makes it a great material for armor.",
+                "value": 200,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 49,
+                  "kind": "skull",
+                  "colorId": 20,
+                  "color": "purple"
+                }
+              },
+              "quantity": 2,
+              "id": 1883
+            },
+            {
+              "item": {
+                "id": 530,
+                "gameId": 580,
+                "rarity": 4,
+                "name": "Firestone",
+                "description": "Ore that is scorching even at room temperature. Its heat can be used to fuse materials.",
+                "value": 860,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 38,
+                  "kind": "ore",
+                  "colorId": 6,
+                  "color": "vermilion"
+                }
+              },
+              "quantity": 1,
+              "id": 1884
+            }
+          ],
+          "zennyCost": 1500,
+          "id": 8
+        },
+        "id": 8
+      },
+      {
+        "charm": {
+          "id": 3
+        },
+        "name": "Fire Charm III",
+        "description": "A charm that grants the Fire Resistance skill.",
+        "level": 3,
+        "rarity": 5,
+        "skills": [
+          {
+            "skill": {
+              "id": 125,
+              "name": "Fire Resistance"
+            },
+            "level": 3,
+            "name": null,
+            "description": "Fire resistance +20 Defense +10",
+            "setPiecesRequired": null,
+            "id": 329
+          }
+        ],
+        "crafting": {
+          "charmRank": {
+            "id": 9
+          },
+          "craftable": false,
+          "materials": [
+            {
+              "item": {
+                "id": 268,
+                "gameId": 301,
+                "rarity": 6,
+                "name": "Quematrice Scale+",
+                "description": "A high-quality Quematrice scale. Its keen ridges allow it to cleave stone in a single stroke.",
+                "value": 870,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 4,
+              "id": 1885
+            },
+            {
+              "item": {
+                "id": 270,
+                "gameId": 303,
+                "rarity": 6,
+                "name": "Quematrice Igniter+",
+                "description": "Especially viscous fluid from a Quematrice. The gas it releases burns at a perilous temperature.",
+                "value": 1566,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 73,
+                  "kind": "extract",
+                  "colorId": 5,
+                  "color": "red"
+                }
+              },
+              "quantity": 3,
+              "id": 1886
+            },
+            {
+              "item": {
+                "id": 452,
+                "gameId": 491,
+                "rarity": 6,
+                "name": "Talioth Scale+",
+                "description": "A high-quality Talioth scale. Built to survive fierce battles, but still not much to look at.",
+                "value": 425,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 7,
+                  "color": "orange"
+                }
+              },
+              "quantity": 3,
+              "id": 1887
+            },
+            {
+              "item": {
+                "id": 531,
+                "gameId": 581,
+                "rarity": 7,
+                "name": "Firecell Stone",
+                "description": "A magma-like deposit that only trained hands can handle. Armor made from it is first-class.",
+                "value": 1720,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 38,
+                  "kind": "ore",
+                  "colorId": 7,
+                  "color": "orange"
+                }
+              },
+              "quantity": 1,
+              "id": 1888
+            }
+          ],
+          "zennyCost": 3000,
+          "id": 9
+        },
+        "id": 9
+      }
+    ],
+    "random": false,
+    "id": 3,
+    "gameId": -1817216768
+  }
+]

@@ -1,0 +1,554 @@
+[
+  {
+    "name": "Oilwell Basin",
+    "zoneCount": 18,
+    "camps": [
+      {
+        "location": {
+          "id": 1
+        },
+        "name": "Area 2: Canyon Divide",
+        "zone": 2,
+        "floor": 2,
+        "risk": "safe",
+        "position": {
+          "x": 728.9807,
+          "y": -37.6587,
+          "z": -77.59798
+        },
+        "id": 48,
+        "gameId": 1236020352
+      },
+      {
+        "location": {
+          "id": 1
+        },
+        "name": "Area 4: Dilapidated Roadway",
+        "zone": 4,
+        "floor": 2,
+        "risk": "dangerous",
+        "position": {
+          "x": 1120.4517,
+          "y": -35.552746,
+          "z": -16.96232
+        },
+        "id": 49,
+        "gameId": -1088539264
+      },
+      {
+        "location": {
+          "id": 1
+        },
+        "name": "Area 8: Middle Strata North",
+        "zone": 8,
+        "floor": 1,
+        "risk": "dangerous",
+        "position": {
+          "x": 917.81976,
+          "y": -111.91728,
+          "z": -201.39014
+        },
+        "id": 50,
+        "gameId": -1513005568
+      },
+      {
+        "location": {
+          "id": 1
+        },
+        "name": "Area 9: Middle Strata South",
+        "zone": 9,
+        "floor": 1,
+        "risk": "insecure",
+        "position": {
+          "x": 981.21027,
+          "y": -119.19153,
+          "z": 108.262024
+        },
+        "id": 51,
+        "gameId": -543541056
+      },
+      {
+        "location": {
+          "id": 1
+        },
+        "name": "Area 12: Crimson Rivulet",
+        "zone": 12,
+        "floor": 0,
+        "risk": "safe",
+        "position": {
+          "x": 673.86554,
+          "y": -219.53549,
+          "z": 24.425632
+        },
+        "id": 52,
+        "gameId": 1056423168
+      },
+      {
+        "location": {
+          "id": 1
+        },
+        "name": "Area 13: Limestone Cavern",
+        "zone": 13,
+        "floor": 0,
+        "risk": "safe",
+        "position": {
+          "x": 951.60693,
+          "y": -142.34926,
+          "z": -180.07504
+        },
+        "id": 53,
+        "gameId": -597130496
+      },
+      {
+        "location": {
+          "id": 1
+        },
+        "name": "Area 14: Mining Cave",
+        "zone": 14,
+        "floor": 0,
+        "risk": "safe",
+        "position": {
+          "x": 864.2866,
+          "y": -167.53925,
+          "z": 193.18413
+        },
+        "id": 54,
+        "gameId": 238639888
+      },
+      {
+        "location": {
+          "id": 1
+        },
+        "name": "Area 15: Lower Strata North",
+        "zone": 15,
+        "floor": 0,
+        "risk": "dangerous",
+        "position": {
+          "x": 1112.7195,
+          "y": -193.42378,
+          "z": -83.16206
+        },
+        "id": 55,
+        "gameId": -1287419136
+      }
+    ],
+    "id": 1,
+    "gameId": -1251081216
+  },
+  {
+    "name": "Windward Plains",
+    "zoneCount": 17,
+    "camps": [
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 3: South",
+        "zone": 3,
+        "floor": 1,
+        "risk": "insecure",
+        "position": {
+          "x": -1026.0447,
+          "y": 32.090633,
+          "z": 964.3236
+        },
+        "id": 56,
+        "gameId": 1072031744
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 4: Mineral Cave",
+        "zone": 4,
+        "floor": 2,
+        "risk": "safe",
+        "position": {
+          "x": -991.67236,
+          "y": 65.97437,
+          "z": 725.0487
+        },
+        "id": 57,
+        "gameId": -1793374848
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 4: Mineral Cave",
+        "zone": 4,
+        "floor": 2,
+        "risk": "safe",
+        "position": {
+          "x": -991.67236,
+          "y": 65.97437,
+          "z": 725.0487
+        },
+        "id": 58,
+        "gameId": -582579520
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 6: Valley Hideaway",
+        "zone": 6,
+        "floor": 1,
+        "risk": "safe",
+        "position": {
+          "x": -1097.2708,
+          "y": 38.560577,
+          "z": 990.01855
+        },
+        "id": 59,
+        "gameId": 1623808640
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 8: Southeast",
+        "zone": 8,
+        "floor": 1,
+        "risk": "dangerous",
+        "position": {
+          "x": -467.48724,
+          "y": -0.8226309,
+          "z": 999.3108
+        },
+        "id": 60,
+        "gameId": 1001462464
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 8: Southeast",
+        "zone": 8,
+        "floor": 1,
+        "risk": "dangerous",
+        "position": {
+          "x": -467.48724,
+          "y": -0.8226309,
+          "z": 999.3108
+        },
+        "id": 61,
+        "gameId": 1388919040
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 9: Lookout Hill",
+        "zone": 9,
+        "floor": 1,
+        "risk": "insecure",
+        "position": {
+          "x": -618.92285,
+          "y": 24.944147,
+          "z": 736.2871
+        },
+        "id": 62,
+        "gameId": 644253312
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 10: Southeast",
+        "zone": 10,
+        "floor": 1,
+        "risk": "dangerous",
+        "position": {
+          "x": -418.34872,
+          "y": 8.551121,
+          "z": 806.5804
+        },
+        "id": 63,
+        "gameId": 1459183360
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 13: Oasis",
+        "zone": 13,
+        "floor": 1,
+        "risk": "dangerous",
+        "position": {
+          "x": -958.5062,
+          "y": 5.088243,
+          "z": 1350.4937
+        },
+        "id": 64,
+        "gameId": -1214747648
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 13: Oasis",
+        "zone": 13,
+        "floor": 1,
+        "risk": "dangerous",
+        "position": {
+          "x": -958.5062,
+          "y": 5.088243,
+          "z": 1350.4937
+        },
+        "id": 65,
+        "gameId": 758123136
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 14: Groundwater Vein",
+        "zone": 14,
+        "floor": 0,
+        "risk": "safe",
+        "position": {
+          "x": -906.80035,
+          "y": -60.88362,
+          "z": 1283.9293
+        },
+        "id": 66,
+        "gameId": 929244352
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 16: Northwest",
+        "zone": 16,
+        "floor": 1,
+        "risk": "insecure",
+        "position": {
+          "x": -698.8055,
+          "y": 0.42693043,
+          "z": 1354.5664
+        },
+        "id": 67,
+        "gameId": 920110464
+      },
+      {
+        "location": {
+          "id": 2
+        },
+        "name": "Area 16: Northwest",
+        "zone": 16,
+        "floor": 1,
+        "risk": "insecure",
+        "position": {
+          "x": -698.8055,
+          "y": 0.42693043,
+          "z": 1354.5664
+        },
+        "id": 68,
+        "gameId": 2009017088
+      }
+    ],
+    "id": 2,
+    "gameId": -1226157568
+  },
+  {
+    "name": "Scarlet Forest",
+    "zoneCount": 19,
+    "camps": [
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 6: Flowering Rocks",
+        "zone": 6,
+        "floor": 0,
+        "risk": "safe",
+        "position": {
+          "x": 9.59886,
+          "y": 42.35018,
+          "z": 240.24194
+        },
+        "id": 69,
+        "gameId": 614515840
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 7: Bower of the Great Tree",
+        "zone": 7,
+        "floor": 0,
+        "risk": "dangerous",
+        "position": {
+          "x": 217.9356,
+          "y": 28.26271,
+          "z": 134.76178
+        },
+        "id": 70,
+        "gameId": 1001432768
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 8: Underground Lake",
+        "zone": 8,
+        "floor": 0,
+        "risk": "safe",
+        "position": {
+          "x": 404.61145,
+          "y": 18.718277,
+          "z": -145.75435
+        },
+        "id": 71,
+        "gameId": -966775616
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 8: Underground Lake",
+        "zone": 8,
+        "floor": 0,
+        "risk": "safe",
+        "position": {
+          "x": 404.61145,
+          "y": 18.718277,
+          "z": -145.75435
+        },
+        "id": 72,
+        "gameId": 824575744
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 10: Southwest",
+        "zone": 10,
+        "floor": 0,
+        "risk": "dangerous",
+        "position": {
+          "x": -65.49854,
+          "y": 99.16469,
+          "z": -9.660472
+        },
+        "id": 73,
+        "gameId": 1662739712
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 12: Northeast",
+        "zone": 12,
+        "floor": 0,
+        "risk": "insecure",
+        "position": {
+          "x": 339.71634,
+          "y": 78.14787,
+          "z": -138.15643
+        },
+        "id": 74,
+        "gameId": -771417984
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 14: Southwest",
+        "zone": 14,
+        "floor": 1,
+        "risk": "dangerous",
+        "position": {
+          "x": 113.690254,
+          "y": 126.37595,
+          "z": -336.4012
+        },
+        "id": 75,
+        "gameId": 526418688
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 16: Hidden Waterfall",
+        "zone": 16,
+        "floor": 1,
+        "risk": "safe",
+        "position": {
+          "x": -218.3413,
+          "y": 52.309914,
+          "z": -418.54602
+        },
+        "id": 76,
+        "gameId": -1122194688
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 16: Hidden Waterfall",
+        "zone": 16,
+        "floor": 1,
+        "risk": "safe",
+        "position": {
+          "x": -218.3413,
+          "y": 52.309914,
+          "z": -418.54602
+        },
+        "id": 77,
+        "gameId": 562913856
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 17: Great Lake Shore",
+        "zone": 17,
+        "floor": 1,
+        "risk": "insecure",
+        "position": {
+          "x": -69.86886,
+          "y": 224.81425,
+          "z": -577.55676
+        },
+        "id": 78,
+        "gameId": -577756288
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 18: Treetop Hill",
+        "zone": 18,
+        "floor": 1,
+        "risk": "safe",
+        "position": {
+          "x": 43.130447,
+          "y": 126.887405,
+          "z": 31.017872
+        },
+        "id": 79,
+        "gameId": 689908672
+      },
+      {
+        "location": {
+          "id": 3
+        },
+        "name": "Area 18: Treetop Hill",
+        "zone": 18,
+        "floor": 1,
+        "risk": "safe",
+        "position": {
+          "x": 43.130447,
+          "y": 126.887405,
+          "z": 31.017872
+        },
+        "id": 80,
+        "gameId": 1277946496
+      }
+    ],
+    "id": 3,
+    "gameId": -859829056
+  }
+]

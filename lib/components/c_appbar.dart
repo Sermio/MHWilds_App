@@ -39,7 +39,7 @@ class Cappbar extends StatelessWidget implements PreferredSizeWidget {
           //     child: Image.asset(
           //       height: 150,
           //       width: 150,
-          //       'assets/imgs/logo/logo512transparent.png',
+          //       'assets/imgs/logo/logo512transparent.webp',
           //     ),
           //   ),
           // ),

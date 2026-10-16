@@ -252,5 +252,9 @@
   "treeViewTooltip": "Widok drzewa",
   "tableViewTooltip": "Widok tabeli",
   "errorLoadingWeaponDetails": "Błąd podczas ładowania szczegółów broni",
-  "masterRank": "Mistrzowska ranga"
+  "masterRank": "Mistrzowska ranga",
+  "retry": "Spróbuj ponownie",
+  "errorOffline": "Brak połączenia. Sprawdź internet i spróbuj ponownie.",
+  "errorLoadingData": "Nie udało się wczytać danych. Spróbuj ponownie.",
+  "offlineDataFrom": "Offline · dane z {date}"
 }

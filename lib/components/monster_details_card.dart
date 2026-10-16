@@ -98,10 +98,10 @@ class MonsterDetailsCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
-                  color: Colors.orange.withOpacity(0.1),
+                  color: Colors.orange.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: Colors.orange.withOpacity(0.3),
+                    color: Colors.orange.withValues(alpha: 0.3),
                     width: 1,
                   ),
                 ),
@@ -133,10 +133,10 @@ class MonsterDetailsCard extends StatelessWidget {
                       alignment: WrapAlignment.center,
                       children: monster.variants.map((variant) {
                         // Determinar si es tempered o arch-tempered
-                        bool isTempered =
+                        final bool isTempered =
                             variant.kind.toLowerCase().contains('tempered') ||
                                 variant.name.toLowerCase().contains('tempered');
-                        bool isArchTempered = variant.kind
+                        final bool isArchTempered = variant.kind
                                 .toLowerCase()
                                 .contains('arch-tempered') ||
                             variant.name
@@ -150,16 +150,18 @@ class MonsterDetailsCard extends StatelessWidget {
 
                         if (isArchTempered) {
                           variantColor = Colors.orange[700]!;
-                          borderColor = Colors.orange.withOpacity(0.6);
-                          backgroundColor = Colors.orange.withOpacity(0.1);
+                          borderColor = Colors.orange.withValues(alpha: 0.6);
+                          backgroundColor =
+                              Colors.orange.withValues(alpha: 0.1);
                         } else if (isTempered) {
                           variantColor = Colors.purple[700]!;
-                          borderColor = Colors.purple.withOpacity(0.6);
-                          backgroundColor = Colors.purple.withOpacity(0.1);
+                          borderColor = Colors.purple.withValues(alpha: 0.6);
+                          backgroundColor =
+                              Colors.purple.withValues(alpha: 0.1);
                         } else {
                           variantColor = Colors.blue[700]!;
-                          borderColor = Colors.blue.withOpacity(0.6);
-                          backgroundColor = Colors.blue.withOpacity(0.1);
+                          borderColor = Colors.blue.withValues(alpha: 0.6);
+                          backgroundColor = Colors.blue.withValues(alpha: 0.1);
                         }
 
                         return Container(
@@ -199,19 +201,26 @@ class MonsterDetailsCard extends StatelessWidget {
                     children: monster.weaknesses
                         .where((w) =>
                             w.level >= 1 &&
-                            ((w.kind == 'element' && w.element != null && w.element!.isNotEmpty) ||
-                             (w.kind == 'status' && w.status != null && w.status!.isNotEmpty)))
+                            ((w.kind == 'element' &&
+                                    w.element != null &&
+                                    w.element!.isNotEmpty) ||
+                                (w.kind == 'status' &&
+                                    w.status != null &&
+                                    w.status!.isNotEmpty)))
                         .map((w) {
-                      final name = (w.kind == 'element' ? w.element : w.status) ?? '';
+                      final name =
+                          (w.kind == 'element' ? w.element : w.status) ?? '';
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 2),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Image.asset(
                               'assets/imgs/elements/${name.toLowerCase()}.webp',
                               height: 25,
-                              errorBuilder: (_, __, ___) => const SizedBox(height: 25),
+                              errorBuilder: (_, __, ___) =>
+                                  const SizedBox(height: 25),
                             ),
                             const SizedBox(height: 2),
                             Row(
@@ -238,11 +247,13 @@ class MonsterDetailsCard extends StatelessWidget {
                         .where((w) => w.element.isNotEmpty)
                         .map(
                           (w) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 4, vertical: 2),
                             child: Image.asset(
                               'assets/imgs/elements/${w.element.toLowerCase()}.webp',
                               height: 25,
-                              errorBuilder: (_, __, ___) => const SizedBox(height: 25),
+                              errorBuilder: (_, __, ___) =>
+                                  const SizedBox(height: 25),
                             ),
                           ),
                         )
@@ -271,8 +282,8 @@ class MonsterDetailsCard extends StatelessWidget {
                 spacing: 8.0,
                 runSpacing: 2.0,
                 children: monster.locations.asMap().entries.map((location) {
-                  int index = location.key;
-                  String loc = location.value.name;
+                  final int index = location.key;
+                  final String loc = location.value.name;
                   return Bounce(
                     from: 10,
                     delay: Duration(milliseconds: index * 150),
@@ -281,7 +292,7 @@ class MonsterDetailsCard extends StatelessWidget {
                       itemIdForColor: location.value.id,
                       getItemColor: zoneBackgroundColor,
                       optionalWidget: Image.asset(
-                        'assets/imgs/maps/map.png',
+                        'assets/imgs/maps/map.webp',
                         width: 16,
                         height: 16,
                       ),
@@ -363,16 +374,16 @@ class ElementsAndAilments extends StatelessWidget {
     return ListView.builder(
       itemCount: ailments.length,
       itemBuilder: (context, index) {
-        String ailmentName = ailments[index].keys.first;
-        String description = ailments[index][ailmentName] ?? "";
+        final String ailmentName = ailments[index].keys.first;
+        final String description = ailments[index][ailmentName] ?? "";
 
         return Container(
           margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHighest.withOpacity(0.6),
+            color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: colorScheme.outlineVariant.withOpacity(0.7),
+              color: colorScheme.outlineVariant.withValues(alpha: 0.7),
               width: 1,
             ),
           ),
@@ -410,7 +421,7 @@ class ElementsAndAilments extends StatelessWidget {
                   description,
                   style: TextStyle(
                     fontSize: 13,
-                    color: colorScheme.onSurface.withOpacity(0.9),
+                    color: colorScheme.onSurface.withValues(alpha: 0.9),
                     height: 1.35,
                   ),
                 ),

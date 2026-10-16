@@ -243,5 +243,9 @@
   "treeViewTooltip": "Vista ad albero",
   "tableViewTooltip": "Vista tabella",
   "errorLoadingWeaponDetails": "Errore durante il caricamento dei dettagli dell'arma",
-  "masterRank": "Rango Maestro"
+  "masterRank": "Rango Maestro",
+  "retry": "Riprova",
+  "errorOffline": "Nessuna connessione. Controlla internet e riprova.",
+  "errorLoadingData": "Impossibile caricare i dati. Riprova.",
+  "offlineDataFrom": "Offline · dati del {date}"
 }

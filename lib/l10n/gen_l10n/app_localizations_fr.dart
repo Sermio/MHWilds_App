@@ -678,4 +678,23 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get masterRank => 'Rang Maître';
+
+  @override
+  String get retry => 'Réessayer';
+
+  @override
+  String get errorOffline =>
+      'Pas de connexion. Vérifiez votre internet et réessayez.';
+
+  @override
+  String get errorLoadingData =>
+      'Impossible de charger les données. Veuillez réessayer.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Hors ligne · données du $dateString';
+  }
 }

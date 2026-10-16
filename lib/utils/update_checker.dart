@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 
@@ -83,7 +84,7 @@ class AppUpdateChecker {
     }
 
     if (!context.mounted) return;
-    showDialog(
+    unawaited(showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (ctx) {
@@ -144,7 +145,7 @@ class AppUpdateChecker {
           ],
         );
       },
-    );
+    ));
   }
 
   /// Devuelve solo el versionName (ej. 1.0.14), sin build number (+27) ni sufijos.
@@ -211,7 +212,7 @@ class AppUpdateChecker {
     if (!Platform.isAndroid) return null;
 
     try {
-      final url =
+      const url =
           'https://play.google.com/store/apps/details?id=$_androidPackageName';
       final response = await http.get(Uri.parse(url)).timeout(
             const Duration(seconds: 5),

@@ -57,7 +57,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                     l10n.loadingSkills,
                     style: TextStyle(
                       fontSize: 16,
-                      color: colorScheme.onSurface.withOpacity(0.7),
+                      color: colorScheme.onSurface.withValues(alpha: 0.7),
                     ),
                   ),
                 ],
@@ -78,7 +78,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: colorScheme.shadow.withOpacity(0.1),
+                            color: colorScheme.shadow.withValues(alpha: 0.1),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
@@ -137,7 +137,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: colorScheme.onSurface
-                                          .withOpacity(0.8),
+                                          .withValues(alpha: 0.8),
                                       height: 1.4,
                                     ),
                                     textAlign: TextAlign.center,
@@ -163,7 +163,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                                 ),
                                 const SizedBox(height: 16),
                                 ...skill.ranks.map((rank) {
-                                  bool isCurrentLevel = widget.skillsLevels !=
+                                  final bool isCurrentLevel = widget.skillsLevels !=
                                           null &&
                                       index < widget.skillsLevels!.length &&
                                       rank.level == widget.skillsLevels![index];
@@ -173,13 +173,13 @@ class _SkillDetailsState extends State<SkillDetails> {
                                     padding: const EdgeInsets.all(20),
                                     decoration: BoxDecoration(
                                       color: isCurrentLevel
-                                          ? colorScheme.primary.withOpacity(0.1)
+                                          ? colorScheme.primary.withValues(alpha: 0.1)
                                           : colorScheme.surfaceContainerHighest,
                                       borderRadius: BorderRadius.circular(16),
                                       border: Border.all(
                                         color: isCurrentLevel
                                             ? colorScheme.primary
-                                                .withOpacity(0.3)
+                                                .withValues(alpha: 0.3)
                                             : colorScheme.outlineVariant,
                                         width: isCurrentLevel ? 2 : 1,
                                       ),
@@ -200,7 +200,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                                                 color: isCurrentLevel
                                                     ? colorScheme.primary
                                                     : colorScheme.onSurface
-                                                        .withOpacity(0.4),
+                                                        .withValues(alpha: 0.4),
                                                 borderRadius:
                                                     BorderRadius.circular(20),
                                               ),
@@ -238,14 +238,14 @@ class _SkillDetailsState extends State<SkillDetails> {
                                       ],
                                     ),
                                   );
-                                }).toList(),
+                                }),
                               ],
                             ),
                           ),
                         ],
                       ),
                     );
-                  }).toList(),
+                  }),
                   const SizedBox(height: 40),
                 ],
               ),

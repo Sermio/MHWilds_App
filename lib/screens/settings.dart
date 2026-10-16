@@ -37,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           const SizedBox(height: 8),
@@ -59,7 +59,7 @@ class SettingsScreen extends StatelessWidget {
                         subtitle,
                         style: TextStyle(
                           fontSize: 12,
-                          color: colorScheme.onSurface.withOpacity(0.6),
+                          color: colorScheme.onSurface.withValues(alpha: 0.6),
                         ),
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
@@ -85,7 +85,7 @@ class SettingsScreen extends StatelessWidget {
                             : l10n.offDefault,
                         style: TextStyle(
                           fontSize: 12,
-                          color: colorScheme.onSurface.withOpacity(0.6),
+                          color: colorScheme.onSurface.withValues(alpha: 0.6),
                         ),
                       ),
                       value: themeProvider.mode == AppThemeMode.dark,
@@ -106,7 +106,7 @@ class SettingsScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           const SizedBox(height: 8),
@@ -134,7 +134,7 @@ class SettingsScreen extends StatelessWidget {
                     'v${packageInfo.version}',
                     style: TextStyle(
                       fontSize: 12,
-                      color: colorScheme.onSurface.withOpacity(0.5),
+                      color: colorScheme.onSurface.withValues(alpha: 0.5),
                     ),
                   ),
                 );
@@ -154,7 +154,7 @@ class SettingsScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
     final currentLocale = localeProvider.locale;
-    final supportedLocales = AppLocalizations.supportedLocales;
+    const supportedLocales = AppLocalizations.supportedLocales;
 
     showModalBottomSheet<void>(
       context: context,
@@ -211,8 +211,8 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  /// Invalida la caché de todos los providers de datos para que la próxima
-  /// vez que se abra cada pantalla se vuelva a pedir la API con el nuevo idioma.
+  /// Vacía la memoria de los providers de datos para que cada pantalla cargue
+  /// el nuevo idioma. La caché en disco de cada idioma no se borra.
   void _invalidateDataProviders(BuildContext context) {
     Provider.of<MonstersProvider>(context, listen: false).invalidate();
     Provider.of<WeaponsProvider>(context, listen: false).invalidate();

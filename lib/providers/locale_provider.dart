@@ -43,7 +43,8 @@ class LocaleProvider extends ChangeNotifier {
       }
 
       final parts = saved.split('_');
-      _locale = parts.length > 1 ? Locale(parts[0], parts[1]) : Locale(parts[0]);
+      _locale =
+          parts.length > 1 ? Locale(parts[0], parts[1]) : Locale(parts[0]);
       notifyListeners();
     } finally {
       if (!_localeReadyCompleter.isCompleted) {

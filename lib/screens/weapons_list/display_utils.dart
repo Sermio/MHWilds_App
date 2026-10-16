@@ -6,41 +6,36 @@ class WeaponDisplayUtils {
       {bool isDetailView = false}) {
     // Buscar specials con daño elemental o de status, y también daño de phial
     if (weapon.specials is List) {
-      final specials = weapon.specials as List;
+      final specials =
+          (weapon.specials as List).whereType<Map<String, dynamic>>();
       final elementalAndStatusSpecials = specials.where((special) {
-        if (special is Map<String, dynamic>) {
-          return (special['kind'] == 'element' ||
-                  special['kind'] == 'status') &&
-              special['damage'] != null &&
-              special['damage']['raw'] > 0;
-        }
-        return false;
+        return (special['kind'] == 'element' || special['kind'] == 'status') &&
+            (((special['damage'] as Map<String, dynamic>?)?['raw'] as num?) ??
+                    0) >
+                0;
       }).toList();
 
       // También buscar phial damage si existe
       final phialSpecial = specials.where((special) {
-        if (special is Map<String, dynamic>) {
-          return special['phial'] != null &&
-              special['phial']['damage'] != null &&
-              special['phial']['damage']['raw'] > 0;
-        }
-        return false;
+        final damage = (special['phial'] as Map<String, dynamic>?)?['damage']
+            as Map<String, dynamic>?;
+        return ((damage?['raw'] as num?) ?? 0) > 0;
       }).toList();
 
       // Priorizar specials elementales/status, luego phial
       if (elementalAndStatusSpecials.isNotEmpty) {
         final special = elementalAndStatusSpecials.first;
         final elementOrStatus = special['kind'] == 'element'
-            ? (special['element'] ?? '')
-            : (special['status'] ?? '');
-        final damage = special['damage'];
-        final damageValue = damage?['display'] ?? damage?['raw'] ?? 0;
+            ? (special['element'] as String? ?? '')
+            : (special['status'] as String? ?? '');
+        final damage = special['damage'] as Map<String, dynamic>?;
+        final damageValue =
+            damage?['display'] as num? ?? damage?['raw'] as num? ?? 0;
 
         if (damageValue > 0) {
           final colorScheme = Theme.of(context).colorScheme;
           return Row(
             children: [
-
               Text(
                 special['kind'] == 'element'
                     ? '${AppLocalizations.of(context)!.element}:'
@@ -48,7 +43,7 @@ class WeaponDisplayUtils {
                 style: TextStyle(
                   fontSize: isDetailView ? 16 : 12,
                   fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withOpacity(0.8),
+                  color: colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
               ),
               const Spacer(),
@@ -66,7 +61,7 @@ class WeaponDisplayUtils {
                   SizedBox(
                     width: isDetailView ? 18 : 16,
                     height: isDetailView ? 18 : 16,
-                    child: Image.asset(
+                    child: AssetThumb(
                       'assets/imgs/elements/${elementOrStatus.toLowerCase()}.webp',
                       errorBuilder: (context, error, stackTrace) {
                         return Icon(
@@ -85,11 +80,11 @@ class WeaponDisplayUtils {
       } else if (phialSpecial.isNotEmpty) {
         // Mostrar daño de phial si no hay specials elementales/status
         final special = phialSpecial.first;
-        final phial = special['phial'];
-        final phialKind = phial['kind'] ?? '';
-        final phialDamage = phial['damage'];
+        final phial = special['phial'] as Map<String, dynamic>;
+        final phialKind = phial['kind'] as String? ?? '';
+        final phialDamage = phial['damage'] as Map<String, dynamic>?;
         final phialDamageValue =
-            phialDamage?['display'] ?? phialDamage?['raw'] ?? 0;
+            phialDamage?['display'] as num? ?? phialDamage?['raw'] as num? ?? 0;
 
         if (phialDamageValue > 0) {
           final colorScheme = Theme.of(context).colorScheme;
@@ -100,7 +95,7 @@ class WeaponDisplayUtils {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withOpacity(0.8),
+                  color: colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
               ),
               const Spacer(),
@@ -118,7 +113,7 @@ class WeaponDisplayUtils {
                   SizedBox(
                     width: 18,
                     height: 18,
-                    child: Image.asset(
+                    child: AssetThumb(
                       'assets/imgs/elements/${phialKind.toLowerCase()}.webp',
                       errorBuilder: (context, error, stackTrace) {
                         return Icon(
@@ -183,7 +178,7 @@ class WeaponDisplayUtils {
               style: TextStyle(
                 fontSize: isDetailView ? 16 : 12,
                 fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
+                color: colorScheme.onSurface.withValues(alpha: 0.8),
               ),
             ),
             const Spacer(),
@@ -211,7 +206,7 @@ class WeaponDisplayUtils {
                       // Icono del elemento/status si existe después del texto
                       if (_hasElementIcon(coating)) ...[
                         const SizedBox(width: 4),
-                        Image.asset(
+                        AssetThumb(
                           'assets/imgs/elements/${_getElementAssetName(coating)}.webp',
                           width: 12,
                           height: 12,
@@ -236,8 +231,7 @@ class WeaponDisplayUtils {
     return const SizedBox.shrink();
   }
 
-  static Widget buildChargeBladeDamageInfo(
-      BuildContext context, Weapon weapon,
+  static Widget buildChargeBladeDamageInfo(BuildContext context, Weapon weapon,
       {bool isDetailView = false}) {
     if (weapon.phial == null) return const SizedBox.shrink();
 
@@ -250,7 +244,7 @@ class WeaponDisplayUtils {
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
         const Spacer(),
@@ -268,7 +262,7 @@ class WeaponDisplayUtils {
             ),
             const SizedBox(width: 4),
             if (_hasElementIcon(phialKind)) ...[
-              Image.asset(
+              AssetThumb(
                 'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
                 width: 16,
                 height: 16,
@@ -311,7 +305,7 @@ class WeaponDisplayUtils {
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
         const Spacer(),
@@ -347,7 +341,7 @@ class WeaponDisplayUtils {
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
         const Spacer(),
@@ -365,7 +359,7 @@ class WeaponDisplayUtils {
             ),
             const SizedBox(width: 4),
             if (_hasElementIcon(phialKind)) ...[
-              Image.asset(
+              AssetThumb(
                 'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
                 width: 16,
                 height: 16,
@@ -394,8 +388,7 @@ class WeaponDisplayUtils {
     );
   }
 
-  static Widget buildHuntingHornDamageInfo(
-      BuildContext context, Weapon weapon,
+  static Widget buildHuntingHornDamageInfo(BuildContext context, Weapon weapon,
       {bool isDetailView = false}) {
     final List<Widget> sections = [];
 
@@ -408,7 +401,7 @@ class WeaponDisplayUtils {
             style: TextStyle(
               fontSize: isDetailView ? 16 : 12,
               fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.8),
+              color: colorScheme.onSurface.withValues(alpha: 0.8),
             ),
           ),
           const Spacer(),
@@ -439,7 +432,7 @@ class WeaponDisplayUtils {
             style: TextStyle(
               fontSize: isDetailView ? 16 : 12,
               fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.8),
+              color: colorScheme.onSurface.withValues(alpha: 0.8),
             ),
           ),
           const SizedBox(width: 8),
@@ -476,7 +469,7 @@ class WeaponDisplayUtils {
             style: TextStyle(
               fontSize: isDetailView ? 16 : 12,
               fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.8),
+              color: colorScheme.onSurface.withValues(alpha: 0.8),
             ),
           ),
           const SizedBox(width: 8),
@@ -526,7 +519,7 @@ class WeaponDisplayUtils {
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
         const Spacer(),
@@ -562,7 +555,7 @@ class WeaponDisplayUtils {
                   ),
                   if (_hasElementIcon(ammo.kind)) ...[
                     const SizedBox(width: 4),
-                    Image.asset(
+                    AssetThumb(
                       'assets/imgs/elements/${_getElementAssetName(ammo.kind)}.webp',
                       width: 12,
                       height: 12,
@@ -586,8 +579,7 @@ class WeaponDisplayUtils {
     );
   }
 
-  static Widget buildInsectGlaiveDamageInfo(
-      BuildContext context, Weapon weapon,
+  static Widget buildInsectGlaiveDamageInfo(BuildContext context, Weapon weapon,
       {bool isDetailView = false}) {
     if (weapon.kinsectLevel == null || weapon.kinsectLevel! <= 0) {
       return const SizedBox.shrink();
@@ -601,7 +593,7 @@ class WeaponDisplayUtils {
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
         const Spacer(),

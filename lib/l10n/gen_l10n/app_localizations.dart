@@ -1406,6 +1406,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Master Rank'**
   String get masterRank;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @errorOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'No connection. Check your internet and try again.'**
+  String get errorOffline;
+
+  /// No description provided for @errorLoadingData.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load the data. Please try again.'**
+  String get errorLoadingData;
+
+  /// Banner over cached data that could not be refreshed. {date} is the day it was downloaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline · data from {date}'**
+  String offlineDataFrom(DateTime date);
 }
 
 class _AppLocalizationsDelegate

@@ -675,6 +675,25 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get masterRank => 'Rank Mestre';
+
+  @override
+  String get retry => 'Tentar novamente';
+
+  @override
+  String get errorOffline =>
+      'Sem ligação. Verifica a internet e tenta novamente.';
+
+  @override
+  String get errorLoadingData =>
+      'Não foi possível carregar os dados. Tenta novamente.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Sem ligação · dados de $dateString';
+  }
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -1326,4 +1345,23 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get masterRank => 'Rank Mestre';
+
+  @override
+  String get retry => 'Tentar novamente';
+
+  @override
+  String get errorOffline =>
+      'Sem conexão. Verifique sua internet e tente novamente.';
+
+  @override
+  String get errorLoadingData =>
+      'Não foi possível carregar os dados. Tente novamente.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Sem conexão · dados de $dateString';
+  }
 }

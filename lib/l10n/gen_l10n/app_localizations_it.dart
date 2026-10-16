@@ -678,4 +678,22 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get masterRank => 'Rango Maestro';
+
+  @override
+  String get retry => 'Riprova';
+
+  @override
+  String get errorOffline =>
+      'Nessuna connessione. Controlla internet e riprova.';
+
+  @override
+  String get errorLoadingData => 'Impossibile caricare i dati. Riprova.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Offline · dati del $dateString';
+  }
 }

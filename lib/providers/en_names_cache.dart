@@ -80,7 +80,7 @@ class EnNamesCache extends ChangeNotifier {
     } catch (e) {
       if (kDebugMode) {
         // ignore: avoid_print
-        print('EnNamesCache: error loading en names: $e');
+        debugPrint('EnNamesCache: error loading en names: $e');
       }
     } finally {
       _loading = false;

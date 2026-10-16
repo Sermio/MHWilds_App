@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/api/api_client.dart';
 import 'package:mhwilds_app/api/api_config.dart';
+import 'package:mhwilds_app/api/cached_api.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/providers/decorations_provider.dart';
@@ -18,9 +20,13 @@ import 'package:mhwilds_app/utils/item_icon_asset_resolver.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Al volver a primer plano tras más de 4 h, comprueba si hay datos nuevos.
+  AppLifecycleListener(onResume: CachedApi.shared.versions.onResume);
   runApp(
     MultiProvider(
       providers: [
+        Provider<ApiClient>.value(value: ApiClient.shared),
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => EnNamesCache()..loadEnNames()),
@@ -57,7 +63,7 @@ class MyApp extends StatelessWidget {
       ]),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          return MaterialApp(
+          return const MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Center(child: CircularProgressIndicator()),

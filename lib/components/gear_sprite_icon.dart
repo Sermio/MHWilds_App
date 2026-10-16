@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ const Map<String, int> armorColumnByKind = {
 
 const int talismanColumn = 19;
 
-const String kGearSpriteSheetAssetPath = 'assets/imgs/sprites/gear.png';
+const String kGearSpriteSheetAssetPath = 'assets/imgs/sprites/gear.webp';
 const int _gearSpriteColumns = 20;
 const int _gearSpriteRows = 13;
 

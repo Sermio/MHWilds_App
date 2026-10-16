@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/weapon.dart';
 import 'package:mhwilds_app/models/skills.dart';
-import 'package:mhwilds_app/api/skills_api.dart';
+import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/api/weapons_api.dart';
 import 'package:mhwilds_app/utils/weapon_tree_builder.dart';
 import 'package:mhwilds_app/providers/weapons_provider.dart';
@@ -26,7 +29,7 @@ class WeaponDetails extends StatefulWidget {
   const WeaponDetails({super.key, required this.weapon});
 
   @override
-  _WeaponDetailsState createState() => _WeaponDetailsState();
+  State<WeaponDetails> createState() => _WeaponDetailsState();
 }
 
 class _WeaponDetailsState extends State<WeaponDetails> {
@@ -39,14 +42,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     _skills = fetchSkillsForWeapon(widget.weapon);
   }
 
-  Future<List<Skills>> fetchSkillsForWeapon(Weapon weapon) async {
-    List<Skills> skills = [];
-    for (var skillInfo in widget.weapon.skills) {
-      int skillId = skillInfo.skill.id;
-      skills.add(await SkillsApi.fetchSkillById(skillId));
-    }
-    return skills;
-  }
+  Future<List<Skills>> fetchSkillsForWeapon(Weapon weapon) => context
+      .read<SkillsProvider>()
+      .skillsByIds(weapon.skills.map((s) => s.skill.id).toSet());
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +96,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -148,7 +146,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
               widget.weapon.description,
               style: TextStyle(
                 fontSize: 16,
-                color: colorScheme.onSurface.withOpacity(0.8),
+                color: colorScheme.onSurface.withValues(alpha: 0.8),
                 height: 1.4,
               ),
               textAlign: TextAlign.center,
@@ -168,7 +166,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -212,11 +210,11 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     decoration: BoxDecoration(
                       color: rarityColorFromSprite(widget.weapon.rarity)
-                          .withOpacity(0.1),
+                          .withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(
                         color: rarityColorFromSprite(widget.weapon.rarity)
-                            .withOpacity(0.3),
+                            .withValues(alpha: 0.3),
                       ),
                     ),
                     child: Text(
@@ -237,7 +235,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: colorScheme.onSurface.withOpacity(0.8),
+                        color: colorScheme.onSurface.withValues(alpha: 0.8),
                       ),
                     ),
                     const Spacer(),
@@ -351,7 +349,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
         const Spacer(),
@@ -379,7 +377,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -501,7 +499,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           '$label: $value',
           style: TextStyle(
             fontSize: 12,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -518,7 +516,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -572,7 +570,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                         AppLocalizations.of(context)!.errorLoadingSkills,
                         style: TextStyle(
                           fontSize: 16,
-                          color: colorScheme.onSurface.withOpacity(0.8),
+                          color: colorScheme.onSurface.withValues(alpha: 0.8),
                         ),
                       ),
                     ),
@@ -585,7 +583,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                         AppLocalizations.of(context)!.noSkillsAvailable,
                         style: TextStyle(
                           fontSize: 16,
-                          color: colorScheme.onSurface.withOpacity(0.8),
+                          color: colorScheme.onSurface.withValues(alpha: 0.8),
                         ),
                       ),
                     ),
@@ -651,7 +649,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                           style: TextStyle(
                                             fontSize: 14,
                                             color: colorScheme.onSurface
-                                                .withOpacity(0.8),
+                                                .withValues(alpha: 0.8),
                                           ),
                                         ),
                                       ],
@@ -662,7 +660,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                             ),
                             const SizedBox(height: 12),
                             ...skillInfo.ranks.map((rank) {
-                              bool isCurrentLevel = widget.weapon.skills.any(
+                              final bool isCurrentLevel = widget.weapon.skills.any(
                                 (armorSkill) =>
                                     armorSkill.skill.id == skillInfo.id &&
                                     armorSkill.level == rank.level,
@@ -673,12 +671,12 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   color: isCurrentLevel
-                                      ? AppColors.goldSoft.withOpacity(0.1)
+                                      ? AppColors.goldSoft.withValues(alpha: 0.1)
                                       : colorScheme.surfaceContainerHighest,
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
                                     color: isCurrentLevel
-                                        ? AppColors.goldSoft.withOpacity(0.3)
+                                        ? AppColors.goldSoft.withValues(alpha: 0.3)
                                         : colorScheme.outlineVariant,
                                     width: isCurrentLevel ? 2 : 1,
                                   ),
@@ -728,7 +726,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                   ],
                                 ),
                               );
-                            }).toList(),
+                            }),
                           ],
                         ),
                       );
@@ -755,7 +753,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -852,11 +850,11 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     );
   }
 
-  Widget _buildMaterialsSection(List<dynamic> materials) {
+  Widget _buildMaterialsSection(List<armor_models.Material> materials) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ...materials.map((material) => _buildMaterialItem(material)).toList(),
+        ...materials.map((material) => _buildMaterialItem(material)),
       ],
     );
   }
@@ -876,7 +874,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     );
   }
 
-  Widget _buildMaterialItem(dynamic material) {
+  Widget _buildMaterialItem(armor_models.Material material) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -984,7 +982,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     if (widget.weapon.slots.isEmpty) {
       return Text(
         AppLocalizations.of(context)!.noSlots,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.grey,
           fontStyle: FontStyle.italic,
         ),
@@ -1002,7 +1000,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             size: 20,
             fallback: Container(
               decoration: BoxDecoration(
-                color: slotColor.withOpacity(0.2),
+                color: slotColor.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(color: slotColor, width: 1),
               ),
@@ -1081,7 +1079,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -1114,7 +1112,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.account_tree, color: _isTreeView ? colorScheme.primary : colorScheme.onSurface.withOpacity(0.5)),
+                    icon: Icon(Icons.account_tree, color: _isTreeView ? colorScheme.primary : colorScheme.onSurface.withValues(alpha: 0.5)),
                     onPressed: () {
                       setState(() {
                         _isTreeView = true;
@@ -1123,7 +1121,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     tooltip: AppLocalizations.of(context)?.treeViewTooltip ?? 'Tree View',
                   ),
                   IconButton(
-                    icon: Icon(Icons.table_rows, color: !_isTreeView ? colorScheme.primary : colorScheme.onSurface.withOpacity(0.5)),
+                    icon: Icon(Icons.table_rows, color: !_isTreeView ? colorScheme.primary : colorScheme.onSurface.withValues(alpha: 0.5)),
                     onPressed: () {
                       setState(() {
                         _isTreeView = false;
@@ -1286,7 +1284,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         return Container(
           margin: const EdgeInsets.only(bottom: 8),
           decoration: BoxDecoration(
-            color: isCurrent ? colorScheme.primaryContainer.withOpacity(0.2) : colorScheme.surfaceContainerHighest,
+            color: isCurrent ? colorScheme.primaryContainer.withValues(alpha: 0.2) : colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: isCurrent ? colorScheme.primary : colorScheme.outlineVariant,
@@ -1363,9 +1361,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     
     // Extraer especial si existe
     WeaponSpecial? special;
-    if (w.specials is List && w.specials.isNotEmpty) {
+    final specialsList = w.specials;
+    if (specialsList is List && specialsList.isNotEmpty) {
       try {
-        special = WeaponSpecial.fromJson(w.specials[0]);
+        special = WeaponSpecial.fromJson(specialsList[0] as Map<String, dynamic>);
       } catch (_) {}
     }
 
@@ -1492,20 +1491,20 @@ class _WeaponDetailsState extends State<WeaponDetails> {
 
   void _navigateToWeaponById(int id) async {
     try {
-      showDialog(
+      unawaited(showDialog<void>(
         context: context,
         barrierDismissible: false,
         builder: (context) => const Center(child: CircularProgressIndicator()),
-      );
+      ));
       final weapon = await WeaponsApi.fetchWeaponById(id);
       if (mounted) {
         Navigator.pop(context); // close dialog
-        Navigator.push(
+        unawaited(Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => WeaponDetails(weapon: weapon),
           ),
-        );
+        ));
       }
     } catch (e) {
       if (mounted) {

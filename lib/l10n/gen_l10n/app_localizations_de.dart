@@ -677,4 +677,23 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get masterRank => 'Meisterrang';
+
+  @override
+  String get retry => 'Erneut versuchen';
+
+  @override
+  String get errorOffline =>
+      'Keine Verbindung. Prüfe dein Internet und versuche es erneut.';
+
+  @override
+  String get errorLoadingData =>
+      'Die Daten konnten nicht geladen werden. Bitte versuche es erneut.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Offline · Daten vom $dateString';
+  }
 }

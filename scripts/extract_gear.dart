@@ -42,9 +42,9 @@ void main() {
     for (int r = 1; r <= 12; r++) {
       final tile = copyCrop(img, x: col * tileSize, y: r * tileSize, width: tileSize, height: tileSize);
       final outBytes = encodePng(tile);
-      File('${outDir.path}/rarity${r}.png').writeAsBytesSync(outBytes);
+      File('${outDir.path}/rarity$r.png').writeAsBytesSync(outBytes);
     }
   }
   
-  print('Extraction complete for armors and weapons!');
+  stdout.writeln('Extraction complete for armors and weapons!');
 }

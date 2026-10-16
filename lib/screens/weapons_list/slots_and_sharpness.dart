@@ -1,6 +1,6 @@
 part of '../weapons_list.dart';
 
-extension WeaponsListSlotsAndSharpness on _WeaponsListState {
+extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
   Widget _buildWeaponSlots(Weapon weapon) {
     final colorScheme = Theme.of(context).colorScheme;
     return Row(
@@ -10,7 +10,7 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
         const SizedBox(width: 8),
@@ -34,7 +34,7 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
           AppLocalizations.of(context)!.noSlots,
           style: TextStyle(
             fontSize: 11,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
             fontStyle: FontStyle.italic,
           ),
         ),
@@ -52,7 +52,7 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
             size: 18,
             fallback: Container(
               decoration: BoxDecoration(
-                color: slotColor.withOpacity(0.2),
+                color: slotColor.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(color: slotColor, width: 1),
               ),
@@ -112,7 +112,7 @@ extension WeaponsListSlotsAndSharpness on _WeaponsListState {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
+                color: colorScheme.onSurface.withValues(alpha: 0.8),
               ),
             ),
           ],

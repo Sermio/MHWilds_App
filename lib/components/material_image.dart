@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/utils/item_icon_asset_resolver.dart';
 import 'package:mhwilds_app/utils/utils.dart';
@@ -63,12 +64,12 @@ class MaterialImage extends StatelessWidget {
     final assetPath = _getAssetPathSync();
 
     if (assetPath != null) {
-      return Image.asset(
+      return AssetThumb(
         assetPath,
         width: width,
         height: height,
         fit: BoxFit.contain,
-        errorBuilder: (_, __, ___) => Image.asset(
+        errorBuilder: (_, __, ___) => AssetThumb(
           'assets/imgs/materials/default_material.webp',
           width: width,
           height: height,
@@ -86,7 +87,7 @@ class MaterialImage extends StatelessWidget {
             child: const Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasError || !snapshot.hasData) {
-          return Image.asset(
+          return AssetThumb(
             'assets/imgs/materials/default_material.webp',
             width: width,
             height: height,
@@ -113,7 +114,7 @@ class MaterialImage extends StatelessWidget {
               );
             },
             errorBuilder: (context, error, stackTrace) {
-              return Image.asset(
+              return AssetThumb(
                 'assets/imgs/materials/default_material.webp',
                 width: width,
                 height: height,

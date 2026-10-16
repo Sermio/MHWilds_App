@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 enum ListFilterFieldType { text, select, gridMenu, custom }
@@ -202,8 +204,8 @@ class ListFiltersPanel extends StatelessWidget {
 
   Widget _buildTextField(BuildContext context, ListFilterFieldConfig field) {
     final colorScheme = Theme.of(context).colorScheme;
-    return TextField(
-      controller: field.controller,
+    return DebouncedTextField(
+      controller: field.controller!,
       onChanged: field.onTextChanged,
       decoration: InputDecoration(
         hintText: field.hintText,
@@ -262,7 +264,7 @@ class ListFiltersPanel extends StatelessWidget {
     );
 
     return DropdownButtonFormField<dynamic>(
-      value: field.value,
+      initialValue: field.value,
       isExpanded: true,
       menuMaxHeight: dropdownMenuMaxHeight,
       items: items,
@@ -282,7 +284,8 @@ class ListFiltersPanel extends StatelessWidget {
     );
   }
 
-  Widget _buildGridMenuField(BuildContext context, ListFilterFieldConfig field) {
+  Widget _buildGridMenuField(
+      BuildContext context, ListFilterFieldConfig field) {
     return _GridMenuWidget(
       field: field,
       allLabel: field.allLabel ?? _localizedAllLabel(context),
@@ -386,18 +389,23 @@ class _GridMenuWidgetState extends State<_GridMenuWidget> {
                   },
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 12),
                     decoration: BoxDecoration(
                       color: field.value == null
-                          ? colorScheme.primaryContainer.withOpacity(0.5)
+                          ? colorScheme.primaryContainer.withValues(alpha: 0.5)
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       allLabel,
                       style: TextStyle(
-                        fontWeight: field.value == null ? FontWeight.bold : FontWeight.normal,
-                        color: field.value == null ? colorScheme.primary : colorScheme.onSurface,
+                        fontWeight: field.value == null
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                        color: field.value == null
+                            ? colorScheme.primary
+                            : colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -418,14 +426,20 @@ class _GridMenuWidgetState extends State<_GridMenuWidget> {
                       },
                       borderRadius: BorderRadius.circular(8),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 8),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? colorScheme.primaryContainer.withOpacity(0.5)
-                              : colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                              ? colorScheme.primaryContainer
+                                  .withValues(alpha: 0.5)
+                              : colorScheme.surfaceContainerHighest
+                                  .withValues(alpha: 0.3),
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: isSelected ? colorScheme.primary : colorScheme.outlineVariant.withOpacity(0.5),
+                            color: isSelected
+                                ? colorScheme.primary
+                                : colorScheme.outlineVariant
+                                    .withValues(alpha: 0.5),
                           ),
                         ),
                         child: Row(
@@ -439,8 +453,12 @@ class _GridMenuWidgetState extends State<_GridMenuWidget> {
                                 option.label,
                                 style: TextStyle(
                                   fontSize: 13,
-                                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                                  color: isSelected ? colorScheme.primary : colorScheme.onSurface,
+                                  fontWeight: isSelected
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: isSelected
+                                      ? colorScheme.primary
+                                      : colorScheme.onSurface,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -478,4 +496,47 @@ String _localizedAllLabel(BuildContext context) {
     default:
       return 'All';
   }
+}
+
+/// [TextField] que avisa de los cambios 250 ms después de la última tecla.
+class DebouncedTextField extends StatefulWidget {
+  const DebouncedTextField({
+    super.key,
+    required this.controller,
+    required this.onChanged,
+    required this.decoration,
+    this.delay = const Duration(milliseconds: 250),
+  });
+
+  final TextEditingController controller;
+  final ValueChanged<String>? onChanged;
+  final InputDecoration decoration;
+  final Duration delay;
+
+  @override
+  State<DebouncedTextField> createState() => _DebouncedTextFieldState();
+}
+
+class _DebouncedTextFieldState extends State<DebouncedTextField> {
+  Timer? _timer;
+
+  void _onChanged(String _) {
+    _timer?.cancel();
+    // Lee el controller al disparar: si se resetea mientras tanto, llega ''.
+    _timer = Timer(
+        widget.delay, () => widget.onChanged?.call(widget.controller.text));
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => TextField(
+        controller: widget.controller,
+        onChanged: _onChanged,
+        decoration: widget.decoration,
+      );
 }

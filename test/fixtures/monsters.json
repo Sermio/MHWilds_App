@@ -1,0 +1,3702 @@
+[
+  {
+    "size": {
+      "base": 4623.598,
+      "mini": 4161.2383,
+      "silver": 5317.1377,
+      "gold": 5687.026
+    },
+    "kind": "large",
+    "species": "construct",
+    "name": "Zoh Shia",
+    "description": "A Guardian created to be Wyveria's savior. It was feeding off the Dragontorch, drawing from the vast stores of energy while it slumbered.",
+    "ailments": [],
+    "locations": [
+      {
+        "name": "Ruins of Wyveria",
+        "zoneCount": 15,
+        "id": 4,
+        "gameId": 327401792
+      }
+    ],
+    "resistances": [
+      {
+        "effect": "noise",
+        "kind": "effect",
+        "condition": null,
+        "id": 814
+      },
+      {
+        "effect": "flash",
+        "kind": "effect",
+        "condition": null,
+        "id": 815
+      },
+      {
+        "effect": "exhaust",
+        "kind": "effect",
+        "condition": null,
+        "id": 816
+      }
+    ],
+    "weaknesses": [
+      {
+        "element": "dragon",
+        "kind": "element",
+        "level": 1,
+        "condition": null,
+        "id": 2932
+      },
+      {
+        "status": "paralysis",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2933
+      },
+      {
+        "status": "poison",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2934
+      },
+      {
+        "status": "sleep",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2935
+      },
+      {
+        "status": "blastblight",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2936
+      },
+      {
+        "effect": "stun",
+        "kind": "effect",
+        "level": 1,
+        "condition": null,
+        "id": 2937
+      }
+    ],
+    "rewards": [
+      {
+        "item": {
+          "id": 403,
+          "gameId": 439,
+          "rarity": 4,
+          "name": "Nourishing Extract",
+          "description": "Can be obtained from some large monsters. Has the ability to amplify the effects of certain medicines.",
+          "value": 122,
+          "carryLimit": 20,
+          "recipes": [],
+          "icon": {
+            "id": 73,
+            "kind": "extract",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20242
+          }
+        ],
+        "id": 5664
+      },
+      {
+        "item": {
+          "id": 417,
+          "gameId": 454,
+          "rarity": 4,
+          "name": "Guardian Scale",
+          "description": "Contains an unknown substance. It has lost any color it previously had and possesses unique properties.",
+          "value": 500,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 43,
+            "kind": "scale",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 15,
+            "part": null,
+            "id": 20243
+          },
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 50,
+            "part": null,
+            "id": 20244
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 50,
+            "part": null,
+            "id": 20245
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 50,
+            "part": null,
+            "id": 20246
+          },
+          {
+            "kind": "carve-rotten-severed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": null,
+            "id": 20247
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "left-front-leg",
+            "id": 20248
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "right-front-leg",
+            "id": 20249
+          }
+        ],
+        "id": 5665
+      },
+      {
+        "item": {
+          "id": 538,
+          "gameId": 588,
+          "rarity": 4,
+          "name": "Tough Guardian Bone",
+          "description": "A bone found in the Ruins of Wyveria. Its peculiar shape is unique to the local wildlife.",
+          "value": 600,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 42,
+            "kind": "bone",
+            "colorId": 16,
+            "color": "sky"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20250
+          }
+        ],
+        "id": 5666
+      },
+      {
+        "item": {
+          "id": 556,
+          "gameId": 607,
+          "rarity": 4,
+          "name": "Guardian Blood",
+          "description": "Guardian blood containing an unknown substance. A valuable research material.",
+          "value": 1100,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 73,
+            "kind": "extract",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20251
+          },
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20252
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 50,
+            "part": null,
+            "id": 20253
+          },
+          {
+            "kind": "carve-severed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": null,
+            "id": 20254
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "head-hide",
+            "id": 20255
+          }
+        ],
+        "id": 5667
+      },
+      {
+        "item": {
+          "id": 557,
+          "gameId": 608,
+          "rarity": 6,
+          "name": "Guardian Blood+",
+          "description": "Guardian blood with rather peculiar properties. Requires further research.",
+          "value": 3300,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 73,
+            "kind": "extract",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20256
+          }
+        ],
+        "id": 5668
+      },
+      {
+        "item": {
+          "id": 611,
+          "gameId": 664,
+          "rarity": 4,
+          "name": "Guardian Pelt",
+          "description": "Contains an unknown substance. It has lost any color it previously had and courses with energy.",
+          "value": 500,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 44,
+            "kind": "hide",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 15,
+            "part": null,
+            "id": 20257
+          },
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20258
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 50,
+            "part": null,
+            "id": 20259
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "left-wing-arm-hide",
+            "id": 20260
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "right-wing-arm-hide",
+            "id": 20261
+          }
+        ],
+        "id": 5669
+      },
+      {
+        "item": {
+          "id": 648,
+          "gameId": 710,
+          "rarity": 6,
+          "name": "Zoh Shia Certificate S",
+          "description": "A Guild certificate awarded to those who have hunted Zoh Shia. Used to make equipment.",
+          "value": 3200,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 30,
+            "kind": "certificate",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20262
+          }
+        ],
+        "id": 5670
+      },
+      {
+        "item": {
+          "id": 649,
+          "gameId": 711,
+          "rarity": 6,
+          "name": "Zoh Shia Crystalscale",
+          "description": "A crystallized Zoh Shia scale. Its dull glow evinces the great energy it contains.",
+          "value": 3200,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 43,
+            "kind": "scale",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20263
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 24,
+            "part": null,
+            "id": 20264
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 24,
+            "part": null,
+            "id": 20265
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 40,
+            "part": null,
+            "id": 20266
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 40,
+            "part": null,
+            "id": 20267
+          },
+          {
+            "kind": "carve-rotten-severed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 60,
+            "part": null,
+            "id": 20268
+          }
+        ],
+        "id": 5671
+      },
+      {
+        "item": {
+          "id": 650,
+          "gameId": 712,
+          "rarity": 6,
+          "name": "Zoh Shia Layershell",
+          "description": "The coiled nature of Zoh Shia's layered shell looks as though it protects as much as it constricts.",
+          "value": 4800,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 46,
+            "kind": "shell",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20269
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 22,
+            "part": null,
+            "id": 20270
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 24,
+            "part": null,
+            "id": 20271
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20272
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 35,
+            "part": null,
+            "id": 20273
+          }
+        ],
+        "id": 5672
+      },
+      {
+        "item": {
+          "id": 651,
+          "gameId": 713,
+          "rarity": 6,
+          "name": "Zoh Shia Stakeclaw",
+          "description": "Stake-like Zoh Shia claws extended by hardened Wylk. The Wylkrystal growths are eerily uniform.",
+          "value": 5760,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 45,
+            "kind": "claw",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 16,
+            "part": null,
+            "id": 20274
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 18,
+            "part": null,
+            "id": 20275
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 18,
+            "part": null,
+            "id": 20276
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 25,
+            "part": null,
+            "id": 20277
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 25,
+            "part": null,
+            "id": 20278
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "left-front-leg",
+            "id": 20279
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "right-front-leg",
+            "id": 20280
+          }
+        ],
+        "id": 5673
+      },
+      {
+        "item": {
+          "id": 652,
+          "gameId": 714,
+          "rarity": 6,
+          "name": "Zoh Shia Crystalhorn",
+          "description": "A crystal-coated Zoh Shia horn. Heavy and wedge-like, as though it were used to seal something.",
+          "value": 6400,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 45,
+            "kind": "claw",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20281
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20282
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 11,
+            "part": null,
+            "id": 20283
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 25,
+            "part": null,
+            "id": 20284
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "head-hide",
+            "id": 20285
+          }
+        ],
+        "id": 5674
+      },
+      {
+        "item": {
+          "id": 653,
+          "gameId": 715,
+          "rarity": 6,
+          "name": "Zoh Shia Crystaltail",
+          "description": "A crystal-covered Zoh Shia tail. The crystals continue to grow even after the tail is severed.",
+          "value": 7040,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 47,
+            "kind": "tail",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20286
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20287
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 11,
+            "part": null,
+            "id": 20288
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 18,
+            "part": null,
+            "id": 20289
+          },
+          {
+            "kind": "carve-rotten-severed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 40,
+            "part": null,
+            "id": 20290
+          },
+          {
+            "kind": "carve-severed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 93,
+            "part": null,
+            "id": 20291
+          }
+        ],
+        "id": 5675
+      },
+      {
+        "item": {
+          "id": 654,
+          "gameId": 717,
+          "rarity": 7,
+          "name": "Faux Whitegleam Orb",
+          "description": "An inorganic orb from inside Zoh Shia. Something wriggles deep within its elaborate design.",
+          "value": 19200,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 20,
+            "kind": "gem",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 3,
+            "part": null,
+            "id": 20292
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 3,
+            "part": null,
+            "id": 20293
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 3,
+            "part": null,
+            "id": 20294
+          },
+          {
+            "kind": "carve-severed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 7,
+            "part": null,
+            "id": 20295
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 7,
+            "part": null,
+            "id": 20296
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": null,
+            "id": 20297
+          }
+        ],
+        "id": 5676
+      },
+      {
+        "item": {
+          "id": 655,
+          "gameId": 719,
+          "rarity": 6,
+          "name": "Blackember Mass",
+          "description": "A small, swollen mass from the inside of Zoh Shia. It pulses with an alien-like quality.",
+          "value": 6400,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 2,
+            "kind": "question",
+            "colorId": 2,
+            "color": "gray"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 13,
+            "part": null,
+            "id": 20298
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 15,
+            "part": null,
+            "id": 20299
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 15,
+            "part": null,
+            "id": 20300
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 25,
+            "part": null,
+            "id": 20301
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "left-wing-arm-hide",
+            "id": 20302
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "right-wing-arm-hide",
+            "id": 20303
+          }
+        ],
+        "id": 5677
+      }
+    ],
+    "elements": [],
+    "features": "A massive Guardian that has been feeding off the Dragontorch's energy. Its body is encased in crystallized Wyvern Milk, allowing it to regenerate. Zoh Shia, like other Guardians, excels at energy attacks and can produce repeated explosions to crystallize the whole area. Beneath its white Guardian coat, its body pulses with dark recollection—which you may see, should it reveal its full power from the days of yore.",
+    "tips": "Zoh Shia share the same basic traits of other Guardians. The crystals on their wings and heads can be stripped away to deplete their energy stores. The white crystals on their bodies will grow back weaker, making them easier to destroy a second time. The crystals they create will detonate if they take elemental damage, but a talented hunter can use elemental Slinger ammo and smart maneuvering to make good use of them.",
+    "baseHealth": 9000,
+    "variants": [],
+    "parts": [
+      {
+        "kind": "neck",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.3,
+          "blunt": 0.3,
+          "pierce": 0.4,
+          "fire": 0.05,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.3,
+          "stun": 0.0
+        },
+        "part": "neck",
+        "name": "neck",
+        "health": null,
+        "kinsectEssence": "red",
+        "id": 2557
+      },
+      {
+        "kind": "left-front-leg",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.45,
+          "blunt": 0.45,
+          "pierce": 0.45,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.15,
+          "stun": 0.0
+        },
+        "part": "left-front-leg",
+        "name": "left-front-leg",
+        "health": 300,
+        "kinsectEssence": "white",
+        "id": 2558
+      },
+      {
+        "kind": "head",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.6,
+          "blunt": 0.65,
+          "pierce": 0.6,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.2,
+          "stun": 1.0
+        },
+        "part": "head",
+        "name": "head",
+        "health": 400,
+        "kinsectEssence": "red",
+        "id": 2559
+      },
+      {
+        "kind": "right-wing-arm-wear",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.4,
+          "blunt": 0.4,
+          "pierce": 0.1,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.15,
+          "stun": 0.0
+        },
+        "part": "right-wing-arm-wear",
+        "name": "right-wing-arm-wear",
+        "health": 28,
+        "kinsectEssence": "white",
+        "id": 2560
+      },
+      {
+        "kind": "left-wing-arm-wear",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.4,
+          "blunt": 0.4,
+          "pierce": 0.1,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.15,
+          "stun": 0.0
+        },
+        "part": "left-wing-arm-wear",
+        "name": "left-wing-arm-wear",
+        "health": 28,
+        "kinsectEssence": "white",
+        "id": 2561
+      },
+      {
+        "kind": "head-wear",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.4,
+          "blunt": 0.45,
+          "pierce": 0.45,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.15,
+          "stun": 1.0
+        },
+        "part": "head-wear",
+        "name": "head-wear",
+        "health": 55,
+        "kinsectEssence": "red",
+        "id": 2562
+      },
+      {
+        "kind": "left-wing-arm-hide",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.85,
+          "blunt": 0.85,
+          "pierce": 0.6,
+          "fire": 0.2,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.15,
+          "dragon": 0.3,
+          "stun": 0.0
+        },
+        "part": "left-wing-arm-hide",
+        "name": "left-wing-arm-hide",
+        "health": 550,
+        "kinsectEssence": "white",
+        "id": 2563
+      },
+      {
+        "kind": "right-wing-arm-hide",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.85,
+          "blunt": 0.85,
+          "pierce": 0.6,
+          "fire": 0.2,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.15,
+          "dragon": 0.3,
+          "stun": 0.0
+        },
+        "part": "right-wing-arm-hide",
+        "name": "right-wing-arm-hide",
+        "health": 550,
+        "kinsectEssence": "white",
+        "id": 2564
+      },
+      {
+        "kind": "left-wing-arm",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.8,
+          "blunt": 0.8,
+          "pierce": 0.55,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.2,
+          "stun": 0.0
+        },
+        "part": "left-wing-arm",
+        "name": "left-wing-arm",
+        "health": 300,
+        "kinsectEssence": "white",
+        "id": 2565
+      },
+      {
+        "kind": "head-hide",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.65,
+          "blunt": 0.7,
+          "pierce": 0.65,
+          "fire": 0.15,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.1,
+          "dragon": 0.3,
+          "stun": 1.0
+        },
+        "part": "head-hide",
+        "name": "head-hide",
+        "health": 500,
+        "kinsectEssence": "red",
+        "id": 2566
+      },
+      {
+        "kind": "right-wing-arm",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.8,
+          "blunt": 0.8,
+          "pierce": 0.55,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.2,
+          "stun": 0.0
+        },
+        "part": "right-wing-arm",
+        "name": "right-wing-arm",
+        "health": 300,
+        "kinsectEssence": "white",
+        "id": 2567
+      },
+      {
+        "kind": "left-hind-leg",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.25,
+          "blunt": 0.25,
+          "pierce": 0.25,
+          "fire": 0.05,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.1,
+          "stun": 0.0
+        },
+        "part": "left-hind-leg",
+        "name": "left-hind-leg",
+        "health": 400,
+        "kinsectEssence": "green",
+        "id": 2568
+      },
+      {
+        "kind": "right-hind-leg",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.25,
+          "blunt": 0.25,
+          "pierce": 0.25,
+          "fire": 0.05,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.1,
+          "stun": 0.0
+        },
+        "part": "right-hind-leg",
+        "name": "right-hind-leg",
+        "health": 400,
+        "kinsectEssence": "green",
+        "id": 2569
+      },
+      {
+        "kind": "torso",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.25,
+          "blunt": 0.25,
+          "pierce": 0.05,
+          "fire": 0.05,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.1,
+          "stun": 0.0
+        },
+        "part": "torso",
+        "name": "torso",
+        "health": null,
+        "kinsectEssence": "orange",
+        "id": 2570
+      },
+      {
+        "kind": "right-front-leg",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.45,
+          "blunt": 0.45,
+          "pierce": 0.45,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.15,
+          "stun": 0.0
+        },
+        "part": "right-front-leg",
+        "name": "right-front-leg",
+        "health": 300,
+        "kinsectEssence": "white",
+        "id": 2571
+      },
+      {
+        "kind": "tail",
+        "monster": {
+          "id": 1
+        },
+        "multipliers": {
+          "slash": 0.35,
+          "blunt": 0.35,
+          "pierce": 0.4,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.05,
+          "dragon": 0.1,
+          "stun": 0.0
+        },
+        "part": "tail",
+        "name": "tail",
+        "health": 300,
+        "kinsectEssence": "red",
+        "id": 2572
+      }
+    ],
+    "id": 1,
+    "gameId": -2003468672
+  },
+  {
+    "size": {
+      "base": 1390.47,
+      "mini": 1251.423,
+      "silver": 1599.0404,
+      "gold": 1710.2781
+    },
+    "kind": "large",
+    "species": "construct",
+    "name": "Guardian Doshaguma",
+    "description": "An artificial species created by an ancient civilization with a Doshaguma's power. They boast an incredibly robust physique and can spew acid.",
+    "ailments": [],
+    "locations": [
+      {
+        "name": "Ruins of Wyveria",
+        "zoneCount": 15,
+        "id": 4,
+        "gameId": 327401792
+      }
+    ],
+    "resistances": [
+      {
+        "effect": "noise",
+        "kind": "effect",
+        "condition": null,
+        "id": 817
+      },
+      {
+        "effect": "exhaust",
+        "kind": "effect",
+        "condition": null,
+        "id": 818
+      }
+    ],
+    "weaknesses": [
+      {
+        "element": "fire",
+        "kind": "element",
+        "level": 1,
+        "condition": null,
+        "id": 2938
+      },
+      {
+        "status": "paralysis",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2939
+      },
+      {
+        "status": "poison",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2940
+      },
+      {
+        "status": "sleep",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2941
+      },
+      {
+        "status": "blastblight",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2942
+      },
+      {
+        "effect": "flash",
+        "kind": "effect",
+        "level": 1,
+        "condition": null,
+        "id": 2943
+      },
+      {
+        "effect": "stun",
+        "kind": "effect",
+        "level": 1,
+        "condition": null,
+        "id": 2944
+      }
+    ],
+    "rewards": [
+      {
+        "item": {
+          "id": 35,
+          "gameId": 37,
+          "rarity": 7,
+          "name": "Beast Gem",
+          "description": "A valuable jewel formed from coagulated juices inside a monster. Glows wildly.",
+          "value": 4000,
+          "carryLimit": 10,
+          "recipes": [],
+          "icon": {
+            "id": 20,
+            "kind": "gem",
+            "colorId": 7,
+            "color": "orange"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 3,
+            "part": null,
+            "id": 20304
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 3,
+            "part": null,
+            "id": 20305
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 5,
+            "part": null,
+            "id": 20306
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 7,
+            "part": null,
+            "id": 20307
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": null,
+            "id": 20308
+          }
+        ],
+        "id": 5678
+      },
+      {
+        "item": {
+          "id": 357,
+          "gameId": 390,
+          "rarity": 4,
+          "name": "Guardian Doshaguma Fur",
+          "description": "The fur of a Guardian Doshaguma. Energy coursing through it has turned it white and strengthened it.",
+          "value": 500,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 44,
+            "kind": "hide",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 22,
+            "part": null,
+            "id": 20309
+          },
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20310
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20311
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 35,
+            "part": null,
+            "id": 20312
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "tail-hair",
+            "id": 20313
+          }
+        ],
+        "id": 5679
+      },
+      {
+        "item": {
+          "id": 358,
+          "gameId": 391,
+          "rarity": 4,
+          "name": "Guardian Doshaguma Hide",
+          "description": "The hide of a Guardian Doshaguma. It is especially thick and tough, with a distinctive white pattern.",
+          "value": 750,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 44,
+            "kind": "hide",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 22,
+            "part": null,
+            "id": 20314
+          },
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 35,
+            "part": null,
+            "id": 20315
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 40,
+            "part": null,
+            "id": 20316
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 45,
+            "part": null,
+            "id": 20317
+          }
+        ],
+        "id": 5680
+      },
+      {
+        "item": {
+          "id": 359,
+          "gameId": 392,
+          "rarity": 4,
+          "name": "Guardian Doshaguma Claw",
+          "description": "The claw of a Guardian Doshaguma. Energy coursing through it has turned it white and rigid.",
+          "value": 900,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 45,
+            "kind": "claw",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 13,
+            "part": null,
+            "id": 20318
+          },
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 15,
+            "part": null,
+            "id": 20319
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "right-front-leg",
+            "id": 20320
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "left-front-leg",
+            "id": 20321
+          }
+        ],
+        "id": 5681
+      },
+      {
+        "item": {
+          "id": 360,
+          "gameId": 393,
+          "rarity": 4,
+          "name": "Guardian Doshaguma Fang",
+          "description": "The fang of a Guardian Doshaguma. Tough enough to withstand the Doshaguma's fiercely acidic saliva.",
+          "value": 1100,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 45,
+            "kind": "claw",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 15,
+            "part": null,
+            "id": 20322
+          },
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20323
+          }
+        ],
+        "id": 5682
+      },
+      {
+        "item": {
+          "id": 361,
+          "gameId": 394,
+          "rarity": 4,
+          "name": "G. Doshaguma Certificate",
+          "description": "A Guild certificate awarded to those who have hunted a Guardian Doshaguma. Used to make equipment.",
+          "value": 500,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 30,
+            "kind": "certificate",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20324
+          }
+        ],
+        "id": 5683
+      },
+      {
+        "item": {
+          "id": 362,
+          "gameId": 395,
+          "rarity": 6,
+          "name": "Guardian Doshaguma Fur+",
+          "description": "High-quality fur from a Guardian Doshaguma. Energy coursing through it has rendered it hard as steel.",
+          "value": 1500,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 44,
+            "kind": "hide",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 22,
+            "part": null,
+            "id": 20325
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 26,
+            "part": null,
+            "id": 20326
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 27,
+            "part": null,
+            "id": 20327
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20328
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 35,
+            "part": null,
+            "id": 20329
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "tail-hair",
+            "id": 20330
+          }
+        ],
+        "id": 5684
+      },
+      {
+        "item": {
+          "id": 363,
+          "gameId": 396,
+          "rarity": 6,
+          "name": "Guardian Doshaguma Hide+",
+          "description": "A high-quality hide from a Guardian Doshaguma. Tough as iron and able to withstand any kind of attack.",
+          "value": 2250,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 44,
+            "kind": "hide",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 22,
+            "part": null,
+            "id": 20331
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 26,
+            "part": null,
+            "id": 20332
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 33,
+            "part": null,
+            "id": 20333
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 40,
+            "part": null,
+            "id": 20334
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 45,
+            "part": null,
+            "id": 20335
+          }
+        ],
+        "id": 5685
+      },
+      {
+        "item": {
+          "id": 364,
+          "gameId": 397,
+          "rarity": 6,
+          "name": "Guardian Doshaguma Claw+",
+          "description": "An especially sharp claw from a Guardian Doshaguma. Filled with energy, it easily cuts through armor.",
+          "value": 2700,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 45,
+            "kind": "claw",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 10,
+            "part": null,
+            "id": 20336
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 10,
+            "part": null,
+            "id": 20337
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 15,
+            "part": null,
+            "id": 20338
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20339
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "right-front-leg",
+            "id": 20340
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "left-front-leg",
+            "id": 20341
+          }
+        ],
+        "id": 5686
+      },
+      {
+        "item": {
+          "id": 365,
+          "gameId": 398,
+          "rarity": 6,
+          "name": "Guardian Doshaguma Fang+",
+          "description": "An especially sharp fang from a Guardian Doshaguma. Mercilessly crushes anything in its way.",
+          "value": 3300,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 45,
+            "kind": "claw",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 15,
+            "part": null,
+            "id": 20342
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 15,
+            "part": null,
+            "id": 20343
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20344
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 38,
+            "part": null,
+            "id": 20345
+          }
+        ],
+        "id": 5687
+      },
+      {
+        "item": {
+          "id": 366,
+          "gameId": 399,
+          "rarity": 6,
+          "name": "G. Doshaguma Certificate S",
+          "description": "A Guild certificate awarded to those who have hunted a Guardian Doshaguma. Used to make equipment.",
+          "value": 1500,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 30,
+            "kind": "certificate",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20346
+          }
+        ],
+        "id": 5688
+      },
+      {
+        "item": {
+          "id": 403,
+          "gameId": 439,
+          "rarity": 4,
+          "name": "Nourishing Extract",
+          "description": "Can be obtained from some large monsters. Has the ability to amplify the effects of certain medicines.",
+          "value": 122,
+          "carryLimit": 20,
+          "recipes": [],
+          "icon": {
+            "id": 73,
+            "kind": "extract",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20347
+          },
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20348
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20349
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 2,
+            "chance": 25,
+            "part": null,
+            "id": 20350
+          }
+        ],
+        "id": 5689
+      },
+      {
+        "item": {
+          "id": 538,
+          "gameId": 588,
+          "rarity": 4,
+          "name": "Tough Guardian Bone",
+          "description": "A bone found in the Ruins of Wyveria. Its peculiar shape is unique to the local wildlife.",
+          "value": 600,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 42,
+            "kind": "bone",
+            "colorId": 16,
+            "color": "sky"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve-rotten",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20351
+          }
+        ],
+        "id": 5690
+      },
+      {
+        "item": {
+          "id": 540,
+          "gameId": 590,
+          "rarity": 4,
+          "name": "Crushed Crystal",
+          "description": "A shard of crystal carved from the carcass of a Guardian. Can be used as a melding material.",
+          "value": 30,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 38,
+            "kind": "ore",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve-crystallized",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 75,
+            "part": null,
+            "id": 20352
+          }
+        ],
+        "id": 5691
+      },
+      {
+        "item": {
+          "id": 541,
+          "gameId": 591,
+          "rarity": 6,
+          "name": "Cloudy Crystal",
+          "description": "A hazy crystal carved from the carcass of a Guardian. Can be used as a melding material.",
+          "value": 50,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 38,
+            "kind": "ore",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve-crystallized",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 25,
+            "part": null,
+            "id": 20353
+          },
+          {
+            "kind": "carve-crystallized",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 83,
+            "part": null,
+            "id": 20354
+          }
+        ],
+        "id": 5692
+      },
+      {
+        "item": {
+          "id": 542,
+          "gameId": 592,
+          "rarity": 6,
+          "name": "Coruscating Crystal",
+          "description": "A glittering crystal carved from the carcass of a Guardian. Can be used as a melding material.",
+          "value": 70,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 38,
+            "kind": "ore",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve-crystallized",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 17,
+            "part": null,
+            "id": 20355
+          }
+        ],
+        "id": 5693
+      },
+      {
+        "item": {
+          "id": 556,
+          "gameId": 607,
+          "rarity": 4,
+          "name": "Guardian Blood",
+          "description": "Guardian blood containing an unknown substance. A valuable research material.",
+          "value": 1100,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 73,
+            "kind": "extract",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "wound-destroyed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20356
+          }
+        ],
+        "id": 5694
+      },
+      {
+        "item": {
+          "id": 557,
+          "gameId": 608,
+          "rarity": 6,
+          "name": "Guardian Blood+",
+          "description": "Guardian blood with rather peculiar properties. Requires further research.",
+          "value": 3300,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 73,
+            "kind": "extract",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20357
+          }
+        ],
+        "id": 5695
+      },
+      {
+        "item": {
+          "id": 605,
+          "gameId": 658,
+          "rarity": 6,
+          "name": "Great Stoutbone",
+          "description": "The bone of a large, high ranking monster. Extremely solid and durable.",
+          "value": 1300,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 42,
+            "kind": "bone",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve-rotten",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20358
+          }
+        ],
+        "id": 5696
+      },
+      {
+        "item": {
+          "id": 611,
+          "gameId": 664,
+          "rarity": 4,
+          "name": "Guardian Pelt",
+          "description": "Contains an unknown substance. It has lost any color it previously had and courses with energy.",
+          "value": 500,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 44,
+            "kind": "hide",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "wound-destroyed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 12,
+            "part": null,
+            "id": 20359
+          }
+        ],
+        "id": 5697
+      },
+      {
+        "item": {
+          "id": 612,
+          "gameId": 665,
+          "rarity": 6,
+          "name": "Guardian Pelt+",
+          "description": "A high-quality Guardian pelt. Exceptionally smooth and tough.",
+          "value": 1500,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 44,
+            "kind": "hide",
+            "colorId": 1,
+            "color": "white"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 12,
+            "part": null,
+            "id": 20360
+          }
+        ],
+        "id": 5698
+      },
+      {
+        "item": {
+          "id": 639,
+          "gameId": 700,
+          "rarity": 6,
+          "name": "Wyverian Bloodstone (S)",
+          "description": "Obtained from destroying a tempered wound. Has a deep sanguine hue. Can be used as a melding material.",
+          "value": 90,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 38,
+            "kind": "ore",
+            "colorId": 5,
+            "color": "red"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "tempered-wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 45,
+            "part": null,
+            "id": 20361
+          }
+        ],
+        "id": 5699
+      },
+      {
+        "item": {
+          "id": 640,
+          "gameId": 701,
+          "rarity": 7,
+          "name": "Wyverian Bloodstone",
+          "description": "Obtained from destroying a tempered wound. Has a deep sanguine hue. Can be used as a melding material.",
+          "value": 100,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 38,
+            "kind": "ore",
+            "colorId": 5,
+            "color": "red"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "tempered-wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 35,
+            "part": null,
+            "id": 20362
+          }
+        ],
+        "id": 5700
+      },
+      {
+        "item": {
+          "id": 641,
+          "gameId": 702,
+          "rarity": 7,
+          "name": "Wyverian Bloodstone (L)",
+          "description": "Obtained from destroying a tempered wound. Larger than most of its type. Can be used as a melding material.",
+          "value": 110,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 38,
+            "kind": "ore",
+            "colorId": 5,
+            "color": "red"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "tempered-wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 20,
+            "part": null,
+            "id": 20363
+          }
+        ],
+        "id": 5701
+      }
+    ],
+    "elements": [],
+    "features": "An artificial monster species created by an ancient civilization and imbued with Doshaguma's power. Guardian Doshaguma cannot reproduce and do not require food, relying instead on Wyvern Milk for energy. While anything but agile, they're tough enough to charge right through attacks without flinching, making them extremely dangerous.",
+    "tips": "Most Guardian Doshaguma attacks are big forelimb swings. While not agile, the attacks that carry Guardian energy will cause wide explosions. Watch out for the acid in their saliva, which temporarily lowers defense. By dealing with their forearm attacks properly, you can expose a weak point worth exploiting. The crystals formed by their attacks will explode from elemental interference, making Slinger ammo effective.",
+    "baseHealth": 5800,
+    "variants": [
+      {
+        "monster": {
+          "id": 2
+        },
+        "name": "Tempered Guardian Doshaguma",
+        "kind": "tempered",
+        "id": 1
+      }
+    ],
+    "parts": [
+      {
+        "kind": "left-front-leg",
+        "monster": {
+          "id": 2
+        },
+        "multipliers": {
+          "slash": 0.6,
+          "blunt": 0.6,
+          "pierce": 0.65,
+          "fire": 0.2,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.2,
+          "dragon": 0.3,
+          "stun": 0.0
+        },
+        "part": "left-front-leg",
+        "name": "left-front-leg",
+        "health": 400,
+        "kinsectEssence": "orange",
+        "id": 2573
+      },
+      {
+        "kind": "head",
+        "monster": {
+          "id": 2
+        },
+        "multipliers": {
+          "slash": 0.55,
+          "blunt": 0.6,
+          "pierce": 0.45,
+          "fire": 0.25,
+          "water": 0.05,
+          "thunder": 0.2,
+          "ice": 0.15,
+          "dragon": 0.05,
+          "stun": 1.0
+        },
+        "part": "head",
+        "name": "head",
+        "health": 360,
+        "kinsectEssence": "red",
+        "id": 2574
+      },
+      {
+        "kind": "tail-hair",
+        "monster": {
+          "id": 2
+        },
+        "multipliers": {
+          "slash": 0.35,
+          "blunt": 0.35,
+          "pierce": 0.25,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.1,
+          "ice": 0.2,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "tail-hair",
+        "name": "tail-hair",
+        "health": 240,
+        "kinsectEssence": "green",
+        "id": 2575
+      },
+      {
+        "kind": "left-hind-leg",
+        "monster": {
+          "id": 2
+        },
+        "multipliers": {
+          "slash": 0.4,
+          "blunt": 0.35,
+          "pierce": 0.35,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.1,
+          "ice": 0.2,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "left-hind-leg",
+        "name": "left-hind-leg",
+        "health": 200,
+        "kinsectEssence": "white",
+        "id": 2576
+      },
+      {
+        "kind": "right-hind-leg",
+        "monster": {
+          "id": 2
+        },
+        "multipliers": {
+          "slash": 0.4,
+          "blunt": 0.35,
+          "pierce": 0.35,
+          "fire": 0.1,
+          "water": 0.05,
+          "thunder": 0.15,
+          "ice": 0.2,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "right-hind-leg",
+        "name": "right-hind-leg",
+        "health": 200,
+        "kinsectEssence": "white",
+        "id": 2577
+      },
+      {
+        "kind": "torso",
+        "monster": {
+          "id": 2
+        },
+        "multipliers": {
+          "slash": 0.38,
+          "blunt": 0.38,
+          "pierce": 0.25,
+          "fire": 0.25,
+          "water": 0.05,
+          "thunder": 0.15,
+          "ice": 0.1,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "torso",
+        "name": "torso",
+        "health": 400,
+        "kinsectEssence": "orange",
+        "id": 2578
+      },
+      {
+        "kind": "right-front-leg",
+        "monster": {
+          "id": 2
+        },
+        "multipliers": {
+          "slash": 0.6,
+          "blunt": 0.6,
+          "pierce": 0.65,
+          "fire": 0.2,
+          "water": 0.05,
+          "thunder": 0.05,
+          "ice": 0.2,
+          "dragon": 0.3,
+          "stun": 0.0
+        },
+        "part": "right-front-leg",
+        "name": "right-front-leg",
+        "health": 400,
+        "kinsectEssence": "orange",
+        "id": 2579
+      }
+    ],
+    "id": 2,
+    "gameId": -1916429696
+  },
+  {
+    "size": {
+      "base": 2057.0854,
+      "mini": 1851.3768,
+      "silver": 2365.6482,
+      "gold": 2530.215
+    },
+    "kind": "large",
+    "species": "flying-wyvern",
+    "name": "Rey Dau",
+    "description": "The flying wyvern that reigns supreme over the Windward Plains' ecosystem. It is able to store, amplify, and discharge the Sandtide's lightning.",
+    "ailments": [],
+    "locations": [
+      {
+        "name": "Windward Plains",
+        "zoneCount": 17,
+        "id": 2,
+        "gameId": -1226157568
+      }
+    ],
+    "resistances": [
+      {
+        "element": "thunder",
+        "kind": "element",
+        "condition": null,
+        "id": 819
+      },
+      {
+        "effect": "noise",
+        "kind": "effect",
+        "condition": null,
+        "id": 820
+      }
+    ],
+    "weaknesses": [
+      {
+        "element": "ice",
+        "kind": "element",
+        "level": 1,
+        "condition": null,
+        "id": 2945
+      },
+      {
+        "status": "paralysis",
+        "kind": "status",
+        "level": 1,
+        "condition": null,
+        "id": 2946
+      },
+      {
+        "status": "poison",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2947
+      },
+      {
+        "status": "sleep",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2948
+      },
+      {
+        "status": "blastblight",
+        "kind": "status",
+        "level": 2,
+        "condition": null,
+        "id": 2949
+      },
+      {
+        "effect": "flash",
+        "kind": "effect",
+        "level": 1,
+        "condition": null,
+        "id": 2950
+      },
+      {
+        "effect": "stun",
+        "kind": "effect",
+        "level": 1,
+        "condition": null,
+        "id": 2951
+      },
+      {
+        "effect": "exhaust",
+        "kind": "effect",
+        "level": 1,
+        "condition": null,
+        "id": 2952
+      }
+    ],
+    "rewards": [
+      {
+        "item": {
+          "id": 117,
+          "gameId": 139,
+          "rarity": 4,
+          "name": "Rey Dau Scale",
+          "description": "A Rey Dau scale. Its unique shape allows electricity from its organs to pass through.",
+          "value": 620,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 43,
+            "kind": "scale",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 25,
+            "part": null,
+            "id": 20364
+          },
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 28,
+            "part": null,
+            "id": 20365
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 50,
+            "part": null,
+            "id": 20366
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 60,
+            "part": null,
+            "id": 20367
+          },
+          {
+            "kind": "carve-rotten-severed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 60,
+            "part": null,
+            "id": 20368
+          }
+        ],
+        "id": 5702
+      },
+      {
+        "item": {
+          "id": 118,
+          "gameId": 140,
+          "rarity": 4,
+          "name": "Rey Dau Shell",
+          "description": "The shell from a Rey Dau. Highly conductive and capable of producing large electrical currents.",
+          "value": 930,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 46,
+            "kind": "shell",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 23,
+            "part": null,
+            "id": 20369
+          },
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 25,
+            "part": null,
+            "id": 20370
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 40,
+            "part": null,
+            "id": 20371
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 50,
+            "part": null,
+            "id": 20372
+          }
+        ],
+        "id": 5703
+      },
+      {
+        "item": {
+          "id": 119,
+          "gameId": 141,
+          "rarity": 4,
+          "name": "Rey Dau Thunderhorn",
+          "description": "An electrically charged Rey Dau horn. The thick, flexible muscle at its base lets it move freely.",
+          "value": 1364,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 45,
+            "kind": "claw",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 11,
+            "part": null,
+            "id": 20373
+          },
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 13,
+            "part": null,
+            "id": 20374
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "head",
+            "id": 20375
+          }
+        ],
+        "id": 5704
+      },
+      {
+        "item": {
+          "id": 120,
+          "gameId": 142,
+          "rarity": 4,
+          "name": "Rey Dau Wingtalon",
+          "description": "The claw-shaped energy conduit of a Rey Dau. Coated in sharp fulgurite blades formed by electric discharges.",
+          "value": 1116,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 45,
+            "kind": "claw",
+            "colorId": 17,
+            "color": "blue"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 15,
+            "part": null,
+            "id": 20376
+          },
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 18,
+            "part": null,
+            "id": 20377
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "hide",
+            "id": 20378
+          },
+          {
+            "kind": "broken-part",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 100,
+            "part": "hide",
+            "id": 20379
+          }
+        ],
+        "id": 5705
+      },
+      {
+        "item": {
+          "id": 121,
+          "gameId": 143,
+          "rarity": 4,
+          "name": "Rey Dau Tail",
+          "description": "A Rey Dau tail. Its fulgurite-covered spines rub together to produce a threatening melody.",
+          "value": 1240,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 47,
+            "kind": "tail",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 11,
+            "part": null,
+            "id": 20380
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 11,
+            "part": null,
+            "id": 20381
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 11,
+            "part": null,
+            "id": 20382
+          },
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 11,
+            "part": null,
+            "id": 20383
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 11,
+            "part": null,
+            "id": 20384
+          },
+          {
+            "kind": "carve-rotten-severed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 40,
+            "part": null,
+            "id": 20385
+          },
+          {
+            "kind": "carve-rotten-severed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 40,
+            "part": null,
+            "id": 20386
+          },
+          {
+            "kind": "carve-severed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 88,
+            "part": null,
+            "id": 20387
+          },
+          {
+            "kind": "carve-severed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 93,
+            "part": null,
+            "id": 20388
+          }
+        ],
+        "id": 5706
+      },
+      {
+        "item": {
+          "id": 122,
+          "gameId": 144,
+          "rarity": 5,
+          "name": "Rey Dau Plate",
+          "description": "A Rey Dau plate. The backward-facing scale accumulates a massive amount of energy.",
+          "value": 3720,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 50,
+            "kind": "plate",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 5,
+            "part": null,
+            "id": 20389
+          },
+          {
+            "kind": "carve",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 7,
+            "part": null,
+            "id": 20390
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 7,
+            "part": null,
+            "id": 20391
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 7,
+            "part": null,
+            "id": 20392
+          },
+          {
+            "kind": "carve-severed",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 12,
+            "part": null,
+            "id": 20393
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 21,
+            "part": null,
+            "id": 20394
+          }
+        ],
+        "id": 5707
+      },
+      {
+        "item": {
+          "id": 313,
+          "gameId": 346,
+          "rarity": 4,
+          "name": "Rey Dau Certificate",
+          "description": "A Guild certificate awarded to those who have hunted a Rey Dau. Used to make equipment.",
+          "value": 620,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 30,
+            "kind": "certificate",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "low",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20395
+          }
+        ],
+        "id": 5708
+      },
+      {
+        "item": {
+          "id": 314,
+          "gameId": 347,
+          "rarity": 6,
+          "name": "Rey Dau Scale+",
+          "description": "A high-quality Rey Dau scale. Constant exposure to the Sandtide made it as sturdy as it is smooth.",
+          "value": 2400,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 43,
+            "kind": "scale",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 22,
+            "part": null,
+            "id": 20396
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 26,
+            "part": null,
+            "id": 20397
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20398
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 40,
+            "part": null,
+            "id": 20399
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 50,
+            "part": null,
+            "id": 20400
+          },
+          {
+            "kind": "carve-rotten-severed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 60,
+            "part": null,
+            "id": 20401
+          }
+        ],
+        "id": 5709
+      },
+      {
+        "item": {
+          "id": 315,
+          "gameId": 348,
+          "rarity": 6,
+          "name": "Rey Dau Carapace",
+          "description": "The tough carapace of a Rey Dau. Its complex but consistent pattern enhances its conductivity.",
+          "value": 3600,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 46,
+            "kind": "shell",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 22,
+            "part": null,
+            "id": 20402
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 23,
+            "part": null,
+            "id": 20403
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 26,
+            "part": null,
+            "id": 20404
+          },
+          {
+            "kind": "carve-rotten",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20405
+          },
+          {
+            "kind": "wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 50,
+            "part": null,
+            "id": 20406
+          }
+        ],
+        "id": 5710
+      },
+      {
+        "item": {
+          "id": 316,
+          "gameId": 349,
+          "rarity": 6,
+          "name": "Rey Dau Bolthorn",
+          "description": "A Rey Dau horn crackling with lightning. Durable enough to sustain great bolts of electricity.",
+          "value": 5280,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 45,
+            "kind": "claw",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 11,
+            "part": null,
+            "id": 20407
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 11,
+            "part": null,
+            "id": 20408
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 13,
+            "part": null,
+            "id": 20409
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 36,
+            "part": null,
+            "id": 20410
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "head",
+            "id": 20411
+          }
+        ],
+        "id": 5711
+      },
+      {
+        "item": {
+          "id": 317,
+          "gameId": 350,
+          "rarity": 6,
+          "name": "Rey Dau Fulgurtalon",
+          "description": "A Rey Dau wingtalon with an azure glow. Coated with pure, razor-sharp fulgurite.",
+          "value": 4800,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 45,
+            "kind": "claw",
+            "colorId": 17,
+            "color": "blue"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 16,
+            "part": null,
+            "id": 20412
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 16,
+            "part": null,
+            "id": 20413
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 18,
+            "part": null,
+            "id": 20414
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 36,
+            "part": null,
+            "id": 20415
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "hide",
+            "id": 20416
+          },
+          {
+            "kind": "broken-part",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": "hide",
+            "id": 20417
+          }
+        ],
+        "id": 5712
+      },
+      {
+        "item": {
+          "id": 318,
+          "gameId": 351,
+          "rarity": 7,
+          "name": "Rey Dau Boltgem",
+          "description": "A rare jewel that developed within a Rey Dau. Said to wield the power of ten thousand storms.",
+          "value": 14400,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 20,
+            "kind": "gem",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 3,
+            "part": null,
+            "id": 20418
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 3,
+            "part": null,
+            "id": 20419
+          },
+          {
+            "kind": "carve",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 5,
+            "part": null,
+            "id": 20420
+          },
+          {
+            "kind": "carve-severed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 7,
+            "part": null,
+            "id": 20421
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 7,
+            "part": null,
+            "id": 20422
+          },
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 100,
+            "part": null,
+            "id": 20423
+          }
+        ],
+        "id": 5713
+      },
+      {
+        "item": {
+          "id": 319,
+          "gameId": 352,
+          "rarity": 6,
+          "name": "Rey Dau Certificate S",
+          "description": "A Guild certificate awarded to those who have hunted a Rey Dau. Used to make equipment.",
+          "value": 2400,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 30,
+            "kind": "certificate",
+            "colorId": 10,
+            "color": "yellow"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "target-reward",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 8,
+            "part": null,
+            "id": 20424
+          }
+        ],
+        "id": 5714
+      },
+      {
+        "item": {
+          "id": 603,
+          "gameId": 656,
+          "rarity": 6,
+          "name": "Monster Hardbone",
+          "description": "Precious bone obtained from high rank large monsters. Their rarity makes them highly sought after.",
+          "value": 1200,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 42,
+            "kind": "bone",
+            "colorId": 5,
+            "color": "red"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "carve-rotten",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 30,
+            "part": null,
+            "id": 20425
+          }
+        ],
+        "id": 5715
+      },
+      {
+        "item": {
+          "id": 640,
+          "gameId": 701,
+          "rarity": 7,
+          "name": "Wyverian Bloodstone",
+          "description": "Obtained from destroying a tempered wound. Has a deep sanguine hue. Can be used as a melding material.",
+          "value": 100,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 38,
+            "kind": "ore",
+            "colorId": 5,
+            "color": "red"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "tempered-wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 70,
+            "part": null,
+            "id": 20426
+          }
+        ],
+        "id": 5716
+      },
+      {
+        "item": {
+          "id": 641,
+          "gameId": 702,
+          "rarity": 7,
+          "name": "Wyverian Bloodstone (L)",
+          "description": "Obtained from destroying a tempered wound. Larger than most of its type. Can be used as a melding material.",
+          "value": 110,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 38,
+            "kind": "ore",
+            "colorId": 5,
+            "color": "red"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "tempered-wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 23,
+            "part": null,
+            "id": 20427
+          }
+        ],
+        "id": 5717
+      },
+      {
+        "item": {
+          "id": 642,
+          "gameId": 703,
+          "rarity": 8,
+          "name": "Wyverian Bloodstone Chunk",
+          "description": "Obtained from destroying a tempered wound. One of the largest of its kind. Can be used as a melding material.",
+          "value": 120,
+          "carryLimit": 99,
+          "recipes": [],
+          "icon": {
+            "id": 38,
+            "kind": "ore",
+            "colorId": 5,
+            "color": "red"
+          }
+        },
+        "conditions": [
+          {
+            "kind": "tempered-wound-destroyed",
+            "rank": "high",
+            "quantity": 1,
+            "chance": 7,
+            "part": null,
+            "id": 20428
+          }
+        ],
+        "id": 5718
+      }
+    ],
+    "elements": [],
+    "features": "The flying wyvern that reigns supreme over the Windward Plains' ecosystem. It has adapted to the Sandtide—when it most frequently appears—and is able to store, amplify, and discharge the storm's heavy lightning to lethal effect. Rey Dau is highly territorial and will attack any and all intruders on sight. The fulgurite against its carapace emits a sound that puts every monster in the region on guard.",
+    "tips": "When a Rey Dau's wing or tail touches the ground while charged, it causes a reaction that produces a mantle of fulgurite. This widens the appendage's attack range and increases the monster's charging capacity— so make it a point to break these parts. Their heads may also be vulnerable after a discharge attack. Hunters are advised to bring thunder-resistant armor and ice-based weaponry.",
+    "baseHealth": 5000,
+    "variants": [
+      {
+        "monster": {
+          "id": 3
+        },
+        "name": "Tempered Rey Dau",
+        "kind": "tempered",
+        "id": 2
+      },
+      {
+        "monster": {
+          "id": 3
+        },
+        "name": "Arch-tempered Rey Dau",
+        "kind": "arch-tempered",
+        "id": 40
+      }
+    ],
+    "parts": [
+      {
+        "kind": "left-wing",
+        "monster": {
+          "id": 3
+        },
+        "multipliers": {
+          "slash": 0.45,
+          "blunt": 0.5,
+          "pierce": 0.45,
+          "fire": 0.05,
+          "water": 0.1,
+          "thunder": 0.0,
+          "ice": 0.15,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "left-wing",
+        "name": "left-wing",
+        "health": 260,
+        "kinsectEssence": "white",
+        "id": 2580
+      },
+      {
+        "kind": "head",
+        "monster": {
+          "id": 3
+        },
+        "multipliers": {
+          "slash": 0.6,
+          "blunt": 0.65,
+          "pierce": 0.5,
+          "fire": 0.05,
+          "water": 0.15,
+          "thunder": 0.0,
+          "ice": 0.2,
+          "dragon": 0.05,
+          "stun": 1.0
+        },
+        "part": "head",
+        "name": "head",
+        "health": 700,
+        "kinsectEssence": "red",
+        "id": 2581
+      },
+      {
+        "kind": "right-leg",
+        "monster": {
+          "id": 3
+        },
+        "multipliers": {
+          "slash": 0.37,
+          "blunt": 0.37,
+          "pierce": 0.33,
+          "fire": 0.05,
+          "water": 0.05,
+          "thunder": 0.0,
+          "ice": 0.05,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "right-leg",
+        "name": "right-leg",
+        "health": 200,
+        "kinsectEssence": "white",
+        "id": 2582
+      },
+      {
+        "kind": "hide",
+        "monster": {
+          "id": 3
+        },
+        "multipliers": {
+          "slash": 0.5,
+          "blunt": 0.55,
+          "pierce": 0.5,
+          "fire": 0.05,
+          "water": 0.1,
+          "thunder": 0.0,
+          "ice": 0.15,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "hide",
+        "name": "hide",
+        "health": null,
+        "kinsectEssence": "white",
+        "id": 2583
+      },
+      {
+        "kind": "hide",
+        "monster": {
+          "id": 3
+        },
+        "multipliers": {
+          "slash": 0.5,
+          "blunt": 0.55,
+          "pierce": 0.5,
+          "fire": 0.05,
+          "water": 0.1,
+          "thunder": 0.0,
+          "ice": 0.15,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "hide",
+        "name": "hide",
+        "health": null,
+        "kinsectEssence": "white",
+        "id": 2584
+      },
+      {
+        "kind": "hide",
+        "monster": {
+          "id": 3
+        },
+        "multipliers": {
+          "slash": 0.55,
+          "blunt": 0.5,
+          "pierce": 0.5,
+          "fire": 0.05,
+          "water": 0.1,
+          "thunder": 0.0,
+          "ice": 0.15,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "hide",
+        "name": "hide",
+        "health": null,
+        "kinsectEssence": "white",
+        "id": 2585
+      },
+      {
+        "kind": "right-wing",
+        "monster": {
+          "id": 3
+        },
+        "multipliers": {
+          "slash": 0.45,
+          "blunt": 0.5,
+          "pierce": 0.45,
+          "fire": 0.05,
+          "water": 0.1,
+          "thunder": 0.0,
+          "ice": 0.15,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "right-wing",
+        "name": "right-wing",
+        "health": 260,
+        "kinsectEssence": "white",
+        "id": 2586
+      },
+      {
+        "kind": "left-leg",
+        "monster": {
+          "id": 3
+        },
+        "multipliers": {
+          "slash": 0.37,
+          "blunt": 0.37,
+          "pierce": 0.33,
+          "fire": 0.05,
+          "water": 0.05,
+          "thunder": 0.0,
+          "ice": 0.05,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "left-leg",
+        "name": "left-leg",
+        "health": 200,
+        "kinsectEssence": "white",
+        "id": 2587
+      },
+      {
+        "kind": "torso",
+        "monster": {
+          "id": 3
+        },
+        "multipliers": {
+          "slash": 0.3,
+          "blunt": 0.3,
+          "pierce": 0.25,
+          "fire": 0.05,
+          "water": 0.05,
+          "thunder": 0.0,
+          "ice": 0.05,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "torso",
+        "name": "torso",
+        "health": 260,
+        "kinsectEssence": "orange",
+        "id": 2588
+      },
+      {
+        "kind": "tail",
+        "monster": {
+          "id": 3
+        },
+        "multipliers": {
+          "slash": 0.45,
+          "blunt": 0.4,
+          "pierce": 0.45,
+          "fire": 0.05,
+          "water": 0.05,
+          "thunder": 0.0,
+          "ice": 0.1,
+          "dragon": 0.05,
+          "stun": 0.0
+        },
+        "part": "tail",
+        "name": "tail",
+        "health": 200,
+        "kinsectEssence": "green",
+        "id": 2589
+      }
+    ],
+    "id": 3,
+    "gameId": -1547364608
+  }
+]

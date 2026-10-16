@@ -255,5 +255,9 @@
   "treeViewTooltip": "Vista de árvore",
   "tableViewTooltip": "Vista de tabela",
   "errorLoadingWeaponDetails": "Erro ao carregar detalhes da arma",
-  "masterRank": "Rank Mestre"
+  "masterRank": "Rank Mestre",
+  "retry": "Tentar novamente",
+  "errorOffline": "Sem conexão. Verifique sua internet e tente novamente.",
+  "errorLoadingData": "Não foi possível carregar os dados. Tente novamente.",
+  "offlineDataFrom": "Sem conexão · dados de {date}"
 }

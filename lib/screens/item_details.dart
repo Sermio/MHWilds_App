@@ -81,7 +81,7 @@ class ItemDetails extends StatelessWidget {
                         item.description,
                         style: TextStyle(
                           fontSize: 16,
-                          color: colorScheme.onSurface.withOpacity(0.8),
+                          color: colorScheme.onSurface.withValues(alpha: 0.8),
                           height: 1.4,
                         ),
                         textAlign: TextAlign.center,
@@ -114,7 +114,7 @@ class ItemDetails extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: colorScheme.shadow.withOpacity(0.1),
+                      color: colorScheme.shadow.withValues(alpha: 0.1),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -136,7 +136,7 @@ class ItemDetails extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: colorScheme.onSurface.withOpacity(0.8),
+                            color: colorScheme.onSurface.withValues(alpha: 0.8),
                           ),
                         ),
                       ],
@@ -202,14 +202,14 @@ class ItemDetails extends StatelessWidget {
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color:
-                                        colorScheme.onSurface.withOpacity(0.8),
+                                        colorScheme.onSurface.withValues(alpha: 0.8),
                                   ),
                                 ),
                                 const SizedBox(width: 8),
                               ],
                             ],
                           );
-                        }).toList(),
+                        }),
                       ],
                     ),
                   ],
@@ -245,7 +245,7 @@ class ItemDetails extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: colorScheme.shadow.withOpacity(0.1),
+                        color: colorScheme.shadow.withValues(alpha: 0.1),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -304,14 +304,14 @@ class ItemDetails extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: colorScheme.onSurface.withOpacity(0.8),
+                                color: colorScheme.onSurface.withValues(alpha: 0.8),
                               ),
                             ),
                             const SizedBox(height: 16),
                             ...relatedRewards
                                 .expand((reward) => reward.conditions)
                                 .map((condition) {
-                              String formattedKind = condition.kind
+                              final String formattedKind = condition.kind
                                   .replaceAll('-', ' ')
                                   .split(' ')
                                   .map((word) =>
@@ -363,14 +363,14 @@ class ItemDetails extends StatelessWidget {
                                   ],
                                 ),
                               );
-                            }).toList(),
+                            }),
                           ],
                         ),
                       ),
                     ],
                   ),
                 );
-              }).toList(),
+              }),
             ],
 
             const SizedBox(height: 40),
@@ -395,7 +395,7 @@ class ItemDetails extends StatelessWidget {
     }
 
     final imagePath =
-        'assets/imgs/monster_icons/${imageName.toLowerCase().replaceAll(' ', '_')}.png';
+        'assets/imgs/monster_icons/${imageName.toLowerCase().replaceAll(' ', '_')}.webp';
     return Image.asset(
       imagePath,
       fit: BoxFit.cover,

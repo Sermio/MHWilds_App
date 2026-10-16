@@ -25,11 +25,13 @@ class TreeConnectorPainter extends CustomPainter {
     canvas.drawLine(Offset(lineX, 0), Offset(lineX, halfHeight), paint);
 
     // Línea horizontal desde el centro hacia la derecha
-    canvas.drawLine(Offset(lineX, halfHeight), Offset(size.width, halfHeight), paint);
+    canvas.drawLine(
+        Offset(lineX, halfHeight), Offset(size.width, halfHeight), paint);
 
     // Si no es el último hijo, continuamos la línea vertical hasta abajo
     if (!isLastChild) {
-      canvas.drawLine(Offset(lineX, halfHeight), Offset(lineX, size.height), paint);
+      canvas.drawLine(
+          Offset(lineX, halfHeight), Offset(lineX, size.height), paint);
     }
   }
 

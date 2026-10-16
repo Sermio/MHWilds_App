@@ -58,19 +58,20 @@ class Cdrawer extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppColors.goldSoft.withOpacity(0.92),
-            AppColors.goldSoft.withOpacity(0.72),
+            AppColors.goldSoft.withValues(alpha: 0.92),
+            AppColors.goldSoft.withValues(alpha: 0.72),
           ],
         ),
         border: Border(
           bottom: BorderSide(
-            color: (isDark ? Colors.black : Colors.white).withOpacity(0.35),
+            color:
+                (isDark ? Colors.black : Colors.white).withValues(alpha: 0.35),
             width: 1,
           ),
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.goldSoft.withOpacity(0.25),
+            color: AppColors.goldSoft.withValues(alpha: 0.25),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
@@ -88,10 +89,12 @@ class Cdrawer extends StatelessWidget {
                   height: 92,
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: (isDark ? Colors.black : Colors.white).withOpacity(0.25),
+                    color: (isDark ? Colors.black : Colors.white)
+                        .withValues(alpha: 0.25),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: (isDark ? Colors.black : Colors.white).withOpacity(0.55),
+                      color: (isDark ? Colors.black : Colors.white)
+                          .withValues(alpha: 0.55),
                       width: 1,
                     ),
                   ),
@@ -101,7 +104,8 @@ class Cdrawer extends StatelessWidget {
                       borderRadius: BorderRadius.circular(18),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(isDark ? 0.3 : 0.1),
+                          color: Colors.black
+                              .withValues(alpha: isDark ? 0.3 : 0.1),
                           blurRadius: 10,
                           offset: const Offset(0, 3),
                         ),
@@ -133,7 +137,7 @@ class Cdrawer extends StatelessWidget {
                 width: 56,
                 height: 3,
                 decoration: BoxDecoration(
-                  color: accentColor.withOpacity(0.4),
+                  color: accentColor.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(99),
                 ),
               ),
@@ -155,7 +159,7 @@ class Cdrawer extends StatelessWidget {
             title: l10n.monsters,
             subtitle: l10n.menuMonstersSubtitle,
             leadingIcon: Image.asset(
-              'assets/imgs/monster_icons/arkveld.png',
+              'assets/imgs/monster_icons/arkveld.webp',
               fit: BoxFit.contain,
               errorBuilder: (_, __, ___) => Icon(
                 Icons.pets,
@@ -232,7 +236,7 @@ class Cdrawer extends StatelessWidget {
             context: context,
             title: l10n.talismans,
             subtitle: l10n.menuTalismansSubtitle,
-            leadingIcon: GearSpriteIcon(
+            leadingIcon: const GearSpriteIcon(
               column: talismanColumn,
               rarity: 1,
               size: 30,
@@ -291,7 +295,7 @@ class Cdrawer extends StatelessWidget {
             title: l10n.locations,
             subtitle: l10n.menuLocationsSubtitle,
             leadingIcon: Image.asset(
-              'assets/imgs/maps/map.png',
+              'assets/imgs/maps/map.webp',
               fit: BoxFit.contain,
               errorBuilder: (_, __, ___) => Icon(
                 Icons.map,
@@ -353,19 +357,19 @@ class Cdrawer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: isSelected
-            ? _selectedHighlightColor.withOpacity(0.12)
+            ? _selectedHighlightColor.withValues(alpha: 0.12)
             : colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.08),
+            color: colorScheme.shadow.withValues(alpha: 0.08),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
         ],
         border: Border.all(
           color: isSelected
-              ? _selectedHighlightColor.withOpacity(0.35)
+              ? _selectedHighlightColor.withValues(alpha: 0.35)
               : colorScheme.outlineVariant,
           width: 1,
         ),
