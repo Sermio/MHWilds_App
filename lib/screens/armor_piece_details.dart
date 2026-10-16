@@ -11,6 +11,7 @@ import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:provider/provider.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
 
 class ArmorDetails extends StatefulWidget {
   final armor_models.ArmorPiece armor;
@@ -187,11 +188,11 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 2),
                       decoration: BoxDecoration(
-                        color: rarityColorFromSprite(widget.armor.rarity)
+                        color: GameColors.of(context).rarity(widget.armor.rarity)
                             .withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                         border: Border.all(
-                          color: rarityColorFromSprite(widget.armor.rarity)
+                          color: GameColors.of(context).rarity(widget.armor.rarity)
                               .withValues(alpha: 0.3),
                         ),
                       ),
@@ -200,7 +201,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: rarityColorFromSprite(widget.armor.rarity),
+                          color: GameColors.of(context).rarity(widget.armor.rarity),
                         ),
                       ),
                     )),

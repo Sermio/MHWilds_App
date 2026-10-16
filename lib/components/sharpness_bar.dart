@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/weapon.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
 
 class SharpnessBar extends StatelessWidget {
   final Sharpness sharpness;
@@ -15,13 +16,14 @@ class SharpnessBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final game = GameColors.of(context);
     // Crear lista de segmentos para poder identificar el último
     final List<Widget> segments = [];
 
     if (sharpness.red > 0) {
       segments.add(_buildSharpnessSegment(
         sharpness.red,
-        Colors.red[400]!,
+        game.sharpnessRed,
         isFirst: segments.isEmpty,
         isLast: false,
       ));
@@ -29,7 +31,7 @@ class SharpnessBar extends StatelessWidget {
     if (sharpness.orange > 0) {
       segments.add(_buildSharpnessSegment(
         sharpness.orange,
-        Colors.orange[400]!,
+        game.sharpnessOrange,
         isFirst: segments.isEmpty,
         isLast: false,
       ));
@@ -37,7 +39,7 @@ class SharpnessBar extends StatelessWidget {
     if (sharpness.yellow > 0) {
       segments.add(_buildSharpnessSegment(
         sharpness.yellow,
-        Colors.yellow[600]!,
+        game.sharpnessYellow,
         isFirst: segments.isEmpty,
         isLast: false,
       ));
@@ -45,7 +47,7 @@ class SharpnessBar extends StatelessWidget {
     if (sharpness.green > 0) {
       segments.add(_buildSharpnessSegment(
         sharpness.green,
-        Colors.green[400]!,
+        game.sharpnessGreen,
         isFirst: segments.isEmpty,
         isLast: false,
       ));
@@ -53,7 +55,7 @@ class SharpnessBar extends StatelessWidget {
     if (sharpness.blue > 0) {
       segments.add(_buildSharpnessSegment(
         sharpness.blue,
-        Colors.blue[400]!,
+        game.sharpnessBlue,
         isFirst: segments.isEmpty,
         isLast: false,
       ));
@@ -61,7 +63,7 @@ class SharpnessBar extends StatelessWidget {
     if (sharpness.white > 0) {
       segments.add(_buildSharpnessSegment(
         sharpness.white,
-        Colors.white,
+        game.sharpnessWhite,
         isFirst: segments.isEmpty,
         isLast: false,
       ));
@@ -69,7 +71,7 @@ class SharpnessBar extends StatelessWidget {
     if (sharpness.purple > 0) {
       segments.add(_buildSharpnessSegment(
         sharpness.purple,
-        Colors.purple[400]!,
+        game.sharpnessPurple,
         isFirst: segments.isEmpty,
         isLast: false,
       ));
@@ -79,7 +81,7 @@ class SharpnessBar extends StatelessWidget {
     if (segments.isNotEmpty) {
       segments.last = _buildSharpnessSegment(
         _getLastSegmentValue(),
-        _getLastSegmentColor(),
+        _getLastSegmentColor(game),
         isFirst: false,
         isLast: true,
       );
@@ -138,14 +140,14 @@ class SharpnessBar extends StatelessWidget {
   }
 
   // Método auxiliar para obtener el color del último segmento
-  Color _getLastSegmentColor() {
-    if (sharpness.purple > 0) return Colors.purple[400]!;
-    if (sharpness.white > 0) return Colors.white;
-    if (sharpness.blue > 0) return Colors.blue[400]!;
-    if (sharpness.green > 0) return Colors.green[400]!;
-    if (sharpness.yellow > 0) return Colors.yellow[600]!;
-    if (sharpness.orange > 0) return Colors.orange[400]!;
-    if (sharpness.red > 0) return Colors.red[400]!;
+  Color _getLastSegmentColor(GameColors game) {
+    if (sharpness.purple > 0) return game.sharpnessPurple;
+    if (sharpness.white > 0) return game.sharpnessWhite;
+    if (sharpness.blue > 0) return game.sharpnessBlue;
+    if (sharpness.green > 0) return game.sharpnessGreen;
+    if (sharpness.yellow > 0) return game.sharpnessYellow;
+    if (sharpness.orange > 0) return game.sharpnessOrange;
+    if (sharpness.red > 0) return game.sharpnessRed;
     return Colors.grey;
   }
 }

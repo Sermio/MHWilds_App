@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
-import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/item.dart';
@@ -10,6 +9,7 @@ import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
 
 class ItemList extends StatefulWidget {
   const ItemList({super.key});
@@ -407,6 +407,6 @@ class _ItemListState extends State<ItemList> {
   }
 
   Color _getRarityColor(int rarity) {
-    return rarityColorFromSprite(rarity);
+    return GameColors.of(context).rarity(rarity);
   }
 }

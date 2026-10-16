@@ -38,27 +38,6 @@ int spriteRowForRarity(int rarity) {
   return rarity.clamp(0, _gearSpriteRows - 1);
 }
 
-// Palette sampled from each sprite sheet row (rarity 0..12).
-const List<Color> _rarityColorsByRow = [
-  Color(0xFF747474), // rarity 0
-  Color(0xFF8A918C), // rarity 1
-  Color(0xFFB1ADA7), // rarity 2
-  Color(0xFF8EA01F), // rarity 3
-  Color(0xFF33943F), // rarity 4
-  Color(0xFF429290), // rarity 5
-  Color(0xFF3F49AF), // rarity 6
-  Color(0xFF7945B9), // rarity 7
-  Color(0xFFA15332), // rarity 8
-  Color(0xFF98304C), // rarity 9
-  Color(0xFF069AC1), // rarity 10
-  Color(0xFFC19413), // rarity 11
-  Color(0xFF87B2C4), // rarity 12
-];
-
-Color rarityColorFromSprite(int rarity) {
-  return _rarityColorsByRow[spriteRowForRarity(rarity)];
-}
-
 class GearSpriteIcon extends StatefulWidget {
   const GearSpriteIcon({
     super.key,

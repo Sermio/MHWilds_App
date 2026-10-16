@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/utils/colors.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
 
 FocusNode myFocusNode = FocusNode();
 
@@ -49,6 +50,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
+      extensions: [GameColors.light],
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.goldSoft,
         foregroundColor: Colors.black87,
@@ -129,6 +131,7 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       colorScheme: colorScheme,
+      extensions: [GameColors.dark],
       // En oscuro la barra no es el elemento más brillante: superficie con
       // título e iconos dorados.
       appBarTheme: AppBarTheme(

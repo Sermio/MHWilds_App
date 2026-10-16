@@ -332,7 +332,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 - **Prompt:**
   > Lee CLAUDE.md. Solo en el tema oscuro, cambia la AppBar a `colorScheme.surfaceContainer` con título e iconos en `primary` (dorado). El tema claro no cambia. Adjunta capturas antes y después.
 
-#### T21 · `GameColors` como `ThemeExtension`
+#### ✅ T21 · `GameColors` como `ThemeExtension`
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** T19
 - **Prompt:**
   > Lee CLAUDE.md. Reúne en una `ThemeExtension<GameColors>` los colores con significado del juego que hoy están repartidos: elementos, estados, rarezas, colores de afilado y fondos de zona (`zoneBackgroundColor`). Define variante clara y oscura y regístrala en los dos temas. Sustituye los usos (grep `Color(0x`, `Colors.` en `weapon_utils.dart`, `sharpness_bar.dart`, `utils.dart`, `rarity_chip.dart` y pantallas). Los colores claros deben quedar exactamente iguales; los oscuros solo cambian donde el contraste falle.

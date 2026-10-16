@@ -22,6 +22,7 @@ import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
 
 class WeaponDetails extends StatefulWidget {
   final Weapon weapon;
@@ -118,13 +119,13 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     size: 80,
                     fallback: Icon(
                       WeaponUtils.getWeaponIcon(widget.weapon.kind),
-                      color: WeaponUtils.getKindColor(widget.weapon.kind),
+                      color: GameColors.of(context).kind(widget.weapon.kind),
                       size: 40,
                     ),
                   )
                 : Icon(
                     WeaponUtils.getWeaponIcon(widget.weapon.kind),
-                    color: WeaponUtils.getKindColor(widget.weapon.kind),
+                    color: GameColors.of(context).kind(widget.weapon.kind),
                     size: 40,
                   ),
           ),
@@ -209,11 +210,11 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     decoration: BoxDecoration(
-                      color: rarityColorFromSprite(widget.weapon.rarity)
+                      color: GameColors.of(context).rarity(widget.weapon.rarity)
                           .withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(
-                        color: rarityColorFromSprite(widget.weapon.rarity)
+                        color: GameColors.of(context).rarity(widget.weapon.rarity)
                             .withValues(alpha: 0.3),
                       ),
                     ),
@@ -222,7 +223,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: rarityColorFromSprite(widget.weapon.rarity),
+                        color: GameColors.of(context).rarity(widget.weapon.rarity),
                       ),
                     ),
                   ),
@@ -1212,7 +1213,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                           size: 24,
                           fallback: Icon(
                             WeaponUtils.getWeaponIcon(node.weapon.kind),
-                            color: WeaponUtils.getKindColor(node.weapon.kind),
+                            color: GameColors.of(context).kind(node.weapon.kind),
                             size: 16,
                           ),
                         ),
@@ -1301,7 +1302,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     column: weaponColumnByKind[w.kind] ?? 0,
                     rarity: w.rarity,
                     size: 32,
-                    fallback: Icon(WeaponUtils.getWeaponIcon(w.kind), size: 24, color: WeaponUtils.getKindColor(w.kind)),
+                    fallback: Icon(WeaponUtils.getWeaponIcon(w.kind), size: 24, color: GameColors.of(context).kind(w.kind)),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
@@ -1397,7 +1398,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(WeaponUtils.getElementIcon(special.element), size: 14, color: WeaponUtils.getElementColor(special.element)),
+              Icon(WeaponUtils.getElementIcon(special.element), size: 14, color: GameColors.of(context).element(special.element)),
               const SizedBox(width: 2),
               Text('${special.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
             ],

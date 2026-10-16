@@ -5,7 +5,7 @@ import 'package:mhwilds_app/components/elements_dialog.dart';
 import 'package:mhwilds_app/data/ailments.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
-import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
 
 class MonsterDetailsCard extends StatelessWidget {
   final Monster monster;
@@ -290,7 +290,7 @@ class MonsterDetailsCard extends StatelessWidget {
                     child: Cchip(
                       itemName: loc,
                       itemIdForColor: location.value.id,
-                      getItemColor: zoneBackgroundColor,
+                      getItemColor: GameColors.of(context).zone,
                       optionalWidget: Image.asset(
                         'assets/imgs/maps/map.webp',
                         width: 16,

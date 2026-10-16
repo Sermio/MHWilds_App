@@ -54,7 +54,7 @@ class WeaponDisplayUtils {
                     style: TextStyle(
                       fontSize: isDetailView ? 16 : 12,
                       fontWeight: FontWeight.bold,
-                      color: WeaponUtils.getElementColor(elementOrStatus),
+                      color: GameColors.of(context).element(elementOrStatus),
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -67,7 +67,7 @@ class WeaponDisplayUtils {
                         return Icon(
                           WeaponUtils.getElementIcon(elementOrStatus),
                           size: isDetailView ? 18 : 16,
-                          color: WeaponUtils.getElementColor(elementOrStatus),
+                          color: GameColors.of(context).element(elementOrStatus),
                         );
                       },
                     ),
@@ -106,7 +106,7 @@ class WeaponDisplayUtils {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: WeaponUtils.getElementColor(phialKind),
+                      color: GameColors.of(context).element(phialKind),
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -119,7 +119,7 @@ class WeaponDisplayUtils {
                         return Icon(
                           WeaponUtils.getElementIcon(phialKind),
                           size: 18,
-                          color: WeaponUtils.getElementColor(phialKind),
+                          color: GameColors.of(context).element(phialKind),
                         );
                       },
                     ),
@@ -189,7 +189,7 @@ class WeaponDisplayUtils {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: _getCoatingColor(coating),
+                    color: GameColors.of(context).coating(coating),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -643,28 +643,5 @@ class WeaponDisplayUtils {
     if (elementLower.contains('sleep')) return 'sleep';
     if (elementLower.contains('blast')) return 'blast';
     return 'fire'; // default
-  }
-
-  static Color _getCoatingColor(String coating) {
-    switch (coating.toLowerCase()) {
-      case 'power':
-        return Colors.red[600]!;
-      case 'paralysis':
-        return Colors.amber[600]!;
-      case 'poison':
-        return Colors.green[600]!;
-      case 'sleep':
-        return Colors.indigo[600]!;
-      case 'blast':
-        return Colors.orange[600]!;
-      case 'exhaust':
-        return Colors.grey[600]!;
-      case 'close-range':
-        return Colors.blue[600]!;
-      case 'pierce':
-        return Colors.purple[600]!;
-      default:
-        return Colors.grey[600]!;
-    }
   }
 }

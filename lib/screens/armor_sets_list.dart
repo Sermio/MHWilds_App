@@ -15,6 +15,7 @@ import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:mhwilds_app/screens/armor_piece_details.dart';
 import 'package:provider/provider.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
 
 class ArmorSetList extends StatefulWidget {
   const ArmorSetList({super.key});
@@ -691,25 +692,10 @@ class _ArmorSetListState extends State<ArmorSetList> {
     }
   }
 
-  Color _getKindColor(String kind) {
-    switch (kind) {
-      case 'head':
-        return Colors.red[400]!;
-      case 'chest':
-        return Colors.blue[400]!;
-      case 'arms':
-        return Colors.green[400]!;
-      case 'waist':
-        return Colors.orange[400]!;
-      case 'legs':
-        return Colors.purple[400]!;
-      default:
-        return Colors.grey[400]!;
-    }
-  }
+  Color _getKindColor(String kind) => GameColors.of(context).kind(kind);
 
   Color _getRarityColor(int rarity) {
-    return rarityColorFromSprite(rarity);
+    return GameColors.of(context).rarity(rarity);
   }
 
   skills_model.SkillIcon? _skillIconForId(int skillId, BuildContext context) {

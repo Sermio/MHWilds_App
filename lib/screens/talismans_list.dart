@@ -12,6 +12,7 @@ import 'package:mhwilds_app/providers/talismans_provider.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/models/talisman.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
 
 class AmuletList extends StatefulWidget {
   const AmuletList({super.key});
@@ -423,7 +424,7 @@ class _AmuletListState extends State<AmuletList> {
   }
 
   Color _getRarityColor(int rarity) {
-    return rarityColorFromSprite(rarity);
+    return GameColors.of(context).rarity(rarity);
   }
 
   SkillIcon? _skillIconForId(SkillsProvider skillsProvider, int skillId) {

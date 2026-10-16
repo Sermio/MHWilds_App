@@ -11,8 +11,8 @@ import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/screens/monster_details.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
-import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
 
 class MonstersList extends StatefulWidget {
   const MonstersList({super.key});
@@ -407,7 +407,7 @@ class _MonstersListState extends State<MonstersList> {
               fontWeight: FontWeight.w500,
             ),
           ),
-          backgroundColor: zoneBackgroundColor(zone.id ?? 0),
+          backgroundColor: GameColors.of(context).zone(zone.id ?? 0),
           selectedColor: colorScheme.primary,
           selected: _selectedLocations.contains(zone.name),
           onSelected: (isSelected) {
@@ -546,7 +546,7 @@ class _MonstersListState extends State<MonstersList> {
             return Cchip(
               itemName: loc.name,
               itemIdForColor: loc.id,
-              getItemColor: zoneBackgroundColor,
+              getItemColor: GameColors.of(context).zone,
               onTap: () {
                 Navigator.push(
                   context,

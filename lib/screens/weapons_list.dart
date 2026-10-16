@@ -18,6 +18,7 @@ import 'package:mhwilds_app/components/tree_connector_painter.dart';
 import 'package:mhwilds_app/utils/weapon_tree_builder.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
 
 part 'weapons_list/display_utils.dart';
 part 'weapons_list/weapon_card.dart';
@@ -1025,43 +1026,10 @@ class _WeaponsListState extends State<WeaponsList> {
     }
   }
 
-  Color _getKindColor(String kind) {
-    switch (kind) {
-      case 'great-sword':
-        return Colors.red[400]!;
-      case 'long-sword':
-        return Colors.orange[400]!;
-      case 'sword-shield':
-        return Colors.blue[400]!;
-      case 'dual-blades':
-        return Colors.purple[400]!;
-      case 'hammer':
-        return Colors.brown[400]!;
-      case 'hunting-horn':
-        return Colors.green[400]!;
-      case 'lance':
-        return Colors.indigo[400]!;
-      case 'gunlance':
-        return Colors.teal[400]!;
-      case 'switch-axe':
-        return Colors.deepOrange[400]!;
-      case 'charge-blade':
-        return Colors.cyan[400]!;
-      case 'insect-glaive':
-        return Colors.lime[400]!;
-      case 'bow':
-        return Colors.amber[400]!;
-      case 'light-bowgun':
-        return Colors.pink[400]!;
-      case 'heavy-bowgun':
-        return Colors.deepPurple[400]!;
-      default:
-        return Colors.grey[400]!;
-    }
-  }
+  Color _getKindColor(String kind) => GameColors.of(context).kind(kind);
 
   Color _getRarityColor(int rarity) {
-    return rarityColorFromSprite(rarity);
+    return GameColors.of(context).rarity(rarity);
   }
 
   skills_model.SkillIcon? _skillIconForId(int skillId, BuildContext context) {

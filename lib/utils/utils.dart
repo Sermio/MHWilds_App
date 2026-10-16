@@ -1,25 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-/// Asigna un color de fondo según el ID del mapa (location/map id de la API).
-/// IDs: 1 Oilwell Basin, 2 Windward Plains, 3 Scarlet Forest, 4 Ruins of Wyveria, 5 Iceshard Cliffs.
-Color zoneBackgroundColor(int mapId) {
-  switch (mapId) {
-    case 1:
-      return const Color.fromARGB(242, 142, 141, 141); // Oilwell Basin
-    case 2:
-      return const Color.fromARGB(255, 249, 207, 37); // Windward Plains
-    case 3:
-      return Colors.green.shade700; // Scarlet Forest
-    case 4:
-      return const Color.fromARGB(221, 141, 110, 99); // Ruins of Wyveria
-    case 5:
-      return const Color.fromARGB(167, 1, 150, 170); // Iceshard Cliffs
-    default:
-      return Colors.white;
-  }
-}
-
 Future<String?> getValidItemImageUrl(String materialName) async {
   // String formattedMaterialName = materialName.replaceAll(RegExp(r'\s\+'), '+');
 
