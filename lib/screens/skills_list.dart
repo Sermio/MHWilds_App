@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/async_list_body.dart';
+import 'package:mhwilds_app/models/skills.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/components/set_piece_tag.dart';
@@ -30,9 +33,7 @@ class _SkillListState2 extends State<SkillList> {
       final skillsProvider =
           Provider.of<SkillsProvider>(context, listen: false);
 
-      if (skillsProvider.skills.isEmpty) {
-        skillsProvider.fetchSkills();
-      }
+      skillsProvider.fetchSkills();
       _resetFilters();
     });
   }
@@ -60,10 +61,10 @@ class _SkillListState2 extends State<SkillList> {
     final filteredSkills = skillsProvider.skills;
     final colorScheme = Theme.of(context).colorScheme;
 
-    if (!skillsProvider.hasData && !skillsProvider.isLoading) {
+    if (skillsProvider.state is Idle) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final p = Provider.of<SkillsProvider>(context, listen: false);
-        if (!p.hasData && !p.isLoading) p.fetchSkills();
+        if (p.state is Idle) p.fetchSkills();
       });
     }
 
@@ -72,217 +73,162 @@ class _SkillListState2 extends State<SkillList> {
       body: Stack(
         children: [
           // Lista de habilidades
-          skillsProvider.isLoading
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(color: colorScheme.primary),
-                        const SizedBox(height: 16),
-                        Text(
-                          l10n.loadingSkills,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: colorScheme.onSurface.withValues(alpha: 0.7),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 120, top: 16),
-                    itemCount: filteredSkills.isEmpty ? 1 : filteredSkills.length,
-                    itemBuilder: (context, index) {                      if (filteredSkills.isEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 64),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.search_off,
-                                  size: 64,
-                                  color: Colors.grey[400],
-                                ),
-                                const SizedBox(height: 16),
-                                Text(
-                                  l10n.noSkillsFound,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: colorScheme.onSurface.withValues(alpha: 0.8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  l10n.tryAdjustingFilters,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: colorScheme.onSurface.withValues(alpha: 0.6),
-                                  ),
-                                ),
-                              ],
+          AsyncListBody<Skills>(
+            state: skillsProvider.state,
+            isOffline: skillsProvider.isOffline,
+            loadingLabel: l10n.loadingSkills,
+            emptyTitle: l10n.noSkillsFound,
+            emptySubtitle: l10n.tryAdjustingFilters,
+            onRetry: skillsProvider.fetchSkills,
+            onRefresh: () => skillsProvider.refresh(force: true),
+            isEmpty: (_) => filteredSkills.isEmpty,
+            builder: (context, _) => ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(bottom: 120, top: 16),
+              itemCount: filteredSkills.length,
+              itemBuilder: (context, index) {
+                final skill = filteredSkills[index];
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16)
+                      .copyWith(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surface,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: colorScheme.shadow.withValues(alpha: 0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SkillDetails(
+                              skillsIds: [skill.id],
+                              skillsLevels: const [1],
                             ),
                           ),
                         );
-                      }
-
-                      final skill = filteredSkills[index];
-
-                      return Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
-                            decoration: BoxDecoration(
-                              color: colorScheme.surface,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: colorScheme.shadow.withOpacity(0.1),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(20),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => SkillDetails(
-                                        skillsIds: [skill.id],
-                                        skillsLevels: [1],
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Header de la habilidad
+                            Row(
+                              children: [
+                                // Icono de la habilidad
+                                SizedBox(
+                                  width: 60,
+                                  height: 60,
+                                  child: Center(
+                                    child: SkillSpriteIcon(
+                                      iconId: skill.icon?.id,
+                                      iconKind: skill.icon?.kind,
+                                      size: 60,
+                                      fallback: Icon(
+                                        Icons.auto_awesome,
+                                        color: _getTypeColor(skill.kind),
+                                        size: 32,
                                       ),
                                     ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20),
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      // Header de la habilidad
                                       Row(
                                         children: [
-                                          // Icono de la habilidad
-                                          SizedBox(
-                                            width: 60,
-                                            height: 60,
-                                            child: Center(
-                                              child: SkillSpriteIcon(
-                                                iconId: skill.icon?.id,
-                                                iconKind: skill.icon?.kind,
-                                                size: 60,
-                                                fallback: Icon(
-                                                  Icons.auto_awesome,
-                                                  color: _getTypeColor(skill.kind),
-                                                  size: 32,
-                                                ),
+                                          Expanded(
+                                            child: Text(
+                                              skill.name,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                                color: colorScheme.onSurface,
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(width: 16),
-                                          Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            child: Text(
-                                                              skill.name,
-                                                              style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 20,
-                                                                color:
-                                                                    colorScheme
-                                                                        .onSurface,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          if (skill.ranks.any((r) =>
-                                                              r.setPiecesRequired >
-                                                              0))
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      left: 8),
-                                                              child: SetPieceTag(
-                                                                count: skill
-                                                                    .ranks
-                                                                    .firstWhere((r) =>
-                                                                        r.setPiecesRequired >
-                                                                        0)
-                                                                    .setPiecesRequired,
-                                                              ),
-                                                            ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(height: 4),
-                                                      Container(
-                                                        padding: const EdgeInsets
-                                                            .symmetric(
-                                                            horizontal: 8,
-                                                            vertical: 4),
-                                                        decoration: BoxDecoration(
-                                                          color: _getTypeColor(
-                                                                  skill.kind)
-                                                              .withOpacity(0.1),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  8),
-                                                          border: Border.all(
-                                                            color: _getTypeColor(
-                                                                    skill.kind)
-                                                                .withOpacity(0.3),
-                                                          ),
-                                                        ),
-                                                        child:
-                                                            _buildSkillTypeBadge(
-                                                          context,
-                                                          skill.kind,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: Colors.grey[400],
-                                            size: 20,
-                                          ),
+                                          if (skill.ranks.any(
+                                              (r) => r.setPiecesRequired > 0))
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8),
+                                              child: SetPieceTag(
+                                                count: skill.ranks
+                                                    .firstWhere((r) =>
+                                                        r.setPiecesRequired > 0)
+                                                    .setPiecesRequired,
+                                              ),
+                                            ),
                                         ],
                                       ),
-                                      const SizedBox(height: 16),
-
-                                      // Descripción
-                                      if (skill.description.isNotEmpty) ...[
-                                        Text(
-                                          skill.description,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: colorScheme.onSurface
-                                                .withOpacity(0.8),
-                                            height: 1.4,
+                                      const SizedBox(height: 4),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: _getTypeColor(skill.kind)
+                                              .withValues(alpha: 0.1),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          border: Border.all(
+                                            color: _getTypeColor(skill.kind)
+                                                .withValues(alpha: 0.3),
                                           ),
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                      ],
+                                        child: _buildSkillTypeBadge(
+                                          context,
+                                          skill.kind,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
-                              ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.grey[400],
+                                  size: 20,
+                                ),
+                              ],
                             ),
-                          );
-                        },
+                            const SizedBox(height: 16),
+
+                            // Descripción
+                            if (skill.description.isNotEmpty) ...[
+                              Text(
+                                skill.description,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: colorScheme.onSurface
+                                      .withValues(alpha: 0.8),
+                                  height: 1.4,
+                                ),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ],
+                        ),
                       ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
           if (_filtersVisible)
             Positioned(
               top: 0,
@@ -290,7 +236,8 @@ class _SkillListState2 extends State<SkillList> {
               right: 0,
               child: Material(
                 elevation: 8,
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                borderRadius:
+                    const BorderRadius.vertical(bottom: Radius.circular(24)),
                 clipBehavior: Clip.antiAlias,
                 child: _buildFiltersSection(context, skillsProvider),
               ),
