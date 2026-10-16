@@ -1,63 +1,61 @@
-import 'package:flutter/material.dart';
 import 'package:mhwilds_app/api/armor_sets_api.dart';
 import 'package:mhwilds_app/models/armor_set.dart';
+import 'package:mhwilds_app/providers/cached_list_provider.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 
-class ArmorSetProvider with ChangeNotifier {
+class ArmorSetProvider extends CachedListProvider<ArmorSet> {
+  ArmorSetProvider({super.api});
+
   List<ArmorSet> _allArmorSets = [];
   List<ArmorSet> _originalArmorSets = [];
   List<ArmorSet> _filteredArmorSets = [];
-  bool _isLoading = false;
 
   String _nameFilter = '';
   String? _kindFilter;
   int? _rarityFilter;
 
   List<ArmorSet> get armorSets => _filteredArmorSets;
-  bool get isLoading => _isLoading;
-  bool get hasData => _allArmorSets.isNotEmpty;
 
-  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
-  void invalidate() {
+  Future<void> fetchArmorSets() => fetch();
+
+  @override
+  Stream<Data<List<ArmorSet>>> watch({required bool force}) =>
+      ArmorsApi.watchArmorSets(force: force, api: api);
+
+  @override
+  void onData(List<ArmorSet> data) {
+    _allArmorSets = data;
+    _allArmorSets.sort((a, b) {
+      final aRarity = a.pieces.isNotEmpty ? a.pieces.first.rarity : 0;
+      final bRarity = b.pieces.isNotEmpty ? b.pieces.first.rarity : 0;
+      final rarityComp = bRarity.compareTo(aRarity);
+      if (rarityComp != 0) return rarityComp;
+      return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+    });
+    _originalArmorSets = List.from(_allArmorSets);
+    // Conserva los filtros activos si llegan datos nuevos.
+    _filter();
+  }
+
+  @override
+  void onReset() {
     _allArmorSets = [];
     _originalArmorSets = [];
     _filteredArmorSets = [];
     _nameFilter = '';
     _kindFilter = null;
     _rarityFilter = null;
-    notifyListeners();
-  }
-
-  Future<void> fetchArmorSets() async {
-    if (_allArmorSets.isNotEmpty) return;
-
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      _allArmorSets = await ArmorsApi.fetchArmorSets();
-      _allArmorSets.sort((a, b) {
-        final aRarity = a.pieces.isNotEmpty ? a.pieces.first.rarity : 0;
-        final bRarity = b.pieces.isNotEmpty ? b.pieces.first.rarity : 0;
-        final rarityComp = bRarity.compareTo(aRarity);
-        if (rarityComp != 0) return rarityComp;
-        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
-      });
-      _originalArmorSets = List.from(_allArmorSets);
-      _filteredArmorSets = List.from(_allArmorSets);
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-    }
-
-    _isLoading = false;
-    notifyListeners();
   }
 
   void applyFilters({String? name, String? kind, int? rarity}) {
     _nameFilter = name ?? '';
     _kindFilter = kind;
     _rarityFilter = rarity;
+    _filter();
+    notifyListeners();
+  }
 
+  void _filter() {
     if (_nameFilter.isEmpty && _kindFilter == null && _rarityFilter == null) {
       _filteredArmorSets = List.from(_allArmorSets);
     } else {
@@ -90,8 +88,6 @@ class ArmorSetProvider with ChangeNotifier {
           .whereType<ArmorSet>()
           .toList();
     }
-
-    notifyListeners();
   }
 
   void clearFilters() {
