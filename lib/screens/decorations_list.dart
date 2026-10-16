@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/async_list_body.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:mhwilds_app/components/decoration_image.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
-import 'package:mhwilds_app/components/url_image_loader.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/decoration.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/skill_details.dart';
-import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/decorations_provider.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
@@ -71,10 +70,10 @@ class _DecorationsListState extends State<DecorationsList> {
     final filteredDecorations = decorationsProvider.filteredDecorations;
     final colorScheme = Theme.of(context).colorScheme;
 
-    if (!decorationsProvider.hasData && !decorationsProvider.isLoading) {
+    if (decorationsProvider.state is Idle) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final p = Provider.of<DecorationsProvider>(context, listen: false);
-        if (!p.hasData && !p.isLoading) p.fetchDecorations();
+        if (p.state is Idle) p.fetchDecorations();
       });
     }
 
@@ -83,162 +82,118 @@ class _DecorationsListState extends State<DecorationsList> {
       body: Stack(
         children: [
           // Lista de decoraciones
-          decorationsProvider.isLoading
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(color: colorScheme.primary),
-                        const SizedBox(height: 16),
-                        Text(
-                          l10n.loadingDecorations,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: colorScheme.onSurface.withValues(alpha: 0.7),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 120, top: 16),
-                    itemCount: filteredDecorations.isEmpty ? 1 : filteredDecorations.length,
-                    itemBuilder: (context, index) {                      if (filteredDecorations.isEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 64),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.search_off,
-                                  size: 64,
-                                  color: colorScheme.onSurface.withValues(alpha: 0.5),
-                                ),
-                                const SizedBox(height: 16),
-                                Text(
-                                  l10n.noDecorationsFound,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: colorScheme.onSurface.withValues(alpha: 0.8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  l10n.tryAdjustingFilters,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: colorScheme.onSurface.withValues(alpha: 0.6),
-                                  ),
-                                ),
-                              ],
+          AsyncListBody<DecorationItem>(
+            state: decorationsProvider.state,
+            isOffline: decorationsProvider.isOffline,
+            loadingLabel: l10n.loadingDecorations,
+            emptyTitle: l10n.noDecorationsFound,
+            emptySubtitle: l10n.tryAdjustingFilters,
+            onRetry: decorationsProvider.fetchDecorations,
+            onRefresh: () => decorationsProvider.refresh(force: true),
+            isEmpty: (_) => filteredDecorations.isEmpty,
+            builder: (context, _) => ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(bottom: 120, top: 16),
+              itemCount: filteredDecorations.length,
+              itemBuilder: (context, index) {
+                final decoration = filteredDecorations[index];
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16)
+                      .copyWith(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surface,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: colorScheme.shadow.withValues(alpha: 0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () {
+                        // Navegar a la pantalla de detalles de habilidades
+                        final skillIds =
+                            decoration.skills.map((s) => s.skill.id).toList();
+                        final skillLevels =
+                            decoration.skills.map((s) => s.level).toList();
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SkillDetails(
+                              skillsIds: skillIds,
+                              skillsLevels: skillLevels,
                             ),
                           ),
                         );
-                      }
-
-                      final decoration = filteredDecorations[index];
-
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
-                            decoration: BoxDecoration(
-                              color: colorScheme.surface,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: colorScheme.shadow.withOpacity(0.1),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(20),
-                                onTap: () {
-                                  // Navegar a la pantalla de detalles de habilidades
-                                  final skillIds = decoration.skills
-                                      .map((s) => s.skill.id)
-                                      .toList();
-                                  final skillLevels = decoration.skills
-                                      .map((s) => s.level)
-                                      .toList();
-
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => SkillDetails(
-                                        skillsIds: skillIds,
-                                        skillsLevels: skillLevels,
-                                      ),
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Header de la decoración
+                            Row(
+                              children: [
+                                // Imagen de la decoración
+                                SizedBox(
+                                  width: 60,
+                                  height: 60,
+                                  child: Center(
+                                    child: DecorationAssetImage(
+                                      decoration: decoration,
+                                      width: 42,
+                                      height: 42,
+                                      fallbackLevel: decoration.displayLevel,
                                     ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20),
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      // Header de la decoración
-                                      Row(
-                                        children: [
-                                          // Imagen de la decoración
-                                          SizedBox(
-                                            width: 60,
-                                            height: 60,
-                                            child: Center(
-                                              child: DecorationAssetImage(
-                                                decoration: decoration,
-                                                width: 42,
-                                                height: 42,
-                                                fallbackLevel:
-                                                    decoration.displayLevel,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(width: 16),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  decoration.name,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
-                                                    color:
-                                                        colorScheme.onSurface,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: colorScheme.onSurface
-                                                .withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ],
+                                      Text(
+                                        decoration.name,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          color: colorScheme.onSurface,
+                                        ),
                                       ),
-                                      const SizedBox(height: 16),
-
-                                      // Habilidades
-                                      if (decoration.skills.isNotEmpty) ...[
-                                        _buildSkillsSection(decoration),
-                                      ],
                                     ],
                                   ),
                                 ),
-                              ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: colorScheme.onSurface
+                                      .withValues(alpha: 0.5),
+                                  size: 20,
+                                ),
+                              ],
                             ),
-                          );
-                        },
+                            const SizedBox(height: 16),
+
+                            // Habilidades
+                            if (decoration.skills.isNotEmpty) ...[
+                              _buildSkillsSection(decoration),
+                            ],
+                          ],
+                        ),
                       ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
           if (_filtersVisible)
             Positioned(
               top: 0,
@@ -246,7 +201,8 @@ class _DecorationsListState extends State<DecorationsList> {
               right: 0,
               child: Material(
                 elevation: 8,
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                borderRadius:
+                    const BorderRadius.vertical(bottom: Radius.circular(24)),
                 clipBehavior: Clip.antiAlias,
                 child: _buildFiltersSection(context, decorationsProvider),
               ),
@@ -329,12 +285,13 @@ class _DecorationsListState extends State<DecorationsList> {
           label: Text(
             _getDecorationTypeLabel(context, type),
             style: TextStyle(
-              color:
-                  _selectedType == type ? colorScheme.onPrimary : colorScheme.onSurface,
+              color: _selectedType == type
+                  ? colorScheme.onPrimary
+                  : colorScheme.onSurface,
               fontWeight: FontWeight.w500,
             ),
           ),
-          backgroundColor: _getTypeColor(type).withOpacity(0.2),
+          backgroundColor: _getTypeColor(type).withValues(alpha: 0.2),
           selectedColor: _getTypeColor(type),
           selected: _selectedType == type,
           onSelected: (isSelected) {
@@ -376,95 +333,95 @@ class _DecorationsListState extends State<DecorationsList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
+                color: colorScheme.onSurface.withValues(alpha: 0.8),
               ),
             ),
           ],
         ),
         const SizedBox(height: 8),
         ...decoration.skills.map((skill) {
-              final fullSkill = skillsProvider.allSkills.firstWhere(
-                (s) => s.id == skill.skill.id,
-                orElse: () => Skills(
-                  id: skill.skill.id,
-                  gameId: 0,
-                  name: skill.skill.name,
-                  kind: 'Unknown',
-                  description: '',
-                  ranks: [],
-                ),
-              );
-              final staticIcon = skillIconsMap[skill.skill.id];
-              final int? iconId = staticIcon?['id'] ?? fullSkill.icon?.id;
-              final String? iconKind = staticIcon?['kind'] ?? fullSkill.icon?.kind;
-              return Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: colorScheme.primary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: colorScheme.primary.withOpacity(0.3)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          final fullSkill = skillsProvider.allSkills.firstWhere(
+            (s) => s.id == skill.skill.id,
+            orElse: () => Skills(
+              id: skill.skill.id,
+              gameId: 0,
+              name: skill.skill.name,
+              kind: 'Unknown',
+              description: '',
+              ranks: [],
+            ),
+          );
+          final staticIcon = skillIconsMap[skill.skill.id];
+          final int? iconId = staticIcon?['id'] ?? fullSkill.icon?.id;
+          final String? iconKind = staticIcon?['kind'] ?? fullSkill.icon?.kind;
+          return Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: colorScheme.primary.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(8),
+              border:
+                  Border.all(color: colorScheme.primary.withValues(alpha: 0.3)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        // Imagen de la habilidad
-                        Container(
-                          width: 24,
-                          height: 24,
-                          margin: const EdgeInsets.only(right: 8),
-                          child: SkillSpriteIcon(
-                            iconId: iconId,
-                            iconKind: iconKind,
-                            size: 24,
-                            fallback: Icon(
-                              Icons.auto_awesome,
-                              color: _getTypeColor(fullSkill.kind),
-                              size: 18,
-                            ),
-                          ),
+                    // Imagen de la habilidad
+                    Container(
+                      width: 24,
+                      height: 24,
+                      margin: const EdgeInsets.only(right: 8),
+                      child: SkillSpriteIcon(
+                        iconId: iconId,
+                        iconKind: iconKind,
+                        size: 24,
+                        fallback: Icon(
+                          Icons.auto_awesome,
+                          color: _getTypeColor(fullSkill.kind),
+                          size: 18,
                         ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: colorScheme.primary,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Text(
-                            '${skill.skill.name} +${skill.level}',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: colorScheme.onPrimary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (skill.description.isNotEmpty) ...[
-                      const SizedBox(height: 6),
-                      Text(
-                        skill.description,
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: colorScheme.onSurface.withOpacity(0.8),
-                          height: 1.3,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ],
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        '${skill.skill.name} +${skill.level}',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: colorScheme.onPrimary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              );
-            }),
+                if (skill.description.isNotEmpty) ...[
+                  const SizedBox(height: 6),
+                  Text(
+                    skill.description,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: colorScheme.onSurface.withValues(alpha: 0.8),
+                      height: 1.3,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ],
+            ),
+          );
+        }),
       ],
     );
   }
-
 
   String _getDecorationTypeLabel(BuildContext context, String type) {
     final l10n = AppLocalizations.of(context)!;
