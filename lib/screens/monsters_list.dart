@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/async_list_body.dart';
+import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
@@ -8,6 +10,7 @@ import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/screens/monster_details.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:mhwilds_app/utils/utils.dart';
 import 'package:provider/provider.dart';
 
@@ -72,10 +75,10 @@ class _MonstersListState extends State<MonstersList> {
 
     // Tras cambiar idioma se invalida la caché; al volver a esta pantalla
     // initState no se ejecuta de nuevo, así que forzamos recarga si no hay datos.
-    if (!monstersProvider.hasData && !monstersProvider.isLoading) {
+    if (monstersProvider.state is Idle) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final p = Provider.of<MonstersProvider>(context, listen: false);
-        if (!p.hasData && !p.isLoading) p.fetchMonsters();
+        if (p.state is Idle) p.fetchMonsters();
       });
     }
     if (!zonesProvider.hasData && !zonesProvider.isLoading) {
@@ -90,212 +93,164 @@ class _MonstersListState extends State<MonstersList> {
       body: Stack(
         children: [
           // Lista de monstruos
-          monstersProvider.isLoading
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(color: colorScheme.primary),
-                        const SizedBox(height: 16),
-                        Text(
-                          l10n.loadingMonsters,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: colorScheme.onSurface.withValues(alpha: 0.7),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 120, top: 16),
-                    itemCount: monsters.isEmpty ? 1 : monsters.length,
-                    itemBuilder: (context, index) {                      if (monsters.isEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 64),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.search_off,
-                                  size: 64,
-                                  color: colorScheme.onSurface.withValues(alpha: 0.5),
-                                ),
-                                const SizedBox(height: 16),
-                                Text(
-                                  l10n.noMonstersFound,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: colorScheme.onSurface.withValues(alpha: 0.8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  l10n.tryAdjustingFilters,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: colorScheme.onSurface.withValues(alpha: 0.6),
-                                  ),
-                                ),
-                              ],
+          AsyncListBody<Monster>(
+            state: monstersProvider.state,
+            isOffline: monstersProvider.isOffline,
+            loadingLabel: l10n.loadingMonsters,
+            emptyTitle: l10n.noMonstersFound,
+            emptySubtitle: l10n.tryAdjustingFilters,
+            onRetry: monstersProvider.fetchMonsters,
+            onRefresh: () => monstersProvider.refresh(force: true),
+            isEmpty: (_) => monsters.isEmpty,
+            builder: (context, _) => ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(bottom: 120, top: 16),
+              itemCount: monsters.length,
+              itemBuilder: (context, index) {
+                final monster = monsters[index];
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16)
+                      .copyWith(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surface,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: colorScheme.shadow.withValues(alpha: 0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MonsterDetails(
+                              monsterId: monster.id,
                             ),
                           ),
                         );
-                      }
-
-                      final monster = monsters[index];
-
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
-                            decoration: BoxDecoration(
-                              color: colorScheme.surface,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: colorScheme.shadow.withOpacity(0.1),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(20),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MonsterDetails(
-                                        monsterId: monster.id,
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Header del monstruo
+                            Row(
+                              children: [
+                                Hero(
+                                  tag: monster.name,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        width: 100,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          child: _buildMonsterIcon(
+                                            context,
+                                            monster.id,
+                                            monster.name,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20),
+                                      // Superposición de debilidades elementales
+                                      ..._buildElementalWeaknessOverlays(
+                                          monster),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      // Header del monstruo
-                                      Row(
-                                        children: [
-                                          Hero(
-                                            tag: monster.name,
-                                            child: Stack(
-                                              children: [
-                                                Container(
-                                                  width: 100,
-                                                  height: 100,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                  ),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                    child: _buildMonsterIcon(
-                                                      context,
-                                                      monster.id,
-                                                      monster.name,
-                                                    ),
-                                                  ),
-                                                ),
-                                                // Superposición de debilidades elementales
-                                                ..._buildElementalWeaknessOverlays(
-                                                    monster),
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(width: 16),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  monster.name,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color:
-                                                        colorScheme.onSurface,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 4),
-                                                Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 8,
-                                                      vertical: 4),
-                                                  decoration: BoxDecoration(
-                                                    color: colorScheme.primary
-                                                        .withOpacity(0.1),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    border: Border.all(
-                                                      color: colorScheme.primary
-                                                          .withOpacity(0.3),
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    monster.displaySpecies(l10n),
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color:
-                                                          colorScheme.primary,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 8),
-                                                _buildRankBadges(monster, context),
-                                              ],
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: colorScheme.onSurface
-                                                .withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 16),
-
-                                      // Descripción
-                                      if (monster.description.isNotEmpty) ...[
-                                        Text(
-                                          monster.description,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: colorScheme.onSurface
-                                                .withOpacity(0.7),
-                                            height: 1.4,
-                                          ),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
+                                      Text(
+                                        monster.name,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                          color: colorScheme.onSurface,
                                         ),
-                                        const SizedBox(height: 16),
-                                      ],
-
-                                      // Ubicaciones
-                                      _buildLocationsSection(context, monster),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: colorScheme.primary
+                                              .withValues(alpha: 0.1),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          border: Border.all(
+                                            color: colorScheme.primary
+                                                .withValues(alpha: 0.3),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          monster.displaySpecies(l10n),
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: colorScheme.primary,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      _buildRankBadges(monster, context),
                                     ],
                                   ),
                                 ),
-                              ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: colorScheme.onSurface
+                                      .withValues(alpha: 0.5),
+                                  size: 20,
+                                ),
+                              ],
                             ),
-                          );
-                        },
+                            const SizedBox(height: 16),
+
+                            // Descripción
+                            if (monster.description.isNotEmpty) ...[
+                              Text(
+                                monster.description,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: colorScheme.onSurface
+                                      .withValues(alpha: 0.7),
+                                  height: 1.4,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 16),
+                            ],
+
+                            // Ubicaciones
+                            _buildLocationsSection(context, monster),
+                          ],
+                        ),
                       ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
           if (_filtersVisible)
             Positioned(
               top: 0,
@@ -303,9 +258,11 @@ class _MonstersListState extends State<MonstersList> {
               right: 0,
               child: Material(
                 elevation: 8,
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                borderRadius:
+                    const BorderRadius.vertical(bottom: Radius.circular(24)),
                 clipBehavior: Clip.antiAlias,
-                child: _buildFiltersSection(context, monstersProvider, zonesProvider),
+                child: _buildFiltersSection(
+                    context, monstersProvider, zonesProvider),
               ),
             ),
         ],
@@ -321,7 +278,8 @@ class _MonstersListState extends State<MonstersList> {
     );
   }
 
-  List<ListFilterOption> _speciesOptions(MonstersProvider monstersProvider, AppLocalizations l10n) {
+  List<ListFilterOption> _speciesOptions(
+      MonstersProvider monstersProvider, AppLocalizations l10n) {
     final colorScheme = Theme.of(context).colorScheme;
     final speciesSet = <String, String>{}; // rawSpecies -> displaySpecies
     for (final monster in monstersProvider.allMonsters) {
@@ -482,7 +440,7 @@ class _MonstersListState extends State<MonstersList> {
 
   Widget _buildRankBadges(Monster monster, BuildContext context) {
     if (monster.availableRanks.isEmpty) return const SizedBox.shrink();
-    
+
     return Wrap(
       spacing: 4,
       runSpacing: 4,
@@ -506,7 +464,7 @@ class _MonstersListState extends State<MonstersList> {
             bgColor = Colors.grey;
             label = rank.toUpperCase();
         }
-        
+
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           decoration: BoxDecoration(
@@ -537,7 +495,7 @@ class _MonstersListState extends State<MonstersList> {
 
     if (elementalWeaknesses.isEmpty) return [];
 
-    List<Widget> overlays = [];
+    final List<Widget> overlays = [];
 
     // Posicionar las debilidades en la esquina inferior derecha del icono
     for (int i = 0; i < elementalWeaknesses.length && i < 3; i++) {
@@ -549,7 +507,7 @@ class _MonstersListState extends State<MonstersList> {
           Positioned(
             bottom: 2,
             right: 2 + (i * 15), // Espaciado horizontal de derecha a izquierda
-            child: Image.asset(
+            child: AssetThumb(
               'assets/imgs/elements/$element.webp',
               width: 40,
               height: 40,
@@ -576,7 +534,7 @@ class _MonstersListState extends State<MonstersList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
+                color: colorScheme.onSurface.withValues(alpha: 0.8),
               ),
             ),
           ],
@@ -619,8 +577,8 @@ class _MonstersListState extends State<MonstersList> {
     }
 
     final imagePath =
-        'assets/imgs/monster_icons/${imageName.toLowerCase().replaceAll(' ', '_')}.png';
-    return Image.asset(
+        'assets/imgs/monster_icons/${imageName.toLowerCase().replaceAll(' ', '_')}.webp';
+    return AssetThumb(
       imagePath,
       fit: BoxFit.cover,
       errorBuilder: (context, error, stackTrace) {
