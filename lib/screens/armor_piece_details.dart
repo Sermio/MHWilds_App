@@ -669,7 +669,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                       width: 40,
                       height: 40,
                       materialName:
-                          Provider.of<EnNamesCache>(context, listen: false)
+                          context.watch<EnNamesCache>()
                                   .nameForItemImage(
                                       material.item.id, material.item.name) ??
                               material.item.name,

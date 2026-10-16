@@ -21,6 +21,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  final startup = Stopwatch()..start();
   // Al volver a primer plano tras más de 4 h, comprueba si hay datos nuevos.
   AppLifecycleListener(onResume: CachedApi.shared.versions.onResume);
   runApp(
@@ -43,22 +44,24 @@ void main() {
       child: const MyApp(),
     ),
   );
+  // Tiempo hasta el primer frame de la app; el de la pantalla de carga cuenta.
+  WidgetsBinding.instance.addPostFrameCallback((_) =>
+      debugPrint('Startup: first frame in ${startup.elapsedMilliseconds} ms'));
 }
 
-/// Espera a que el idioma guardado esté cargado antes de mostrar la UI,
+/// Espera solo a lo local (idioma guardado e índice de iconos) antes de pintar,
 /// así la primera petición (p. ej. monstruos) usa ya el idioma correcto.
+/// Los nombres en inglés (`EnNamesCache`) cargan en segundo plano.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     final localeProvider = Provider.of<LocaleProvider>(context);
-    final enNamesCache = Provider.of<EnNamesCache>(context);
 
     return FutureBuilder<void>(
       future: Future.wait([
         localeProvider.localeReady,
-        enNamesCache.cacheReady,
         ItemIconAssetResolver.ensureIndexLoaded(),
       ]),
       builder: (context, snapshot) {

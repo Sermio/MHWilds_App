@@ -138,9 +138,7 @@ class _ItemListState extends State<ItemList> {
                                     borderRadius: BorderRadius.circular(15),
                                     child: MaterialImage(
                                       item: item,
-                                      materialName: (Provider.of<EnNamesCache>(
-                                                  context,
-                                                  listen: false)
+                                      materialName: (context.watch<EnNamesCache>()
                                               .nameForItemImage(
                                                   item.id, item.name) ??
                                           item.name),
@@ -364,7 +362,7 @@ class _ItemListState extends State<ItemList> {
                         width: 32,
                         height: 32,
                         materialName:
-                            (Provider.of<EnNamesCache>(context, listen: false)
+                            (context.watch<EnNamesCache>()
                                     .nameForItemImage(
                                   recipeItem.id,
                                   recipeItem.name,

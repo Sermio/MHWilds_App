@@ -315,7 +315,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 - **Prompt:**
   > Lee CLAUDE.md. Repite el patrón del piloto de T15/T16 (`MonstersProvider` + `MonstersList`) en weapons, armor sets, decorations, talismans/charms, items, skills y locations: `LoadState`, `AsyncStateView`, aviso de datos sin conexión y `RefreshIndicator` que llame a `refresh(force: true)`. Haz un commit por entidad. Cada lista debe conservar sus filtros y su comportamiento actuales.
 
-#### T18 · Arranque sin esperar a la red
+#### ✅ T18 · Arranque sin esperar a la red
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** T16
 - **Prompt:**
   > Lee CLAUDE.md. Hoy `MyApp` no pinta nada hasta que `EnNamesCache` termina 4 descargas completas. Mientras no se haga T27: (1) `EnNamesCache` debe pedir solo `?p={"id":true,"name":true}` y guardarse con `CacheStore`; (2) el `FutureBuilder` de `main.dart` solo debe esperar al idioma y al índice de iconos, que son locales; (3) los widgets que necesitan el nombre en inglés escuchan `EnNamesCache` y muestran el placeholder actual hasta que esté listo. Mide el tiempo hasta el primer frame antes y después (modo profile o un log con `Stopwatch`).

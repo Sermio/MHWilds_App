@@ -57,8 +57,7 @@ class ItemDetails extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         child: MaterialImage(
                             item: item,
-                            materialName: Provider.of<EnNamesCache>(context,
-                                        listen: false)
+                            materialName: context.watch<EnNamesCache>()
                                     .nameForItemImage(item.id, item.name) ??
                                 item.name),
                       ),
@@ -169,9 +168,7 @@ class ItemDetails extends StatelessWidget {
                                     item: itemsById[recipeItem.id],
                                     width: 48,
                                     height: 48,
-                                    materialName: Provider.of<EnNamesCache>(
-                                                context,
-                                                listen: false)
+                                    materialName: context.watch<EnNamesCache>()
                                             .nameForItemImage(recipeItem.id,
                                                 recipeItem.name) ??
                                         recipeItem.name,
@@ -382,7 +379,7 @@ class ItemDetails extends StatelessWidget {
 
   Widget _buildMonsterIcon(
       BuildContext context, int monsterId, String monsterName) {
-    final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
+    final enNamesCache = context.watch<EnNamesCache>();
     final imageName = enNamesCache.nameForMonsterImage(monsterId, monsterName);
 
     if (imageName == null) {

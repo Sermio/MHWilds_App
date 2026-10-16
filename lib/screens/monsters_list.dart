@@ -565,7 +565,7 @@ class _MonstersListState extends State<MonstersList> {
 
   Widget _buildMonsterIcon(
       BuildContext context, int monsterId, String monsterName) {
-    final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
+    final enNamesCache = context.watch<EnNamesCache>();
     final imageName = enNamesCache.nameForMonsterImage(monsterId, monsterName);
 
     if (imageName == null) {

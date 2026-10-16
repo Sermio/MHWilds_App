@@ -22,13 +22,19 @@ class CachedApi {
   /// el flujo termina tras la primera emisión; sin red y sin caché, lanza.
   /// [force] pide el endpoint aunque la versión no haya cambiado.
   /// [parse] convierte el JSON crudo; si falla, no se guarda nada.
+  /// [lang] fija un idioma distinto al actual; [query] se añade a la petición
+  /// y [cacheKey] (por defecto [endpoint]) nombra el archivo de caché.
   Stream<Data<T>> watch<T>(
     String endpoint,
     Future<T> Function(String body) parse, {
     bool force = false,
+    String? lang,
+    Map<String, String>? query,
+    String? cacheKey,
   }) async* {
-    final lang = ApiConfig.languageCode;
-    var cached = await store.read(lang, endpoint);
+    lang ??= ApiConfig.languageCode;
+    final key = cacheKey ?? endpoint;
+    var cached = await store.read(lang, key);
     late T value;
     if (cached != null) {
       try {
@@ -56,12 +62,12 @@ class CachedApi {
     final T fresh;
     try {
       r = await client.get(endpoint,
-          lang: lang, ifModifiedSince: cached?.ifModifiedSince);
+          lang: lang, query: query, ifModifiedSince: cached?.ifModifiedSince);
       if (r.notModified && cached != null) {
         // Se mantiene la versión guardada: si el 304 venía de una CDN
         // desfasada, el próximo arranque vuelve a preguntar.
         final touched = cached.copyWith(fetchedAt: DateTime.now());
-        await store.write(lang, endpoint, touched);
+        await store.write(lang, key, touched);
         yield Data(value, updatedAt: touched.fetchedAt);
         return;
       }
@@ -77,7 +83,7 @@ class CachedApi {
           _isFromVersion(r.lastModified, remote) ? remote : cached?.version,
       lastModified: r.lastModified,
     );
-    await store.write(lang, endpoint, entry);
+    await store.write(lang, key, entry);
     yield Data(fresh, updatedAt: entry.fetchedAt);
   }
 

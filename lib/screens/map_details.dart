@@ -33,7 +33,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
     });
   }
 
-  void _initMapData(LocationsProvider provider) {
+  Future<void> _initMapData(LocationsProvider provider) async {
     mapData = provider.zones.firstWhere(
       (element) => element.id == widget.mapId,
       orElse: () => MapData(
@@ -46,6 +46,8 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
     );
     // Obtener el nombre en inglés del mapa para cargar las imágenes
     final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
+    await enNamesCache.cacheReady;
+    if (!mounted) return;
     final l10n = AppLocalizations.of(context)!;
     final englishMapName = enNamesCache.nameForMapImage(
           widget.mapId,
@@ -53,7 +55,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
         ) ??
         mapData!.name ??
         l10n.unknownMap;
-    loadImages(englishMapName);
+    await loadImages(englishMapName);
   }
 
   Future<void> loadImages(String? mapName) async {

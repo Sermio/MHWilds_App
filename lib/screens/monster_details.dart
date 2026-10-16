@@ -906,7 +906,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
   Widget _buildMonsterImage(
       BuildContext context, int monsterId, String monsterName) {
-    final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
+    final enNamesCache = context.watch<EnNamesCache>();
     final imageName = enNamesCache.nameForMonsterImage(monsterId, monsterName);
 
     if (imageName == null) {
@@ -1025,9 +1025,7 @@ class MonsterRewards extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                   child: MaterialImage(
                                     item: reward.item,
-                                    materialName: (Provider.of<EnNamesCache>(
-                                                context,
-                                                listen: false)
+                                    materialName: (context.watch<EnNamesCache>()
                                             .nameForItemImage(reward.item.id,
                                                 reward.item.name) ??
                                         reward.item.name),
