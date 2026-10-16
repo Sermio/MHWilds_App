@@ -31,10 +31,10 @@ class Cchip<T> extends StatelessWidget {
           children: [
             Text(
               itemName.isNotEmpty ? itemName : "Unknown",
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 12,
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: Colors.black),
             ),
             if (optionalWidget != null) ...[
               const SizedBox(width: 6),

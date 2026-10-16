@@ -118,11 +118,12 @@ class MonsterDetailsCard extends StatelessWidget {
                         const SizedBox(width: 6),
                         Text(
                           'Variants Available:',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.orange[700],
-                            fontSize: 12,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.orange[700]),
                         ),
                       ],
                     ),

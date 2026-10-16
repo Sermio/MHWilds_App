@@ -183,11 +183,8 @@ class ListFiltersPanel extends StatelessWidget {
       children: [
         Text(
           field.label,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface,
-          ),
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              fontWeight: FontWeight.w600, color: colorScheme.onSurface),
         ),
         const SizedBox(height: 8),
         if (field.type == ListFilterFieldType.text)

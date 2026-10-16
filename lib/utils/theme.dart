@@ -45,6 +45,31 @@ class AppTheme {
     outlineVariant: const Color(0xFF383838),
   );
 
+  /// Escala tipográfica completa; ningún estilo baja de 12 px.
+  static TextTheme _textTheme(Color color) => TextTheme(
+        displayLarge: TextStyle(color: color, fontSize: 57),
+        displayMedium: TextStyle(color: color, fontSize: 45),
+        displaySmall: TextStyle(color: color, fontSize: 36),
+        headlineLarge: TextStyle(color: color, fontSize: 32),
+        headlineMedium: TextStyle(color: color, fontSize: 28),
+        headlineSmall: TextStyle(color: color, fontSize: 24),
+        titleLarge:
+            TextStyle(color: color, fontSize: 22, fontWeight: FontWeight.w500),
+        titleMedium:
+            TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500),
+        titleSmall:
+            TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w500),
+        bodyLarge: TextStyle(color: color, fontSize: 16, height: 1.4),
+        bodyMedium: TextStyle(color: color, fontSize: 14),
+        bodySmall: TextStyle(color: color, fontSize: 12),
+        labelLarge:
+            TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w500),
+        labelMedium:
+            TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w500),
+        labelSmall:
+            TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w500),
+      );
+
   static ThemeData get lightTheme {
     final colorScheme = lightScheme;
     return ThemeData(
@@ -67,15 +92,7 @@ class AppTheme {
         foregroundColor: Colors.black87,
         elevation: 10,
       ),
-      textTheme: const TextTheme(
-        bodyLarge: TextStyle(color: Colors.black87, fontSize: 16, height: 1.4),
-        bodyMedium: TextStyle(color: Colors.black87),
-        titleLarge: TextStyle(
-          color: Colors.black87,
-          fontSize: 22,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
+      textTheme: _textTheme(colorScheme.onSurface),
       dialogTheme: DialogThemeData(
         backgroundColor: colorScheme.surface,
         surfaceTintColor: Colors.transparent,
@@ -151,19 +168,7 @@ class AppTheme {
         foregroundColor: Colors.black87,
         elevation: 10,
       ),
-      textTheme: TextTheme(
-        bodyLarge: TextStyle(
-          color: colorScheme.onSurface,
-          fontSize: 16,
-          height: 1.4,
-        ),
-        bodyMedium: TextStyle(color: colorScheme.onSurface),
-        titleLarge: TextStyle(
-          color: colorScheme.onSurface,
-          fontSize: 22,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
+      textTheme: _textTheme(colorScheme.onSurface),
       dialogTheme: DialogThemeData(
         backgroundColor: colorScheme.surfaceContainerHighest,
         surfaceTintColor: Colors.transparent,
