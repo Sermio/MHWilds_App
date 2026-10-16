@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/async_list_body.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
@@ -30,9 +32,7 @@ class _ItemListState extends State<ItemList> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final itemsProvider = Provider.of<ItemsProvider>(context, listen: false);
 
-      if (itemsProvider.items.isEmpty) {
-        itemsProvider.fetchItems();
-      }
+      itemsProvider.fetchItems();
       _resetFilters();
     });
   }
@@ -63,10 +63,10 @@ class _ItemListState extends State<ItemList> {
     };
     final colorScheme = Theme.of(context).colorScheme;
 
-    if (!itemsProvider.hasData && !itemsProvider.isLoading) {
+    if (itemsProvider.state is Idle) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final p = Provider.of<ItemsProvider>(context, listen: false);
-        if (!p.hasData && !p.isLoading) p.fetchItems();
+        if (p.state is Idle) p.fetchItems();
       });
     }
 
@@ -75,210 +75,157 @@ class _ItemListState extends State<ItemList> {
       body: Stack(
         children: [
           // Lista de objetos
-          itemsProvider.isLoading
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(color: colorScheme.primary),
-                        const SizedBox(height: 16),
-                        Text(
-                          l10n.loadingItems,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: colorScheme.onSurface.withValues(alpha: 0.7),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 120, top: 16),
-                    itemCount: filteredItems.isEmpty ? 1 : filteredItems.length,
-                    itemBuilder: (context, index) {                      if (filteredItems.isEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 64),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.search_off,
-                                  size: 64,
-                                  color: colorScheme.onSurface.withValues(alpha: 0.5),
-                                ),
-                                const SizedBox(height: 16),
-                                Text(
-                                  l10n.noItemsFound,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: colorScheme.onSurface.withValues(alpha: 0.8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  l10n.tryAdjustingFilters,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: colorScheme.onSurface.withValues(alpha: 0.6),
-                                  ),
-                                ),
-                              ],
+          AsyncListBody<Item>(
+            state: itemsProvider.state,
+            isOffline: itemsProvider.isOffline,
+            loadingLabel: l10n.loadingItems,
+            emptyTitle: l10n.noItemsFound,
+            emptySubtitle: l10n.tryAdjustingFilters,
+            onRetry: itemsProvider.fetchItems,
+            onRefresh: () => itemsProvider.refresh(force: true),
+            isEmpty: (_) => filteredItems.isEmpty,
+            builder: (context, _) => ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(bottom: 120, top: 16),
+              itemCount: filteredItems.length,
+              itemBuilder: (context, index) {
+                final item = filteredItems[index];
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16)
+                      .copyWith(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surface,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: colorScheme.shadow.withValues(alpha: 0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ItemDetails(
+                              item: item,
                             ),
                           ),
                         );
-                      }
-                      final item = filteredItems[index];
-
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
-                            decoration: BoxDecoration(
-                              color: colorScheme.surface,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: colorScheme.shadow.withOpacity(0.1),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(20),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ItemDetails(
-                                        item: item,
-                                      ),
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Header del item
+                            Row(
+                              children: [
+                                // Imagen del material
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: MaterialImage(
+                                      item: item,
+                                      materialName: (Provider.of<EnNamesCache>(
+                                                  context,
+                                                  listen: false)
+                                              .nameForItemImage(
+                                                  item.id, item.name) ??
+                                          item.name),
                                     ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20),
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      // Header del item
-                                      Row(
-                                        children: [
-                                          // Imagen del material
-                                          Container(
-                                            width: 60,
-                                            height: 60,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              child: MaterialImage(
-                                                item: item,
-                                                materialName:
-                                                    (Provider.of<EnNamesCache>(
-                                                                context,
-                                                                listen: false)
-                                                            .nameForItemImage(
-                                                                item.id,
-                                                                item.name) ??
-                                                        item.name),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(width: 16),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  item.name,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color:
-                                                        colorScheme.onSurface,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 4),
-                                                Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 8,
-                                                      vertical: 4),
-                                                  decoration: BoxDecoration(
-                                                    color: _getRarityColor(
-                                                            item.rarity)
-                                                        .withOpacity(0.1),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    border: Border.all(
-                                                      color: _getRarityColor(
-                                                              item.rarity)
-                                                          .withOpacity(0.3),
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    l10n.rarityLevel(
-                                                        item.rarity),
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: _getRarityColor(
-                                                          item.rarity),
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: colorScheme.onSurface
-                                                .withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 16),
-
-                                      // Descripción
-                                      if (item.description.isNotEmpty) ...[
-                                        Text(
-                                          item.description,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: colorScheme.onSurface
-                                                .withOpacity(0.7),
-                                            height: 1.4,
-                                          ),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
+                                      Text(
+                                        item.name,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                          color: colorScheme.onSurface,
                                         ),
-                                        const SizedBox(height: 16),
-                                      ],
-
-                                      // Recetas
-                                      if (item.recipes.isNotEmpty) ...[
-                                        _buildRecipesSection(
-                                            context, item, itemsById),
-                                      ],
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: _getRarityColor(item.rarity)
+                                              .withValues(alpha: 0.1),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          border: Border.all(
+                                            color: _getRarityColor(item.rarity)
+                                                .withValues(alpha: 0.3),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          l10n.rarityLevel(item.rarity),
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: _getRarityColor(item.rarity),
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
-                              ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: colorScheme.onSurface
+                                      .withValues(alpha: 0.5),
+                                  size: 20,
+                                ),
+                              ],
                             ),
-                          );
-                        },
+                            const SizedBox(height: 16),
+
+                            // Descripción
+                            if (item.description.isNotEmpty) ...[
+                              Text(
+                                item.description,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: colorScheme.onSurface
+                                      .withValues(alpha: 0.7),
+                                  height: 1.4,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 16),
+                            ],
+
+                            // Recetas
+                            if (item.recipes.isNotEmpty) ...[
+                              _buildRecipesSection(context, item, itemsById),
+                            ],
+                          ],
+                        ),
                       ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
           if (_filtersVisible)
             Positioned(
               top: 0,
@@ -286,7 +233,8 @@ class _ItemListState extends State<ItemList> {
               right: 0,
               child: Material(
                 elevation: 8,
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                borderRadius:
+                    const BorderRadius.vertical(bottom: Radius.circular(24)),
                 clipBehavior: Clip.antiAlias,
                 child: _buildFiltersSection(context, itemsProvider),
               ),
@@ -387,7 +335,7 @@ class _ItemListState extends State<ItemList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
+                color: colorScheme.onSurface.withValues(alpha: 0.8),
               ),
             ),
           ],
@@ -418,9 +366,9 @@ class _ItemListState extends State<ItemList> {
                         materialName:
                             (Provider.of<EnNamesCache>(context, listen: false)
                                     .nameForItemImage(
-                                      recipeItem.id,
-                                      recipeItem.name,
-                                    ) ??
+                                  recipeItem.id,
+                                  recipeItem.name,
+                                ) ??
                                 recipeItem.name),
                       ),
                     ),
@@ -450,7 +398,7 @@ class _ItemListState extends State<ItemList> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface.withOpacity(0.6),
+                    color: colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
               ];
