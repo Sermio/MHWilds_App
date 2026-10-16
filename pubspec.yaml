@@ -46,7 +46,7 @@ dependencies:
   webview_flutter: ^4.13.1
   webview_flutter_android: ^4.10.1
   file_picker: ^10.2.0
-  font_awesome_flutter: ^10.9.1
+  font_awesome_flutter: ^11.0.0
   in_app_review: 2.0.9
   path_provider: ^2.1.6
 
