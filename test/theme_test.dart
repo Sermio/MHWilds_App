@@ -41,9 +41,14 @@ void main() {
     });
   }
 
-  test('la AppBar sigue dorada en ambos temas y el borde claro es goldInk', () {
+  test('AppBar dorada en claro; en oscuro superficie con título dorado', () {
     expect(AppTheme.lightTheme.appBarTheme.backgroundColor, AppColors.goldSoft);
-    expect(AppTheme.darkTheme.appBarTheme.backgroundColor, AppColors.goldSoft);
+    final dark = AppTheme.darkTheme.appBarTheme;
+    expect(dark.backgroundColor, AppTheme.darkScheme.surfaceContainer);
+    expect(dark.foregroundColor, AppColors.goldSoft);
+    expect(dark.titleTextStyle!.color, AppColors.goldSoft);
+    expect(
+        _contrast(AppColors.goldSoft, dark.backgroundColor!), greaterThan(4.5));
     final border = AppTheme
         .lightTheme.inputDecorationTheme.enabledBorder!.borderSide.color;
     expect(border, AppColors.goldInk);

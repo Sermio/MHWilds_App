@@ -129,12 +129,15 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       colorScheme: colorScheme,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.goldSoft,
-        foregroundColor: Colors.black87,
+      // En oscuro la barra no es el elemento más brillante: superficie con
+      // título e iconos dorados.
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorScheme.surfaceContainer,
+        foregroundColor: colorScheme.primary,
+        surfaceTintColor: Colors.transparent,
         elevation: 10,
         titleTextStyle: TextStyle(
-          color: Colors.black87,
+          color: colorScheme.primary,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
