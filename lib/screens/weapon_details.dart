@@ -1112,7 +1112,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.account_tree, color: _isTreeView ? colorScheme.primary : colorScheme.onSurface.withValues(alpha: 0.5)),
+                    icon: Icon(Icons.account_tree, color: _isTreeView ? colorScheme.primary : colorScheme.onSurfaceVariant),
                     onPressed: () {
                       setState(() {
                         _isTreeView = true;
@@ -1121,7 +1121,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     tooltip: AppLocalizations.of(context)?.treeViewTooltip ?? 'Tree View',
                   ),
                   IconButton(
-                    icon: Icon(Icons.table_rows, color: !_isTreeView ? colorScheme.primary : colorScheme.onSurface.withValues(alpha: 0.5)),
+                    icon: Icon(Icons.table_rows, color: !_isTreeView ? colorScheme.primary : colorScheme.onSurfaceVariant),
                     onPressed: () {
                       setState(() {
                         _isTreeView = false;

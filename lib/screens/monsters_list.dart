@@ -216,8 +216,7 @@ class _MonstersListState extends State<MonstersList> {
                                 ),
                                 Icon(
                                   Icons.arrow_forward_ios,
-                                  color: colorScheme.onSurface
-                                      .withValues(alpha: 0.5),
+                                  color: colorScheme.onSurfaceVariant,
                                   size: 20,
                                 ),
                               ],

@@ -84,7 +84,7 @@ class _Message extends StatelessWidget {
           children: [
             leading ??
                 Icon(icon,
-                    size: 64, color: scheme.onSurface.withValues(alpha: 0.5)),
+                    size: 64, color: scheme.onSurfaceVariant),
             const SizedBox(height: 16),
             Text(
               title,
@@ -102,7 +102,7 @@ class _Message extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 14,
-                    color: scheme.onSurface.withValues(alpha: 0.6)),
+                    color: scheme.onSurfaceVariant),
               ),
             ],
             if (action != null) ...[const SizedBox(height: 24), action!],

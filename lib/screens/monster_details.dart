@@ -416,7 +416,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.construction, color: AppColors.goldSoft),
+                  Icon(Icons.construction, color: AppColors.goldAccent(context)),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
@@ -476,7 +476,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
       ),
       child: Column(
         children: [
-          Icon(icon, color: AppColors.goldSoft, size: 24),
+          Icon(icon, color: AppColors.goldAccent(context), size: 24),
           const SizedBox(height: 8),
           Text(
             label,
@@ -554,7 +554,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                     errorBuilder: (_, __, ___) => Icon(
                       Icons.help_outline,
                       size: 25,
-                      color: colorScheme.onSurface.withValues(alpha: 0.5),
+                      color: colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: 2),

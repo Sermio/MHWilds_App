@@ -59,7 +59,7 @@ class SettingsScreen extends StatelessWidget {
                         subtitle,
                         style: TextStyle(
                           fontSize: 12,
-                          color: colorScheme.onSurface.withValues(alpha: 0.6),
+                          color: colorScheme.onSurfaceVariant,
                         ),
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
@@ -85,7 +85,7 @@ class SettingsScreen extends StatelessWidget {
                             : l10n.offDefault,
                         style: TextStyle(
                           fontSize: 12,
-                          color: colorScheme.onSurface.withValues(alpha: 0.6),
+                          color: colorScheme.onSurfaceVariant,
                         ),
                       ),
                       value: themeProvider.mode == AppThemeMode.dark,
@@ -134,7 +134,7 @@ class SettingsScreen extends StatelessWidget {
                     'v${packageInfo.version}',
                     style: TextStyle(
                       fontSize: 12,
-                      color: colorScheme.onSurface.withValues(alpha: 0.5),
+                      color: colorScheme.onSurfaceVariant,
                     ),
                   ),
                 );

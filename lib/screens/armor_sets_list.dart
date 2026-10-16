@@ -241,8 +241,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                       ),
                                       Icon(
                                         Icons.arrow_forward_ios,
-                                        color: colorScheme.onSurface
-                                            .withValues(alpha: 0.6),
+                                        color: colorScheme.onSurfaceVariant,
                                         size: 20,
                                       ),
                                     ],

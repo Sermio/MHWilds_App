@@ -367,7 +367,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                         Icon(
                           Icons.map_outlined,
                           size: 64,
-                          color: colorScheme.onSurface.withValues(alpha: 0.5),
+                          color: colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(height: 16),
                         Text(

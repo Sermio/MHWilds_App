@@ -322,7 +322,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 
 ### Fase 4 — Diseño
 
-#### T19 · Paleta y contraste
+#### ✅ T19 · Paleta y contraste
 - **Modelo:** Opus 5.5 · **Razonamiento:** medium · **Depende de:** T06
 - **Prompt:**
   > Lee CLAUDE.md y la sección 6.1 de docs/PLAN_MEJORAS.md. En `lib/utils/theme.dart` y `colors.dart`: genera los `ColorScheme` claro y oscuro con `ColorScheme.fromSeed(seedColor: AppColors.goldSoft, brightness: …)` y fija `primary: goldSoft` con `onPrimary` oscuro. Revisa `secondary`/`tertiary` (puedes partir de `mutedOlive` y `oliveBrown`). Añade `AppColors.goldInk = Color(0xFF7A5F22)` para texto, iconos y bordes dorados sobre fondo claro (los bordes de input también). Busca textos secundarios con `alpha` por debajo de 0.7 y súbelos o usa `onSurfaceVariant`. Mantén el aspecto general: la AppBar sigue siendo dorada. Verifica en emulador las 10 secciones en claro y en oscuro, y adjunta capturas al PR.

@@ -236,18 +236,18 @@ class Cdrawer extends StatelessWidget {
             context: context,
             title: l10n.talismans,
             subtitle: l10n.menuTalismansSubtitle,
-            leadingIcon: const GearSpriteIcon(
+            leadingIcon: GearSpriteIcon(
               column: talismanColumn,
               rarity: 1,
               size: 30,
               fallback: Icon(
                 Icons.workspace_premium,
-                color: AppColors.goldSoft,
+                color: AppColors.goldAccent(context),
                 size: 30,
               ),
             ),
             icon: Icons.workspace_premium,
-            iconColor: AppColors.goldSoft,
+            iconColor: AppColors.goldAccent(context),
             isSelected: selectedScreen is AmuletList,
             onTap: () => onItemSelected(const AmuletList()),
           ),

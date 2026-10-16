@@ -683,7 +683,7 @@ class _WeaponsListState extends State<WeaponsList> {
           ),
         ),
         Icon(Icons.arrow_forward_ios,
-            color: colorScheme.onSurface.withValues(alpha: 0.6), size: 20),
+            color: colorScheme.onSurfaceVariant, size: 20),
       ],
     );
   }
