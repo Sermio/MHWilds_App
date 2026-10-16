@@ -34,11 +34,7 @@ class SettingsScreen extends StatelessWidget {
         children: [
           Text(
             l10n.appearance,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withValues(alpha: 0.7),
-            ),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.7)),
           ),
           const SizedBox(height: 8),
           Card(
@@ -57,10 +53,7 @@ class SettingsScreen extends StatelessWidget {
                       title: Text(l10n.language),
                       subtitle: Text(
                         subtitle,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: colorScheme.onSurfaceVariant,
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurfaceVariant),
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       onTap: () =>
@@ -83,10 +76,7 @@ class SettingsScreen extends StatelessWidget {
                         themeProvider.mode == AppThemeMode.dark
                             ? l10n.on
                             : l10n.offDefault,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: colorScheme.onSurfaceVariant,
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurfaceVariant),
                       ),
                       value: themeProvider.mode == AppThemeMode.dark,
                       onChanged: (value) {
@@ -103,11 +93,7 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(height: 24),
           Text(
             l10n.rateAppAction,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withValues(alpha: 0.7),
-            ),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.7)),
           ),
           const SizedBox(height: 8),
           Card(
@@ -132,10 +118,7 @@ class SettingsScreen extends StatelessWidget {
                 return Center(
                   child: Text(
                     'v${packageInfo.version}',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: colorScheme.onSurfaceVariant,
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurfaceVariant),
                   ),
                 );
               }

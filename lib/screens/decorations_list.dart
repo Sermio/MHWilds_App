@@ -329,11 +329,9 @@ class _DecorationsListState extends State<DecorationsList> {
             const SizedBox(width: 6),
             Text(
               '${AppLocalizations.of(context)!.skills}:',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withValues(alpha: 0.8),
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
             ),
           ],
         ),
@@ -392,11 +390,9 @@ class _DecorationsListState extends State<DecorationsList> {
                       ),
                       child: Text(
                         '${skill.skill.name} +${skill.level}',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: colorScheme.onPrimary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: colorScheme.onPrimary,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],

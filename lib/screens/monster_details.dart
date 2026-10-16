@@ -87,11 +87,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             ),
             child: Text(
               AppLocalizations.of(context)!.monsterInformation,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.primary,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.primary),
             ),
           ),
           const SizedBox(height: 16),
@@ -160,11 +156,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                       const SizedBox(width: 8),
                       Text(
                         AppLocalizations.of(context)!.monsterVariants,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.orange[700],
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: Colors.orange[700]),
                       ),
                     ],
                   ),
@@ -216,20 +208,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                           children: [
                             Text(
                               variant.name,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: variantColor,
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: variantColor),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               variant.kind,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: variantColor,
-                                fontStyle: FontStyle.italic,
-                              ),
+                              style: Theme.of(context).textTheme.bodySmall!.copyWith(color: variantColor, fontStyle: FontStyle.italic),
                             ),
                           ],
                         ),
@@ -273,11 +257,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             ),
             child: Text(
               AppLocalizations.of(context)!.statistics,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.primary,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.primary),
             ),
           ),
           const SizedBox(height: 16),
@@ -336,11 +316,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                 ),
                 child: Text(
                   AppLocalizations.of(context)!.weaknessesAndResistances,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.primary,
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.primary),
                 ),
               ),
               const Spacer(),
@@ -397,11 +373,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             ),
             child: Text(
               AppLocalizations.of(context)!.breakableParts,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.primary,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.primary),
             ),
           ),
           const SizedBox(height: 16),
@@ -421,11 +393,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                   Expanded(
                     child: Text(
                       part.name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        color: colorScheme.onSurface,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface),
                     ),
                   ),
                 ],
@@ -446,11 +414,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
       children: [
         Text(
           label,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-            color: colorScheme.onSurface,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
         ),
         const SizedBox(height: 4),
         Text(
@@ -480,20 +444,12 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           const SizedBox(height: 8),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface,
-            ),
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface),
           ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: colorScheme.onSurface,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
           ),
         ],
       ),
@@ -513,11 +469,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
       children: [
         Text(
           AppLocalizations.of(context)!.weaknesses,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-            color: Colors.red,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: Colors.red),
         ),
         const SizedBox(height: 8),
         if (validWeaknesses.isEmpty)
@@ -530,11 +482,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             ),
             child: Text(
               AppLocalizations.of(context)!.noKnownWeaknesses,
-              style: TextStyle(
-                fontSize: 12,
-                color: colorScheme.onSurface.withValues(alpha: 0.7),
-                fontStyle: FontStyle.italic,
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7), fontStyle: FontStyle.italic),
             ),
           )
         else
@@ -589,11 +537,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
       children: [
         Text(
           AppLocalizations.of(context)!.resistances,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-            color: Colors.blue,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: Colors.blue),
         ),
         const SizedBox(height: 8),
         if (validResistances.isEmpty)
@@ -606,11 +550,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             ),
             child: Text(
               AppLocalizations.of(context)!.noKnownResistances,
-              style: TextStyle(
-                fontSize: 12,
-                color: colorScheme.onSurface.withValues(alpha: 0.7),
-                fontStyle: FontStyle.italic,
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7), fontStyle: FontStyle.italic),
             ),
           )
         else
@@ -680,11 +620,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
             ),
             child: Text(
               AppLocalizations.of(context)!.crownSizes,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.primary,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.primary),
             ),
           ),
           const SizedBox(height: 16),
@@ -741,11 +677,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         Expanded(
           child: Text(
             label,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-              color: colorScheme.onSurface,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface),
           ),
         ),
         Container(
@@ -757,11 +689,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
           ),
           child: Text(
             size,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold, color: color),
           ),
         ),
       ],
@@ -1119,14 +1047,10 @@ class MonsterRewards extends StatelessWidget {
                                     ),
                                     child: Text(
                                       "${condition.chance}%",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        color: colorScheme.brightness ==
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.brightness ==
                                                 Brightness.dark
                                             ? colorScheme.onSurface
-                                            : Colors.black87,
-                                      ),
+                                            : Colors.black87),
                                     ),
                                   ),
                                   const SizedBox(width: 12),
@@ -1134,11 +1058,7 @@ class MonsterRewards extends StatelessWidget {
                                   Expanded(
                                     child: Text(
                                       formattedKind,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: conditionColor,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: conditionColor, fontWeight: FontWeight.w500),
                                       softWrap: true,
                                     ),
                                   ),

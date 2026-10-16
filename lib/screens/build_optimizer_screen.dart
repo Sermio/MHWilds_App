@@ -136,11 +136,7 @@ class _BuildOptimizerScreenState extends State<BuildOptimizerScreen> {
                         const SizedBox(height: 12),
                         Text(
                           AppLocalizations.of(context)!.webViewNotSupported,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: colorScheme.onSurface,
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
@@ -177,21 +173,13 @@ Future<void> showBuildOptimizerCreditsDialog(BuildContext context) async {
     context: context,
     builder: (dialogContext) {
       final cs = Theme.of(dialogContext).colorScheme;
-      final bodyStyle = TextStyle(
-        color: cs.onSurface,
-        fontSize: 16,
-        height: 1.4,
-      );
+      final bodyStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(color: cs.onSurface, height: 1.4);
       return AlertDialog(
         backgroundColor: cs.surfaceContainerHighest,
         surfaceTintColor: Colors.transparent,
         title: Text(
           l10n.buildOptimizer,
-          style: TextStyle(
-            color: cs.onSurface,
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(color: cs.onSurface, fontWeight: FontWeight.w600),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,

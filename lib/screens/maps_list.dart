@@ -149,18 +149,19 @@ class _MapsListState extends State<MapsList> {
                         right: 16,
                         child: Text(
                           zone.name ?? l10n.unknownMap,
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: Colors.black45,
-                                offset: Offset(0, 2),
-                                blurRadius: 4,
-                              ),
-                            ],
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  shadows: [
+                                const Shadow(
+                                  color: Colors.black45,
+                                  offset: Offset(0, 2),
+                                  blurRadius: 4,
+                                ),
+                              ]),
                         ),
                       ),
                     ],
@@ -222,11 +223,10 @@ class _MapsListState extends State<MapsList> {
           const SizedBox(width: 6),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: color,
-            ),
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall!
+                .copyWith(fontWeight: FontWeight.w600, color: color),
           ),
         ],
       ),

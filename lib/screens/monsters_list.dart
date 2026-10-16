@@ -202,11 +202,12 @@ class _MonstersListState extends State<MonstersList> {
                                         ),
                                         child: Text(
                                           monster.displaySpecies(l10n),
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: colorScheme.primary,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall!
+                                              .copyWith(
+                                                  color: colorScheme.primary,
+                                                  fontWeight: FontWeight.w600),
                                         ),
                                       ),
                                       const SizedBox(height: 8),
@@ -227,12 +228,13 @@ class _MonstersListState extends State<MonstersList> {
                             if (monster.description.isNotEmpty) ...[
                               Text(
                                 monster.description,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: colorScheme.onSurface
-                                      .withValues(alpha: 0.7),
-                                  height: 1.4,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        color: colorScheme.onSurface
+                                            .withValues(alpha: 0.7),
+                                        height: 1.4),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -530,11 +532,9 @@ class _MonstersListState extends State<MonstersList> {
           children: [
             Text(
               AppLocalizations.of(context)!.locationsLabel,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withValues(alpha: 0.8),
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
             ),
           ],
         ),

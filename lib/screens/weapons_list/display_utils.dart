@@ -92,22 +92,14 @@ class WeaponDisplayUtils {
             children: [
               Text(
                 '${AppLocalizations.of(context)!.phial}:',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withValues(alpha: 0.8),
-                ),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
               ),
               const Spacer(),
               Row(
                 children: [
                   Text(
                     '$phialDamageValue',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: GameColors.of(context).element(phialKind),
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: GameColors.of(context).element(phialKind)),
                   ),
                   const SizedBox(width: 6),
                   SizedBox(

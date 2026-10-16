@@ -201,11 +201,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
             ),
             child: Text(
               AppLocalizations.of(context)!.campsOfLevel(floor + 1),
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onSurface,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
             ),
           ),
         ),
@@ -301,19 +297,11 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
         children: [
           Text(
             '$label: ',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: color.withValues(alpha: 0.8),
-            ),
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600, color: color.withValues(alpha: 0.8)),
           ),
           Text(
             value,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-              color: color,
-            ),
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w700, color: color),
           ),
         ],
       ),
@@ -347,10 +335,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                     const SizedBox(height: 16),
                     Text(
                       AppLocalizations.of(context)!.loadingMap,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
                     ),
                   ],
                 ),
@@ -372,10 +357,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                         const SizedBox(height: 16),
                         Text(
                           AppLocalizations.of(context)!.noMapImagesFound,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: colorScheme.onSurface.withValues(alpha: 0.7),
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
                         ),
                       ],
                     ),
@@ -426,12 +408,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                                   ),
                                   child: Text(
                                     '${AppLocalizations.of(context)!.level} $levelLabel',
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                      letterSpacing: 0.5,
-                                    ),
+                                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700, color: Colors.white, letterSpacing: 0.5),
                                   ),
                                 ),
                                 const SizedBox(height: 20),

@@ -229,12 +229,14 @@ class _ArmorSetListState extends State<ArmorSetList> {
                                               child: Text(
                                                 AppLocalizations.of(context)!
                                                     .rarityLevel(piece.rarity),
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: _getRarityColor(
-                                                      piece.rarity),
-                                                  fontWeight: FontWeight.w600,
-                                                ),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall!
+                                                    .copyWith(
+                                                        color: _getRarityColor(
+                                                            piece.rarity),
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                               ),
                                             ),
                                           ],
@@ -404,22 +406,18 @@ class _ArmorSetListState extends State<ArmorSetList> {
           children: [
             Text(
               '${AppLocalizations.of(context)!.defense}:',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withValues(alpha: 0.8),
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
             ),
             const Spacer(),
             Row(
               children: [
                 Text(
                   '${armorPiece.defense['base']}',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
-                  ),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface),
                 ),
                 const SizedBox(width: 4),
                 const SizedBox(
@@ -438,11 +436,9 @@ class _ArmorSetListState extends State<ArmorSetList> {
           children: [
             Text(
               '${AppLocalizations.of(context)!.slots}:',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withValues(alpha: 0.8),
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
             ),
             const Spacer(),
             _buildSlotsWidget(armorPiece),
@@ -454,11 +450,9 @@ class _ArmorSetListState extends State<ArmorSetList> {
           children: [
             Text(
               '${AppLocalizations.of(context)!.resistances}:',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withValues(alpha: 0.8),
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
             ),
           ],
         ),
@@ -470,11 +464,9 @@ class _ArmorSetListState extends State<ArmorSetList> {
           children: [
             Text(
               '${AppLocalizations.of(context)!.skills}:',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withValues(alpha: 0.8),
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
             ),
           ],
         ),
@@ -519,11 +511,12 @@ class _ArmorSetListState extends State<ArmorSetList> {
                         ),
                         child: Text(
                           '${skill.name ?? skill.skill.name} +${skill.level}',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: colorScheme.onPrimary,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  color: colorScheme.onPrimary,
+                                  fontWeight: FontWeight.bold),
                         ),
                       ),
                       if (skill.setPiecesRequired != null)
@@ -822,11 +815,9 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
                   '${AppLocalizations.of(context)!.setBonus} ${(primarySkill['skill'] as skills_model.Skills).name}',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface),
                 ),
               ),
             ],
@@ -857,8 +848,10 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
                   _isExpanded
                       ? AppLocalizations.of(context)!.showLess
                       : '${AppLocalizations.of(context)!.showMore} (${extraSkills.length})',
-                  style: const TextStyle(
-                      fontSize: 12, fontWeight: FontWeight.bold),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
                 style: TextButton.styleFrom(
                   foregroundColor: colorScheme.primary,
@@ -917,11 +910,9 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
                 ),
                 child: Text(
                   skill.name,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.black, // Texto negro solicitado
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.black, // Texto negro solicitado
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -931,11 +922,9 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
             const SizedBox(height: 8),
             Text(
               description,
-              style: TextStyle(
-                fontSize: 12,
-                color: colorScheme.onSurface.withValues(alpha: 0.8),
-                height: 1.3,
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  color: colorScheme.onSurface.withValues(alpha: 0.8),
+                  height: 1.3),
             ),
           ],
         ],

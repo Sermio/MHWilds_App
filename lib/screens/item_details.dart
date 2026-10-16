@@ -66,11 +66,7 @@ class ItemDetails extends StatelessWidget {
                     // Nombre del item
                     Text(
                       item.name,
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface,
-                      ),
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
@@ -78,11 +74,7 @@ class ItemDetails extends StatelessWidget {
                     if (item.description.isNotEmpty) ...[
                       Text(
                         item.description,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: colorScheme.onSurface.withValues(alpha: 0.8),
-                          height: 1.4,
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.8), height: 1.4),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -132,11 +124,7 @@ class ItemDetails extends StatelessWidget {
                         const SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.requiredMaterials,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: colorScheme.onSurface.withValues(alpha: 0.8),
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
                         ),
                       ],
                     ),
@@ -183,11 +171,7 @@ class ItemDetails extends StatelessWidget {
                                   recipeItem.name,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: colorScheme.onSurface,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
                                 ),
                               ),
                               // Símbolo "+" si no es el último
@@ -298,11 +282,7 @@ class ItemDetails extends StatelessWidget {
                           children: [
                             Text(
                               AppLocalizations.of(context)!.dropConditions,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: colorScheme.onSurface.withValues(alpha: 0.8),
-                              ),
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
                             ),
                             const SizedBox(height: 16),
                             ...relatedRewards
@@ -339,22 +319,14 @@ class ItemDetails extends StatelessWidget {
                                       ),
                                       child: Text(
                                         '${condition.chance}%',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                          color: colorScheme.onPrimary,
-                                        ),
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onPrimary),
                                       ),
                                     ),
                                     const SizedBox(width: 16),
                                     Expanded(
                                       child: Text(
                                         formattedKind,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: colorScheme.onSurface,
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
                                       ),
                                     ),
                                   ],

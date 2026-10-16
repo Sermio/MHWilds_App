@@ -132,11 +132,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           const SizedBox(height: 16),
           Text(
             widget.weapon.name,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: colorScheme.onSurface,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
@@ -145,11 +141,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           if (widget.weapon.description.isNotEmpty) ...[
             Text(
               widget.weapon.description,
-              style: TextStyle(
-                fontSize: 16,
-                color: colorScheme.onSurface.withValues(alpha: 0.8),
-                height: 1.4,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.8), height: 1.4),
               textAlign: TextAlign.center,
             ),
           ],
@@ -220,11 +212,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     ),
                     child: Text(
                       widget.weapon.rarity.toString(),
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: GameColors.of(context).rarity(widget.weapon.rarity),
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: GameColors.of(context).rarity(widget.weapon.rarity)),
                     ),
                   ),
                 ),
@@ -233,22 +221,14 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   children: [
                     Text(
                       '${AppLocalizations.of(context)!.physicalDamage}:',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: colorScheme.onSurface.withValues(alpha: 0.8),
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
                     ),
                     const Spacer(),
                     Row(
                       children: [
                         Text(
                           '${widget.weapon.damage.display}',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: colorScheme.onSurface,
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
                         ),
                         const SizedBox(width: 4),
                         Icon(
@@ -268,11 +248,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     children: [
                       Text(
                         '${widget.weapon.affinity > 0 ? '+' : ''}${widget.weapon.affinity}%',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: colorScheme.onSurface,
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, color: colorScheme.onSurface),
                       ),
                       const SizedBox(width: 4),
                       Icon(Icons.trending_up,
@@ -289,11 +265,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                       children: [
                         Text(
                           "+${widget.weapon.defenseBonus}",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: colorScheme.onSurface,
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, color: colorScheme.onSurface),
                         ),
                         const SizedBox(width: 4),
                         Icon(Icons.shield,
@@ -312,11 +284,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                         Text(
                           widget.weapon.elderseal![0].toUpperCase() +
                               widget.weapon.elderseal!.substring(1),
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: colorScheme.onSurface,
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, color: colorScheme.onSurface),
                         ),
                         const SizedBox(width: 4),
                         Icon(Icons.auto_awesome,
@@ -347,21 +315,13 @@ class _WeaponDetailsState extends State<WeaponDetails> {
       children: [
         Text(
           "$title:",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withValues(alpha: 0.8),
-          ),
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
         ),
         const Spacer(),
         if (value is String)
           Text(
             value,
-            style: TextStyle(
-              fontSize: 16,
-              color: colorScheme.onSurface,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
           )
         else if (value is Widget)
           value,
@@ -498,11 +458,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         const SizedBox(width: 6),
         Text(
           '$label: $value',
-          style: TextStyle(
-            fontSize: 12,
-            color: colorScheme.onSurface.withValues(alpha: 0.8),
-            fontWeight: FontWeight.w500,
-          ),
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.8), fontWeight: FontWeight.w500),
         ),
       ],
     );
@@ -569,10 +525,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                       padding: const EdgeInsets.all(20),
                       child: Text(
                         AppLocalizations.of(context)!.errorLoadingSkills,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: colorScheme.onSurface.withValues(alpha: 0.8),
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.8)),
                       ),
                     ),
                   );
@@ -582,10 +535,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                       padding: const EdgeInsets.all(20),
                       child: Text(
                         AppLocalizations.of(context)!.noSkillsAvailable,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: colorScheme.onSurface.withValues(alpha: 0.8),
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.8)),
                       ),
                     ),
                   );
@@ -637,21 +587,14 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                     children: [
                                       Text(
                                         skillInfo.name,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: colorScheme.onSurface,
-                                        ),
+                                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
                                       ),
                                       if (skillInfo.description.isNotEmpty) ...[
                                         const SizedBox(height: 4),
                                         Text(
                                           skillInfo.description,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: colorScheme.onSurface
-                                                .withValues(alpha: 0.8),
-                                          ),
+                                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: colorScheme.onSurface
+                                                .withValues(alpha: 0.8)),
                                         ),
                                       ],
                                     ],
@@ -699,29 +642,21 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                       ),
                                       child: Text(
                                         "${AppLocalizations.of(context)!.lv} ${rank.level}",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                          color: isCurrentLevel
+                                        style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold, color: isCurrentLevel
                                               ? (colorScheme.brightness ==
                                                       Brightness.dark
                                                   ? colorScheme.onSurface
                                                   : Colors.black87)
-                                              : colorScheme.onSurface,
-                                        ),
+                                              : colorScheme.onSurface),
                                       ),
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Text(
                                         rank.description,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: colorScheme.onSurface,
-                                          fontWeight: isCurrentLevel
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: colorScheme.onSurface, fontWeight: isCurrentLevel
                                               ? FontWeight.w500
-                                              : FontWeight.normal,
-                                        ),
+                                              : FontWeight.normal),
                                       ),
                                     ),
                                   ],
@@ -926,11 +861,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 Expanded(
                   child: Text(
                     material.item.name,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: colorScheme.onSurface,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, color: colorScheme.onSurface),
                   ),
                 ),
                 Text(
@@ -1226,11 +1157,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                             children: [
                               Text(
                                 node.weapon.name,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: isCurrentWeapon ? FontWeight.bold : FontWeight.w500,
-                                  color: isCurrentWeapon ? colorScheme.primary : colorScheme.onSurface,
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: isCurrentWeapon ? FontWeight.bold : FontWeight.w500, color: isCurrentWeapon ? colorScheme.primary : colorScheme.onSurface),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             if (_hasSharpnessDataForWeapon(node.weapon)) ...[
@@ -1380,7 +1307,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           children: [
             Icon(Icons.gps_fixed, size: 14, color: Colors.red[400]),
             const SizedBox(width: 2),
-            Text('${w.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+            Text('${w.damage.display}', style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
           ],
         ),
         
@@ -1390,7 +1317,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             children: [
               Icon(Icons.trending_up, size: 14, color: colorScheme.primary),
               const SizedBox(width: 2),
-              Text('${w.affinity}%', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              Text('${w.affinity}%', style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
             ],
           ),
         
@@ -1400,7 +1327,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
             children: [
               Icon(WeaponUtils.getElementIcon(special.element), size: 14, color: GameColors.of(context).element(special.element)),
               const SizedBox(width: 2),
-              Text('${special.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              Text('${special.damage.display}', style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
             ],
           ),
       ],

@@ -210,12 +210,13 @@ class _SkillListState2 extends State<SkillList> {
                             if (skill.description.isNotEmpty) ...[
                               Text(
                                 skill.description,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: colorScheme.onSurface
-                                      .withValues(alpha: 0.8),
-                                  height: 1.4,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        color: colorScheme.onSurface
+                                            .withValues(alpha: 0.8),
+                                        height: 1.4),
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -407,11 +408,10 @@ class _SkillListState2 extends State<SkillList> {
         ],
         Text(
           _getSkillTypeLabel(context, kind),
-          style: TextStyle(
-            fontSize: 12,
-            color: typeColor,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context)
+              .textTheme
+              .bodySmall!
+              .copyWith(color: typeColor, fontWeight: FontWeight.w600),
         ),
       ],
     );

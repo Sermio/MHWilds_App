@@ -7,11 +7,9 @@ extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
       children: [
         Text(
           '${AppLocalizations.of(context)!.slots}:',
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withValues(alpha: 0.8),
-          ),
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSurface.withValues(alpha: 0.8)),
         ),
         const SizedBox(width: 8),
         const Spacer(),
@@ -109,11 +107,9 @@ extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
           children: [
             Text(
               AppLocalizations.of(context)!.sharpness,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withValues(alpha: 0.8),
-              ),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
             ),
           ],
         ),

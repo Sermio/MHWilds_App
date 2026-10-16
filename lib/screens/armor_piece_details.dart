@@ -96,11 +96,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   // Nombre de la pieza
                   Text(
                     widget.armor.name,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onSurface,
-                    ),
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
@@ -109,11 +105,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                   if (widget.armor.description.isNotEmpty) ...[
                     Text(
                       widget.armor.description,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: colorScheme.onSurface.withValues(alpha: 0.8),
-                        height: 1.4,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.8), height: 1.4),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -198,11 +190,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                       ),
                       child: Text(
                         widget.armor.rarity.toString(),
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: GameColors.of(context).rarity(widget.armor.rarity),
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: GameColors.of(context).rarity(widget.armor.rarity)),
                       ),
                     )),
                 const Divider(height: 24),
@@ -238,13 +226,9 @@ class _ArmorDetailsState extends State<ArmorDetails> {
       children: [
         Text(
           "$title:",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: onTap != null
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: onTap != null
                 ? colorScheme.primary
-                : colorScheme.onSurface.withValues(alpha: 0.8),
-          ),
+                : colorScheme.onSurface.withValues(alpha: 0.8)),
         ),
         const Spacer(),
         if (trailing != null)
@@ -252,11 +236,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
         else
           Text(
             value,
-            style: TextStyle(
-              fontSize: 16,
-              color: colorScheme.onSurface,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
           ),
       ],
     );
@@ -332,10 +312,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                       padding: const EdgeInsets.all(20),
                       child: Text(
                         AppLocalizations.of(context)!.errorLoadingSkills,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: colorScheme.onSurface.withValues(alpha: 0.8),
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.8)),
                       ),
                     ),
                   );
@@ -345,10 +322,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                       padding: const EdgeInsets.all(20),
                       child: Text(
                         AppLocalizations.of(context)!.noSkillsAvailable,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: colorScheme.onSurface.withValues(alpha: 0.8),
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.8)),
                       ),
                     ),
                   );
@@ -408,11 +382,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                                     as.name != null)
                                                 .name!
                                             : skillInfo.name,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: colorScheme.onSurface,
-                                        ),
+                                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
                                       ),
                                       if (skillInfo.description.isNotEmpty &&
                                           skillInfo.description !=
@@ -420,11 +390,8 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                         const SizedBox(height: 4),
                                         Text(
                                           skillInfo.description,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: colorScheme.onSurface
-                                                .withValues(alpha: 0.8),
-                                          ),
+                                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: colorScheme.onSurface
+                                                .withValues(alpha: 0.8)),
                                         ),
                                       ],
                                       if (widget.armor.skills.any((as) =>
@@ -489,26 +456,18 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                                       ),
                                       child: Text(
                                         "${AppLocalizations.of(context)!.lv} ${rank.level}",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                          color: isCurrentLevel
+                                        style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold, color: isCurrentLevel
                                               ? colorScheme.onPrimary
-                                              : colorScheme.onSurface,
-                                        ),
+                                              : colorScheme.onSurface),
                                       ),
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Text(
                                         rank.description,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: colorScheme.onSurface,
-                                          fontWeight: isCurrentLevel
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: colorScheme.onSurface, fontWeight: isCurrentLevel
                                               ? FontWeight.w500
-                                              : FontWeight.normal,
-                                        ),
+                                              : FontWeight.normal),
                                       ),
                                     ),
                                   ],
@@ -681,11 +640,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                 Expanded(
                   child: Text(
                     material.item.name,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: colorScheme.onSurface,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, color: colorScheme.onSurface),
                   ),
                 ),
                 Text(
@@ -760,11 +715,7 @@ class ArmorResistancesWidget extends StatelessWidget {
           children: [
             Text(
               '${AppLocalizations.of(context)!.resistances}:',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.primary,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.primary),
             ),
           ],
         ),

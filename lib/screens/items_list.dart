@@ -175,11 +175,7 @@ class _ItemListState extends State<ItemList> {
                                         ),
                                         child: Text(
                                           l10n.rarityLevel(item.rarity),
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: _getRarityColor(item.rarity),
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                          style: Theme.of(context).textTheme.bodySmall!.copyWith(color: _getRarityColor(item.rarity), fontWeight: FontWeight.w600),
                                         ),
                                       ),
                                     ],
@@ -198,12 +194,8 @@ class _ItemListState extends State<ItemList> {
                             if (item.description.isNotEmpty) ...[
                               Text(
                                 item.description,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: colorScheme.onSurface
-                                      .withValues(alpha: 0.7),
-                                  height: 1.4,
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: colorScheme.onSurface
+                                      .withValues(alpha: 0.7), height: 1.4),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -329,11 +321,7 @@ class _ItemListState extends State<ItemList> {
             const SizedBox(width: 6),
             Text(
               AppLocalizations.of(context)!.craftingRecipe,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withValues(alpha: 0.8),
-              ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
             ),
           ],
         ),
@@ -377,11 +365,7 @@ class _ItemListState extends State<ItemList> {
                       recipeItem.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: colorScheme.onSurface,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ],
@@ -392,11 +376,7 @@ class _ItemListState extends State<ItemList> {
                 ingredientWidget,
                 Text(
                   '+',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurfaceVariant,
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurfaceVariant),
                 ),
               ];
             }),

@@ -55,10 +55,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                   const SizedBox(height: 16),
                   Text(
                     l10n.loadingSkills,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: colorScheme.onSurface.withValues(alpha: 0.7),
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
                   ),
                 ],
               ),
@@ -122,11 +119,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                                 // Nombre de la skill
                                 Text(
                                   skill.name,
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: colorScheme.onSurface,
-                                  ),
+                                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
                                   textAlign: TextAlign.center,
                                 ),
                                 const SizedBox(height: 8),
@@ -134,12 +127,8 @@ class _SkillDetailsState extends State<SkillDetails> {
                                 if (skill.description.isNotEmpty) ...[
                                   Text(
                                     skill.description,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: colorScheme.onSurface
-                                          .withValues(alpha: 0.8),
-                                      height: 1.4,
-                                    ),
+                                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface
+                                          .withValues(alpha: 0.8), height: 1.4),
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
@@ -206,13 +195,9 @@ class _SkillDetailsState extends State<SkillDetails> {
                                               ),
                                               child: Text(
                                                 '${AppLocalizations.of(context)!.level} ${rank.level}',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: isCurrentLevel
+                                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: isCurrentLevel
                                                       ? colorScheme.onPrimary
-                                                      : colorScheme.surface,
-                                                ),
+                                                      : colorScheme.surface),
                                               ),
                                             ),
                                             if (rank.setPiecesRequired > 0) ...[
@@ -226,14 +211,9 @@ class _SkillDetailsState extends State<SkillDetails> {
                                         const SizedBox(height: 12),
                                         Text(
                                           rank.description,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: colorScheme.onSurface,
-                                            height: 1.4,
-                                            fontWeight: isCurrentLevel
+                                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, height: 1.4, fontWeight: isCurrentLevel
                                                 ? FontWeight.w500
-                                                : FontWeight.normal,
-                                          ),
+                                                : FontWeight.normal),
                                         ),
                                       ],
                                     ),
