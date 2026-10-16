@@ -572,8 +572,9 @@ class _MonstersListState extends State<MonstersList> {
     if (imageName == null) {
       // Cache no cargado, mostrar placeholder
       return Container(
-        color: Colors.grey[300],
-        child: Icon(Icons.image_not_supported, color: Colors.grey[600]),
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        child: Icon(Icons.image_not_supported,
+            color: Theme.of(context).colorScheme.onSurfaceVariant),
       );
     }
 
@@ -585,8 +586,9 @@ class _MonstersListState extends State<MonstersList> {
       errorBuilder: (context, error, stackTrace) {
         // Si la imagen no existe, mostrar placeholder
         return Container(
-          color: Colors.grey[300],
-          child: Icon(Icons.image_not_supported, color: Colors.grey[600]),
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          child: Icon(Icons.image_not_supported,
+              color: Theme.of(context).colorScheme.onSurfaceVariant),
         );
       },
     );

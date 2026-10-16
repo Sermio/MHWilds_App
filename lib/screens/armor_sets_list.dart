@@ -917,7 +917,7 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
                 child: Text(
                   skill.name,
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Colors.black, // Texto negro solicitado
+                      color: Theme.of(context).colorScheme.onPrimary,
                       fontWeight: FontWeight.bold),
                 ),
               ),

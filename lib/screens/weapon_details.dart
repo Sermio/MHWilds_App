@@ -390,37 +390,37 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     if (widget.weapon.sharpness.red > 0)
                       _buildSharpnessLegend(
                           AppLocalizations.of(context)!.sharpnessRed,
-                          Colors.red[400]!,
+                          GameColors.of(context).sharpnessRed,
                           widget.weapon.sharpness.red),
                     if (widget.weapon.sharpness.orange > 0)
                       _buildSharpnessLegend(
                           AppLocalizations.of(context)!.sharpnessOrange,
-                          Colors.orange[400]!,
+                          GameColors.of(context).sharpnessOrange,
                           widget.weapon.sharpness.orange),
                     if (widget.weapon.sharpness.yellow > 0)
                       _buildSharpnessLegend(
                           AppLocalizations.of(context)!.sharpnessYellow,
-                          Colors.yellow[600]!,
+                          GameColors.of(context).sharpnessYellow,
                           widget.weapon.sharpness.yellow),
                     if (widget.weapon.sharpness.green > 0)
                       _buildSharpnessLegend(
                           AppLocalizations.of(context)!.sharpnessGreen,
-                          Colors.green[400]!,
+                          GameColors.of(context).sharpnessGreen,
                           widget.weapon.sharpness.green),
                     if (widget.weapon.sharpness.blue > 0)
                       _buildSharpnessLegend(
                           AppLocalizations.of(context)!.sharpnessBlue,
-                          Colors.blue[400]!,
+                          GameColors.of(context).sharpnessBlue,
                           widget.weapon.sharpness.blue),
                     if (widget.weapon.sharpness.white > 0)
                       _buildSharpnessLegend(
                           AppLocalizations.of(context)!.sharpnessWhite,
-                          Colors.white,
+                          GameColors.of(context).sharpnessWhite,
                           widget.weapon.sharpness.white),
                     if (widget.weapon.sharpness.purple > 0)
                       _buildSharpnessLegend(
                           AppLocalizations.of(context)!.sharpnessPurple,
-                          Colors.purple[400]!,
+                          GameColors.of(context).sharpnessPurple,
                           widget.weapon.sharpness.purple),
                   ],
                 ),
@@ -440,7 +440,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
   Widget _buildSharpnessLegend(String label, Color color, int value) {
     final colorScheme = Theme.of(context).colorScheme;
     // Si el color es blanco, añadir un outline para que sea visible
-    final bool needsOutline = color == Colors.white;
+    final bool needsOutline = color == GameColors.of(context).sharpnessWhite;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -644,10 +644,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                                       child: Text(
                                         "${AppLocalizations.of(context)!.lv} ${rank.level}",
                                         style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold, color: isCurrentLevel
-                                              ? (colorScheme.brightness ==
-                                                      Brightness.dark
-                                                  ? colorScheme.onSurface
-                                                  : Colors.black87)
+                                              ? colorScheme.onPrimary
                                               : colorScheme.onSurface),
                                       ),
                                     ),

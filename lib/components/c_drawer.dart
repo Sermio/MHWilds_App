@@ -51,7 +51,7 @@ class Cdrawer extends StatelessWidget {
   Widget menuHeader(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final accentColor = isDark ? Colors.white : Colors.black87;
+    final accentColor = Theme.of(context).colorScheme.onSurface;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(

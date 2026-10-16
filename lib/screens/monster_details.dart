@@ -843,9 +843,9 @@ class _MonsterDetailsState extends State<MonsterDetails> {
       return Container(
         width: 380,
         height: 250,
-        color: Colors.grey[300],
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         child:
-            Icon(Icons.image_not_supported, color: Colors.grey[600], size: 64),
+            Icon(Icons.image_not_supported, color: Theme.of(context).colorScheme.onSurfaceVariant, size: 64),
       );
     }
 
@@ -861,9 +861,9 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         return Container(
           width: 380,
           height: 250,
-          color: Colors.grey[300],
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
           child: Icon(Icons.image_not_supported,
-              color: Colors.grey[600], size: 64),
+              color: Theme.of(context).colorScheme.onSurfaceVariant, size: 64),
         );
       },
     );
@@ -1048,10 +1048,7 @@ class MonsterRewards extends StatelessWidget {
                                     ),
                                     child: Text(
                                       "${condition.chance}%",
-                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.brightness ==
-                                                Brightness.dark
-                                            ? colorScheme.onSurface
-                                            : Colors.black87),
+                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onPrimary),
                                     ),
                                   ),
                                   const SizedBox(width: 12),

@@ -201,7 +201,9 @@ class _SkillListState2 extends State<SkillList> {
                                 ),
                                 Icon(
                                   Icons.arrow_forward_ios,
-                                  color: Colors.grey[400],
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant,
                                   size: 20,
                                 ),
                               ],
@@ -252,7 +254,7 @@ class _SkillListState2 extends State<SkillList> {
         backgroundColor: colorScheme.primary,
         child: Icon(
           _filtersVisible ? Icons.close : Icons.tune,
-          color: Colors.black,
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
     );

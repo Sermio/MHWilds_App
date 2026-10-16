@@ -342,7 +342,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 - **Prompt:**
   > Lee CLAUDE.md. Completa el `textTheme` de ambos temas (display/headline/title/body/label en sus tres tamaños, con 12 px como mínimo para texto legible) y crea `AppSpacing` (4, 8, 12, 16, 24) y `AppRadius` (10, 15, 20) en `lib/utils/`. Migra por carpetas (`components/`, listas y detalles) los `TextStyle(fontSize: …)` sueltos al estilo del tema más cercano, y los `EdgeInsets`/`BorderRadius` a los tokens. Un commit por carpeta. El aspecto debe ser prácticamente igual; adjunta capturas.
 
-#### T23 · Cerrar el modo oscuro
+#### ✅ T23 · Cerrar el modo oscuro
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** low · **Depende de:** T21
 - **Prompt:**
   > Lee CLAUDE.md y `ARCHIVOS_MODIFICAR_MODO_OSCURO.md`. Termina la lista de pendientes aplicando el patrón descrito (colorScheme/GameColors en lugar de `Colors.white`, `Colors.black` y `Colors.grey[…]`). Revisa cada pantalla en oscuro en emulador. Cuando no quede nada, borra `ARCHIVOS_MODIFICAR_MODO_OSCURO.md`. Si el PR sale grande, divídelo en tres: componentes, listas y detalles.
