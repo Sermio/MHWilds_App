@@ -1,49 +1,33 @@
+import 'dart:isolate';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:mhwilds_app/api/api_config.dart';
+import 'package:mhwilds_app/api/api_client.dart';
+import 'package:mhwilds_app/api/cached_api.dart';
 import 'package:mhwilds_app/models/weapon.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 
 class WeaponsApi {
-  static Future<List<Weapon>> fetchWeapons() async {
-    try {
-      final response = await http.get(Uri.parse(ApiConfig.url('weapons')));
+  static Stream<Data<List<Weapon>>> watchWeapons(
+          {bool force = false, CachedApi? api}) =>
+      (api ?? CachedApi.shared).watch('weapons', _parse, force: force);
 
-      if (response.statusCode == 200) {
-        final List<dynamic> jsonData = json.decode(response.body);
-
+  static Future<List<Weapon>> _parse(String body) => Isolate.run(() {
+        final List<dynamic> jsonData = json.decode(body);
         final List<Weapon> weapons = [];
-        int successCount = 0;
-        int errorCount = 0;
-
         for (int i = 0; i < jsonData.length; i++) {
           try {
-            final weapon = Weapon.fromJson(jsonData[i]);
-            weapons.add(weapon);
-            successCount++;
-          } catch (e) {
-            errorCount++;
+            weapons.add(Weapon.fromJson(jsonData[i]));
+          } catch (_) {
+            // Skip malformed entries.
           }
         }
-
         return weapons;
-      } else {
-        throw Exception('Failed to load weapons: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Error fetching weapons: $e');
-    }
-  }
+      });
 
   static Future<Weapon> fetchWeaponById(int id) async {
     try {
-      final response = await http.get(Uri.parse(ApiConfig.url('weapons/$id')));
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> jsonData = json.decode(response.body);
-        return Weapon.fromJson(jsonData);
-      } else {
-        throw Exception('Failed to load weapon: ${response.statusCode}');
-      }
+      final Map<String, dynamic> jsonData =
+          await ApiClient.shared.getJson('weapons/$id');
+      return Weapon.fromJson(jsonData);
     } catch (e) {
       throw Exception('Error fetching weapon: $e');
     }

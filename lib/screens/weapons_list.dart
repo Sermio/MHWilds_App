@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/async_list_body.dart';
+import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/skills.dart' as skills_model;
@@ -14,18 +16,18 @@ import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/tree_connector_painter.dart';
 import 'package:mhwilds_app/utils/weapon_tree_builder.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
 
 part 'weapons_list/display_utils.dart';
 part 'weapons_list/weapon_card.dart';
-part 'weapons_list/damage_info.dart';
 part 'weapons_list/slots_and_sharpness.dart';
 
 class WeaponsList extends StatefulWidget {
   const WeaponsList({super.key});
 
   @override
-  _WeaponsListState createState() => _WeaponsListState();
+  State<WeaponsList> createState() => _WeaponsListState();
 }
 
 class _WeaponsListState extends State<WeaponsList> {
@@ -44,10 +46,9 @@ class _WeaponsListState extends State<WeaponsList> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final weaponsProvider =
           Provider.of<WeaponsProvider>(context, listen: false);
-      final skillsProvider = Provider.of<SkillsProvider>(context, listen: false);
-      if (!weaponsProvider.hasData) {
-        weaponsProvider.fetchWeapons();
-      }
+      final skillsProvider =
+          Provider.of<SkillsProvider>(context, listen: false);
+      weaponsProvider.fetchWeapons();
       if (!skillsProvider.hasData && !skillsProvider.isLoading) {
         skillsProvider.fetchSkills();
       }
@@ -70,15 +71,14 @@ class _WeaponsListState extends State<WeaponsList> {
       _searchNameController.clear();
       _searchSeriesController.clear();
     });
-    print('WeaponsList: _selectedKind reset to: "$_selectedKind"');
+    debugPrint('WeaponsList: _selectedKind reset to: "$_selectedKind"');
     final provider = Provider.of<WeaponsProvider>(context, listen: false);
     provider.clearFilters();
 
     // Debug: Verificar que el provider se haya limpiado
-    print(
+    debugPrint(
         'WeaponsList: Provider filters cleared, weapons count: ${provider.weapons.length}');
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +86,10 @@ class _WeaponsListState extends State<WeaponsList> {
     final weaponsProvider = Provider.of<WeaponsProvider>(context);
     final filteredWeapons = weaponsProvider.weapons;
 
-    if (!weaponsProvider.hasData && !weaponsProvider.isLoading) {
+    if (weaponsProvider.state is Idle) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final p = Provider.of<WeaponsProvider>(context, listen: false);
-        if (!p.hasData && !p.isLoading) p.fetchWeapons();
+        if (p.state is Idle) p.fetchWeapons();
       });
     }
 
@@ -99,7 +99,7 @@ class _WeaponsListState extends State<WeaponsList> {
         children: [
           _buildWeaponsList(context, weaponsProvider, filteredWeapons),
           Positioned(
-            top: 8,
+            top: weaponsProvider.isOffline ? 48 : 8,
             right: 16,
             child: SegmentedButton<bool>(
               segments: [
@@ -140,7 +140,8 @@ class _WeaponsListState extends State<WeaponsList> {
               right: 0,
               child: Material(
                 elevation: 8,
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
+                borderRadius:
+                    const BorderRadius.vertical(bottom: Radius.circular(24)),
                 clipBehavior: Clip.antiAlias,
                 child: _buildFiltersSection(context, weaponsProvider),
               ),
@@ -290,30 +291,18 @@ class _WeaponsListState extends State<WeaponsList> {
         ),
       );
     }).toList();
-  }  Widget _buildWeaponsList(BuildContext context,
+  }
+
+  Widget _buildWeaponsList(BuildContext context,
       WeaponsProvider weaponsProvider, List<Weapon> filteredWeapons) {
     final colorScheme = Theme.of(context).colorScheme;
-    if (weaponsProvider.isLoading) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircularProgressIndicator(color: colorScheme.primary),
-            const SizedBox(height: 16),
-            Text(
-              AppLocalizations.of(context)!.loadingWeapons,
-              style: TextStyle(
-                  fontSize: 16, color: colorScheme.onSurface.withOpacity(0.7)),
-            ),
-          ],
-        ),
-      );
-    }
+    final l10n = AppLocalizations.of(context)!;
 
     final Map<String, List<Weapon>> seriesGroups = {};
     if (_isTreeView) {
       for (final w in filteredWeapons) {
-        final seriesName = w.series?.name ?? AppLocalizations.of(context)!.noSeries;
+        final seriesName =
+            w.series?.name ?? AppLocalizations.of(context)!.noSeries;
         if (!seriesGroups.containsKey(seriesName)) {
           seriesGroups[seriesName] = [];
         }
@@ -322,113 +311,110 @@ class _WeaponsListState extends State<WeaponsList> {
     }
     final seriesKeys = seriesGroups.keys.toList()..sort();
 
-    return ListView.builder(
-      padding: const EdgeInsets.only(bottom: 120, top: 64),
-      itemCount: filteredWeapons.isEmpty ? 1 : (_isTreeView ? seriesKeys.length : filteredWeapons.length),
-      itemBuilder: (context, index) {
-        if (filteredWeapons.isEmpty) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 64),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.search_off,
-                      size: 64, color: colorScheme.onSurface.withValues(alpha: 0.5)),
-                  const SizedBox(height: 16),
-                  Text(
-                    AppLocalizations.of(context)!.noWeaponsFound,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: colorScheme.onSurface.withValues(alpha: 0.8),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    AppLocalizations.of(context)!.tryAdjustingFilters,
-                    style: TextStyle(
-                        fontSize: 14, color: colorScheme.onSurface.withValues(alpha: 0.6)),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
-        
-        final itemIndex = index;
+    return AsyncListBody<Weapon>(
+        state: weaponsProvider.state,
+        isOffline: weaponsProvider.isOffline,
+        loadingLabel: l10n.loadingWeapons,
+        emptyTitle: l10n.noWeaponsFound,
+        emptySubtitle: l10n.tryAdjustingFilters,
+        onRetry: weaponsProvider.fetchWeapons,
+        onRefresh: () => weaponsProvider.refresh(force: true),
+        isEmpty: (_) => filteredWeapons.isEmpty,
+        builder: (context, _) => ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(bottom: 120, top: 64),
+              itemCount:
+                  _isTreeView ? seriesKeys.length : filteredWeapons.length,
+              itemBuilder: (context, index) {
+                final itemIndex = index;
 
-        if (_isTreeView) {
-          final seriesName = seriesKeys[itemIndex];
-          final weaponsInSeries = seriesGroups[seriesName]!;
-          final roots = _buildSeriesTrees(weaponsInSeries);
+                if (_isTreeView) {
+                  final seriesName = seriesKeys[itemIndex];
+                  final weaponsInSeries = seriesGroups[seriesName]!;
+                  final roots = _buildSeriesTrees(weaponsInSeries);
 
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            decoration: BoxDecoration(
-              color: colorScheme.surface,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: colorScheme.shadow.withValues(alpha: 0.08),
-                  blurRadius: 8,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Theme(
-              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-              child: ExpansionTile(
-                initiallyExpanded: seriesKeys.length == 1,
-                collapsedBackgroundColor: Colors.transparent,
-                backgroundColor: Colors.transparent,
-                collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                title: Row(
-                  children: [
-                    Icon(Icons.account_tree_outlined, size: 20, color: colorScheme.primary),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        seriesName,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  return Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: colorScheme.surface,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: colorScheme.shadow.withValues(alpha: 0.08),
+                          blurRadius: 8,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Theme(
+                      data: Theme.of(context)
+                          .copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        initiallyExpanded: seriesKeys.length == 1,
+                        collapsedBackgroundColor: Colors.transparent,
+                        backgroundColor: Colors.transparent,
+                        collapsedShape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        tilePadding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 4),
+                        title: Row(
+                          children: [
+                            Icon(Icons.account_tree_outlined,
+                                size: 20, color: colorScheme.primary),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                seriesName,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 2),
+                              decoration: BoxDecoration(
+                                color:
+                                    colorScheme.primary.withValues(alpha: 0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                '${weaponsInSeries.length}',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: colorScheme.primary),
+                              ),
+                            ),
+                          ],
+                        ),
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 24, left: 8, right: 8, top: 8),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: roots
+                                    .map((node) =>
+                                        _buildVisualTree(node, context))
+                                    .toList(),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: colorScheme.primary.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        '${weaponsInSeries.length}',
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: colorScheme.primary),
-                      ),
-                    ),
-                  ],
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 24, left: 8, right: 8, top: 8),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: roots.map((node) => _buildVisualTree(node, context)).toList(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        } else {
-          final weapon = filteredWeapons[itemIndex];
-          return _buildWeaponCard(weapon, itemIndex);
-        }
-      },
-    );
+                  );
+                } else {
+                  final weapon = filteredWeapons[itemIndex];
+                  return _buildWeaponCard(weapon, itemIndex);
+                }
+              },
+            ));
   }
 
   List<TreeNode> _buildSeriesTrees(List<Weapon> seriesWeapons) {
@@ -438,7 +424,9 @@ class _WeaponsListState extends State<WeaponsList> {
     }).toList();
 
     TreeNode buildNode(Weapon w) {
-      final children = seriesWeapons.where((child) => child.crafting.previous?.id == w.id).toList();
+      final children = seriesWeapons
+          .where((child) => child.crafting.previous?.id == w.id)
+          .toList();
       return TreeNode(
         weapon: w,
         children: children.map((c) => buildNode(c)).toList(),
@@ -448,7 +436,8 @@ class _WeaponsListState extends State<WeaponsList> {
     return roots.map((r) => buildNode(r)).toList();
   }
 
-  Widget _buildVisualTree(TreeNode node, BuildContext context, {int depth = 0, List<bool> isLastChildPath = const []}) {
+  Widget _buildVisualTree(TreeNode node, BuildContext context,
+      {int depth = 0, List<bool> isLastChildPath = const []}) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Column(
@@ -480,86 +469,101 @@ class _WeaponsListState extends State<WeaponsList> {
                   ),
                 ),
               Container(
-                  margin: const EdgeInsets.only(bottom: 4, top: 4, left: 4),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(8),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => WeaponDetails(weapon: node.weapon)),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          GearSpriteIcon(
-                            column: weaponColumnByKind[node.weapon.kind] ?? 0,
-                            rarity: node.weapon.rarity,
-                            size: 32,
-                            fallback: Icon(_getWeaponIcon(node.weapon.kind), size: 24, color: _getKindColor(node.weapon.kind)),
-                          ),
-                          const SizedBox(width: 8),
-                          SizedBox(
-                            width: 140,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(node.weapon.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                                if (_hasSharpnessData(node.weapon)) ...[
-                                  const SizedBox(height: 4),
-                                  SharpnessBar(
-                                    sharpness: node.weapon.sharpness,
-                                    height: 6,
-                                    borderRadius: 2,
-                                  ),
-                                  const SizedBox(height: 4),
-                                ],
-                                RarityChip(
-                                  rarity: node.weapon.rarity,
-                                  fontSize: 10,
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                margin: const EdgeInsets.only(bottom: 4, top: 4, left: 4),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(8),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              WeaponDetails(weapon: node.weapon)),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        GearSpriteIcon(
+                          column: weaponColumnByKind[node.weapon.kind] ?? 0,
+                          rarity: node.weapon.rarity,
+                          size: 32,
+                          fallback: Icon(_getWeaponIcon(node.weapon.kind),
+                              size: 24, color: _getKindColor(node.weapon.kind)),
+                        ),
+                        const SizedBox(width: 8),
+                        SizedBox(
+                          width: 140,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(node.weapon.name,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13)),
+                              if (_hasSharpnessData(node.weapon)) ...[
+                                const SizedBox(height: 4),
+                                SharpnessBar(
+                                  sharpness: node.weapon.sharpness,
+                                  height: 6,
+                                  borderRadius: 2,
                                 ),
+                                const SizedBox(height: 4),
                               ],
-                            ),
+                              RarityChip(
+                                rarity: node.weapon.rarity,
+                                fontSize: 10,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6, vertical: 2),
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            width: 70,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
+                        ),
+                        SizedBox(
+                          width: 70,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.gps_fixed,
+                                      size: 14, color: Colors.red[400]),
+                                  const SizedBox(width: 2),
+                                  Text('${node.weapon.damage.display}',
+                                      style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                              if (node.weapon.affinity != 0) ...[
+                                const SizedBox(height: 4),
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(Icons.gps_fixed, size: 14, color: Colors.red[400]),
+                                    Icon(Icons.trending_up,
+                                        size: 14, color: colorScheme.primary),
                                     const SizedBox(width: 2),
-                                    Text('${node.weapon.damage.display}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                                    Text('${node.weapon.affinity}%',
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold)),
                                   ],
                                 ),
-                                if (node.weapon.affinity != 0) ...[
-                                  const SizedBox(height: 4),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(Icons.trending_up, size: 14, color: colorScheme.primary),
-                                      const SizedBox(width: 2),
-                                      Text('${node.weapon.affinity}%', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-                                    ],
-                                  ),
-                                ],
                               ],
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
+              ),
             ],
           ),
         ),
@@ -586,7 +590,7 @@ class _WeaponsListState extends State<WeaponsList> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -679,7 +683,7 @@ class _WeaponsListState extends State<WeaponsList> {
           ),
         ),
         Icon(Icons.arrow_forward_ios,
-            color: colorScheme.onSurface.withOpacity(0.6), size: 20),
+            color: colorScheme.onSurface.withValues(alpha: 0.6), size: 20),
       ],
     );
   }
@@ -696,7 +700,7 @@ class _WeaponsListState extends State<WeaponsList> {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
         const Spacer(),
@@ -730,7 +734,7 @@ class _WeaponsListState extends State<WeaponsList> {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
         const Spacer(),
@@ -779,7 +783,7 @@ class _WeaponsListState extends State<WeaponsList> {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.8),
+              color: colorScheme.onSurface.withValues(alpha: 0.8),
             ),
           ),
           const Spacer(),
@@ -815,14 +819,15 @@ class _WeaponsListState extends State<WeaponsList> {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.8),
+              color: colorScheme.onSurface.withValues(alpha: 0.8),
             ),
           ),
           const Spacer(),
           Row(
             children: [
               Text(
-                weapon.elderseal![0].toUpperCase() + weapon.elderseal!.substring(1),
+                weapon.elderseal![0].toUpperCase() +
+                    weapon.elderseal!.substring(1),
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
@@ -855,38 +860,14 @@ class _WeaponsListState extends State<WeaponsList> {
         if (special is Map<String, dynamic>) {
           return (special['kind'] == 'element' ||
                   special['kind'] == 'status') &&
-              special['damage'] != null &&
-              special['damage']['raw'] > 0;
+              ((special['damage'] as Map<String, dynamic>?)?['raw'] as num? ??
+                      0) >
+                  0;
         }
         return false;
       });
     }
     return false;
-  }
-
-  // Método auxiliar para verificar si hay información adicional de daño
-  bool _hasAdditionalDamageInfo(Weapon weapon) {
-    switch (weapon.kind) {
-      case 'bow':
-        return weapon.coatings != null && weapon.coatings!.isNotEmpty;
-      case 'charge-blade':
-        return weapon.phial != null;
-      case 'gunlance':
-        return weapon.shell != null && weapon.shellLevel != null;
-      case 'switch-axe':
-        return weapon.phial != null;
-      case 'hunting-horn':
-        return weapon.melody != null ||
-            weapon.echoBubble != null ||
-            weapon.echoWave != null;
-      case 'heavy-bowgun':
-      case 'light-bowgun':
-        return weapon.ammo != null && weapon.ammo!.isNotEmpty;
-      case 'insect-glaive':
-        return weapon.kinsectLevel != null && weapon.kinsectLevel! > 0;
-      default:
-        return false;
-    }
   }
 
   Widget _buildWeaponSkills(Weapon weapon) {
@@ -907,7 +888,7 @@ class _WeaponsListState extends State<WeaponsList> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
+                color: colorScheme.onSurface.withValues(alpha: 0.8),
               ),
             ),
           ],
@@ -917,9 +898,10 @@ class _WeaponsListState extends State<WeaponsList> {
               margin: const EdgeInsets.only(bottom: 8),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: colorScheme.primary.withOpacity(0.1),
+                color: colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: colorScheme.primary.withOpacity(0.3)),
+                border: Border.all(
+                    color: colorScheme.primary.withValues(alpha: 0.3)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -932,8 +914,7 @@ class _WeaponsListState extends State<WeaponsList> {
                         height: 24,
                         margin: const EdgeInsets.only(right: 8),
                         child: SkillSpriteIcon(
-                          iconId:
-                              _skillIconForId(skill.skill.id, context)?.id,
+                          iconId: _skillIconForId(skill.skill.id, context)?.id,
                           iconKind:
                               _skillIconForId(skill.skill.id, context)?.kind,
                           size: 24,
@@ -968,7 +949,7 @@ class _WeaponsListState extends State<WeaponsList> {
                       skill.description,
                       style: TextStyle(
                         fontSize: 11,
-                        color: colorScheme.onSurface.withOpacity(0.8),
+                        color: colorScheme.onSurface.withValues(alpha: 0.8),
                         height: 1.3,
                       ),
                       maxLines: 2,

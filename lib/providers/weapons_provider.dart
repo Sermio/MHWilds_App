@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:mhwilds_app/api/weapons_api.dart';
 import 'package:mhwilds_app/models/weapon.dart';
+import 'package:mhwilds_app/providers/cached_list_provider.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 
-class WeaponsProvider with ChangeNotifier {
+class WeaponsProvider extends CachedListProvider<Weapon> {
+  WeaponsProvider({super.api});
+
   List<Weapon> _allWeapons = [];
   List<Weapon> _originalWeapons = [];
   List<Weapon> _filteredWeapons = [];
-  bool _isLoading = false;
 
   String _nameFilter = '';
   String _seriesFilter = '';
@@ -14,11 +16,30 @@ class WeaponsProvider with ChangeNotifier {
   int? _rarityFilter;
 
   List<Weapon> get weapons => _filteredWeapons;
-  bool get isLoading => _isLoading;
-  bool get hasData => _allWeapons.isNotEmpty;
 
-  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
-  void invalidate() {
+  Future<void> fetchWeapons() => fetch();
+
+  @override
+  Stream<Data<List<Weapon>>> watch({required bool force}) =>
+      WeaponsApi.watchWeapons(force: force, api: api);
+
+  @override
+  void onData(List<Weapon> data) {
+    _allWeapons = data;
+    _allWeapons.sort((a, b) {
+      final kindComp = a.kind.toLowerCase().compareTo(b.kind.toLowerCase());
+      if (kindComp != 0) return kindComp;
+      final rarityComp = b.rarity.compareTo(a.rarity);
+      if (rarityComp != 0) return rarityComp;
+      return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+    });
+    _originalWeapons = List.from(_allWeapons);
+    // Conserva los filtros activos si llegan datos nuevos.
+    _filter();
+  }
+
+  @override
+  void onReset() {
     _allWeapons = [];
     _originalWeapons = [];
     _filteredWeapons = [];
@@ -26,44 +47,6 @@ class WeaponsProvider with ChangeNotifier {
     _seriesFilter = '';
     _kindFilter = null;
     _rarityFilter = null;
-    notifyListeners();
-  }
-
-  Future<void> fetchWeapons() async {
-    if (_allWeapons.isNotEmpty) return;
-
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      _allWeapons = await WeaponsApi.fetchWeapons();
-
-      // Debug: Ver cuántas weapons de cada kind tenemos
-      final kindCounts = <String, int>{};
-      for (final weapon in _allWeapons) {
-        kindCounts[weapon.kind] = (kindCounts[weapon.kind] ?? 0) + 1;
-      }
-
-      // Debug: Ver específicamente switch-axe weapons
-      final switchAxeWeapons =
-          _allWeapons.where((w) => w.kind == 'switch-axe').toList();
-
-      _allWeapons.sort((a, b) {
-        final kindComp = a.kind.toLowerCase().compareTo(b.kind.toLowerCase());
-        if (kindComp != 0) return kindComp;
-        final rarityComp = b.rarity.compareTo(a.rarity);
-        if (rarityComp != 0) return rarityComp;
-        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
-      });
-
-      _originalWeapons = List.from(_allWeapons);
-      _filteredWeapons = List.from(_allWeapons);
-    } catch (e) {
-      print('WeaponsProvider: Error fetching weapons: $e');
-    }
-
-    _isLoading = false;
-    notifyListeners();
   }
 
   void applyFilters({String? name, String? series, String? kind, int? rarity}) {
@@ -71,16 +54,15 @@ class WeaponsProvider with ChangeNotifier {
     _seriesFilter = series ?? '';
     _kindFilter = kind;
     _rarityFilter = rarity;
+    _filter();
+    notifyListeners();
+  }
 
-    // Debug específico para switch-axe
-    if (_kindFilter == 'switch-axe') {
-      final switchAxeWeapons =
-          _allWeapons.where((w) => w.kind == 'switch-axe').toList();
-
-      for (final weapon in switchAxeWeapons) {}
-    }
-
-    if (_nameFilter.isEmpty && _seriesFilter.isEmpty && _kindFilter == null && _rarityFilter == null) {
+  void _filter() {
+    if (_nameFilter.isEmpty &&
+        _seriesFilter.isEmpty &&
+        _kindFilter == null &&
+        _rarityFilter == null) {
       _filteredWeapons = List.from(_allWeapons);
     } else {
       _filteredWeapons = _allWeapons.where((weapon) {
@@ -88,7 +70,10 @@ class WeaponsProvider with ChangeNotifier {
             weapon.name.toLowerCase().contains(_nameFilter.toLowerCase());
 
         final matchesSeries = _seriesFilter.isEmpty ||
-            (weapon.series != null && weapon.series!.name.toLowerCase().contains(_seriesFilter.toLowerCase()));
+            (weapon.series != null &&
+                weapon.series!.name
+                    .toLowerCase()
+                    .contains(_seriesFilter.toLowerCase()));
 
         final matchesKind = _kindFilter == null || weapon.kind == _kindFilter;
 
@@ -98,8 +83,6 @@ class WeaponsProvider with ChangeNotifier {
         return matchesName && matchesSeries && matchesKind && matchesRarity;
       }).toList();
     }
-
-    notifyListeners();
   }
 
   void clearFilters() {
