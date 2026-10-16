@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 /// Aviso discreto sobre una lista que muestra datos guardados sin conexión:
 /// "Sin conexión · datos del 12/10".
@@ -16,7 +17,8 @@ class OfflineDataBanner extends StatelessWidget {
       child: Container(
         width: double.infinity,
         color: scheme.secondaryContainer,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
         child: Row(
           children: [
             Icon(Icons.cloud_off, size: 18, color: scheme.onSecondaryContainer),

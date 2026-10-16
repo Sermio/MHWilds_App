@@ -6,6 +6,7 @@ import 'package:mhwilds_app/data/ailments.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class MonsterDetailsCard extends StatelessWidget {
   final Monster monster;
@@ -19,7 +20,7 @@ class MonsterDetailsCard extends StatelessWidget {
       elevation: 5,
       margin: EdgeInsets.zero,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(AppSpacing.sm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -95,8 +96,8 @@ class MonsterDetailsCard extends StatelessWidget {
             // Variantes del monstruo (incluyendo tempered)
             if (monster.variants.isNotEmpty) ...[
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md, vertical: AppSpacing.sm),
                 decoration: BoxDecoration(
                   color: Colors.orange.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -167,7 +168,8 @@ class MonsterDetailsCard extends StatelessWidget {
 
                         return Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 4),
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xs),
                           decoration: BoxDecoration(
                             color: backgroundColor,
                             borderRadius: BorderRadius.circular(8),
@@ -213,7 +215,7 @@ class MonsterDetailsCard extends StatelessWidget {
                           (w.kind == 'element' ? w.element : w.status) ?? '';
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 4, vertical: 2),
+                            horizontal: AppSpacing.xs, vertical: 2),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -249,7 +251,7 @@ class MonsterDetailsCard extends StatelessWidget {
                         .map(
                           (w) => Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 4, vertical: 2),
+                                horizontal: AppSpacing.xs, vertical: 2),
                             child: Image.asset(
                               'assets/imgs/elements/${w.element.toLowerCase()}.webp',
                               height: 25,
@@ -389,7 +391,7 @@ class ElementsAndAilments extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(AppSpacing.md),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -474,7 +476,7 @@ class MonsterAttributes extends StatelessWidget {
 
 Widget attributeIconWithText(String imageName, String label) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 4),
+    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
     child: Column(
       children: [
         Image.asset(

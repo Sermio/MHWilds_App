@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 enum ListFilterFieldType { text, select, gridMenu, custom }
 
@@ -117,7 +118,7 @@ class ListFiltersPanel extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final header = Container(
-      padding: const EdgeInsets.fromLTRB(20, 4, 12, 0),
+      padding: const EdgeInsets.fromLTRB(20, AppSpacing.xs, AppSpacing.md, 0),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -140,7 +141,7 @@ class ListFiltersPanel extends StatelessWidget {
     );
 
     final fieldsContent = SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, AppSpacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -314,7 +315,7 @@ class _GridMenuWidgetState extends State<_GridMenuWidget> {
       style: MenuStyle(
         backgroundColor: WidgetStateProperty.all(colorScheme.surface),
         elevation: WidgetStateProperty.all(8),
-        padding: WidgetStateProperty.all(const EdgeInsets.all(8)),
+        padding: WidgetStateProperty.all(const EdgeInsets.all(AppSpacing.sm)),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         ),
@@ -373,7 +374,7 @@ class _GridMenuWidgetState extends State<_GridMenuWidget> {
       menuChildren: [
         Container(
           width: 280,
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(AppSpacing.sm),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -387,7 +388,7 @@ class _GridMenuWidgetState extends State<_GridMenuWidget> {
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 12),
+                        vertical: 10, horizontal: AppSpacing.md),
                     decoration: BoxDecoration(
                       color: field.value == null
                           ? colorScheme.primaryContainer.withValues(alpha: 0.5)
@@ -424,7 +425,7 @@ class _GridMenuWidgetState extends State<_GridMenuWidget> {
                       borderRadius: BorderRadius.circular(8),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 8),
+                            vertical: AppSpacing.sm, horizontal: AppSpacing.sm),
                         decoration: BoxDecoration(
                           color: isSelected
                               ? colorScheme.primaryContainer

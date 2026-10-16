@@ -13,6 +13,7 @@ import 'package:mhwilds_app/screens/build_optimizer_screen.dart';
 import 'package:mhwilds_app/screens/build_crafter_screen.dart';
 import 'package:mhwilds_app/screens/maps_list.dart';
 import 'package:mhwilds_app/utils/colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class Cdrawer extends StatelessWidget {
   final Function(Widget) onItemSelected;
@@ -79,7 +80,7 @@ class Cdrawer extends StatelessWidget {
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 18),
+          padding: const EdgeInsets.fromLTRB(20, AppSpacing.lg, 20, 18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -151,7 +152,8 @@ class Cdrawer extends StatelessWidget {
   Widget menuItems(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Container(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+      padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.xl),
       child: Column(
         children: [
           _buildMenuItem(
@@ -380,7 +382,7 @@ class Cdrawer extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppSpacing.lg),
             child: Row(
               children: [
                 // Icono con fondo circular

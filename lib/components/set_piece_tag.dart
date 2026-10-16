@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 enum SetPieceTagVariant { gold, grey }
 
@@ -14,7 +15,8 @@ class SetPieceTag extends StatelessWidget {
     required this.count,
     this.variant = SetPieceTagVariant.grey,
     this.fontSize = 11,
-    this.padding = const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+    this.padding =
+        const EdgeInsets.symmetric(horizontal: 10, vertical: AppSpacing.xs),
   });
 
   @override
@@ -32,7 +34,7 @@ class SetPieceTag extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(20), // Forma de píldora
+        borderRadius: BorderRadius.circular(AppRadius.lg), // Forma de píldora
       ),
       child: Text(
         "$count ${l10n.pieces}",
