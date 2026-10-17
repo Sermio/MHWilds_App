@@ -417,3 +417,15 @@ Cada fase deja la app publicable. Las puertas entre fases son:
 - **Fase 1:** `flutter analyze` limpio y tests de modelos en verde.
 - **Fase 3:** la app abre y navega en modo avión con datos guardados.
 - **Fase 4:** los tests de overflow están en verde y el modo oscuro se ha revisado en dispositivo.
+
+---
+
+## 11. Tareas añadidas durante la ejecución
+
+#### T34 · Generar `asset_ids.g.dart` (reintento de T27, bloqueada por red)
+- **Modelo:** Opus 5.5 · **Razonamiento:** high · **Depende de:** T18
+- **Problema:** T27 no pudo hacerse en la ejecución automática (T18–T33). El entorno no alcanza `https://wilds.mhdb.io` (el proxy responde `403` al `CONNECT`), y el script necesita la lista completa de monstruos, localizaciones y objetos en inglés. Los fixtures de `test/fixtures` solo traen 3 elementos por archivo, así que no sirven para generar el mapa: quitar `EnNamesCache` con un mapa incompleto dejaría sin icono a los monstruos y mapas que falten.
+- **Intentado:** comprobar el acceso con `curl` (403), buscar un volcado local completo de la API (no existe) y ver si los fixtures bastaban (no). No se ha dejado ningún cambio de T27 en el código; `EnNamesCache` sigue funcionando como tras T18 (solo `id`+`name`, con `CacheStore`, sin bloquear el arranque).
+- **Falta:** ejecutar el prompt de T27 desde una máquina con red: crear `scripts/generate_asset_ids.dart` (llama a la API en inglés y escribe `lib/utils/asset_ids.g.dart` con mapas `const` `monsterId → asset`, `locationId → carpeta de mapa`, `itemId → asset` si aplica, avisando de los ids sin asset), sustituir los usos de `EnNamesCache` (`nameForMonsterImage`, `nameForMapImage`, `nameForItemImage`), quitar el provider, su `ChangeNotifierProvider` en `main.dart` y el fallback a fextralife de `MaterialImage`, documentar en CLAUDE.md cómo regenerar el archivo y añadir el test «todos los ids de los fixtures resuelven a un asset que existe». Usar `ApiConfig.baseUrlForLanguage('en')` y `?p={"id":true,"name":true}` para que la descarga sea pequeña.
+- **Prompt:**
+  > Lee CLAUDE.md y la sección 5 y la tarea T27 de docs/PLAN_MEJORAS.md. Ejecuta T27 desde un entorno con acceso a https://wilds.mhdb.io. Tras T18, `EnNamesCache` ya pide solo `id` y `name` y se guarda con `CacheStore`; el objetivo ahora es sustituirla por mapas generados `const` y borrarla.
