@@ -434,7 +434,7 @@ Cada fase deja la app publicable. Las puertas entre fases son:
 
 Salen de `.todo`. Decisiones tomadas: filtro de elemento en armaduras sin multiselección, solo piezas con resistencia > 0 y ordenadas de mayor a menor; anuncios con un JSON en el repo (sin Firebase ni web de administrador); login con Google descartado; Buy me a coffee **no se implementa por ahora** (ver nota al final). Orden: T35 · T36 → T37 → T38 · T39 · T40 → T41.
 
-#### T35 · Bugs de listas, drawer y árbol de armas
+#### ✅ T35 · Bugs de listas, drawer y árbol de armas
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** —
 - **Prompt:**
   > Lee CLAUDE.md. Tres bugs de `.todo`, cada uno en su commit y con su test: (1) el panel de filtros tapa los primeros elementos de todas las listas (monstruos, armas, sets de armadura, decoraciones, talismanes, habilidades, objetos): reproduce en un test de widget con un `ListFiltersPanel` abierto y arregla el solape en el sitio común, sin parchear lista por lista. (2) los elementos del drawer (`Cdrawer`/`AppSection`) se pintan todos de marrón como si estuvieran seleccionados, en claro y en oscuro: solo debe destacar el activo; test con `selected`. (3) abrir un árbol (serie) desde la lista de armas lanza un error: reprodúcelo con los fixtures, arregla la causa raíz y añade el test. Aplica `ui-ux-pro-max` y comprueba contraste en claro y oscuro.
