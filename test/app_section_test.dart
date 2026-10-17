@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mhwilds_app/components/c_drawer.dart';
-import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations_en.dart';
 import 'package:mhwilds_app/screens/app_section.dart';
 import 'package:mhwilds_app/screens/armor_sets_list.dart';
