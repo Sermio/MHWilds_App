@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:mhwilds_app/api/api_config.dart';
 import 'package:mhwilds_app/api/cached_api.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
 
@@ -11,6 +14,33 @@ abstract class CachedListProvider<T> with ChangeNotifier {
   }
 
   final CachedApi api;
+
+  String _language = ApiConfig.defaultLanguage;
+
+  /// Idioma de la API con el que se piden los datos.
+  String get language => _language;
+
+  /// Cambia el idioma de los datos (lo llama el `ProxyProvider` de
+  /// `LocaleProvider`). Si ya había datos cargados o en carga, se vacía la
+  /// memoria y se vuelve a cargar en el idioma nuevo: de la caché en disco si
+  /// ya existe, de la API si no. Si no se había cargado nada, solo recuerda el
+  /// idioma para la primera carga.
+  void setLanguage(String language) {
+    if (language == _language) return;
+    final wasActive = _state is! Idle;
+    _language = language;
+    if (!wasActive) return;
+    // Se invoca desde `update` de un provider, es decir, durante un build: la
+    // invalidación (que notifica) y la recarga esperan a que termine.
+    final generation = ++_languageChanges;
+    scheduleMicrotask(() {
+      if (generation != _languageChanges) return;
+      invalidate();
+      unawaited(fetch());
+    });
+  }
+
+  int _languageChanges = 0;
   LoadState<List<T>> _state = const Idle();
   bool _revalidating = false;
   // Se incrementa en [invalidate] para descartar cargas en curso del idioma anterior.

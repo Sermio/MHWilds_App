@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 
-FocusNode myFocusNode = FocusNode();
-
 class AppTheme {
   /// Esquemas generados desde el dorado para que `secondary`, `tertiary` y los
   /// contenedores de Material 3 no caigan en los colores por defecto de

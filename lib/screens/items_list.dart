@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
-import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/item.dart';
@@ -59,12 +58,6 @@ class _ItemListState extends State<ItemList> {
     };
     final colorScheme = Theme.of(context).colorScheme;
 
-    if (itemsProvider.state is Idle) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final p = Provider.of<ItemsProvider>(context, listen: false);
-        if (p.state is Idle) p.fetchItems();
-      });
-    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,

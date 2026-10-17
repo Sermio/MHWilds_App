@@ -10,7 +10,6 @@ import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/screens/monster_details.dart';
-import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
@@ -66,21 +65,6 @@ class _MonstersListState extends State<MonstersList> {
     final zonesProvider = Provider.of<LocationsProvider>(context);
     final monsters = monstersProvider.filteredMonsters;
     final colorScheme = Theme.of(context).colorScheme;
-
-    // Tras cambiar idioma se invalida la caché; al volver a esta pantalla
-    // initState no se ejecuta de nuevo, así que forzamos recarga si no hay datos.
-    if (monstersProvider.state is Idle) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final p = Provider.of<MonstersProvider>(context, listen: false);
-        if (p.state is Idle) p.fetchMonsters();
-      });
-    }
-    if (zonesProvider.state is Idle) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final p = Provider.of<LocationsProvider>(context, listen: false);
-        if (p.state is Idle) p.fetchZones();
-      });
-    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,

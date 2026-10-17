@@ -14,7 +14,7 @@ class ItemsProvider extends CatalogProvider<Item, ItemFilter> {
 
   @override
   Stream<Data<List<Item>>> watch({required bool force}) =>
-      ItemsApi.watchItems(force: force, api: api);
+      ItemsApi.watchItems(force: force, lang: language, api: api);
 
   @override
   List<Item> prepare(List<Item> data) => data

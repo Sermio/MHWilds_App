@@ -16,7 +16,6 @@ import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/tree_connector_painter.dart';
 import 'package:mhwilds_app/utils/weapon_tree_builder.dart';
-import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
@@ -75,13 +74,6 @@ class _WeaponsListState extends State<WeaponsList> {
     final colorScheme = Theme.of(context).colorScheme;
     final weaponsProvider = Provider.of<WeaponsProvider>(context);
     final filteredWeapons = weaponsProvider.weapons;
-
-    if (weaponsProvider.state is Idle) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final p = Provider.of<WeaponsProvider>(context, listen: false);
-        if (p.state is Idle) p.fetchWeapons();
-      });
-    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,

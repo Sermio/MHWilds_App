@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
-import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
@@ -67,13 +66,6 @@ class _AmuletListState extends State<AmuletList> {
     final skillsProvider = Provider.of<SkillsProvider>(context);
     final List<Amulet> filteredAmulets = talismansProvider.filteredAmulets;
     final colorScheme = Theme.of(context).colorScheme;
-
-    if (talismansProvider.state is Idle) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final p = Provider.of<TalismansProvider>(context, listen: false);
-        if (p.state is Idle) p.fetchAmulets();
-      });
-    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,

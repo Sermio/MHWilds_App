@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/api/api_config.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/providers/armor_sets_provider.dart';
-import 'package:mhwilds_app/providers/decorations_provider.dart';
-import 'package:mhwilds_app/providers/items_provider.dart';
 import 'package:mhwilds_app/providers/locale_provider.dart';
-import 'package:mhwilds_app/providers/locations_provider.dart';
-import 'package:mhwilds_app/providers/monsters_provider.dart';
-import 'package:mhwilds_app/providers/skills_provider.dart';
-import 'package:mhwilds_app/providers/talismans_provider.dart';
 import 'package:mhwilds_app/providers/theme_provider.dart';
-import 'package:mhwilds_app/providers/weapons_provider.dart';
 import 'package:mhwilds_app/utils/locale_utils.dart';
 import 'package:mhwilds_app/utils/review_service.dart';
 import 'package:provider/provider.dart';
@@ -177,9 +168,7 @@ class SettingsScreen extends StatelessWidget {
                               ? Icon(Icons.check, color: colorScheme.primary)
                               : null,
                           onTap: () {
-                            ApiConfig.languageCode = locale.languageCode;
                             localeProvider.setLocale(locale);
-                            _invalidateDataProviders(ctx);
                             Navigator.pop(ctx);
                           },
                         );
@@ -193,18 +182,5 @@ class SettingsScreen extends StatelessWidget {
         );
       },
     );
-  }
-
-  /// Vacía la memoria de los providers de datos para que cada pantalla cargue
-  /// el nuevo idioma. La caché en disco de cada idioma no se borra.
-  void _invalidateDataProviders(BuildContext context) {
-    Provider.of<MonstersProvider>(context, listen: false).invalidate();
-    Provider.of<WeaponsProvider>(context, listen: false).invalidate();
-    Provider.of<ArmorSetProvider>(context, listen: false).invalidate();
-    Provider.of<DecorationsProvider>(context, listen: false).invalidate();
-    Provider.of<ItemsProvider>(context, listen: false).invalidate();
-    Provider.of<LocationsProvider>(context, listen: false).invalidate();
-    Provider.of<SkillsProvider>(context, listen: false).invalidate();
-    Provider.of<TalismansProvider>(context, listen: false).invalidate();
   }
 }

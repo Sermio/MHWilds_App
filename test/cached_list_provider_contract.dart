@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mhwilds_app/api/api_client.dart';
-import 'package:mhwilds_app/api/api_config.dart';
 import 'package:mhwilds_app/api/cached_api.dart';
 import 'package:mhwilds_app/providers/cached_list_provider.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
@@ -38,7 +37,6 @@ void cachedListProviderContract<P extends CachedListProvider>(
 
     setUp(() {
       online = true;
-      ApiConfig.languageCode = 'en';
     });
 
     test('sin red y sin caché: Failure, y se recupera al reintentar', () async {

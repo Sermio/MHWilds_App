@@ -7,8 +7,9 @@ import 'package:mhwilds_app/utils/load_state.dart';
 
 class SkillsApi {
   static Stream<Data<List<Skills>>> watchSkills(
-          {bool force = false, CachedApi? api}) =>
-      (api ?? CachedApi.shared).watch('skills', _parse, force: force);
+          {bool force = false, String? lang, CachedApi? api}) =>
+      (api ?? CachedApi.shared)
+          .watch('skills', _parse, force: force, lang: lang);
 
   static Future<List<Skills>> _parse(String body) async =>
       (json.decode(body) as List<dynamic>)
@@ -18,10 +19,10 @@ class SkillsApi {
   /// Una sola petición con `q={"id":{"$in":[...]}}`. Devuelve las skills en el
   /// orden de [ids] (la API no garantiza orden); los ids inexistentes se omiten.
   static Future<List<Skills>> fetchSkillsByIds(Set<int> ids,
-      {http.Client? client}) async {
+      {String? lang, http.Client? client}) async {
     if (ids.isEmpty) return [];
     final api = client == null ? ApiClient.shared : ApiClient(client);
-    final data = await api.getJson('skills', query: {
+    final data = await api.getJson('skills', lang: lang, query: {
       'q': json.encode({
         'id': {r'$in': ids.toList()}
       }),
@@ -36,9 +37,9 @@ class SkillsApi {
     ];
   }
 
-  static Future<Skills> fetchSkillById(int skillId) async {
+  static Future<Skills> fetchSkillById(int skillId, {String? lang}) async {
     final Map<String, dynamic> jsonData =
-        await ApiClient.shared.getJson('skills/$skillId');
+        await ApiClient.shared.getJson('skills/$skillId', lang: lang);
     return Skills.fromJson(jsonData);
   }
 }

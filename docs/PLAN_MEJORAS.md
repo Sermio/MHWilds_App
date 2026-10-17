@@ -374,7 +374,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 - **Prompt:**
   > Lee CLAUDE.md y la sección 4 de docs/PLAN_MEJORAS.md (seguimos con Provider). Los 8 providers de datos repiten carga, `LoadState`, `invalidate` y `refresh`. Extrae una base `CatalogProvider<T, F>` que lo gestione, con un objeto de filtro inmutable `F` por entidad (p. ej. `MonsterFilter`), y una función pura `List<T> applyFilter(List<T>, F)` por entidad, testeada aparte. Hoy el estado del filtro se reparte entre el `State` de la pantalla y el provider: deja el provider como única fuente, de modo que al volver a una sección se conserven el filtro y (con `PageStorageKey`) el scroll. Migra entidad por entidad, en commits separados y sin cambiar el comportamiento de los filtros. Tests: filtros puros con casos límite y provider con repositorio falso.
 
-#### T29 · Idioma sin estado global
+#### ✅ T29 · Idioma sin estado global
 - **Modelo:** Opus 5.5 · **Razonamiento:** medium · **Depende de:** T28
 - **Prompt:**
   > Lee CLAUDE.md. `ApiConfig.languageCode` es estático y mutable, y se asigna dentro de `build()` (`main.dart:69`) y en `settings.dart:196`. Haz que el idioma fluya de `LocaleProvider` a los providers de datos con `ChangeNotifierProxyProvider` (o pasándolo al repositorio). Elimina la asignación en `build`, `_invalidateDataProviders` de `settings.dart` y el `addPostFrameCallback` de recarga que tienen las listas en `build`. Cambiar de idioma debe seguir recargando los datos en el idioma nuevo, y servirlos desde la caché si ya existen. Borra también el `FocusNode` global `myFocusNode` de `theme.dart` si no se usa, o muévelo a donde corresponda. Test: cambiar el idioma dispara la carga en el idioma nuevo.

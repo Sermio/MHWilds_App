@@ -13,7 +13,7 @@ class TalismansProvider extends CatalogProvider<Amulet, AmuletFilter> {
 
   @override
   Stream<Data<List<Amulet>>> watch({required bool force}) =>
-      AmuletsApi.watchAmulets(force: force, api: api);
+      AmuletsApi.watchAmulets(force: force, lang: language, api: api);
 
   /// Un talismán por rango: cada rank pasa a ser una entrada de la lista.
   @override

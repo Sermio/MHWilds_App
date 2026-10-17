@@ -9,10 +9,10 @@ class MonstersProvider extends CatalogProvider<Monster, MonsterFilter> {
   MonstersProvider({
     super.api,
     Future<Monster> Function(int id)? fetchById,
-  })  : _fetchById = fetchById ?? MonstersApi.fetchMonsterById,
+  })  : _fetchById = fetchById,
         super(const MonsterFilter());
 
-  final Future<Monster> Function(int id) _fetchById;
+  final Future<Monster> Function(int id)? _fetchById;
 
   // Nombre normalizado por id, calculado una vez al cargar.
   Map<int, String> _normalizedNames = {};
@@ -23,7 +23,8 @@ class MonstersProvider extends CatalogProvider<Monster, MonsterFilter> {
     for (final m in all) {
       if (m.id == id) return Future.value(m);
     }
-    return _fetchById(id);
+    return _fetchById?.call(id) ??
+        MonstersApi.fetchMonsterById(id, lang: language);
   }
 
   List<Monster> get allMonsters => all;
@@ -33,7 +34,7 @@ class MonstersProvider extends CatalogProvider<Monster, MonsterFilter> {
 
   @override
   Stream<Data<List<Monster>>> watch({required bool force}) =>
-      MonstersApi.watchMonsters(force: force, api: api);
+      MonstersApi.watchMonsters(force: force, lang: language, api: api);
 
   @override
   List<Monster> prepare(List<Monster> data) {

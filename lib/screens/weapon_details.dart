@@ -5,7 +5,6 @@ import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/weapon.dart';
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
-import 'package:mhwilds_app/api/weapons_api.dart';
 import 'package:mhwilds_app/utils/weapon_tree_builder.dart';
 import 'package:mhwilds_app/providers/weapons_provider.dart';
 import 'package:mhwilds_app/components/tree_connector_painter.dart';
@@ -1392,7 +1391,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         barrierDismissible: false,
         builder: (context) => const Center(child: CircularProgressIndicator()),
       ));
-      final weapon = await WeaponsApi.fetchWeaponById(id);
+      final weapon = await context.read<WeaponsProvider>().weaponById(id);
       if (mounted) {
         Navigator.pop(context); // close dialog
         unawaited(Navigator.push(

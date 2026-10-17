@@ -22,7 +22,7 @@ class CachedApi {
   /// el flujo termina tras la primera emisión; sin red y sin caché, lanza.
   /// [force] pide el endpoint aunque la versión no haya cambiado.
   /// [parse] convierte el JSON crudo; si falla, no se guarda nada.
-  /// [lang] fija un idioma distinto al actual; [query] se añade a la petición
+  /// [lang] es el idioma de la API (por defecto inglés); [query] se añade a la petición
   /// y [cacheKey] (por defecto [endpoint]) nombra el archivo de caché.
   Stream<Data<T>> watch<T>(
     String endpoint,
@@ -32,7 +32,7 @@ class CachedApi {
     Map<String, String>? query,
     String? cacheKey,
   }) async* {
-    lang ??= ApiConfig.languageCode;
+    lang ??= ApiConfig.defaultLanguage;
     final key = cacheKey ?? endpoint;
     var cached = await store.read(lang, key);
     late T value;

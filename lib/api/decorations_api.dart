@@ -6,8 +6,9 @@ import 'package:mhwilds_app/utils/load_state.dart';
 
 class DecorationsApi {
   static Stream<Data<List<DecorationItem>>> watchDecorations(
-          {bool force = false, CachedApi? api}) =>
-      (api ?? CachedApi.shared).watch('decorations', _parse, force: force);
+          {bool force = false, String? lang, CachedApi? api}) =>
+      (api ?? CachedApi.shared)
+          .watch('decorations', _parse, force: force, lang: lang);
 
   static Future<List<DecorationItem>> _parse(String body) async =>
       (json.decode(body) as List<dynamic>)

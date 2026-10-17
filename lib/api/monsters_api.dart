@@ -8,8 +8,9 @@ import 'package:mhwilds_app/utils/load_state.dart';
 
 class MonstersApi {
   static Stream<Data<List<Monster>>> watchMonsters(
-          {bool force = false, CachedApi? api}) =>
-      (api ?? CachedApi.shared).watch('monsters', _parse, force: force);
+          {bool force = false, String? lang, CachedApi? api}) =>
+      (api ?? CachedApi.shared)
+          .watch('monsters', _parse, force: force, lang: lang);
 
   static Future<List<Monster>> _parse(String body) => Isolate.run(() {
         final List<dynamic> jsonData = json.decode(body);
@@ -19,9 +20,9 @@ class MonstersApi {
         return monsters;
       });
 
-  static Future<Monster> fetchMonsterById(int monsterId) async {
+  static Future<Monster> fetchMonsterById(int monsterId, {String? lang}) async {
     final Map<String, dynamic> jsonData =
-        await ApiClient.shared.getJson('monsters/$monsterId');
+        await ApiClient.shared.getJson('monsters/$monsterId', lang: lang);
     return Monster.fromJson(jsonData);
   }
 }

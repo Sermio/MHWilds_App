@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mhwilds_app/api/api_client.dart';
-import 'package:mhwilds_app/api/api_config.dart';
 import 'package:mhwilds_app/api/cache_store.dart';
 import 'package:mhwilds_app/api/cached_api.dart';
 
@@ -56,13 +55,12 @@ void main() {
       );
 
   // (cuerpo, stale) de cada emisión.
-  Future<List<(String, bool)>> watch({bool force = false}) => api
-      .watch('monsters', (b) async => b, force: force)
+  Future<List<(String, bool)>> watch({bool force = false, String? lang}) => api
+      .watch('monsters', (b) async => b, force: force, lang: lang)
       .map((d) => (d.value, d.stale))
       .toList();
 
   setUp(() {
-    ApiConfig.languageCode = 'en';
     server = _Server();
     store = MemoryCacheStore();
     api = fakeCachedApi(server.call, store);
@@ -144,9 +142,8 @@ void main() {
 
   test('cada idioma tiene su caché', () async {
     seedCache(); // en
-    ApiConfig.languageCode = 'es';
 
-    expect(await watch(), [('nuevo', false)]);
+    expect(await watch(lang: 'es'), [('nuevo', false)]);
     expect(store.entries.keys, containsAll(['en/monsters', 'es/monsters']));
     expect(server.endpointRequests.single.url.path, '/es/monsters');
   });

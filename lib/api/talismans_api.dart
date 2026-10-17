@@ -6,8 +6,9 @@ import 'dart:convert';
 
 class AmuletsApi {
   static Stream<Data<List<Amulet>>> watchAmulets(
-          {bool force = false, CachedApi? api}) =>
-      (api ?? CachedApi.shared).watch('charms', _parse, force: force);
+          {bool force = false, String? lang, CachedApi? api}) =>
+      (api ?? CachedApi.shared)
+          .watch('charms', _parse, force: force, lang: lang);
 
   static Future<List<Amulet>> _parse(String body) => Isolate.run(() {
         final List<dynamic> jsonData = json.decode(body);

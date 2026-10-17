@@ -13,7 +13,7 @@ class WeaponsProvider extends CatalogProvider<Weapon, WeaponFilter> {
 
   @override
   Stream<Data<List<Weapon>>> watch({required bool force}) =>
-      WeaponsApi.watchWeapons(force: force, api: api);
+      WeaponsApi.watchWeapons(force: force, lang: language, api: api);
 
   @override
   List<Weapon> prepare(List<Weapon> data) => data
@@ -28,6 +28,15 @@ class WeaponsProvider extends CatalogProvider<Weapon, WeaponFilter> {
   @override
   List<Weapon> applyFilter(List<Weapon> items, WeaponFilter filter) =>
       filterWeapons(items, filter);
+
+  /// El arma del listado si ya está en memoria; si no, la pide por id en el
+  /// idioma actual.
+  Future<Weapon> weaponById(int id) {
+    final loaded = getWeaponById(id);
+    return loaded != null
+        ? Future.value(loaded)
+        : WeaponsApi.fetchWeaponById(id, lang: language);
+  }
 
   Weapon? getWeaponById(int id) {
     for (final w in all) {

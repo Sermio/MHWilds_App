@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
-import 'package:mhwilds_app/api/api_config.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/providers/decorations_provider.dart';
@@ -48,7 +47,6 @@ class FixtureProviders {
   late final EnNamesCache enNames;
 
   static Future<FixtureProviders> load(WidgetTester tester) async {
-    ApiConfig.languageCode = 'en';
     final bodies = {
       for (final e in _fixtureByEndpoint.entries)
         e.key: jsonEncode(loadFixture(e.value)),

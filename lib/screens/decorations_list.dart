@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
-import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:mhwilds_app/components/decoration_image.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
@@ -66,13 +65,6 @@ class _DecorationsListState extends State<DecorationsList> {
     final decorationsProvider = Provider.of<DecorationsProvider>(context);
     final filteredDecorations = decorationsProvider.filteredDecorations;
     final colorScheme = Theme.of(context).colorScheme;
-
-    if (decorationsProvider.state is Idle) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final p = Provider.of<DecorationsProvider>(context, listen: false);
-        if (p.state is Idle) p.fetchDecorations();
-      });
-    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,

@@ -17,14 +17,14 @@ class SkillsProvider extends CatalogProvider<Skills, SkillFilter> {
     if (ids.every(byId.containsKey)) {
       return Future.value([for (final id in ids) byId[id]!]);
     }
-    return SkillsApi.fetchSkillsByIds(ids);
+    return SkillsApi.fetchSkillsByIds(ids, lang: language);
   }
 
   Future<void> fetchSkills() => fetch();
 
   @override
   Stream<Data<List<Skills>>> watch({required bool force}) =>
-      SkillsApi.watchSkills(force: force, api: api);
+      SkillsApi.watchSkills(force: force, lang: language, api: api);
 
   @override
   List<Skills> prepare(List<Skills> data) => data

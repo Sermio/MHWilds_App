@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mhwilds_app/api/api_client.dart';
-import 'package:mhwilds_app/api/api_config.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/providers/filters/monster_filter.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
@@ -30,7 +29,6 @@ void main() {
 
   setUp(() {
     online = true;
-    ApiConfig.languageCode = 'en';
   });
 
   test('monsterById usa el del provider sin pedir por id', () async {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
-import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/en_names_cache.dart';
@@ -33,13 +32,6 @@ class _MapsListState extends State<MapsList> {
     final l10n = AppLocalizations.of(context)!;
     final provider = Provider.of<LocationsProvider>(context);
     final colorScheme = Theme.of(context).colorScheme;
-
-    if (provider.state is Idle) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final p = Provider.of<LocationsProvider>(context, listen: false);
-        if (p.state is Idle) p.fetchZones();
-      });
-    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,

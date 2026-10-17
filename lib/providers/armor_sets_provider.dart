@@ -13,7 +13,7 @@ class ArmorSetProvider extends CatalogProvider<ArmorSet, ArmorSetFilter> {
 
   @override
   Stream<Data<List<ArmorSet>>> watch({required bool force}) =>
-      ArmorsApi.watchArmorSets(force: force, api: api);
+      ArmorsApi.watchArmorSets(force: force, lang: language, api: api);
 
   @override
   List<ArmorSet> prepare(List<ArmorSet> data) => data

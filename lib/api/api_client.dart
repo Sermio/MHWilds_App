@@ -61,7 +61,7 @@ class ApiClient {
   final Duration retryDelay;
 
   /// GET a [path] (relativo al host + idioma, o una URL absoluta `https://`).
-  /// [lang] sustituye al idioma actual.
+  /// [lang] es el idioma de la API (por defecto inglés).
   /// [ifModifiedSince] se envía como `If-Modified-Since`.
   Future<ApiResponse> get(
     String path, {
@@ -71,7 +71,7 @@ class ApiClient {
     String? ifModifiedSince,
   }) async {
     final base =
-        lang == null ? ApiConfig.baseUrl : ApiConfig.baseUrlForLanguage(lang);
+        ApiConfig.baseUrlForLanguage(lang ?? ApiConfig.defaultLanguage);
     final p = path.startsWith('/') ? path.substring(1) : path;
     var uri = Uri.parse(path.startsWith('https://') ? path : '$base/$p');
     if (query != null && query.isNotEmpty) {

@@ -15,7 +15,7 @@ class DecorationsProvider
 
   @override
   Stream<Data<List<DecorationItem>>> watch({required bool force}) =>
-      DecorationsApi.watchDecorations(force: force, api: api);
+      DecorationsApi.watchDecorations(force: force, lang: language, api: api);
 
   @override
   List<DecorationItem> applyFilter(

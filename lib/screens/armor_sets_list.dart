@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
-import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
@@ -71,13 +70,6 @@ class _ArmorSetListState extends State<ArmorSetList> {
     final colorScheme = Theme.of(context).colorScheme;
     final armorSetProvider = Provider.of<ArmorSetProvider>(context);
     final filteredArmorSets = armorSetProvider.armorSets;
-
-    if (armorSetProvider.state is Idle) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final p = Provider.of<ArmorSetProvider>(context, listen: false);
-        if (p.state is Idle) p.fetchArmorSets();
-      });
-    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,

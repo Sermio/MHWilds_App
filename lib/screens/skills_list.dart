@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
 import 'package:mhwilds_app/models/skills.dart';
-import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/components/set_piece_tag.dart';
@@ -56,13 +55,6 @@ class _SkillListState2 extends State<SkillList> {
     final skillsProvider = Provider.of<SkillsProvider>(context);
     final filteredSkills = skillsProvider.skills;
     final colorScheme = Theme.of(context).colorScheme;
-
-    if (skillsProvider.state is Idle) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final p = Provider.of<SkillsProvider>(context, listen: false);
-        if (p.state is Idle) p.fetchSkills();
-      });
-    }
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,

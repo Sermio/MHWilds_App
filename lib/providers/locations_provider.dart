@@ -12,7 +12,7 @@ class LocationsProvider extends CatalogProvider<MapData, NoFilter> {
 
   @override
   Stream<Data<List<MapData>>> watch({required bool force}) =>
-      LocationsApi.watchLocations(force: force, api: api);
+      LocationsApi.watchLocations(force: force, lang: language, api: api);
 
   @override
   List<MapData> prepare(List<MapData> data) => data
