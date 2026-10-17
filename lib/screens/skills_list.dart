@@ -410,12 +410,14 @@ class _SkillListState2 extends State<SkillList> {
           leadingIcon,
           const SizedBox(width: 6),
         ],
-        Text(
-          _getSkillTypeLabel(context, kind),
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall!
-              .copyWith(color: typeColor, fontWeight: FontWeight.w600),
+        Flexible(
+          child: Text(
+            _getSkillTypeLabel(context, kind),
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall!
+                .copyWith(color: typeColor, fontWeight: FontWeight.w600),
+          ),
         ),
       ],
     );

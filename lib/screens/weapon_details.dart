@@ -24,6 +24,7 @@ import 'package:provider/provider.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
+import 'package:mhwilds_app/components/label_value_row.dart';
 
 class WeaponDetails extends StatefulWidget {
   final Weapon weapon;
@@ -172,24 +173,18 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           // Título de la sección (sin fondo dorado; alineado con otras pantallas)
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Icon(
+            child: Row(children: [Icon(
                   Icons.analytics,
                   color: colorScheme.primary,
                   size: 24,
-                ),
-                const SizedBox(width: 12),
-                Text(
+                ), const SizedBox(width: 12), Flexible(child: Text(
                   AppLocalizations.of(context)!.statistics,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: colorScheme.onSurface,
                   ),
-                ),
-              ],
-            ),
+                ))]),
           ),
 
           // Contenido de estadísticas
@@ -218,14 +213,10 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                   ),
                 ),
                 const Divider(height: 24),
-                Row(
-                  children: [
-                    Text(
+                LabelValueRow(label: Text(
                       '${AppLocalizations.of(context)!.physicalDamage}:',
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
-                    ),
-                    const Spacer(),
-                    Row(
+                    ), value: Row(mainAxisSize: MainAxisSize.min, 
                       children: [
                         Text(
                           '${widget.weapon.damage.display}',
@@ -238,9 +229,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                           color: Colors.red[400],
                         ),
                       ],
-                    ),
-                  ],
-                ),
+                    )),
                 const Divider(height: 24),
                 _buildStatRow(
                   AppLocalizations.of(context)!.affinity,
@@ -312,22 +301,17 @@ class _WeaponDetailsState extends State<WeaponDetails> {
 
   Widget _buildStatRow(String title, dynamic value) {
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
+    return LabelValueRow(label: Text(
           "$title:",
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
-        ),
-        const Spacer(),
-        if (value is String)
-          Text(
-            value,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
-          )
-        else if (value is Widget)
-          value,
-      ],
-    );
+        ), value: value is String
+            ? Text(
+                value,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
+              )
+            : value is Widget
+                ? value
+                : const SizedBox.shrink());
   }
 
   Widget _buildSharpnessSection() {
@@ -351,24 +335,18 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           // Título de la sección (sin fondo dorado; alineado con otras pantallas)
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Icon(
+            child: Row(children: [Icon(
                   Icons.content_cut,
                   color: colorScheme.primary,
                   size: 24,
-                ),
-                const SizedBox(width: 12),
-                Text(
+                ), const SizedBox(width: 12), Flexible(child: Text(
                   AppLocalizations.of(context)!.sharpness,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: colorScheme.onSurface,
                   ),
-                ),
-              ],
-            ),
+                ))]),
           ),
 
           // Contenido de sharpness
@@ -383,7 +361,9 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                 ),
                 const SizedBox(height: 12),
                 // Leyenda de colores
-                Wrap(
+                MediaQuery.withClampedTextScaling(
+                  maxScaleFactor: 1.3,
+                  child: Wrap(
                   spacing: 16,
                   runSpacing: 8,
                   children: [
@@ -423,6 +403,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                           GameColors.of(context).sharpnessPurple,
                           widget.weapon.sharpness.purple),
                   ],
+                ),
                 ),
                 // if (widget.weapon.handicraft.isNotEmpty) ...[
                 //   const SizedBox(height: 16),
@@ -486,24 +467,18 @@ class _WeaponDetailsState extends State<WeaponDetails> {
           // Título de la sección (sin fondo dorado; alineado con otras pantallas)
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Icon(
+            child: Row(children: [Icon(
                   Icons.flash_on,
                   color: colorScheme.primary,
                   size: 24,
-                ),
-                const SizedBox(width: 12),
-                Text(
+                ), const SizedBox(width: 12), Flexible(child: Text(
                   AppLocalizations.of(context)!.skills,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: colorScheme.onSurface,
                   ),
-                ),
-              ],
-            ),
+                ))]),
           ),
 
           // Contenido de habilidades
@@ -698,24 +673,18 @@ class _WeaponDetailsState extends State<WeaponDetails> {
         child: ExpansionTile(
           initiallyExpanded: false,
           tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: AppSpacing.sm),
-          title: Row(
-            children: [
-              Icon(
+          title: Row(children: [Icon(
                 Icons.build,
                 color: colorScheme.primary,
                 size: 24,
-              ),
-              const SizedBox(width: 12),
-              Text(
+              ), const SizedBox(width: 12), Flexible(child: Text(
                 AppLocalizations.of(context)!.craftingMaterials,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: colorScheme.onSurface,
                 ),
-              ),
-            ],
-          ),
+              ))]),
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),

@@ -17,6 +17,7 @@ import 'package:mhwilds_app/screens/armor_piece_details.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
+import 'package:mhwilds_app/components/label_value_row.dart';
 
 class ArmorSetList extends StatefulWidget {
   const ArmorSetList({super.key});
@@ -403,73 +404,59 @@ class _ArmorSetListState extends State<ArmorSetList> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Sección de defensa
-        Row(
-          children: [
-            Text(
-              '${AppLocalizations.of(context)!.defense}:',
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
-            ),
-            const Spacer(),
-            Row(
-              children: [
-                Text(
-                  '${armorPiece.defense['base']}',
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onSurface),
+        LabelValueRow(
+          label: Text(
+            '${AppLocalizations.of(context)!.defense}:',
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                fontWeight: FontWeight.w600,
+                color: colorScheme.onSurface.withValues(alpha: 0.8)),
+          ),
+          value: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '${armorPiece.defense['base']}',
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontWeight: FontWeight.bold, color: colorScheme.onSurface),
+              ),
+              const SizedBox(width: 4),
+              const SizedBox(
+                height: 16,
+                child: AssetThumb(
+                  'assets/imgs/armor/armor.webp',
                 ),
-                const SizedBox(width: 4),
-                const SizedBox(
-                  height: 16,
-                  child: AssetThumb(
-                    'assets/imgs/armor/armor.webp',
-                  ),
-                ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 12),
         // Sección de slots
-        Row(
-          children: [
-            Text(
-              '${AppLocalizations.of(context)!.slots}:',
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
-            ),
-            const Spacer(),
-            _buildSlotsWidget(armorPiece),
-          ],
+        LabelValueRow(
+          label: Text(
+            '${AppLocalizations.of(context)!.slots}:',
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                fontWeight: FontWeight.w600,
+                color: colorScheme.onSurface.withValues(alpha: 0.8)),
+          ),
+          value: _buildSlotsWidget(armorPiece),
         ),
         const SizedBox(height: 12),
         // Sección de resistencias
-        Row(
-          children: [
-            Text(
-              '${AppLocalizations.of(context)!.resistances}:',
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
-            ),
-          ],
+        Text(
+          '${AppLocalizations.of(context)!.resistances}:',
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSurface.withValues(alpha: 0.8)),
         ),
         const SizedBox(height: 8),
         _buildResistancesWidget(armorPiece),
         const SizedBox(height: 12),
         // Sección de skills
-        Row(
-          children: [
-            Text(
-              '${AppLocalizations.of(context)!.skills}:',
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
-            ),
-          ],
+        Text(
+          '${AppLocalizations.of(context)!.skills}:',
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSurface.withValues(alpha: 0.8)),
         ),
         const SizedBox(height: 8),
         ...armorPiece.displaySkills.map((skill) => Container(
@@ -503,21 +490,24 @@ class _ArmorSetListState extends State<ArmorSetList> {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
-                        decoration: BoxDecoration(
-                          color: colorScheme.primary,
-                          borderRadius: BorderRadius.circular(AppRadius.lg),
-                        ),
-                        child: Text(
-                          '${skill.name ?? skill.skill.name} +${skill.level}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(
-                                  color: colorScheme.onPrimary,
-                                  fontWeight: FontWeight.bold),
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xs),
+                          decoration: BoxDecoration(
+                            color: colorScheme.primary,
+                            borderRadius: BorderRadius.circular(AppRadius.lg),
+                          ),
+                          child: Text(
+                            '${skill.name ?? skill.skill.name} +${skill.level}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(
+                                    color: colorScheme.onPrimary,
+                                    fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                       if (skill.setPiecesRequired != null)
@@ -569,8 +559,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
       );
     }
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    return Wrap(
       children: armorPiece.slots.map((slot) {
         final Color slotColor = _slotColor(slot);
         return Padding(
@@ -638,8 +627,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
       );
     }
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    return Wrap(
       children: armorPiece.resistances.entries.map((entry) {
         final resistanceType = entry.key;
         final resistanceValue = entry.value;
@@ -647,6 +635,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
         return Container(
           margin: const EdgeInsets.only(right: AppSpacing.sm),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 resistanceValue.toString(),
@@ -906,19 +895,21 @@ class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFC5A35C)
-                      .withValues(alpha: 0.8), // Dorado/Beige solicitado
-                  borderRadius: BorderRadius.circular(AppRadius.lg),
-                ),
-                child: Text(
-                  skill.name,
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold),
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFC5A35C)
+                        .withValues(alpha: 0.8), // Dorado/Beige solicitado
+                    borderRadius: BorderRadius.circular(AppRadius.lg),
+                  ),
+                  child: Text(
+                    skill.name,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ],

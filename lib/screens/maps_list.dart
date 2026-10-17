@@ -175,22 +175,28 @@ class _MapsListState extends State<MapsList> {
                 padding: const EdgeInsets.all(AppSpacing.lg),
                 child: Row(
                   children: [
-                    // Zonas chip
-                    _buildInfoBadge(
-                      context,
-                      Icons.grid_on,
-                      '${l10n.zone}: $zoneCount',
-                      colorScheme.primary,
+                    Expanded(
+                      child: Wrap(
+                        spacing: AppSpacing.md,
+                        runSpacing: AppSpacing.sm,
+                        children: [
+                          // Zonas chip
+                          _buildInfoBadge(
+                            context,
+                            Icons.grid_on,
+                            '${l10n.zone}: $zoneCount',
+                            colorScheme.primary,
+                          ),
+                          // Campamentos chip
+                          _buildInfoBadge(
+                            context,
+                            Icons.campaign_outlined,
+                            '${l10n.camps}: $campCount',
+                            colorScheme.secondary,
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(width: 12),
-                    // Campamentos chip
-                    _buildInfoBadge(
-                      context,
-                      Icons.campaign_outlined,
-                      '${l10n.camps}: $campCount',
-                      colorScheme.secondary,
-                    ),
-                    const Spacer(),
                     Icon(
                       Icons.arrow_forward_ios,
                       color: colorScheme.onSurfaceVariant,

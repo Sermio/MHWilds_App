@@ -20,6 +20,7 @@ import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
+import 'package:mhwilds_app/components/label_value_row.dart';
 
 part 'weapons_list/display_utils.dart';
 part 'weapons_list/weapon_card.dart';
@@ -709,16 +710,15 @@ class _WeaponsListState extends State<WeaponsList> {
     final List<Widget> statRows = [];
 
     // Sección de daño físico
-    statRows.add(Row(
-      children: [
-        Text(
+    statRows.add(LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.physicalDamage}:',
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
               fontWeight: FontWeight.w600,
               color: colorScheme.onSurface.withValues(alpha: 0.8)),
         ),
-        const Spacer(),
-        Row(
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               '${weapon.damage.display}',
@@ -732,22 +732,19 @@ class _WeaponsListState extends State<WeaponsList> {
               color: Colors.red[400],
             ),
           ],
-        ),
-      ],
-    ));
+        )));
 
     // Afinidad
     statRows.add(const SizedBox(height: 12));
-    statRows.add(Row(
-      children: [
-        Text(
+    statRows.add(LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.affinity}:',
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
               fontWeight: FontWeight.w600,
               color: colorScheme.onSurface.withValues(alpha: 0.8)),
         ),
-        const Spacer(),
-        Row(
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               '${weapon.affinity > 0 ? '+' : ''}${weapon.affinity}%',
@@ -761,9 +758,7 @@ class _WeaponsListState extends State<WeaponsList> {
               color: colorScheme.primary,
             ),
           ],
-        ),
-      ],
-    ));
+        )));
 
     // Sección de daño elemental
     if (weapon.specials != null && _hasElementalDamage(weapon)) {
@@ -782,16 +777,15 @@ class _WeaponsListState extends State<WeaponsList> {
     // Sección de defense bonus
     if (weapon.defenseBonus > 0) {
       statRows.add(const SizedBox(height: 12));
-      statRows.add(Row(
-        children: [
-          Text(
+      statRows.add(LabelValueRow(
+          label: Text(
             '${AppLocalizations.of(context)!.defense}:',
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w600,
                 color: colorScheme.onSurface.withValues(alpha: 0.8)),
           ),
-          const Spacer(),
-          Row(
+          value: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 '+${weapon.defenseBonus}',
@@ -805,24 +799,21 @@ class _WeaponsListState extends State<WeaponsList> {
                 color: colorScheme.primary,
               ),
             ],
-          ),
-        ],
-      ));
+          )));
     }
 
     // Elderseal
     if (weapon.elderseal != null) {
       statRows.add(const SizedBox(height: 12));
-      statRows.add(Row(
-        children: [
-          Text(
+      statRows.add(LabelValueRow(
+          label: Text(
             'Elderseal:',
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w600,
                 color: colorScheme.onSurface.withValues(alpha: 0.8)),
           ),
-          const Spacer(),
-          Row(
+          value: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 weapon.elderseal![0].toUpperCase() +
@@ -837,9 +828,7 @@ class _WeaponsListState extends State<WeaponsList> {
                 color: colorScheme.primary,
               ),
             ],
-          ),
-        ],
-      ));
+          )));
     }
 
     return Column(
@@ -879,11 +868,13 @@ class _WeaponsListState extends State<WeaponsList> {
               color: colorScheme.primary,
             ),
             const SizedBox(width: 6),
-            Text(
-              '${AppLocalizations.of(context)!.skills}:',
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
+            Flexible(
+              child: Text(
+                '${AppLocalizations.of(context)!.skills}:',
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface.withValues(alpha: 0.8)),
+              ),
             ),
           ],
         ),
@@ -919,21 +910,24 @@ class _WeaponsListState extends State<WeaponsList> {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
-                        decoration: BoxDecoration(
-                          color: colorScheme.primary,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          '${skill.skill.name} +${skill.level}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(
-                                  color: colorScheme.onPrimary,
-                                  fontWeight: FontWeight.bold),
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xs),
+                          decoration: BoxDecoration(
+                            color: colorScheme.primary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            '${skill.skill.name} +${skill.level}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(
+                                    color: colorScheme.onPrimary,
+                                    fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ],

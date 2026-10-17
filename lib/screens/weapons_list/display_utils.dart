@@ -34,9 +34,7 @@ class WeaponDisplayUtils {
 
         if (damageValue > 0) {
           final colorScheme = Theme.of(context).colorScheme;
-          return Row(
-            children: [
-              Text(
+          return LabelValueRow(label: Text(
                 special['kind'] == 'element'
                     ? '${AppLocalizations.of(context)!.element}:'
                     : '${AppLocalizations.of(context)!.statusEffect}:',
@@ -45,9 +43,7 @@ class WeaponDisplayUtils {
                   fontWeight: FontWeight.w600,
                   color: colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
-              ),
-              const Spacer(),
-              Row(
+              ), value: Row(mainAxisSize: MainAxisSize.min, 
                 children: [
                   Text(
                     '$damageValue',
@@ -73,9 +69,7 @@ class WeaponDisplayUtils {
                     ),
                   ),
                 ],
-              ),
-            ],
-          );
+              ));
         }
       } else if (phialSpecial.isNotEmpty) {
         // Mostrar daño de phial si no hay specials elementales/status
@@ -88,14 +82,10 @@ class WeaponDisplayUtils {
 
         if (phialDamageValue > 0) {
           final colorScheme = Theme.of(context).colorScheme;
-          return Row(
-            children: [
-              Text(
+          return LabelValueRow(label: Text(
                 '${AppLocalizations.of(context)!.phial}:',
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
-              ),
-              const Spacer(),
-              Row(
+              ), value: Row(mainAxisSize: MainAxisSize.min, 
                 children: [
                   Text(
                     '$phialDamageValue',
@@ -117,9 +107,7 @@ class WeaponDisplayUtils {
                     ),
                   ),
                 ],
-              ),
-            ],
-          );
+              ));
         }
       }
     }
@@ -163,18 +151,15 @@ class WeaponDisplayUtils {
     try {
       if (weapon.coatings != null && weapon.coatings!.isNotEmpty) {
         final colorScheme = Theme.of(context).colorScheme;
-        return Row(
-          children: [
-            Text(
+        return LabelValueRow(label: Text(
               '${AppLocalizations.of(context)!.coatings}:',
               style: TextStyle(
                 fontSize: isDetailView ? 16 : 12,
                 fontWeight: FontWeight.w600,
                 color: colorScheme.onSurface.withValues(alpha: 0.8),
               ),
-            ),
-            const Spacer(),
-            Row(
+            ), value: Wrap(
+              runSpacing: AppSpacing.xs,
               children: weapon.coatings!.map((coating) {
                 return Container(
                   margin: const EdgeInsets.only(left: AppSpacing.xs),
@@ -215,9 +200,7 @@ class WeaponDisplayUtils {
                   ),
                 );
               }).toList(),
-            ),
-          ],
-        );
+            ));
       }
     } catch (_) {}
     return const SizedBox.shrink();
@@ -229,18 +212,14 @@ class WeaponDisplayUtils {
 
     final phialKind = weapon.phial!.kind;
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
+    return LabelValueRow(label: Text(
           '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
-        ),
-        const Spacer(),
-        Row(
+        ), value: Row(mainAxisSize: MainAxisSize.min, 
           children: [
             Text(
               phialKind[0].toUpperCase() + phialKind.substring(1),
@@ -278,9 +257,7 @@ class WeaponDisplayUtils {
               ),
             ],
           ],
-        ),
-      ],
-    );
+        ));
   }
 
   static Widget buildGunlanceDamageInfo(BuildContext context, Weapon weapon,
@@ -290,18 +267,14 @@ class WeaponDisplayUtils {
     }
 
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
+    return LabelValueRow(label: Text(
           '${AppLocalizations.of(context)!.shell}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
-        ),
-        const Spacer(),
-        Row(
+        ), value: Row(mainAxisSize: MainAxisSize.min, 
           children: [
             Text(
               '${weapon.shell![0].toUpperCase() + weapon.shell!.substring(1)} Lv${weapon.shellLevel}',
@@ -315,9 +288,7 @@ class WeaponDisplayUtils {
             Icon(Icons.local_fire_department,
                 size: 16, color: Colors.red[600]!),
           ],
-        ),
-      ],
-    );
+        ));
   }
 
   static Widget buildSwitchAxeDamageInfo(BuildContext context, Weapon weapon,
@@ -326,18 +297,14 @@ class WeaponDisplayUtils {
 
     final phialKind = weapon.phial!.kind;
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
+    return LabelValueRow(label: Text(
           '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
-        ),
-        const Spacer(),
-        Row(
+        ), value: Row(mainAxisSize: MainAxisSize.min, 
           children: [
             Text(
               phialKind[0].toUpperCase() + phialKind.substring(1),
@@ -375,9 +342,7 @@ class WeaponDisplayUtils {
               ),
             ],
           ],
-        ),
-      ],
-    );
+        ));
   }
 
   static Widget buildHuntingHornDamageInfo(BuildContext context, Weapon weapon,
@@ -386,18 +351,14 @@ class WeaponDisplayUtils {
 
     final colorScheme = Theme.of(context).colorScheme;
     if (weapon.melody != null) {
-      sections.add(Row(
-        children: [
-          Text(
+      sections.add(LabelValueRow(label: Text(
             '${AppLocalizations.of(context)!.melody}:',
             style: TextStyle(
               fontSize: isDetailView ? 16 : 12,
               fontWeight: FontWeight.w600,
               color: colorScheme.onSurface.withValues(alpha: 0.8),
             ),
-          ),
-          const Spacer(),
-          Row(
+          ), value: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
@@ -411,24 +372,18 @@ class WeaponDisplayUtils {
               const SizedBox(width: 4),
               Icon(Icons.music_note, size: 16, color: Colors.teal[600]),
             ],
-          ),
-        ],
-      ));
+          )));
     }
 
     if (weapon.echoBubble != null) {
-      sections.add(Row(
-        children: [
-          Text(
+      sections.add(Row(children: [Flexible(child: Text(
             '${AppLocalizations.of(context)!.echoBubble}:',
             style: TextStyle(
               fontSize: isDetailView ? 16 : 12,
               fontWeight: FontWeight.w600,
               color: colorScheme.onSurface.withValues(alpha: 0.8),
             ),
-          ),
-          const SizedBox(width: 8),
-          Flexible(
+          )), const SizedBox(width: 8), Flexible(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -448,24 +403,18 @@ class WeaponDisplayUtils {
                 Icon(Icons.bubble_chart, size: 16, color: Colors.indigo[600]),
               ],
             ),
-          ),
-        ],
-      ));
+          )]));
     }
 
     if (weapon.echoWave != null) {
-      sections.add(Row(
-        children: [
-          Text(
+      sections.add(Row(children: [Flexible(child: Text(
             '${AppLocalizations.of(context)!.echoWave}:',
             style: TextStyle(
               fontSize: isDetailView ? 16 : 12,
               fontWeight: FontWeight.w600,
               color: colorScheme.onSurface.withValues(alpha: 0.8),
             ),
-          ),
-          const SizedBox(width: 8),
-          Flexible(
+          )), const SizedBox(width: 8), Flexible(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -485,9 +434,7 @@ class WeaponDisplayUtils {
                 Icon(Icons.waves, size: 16, color: Colors.orange[600]),
               ],
             ),
-          ),
-        ],
-      ));
+          )]));
     }
 
     if (sections.isEmpty) {
@@ -504,18 +451,15 @@ class WeaponDisplayUtils {
     }
 
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
+    return LabelValueRow(label: Text(
           '${AppLocalizations.of(context)!.ammo}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
-        ),
-        const Spacer(),
-        Row(
+        ), value: Wrap(
+          runSpacing: AppSpacing.xs,
           children: weapon.ammo!.take(3).map((ammo) {
             return Container(
               margin: const EdgeInsets.only(left: AppSpacing.xs),
@@ -566,9 +510,7 @@ class WeaponDisplayUtils {
               ),
             );
           }).toList(),
-        ),
-      ],
-    );
+        ));
   }
 
   static Widget buildInsectGlaiveDamageInfo(BuildContext context, Weapon weapon,
@@ -578,18 +520,14 @@ class WeaponDisplayUtils {
     }
 
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
+    return LabelValueRow(label: Text(
           '${AppLocalizations.of(context)!.kinsect}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
-        ),
-        const Spacer(),
-        Row(
+        ), value: Row(mainAxisSize: MainAxisSize.min, 
           children: [
             Text(
               'Lv${weapon.kinsectLevel}',
@@ -602,9 +540,7 @@ class WeaponDisplayUtils {
             const SizedBox(width: 4),
             Icon(Icons.flutter_dash, size: 16, color: Colors.lime[600]),
           ],
-        ),
-      ],
-    );
+        ));
   }
 
   // Métodos auxiliares estáticos

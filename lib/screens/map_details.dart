@@ -293,18 +293,19 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
           width: 1,
         ),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            '$label: ',
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600, color: color.withValues(alpha: 0.8)),
-          ),
-          Text(
-            value,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w700, color: color),
-          ),
-        ],
+      child: Text.rich(
+        TextSpan(
+          children: [
+            TextSpan(
+              text: '$label: ',
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600, color: color.withValues(alpha: 0.8)),
+            ),
+            TextSpan(
+              text: value,
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w700, color: color),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -323,7 +324,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
       ),
       body: isLoadingImages
           ? Container(
-              height: 200,
+              constraints: const BoxConstraints(minHeight: 200),
               margin: const EdgeInsets.all(20),
               child: Center(
                 child: Column(
@@ -344,7 +345,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
             )
           : imageFiles.isEmpty
               ? Container(
-                  height: 200,
+                  constraints: const BoxConstraints(minHeight: 200),
                   margin: const EdgeInsets.all(20),
                   child: Center(
                     child: Column(

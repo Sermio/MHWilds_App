@@ -9,6 +9,7 @@ import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
+import 'package:mhwilds_app/components/label_value_row.dart';
 
 class MonsterDetails extends StatefulWidget {
   final int monsterId;
@@ -147,20 +148,14 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Icon(
+                  Row(children: [Icon(
                         Icons.warning_amber,
                         size: 20,
                         color: Colors.orange[700],
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
+                      ), const SizedBox(width: 8), Flexible(child: Text(
                         AppLocalizations.of(context)!.monsterVariants,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: Colors.orange[700]),
-                      ),
-                    ],
-                  ),
+                      ))]),
                   const SizedBox(height: 12),
                   Wrap(
                     spacing: 8,
@@ -306,9 +301,8 @@ class _MonsterDetailsState extends State<MonsterDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header con título y ElementsInfo
-          Row(
-            children: [
-              Container(
+          LabelValueRow(
+            label: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
                 decoration: BoxDecoration(
@@ -320,10 +314,8 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.primary),
                 ),
               ),
-              const Spacer(),
-              // ElementsInfo a la derecha
-              const ElementsInfo(),
-            ],
+            // ElementsInfo a la derecha
+            value: const ElementsInfo(),
           ),
           const SizedBox(height: 16),
           Row(
@@ -766,7 +758,9 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                 // Selector de rango para recompensas
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: ToggleButtons(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: ToggleButtons(
                     fillColor: colorScheme.primary,
                     borderRadius: BorderRadius.circular(AppRadius.sm),
                     disabledColor: colorScheme.onSurface.withValues(alpha: 0.5),
@@ -814,6 +808,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                         ),
                       ),
                     ],
+                  ),
                   ),
                 ),
                 const SizedBox(height: 20),

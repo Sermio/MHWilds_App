@@ -312,20 +312,14 @@ class _ItemListState extends State<ItemList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Icon(
+        Row(children: [Icon(
               Icons.construction,
               size: 16,
               color: colorScheme.primary,
-            ),
-            const SizedBox(width: 6),
-            Text(
+            ), const SizedBox(width: 6), Flexible(child: Text(
               AppLocalizations.of(context)!.craftingRecipe,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
-            ),
-          ],
-        ),
+            ))]),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,

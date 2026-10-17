@@ -115,20 +115,14 @@ class ItemDetails extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Icon(
+                    Row(children: [Icon(
                           Icons.construction,
                           size: 20,
                           color: colorScheme.primary,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
+                        ), const SizedBox(width: 8), Flexible(child: Text(
                           AppLocalizations.of(context)!.requiredMaterials,
                           style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
-                        ),
-                      ],
-                    ),
+                        ))]),
                     const SizedBox(height: 16),
                     Wrap(
                       spacing: 8,

@@ -530,15 +530,11 @@ class _MonstersListState extends State<MonstersList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              AppLocalizations.of(context)!.locationsLabel,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
-            ),
-          ],
+        Text(
+          AppLocalizations.of(context)!.locationsLabel,
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSurface.withValues(alpha: 0.8)),
         ),
         const SizedBox(height: 8),
         Wrap(

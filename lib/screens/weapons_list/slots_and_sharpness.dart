@@ -3,18 +3,14 @@ part of '../weapons_list.dart';
 extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
   Widget _buildWeaponSlots(Weapon weapon) {
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
-          '${AppLocalizations.of(context)!.slots}:',
-          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withValues(alpha: 0.8)),
-        ),
-        const SizedBox(width: 8),
-        const Spacer(),
-        _buildSlotsWidget(weapon.slots),
-      ],
+    return LabelValueRow(
+      label: Text(
+        '${AppLocalizations.of(context)!.slots}:',
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            fontWeight: FontWeight.w600,
+            color: colorScheme.onSurface.withValues(alpha: 0.8)),
+      ),
+      value: _buildSlotsWidget(weapon.slots),
     );
   }
 
@@ -104,15 +100,11 @@ extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              AppLocalizations.of(context)!.sharpness,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
-            ),
-          ],
+        Text(
+          AppLocalizations.of(context)!.sharpness,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSurface.withValues(alpha: 0.8)),
         ),
         const SizedBox(height: 8),
         SharpnessBar(

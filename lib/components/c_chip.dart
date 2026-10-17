@@ -29,12 +29,14 @@ class Cchip<T> extends StatelessWidget {
         label: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              itemName.isNotEmpty ? itemName : "Unknown",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall!
-                  .copyWith(color: Colors.black),
+            Flexible(
+              child: Text(
+                itemName.isNotEmpty ? itemName : "Unknown",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall!
+                    .copyWith(color: Colors.black),
+              ),
             ),
             if (optionalWidget != null) ...[
               const SizedBox(width: 6),

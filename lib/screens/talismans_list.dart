@@ -319,22 +319,21 @@ class _AmuletListState extends State<AmuletList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Icon(
-              Icons.flash_on,
-              size: 16,
-              color: colorScheme.primary,
-            ),
-            const SizedBox(width: 6),
-            Text(
-              '${AppLocalizations.of(context)!.skills}:',
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withValues(alpha: 0.8)),
-            ),
-          ],
-        ),
+        Row(children: [
+          Icon(
+            Icons.flash_on,
+            size: 16,
+            color: colorScheme.primary,
+          ),
+          const SizedBox(width: 6),
+          Flexible(
+              child: Text(
+            '${AppLocalizations.of(context)!.skills}:',
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                fontWeight: FontWeight.w600,
+                color: colorScheme.onSurface.withValues(alpha: 0.8)),
+          ))
+        ]),
         const SizedBox(height: 8),
         ...rank.skills.map((skill) => Container(
               margin: const EdgeInsets.only(bottom: AppSpacing.sm),
@@ -348,47 +347,41 @@ class _AmuletListState extends State<AmuletList> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      // Imagen de la habilidad
-                      Container(
-                        width: 24,
-                        height: 24,
-                        margin: const EdgeInsets.only(right: AppSpacing.sm),
-                        child: SkillSpriteIcon(
-                          iconId:
-                              _skillIconForId(skillsProvider, skill.skill.id)
-                                  ?.id,
-                          iconKind:
-                              _skillIconForId(skillsProvider, skill.skill.id)
-                                  ?.kind,
-                          size: 24,
-                          fallback: Icon(
-                            Icons.auto_awesome,
-                            size: 14,
-                            color: colorScheme.primary,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
-                        decoration: BoxDecoration(
+                  Row(children: [
+                    Container(
+                      width: 24,
+                      height: 24,
+                      margin: const EdgeInsets.only(right: AppSpacing.sm),
+                      child: SkillSpriteIcon(
+                        iconId:
+                            _skillIconForId(skillsProvider, skill.skill.id)?.id,
+                        iconKind:
+                            _skillIconForId(skillsProvider, skill.skill.id)
+                                ?.kind,
+                        size: 24,
+                        fallback: Icon(
+                          Icons.auto_awesome,
+                          size: 14,
                           color: colorScheme.primary,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          '${skill.skill.name} +${skill.level}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(
-                                  color: colorScheme.onPrimary,
-                                  fontWeight: FontWeight.bold),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Flexible(
+                        child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        '${skill.skill.name} +${skill.level}',
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: colorScheme.onPrimary,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ))
+                  ]),
                   if (skill.description.isNotEmpty) ...[
                     const SizedBox(height: 6),
                     Text(

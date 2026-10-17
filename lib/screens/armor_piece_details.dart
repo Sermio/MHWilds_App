@@ -13,6 +13,7 @@ import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
+import 'package:mhwilds_app/components/label_value_row.dart';
 
 class ArmorDetails extends StatefulWidget {
   final armor_models.ArmorPiece armor;
@@ -151,24 +152,18 @@ class _ArmorDetailsState extends State<ArmorDetails> {
           // Título de la sección (sin fondo dorado; alineado con otras pantallas)
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Icon(
+            child: Row(children: [Icon(
                   Icons.analytics,
                   color: colorScheme.primary,
                   size: 24,
-                ),
-                const SizedBox(width: 12),
-                Text(
+                ), const SizedBox(width: 12), Flexible(child: Text(
                   AppLocalizations.of(context)!.statistics,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: colorScheme.onSurface,
                   ),
-                ),
-              ],
-            ),
+                ))]),
           ),
 
           // Contenido de estadísticas
@@ -223,24 +218,16 @@ class _ArmorDetailsState extends State<ArmorDetails> {
   Widget _buildStatRow(String title, String value,
       {Widget? trailing, VoidCallback? onTap}) {
     final colorScheme = Theme.of(context).colorScheme;
-    final Widget content = Row(
-      children: [
-        Text(
+    final Widget content = LabelValueRow(label: Text(
           "$title:",
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: onTap != null
                 ? colorScheme.primary
                 : colorScheme.onSurface.withValues(alpha: 0.8)),
-        ),
-        const Spacer(),
-        if (trailing != null)
-          trailing
-        else
-          Text(
-            value,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
-          ),
-      ],
-    );
+        ), value: trailing ??
+            Text(
+              value,
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
+            ));
 
     if (onTap != null) {
       return GestureDetector(
@@ -273,24 +260,18 @@ class _ArmorDetailsState extends State<ArmorDetails> {
           // Título de la sección (sin fondo dorado; alineado con otras pantallas)
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Icon(
+            child: Row(children: [Icon(
                   Icons.flash_on,
                   color: colorScheme.primary,
                   size: 24,
-                ),
-                const SizedBox(width: 12),
-                Text(
+                ), const SizedBox(width: 12), Flexible(child: Text(
                   AppLocalizations.of(context)!.skills,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: colorScheme.onSurface,
                   ),
-                ),
-              ],
-            ),
+                ))]),
           ),
 
           // Contenido de habilidades
@@ -511,24 +492,18 @@ class _ArmorDetailsState extends State<ArmorDetails> {
           // Título de la sección (sin fondo dorado; alineado con otras pantallas)
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Icon(
+            child: Row(children: [Icon(
                   Icons.build,
                   color: colorScheme.primary,
                   size: 24,
-                ),
-                const SizedBox(width: 12),
-                Text(
+                ), const SizedBox(width: 12), Flexible(child: Text(
                   AppLocalizations.of(context)!.craftingMaterials,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: colorScheme.onSurface,
                   ),
-                ),
-              ],
-            ),
+                ))]),
           ),
 
           // Contenido de crafting
@@ -712,16 +687,12 @@ class ArmorResistancesWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              '${AppLocalizations.of(context)!.resistances}:',
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.primary),
-            ),
-          ],
+        Text(
+          '${AppLocalizations.of(context)!.resistances}:',
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.primary),
         ),
         const SizedBox(height: 8),
-        Row(
+        Wrap(
           children: [
             ...armor.resistances.entries.map(
               (entry) {
@@ -731,6 +702,7 @@ class ArmorResistancesWidget extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(resistanceValue.toString()),
                       const SizedBox(width: 5),
