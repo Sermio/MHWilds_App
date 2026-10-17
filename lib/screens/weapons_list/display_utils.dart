@@ -1,4 +1,11 @@
-part of '../weapons_list.dart';
+import 'package:flutter/material.dart';
+import 'package:mhwilds_app/models/weapon.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/components/asset_thumb.dart';
+import 'package:mhwilds_app/components/label_value_row.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
+import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 // Clase estática para métodos auxiliares reutilizables
 class WeaponDisplayUtils {

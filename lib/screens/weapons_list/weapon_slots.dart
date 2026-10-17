@@ -1,7 +1,19 @@
-part of '../weapons_list.dart';
+import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
+import 'package:mhwilds_app/components/label_value_row.dart';
+import 'package:mhwilds_app/components/sharpness_bar.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/models/weapon.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
-extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
-  Widget _buildWeaponSlots(Weapon weapon) {
+/// Fila "Slots: ..." de la tarjeta de arma.
+class WeaponSlotsRow extends StatelessWidget {
+  final List<int> slots;
+
+  const WeaponSlotsRow({super.key, required this.slots});
+
+  @override
+  Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return LabelValueRow(
       label: Text(
@@ -10,11 +22,34 @@ extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8)),
       ),
-      value: _buildSlotsWidget(weapon.slots),
+      value: WeaponSlotsIcons(slots: slots),
     );
   }
+}
 
-  Widget _buildSlotsWidget(List<int> slots) {
+/// Iconos de las ranuras de decoración (o texto "sin ranuras").
+class WeaponSlotsIcons extends StatelessWidget {
+  final List<int> slots;
+
+  const WeaponSlotsIcons({super.key, required this.slots});
+
+  static Color slotColor(int slot) {
+    switch (slot) {
+      case 1:
+        return Colors.green;
+      case 2:
+        return Colors.blue;
+      case 3:
+        return Colors.purple;
+      case 4:
+        return Colors.orange;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     if (slots.isEmpty) {
       return Container(
@@ -39,7 +74,7 @@ extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: slots.map((slot) {
-        final Color slotColor = _slotColor(slot);
+        final Color color = slotColor(slot);
         return Padding(
           padding: const EdgeInsets.only(left: 6),
           child: DecorationSpriteIcon(
@@ -47,9 +82,9 @@ extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
             size: 18,
             fallback: Container(
               decoration: BoxDecoration(
-                color: slotColor.withValues(alpha: 0.2),
+                color: color.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: slotColor, width: 1),
+                border: Border.all(color: color, width: 1),
               ),
               child: Center(
                 child: Text(
@@ -57,7 +92,7 @@ extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
                   style: TextStyle(
                     fontSize: 9,
                     fontWeight: FontWeight.bold,
-                    color: slotColor,
+                    color: color,
                   ),
                 ),
               ),
@@ -67,35 +102,16 @@ extension _WeaponsListSlotsAndSharpness on _WeaponsListState {
       }).toList(),
     );
   }
+}
 
-  Color _slotColor(int slot) {
-    switch (slot) {
-      case 1:
-        return Colors.green;
-      case 2:
-        return Colors.blue;
-      case 3:
-        return Colors.purple;
-      case 4:
-        return Colors.orange;
-      default:
-        return Colors.grey;
-    }
-  }
+/// Sección "Afilado" con la barra de nitidez.
+class WeaponSharpnessSection extends StatelessWidget {
+  final Weapon weapon;
 
-  // Método auxiliar para verificar si el weapon tiene datos de sharpness
-  bool _hasSharpnessData(Weapon weapon) {
-    return weapon.sharpness.red > 0 ||
-        weapon.sharpness.orange > 0 ||
-        weapon.sharpness.yellow > 0 ||
-        weapon.sharpness.green > 0 ||
-        weapon.sharpness.blue > 0 ||
-        weapon.sharpness.white > 0 ||
-        weapon.sharpness.purple > 0;
-  }
+  const WeaponSharpnessSection({super.key, required this.weapon});
 
-  // Método para construir la sección de sharpness
-  Widget _buildSharpnessSection(Weapon weapon) {
+  @override
+  Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
