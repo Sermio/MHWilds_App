@@ -41,7 +41,8 @@ class WeaponDisplayUtils {
 
         if (damageValue > 0) {
           final colorScheme = Theme.of(context).colorScheme;
-          return LabelValueRow(label: Text(
+          return LabelValueRow(
+              label: Text(
                 special['kind'] == 'element'
                     ? '${AppLocalizations.of(context)!.element}:'
                     : '${AppLocalizations.of(context)!.statusEffect}:',
@@ -50,7 +51,9 @@ class WeaponDisplayUtils {
                   fontWeight: FontWeight.w600,
                   color: colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
-              ), value: Row(mainAxisSize: MainAxisSize.min, 
+              ),
+              value: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     '$damageValue',
@@ -65,14 +68,16 @@ class WeaponDisplayUtils {
                     width: isDetailView ? 18 : 16,
                     height: isDetailView ? 18 : 16,
                     child: AssetThumb(
-                      'assets/imgs/elements/${elementOrStatus.toLowerCase()}.webp',
-                      errorBuilder: (context, error, stackTrace) {
-                        return Icon(
-                          WeaponUtils.getElementIcon(elementOrStatus),
-                          size: isDetailView ? 18 : 16,
-                          color: GameColors.of(context).element(elementOrStatus),
-                        );
-                      }, semanticLabel: WeaponUtils.elementLabel(elementOrStatus)),
+                        'assets/imgs/elements/${elementOrStatus.toLowerCase()}.webp',
+                        errorBuilder: (context, error, stackTrace) {
+                      return Icon(
+                        WeaponUtils.getElementIcon(elementOrStatus),
+                        size: isDetailView ? 18 : 16,
+                        color: GameColors.of(context).element(elementOrStatus),
+                      );
+                    },
+                        semanticLabel:
+                            WeaponUtils.elementLabel(elementOrStatus)),
                   ),
                 ],
               ));
@@ -88,28 +93,35 @@ class WeaponDisplayUtils {
 
         if (phialDamageValue > 0) {
           final colorScheme = Theme.of(context).colorScheme;
-          return LabelValueRow(label: Text(
+          return LabelValueRow(
+              label: Text(
                 '${AppLocalizations.of(context)!.phial}:',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
-              ), value: Row(mainAxisSize: MainAxisSize.min, 
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface.withValues(alpha: 0.8)),
+              ),
+              value: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     '$phialDamageValue',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: GameColors.of(context).element(phialKind)),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: GameColors.of(context).element(phialKind)),
                   ),
                   const SizedBox(width: 6),
                   SizedBox(
                     width: 18,
                     height: 18,
                     child: AssetThumb(
-                      'assets/imgs/elements/${phialKind.toLowerCase()}.webp',
-                      errorBuilder: (context, error, stackTrace) {
-                        return Icon(
-                          WeaponUtils.getElementIcon(phialKind),
-                          size: 18,
-                          color: GameColors.of(context).element(phialKind),
-                        );
-                      }, semanticLabel: WeaponUtils.elementLabel(phialKind)),
+                        'assets/imgs/elements/${phialKind.toLowerCase()}.webp',
+                        errorBuilder: (context, error, stackTrace) {
+                      return Icon(
+                        WeaponUtils.getElementIcon(phialKind),
+                        size: 18,
+                        color: GameColors.of(context).element(phialKind),
+                      );
+                    }, semanticLabel: WeaponUtils.elementLabel(phialKind)),
                   ),
                 ],
               ));
@@ -156,14 +168,16 @@ class WeaponDisplayUtils {
     try {
       if (weapon.coatings != null && weapon.coatings!.isNotEmpty) {
         final colorScheme = Theme.of(context).colorScheme;
-        return LabelValueRow(label: Text(
+        return LabelValueRow(
+            label: Text(
               '${AppLocalizations.of(context)!.coatings}:',
               style: TextStyle(
                 fontSize: isDetailView ? 16 : 12,
                 fontWeight: FontWeight.w600,
                 color: colorScheme.onSurface.withValues(alpha: 0.8),
               ),
-            ), value: Wrap(
+            ),
+            value: Wrap(
               runSpacing: AppSpacing.xs,
               children: weapon.coatings!.map((coating) {
                 return Container(
@@ -189,16 +203,18 @@ class WeaponDisplayUtils {
                       if (_hasElementIcon(coating)) ...[
                         const SizedBox(width: 4),
                         AssetThumb(
-                          'assets/imgs/elements/${_getElementAssetName(coating)}.webp',
-                          width: 12,
-                          height: 12,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Icon(
-                              WeaponUtils.getElementIcon(coating),
-                              size: 12,
-                              color: Colors.white,
-                            );
-                          }, semanticLabel: WeaponUtils.elementLabel(_getElementAssetName(coating))),
+                            'assets/imgs/elements/${_getElementAssetName(coating)}.webp',
+                            width: 12,
+                            height: 12,
+                            errorBuilder: (context, error, stackTrace) {
+                          return Icon(
+                            WeaponUtils.getElementIcon(coating),
+                            size: 12,
+                            color: Colors.white,
+                          );
+                        },
+                            semanticLabel: WeaponUtils.elementLabel(
+                                _getElementAssetName(coating))),
                       ],
                     ],
                   ),
@@ -216,14 +232,17 @@ class WeaponDisplayUtils {
 
     final phialKind = weapon.phial!.kind;
     final colorScheme = Theme.of(context).colorScheme;
-    return LabelValueRow(label: Text(
+    return LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
-        ), value: Row(mainAxisSize: MainAxisSize.min, 
+        ),
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               phialKind[0].toUpperCase() + phialKind.substring(1),
@@ -238,18 +257,19 @@ class WeaponDisplayUtils {
             const SizedBox(width: 4),
             if (_hasElementIcon(phialKind)) ...[
               AssetThumb(
-                'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
-                width: 16,
-                height: 16,
-                errorBuilder: (context, error, stackTrace) {
-                  return Icon(
-                    WeaponUtils.getElementIcon(phialKind),
-                    size: 16,
-                    color: phialKind == 'impact'
-                        ? Colors.blue[600]!
-                        : Colors.orange[600]!,
-                  );
-                }, semanticLabel: WeaponUtils.elementLabel(_getElementAssetName(phialKind))),
+                  'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
+                  width: 16,
+                  height: 16, errorBuilder: (context, error, stackTrace) {
+                return Icon(
+                  WeaponUtils.getElementIcon(phialKind),
+                  size: 16,
+                  color: phialKind == 'impact'
+                      ? Colors.blue[600]!
+                      : Colors.orange[600]!,
+                );
+              },
+                  semanticLabel: WeaponUtils.elementLabel(
+                      _getElementAssetName(phialKind))),
             ] else ...[
               Icon(
                 Icons.electric_bolt,
@@ -270,14 +290,17 @@ class WeaponDisplayUtils {
     }
 
     final colorScheme = Theme.of(context).colorScheme;
-    return LabelValueRow(label: Text(
+    return LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.shell}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
-        ), value: Row(mainAxisSize: MainAxisSize.min, 
+        ),
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               '${weapon.shell![0].toUpperCase() + weapon.shell!.substring(1)} Lv${weapon.shellLevel}',
@@ -300,14 +323,17 @@ class WeaponDisplayUtils {
 
     final phialKind = weapon.phial!.kind;
     final colorScheme = Theme.of(context).colorScheme;
-    return LabelValueRow(label: Text(
+    return LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
-        ), value: Row(mainAxisSize: MainAxisSize.min, 
+        ),
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               phialKind[0].toUpperCase() + phialKind.substring(1),
@@ -322,18 +348,19 @@ class WeaponDisplayUtils {
             const SizedBox(width: 4),
             if (_hasElementIcon(phialKind)) ...[
               AssetThumb(
-                'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
-                width: 16,
-                height: 16,
-                errorBuilder: (context, error, stackTrace) {
-                  return Icon(
-                    WeaponUtils.getElementIcon(phialKind),
-                    size: 16,
-                    color: phialKind == 'impact'
-                        ? Colors.blue[600]!
-                        : Colors.orange[600]!,
-                  );
-                }, semanticLabel: WeaponUtils.elementLabel(_getElementAssetName(phialKind))),
+                  'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
+                  width: 16,
+                  height: 16, errorBuilder: (context, error, stackTrace) {
+                return Icon(
+                  WeaponUtils.getElementIcon(phialKind),
+                  size: 16,
+                  color: phialKind == 'impact'
+                      ? Colors.blue[600]!
+                      : Colors.orange[600]!,
+                );
+              },
+                  semanticLabel: WeaponUtils.elementLabel(
+                      _getElementAssetName(phialKind))),
             ] else ...[
               Icon(
                 Icons.electric_bolt,
@@ -349,101 +376,70 @@ class WeaponDisplayUtils {
 
   static Widget buildHuntingHornDamageInfo(BuildContext context, Weapon weapon,
       {bool isDetailView = false}) {
-    final List<Widget> sections = [];
-
     final colorScheme = Theme.of(context).colorScheme;
-    if (weapon.melody != null) {
-      sections.add(LabelValueRow(label: Text(
-            '${AppLocalizations.of(context)!.melody}:',
-            style: TextStyle(
-              fontSize: isDetailView ? 16 : 12,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withValues(alpha: 0.8),
-            ),
-          ), value: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '${weapon.melody!.songs.length} ${AppLocalizations.of(context)!.songs}',
+    final l10n = AppLocalizations.of(context)!;
+    final fontSize = isDetailView ? 16.0 : 12.0;
+
+    Widget row(String label, String text, Color textColor, IconData icon,
+        Color iconColor) {
+      return LabelValueRow(
+        label: Text(
+          '$label:',
+          style: TextStyle(
+            fontSize: fontSize,
+            fontWeight: FontWeight.w600,
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
+          ),
+        ),
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: Text(
+                text,
+                textAlign: TextAlign.right,
                 style: TextStyle(
-                  fontSize: isDetailView ? 16 : 12,
+                  fontSize: fontSize,
                   fontWeight: FontWeight.bold,
-                  color: Colors.amber[600],
+                  color: textColor,
                 ),
               ),
-              const SizedBox(width: 4),
-              Icon(Icons.music_note, size: 16, color: Colors.teal[600]),
-            ],
-          )));
+            ),
+            const SizedBox(width: 4),
+            Icon(icon, size: 16, color: iconColor),
+          ],
+        ),
+      );
     }
 
-    if (weapon.echoBubble != null) {
-      sections.add(Row(children: [Flexible(child: Text(
-            '${AppLocalizations.of(context)!.echoBubble}:',
-            style: TextStyle(
-              fontSize: isDetailView ? 16 : 12,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withValues(alpha: 0.8),
-            ),
-          )), const SizedBox(width: 8), Flexible(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Flexible(
-                  child: Text(
-                    weapon.echoBubble!.name,
-                    style: TextStyle(
-                      fontSize: isDetailView ? 16 : 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue[600],
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Icon(Icons.bubble_chart, size: 16, color: Colors.indigo[600]),
-              ],
-            ),
-          )]));
-    }
-
-    if (weapon.echoWave != null) {
-      sections.add(Row(children: [Flexible(child: Text(
-            '${AppLocalizations.of(context)!.echoWave}:',
-            style: TextStyle(
-              fontSize: isDetailView ? 16 : 12,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withValues(alpha: 0.8),
-            ),
-          )), const SizedBox(width: 8), Flexible(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Flexible(
-                  child: Text(
-                    weapon.echoWave!.name,
-                    style: TextStyle(
-                      fontSize: isDetailView ? 16 : 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green[600],
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Icon(Icons.waves, size: 16, color: Colors.orange[600]),
-              ],
-            ),
-          )]));
-    }
+    final sections = <Widget>[
+      if (weapon.melody != null)
+        row(l10n.melody, '${weapon.melody!.songs.length} ${l10n.songs}',
+            Colors.amber[600]!, Icons.music_note, Colors.teal[600]!),
+      if (weapon.echoBubble != null)
+        row(l10n.echoBubble, weapon.echoBubble!.name, Colors.blue[600]!,
+            Icons.bubble_chart, Colors.indigo[600]!),
+      if (weapon.echoWave != null)
+        row(l10n.echoWave, weapon.echoWave!.name, Colors.green[600]!,
+            Icons.waves, Colors.orange[600]!),
+    ];
 
     if (sections.isEmpty) {
       return const SizedBox.shrink();
     }
 
-    return Column(children: sections);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        for (var i = 0; i < sections.length; i++) ...[
+          if (i > 0)
+            isDetailView
+                ? const Divider(height: 24)
+                : const SizedBox(height: 4),
+          sections[i],
+        ],
+      ],
+    );
   }
 
   static Widget buildBowgunDamageInfo(BuildContext context, Weapon weapon,
@@ -453,14 +449,16 @@ class WeaponDisplayUtils {
     }
 
     final colorScheme = Theme.of(context).colorScheme;
-    return LabelValueRow(label: Text(
+    return LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.ammo}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
-        ), value: Wrap(
+        ),
+        value: Wrap(
           runSpacing: AppSpacing.xs,
           children: weapon.ammo!.take(3).map((ammo) {
             return Container(
@@ -494,18 +492,19 @@ class WeaponDisplayUtils {
                   if (_hasElementIcon(ammo.kind)) ...[
                     const SizedBox(width: 4),
                     AssetThumb(
-                      'assets/imgs/elements/${_getElementAssetName(ammo.kind)}.webp',
-                      width: 12,
-                      height: 12,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Icon(
-                          WeaponUtils.getElementIcon(ammo.kind),
-                          size: 12,
-                          color: weapon.kind == 'heavy-bowgun'
-                              ? Colors.purple[800]
-                              : Colors.green[800],
-                        );
-                      }, semanticLabel: WeaponUtils.elementLabel(_getElementAssetName(ammo.kind))),
+                        'assets/imgs/elements/${_getElementAssetName(ammo.kind)}.webp',
+                        width: 12,
+                        height: 12, errorBuilder: (context, error, stackTrace) {
+                      return Icon(
+                        WeaponUtils.getElementIcon(ammo.kind),
+                        size: 12,
+                        color: weapon.kind == 'heavy-bowgun'
+                            ? Colors.purple[800]
+                            : Colors.green[800],
+                      );
+                    },
+                        semanticLabel: WeaponUtils.elementLabel(
+                            _getElementAssetName(ammo.kind))),
                   ],
                 ],
               ),
@@ -521,14 +520,17 @@ class WeaponDisplayUtils {
     }
 
     final colorScheme = Theme.of(context).colorScheme;
-    return LabelValueRow(label: Text(
+    return LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.kinsect}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
             color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
-        ), value: Row(mainAxisSize: MainAxisSize.min, 
+        ),
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               'Lv${weapon.kinsectLevel}',

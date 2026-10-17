@@ -8,6 +8,7 @@ class ArmorBaseDefense extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(baseDefense.toString()),
         const SizedBox(width: 5),

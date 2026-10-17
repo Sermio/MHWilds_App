@@ -69,9 +69,10 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
             ),
             // Imagen centrada con zoom que NO se puede tocar para cerrar
             Center(
+              // Sin margen y con minScale 1 la imagen no se mueve a escala 1;
+              // el arrastre solo sirve una vez hecho el zoom.
               child: InteractiveViewer(
-                boundaryMargin: const EdgeInsets.all(20),
-                minScale: 0.5,
+                minScale: 1.0,
                 maxScale: 4.0,
                 child: Container(
                   decoration: BoxDecoration(
@@ -163,14 +164,16 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
         Padding(
           padding: const EdgeInsets.only(bottom: AppSpacing.lg),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md, vertical: 6),
             decoration: BoxDecoration(
               color: colorScheme.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(AppRadius.lg),
             ),
             child: Text(
               AppLocalizations.of(context)!.campsOfLevel(floor + 1),
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold, color: colorScheme.onSurface),
             ),
           ),
         ),
@@ -202,8 +205,9 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
-                          'assets/imgs/item_icons/MHWilds-Tent_Icon_White_e15a70e45a.webp',
-                          fit: BoxFit.contain, excludeFromSemantics: true),
+                            'assets/imgs/item_icons/MHWilds-Tent_Icon_White_e15a70e45a.webp',
+                            fit: BoxFit.contain,
+                            excludeFromSemantics: true),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -251,7 +255,8 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
 
   Widget _buildInfoChip(String label, String value, Color color) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
+      padding:
+          const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppRadius.lg),
@@ -265,11 +270,16 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
           children: [
             TextSpan(
               text: '$label: ',
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600, color: color.withValues(alpha: 0.8)),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: color.withValues(alpha: 0.8)),
             ),
             TextSpan(
               text: value,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w700, color: color),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(fontWeight: FontWeight.w700, color: color),
             ),
           ],
         ),
@@ -304,7 +314,8 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                     const SizedBox(height: 16),
                     Text(
                       AppLocalizations.of(context)!.loadingMap,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: colorScheme.onSurface.withValues(alpha: 0.7)),
                     ),
                   ],
                 ),
@@ -326,7 +337,12 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                         const SizedBox(height: 16),
                         Text(
                           AppLocalizations.of(context)!.noMapImagesFound,
-                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                  color: colorScheme.onSurface
+                                      .withValues(alpha: 0.7)),
                         ),
                       ],
                     ),
@@ -354,7 +370,8 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                             borderRadius: BorderRadius.circular(AppRadius.lg),
                             boxShadow: [
                               BoxShadow(
-                                color: colorScheme.shadow.withValues(alpha: 0.1),
+                                color:
+                                    colorScheme.shadow.withValues(alpha: 0.1),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               ),
@@ -377,7 +394,13 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                                   ),
                                   child: Text(
                                     '${AppLocalizations.of(context)!.level} $levelLabel',
-                                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700, color: Colors.white, letterSpacing: 0.5),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white,
+                                            letterSpacing: 0.5),
                                   ),
                                 ),
                                 const SizedBox(height: 20),

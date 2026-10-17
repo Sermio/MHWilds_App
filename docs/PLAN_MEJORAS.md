@@ -439,7 +439,7 @@ Salen de `.todo`. Decisiones tomadas: filtro de elemento en armaduras sin multis
 - **Prompt:**
   > Lee CLAUDE.md. Tres bugs de `.todo`, cada uno en su commit y con su test: (1) el panel de filtros tapa los primeros elementos de todas las listas (monstruos, armas, sets de armadura, decoraciones, talismanes, habilidades, objetos): reproduce en un test de widget con un `ListFiltersPanel` abierto y arregla el solape en el sitio común, sin parchear lista por lista. (2) los elementos del drawer (`Cdrawer`/`AppSection`) se pintan todos de marrón como si estuvieran seleccionados, en claro y en oscuro: solo debe destacar el activo; test con `selected`. (3) abrir un árbol (serie) desde la lista de armas lanza un error: reprodúcelo con los fixtures, arregla la causa raíz y añade el test. Aplica `ui-ux-pro-max` y comprueba contraste en claro y oscuro.
 
-#### T36 · Dialog de mapas sin scroll y layout de stats
+#### ✅ T36 · Dialog de mapas sin scroll y layout de stats
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** —
 - **Prompt:**
   > Lee CLAUDE.md. (1) En `_showFullImage` de `lib/screens/map_details.dart`, el `InteractiveViewer` permite arrastrar sin zoom (`minScale: 0.5`, `boundaryMargin` de 20). Haz que a escala 1 la imagen no se mueva y siga pudiéndose hacer zoom (`minScale: 1`, sin margen); test de widget. (2) En los detalles de armas y armaduras los stats mezclan filas centradas y no centradas. Unifica todas con `LabelValueRow` (nombre a la izquierda, valor a la derecha) reutilizando el componente existente, sin crear otro. Comprueba que los tests de overflow (T24) siguen en verde y revisa la pantalla.

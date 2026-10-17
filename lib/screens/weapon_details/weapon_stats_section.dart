@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/label_value_row.dart';
+import 'package:mhwilds_app/components/stat_row.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/weapon.dart';
 import 'package:mhwilds_app/screens/weapon_details/section_card.dart';
@@ -24,9 +24,11 @@ class WeaponStatsSection extends StatelessWidget {
     return WeaponTitledCard(
       icon: Icons.analytics,
       title: l10n.statistics,
+      // stretch: sin él cada fila se encoge a su contenido y queda centrada.
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _StatRow(
+          StatRow(
             title: l10n.rarity,
             value: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
@@ -43,7 +45,7 @@ class WeaponStatsSection extends StatelessWidget {
             ),
           ),
           const Divider(height: 24),
-          _StatRow(
+          StatRow(
             title: l10n.physicalDamage,
             value: _IconValue(
               text: '${weapon.damage.display}',
@@ -53,7 +55,7 @@ class WeaponStatsSection extends StatelessWidget {
             ),
           ),
           const Divider(height: 24),
-          _StatRow(
+          StatRow(
             title: l10n.affinity,
             value: _IconValue(
               text: '${weapon.affinity > 0 ? '+' : ''}${weapon.affinity}%',
@@ -63,7 +65,7 @@ class WeaponStatsSection extends StatelessWidget {
           ),
           if (weapon.defenseBonus > 0) ...[
             const Divider(height: 24),
-            _StatRow(
+            StatRow(
               title: l10n.defenseBonus,
               value: _IconValue(
                 text: '+${weapon.defenseBonus}',
@@ -74,7 +76,7 @@ class WeaponStatsSection extends StatelessWidget {
           ],
           if (weapon.elderseal != null) ...[
             const Divider(height: 24),
-            _StatRow(
+            StatRow(
               title: l10n.elderseal,
               value: _IconValue(
                 text: weapon.elderseal![0].toUpperCase() +
@@ -86,8 +88,7 @@ class WeaponStatsSection extends StatelessWidget {
           ],
           if (weapon.slots.isNotEmpty) ...[
             const Divider(height: 24),
-            _StatRow(
-                title: l10n.slots, value: WeaponSlots(slots: weapon.slots)),
+            StatRow(title: l10n.slots, value: WeaponSlots(slots: weapon.slots)),
           ],
           ..._typeSpecificStats(context),
         ],
@@ -113,27 +114,6 @@ class WeaponStatsSection extends StatelessWidget {
       stats.add(additionalInfo);
     }
     return stats;
-  }
-}
-
-class _StatRow extends StatelessWidget {
-  const _StatRow({required this.title, required this.value});
-
-  final String title;
-  final Widget value;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return LabelValueRow(
-      label: Text(
-        '$title:',
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withValues(alpha: 0.8)),
-      ),
-      value: value,
-    );
   }
 }
 
