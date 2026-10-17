@@ -379,7 +379,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 - **Prompt:**
   > Lee CLAUDE.md. `ApiConfig.languageCode` es estático y mutable, y se asigna dentro de `build()` (`main.dart:69`) y en `settings.dart:196`. Haz que el idioma fluya de `LocaleProvider` a los providers de datos con `ChangeNotifierProxyProvider` (o pasándolo al repositorio). Elimina la asignación en `build`, `_invalidateDataProviders` de `settings.dart` y el `addPostFrameCallback` de recarga que tienen las listas en `build`. Cambiar de idioma debe seguir recargando los datos en el idioma nuevo, y servirlos desde la caché si ya existen. Borra también el `FocusNode` global `myFocusNode` de `theme.dart` si no se usa, o muévelo a donde corresponda. Test: cambiar el idioma dispara la carga en el idioma nuevo.
 
-#### T30 · Secciones de navegación con un `enum`
+#### ✅ T30 · Secciones de navegación con un `enum`
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** low · **Depende de:** T06
 - **Prompt:**
   > Lee CLAUDE.md. `HomeScreen` decide el título y las acciones con cadenas de `if (screen is X)`, y el drawer guarda instancias de `Widget`. Crea `enum AppSection` con título traducido, icono o asset, constructor de pantalla y acciones de la AppBar, y úsalo en `HomeScreen` y en `Cdrawer` como única fuente. Mismo orden, mismos iconos y mismo comportamiento. Test: cada sección muestra su título.

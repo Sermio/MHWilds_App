@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/gear_sprite_icon.dart';
-import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/screens/talismans_list.dart';
-import 'package:mhwilds_app/screens/armor_sets_list.dart';
-import 'package:mhwilds_app/screens/decorations_list.dart';
-import 'package:mhwilds_app/screens/items_list.dart';
-import 'package:mhwilds_app/screens/monsters_list.dart';
-import 'package:mhwilds_app/screens/skills_list.dart';
-import 'package:mhwilds_app/screens/weapons_list.dart';
-import 'package:mhwilds_app/screens/build_optimizer_screen.dart';
-import 'package:mhwilds_app/screens/build_crafter_screen.dart';
-import 'package:mhwilds_app/screens/maps_list.dart';
+import 'package:mhwilds_app/screens/app_section.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
 
 class Cdrawer extends StatelessWidget {
-  final Function(Widget) onItemSelected;
-  final Widget selectedScreen;
+  final ValueChanged<AppSection> onSectionSelected;
+  final AppSection selectedSection;
   static final Color _selectedHighlightColor = Colors.orange[600]!;
 
   const Cdrawer({
     super.key,
-    required this.onItemSelected,
-    required this.selectedScreen,
+    required this.onSectionSelected,
+    required this.selectedSection,
   });
 
   @override
@@ -154,186 +143,19 @@ class Cdrawer extends StatelessWidget {
           AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.xl),
       child: Column(
         children: [
-          _buildMenuItem(
-            context: context,
-            title: l10n.monsters,
-            subtitle: l10n.menuMonstersSubtitle,
-            leadingIcon: Image.asset('assets/imgs/monster_icons/arkveld.webp',
-                fit: BoxFit.contain,
-                errorBuilder: (_, __, ___) => Icon(
-                      Icons.pets,
-                      color: Colors.red[400],
-                      size: 30,
-                    ),
-                excludeFromSemantics: true),
-            icon: Icons.pets,
-            iconColor: Colors.red[400]!,
-            isSelected: selectedScreen is MonstersList,
-            onTap: () => onItemSelected(const MonstersList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.weapons,
-            subtitle: l10n.menuWeaponsSubtitle,
-            leadingIcon: GearSpriteIcon(
-              column: weaponColumnByKind['great-sword']!,
-              rarity: 1,
-              size: 30,
-              fallback: Icon(
-                Icons.gps_fixed,
-                color: Colors.indigo[600],
-                size: 30,
-              ),
+          for (final section in AppSection.values) ...[
+            if (section != AppSection.values.first) const SizedBox(height: 8),
+            _buildMenuItem(
+              context: context,
+              title: section.title(l10n),
+              subtitle: section.subtitle(l10n),
+              leadingIcon: section.menuLeading(context),
+              icon: section.icon,
+              iconColor: section.iconColor(context),
+              isSelected: selectedSection == section,
+              onTap: () => onSectionSelected(section),
             ),
-            icon: Icons.gps_fixed,
-            iconColor: Colors.indigo[600]!,
-            isSelected: selectedScreen is WeaponsList,
-            onTap: () => onItemSelected(const WeaponsList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.armorSets,
-            subtitle: l10n.menuArmorSetsSubtitle,
-            leadingIcon: GearSpriteIcon(
-              column: armorColumnByKind['head']!,
-              rarity: 1,
-              size: 30,
-              fallback: Icon(
-                Icons.shield,
-                color: Colors.blue[600],
-                size: 30,
-              ),
-            ),
-            icon: Icons.shield,
-            iconColor: Colors.blue[600]!,
-            isSelected: selectedScreen is ArmorSetList,
-            onTap: () => onItemSelected(const ArmorSetList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.decorations,
-            subtitle: l10n.menuDecorationsSubtitle,
-            leadingIcon: Image.asset('assets/imgs/drawer/decoration.png',
-                fit: BoxFit.contain,
-                errorBuilder: (_, __, ___) => Icon(
-                      Icons.diamond,
-                      color: Colors.purple[400],
-                      size: 30,
-                    ),
-                excludeFromSemantics: true),
-            icon: Icons.diamond,
-            iconColor: Colors.purple[400]!,
-            isSelected: selectedScreen is DecorationsList,
-            onTap: () => onItemSelected(const DecorationsList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.talismans,
-            subtitle: l10n.menuTalismansSubtitle,
-            leadingIcon: GearSpriteIcon(
-              column: talismanColumn,
-              rarity: 1,
-              size: 30,
-              fallback: Icon(
-                Icons.workspace_premium,
-                color: AppColors.goldAccent(context),
-                size: 30,
-              ),
-            ),
-            icon: Icons.workspace_premium,
-            iconColor: AppColors.goldAccent(context),
-            isSelected: selectedScreen is AmuletList,
-            onTap: () => onItemSelected(const AmuletList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.skills,
-            subtitle: l10n.menuSkillsSubtitle,
-            leadingIcon: SkillSpriteIcon(
-              iconId: 1,
-              size: 30,
-              fallback: Icon(
-                Icons.flash_on,
-                color: Colors.green[600],
-                size: 30,
-              ),
-            ),
-            icon: Icons.flash_on,
-            iconColor: Colors.green[600]!,
-            isSelected: selectedScreen is SkillList,
-            onTap: () => onItemSelected(const SkillList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.items,
-            subtitle: l10n.menuItemsSubtitle,
-            leadingIcon: Image.asset('assets/imgs/drawer/potion.png',
-                fit: BoxFit.contain,
-                errorBuilder: (_, __, ___) => Icon(
-                      Icons.inventory_2,
-                      color: Colors.orange[600],
-                      size: 30,
-                    ),
-                excludeFromSemantics: true),
-            icon: Icons.inventory_2,
-            iconColor: Colors.orange[600]!,
-            isSelected: selectedScreen is ItemList,
-            onTap: () => onItemSelected(const ItemList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.locations,
-            subtitle: l10n.menuLocationsSubtitle,
-            leadingIcon: Image.asset('assets/imgs/maps/map.webp',
-                fit: BoxFit.contain,
-                errorBuilder: (_, __, ___) => Icon(
-                      Icons.map,
-                      color: Colors.blue[400],
-                      size: 30,
-                    ),
-                excludeFromSemantics: true),
-            icon: Icons.map,
-            iconColor: Colors.blue[400]!,
-            isSelected: selectedScreen is MapsList,
-            onTap: () => onItemSelected(const MapsList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.buildCrafter,
-            subtitle: l10n.buildCrafterMenuSubtitle,
-            leadingIcon: Icon(
-              Icons.handyman,
-              color: Colors.deepPurple.shade400,
-              size: 30,
-            ),
-            icon: Icons.handyman,
-            iconColor: Colors.deepPurple.shade400,
-            isSelected: selectedScreen is BuildCrafterScreen,
-            onTap: () => onItemSelected(const BuildCrafterScreen()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.buildOptimizer,
-            subtitle: l10n.buildOptimizerMenuSubtitle,
-            leadingIcon: Icon(
-              Icons.auto_graph,
-              color: Colors.teal[600],
-              size: 30,
-            ),
-            icon: Icons.auto_graph,
-            iconColor: Colors.teal[600]!,
-            isSelected: selectedScreen is BuildOptimizerScreen,
-            onTap: () => onItemSelected(const BuildOptimizerScreen()),
-          ),
+          ],
         ],
       ),
     );
