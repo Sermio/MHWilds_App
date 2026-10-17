@@ -726,4 +726,90 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get elementBlastblight => 'Explosion';
+
+  @override
+  String get elementBlast => 'Explosiv';
+
+  @override
+  String get elementFireblight => 'Feuerplage';
+
+  @override
+  String get elementWaterblight => 'Wasserplage';
+
+  @override
+  String get elementIceblight => 'Eisplage';
+
+  @override
+  String get elementThunderblight => 'Blitzplage';
+
+  @override
+  String get elementDragonblight => 'Drachenplage';
+
+  @override
+  String get elementFrostblight => 'Erfrierung';
+
+  @override
+  String get elementWebbed => 'Verstrickt';
+
+  @override
+  String get elementBleeding => 'Blutung';
+
+  @override
+  String get elementFrenzy => 'Raserei';
+
+  @override
+  String get ailmentDescThunderblight =>
+      'Blitzplage wird durch das Element Blitz verursacht und erhöht die Chance, dass Monsterangriffe den Jäger betäuben.\nSie wird durch den Verzehr einer Nulberry oder die Verwendung eines Cleanser Booster geheilt.';
+
+  @override
+  String get ailmentDescWaterblight =>
+      'Wasserplage wird durch das Element Wasser verursacht und verringert die Ausdauerregeneration des Jägers.\nSie wird durch den Verzehr einer Nulberry oder die Verwendung eines Cleanser Booster geheilt.';
+
+  @override
+  String get ailmentDescFireblight =>
+      'Feuerplage wird durch das Element Feuer verursacht und lässt den Jäger mit der Zeit Gesundheit verlieren.\nSie wird durch den Verzehr einer Nulberry geheilt. Ist Wasser in der Nähe, kann man hineinspringen oder sich 3-mal am Boden abrollen.';
+
+  @override
+  String get ailmentDescIceblight =>
+      'Eisplage wird durch das Element Eis verursacht und erhöht den Ausdauerverbrauch beim Sprinten, Angreifen und Ausweichen.\nSie wird durch den Verzehr einer Nulberry geheilt.';
+
+  @override
+  String get ailmentDescDragonblight =>
+      'Drachenplage wird durch das Element Drache verursacht und hebt die Schadenswirkung und den Statusaufbau dieses Elements auf.\nSie wird durch den Verzehr einer Nulberry geheilt.';
+
+  @override
+  String get ailmentDescBlast =>
+      'Explosiv ist ein Zustand, der ein Monster markiert und ihm durch kleine Explosionen Schaden zufügen kann.\nEr wird mit einer Nulberry oder durch bis zu dreimaliges Ausweichrollen geheilt.';
+
+  @override
+  String get ailmentDescBlastblight =>
+      'Explosion lässt das Ziel nach einiger Zeit oder bei einem wuchtigen Treffer explodieren.\nSie wird mit einer Nulberry oder durch bis zu dreimaliges Ausweichrollen geheilt.';
+
+  @override
+  String get ailmentDescBleeding =>
+      'Blutung lässt den Jäger beim Bewegen, Angreifen oder Ausweichen Gesundheit verlieren.\nSie wird durch den Verzehr von Astera Jerky, Well-Done Steak oder Sushifish Scale oder durch einige Sekunden Ducken geheilt.';
+
+  @override
+  String get ailmentDescFrenzy =>
+      'Raserei lässt den Jäger vorübergehend mehr Schaden erleiden, wenn er vollständig infiziert ist.\nSie wird mit einer Nulberry geheilt.';
+
+  @override
+  String get ailmentDescFrostblight =>
+      'Erfrierung hindert den Jäger vorübergehend daran, sich zu bewegen oder zu handeln.\nSie wird mit einem Cleanser oder mit Fesselresistenz Stufe 3 geheilt.';
+
+  @override
+  String get ailmentDescWebbed =>
+      'Verstrickt hindert den Jäger vorübergehend daran, sich zu bewegen oder zu handeln.\nEs wird mit einem Cleanser, durch Bewegen, Tastendrücke, einen Angriff, der ihn wegschleudert, oder einen Treffer gelöst.';
+
+  @override
+  String get ailmentDescPoison =>
+      'Gift verringert mit der Zeit allmählich die Gesundheit des Ziels.\nEs wird mit Antidote, Herbal Medicine oder Herbal Powder geheilt.';
+
+  @override
+  String get ailmentDescSleep =>
+      'Schlaf lässt das Ziel einschlafen und macht es für einen einmaligen Angriff verwundbar.\nDas Ziel wacht auf, sobald es Schaden erhält.\nEr wird mit einem Energy Drink geheilt, von einem Verbündeten oder einem Monster.';
+
+  @override
+  String get ailmentDescParalysis =>
+      'Lähmung macht den Jäger oder das Monster bewegungsunfähig und anfälliger für erhöhten Schaden, solange sie anhält.\nSie wird durch Treffer mit starkem Rückstoß geheilt, etwa einen Aufwärtshieb mit Hammer oder Großschwert.';
 }

@@ -14,7 +14,7 @@ enum GameElement {
   poison(Icons.warning),
   sleep(Icons.bedtime),
   blastblight(Icons.local_fire_department),
-  // Estados de los monstruos; su nombre traducido llega con T38.
+  // Estados de los monstruos.
   blast(Icons.local_fire_department),
   fireblight(Icons.local_fire_department),
   waterblight(Icons.water_drop),
@@ -54,7 +54,25 @@ enum GameElement {
   /// Icono de respaldo para cualquier id (`Icons.star` si no es conocido).
   static IconData iconOf(String? raw) => fromId(raw)?.icon ?? Icons.star;
 
-  /// Nombre traducido. Los estados de monstruo aún sin traducir caen al id.
+  /// Estados que se explican en el diálogo de elementos y estados, en orden.
+  static const ailments = [
+    thunderblight,
+    waterblight,
+    fireblight,
+    iceblight,
+    dragonblight,
+    blast,
+    blastblight,
+    bleeding,
+    frenzy,
+    frostblight,
+    webbed,
+    poison,
+    sleep,
+    paralysis,
+  ];
+
+  /// Nombre traducido.
   String label(AppLocalizations l10n) => switch (this) {
         fire => l10n.elementFire,
         water => l10n.elementWater,
@@ -65,7 +83,35 @@ enum GameElement {
         poison => l10n.elementPoison,
         sleep => l10n.elementSleep,
         blastblight => l10n.elementBlastblight,
-        _ => _capitalize(name),
+        blast => l10n.elementBlast,
+        fireblight => l10n.elementFireblight,
+        waterblight => l10n.elementWaterblight,
+        iceblight => l10n.elementIceblight,
+        thunderblight => l10n.elementThunderblight,
+        dragonblight => l10n.elementDragonblight,
+        frostblight => l10n.elementFrostblight,
+        webbed => l10n.elementWebbed,
+        bleeding => l10n.elementBleeding,
+        frenzy => l10n.elementFrenzy,
+      };
+
+  /// Qué hace el estado y cómo se cura; null para los elementos de daño.
+  String? description(AppLocalizations l10n) => switch (this) {
+        thunderblight => l10n.ailmentDescThunderblight,
+        waterblight => l10n.ailmentDescWaterblight,
+        fireblight => l10n.ailmentDescFireblight,
+        iceblight => l10n.ailmentDescIceblight,
+        dragonblight => l10n.ailmentDescDragonblight,
+        blast => l10n.ailmentDescBlast,
+        blastblight => l10n.ailmentDescBlastblight,
+        bleeding => l10n.ailmentDescBleeding,
+        frenzy => l10n.ailmentDescFrenzy,
+        frostblight => l10n.ailmentDescFrostblight,
+        webbed => l10n.ailmentDescWebbed,
+        poison => l10n.ailmentDescPoison,
+        sleep => l10n.ailmentDescSleep,
+        paralysis => l10n.ailmentDescParalysis,
+        _ => null,
       };
 }
 

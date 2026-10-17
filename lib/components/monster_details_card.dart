@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/elements_dialog.dart';
-import 'package:mhwilds_app/data/ailments.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/game_element.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
 
 class MonsterDetailsCard extends StatelessWidget {
@@ -352,11 +353,11 @@ class ElementsAndAilments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return ListView.builder(
-      itemCount: ailments.length,
+      itemCount: GameElement.ailments.length,
       itemBuilder: (context, index) {
-        final String ailmentName = ailments[index].keys.first;
-        final String description = ailments[index][ailmentName] ?? "";
+        final ailment = GameElement.ailments[index];
 
         return Container(
           margin: const EdgeInsets.only(bottom: 10),
@@ -375,16 +376,11 @@ class ElementsAndAilments extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    ElementIcon(ailmentName, size: 24),
+                    ElementIcon(ailment.id, size: 24),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        ailmentName
-                            .replaceAll('-', ' ')
-                            .split(' ')
-                            .map((word) =>
-                                word[0].toUpperCase() + word.substring(1))
-                            .join(' '),
+                        ailment.label(l10n),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -396,7 +392,7 @@ class ElementsAndAilments extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  description,
+                  ailment.description(l10n) ?? '',
                   style: TextStyle(
                     fontSize: 13,
                     color: colorScheme.onSurface.withValues(alpha: 0.9),

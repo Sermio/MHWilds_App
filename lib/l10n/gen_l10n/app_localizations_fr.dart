@@ -727,4 +727,90 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get elementBlastblight => 'Explosion';
+
+  @override
+  String get elementBlast => 'Explosif';
+
+  @override
+  String get elementFireblight => 'Fléau de feu';
+
+  @override
+  String get elementWaterblight => 'Fléau d\'eau';
+
+  @override
+  String get elementIceblight => 'Fléau de glace';
+
+  @override
+  String get elementThunderblight => 'Fléau de foudre';
+
+  @override
+  String get elementDragonblight => 'Fléau du dragon';
+
+  @override
+  String get elementFrostblight => 'Gelure';
+
+  @override
+  String get elementWebbed => 'Entoilé';
+
+  @override
+  String get elementBleeding => 'Saignement';
+
+  @override
+  String get elementFrenzy => 'Frénésie';
+
+  @override
+  String get ailmentDescThunderblight =>
+      'Le fléau de foudre est causé par l\'élément Foudre et augmente la probabilité que les attaques des monstres étourdissent le chasseur.\nIl se soigne en consommant une Nulberry ou en utilisant un Cleanser Booster.';
+
+  @override
+  String get ailmentDescWaterblight =>
+      'Le fléau d\'eau est causé par l\'élément Eau et réduit la récupération d\'endurance du chasseur.\nIl se soigne en consommant une Nulberry ou en utilisant un Cleanser Booster.';
+
+  @override
+  String get ailmentDescFireblight =>
+      'Le fléau de feu est causé par l\'élément Feu et fait perdre de la santé au chasseur au fil du temps.\nIl se soigne en consommant une Nulberry. Si de l\'eau est proche, on peut y sauter ou rouler 3 fois au sol.';
+
+  @override
+  String get ailmentDescIceblight =>
+      'Le fléau de glace est causé par l\'élément Glace et augmente la consommation d\'endurance quand on court, attaque ou esquive.\nIl se soigne en consommant une Nulberry.';
+
+  @override
+  String get ailmentDescDragonblight =>
+      'Le fléau du dragon est causé par l\'élément Dragon et annule les effets de dégâts et l\'accumulation d\'état de cet élément.\nIl se soigne en consommant une Nulberry.';
+
+  @override
+  String get ailmentDescBlast =>
+      'Explosif est un état qui marque un monstre et permet de l\'endommager par de petites explosions.\nIl se soigne avec une Nulberry ou en esquivant en roulade jusqu\'à trois fois.';
+
+  @override
+  String get ailmentDescBlastblight =>
+      'L\'explosion fait exploser la cible après un certain temps ou lorsqu\'elle reçoit une attaque puissante.\nElle se soigne avec une Nulberry ou en esquivant en roulade jusqu\'à trois fois.';
+
+  @override
+  String get ailmentDescBleeding =>
+      'Le saignement fait perdre de la santé au chasseur lorsqu\'il se déplace, attaque ou esquive.\nIl se soigne en mangeant un Astera Jerky, un Well-Done Steak ou une Sushifish Scale, ou en s\'accroupissant quelques secondes.';
+
+  @override
+  String get ailmentDescFrenzy =>
+      'La frénésie fait subir temporairement plus de dégâts au chasseur lorsqu\'il est totalement infecté.\nElle se soigne en utilisant une Nulberry.';
+
+  @override
+  String get ailmentDescFrostblight =>
+      'La gelure empêche temporairement le chasseur de bouger ou d\'agir.\nElle se soigne avec un Cleanser ou avec une Résistance à l\'immobilisation de niveau 3.';
+
+  @override
+  String get ailmentDescWebbed =>
+      'Entoilé empêche temporairement le chasseur de bouger ou d\'agir.\nIl se soigne avec un Cleanser, en bougeant, en appuyant sur des boutons, en étant projeté par une attaque ou en subissant un coup.';
+
+  @override
+  String get ailmentDescPoison =>
+      'Le poison réduit progressivement la santé de la cible au fil du temps.\nIl se soigne avec un Antidote, une Herbal Medicine ou une Herbal Powder.';
+
+  @override
+  String get ailmentDescSleep =>
+      'Le sommeil endort la cible, qui devient vulnérable à une seule attaque.\nLa cible se réveille lorsqu\'elle subit des dégâts.\nIl se soigne avec un Energy Drink, par un allié ou un monstre.';
+
+  @override
+  String get ailmentDescParalysis =>
+      'La paralysie immobilise le chasseur ou le monstre et le rend vulnérable à des dégâts accrus pendant sa durée.\nElle se soigne avec des impacts à fort recul, comme un coup montant d\'un Marteau ou d\'une Grande Épée.';
 }

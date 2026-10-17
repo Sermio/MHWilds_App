@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
+import 'package:mhwilds_app/components/monster_details_card.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/utils/game_element.dart';
 
@@ -61,5 +63,43 @@ void main() {
       expect(labels.toSet().length, labels.length, reason: '$locale');
     }
     expect(const Locale('en'), isNotNull);
+  });
+
+  test(
+      'los estados tienen nombre y descripción traducidos en todos los idiomas',
+      () {
+    final en = lookupAppLocalizations(const Locale('en'));
+    for (final locale in AppLocalizations.supportedLocales) {
+      final l10n = lookupAppLocalizations(locale);
+      for (final e in GameElement.ailments) {
+        expect(e.label(l10n), isNotEmpty, reason: '${e.id} $locale');
+        final text = e.description(l10n);
+        expect(text, isNotNull, reason: '${e.id} $locale');
+        if (locale.languageCode != 'en') {
+          expect(text, isNot(e.description(en)),
+              reason: '${e.id} sin traducir en $locale');
+        }
+      }
+    }
+  });
+
+  testWidgets('el diálogo de estados se muestra en el idioma de la app',
+      (tester) async {
+    tester.view
+      ..physicalSize = const Size(400, 6000)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(const MaterialApp(
+      locale: Locale('de'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(body: ElementsAndAilments()),
+    ));
+
+    expect(find.text('Blitzplage'), findsOneWidget);
+    expect(find.text('Gift'), findsOneWidget);
+    expect(find.textContaining('Nulberry'), findsWidgets);
+    expect(
+        find.byType(ElementIcon), findsNWidgets(GameElement.ailments.length));
   });
 }

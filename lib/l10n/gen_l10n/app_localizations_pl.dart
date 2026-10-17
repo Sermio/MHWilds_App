@@ -728,4 +728,90 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get elementBlastblight => 'Wybuch';
+
+  @override
+  String get elementBlast => 'Wybuchowy';
+
+  @override
+  String get elementFireblight => 'Plaga ognia';
+
+  @override
+  String get elementWaterblight => 'Plaga wody';
+
+  @override
+  String get elementIceblight => 'Plaga lodu';
+
+  @override
+  String get elementThunderblight => 'Plaga pioruna';
+
+  @override
+  String get elementDragonblight => 'Plaga smoka';
+
+  @override
+  String get elementFrostblight => 'Przemarznięcie';
+
+  @override
+  String get elementWebbed => 'Oplątany';
+
+  @override
+  String get elementBleeding => 'Krwawienie';
+
+  @override
+  String get elementFrenzy => 'Szał';
+
+  @override
+  String get ailmentDescThunderblight =>
+      'Plaga pioruna jest wywoływana przez żywioł Pioruna i zwiększa szansę ogłuszenia łowcy atakami potworów.\nMożna ją wyleczyć, zjadając Nulberry lub używając Cleanser Booster.';
+
+  @override
+  String get ailmentDescWaterblight =>
+      'Plaga wody jest wywoływana przez żywioł Wody i zmniejsza regenerację wytrzymałości łowcy.\nMożna ją wyleczyć, zjadając Nulberry lub używając Cleanser Booster.';
+
+  @override
+  String get ailmentDescFireblight =>
+      'Plaga ognia jest wywoływana przez żywioł Ognia i powoduje stopniową utratę zdrowia przez łowcę.\nMożna ją wyleczyć, zjadając Nulberry. Jeśli w pobliżu jest woda, można do niej wskoczyć lub 3 razy przetoczyć się po ziemi.';
+
+  @override
+  String get ailmentDescIceblight =>
+      'Plaga lodu jest wywoływana przez żywioł Lodu i zwiększa zużycie wytrzymałości podczas biegu, ataków i uników.\nMożna ją wyleczyć, zjadając Nulberry.';
+
+  @override
+  String get ailmentDescDragonblight =>
+      'Plaga smoka jest wywoływana przez żywioł Smoka i znosi obrażenia oraz narastanie statusów tego żywiołu.\nMożna ją wyleczyć, zjadając Nulberry.';
+
+  @override
+  String get ailmentDescBlast =>
+      'Wybuchowy to status, który oznacza potwora i pozwala zadawać mu obrażenia małymi wybuchami.\nMożna go wyleczyć za pomocą Nulberry lub unikając toczeniem do trzech razy.';
+
+  @override
+  String get ailmentDescBlastblight =>
+      'Wybuch sprawia, że cel eksploduje po pewnym czasie lub po otrzymaniu silnego ataku.\nMożna go wyleczyć za pomocą Nulberry lub unikając toczeniem do trzech razy.';
+
+  @override
+  String get ailmentDescBleeding =>
+      'Krwawienie powoduje utratę zdrowia przez łowcę podczas ruchu, ataków lub uników.\nMożna je wyleczyć, jedząc Astera Jerky, Well-Done Steak lub Sushifish Scale albo kucając przez kilka sekund.';
+
+  @override
+  String get ailmentDescFrenzy =>
+      'Szał sprawia, że łowca tymczasowo otrzymuje większe obrażenia, gdy jest w pełni zarażony.\nMożna go wyleczyć za pomocą Nulberry.';
+
+  @override
+  String get ailmentDescFrostblight =>
+      'Przemarznięcie tymczasowo uniemożliwia łowcy ruch i działanie.\nMożna je wyleczyć za pomocą Cleanser lub odporności na unieruchomienie poziomu 3.';
+
+  @override
+  String get ailmentDescWebbed =>
+      'Oplątany tymczasowo uniemożliwia łowcy ruch i działanie.\nMożna się uwolnić za pomocą Cleanser, poruszając się, naciskając przyciski, przez odrzucenie atakiem lub otrzymanie ciosu.';
+
+  @override
+  String get ailmentDescPoison =>
+      'Trucizna stopniowo zmniejsza zdrowie celu.\nMożna ją wyleczyć za pomocą Antidote, Herbal Medicine lub Herbal Powder.';
+
+  @override
+  String get ailmentDescSleep =>
+      'Sen usypia cel, który staje się podatny na jednorazowy atak.\nCel budzi się po otrzymaniu obrażeń.\nMożna go wybudzić za pomocą Energy Drink, użytego przez sojusznika lub potwora.';
+
+  @override
+  String get ailmentDescParalysis =>
+      'Paraliż unieruchamia łowcę lub potwora i naraża go na zwiększone obrażenia przez czas trwania.\nMożna go przerwać uderzeniami z dużym odrzutem, np. uderzeniem w górę Młotem lub Wielkim Mieczem.';
 }

@@ -450,7 +450,7 @@ Salen de `.todo`. Decisiones tomadas: filtro de elemento en armaduras sin multis
 - **Prompt:**
   > Lee CLAUDE.md. Crea `GameElement` (enum en `lib/utils/game_element.dart`) con id de la API, ruta del asset, icono de respaldo y `isStatus`, y una función que devuelva la etiqueta traducida con `AppLocalizations` (añade claves ARB para los 5 elementos y los 4 estados en los 10 archivos y ejecuta `flutter gen-l10n`). Sustituye las rutas construidas a mano y `WeaponUtils.getElementAssetName/getElementIcon/elementLabel` por él, empezando por los que usan los filtros; los `semanticLabel` pasan a ser traducidos. Test: todos los assets existen, todo valor de elemento o estado del fixture de armas resuelve a un `GameElement` y cada etiqueta existe en los 10 idiomas. Sin cambios visuales.
 
-#### T38 · Estados alterados traducidos
+#### ✅ T38 · Estados alterados traducidos
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** T37
 - **Prompt:**
   > Lee CLAUDE.md. `lib/data/ailments.dart` tiene los nombres y las descripciones de los estados solo en inglés y se muestra así en `ElementsAndAilments`. Mueve nombres y descripciones a ARB (en, es, es_419, es_ES, fr, it, pl, pt, pt_BR, de) y a un único registro con el nombre del asset, y borra `ailments.dart`. Si no hay traducción de un idioma, cae al inglés (Flutter ya lo hace con `fallback`); no inventes términos oficiales que no conozcas: deja la traducción más natural y lista los términos dudosos en la respuesta para revisarlos. Test: todas las claves existen en los 10 archivos y el diálogo muestra el texto en un idioma no inglés.
