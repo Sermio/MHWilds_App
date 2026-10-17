@@ -14,6 +14,7 @@ class AssetThumb extends StatelessWidget {
     this.color,
     this.colorBlendMode,
     this.errorBuilder,
+    this.semanticLabel,
   });
 
   final String path;
@@ -23,6 +24,10 @@ class AssetThumb extends StatelessWidget {
   final Color? color;
   final BlendMode? colorBlendMode;
   final ImageErrorWidgetBuilder? errorBuilder;
+
+  /// Descripción para lector de pantalla. Sin ella la imagen se trata como
+  /// decorativa y se excluye de la accesibilidad.
+  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +50,8 @@ class AssetThumb extends StatelessWidget {
       color: color,
       colorBlendMode: colorBlendMode,
       errorBuilder: errorBuilder,
+      semanticLabel: semanticLabel,
+      excludeFromSemantics: semanticLabel == null,
       cacheWidth: cacheW != null && px > 0 ? px.round() : null,
       cacheHeight: cacheW == null && px > 0 ? px.round() : null,
     );

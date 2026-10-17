@@ -232,6 +232,9 @@ class _ItemListState extends State<ItemList> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: _filtersVisible
+            ? AppLocalizations.of(context)!.close
+            : AppLocalizations.of(context)!.filters,
         onPressed: _toggleFiltersVisibility,
         backgroundColor: colorScheme.primary,
         child: Icon(

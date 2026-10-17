@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class WeaponUtils {
+  /// Nombre legible de un icono de elemento o estado (`'poison'` → `'Poison'`)
+  /// para etiquetas de accesibilidad.
+  static String elementLabel(String element) {
+    final words = element.trim().replaceAll(RegExp(r'[-_]'), ' ');
+    if (words.isEmpty) return words;
+    return words[0].toUpperCase() + words.substring(1);
+  }
+
 
   // Funciones para iconos de elementos
   static IconData getElementIcon(String element) {

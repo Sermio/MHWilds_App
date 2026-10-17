@@ -235,8 +235,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                         borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
                           'assets/imgs/item_icons/MHWilds-Tent_Icon_White_e15a70e45a.webp',
-                          fit: BoxFit.contain,
-                        ),
+                          fit: BoxFit.contain, excludeFromSemantics: true),
                       ),
                     ),
                     const SizedBox(width: 16),

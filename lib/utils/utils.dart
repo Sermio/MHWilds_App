@@ -47,18 +47,18 @@ String getTypeImage(String skillKind) {
 
 Widget getJewelSlotIcon(int slot) {
   if (slot == 1) {
-    return Image.asset('assets/imgs/decorations/gem_level_1.png');
+    return Image.asset('assets/imgs/decorations/gem_level_1.png', excludeFromSemantics: true);
   }
   if (slot == 2) {
-    return Image.asset('assets/imgs/decorations/gem_level_2.png');
+    return Image.asset('assets/imgs/decorations/gem_level_2.png', excludeFromSemantics: true);
   }
   if (slot == 3) {
-    return Image.asset('assets/imgs/decorations/gem_level_3.png');
+    return Image.asset('assets/imgs/decorations/gem_level_3.png', excludeFromSemantics: true);
   }
   if (slot == 4) {
-    return Image.asset('assets/imgs/decorations/gem_level_4.png');
+    return Image.asset('assets/imgs/decorations/gem_level_4.png', excludeFromSemantics: true);
   }
-  return Image.asset('assets/imgs/decorations/gem_level_1.png');
+  return Image.asset('assets/imgs/decorations/gem_level_1.png', excludeFromSemantics: true);
 }
 
 String getKindImage(String skillKind) {

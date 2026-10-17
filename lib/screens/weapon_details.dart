@@ -1336,6 +1336,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
                     ),
                   ),
                   IconButton(
+                    tooltip: AppLocalizations.of(context)!.close,
                     icon: const Icon(Icons.close),
                     onPressed: () => Navigator.pop(context),
                   ),

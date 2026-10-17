@@ -264,5 +264,6 @@
   "retry": "Reintentar",
   "errorOffline": "Sin conexión. Revisa tu internet e inténtalo de nuevo.",
   "errorLoadingData": "No se pudieron cargar los datos. Inténtalo de nuevo.",
-  "offlineDataFrom": "Sin conexión · datos del {date}"
+  "offlineDataFrom": "Sin conexión · datos del {date}",
+  "creditsTooltip": "Créditos"
 }

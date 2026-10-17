@@ -357,7 +357,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 - **Prompt:**
   > Lee CLAUDE.md. `DecorationSpriteIcon`, `SkillSpriteIcon` y `GearSpriteIcon` repiten la misma lógica: cargar la hoja de sprites, guardar el `ui.Image` en caché y recortar un rectángulo. Extrae un `SpriteIcon(sheetAsset, sourceRect, size)` con una caché compartida y deja los tres como envoltorios que solo calculan el rectángulo. Mantén sus APIs públicas para no tocar a quienes los usan. Añade un widget test que pinte cada tipo.
 
-#### T26 · Accesibilidad y feedback
+#### ✅ T26 · Accesibilidad y feedback
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** low · **Depende de:** T19
 - **Prompt:**
   > Lee CLAUDE.md. Añade `tooltip` traducido a todos los `IconButton` y `semanticLabel` a las imágenes que transmiten información (debilidades, elementos, rareza, tipo de arma). Las decorativas llevan `excludeFromSemantics: true`. Comprueba que ningún área táctil mide menos de 48×48 dp. Sustituye los spinners centrados de las listas por skeletons con la forma de la tarjeta, reutilizando `AsyncStateView`.

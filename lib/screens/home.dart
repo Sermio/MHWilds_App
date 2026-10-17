@@ -64,10 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_selectedScreen is BuildOptimizerScreen) {
       return [
         IconButton(
+          tooltip: AppLocalizations.of(context)!.creditsTooltip,
           icon: const Icon(Icons.help_outline),
           onPressed: () => showBuildOptimizerCreditsDialog(context),
         ),
         IconButton(
+          tooltip: AppLocalizations.of(context)!.settings,
           icon: const Icon(Icons.settings),
           onPressed: () {
             Navigator.push(
@@ -83,10 +85,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_selectedScreen is BuildCrafterScreen) {
       return [
         IconButton(
+          tooltip: AppLocalizations.of(context)!.creditsTooltip,
           icon: const Icon(Icons.help_outline),
           onPressed: () => showBuildCrafterCreditsDialog(context),
         ),
         IconButton(
+          tooltip: AppLocalizations.of(context)!.settings,
           icon: const Icon(Icons.settings),
           onPressed: () {
             Navigator.push(

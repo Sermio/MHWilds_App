@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
 import 'package:mhwilds_app/components/label_value_row.dart';
+import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 class ArmorDetails extends StatefulWidget {
   final armor_models.ArmorPiece armor;
@@ -85,13 +86,11 @@ class _ArmorDetailsState extends State<ArmorDetails> {
                               size: 80,
                               fallback: Image.asset(
                                 'assets/imgs/armor/${widget.armor.kind.toString().toLowerCase()}/rarity${widget.armor.rarity}.webp',
-                                fit: BoxFit.cover,
-                              ),
+                                fit: BoxFit.cover, excludeFromSemantics: true),
                             )
                           : Image.asset(
                               'assets/imgs/armor/${widget.armor.kind.toString().toLowerCase()}/rarity${widget.armor.rarity}.webp',
-                              fit: BoxFit.cover,
-                            ),
+                              fit: BoxFit.cover, excludeFromSemantics: true),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -668,8 +667,7 @@ class ArmorBaseDefense extends StatelessWidget {
         SizedBox(
           height: 20,
           child: Image.asset(
-            'assets/imgs/armor/armor.webp',
-          ),
+            'assets/imgs/armor/armor.webp', excludeFromSemantics: true),
         ),
       ],
     );
@@ -709,8 +707,7 @@ class ArmorResistancesWidget extends StatelessWidget {
                       SizedBox(
                         height: 20,
                         child: Image.asset(
-                          'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
-                        ),
+                          'assets/imgs/elements/${resistanceType.toLowerCase()}.webp', semanticLabel: WeaponUtils.elementLabel(resistanceType)),
                       ),
                     ],
                   ),

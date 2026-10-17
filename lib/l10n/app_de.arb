@@ -256,5 +256,6 @@
   "retry": "Erneut versuchen",
   "errorOffline": "Keine Verbindung. Prüfe dein Internet und versuche es erneut.",
   "errorLoadingData": "Die Daten konnten nicht geladen werden. Bitte versuche es erneut.",
-  "offlineDataFrom": "Offline · Daten vom {date}"
+  "offlineDataFrom": "Offline · Daten vom {date}",
+  "creditsTooltip": "Mitwirkende"
 }

@@ -152,6 +152,9 @@ class _WeaponsListState extends State<WeaponsList> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: _filtersVisible
+            ? AppLocalizations.of(context)!.close
+            : AppLocalizations.of(context)!.filters,
         onPressed: _toggleFiltersVisibility,
         backgroundColor: colorScheme.primary,
         child: Icon(

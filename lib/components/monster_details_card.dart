@@ -7,6 +7,7 @@ import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
+import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 class MonsterDetailsCard extends StatelessWidget {
   final Monster monster;
@@ -69,9 +70,9 @@ class MonsterDetailsCard extends StatelessWidget {
                           .where((w) => w.isNotEmpty)
                           .map(
                             (w) => Image.asset(
-                              'assets/imgs/elements/${w.toLowerCase()}.webp',
-                              height: 25,
-                            ),
+                                'assets/imgs/elements/${w.toLowerCase()}.webp',
+                                height: 25,
+                                semanticLabel: WeaponUtils.elementLabel(w)),
                           )
                           .toList(),
                     ),
@@ -81,9 +82,10 @@ class MonsterDetailsCard extends StatelessWidget {
                           .where((w) => w.name.isNotEmpty)
                           .map(
                             (w) => Image.asset(
-                              'assets/imgs/elements/${w.name.toLowerCase()}.webp',
-                              height: 25,
-                            ),
+                                'assets/imgs/elements/${w.name.toLowerCase()}.webp',
+                                height: 25,
+                                semanticLabel:
+                                    WeaponUtils.elementLabel(w.name)),
                           )
                           .toList(),
                     ),
@@ -220,11 +222,11 @@ class MonsterDetailsCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Image.asset(
-                              'assets/imgs/elements/${name.toLowerCase()}.webp',
-                              height: 25,
-                              errorBuilder: (_, __, ___) =>
-                                  const SizedBox(height: 25),
-                            ),
+                                'assets/imgs/elements/${name.toLowerCase()}.webp',
+                                height: 25,
+                                errorBuilder: (_, __, ___) =>
+                                    const SizedBox(height: 25),
+                                semanticLabel: WeaponUtils.elementLabel(name)),
                             const SizedBox(height: 2),
                             Row(
                               mainAxisSize: MainAxisSize.min,
@@ -253,11 +255,12 @@ class MonsterDetailsCard extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: AppSpacing.xs, vertical: 2),
                             child: Image.asset(
-                              'assets/imgs/elements/${w.element.toLowerCase()}.webp',
-                              height: 25,
-                              errorBuilder: (_, __, ___) =>
-                                  const SizedBox(height: 25),
-                            ),
+                                'assets/imgs/elements/${w.element.toLowerCase()}.webp',
+                                height: 25,
+                                errorBuilder: (_, __, ___) =>
+                                    const SizedBox(height: 25),
+                                semanticLabel:
+                                    WeaponUtils.elementLabel(w.element)),
                           ),
                         )
                         .toList(),
@@ -294,11 +297,8 @@ class MonsterDetailsCard extends StatelessWidget {
                       itemName: loc,
                       itemIdForColor: location.value.id,
                       getItemColor: GameColors.of(context).zone,
-                      optionalWidget: Image.asset(
-                        'assets/imgs/maps/map.webp',
-                        width: 16,
-                        height: 16,
-                      ),
+                      optionalWidget: Image.asset('assets/imgs/maps/map.webp',
+                          width: 16, height: 16, excludeFromSemantics: true),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -398,9 +398,9 @@ class ElementsAndAilments extends StatelessWidget {
                 Row(
                   children: [
                     Image.asset(
-                      'assets/imgs/elements/${ailmentName.toLowerCase()}.webp',
-                      height: 24,
-                    ),
+                        'assets/imgs/elements/${ailmentName.toLowerCase()}.webp',
+                        height: 24,
+                        semanticLabel: WeaponUtils.elementLabel(ailmentName)),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
@@ -479,10 +479,8 @@ Widget attributeIconWithText(String imageName, String label) {
     padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
     child: Column(
       children: [
-        Image.asset(
-          'assets/imgs/elements/${imageName.toLowerCase()}.webp',
-          height: 25,
-        ),
+        Image.asset('assets/imgs/elements/${imageName.toLowerCase()}.webp',
+            height: 25, semanticLabel: WeaponUtils.elementLabel(imageName)),
         Text(
           label,
           style: const TextStyle(fontSize: 10),

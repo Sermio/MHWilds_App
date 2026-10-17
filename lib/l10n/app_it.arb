@@ -247,5 +247,6 @@
   "retry": "Riprova",
   "errorOffline": "Nessuna connessione. Controlla internet e riprova.",
   "errorLoadingData": "Impossibile caricare i dati. Riprova.",
-  "offlineDataFrom": "Offline · dati del {date}"
+  "offlineDataFrom": "Offline · dati del {date}",
+  "creditsTooltip": "Crediti"
 }

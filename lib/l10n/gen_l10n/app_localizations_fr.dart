@@ -697,4 +697,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
     return 'Hors ligne · données du $dateString';
   }
+
+  @override
+  String get creditsTooltip => 'Crédits';
 }

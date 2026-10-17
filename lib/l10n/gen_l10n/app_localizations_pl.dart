@@ -698,4 +698,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
     return 'Offline · dane z $dateString';
   }
+
+  @override
+  String get creditsTooltip => 'Autorzy';
 }

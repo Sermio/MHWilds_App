@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
 import 'package:mhwilds_app/components/label_value_row.dart';
+import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 class ArmorSetList extends StatefulWidget {
   const ArmorSetList({super.key});
@@ -285,6 +286,9 @@ class _ArmorSetListState extends State<ArmorSetList> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: _filtersVisible
+            ? AppLocalizations.of(context)!.close
+            : AppLocalizations.of(context)!.filters,
         onPressed: _toggleFiltersVisibility,
         backgroundColor: colorScheme.primary,
         child: Icon(
@@ -649,8 +653,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
               SizedBox(
                 height: 16,
                 child: AssetThumb(
-                  'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
-                ),
+                    'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
+                    semanticLabel: WeaponUtils.elementLabel(resistanceType)),
               ),
             ],
           ),

@@ -14,6 +14,7 @@ import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
+import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 class MonstersList extends StatefulWidget {
   const MonstersList({super.key});
@@ -271,6 +272,9 @@ class _MonstersListState extends State<MonstersList> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: _filtersVisible
+            ? AppLocalizations.of(context)!.close
+            : AppLocalizations.of(context)!.filters,
         onPressed: _toggleFiltersVisibility,
         backgroundColor: colorScheme.primary,
         child: Icon(
@@ -510,12 +514,11 @@ class _MonstersListState extends State<MonstersList> {
           Positioned(
             bottom: 2,
             right: 2 + (i * 15), // Espaciado horizontal de derecha a izquierda
-            child: AssetThumb(
-              'assets/imgs/elements/$element.webp',
-              width: 40,
-              height: 40,
-              fit: BoxFit.cover,
-            ),
+            child: AssetThumb('assets/imgs/elements/$element.webp',
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+                semanticLabel: WeaponUtils.elementLabel(element)),
           ),
         );
       }

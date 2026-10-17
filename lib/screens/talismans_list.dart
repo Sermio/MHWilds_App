@@ -255,6 +255,9 @@ class _AmuletListState extends State<AmuletList> {
       ),
       // Botón flotante para mostrar/ocultar filtros
       floatingActionButton: FloatingActionButton(
+        tooltip: _filtersVisible
+            ? AppLocalizations.of(context)!.close
+            : AppLocalizations.of(context)!.filters,
         onPressed: _toggleFiltersVisibility,
         backgroundColor: colorScheme.primary,
         child: Icon(

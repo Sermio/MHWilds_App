@@ -47,6 +47,7 @@ class ElementsDialog extends StatelessWidget {
                     ),
                   ),
                   IconButton(
+                    tooltip: AppLocalizations.of(context)!.close,
                     onPressed: () => Navigator.of(context).pop(),
                     icon: Icon(
                       Icons.close,

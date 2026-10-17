@@ -1430,6 +1430,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Offline · data from {date}'**
   String offlineDataFrom(DateTime date);
+
+  /// Tooltip of the help button that opens the credits of an external tool screen
+  ///
+  /// In en, this message translates to:
+  /// **'Credits'**
+  String get creditsTooltip;
 }
 
 class _AppLocalizationsDelegate

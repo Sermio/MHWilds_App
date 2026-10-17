@@ -693,6 +693,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
     return 'Sin conexión · datos del $dateString';
   }
+
+  @override
+  String get creditsTooltip => 'Créditos';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -1369,6 +1372,9 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
 
     return 'Sin conexión · datos del $dateString';
   }
+
+  @override
+  String get creditsTooltip => 'Créditos';
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -2045,4 +2051,7 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
     return 'Sin conexión · datos del $dateString';
   }
+
+  @override
+  String get creditsTooltip => 'Créditos';
 }

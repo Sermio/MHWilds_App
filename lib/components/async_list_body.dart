@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/async_state_view.dart';
+import 'package:mhwilds_app/components/card_skeleton_list.dart';
 import 'package:mhwilds_app/components/offline_data_banner.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
 
@@ -41,6 +42,7 @@ class AsyncListBody<T> extends StatelessWidget {
           child: AsyncStateView<List<T>>(
             state: state,
             loadingLabel: loadingLabel,
+            loadingSkeleton: CardSkeletonList(semanticLabel: loadingLabel),
             emptyTitle: emptyTitle,
             emptySubtitle: emptySubtitle,
             onRetry: onRetry,

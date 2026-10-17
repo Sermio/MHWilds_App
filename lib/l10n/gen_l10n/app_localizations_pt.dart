@@ -694,6 +694,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
     return 'Sem ligação · dados de $dateString';
   }
+
+  @override
+  String get creditsTooltip => 'Créditos';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -1364,4 +1367,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
     return 'Sem conexão · dados de $dateString';
   }
+
+  @override
+  String get creditsTooltip => 'Créditos';
 }

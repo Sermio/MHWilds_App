@@ -10,6 +10,7 @@ import 'package:mhwilds_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
 import 'package:mhwilds_app/components/label_value_row.dart';
+import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 class MonsterDetails extends StatefulWidget {
   final int monsterId;
@@ -496,8 +497,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                       Icons.help_outline,
                       size: 25,
                       color: colorScheme.onSurfaceVariant,
-                    ),
-                  ),
+                    ), semanticLabel: WeaponUtils.elementLabel(name)),
                   const SizedBox(height: 2),
                   Row(
                     mainAxisSize: MainAxisSize.min,
@@ -553,8 +553,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
                     padding: const EdgeInsets.only(right: AppSpacing.sm),
                     child: Image.asset(
                       'assets/imgs/elements/${r.element.toLowerCase()}.webp',
-                      height: 25,
-                    ),
+                      height: 25, semanticLabel: WeaponUtils.elementLabel(r.element)),
                   )),
             ],
           ),

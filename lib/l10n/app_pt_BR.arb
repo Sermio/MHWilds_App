@@ -259,5 +259,6 @@
   "retry": "Tentar novamente",
   "errorOffline": "Sem conexão. Verifique sua internet e tente novamente.",
   "errorLoadingData": "Não foi possível carregar os dados. Tente novamente.",
-  "offlineDataFrom": "Sem conexão · dados de {date}"
+  "offlineDataFrom": "Sem conexão · dados de {date}",
+  "creditsTooltip": "Créditos"
 }

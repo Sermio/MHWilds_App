@@ -14,6 +14,7 @@ class AsyncStateView<T> extends StatelessWidget {
     this.emptySubtitle,
     this.onRetry,
     this.isEmpty,
+    this.loadingSkeleton,
   });
 
   final LoadState<T> state;
@@ -26,13 +27,17 @@ class AsyncStateView<T> extends StatelessWidget {
   /// Por defecto, una colección vacía. Permite contar los datos ya filtrados.
   final bool Function(T data)? isEmpty;
 
+  /// Sustituye al spinner centrado mientras carga (p. ej. [CardSkeletonList]).
+  final Widget? loadingSkeleton;
+
   @override
   Widget build(BuildContext context) {
     return switch (state) {
-      Idle() || Loading() => _Message(
-          leading: const CircularProgressIndicator(),
-          title: loadingLabel,
-        ),
+      Idle() || Loading() => loadingSkeleton ??
+          _Message(
+            leading: const CircularProgressIndicator(),
+            title: loadingLabel,
+          ),
       Failure(:final error) => _Message(
           icon:
               error is NetworkException ? Icons.wifi_off : Icons.error_outline,

@@ -276,5 +276,9 @@
     "placeholders": {
       "date": {"type": "DateTime", "format": "Md"}
     }
+  },
+  "creditsTooltip": "Credits",
+  "@creditsTooltip": {
+    "description": "Tooltip of the help button that opens the credits of an external tool screen"
   }
 }

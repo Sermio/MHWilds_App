@@ -65,8 +65,7 @@ class WeaponDisplayUtils {
                           size: isDetailView ? 18 : 16,
                           color: GameColors.of(context).element(elementOrStatus),
                         );
-                      },
-                    ),
+                      }, semanticLabel: WeaponUtils.elementLabel(elementOrStatus)),
                   ),
                 ],
               ));
@@ -103,8 +102,7 @@ class WeaponDisplayUtils {
                           size: 18,
                           color: GameColors.of(context).element(phialKind),
                         );
-                      },
-                    ),
+                      }, semanticLabel: WeaponUtils.elementLabel(phialKind)),
                   ),
                 ],
               ));
@@ -193,8 +191,7 @@ class WeaponDisplayUtils {
                               size: 12,
                               color: Colors.white,
                             );
-                          },
-                        ),
+                          }, semanticLabel: WeaponUtils.elementLabel(_getElementAssetName(coating))),
                       ],
                     ],
                   ),
@@ -245,8 +242,7 @@ class WeaponDisplayUtils {
                         ? Colors.blue[600]!
                         : Colors.orange[600]!,
                   );
-                },
-              ),
+                }, semanticLabel: WeaponUtils.elementLabel(_getElementAssetName(phialKind))),
             ] else ...[
               Icon(
                 Icons.electric_bolt,
@@ -330,8 +326,7 @@ class WeaponDisplayUtils {
                         ? Colors.blue[600]!
                         : Colors.orange[600]!,
                   );
-                },
-              ),
+                }, semanticLabel: WeaponUtils.elementLabel(_getElementAssetName(phialKind))),
             ] else ...[
               Icon(
                 Icons.electric_bolt,
@@ -503,8 +498,7 @@ class WeaponDisplayUtils {
                               ? Colors.purple[800]
                               : Colors.green[800],
                         );
-                      },
-                    ),
+                      }, semanticLabel: WeaponUtils.elementLabel(_getElementAssetName(ammo.kind))),
                   ],
                 ],
               ),

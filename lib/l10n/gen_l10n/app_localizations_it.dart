@@ -696,4 +696,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
     return 'Offline · dati del $dateString';
   }
+
+  @override
+  String get creditsTooltip => 'Crediti';
 }
