@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mhwilds_app/api/api_client.dart';
 import 'package:mhwilds_app/api/api_config.dart';
-import 'package:mhwilds_app/l10n/gen_l10n/app_localizations_en.dart';
 import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/providers/filters/monster_filter.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:mhwilds_app/utils/utils.dart';
@@ -65,14 +65,13 @@ void main() {
     expect(ids, [monsters.first.id]);
   });
 
-  test('applyFilters ignora tildes y mayúsculas en el nombre', () async {
+  test('setFilter ignora tildes y mayúsculas en el nombre', () async {
     final provider = MonstersProvider(api: fakeCachedApi(server));
     await provider.fetchMonsters();
     final first = provider.allMonsters.first;
 
-    provider.applyFilters(
-        name: removeDiacritics(first.name).toUpperCase(),
-        l10n: AppLocalizationsEn());
+    provider.setFilter(
+        MonsterFilter(name: removeDiacritics(first.name).toUpperCase()));
 
     expect(provider.filteredMonsters, contains(first));
   });
@@ -115,12 +114,33 @@ void main() {
     final provider = MonstersProvider(api: fakeCachedApi(server));
     await provider.fetchMonsters();
     final name = provider.allMonsters.first.name;
-    provider.applyFilters(name: name, l10n: AppLocalizationsEn());
+    provider.setFilter(MonsterFilter(name: name));
     final filtered = provider.filteredMonsters.length;
 
     await provider.refresh(force: true);
 
     expect(provider.filteredMonsters.length, filtered);
     expect(filtered, lessThan(monsters.length));
+  });
+
+  test('el filtro sobrevive a cambiar de pantalla y se vacía al invalidar',
+      () async {
+    final provider = MonstersProvider(api: fakeCachedApi(server));
+    await provider.fetchMonsters();
+    final name = provider.allMonsters.first.name;
+    provider.setFilter(MonsterFilter(name: name));
+    expect(provider.hasActiveFilter, isTrue);
+
+    // Otra pantalla lee el mismo provider: el filtro sigue ahí.
+    expect(provider.filter.name, name);
+
+    provider.clearFilters();
+    expect(provider.hasActiveFilter, isFalse);
+    expect(provider.filteredMonsters.length, monsters.length);
+
+    provider.setFilter(MonsterFilter(name: name));
+    provider.invalidate();
+    expect(provider.filter, const MonsterFilter());
+    expect(provider.filteredMonsters, isEmpty);
   });
 }

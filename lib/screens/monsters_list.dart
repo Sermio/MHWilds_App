@@ -24,16 +24,15 @@ class MonstersList extends StatefulWidget {
 }
 
 class _MonstersListState extends State<MonstersList> {
-  final TextEditingController _searchNameController = TextEditingController();
-  String _searchNameQuery = '';
-  String? _selectedSpecies;
-  String? _selectedRank;
-  final List<String> _selectedLocations = [];
+  // El filtro vive en MonstersProvider; aquí solo el controlador del texto.
+  late final TextEditingController _searchNameController;
   bool _filtersVisible = false;
 
   @override
   void initState() {
     super.initState();
+    _searchNameController = TextEditingController(
+        text: context.read<MonstersProvider>().filter.name);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider = Provider.of<MonstersProvider>(context, listen: false);
@@ -46,7 +45,6 @@ class _MonstersListState extends State<MonstersList> {
       if (!zonesProvider.hasData) {
         zonesProvider.fetchZones();
       }
-      _resetFilters();
     });
   }
 
@@ -57,14 +55,8 @@ class _MonstersListState extends State<MonstersList> {
   }
 
   void _resetFilters() {
-    setState(() {
-      _searchNameQuery = '';
-      _selectedSpecies = null;
-      _selectedRank = null;
-      _selectedLocations.clear();
-      _searchNameController.clear();
-    });
-    Provider.of<MonstersProvider>(context, listen: false).clearFilters();
+    _searchNameController.clear();
+    context.read<MonstersProvider>().clearFilters();
   }
 
   @override
@@ -105,6 +97,7 @@ class _MonstersListState extends State<MonstersList> {
             onRefresh: () => monstersProvider.refresh(force: true),
             isEmpty: (_) => monsters.isEmpty,
             builder: (context, _) => ListView.builder(
+              key: const PageStorageKey('monsters-list'),
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: monsters.length,
@@ -344,37 +337,27 @@ class _MonstersListState extends State<MonstersList> {
           id: 'name',
           label: l10n.searchByName,
           controller: _searchNameController,
-          onTextChanged: (query) {
-            setState(() {
-              _searchNameQuery = query;
-            });
-            _applyFilters(monstersProvider);
-          },
+          onTextChanged: (query) => monstersProvider
+              .setFilter(monstersProvider.filter.copyWith(name: query)),
           hintText: l10n.enterMonsterName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
         ListFilterFieldConfig.select(
           id: 'species',
           label: l10n.searchBySpecies,
-          value: _selectedSpecies,
-          onSelectChanged: (selectedSpecies) {
-            setState(() {
-              _selectedSpecies = selectedSpecies as String?;
-            });
-            _applyFilters(monstersProvider);
-          },
+          value: monstersProvider.filter.species,
+          onSelectChanged: (selectedSpecies) => monstersProvider.setFilter(
+              monstersProvider.filter
+                  .copyWith(species: () => selectedSpecies as String?)),
           options: _speciesOptions(monstersProvider, l10n),
         ),
         ListFilterFieldConfig.select(
           id: 'rank',
           label: l10n.rank,
-          value: _selectedRank,
-          onSelectChanged: (selectedRank) {
-            setState(() {
-              _selectedRank = selectedRank as String?;
-            });
-            _applyFilters(monstersProvider);
-          },
+          value: monstersProvider.filter.rank,
+          onSelectChanged: (selectedRank) => monstersProvider.setFilter(
+              monstersProvider.filter
+                  .copyWith(rank: () => selectedRank as String?)),
           options: _rankOptions(),
         ),
         ListFilterFieldConfig.custom(
@@ -396,6 +379,7 @@ class _MonstersListState extends State<MonstersList> {
     LocationsProvider zonesProvider,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
+    final selected = monstersProvider.filter.locations;
 
     if (zonesProvider.isLoading) {
       return const Center(child: CircularProgressIndicator());
@@ -409,7 +393,7 @@ class _MonstersListState extends State<MonstersList> {
           label: Text(
             zone.name!,
             style: TextStyle(
-              color: _selectedLocations.contains(zone.name)
+              color: selected.contains(zone.name)
                   ? colorScheme.onPrimary
                   : colorScheme.onSurface,
               fontWeight: FontWeight.w500,
@@ -417,31 +401,17 @@ class _MonstersListState extends State<MonstersList> {
           ),
           backgroundColor: GameColors.of(context).zone(zone.id ?? 0),
           selectedColor: colorScheme.primary,
-          selected: _selectedLocations.contains(zone.name),
-          onSelected: (isSelected) {
-            setState(() {
-              if (isSelected) {
-                _selectedLocations.add(zone.name!);
-              } else {
-                _selectedLocations.remove(zone.name);
-              }
-            });
-            _applyFilters(monstersProvider);
-          },
+          selected: selected.contains(zone.name),
+          onSelected: (isSelected) => monstersProvider
+              .setFilter(monstersProvider.filter.copyWith(locations: [
+            for (final l in selected)
+              if (l != zone.name) l,
+            if (isSelected) zone.name!,
+          ])),
           elevation: 2,
           pressElevation: 4,
         );
       }).toList(),
-    );
-  }
-
-  void _applyFilters(MonstersProvider monstersProvider) {
-    monstersProvider.applyFilters(
-      name: _searchNameQuery,
-      species: _selectedSpecies,
-      rank: _selectedRank,
-      locations: _selectedLocations,
-      l10n: AppLocalizations.of(context)!,
     );
   }
 
