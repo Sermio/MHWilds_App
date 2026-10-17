@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/filter_panel_layout.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
 import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
@@ -69,178 +70,173 @@ class _AmuletListState extends State<AmuletList> {
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
-      body: Stack(
-        children: [
-          // Lista de talismanes
-          AsyncListBody<Amulet>(
-            state: talismansProvider.state,
-            isOffline: talismansProvider.isOffline,
-            loadingLabel: l10n.loadingTalismans,
-            emptyTitle: l10n.noTalismansFound,
-            emptySubtitle: l10n.tryAdjustingFilters,
-            onRetry: talismansProvider.fetchAmulets,
-            onRefresh: () => talismansProvider.refresh(force: true),
-            isEmpty: (_) => filteredAmulets.isEmpty,
-            builder: (context, _) => ListView.builder(
-              key: const PageStorageKey('talismans-list'),
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
-              itemCount: filteredAmulets.length,
-              itemBuilder: (context, index) {
-                final amulet = filteredAmulets[index];
-                final ranks = amulet.ranks;
-                final firstRank = ranks.isNotEmpty ? ranks[0] : null;
+      body: FilterPanelLayout(
+        panel: !_filtersVisible
+            ? null
+            : _buildFiltersSection(context, talismansProvider),
+        child: Stack(
+          children: [
+            // Lista de talismanes
+            AsyncListBody<Amulet>(
+              state: talismansProvider.state,
+              isOffline: talismansProvider.isOffline,
+              loadingLabel: l10n.loadingTalismans,
+              emptyTitle: l10n.noTalismansFound,
+              emptySubtitle: l10n.tryAdjustingFilters,
+              onRetry: talismansProvider.fetchAmulets,
+              onRefresh: () => talismansProvider.refresh(force: true),
+              isEmpty: (_) => filteredAmulets.isEmpty,
+              builder: (context, _) => ListView.builder(
+                key: const PageStorageKey('talismans-list'),
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
+                itemCount: filteredAmulets.length,
+                itemBuilder: (context, index) {
+                  final amulet = filteredAmulets[index];
+                  final ranks = amulet.ranks;
+                  final firstRank = ranks.isNotEmpty ? ranks[0] : null;
 
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg)
-                      .copyWith(bottom: 16),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surface,
-                    borderRadius: BorderRadius.circular(AppRadius.lg),
-                    boxShadow: [
-                      BoxShadow(
-                        color: colorScheme.shadow.withValues(alpha: 0.1),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
+                  return Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: AppSpacing.lg)
+                            .copyWith(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: colorScheme.surface,
                       borderRadius: BorderRadius.circular(AppRadius.lg),
-                      onTap: () {
-                        if (firstRank != null) {
-                          final skillIds =
-                              firstRank.skills.map((s) => s.skill.id).toList();
-                          final skillLevels =
-                              firstRank.skills.map((s) => s.level).toList();
+                      boxShadow: [
+                        BoxShadow(
+                          color: colorScheme.shadow.withValues(alpha: 0.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(AppRadius.lg),
+                        onTap: () {
+                          if (firstRank != null) {
+                            final skillIds = firstRank.skills
+                                .map((s) => s.skill.id)
+                                .toList();
+                            final skillLevels =
+                                firstRank.skills.map((s) => s.level).toList();
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SkillDetails(
-                                skillsIds: skillIds,
-                                skillsLevels: skillLevels,
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SkillDetails(
+                                  skillsIds: skillIds,
+                                  skillsLevels: skillLevels,
+                                ),
                               ),
-                            ),
-                          );
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Header del talisman
-                            Row(
-                              children: [
-                                // Imagen del talisman
-                                SizedBox(
-                                  width: 60,
-                                  height: 60,
-                                  child: Center(
-                                    child: GearSpriteIcon(
-                                      column: talismanColumn,
-                                      rarity: firstRank?.rarity ?? 0,
-                                      size: 42,
-                                      fallback: AssetThumb(
-                                        'assets/imgs/amulets/rarity${firstRank?.rarity ?? 1}.webp',
-                                        fit: BoxFit.contain,
+                            );
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Header del talisman
+                              Row(
+                                children: [
+                                  // Imagen del talisman
+                                  SizedBox(
+                                    width: 60,
+                                    height: 60,
+                                    child: Center(
+                                      child: GearSpriteIcon(
+                                        column: talismanColumn,
+                                        rarity: firstRank?.rarity ?? 0,
+                                        size: 42,
+                                        fallback: AssetThumb(
+                                          'assets/imgs/amulets/rarity${firstRank?.rarity ?? 1}.webp',
+                                          fit: BoxFit.contain,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        firstRank?.name ??
-                                            AppLocalizations.of(context)!
-                                                .unknown,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          color: colorScheme.onSurface,
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          firstRank?.name ??
+                                              AppLocalizations.of(context)!
+                                                  .unknown,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: colorScheme.onSurface,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      if (firstRank != null) ...[
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: AppSpacing.sm,
-                                              vertical: AppSpacing.xs),
-                                          decoration: BoxDecoration(
-                                            color: _getRarityColor(
-                                                    firstRank.rarity)
-                                                .withValues(alpha: 0.1),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            border: Border.all(
+                                        const SizedBox(height: 4),
+                                        if (firstRank != null) ...[
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: AppSpacing.sm,
+                                                vertical: AppSpacing.xs),
+                                            decoration: BoxDecoration(
                                               color: _getRarityColor(
                                                       firstRank.rarity)
-                                                  .withValues(alpha: 0.3),
+                                                  .withValues(alpha: 0.1),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                color: _getRarityColor(
+                                                        firstRank.rarity)
+                                                    .withValues(alpha: 0.3),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              l10n.rarityLevel(
+                                                  firstRank.rarity),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall!
+                                                  .copyWith(
+                                                      color: _getRarityColor(
+                                                          firstRank.rarity),
+                                                      fontWeight:
+                                                          FontWeight.w600),
                                             ),
                                           ),
-                                          child: Text(
-                                            l10n.rarityLevel(firstRank.rarity),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodySmall!
-                                                .copyWith(
-                                                    color: _getRarityColor(
-                                                        firstRank.rarity),
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                          ),
-                                        ),
+                                        ],
                                       ],
-                                    ],
+                                    ),
                                   ),
-                                ),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: colorScheme.onSurfaceVariant,
-                                  size: 20,
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: colorScheme.onSurfaceVariant,
+                                    size: 20,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+
+                              // Habilidades del primer rango
+                              if (firstRank != null &&
+                                  firstRank.skills.isNotEmpty) ...[
+                                _buildSkillsSection(
+                                  firstRank,
+                                  skillsProvider,
                                 ),
                               ],
-                            ),
-                            const SizedBox(height: 16),
-
-                            // Habilidades del primer rango
-                            if (firstRank != null &&
-                                firstRank.skills.isNotEmpty) ...[
-                              _buildSkillsSection(
-                                firstRank,
-                                skillsProvider,
-                              ),
                             ],
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
-            ),
-          ),
-          if (_filtersVisible)
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Material(
-                elevation: 8,
-                borderRadius:
-                    const BorderRadius.vertical(bottom: Radius.circular(24)),
-                clipBehavior: Clip.antiAlias,
-                child: _buildFiltersSection(context, talismansProvider),
+                  );
+                },
               ),
             ),
-        ],
+          ],
+        ),
       ),
       // Botón flotante para mostrar/ocultar filtros
       floatingActionButton: FloatingActionButton(

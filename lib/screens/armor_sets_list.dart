@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/filter_panel_layout.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_set.dart' as set_models;
@@ -68,45 +69,37 @@ class _ArmorSetListState extends State<ArmorSetList> {
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
-      body: Stack(
-        children: [
-          AsyncListBody<set_models.ArmorSet>(
-            state: armorSetProvider.state,
-            isOffline: armorSetProvider.isOffline,
-            loadingLabel: l10n.loadingArmorSets,
-            emptyTitle: l10n.noArmorSetsFound,
-            emptySubtitle: l10n.tryAdjustingFilters,
-            onRetry: armorSetProvider.fetchArmorSets,
-            onRefresh: () => armorSetProvider.refresh(force: true),
-            isEmpty: (_) => filteredArmorSets.isEmpty,
-            builder: (context, _) => ListView.builder(
-              key: const PageStorageKey('armor-sets-list'),
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
-              itemCount: filteredArmorSets.length,
-              itemBuilder: (context, index) =>
-                  _buildArmorSet(context, filteredArmorSets[index]),
-            ),
-          ),
-          if (_filtersVisible)
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Material(
-                elevation: 8,
-                borderRadius:
-                    const BorderRadius.vertical(bottom: Radius.circular(24)),
-                clipBehavior: Clip.antiAlias,
-                child: ArmorSetFiltersPanel(
-                  filter: armorSetProvider.filter,
-                  nameController: _searchNameController,
-                  onFilterChanged: armorSetProvider.setFilter,
-                  onReset: _resetFilters,
-                ),
+      body: FilterPanelLayout(
+        panel: !_filtersVisible
+            ? null
+            : ArmorSetFiltersPanel(
+                filter: armorSetProvider.filter,
+                nameController: _searchNameController,
+                onFilterChanged: armorSetProvider.setFilter,
+                onReset: _resetFilters,
+              ),
+        child: Stack(
+          children: [
+            AsyncListBody<set_models.ArmorSet>(
+              state: armorSetProvider.state,
+              isOffline: armorSetProvider.isOffline,
+              loadingLabel: l10n.loadingArmorSets,
+              emptyTitle: l10n.noArmorSetsFound,
+              emptySubtitle: l10n.tryAdjustingFilters,
+              onRetry: armorSetProvider.fetchArmorSets,
+              onRefresh: () => armorSetProvider.refresh(force: true),
+              isEmpty: (_) => filteredArmorSets.isEmpty,
+              builder: (context, _) => ListView.builder(
+                key: const PageStorageKey('armor-sets-list'),
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
+                itemCount: filteredArmorSets.length,
+                itemBuilder: (context, index) =>
+                    _buildArmorSet(context, filteredArmorSets[index]),
               ),
             ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: _filtersVisible ? l10n.close : l10n.filters,
@@ -164,5 +157,4 @@ class _ArmorSetListState extends State<ArmorSetList> {
     }
     return null;
   }
-
 }

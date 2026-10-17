@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/filter_panel_layout.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/weapon.dart';
@@ -65,63 +66,56 @@ class _WeaponsListState extends State<WeaponsList> {
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
-      body: Stack(
-        children: [
-          _buildWeaponsList(context, weaponsProvider, weaponsProvider.weapons),
-          Positioned(
-            top: weaponsProvider.isOffline ? 48 : 8,
-            right: 16,
-            child: SegmentedButton<bool>(
-              segments: [
-                ButtonSegment(
-                  value: false,
-                  icon: const Icon(Icons.view_list),
-                  label: Text(l10n.listView),
-                ),
-                ButtonSegment(
-                  value: true,
-                  icon: const Icon(Icons.account_tree),
-                  label: Text(l10n.treeView),
-                ),
-              ],
-              selected: {_isTreeView},
-              onSelectionChanged: (Set<bool> newSelection) {
-                setState(() {
-                  _isTreeView = newSelection.first;
-                });
-              },
-              showSelectedIcon: false,
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.resolveWith<Color>(
-                  (Set<WidgetState> states) {
-                    if (states.contains(WidgetState.selected)) {
-                      return colorScheme.primaryContainer;
-                    }
-                    return colorScheme.surface.withValues(alpha: 0.9);
-                  },
-                ),
+      body: FilterPanelLayout(
+        panel: !_filtersVisible
+            ? null
+            : WeaponsFiltersPanel(
+                provider: weaponsProvider,
+                nameController: _searchNameController,
+                seriesController: _searchSeriesController,
+                onReset: _resetFilters,
               ),
-            ),
-          ),
-          if (_filtersVisible)
+        child: Stack(
+          children: [
+            _buildWeaponsList(
+                context, weaponsProvider, weaponsProvider.weapons),
             Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Material(
-                elevation: 8,
-                borderRadius:
-                    const BorderRadius.vertical(bottom: Radius.circular(24)),
-                clipBehavior: Clip.antiAlias,
-                child: WeaponsFiltersPanel(
-                  provider: weaponsProvider,
-                  nameController: _searchNameController,
-                  seriesController: _searchSeriesController,
-                  onReset: _resetFilters,
+              top: weaponsProvider.isOffline ? 48 : 8,
+              right: 16,
+              child: SegmentedButton<bool>(
+                segments: [
+                  ButtonSegment(
+                    value: false,
+                    icon: const Icon(Icons.view_list),
+                    label: Text(l10n.listView),
+                  ),
+                  ButtonSegment(
+                    value: true,
+                    icon: const Icon(Icons.account_tree),
+                    label: Text(l10n.treeView),
+                  ),
+                ],
+                selected: {_isTreeView},
+                onSelectionChanged: (Set<bool> newSelection) {
+                  setState(() {
+                    _isTreeView = newSelection.first;
+                  });
+                },
+                showSelectedIcon: false,
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                    (Set<WidgetState> states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return colorScheme.primaryContainer;
+                      }
+                      return colorScheme.surface.withValues(alpha: 0.9);
+                    },
+                  ),
                 ),
               ),
             ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: _filtersVisible ? l10n.close : l10n.filters,
