@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mhwilds_app/providers/filters/item_filter.dart';
 import 'package:mhwilds_app/providers/filters/monster_filter.dart';
 import 'package:mhwilds_app/providers/filters/weapon_filter.dart';
+import 'package:mhwilds_app/screens/armor_sets_list.dart';
 import 'package:mhwilds_app/screens/items_list.dart';
 import 'package:mhwilds_app/screens/monsters_list.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
@@ -99,5 +100,22 @@ void main() {
     await tester.pump(const Duration(milliseconds: 400));
 
     expect(data.weapons.filter.element, 'ice');
+  });
+
+  testWidgets('armaduras: elegir un elemento en el desplegable lo guarda',
+      (tester) async {
+    final data = await FixtureProviders.load(tester);
+
+    await open(tester, const ArmorSetList(), data);
+    await showFilters(tester);
+    final field = find.byType(DropdownButtonFormField<dynamic>);
+    await tester.ensureVisible(field);
+    await tester.pump();
+    await tester.tap(field);
+    await tester.pump(const Duration(milliseconds: 400));
+    await tester.tap(find.text('Dragon').last);
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(data.armorSets.filter.element, 'dragon');
   });
 }

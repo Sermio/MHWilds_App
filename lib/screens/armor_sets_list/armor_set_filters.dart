@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/filters/armor_set_filter.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/game_element.dart';
 
-/// Panel de filtros (nombre, tipo, rareza) de la lista de sets de armadura.
+/// Panel de filtros (nombre, tipo, rareza, resistencia) de la lista de sets de armadura.
 class ArmorSetFiltersPanel extends StatelessWidget {
   final ArmorSetFilter filter;
   final TextEditingController nameController;
@@ -26,7 +28,7 @@ class ArmorSetFiltersPanel extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ListFiltersPanel(
-      maxHeight: 340,
+      maxHeight: 440,
       title: l10n.filters,
       resetLabel: l10n.reset,
       onReset: onReset,
@@ -56,8 +58,28 @@ class ArmorSetFiltersPanel extends StatelessWidget {
               filter.copyWith(rarity: () => selectedRarity as int?)),
           options: _rarityOptions(context, l10n),
         ),
+        ListFilterFieldConfig.select(
+          id: 'element',
+          label: l10n.resistances,
+          value: filter.element,
+          onSelectChanged: (selected) => onFilterChanged(
+              filter.copyWith(element: () => selected as String?)),
+          options: _elementOptions(l10n),
+        ),
       ],
     );
+  }
+
+  /// Solo elementos: las armaduras no resisten estados.
+  List<ListFilterOption> _elementOptions(AppLocalizations l10n) {
+    return [
+      for (final e in GameElement.elements)
+        ListFilterOption(
+          value: e.id,
+          label: e.label(l10n),
+          leading: ElementIcon(e.id, size: 20),
+        ),
+    ];
   }
 
   List<ListFilterOption> _armorTypeOptions(BuildContext context) {
