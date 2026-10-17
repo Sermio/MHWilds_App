@@ -701,4 +701,31 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get creditsTooltip => 'Autorzy';
+
+  @override
+  String get elementFire => 'Ogień';
+
+  @override
+  String get elementWater => 'Woda';
+
+  @override
+  String get elementIce => 'Lód';
+
+  @override
+  String get elementThunder => 'Piorun';
+
+  @override
+  String get elementDragon => 'Smok';
+
+  @override
+  String get elementParalysis => 'Paraliż';
+
+  @override
+  String get elementPoison => 'Trucizna';
+
+  @override
+  String get elementSleep => 'Sen';
+
+  @override
+  String get elementBlastblight => 'Wybuch';
 }

@@ -257,5 +257,14 @@
   "errorOffline": "Brak połączenia. Sprawdź internet i spróbuj ponownie.",
   "errorLoadingData": "Nie udało się wczytać danych. Spróbuj ponownie.",
   "offlineDataFrom": "Offline · dane z {date}",
-  "creditsTooltip": "Autorzy"
+  "creditsTooltip": "Autorzy",
+  "elementFire": "Ogień",
+  "elementWater": "Woda",
+  "elementIce": "Lód",
+  "elementThunder": "Piorun",
+  "elementDragon": "Smok",
+  "elementParalysis": "Paraliż",
+  "elementPoison": "Trucizna",
+  "elementSleep": "Sen",
+  "elementBlastblight": "Wybuch"
 }

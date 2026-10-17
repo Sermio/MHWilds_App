@@ -257,5 +257,14 @@
   "errorOffline": "Keine Verbindung. Prüfe dein Internet und versuche es erneut.",
   "errorLoadingData": "Die Daten konnten nicht geladen werden. Bitte versuche es erneut.",
   "offlineDataFrom": "Offline · Daten vom {date}",
-  "creditsTooltip": "Mitwirkende"
+  "creditsTooltip": "Mitwirkende",
+  "elementFire": "Feuer",
+  "elementWater": "Wasser",
+  "elementIce": "Eis",
+  "elementThunder": "Blitz",
+  "elementDragon": "Drache",
+  "elementParalysis": "Lähmung",
+  "elementPoison": "Gift",
+  "elementSleep": "Schlaf",
+  "elementBlastblight": "Explosion"
 }

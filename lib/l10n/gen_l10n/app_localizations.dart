@@ -1436,6 +1436,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Credits'**
   String get creditsTooltip;
+
+  /// No description provided for @elementFire.
+  ///
+  /// In en, this message translates to:
+  /// **'Fire'**
+  String get elementFire;
+
+  /// No description provided for @elementWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get elementWater;
+
+  /// No description provided for @elementIce.
+  ///
+  /// In en, this message translates to:
+  /// **'Ice'**
+  String get elementIce;
+
+  /// No description provided for @elementThunder.
+  ///
+  /// In en, this message translates to:
+  /// **'Thunder'**
+  String get elementThunder;
+
+  /// No description provided for @elementDragon.
+  ///
+  /// In en, this message translates to:
+  /// **'Dragon'**
+  String get elementDragon;
+
+  /// No description provided for @elementParalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Paralysis'**
+  String get elementParalysis;
+
+  /// No description provided for @elementPoison.
+  ///
+  /// In en, this message translates to:
+  /// **'Poison'**
+  String get elementPoison;
+
+  /// No description provided for @elementSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get elementSleep;
+
+  /// No description provided for @elementBlastblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Blastblight'**
+  String get elementBlastblight;
 }
 
 class _AppLocalizationsDelegate

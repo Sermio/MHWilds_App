@@ -248,5 +248,14 @@
   "errorOffline": "Nessuna connessione. Controlla internet e riprova.",
   "errorLoadingData": "Impossibile caricare i dati. Riprova.",
   "offlineDataFrom": "Offline · dati del {date}",
-  "creditsTooltip": "Crediti"
+  "creditsTooltip": "Crediti",
+  "elementFire": "Fuoco",
+  "elementWater": "Acqua",
+  "elementIce": "Ghiaccio",
+  "elementThunder": "Fulmine",
+  "elementDragon": "Drago",
+  "elementParalysis": "Paralisi",
+  "elementPoison": "Veleno",
+  "elementSleep": "Sonno",
+  "elementBlastblight": "Esplosione"
 }

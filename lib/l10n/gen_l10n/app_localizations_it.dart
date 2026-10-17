@@ -699,4 +699,31 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get creditsTooltip => 'Crediti';
+
+  @override
+  String get elementFire => 'Fuoco';
+
+  @override
+  String get elementWater => 'Acqua';
+
+  @override
+  String get elementIce => 'Ghiaccio';
+
+  @override
+  String get elementThunder => 'Fulmine';
+
+  @override
+  String get elementDragon => 'Drago';
+
+  @override
+  String get elementParalysis => 'Paralisi';
+
+  @override
+  String get elementPoison => 'Veleno';
+
+  @override
+  String get elementSleep => 'Sonno';
+
+  @override
+  String get elementBlastblight => 'Esplosione';
 }

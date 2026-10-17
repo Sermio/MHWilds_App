@@ -280,5 +280,14 @@
   "creditsTooltip": "Credits",
   "@creditsTooltip": {
     "description": "Tooltip of the help button that opens the credits of an external tool screen"
-  }
+  },
+  "elementFire": "Fire",
+  "elementWater": "Water",
+  "elementIce": "Ice",
+  "elementThunder": "Thunder",
+  "elementDragon": "Dragon",
+  "elementParalysis": "Paralysis",
+  "elementPoison": "Poison",
+  "elementSleep": "Sleep",
+  "elementBlastblight": "Blastblight"
 }

@@ -699,4 +699,31 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get creditsTooltip => 'Mitwirkende';
+
+  @override
+  String get elementFire => 'Feuer';
+
+  @override
+  String get elementWater => 'Wasser';
+
+  @override
+  String get elementIce => 'Eis';
+
+  @override
+  String get elementThunder => 'Blitz';
+
+  @override
+  String get elementDragon => 'Drache';
+
+  @override
+  String get elementParalysis => 'Lähmung';
+
+  @override
+  String get elementPoison => 'Gift';
+
+  @override
+  String get elementSleep => 'Schlaf';
+
+  @override
+  String get elementBlastblight => 'Explosion';
 }

@@ -14,7 +14,7 @@ import 'package:mhwilds_app/screens/skills_list.dart';
 import 'package:mhwilds_app/screens/talismans_list.dart';
 import 'package:mhwilds_app/screens/weapons_list.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
-import 'package:mhwilds_app/utils/weapon_utils.dart';
+import 'package:mhwilds_app/utils/game_element.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -71,10 +71,11 @@ void main() {
   });
 
   group('etiquetas de accesibilidad', () {
-    test('elementLabel', () {
-      expect(WeaponUtils.elementLabel('poison'), 'Poison');
-      expect(WeaponUtils.elementLabel('close-range'), 'Close range');
-      expect(WeaponUtils.elementLabel(''), '');
+    test('gameElementLabel', () {
+      final en = lookupAppLocalizations(const Locale('en'));
+      expect(gameElementLabel(en, 'poison'), 'Poison');
+      expect(gameElementLabel(en, 'close-range'), 'Close range');
+      expect(gameElementLabel(en, ''), '');
     });
 
     testWidgets('AssetThumb: decorativa salvo que se dé semanticLabel',

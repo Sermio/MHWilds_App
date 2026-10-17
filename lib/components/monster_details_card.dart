@@ -1,13 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/elements_dialog.dart';
 import 'package:mhwilds_app/data/ailments.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
-import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 class MonsterDetailsCard extends StatelessWidget {
   final Monster monster;
@@ -68,25 +68,14 @@ class MonsterDetailsCard extends StatelessWidget {
                       attributeType: "Elements",
                       children: monster.elements
                           .where((w) => w.isNotEmpty)
-                          .map(
-                            (w) => Image.asset(
-                                'assets/imgs/elements/${w.toLowerCase()}.webp',
-                                height: 25,
-                                semanticLabel: WeaponUtils.elementLabel(w)),
-                          )
+                          .map((w) => ElementIcon(w))
                           .toList(),
                     ),
                     MonsterAttributes(
                       attributeType: "Ailments",
                       children: monster.ailments
                           .where((w) => w.name.isNotEmpty)
-                          .map(
-                            (w) => Image.asset(
-                                'assets/imgs/elements/${w.name.toLowerCase()}.webp',
-                                height: 25,
-                                semanticLabel:
-                                    WeaponUtils.elementLabel(w.name)),
-                          )
+                          .map((w) => ElementIcon(w.name))
                           .toList(),
                     ),
                   ],
@@ -221,12 +210,7 @@ class MonsterDetailsCard extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Image.asset(
-                                'assets/imgs/elements/${name.toLowerCase()}.webp',
-                                height: 25,
-                                errorBuilder: (_, __, ___) =>
-                                    const SizedBox(height: 25),
-                                semanticLabel: WeaponUtils.elementLabel(name)),
+                            ElementIcon(name),
                             const SizedBox(height: 2),
                             Row(
                               mainAxisSize: MainAxisSize.min,
@@ -254,13 +238,7 @@ class MonsterDetailsCard extends StatelessWidget {
                           (w) => Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: AppSpacing.xs, vertical: 2),
-                            child: Image.asset(
-                                'assets/imgs/elements/${w.element.toLowerCase()}.webp',
-                                height: 25,
-                                errorBuilder: (_, __, ___) =>
-                                    const SizedBox(height: 25),
-                                semanticLabel:
-                                    WeaponUtils.elementLabel(w.element)),
+                            child: ElementIcon(w.element),
                           ),
                         )
                         .toList(),
@@ -397,10 +375,7 @@ class ElementsAndAilments extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Image.asset(
-                        'assets/imgs/elements/${ailmentName.toLowerCase()}.webp',
-                        height: 24,
-                        semanticLabel: WeaponUtils.elementLabel(ailmentName)),
+                    ElementIcon(ailmentName, size: 24),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
@@ -472,20 +447,4 @@ class MonsterAttributes extends StatelessWidget {
       ],
     );
   }
-}
-
-Widget attributeIconWithText(String imageName, String label) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
-    child: Column(
-      children: [
-        Image.asset('assets/imgs/elements/${imageName.toLowerCase()}.webp',
-            height: 25, semanticLabel: WeaponUtils.elementLabel(imageName)),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 10),
-        ),
-      ],
-    ),
-  );
 }

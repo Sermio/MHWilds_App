@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/stat_row.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
-import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 class ArmorResistancesWidget extends StatelessWidget {
   final armor_models.ArmorPiece armor;
@@ -23,12 +23,7 @@ class ArmorResistancesWidget extends StatelessWidget {
               children: [
                 Text(entry.value.toString()),
                 const SizedBox(width: 5),
-                SizedBox(
-                  height: 20,
-                  child: Image.asset(
-                      'assets/imgs/elements/${entry.key.toLowerCase()}.webp',
-                      semanticLabel: WeaponUtils.elementLabel(entry.key)),
-                ),
+                ElementIcon(entry.key, size: 20),
               ],
             ),
         ],

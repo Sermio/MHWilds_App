@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
-import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/components/filter_panel_layout.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
@@ -14,7 +14,6 @@ import 'package:mhwilds_app/screens/monster_details.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
-import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 class MonstersList extends StatefulWidget {
   const MonstersList({super.key});
@@ -458,11 +457,7 @@ class _MonstersListState extends State<MonstersList> {
           Positioned(
             bottom: 2,
             right: 2 + (i * 15), // Espaciado horizontal de derecha a izquierda
-            child: AssetThumb('assets/imgs/elements/$element.webp',
-                width: 40,
-                height: 40,
-                fit: BoxFit.cover,
-                semanticLabel: WeaponUtils.elementLabel(element)),
+            child: ElementIcon(element, size: 40, fit: BoxFit.cover),
           ),
         );
       }

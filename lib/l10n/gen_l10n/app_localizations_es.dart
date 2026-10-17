@@ -696,6 +696,33 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get creditsTooltip => 'Créditos';
+
+  @override
+  String get elementFire => 'Fuego';
+
+  @override
+  String get elementWater => 'Agua';
+
+  @override
+  String get elementIce => 'Hielo';
+
+  @override
+  String get elementThunder => 'Rayo';
+
+  @override
+  String get elementDragon => 'Dragón';
+
+  @override
+  String get elementParalysis => 'Parálisis';
+
+  @override
+  String get elementPoison => 'Veneno';
+
+  @override
+  String get elementSleep => 'Sueño';
+
+  @override
+  String get elementBlastblight => 'Explosión';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -1375,6 +1402,33 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
 
   @override
   String get creditsTooltip => 'Créditos';
+
+  @override
+  String get elementFire => 'Fuego';
+
+  @override
+  String get elementWater => 'Agua';
+
+  @override
+  String get elementIce => 'Hielo';
+
+  @override
+  String get elementThunder => 'Rayo';
+
+  @override
+  String get elementDragon => 'Dragón';
+
+  @override
+  String get elementParalysis => 'Parálisis';
+
+  @override
+  String get elementPoison => 'Veneno';
+
+  @override
+  String get elementSleep => 'Sueño';
+
+  @override
+  String get elementBlastblight => 'Explosión';
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -2054,4 +2108,31 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
   @override
   String get creditsTooltip => 'Créditos';
+
+  @override
+  String get elementFire => 'Fuego';
+
+  @override
+  String get elementWater => 'Agua';
+
+  @override
+  String get elementIce => 'Hielo';
+
+  @override
+  String get elementThunder => 'Rayo';
+
+  @override
+  String get elementDragon => 'Dragón';
+
+  @override
+  String get elementParalysis => 'Parálisis';
+
+  @override
+  String get elementPoison => 'Veneno';
+
+  @override
+  String get elementSleep => 'Sueño';
+
+  @override
+  String get elementBlastblight => 'Explosión';
 }

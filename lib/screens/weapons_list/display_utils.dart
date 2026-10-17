@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/weapon.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
-import 'package:mhwilds_app/components/asset_thumb.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/label_value_row.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
-import 'package:mhwilds_app/utils/weapon_utils.dart';
+import 'package:mhwilds_app/utils/game_element.dart';
 
 // Clase estática para métodos auxiliares reutilizables
 class WeaponDisplayUtils {
@@ -64,20 +64,14 @@ class WeaponDisplayUtils {
                     ),
                   ),
                   const SizedBox(width: 6),
-                  SizedBox(
-                    width: isDetailView ? 18 : 16,
-                    height: isDetailView ? 18 : 16,
-                    child: AssetThumb(
-                        'assets/imgs/elements/${elementOrStatus.toLowerCase()}.webp',
-                        errorBuilder: (context, error, stackTrace) {
-                      return Icon(
-                        WeaponUtils.getElementIcon(elementOrStatus),
-                        size: isDetailView ? 18 : 16,
-                        color: GameColors.of(context).element(elementOrStatus),
-                      );
-                    },
-                        semanticLabel:
-                            WeaponUtils.elementLabel(elementOrStatus)),
+                  ElementIcon(
+                    elementOrStatus,
+                    size: isDetailView ? 18 : 16,
+                    fallback: Icon(
+                      GameElement.iconOf(elementOrStatus),
+                      size: isDetailView ? 18 : 16,
+                      color: GameColors.of(context).element(elementOrStatus),
+                    ),
                   ),
                 ],
               ));
@@ -110,18 +104,14 @@ class WeaponDisplayUtils {
                         color: GameColors.of(context).element(phialKind)),
                   ),
                   const SizedBox(width: 6),
-                  SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: AssetThumb(
-                        'assets/imgs/elements/${phialKind.toLowerCase()}.webp',
-                        errorBuilder: (context, error, stackTrace) {
-                      return Icon(
-                        WeaponUtils.getElementIcon(phialKind),
-                        size: 18,
-                        color: GameColors.of(context).element(phialKind),
-                      );
-                    }, semanticLabel: WeaponUtils.elementLabel(phialKind)),
+                  ElementIcon(
+                    phialKind,
+                    size: 18,
+                    fallback: Icon(
+                      GameElement.iconOf(phialKind),
+                      size: 18,
+                      color: GameColors.of(context).element(phialKind),
+                    ),
                   ),
                 ],
               ));
@@ -200,21 +190,9 @@ class WeaponDisplayUtils {
                         ),
                       ),
                       // Icono del elemento/status si existe después del texto
-                      if (_hasElementIcon(coating)) ...[
+                      if (GameElement.fromId(coating) != null) ...[
                         const SizedBox(width: 4),
-                        AssetThumb(
-                            'assets/imgs/elements/${_getElementAssetName(coating)}.webp',
-                            width: 12,
-                            height: 12,
-                            errorBuilder: (context, error, stackTrace) {
-                          return Icon(
-                            WeaponUtils.getElementIcon(coating),
-                            size: 12,
-                            color: Colors.white,
-                          );
-                        },
-                            semanticLabel: WeaponUtils.elementLabel(
-                                _getElementAssetName(coating))),
+                        ElementIcon(coating, size: 12),
                       ],
                     ],
                   ),
@@ -255,30 +233,17 @@ class WeaponDisplayUtils {
               ),
             ),
             const SizedBox(width: 4),
-            if (_hasElementIcon(phialKind)) ...[
-              AssetThumb(
-                  'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
-                  width: 16,
-                  height: 16, errorBuilder: (context, error, stackTrace) {
-                return Icon(
-                  WeaponUtils.getElementIcon(phialKind),
-                  size: 16,
-                  color: phialKind == 'impact'
-                      ? Colors.blue[600]!
-                      : Colors.orange[600]!,
-                );
-              },
-                  semanticLabel: WeaponUtils.elementLabel(
-                      _getElementAssetName(phialKind))),
-            ] else ...[
-              Icon(
+            ElementIcon(
+              phialKind,
+              size: 16,
+              fallback: Icon(
                 Icons.electric_bolt,
                 size: 16,
                 color: phialKind == 'impact'
                     ? Colors.blue[600]!
                     : Colors.orange[600]!,
               ),
-            ],
+            ),
           ],
         ));
   }
@@ -317,62 +282,10 @@ class WeaponDisplayUtils {
         ));
   }
 
+  /// Mismo formato que la hacha cargada: nombre del vial e icono.
   static Widget buildSwitchAxeDamageInfo(BuildContext context, Weapon weapon,
-      {bool isDetailView = false}) {
-    if (weapon.phial == null) return const SizedBox.shrink();
-
-    final phialKind = weapon.phial!.kind;
-    final colorScheme = Theme.of(context).colorScheme;
-    return LabelValueRow(
-        label: Text(
-          '${AppLocalizations.of(context)!.phial}:',
-          style: TextStyle(
-            fontSize: isDetailView ? 16 : 12,
-            fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withValues(alpha: 0.8),
-          ),
-        ),
-        value: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              phialKind[0].toUpperCase() + phialKind.substring(1),
-              style: TextStyle(
-                fontSize: isDetailView ? 16 : 12,
-                fontWeight: FontWeight.bold,
-                color: phialKind == 'impact'
-                    ? Colors.blue[600]!
-                    : Colors.orange[600]!,
-              ),
-            ),
-            const SizedBox(width: 4),
-            if (_hasElementIcon(phialKind)) ...[
-              AssetThumb(
-                  'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
-                  width: 16,
-                  height: 16, errorBuilder: (context, error, stackTrace) {
-                return Icon(
-                  WeaponUtils.getElementIcon(phialKind),
-                  size: 16,
-                  color: phialKind == 'impact'
-                      ? Colors.blue[600]!
-                      : Colors.orange[600]!,
-                );
-              },
-                  semanticLabel: WeaponUtils.elementLabel(
-                      _getElementAssetName(phialKind))),
-            ] else ...[
-              Icon(
-                Icons.electric_bolt,
-                size: 16,
-                color: phialKind == 'impact'
-                    ? Colors.blue[600]!
-                    : Colors.orange[600]!,
-              ),
-            ],
-          ],
-        ));
-  }
+          {bool isDetailView = false}) =>
+      buildChargeBladeDamageInfo(context, weapon, isDetailView: isDetailView);
 
   static Widget buildHuntingHornDamageInfo(BuildContext context, Weapon weapon,
       {bool isDetailView = false}) {
@@ -489,22 +402,9 @@ class WeaponDisplayUtils {
                           : Colors.green[800],
                     ),
                   ),
-                  if (_hasElementIcon(ammo.kind)) ...[
+                  if (GameElement.fromId(ammo.kind) != null) ...[
                     const SizedBox(width: 4),
-                    AssetThumb(
-                        'assets/imgs/elements/${_getElementAssetName(ammo.kind)}.webp',
-                        width: 12,
-                        height: 12, errorBuilder: (context, error, stackTrace) {
-                      return Icon(
-                        WeaponUtils.getElementIcon(ammo.kind),
-                        size: 12,
-                        color: weapon.kind == 'heavy-bowgun'
-                            ? Colors.purple[800]
-                            : Colors.green[800],
-                      );
-                    },
-                        semanticLabel: WeaponUtils.elementLabel(
-                            _getElementAssetName(ammo.kind))),
+                    ElementIcon(ammo.kind, size: 12),
                   ],
                 ],
               ),
@@ -544,35 +444,5 @@ class WeaponDisplayUtils {
             Icon(Icons.flutter_dash, size: 16, color: Colors.lime[600]),
           ],
         ));
-  }
-
-  // Métodos auxiliares estáticos
-  static bool _hasElementIcon(String element) {
-    final elementTypes = [
-      'fire',
-      'water',
-      'ice',
-      'thunder',
-      'dragon',
-      'poison',
-      'paralysis',
-      'sleep',
-      'blast'
-    ];
-    return elementTypes.any((type) => element.toLowerCase().contains(type));
-  }
-
-  static String _getElementAssetName(String element) {
-    final elementLower = element.toLowerCase();
-    if (elementLower.contains('fire')) return 'fire';
-    if (elementLower.contains('water')) return 'water';
-    if (elementLower.contains('ice')) return 'ice';
-    if (elementLower.contains('thunder')) return 'thunder';
-    if (elementLower.contains('dragon')) return 'dragon';
-    if (elementLower.contains('poison')) return 'poison';
-    if (elementLower.contains('paralysis')) return 'paralysis';
-    if (elementLower.contains('sleep')) return 'sleep';
-    if (elementLower.contains('blast')) return 'blast';
-    return 'fire'; // default
   }
 }

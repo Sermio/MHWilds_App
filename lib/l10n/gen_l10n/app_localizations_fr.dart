@@ -700,4 +700,31 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get creditsTooltip => 'Crédits';
+
+  @override
+  String get elementFire => 'Feu';
+
+  @override
+  String get elementWater => 'Eau';
+
+  @override
+  String get elementIce => 'Glace';
+
+  @override
+  String get elementThunder => 'Foudre';
+
+  @override
+  String get elementDragon => 'Dragon';
+
+  @override
+  String get elementParalysis => 'Paralysie';
+
+  @override
+  String get elementPoison => 'Poison';
+
+  @override
+  String get elementSleep => 'Sommeil';
+
+  @override
+  String get elementBlastblight => 'Explosion';
 }

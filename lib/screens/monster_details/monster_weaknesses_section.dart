@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/label_value_row.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/monster_details/section_card.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
-import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 /// Debilidades y resistencias elementales / de estado.
 class MonsterWeaknessesSection extends StatelessWidget {
@@ -116,14 +116,14 @@ class _WeaknessesColumn extends StatelessWidget {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset('assets/imgs/elements/${name.toLowerCase()}.webp',
-                      height: 25,
-                      errorBuilder: (_, __, ___) => Icon(
-                            Icons.help_outline,
-                            size: 25,
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                      semanticLabel: WeaponUtils.elementLabel(name)),
+                  ElementIcon(
+                    name,
+                    fallback: Icon(
+                      Icons.help_outline,
+                      size: 25,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
                   const SizedBox(height: 2),
                   Row(
                     mainAxisSize: MainAxisSize.min,
@@ -176,10 +176,7 @@ class _ResistancesColumn extends StatelessWidget {
             children: [
               ...validResistances.map((r) => Padding(
                     padding: const EdgeInsets.only(right: AppSpacing.sm),
-                    child: Image.asset(
-                        'assets/imgs/elements/${r.element.toLowerCase()}.webp',
-                        height: 25,
-                        semanticLabel: WeaponUtils.elementLabel(r.element)),
+                    child: ElementIcon(r.element),
                   )),
             ],
           ),

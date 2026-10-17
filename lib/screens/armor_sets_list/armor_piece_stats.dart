@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
 import 'package:mhwilds_app/components/label_value_row.dart';
@@ -7,7 +8,6 @@ import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/skills.dart' as skills_model;
 import 'package:mhwilds_app/screens/armor_sets_list/armor_piece_skill_card.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
-import 'package:mhwilds_app/utils/weapon_utils.dart';
 
 /// Defensa, slots, resistencias y skills de una pieza de armadura.
 class ArmorPieceStats extends StatelessWidget {
@@ -186,12 +186,7 @@ class _ResistancesView extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 4),
-              SizedBox(
-                height: 16,
-                child: AssetThumb(
-                    'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
-                    semanticLabel: WeaponUtils.elementLabel(resistanceType)),
-              ),
+              ElementIcon(resistanceType, size: 16),
             ],
           ),
         );

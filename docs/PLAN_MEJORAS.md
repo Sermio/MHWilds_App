@@ -444,7 +444,7 @@ Salen de `.todo`. Decisiones tomadas: filtro de elemento en armaduras sin multis
 - **Prompt:**
   > Lee CLAUDE.md. (1) En `_showFullImage` de `lib/screens/map_details.dart`, el `InteractiveViewer` permite arrastrar sin zoom (`minScale: 0.5`, `boundaryMargin` de 20). Haz que a escala 1 la imagen no se mueva y siga pudiéndose hacer zoom (`minScale: 1`, sin margen); test de widget. (2) En los detalles de armas y armaduras los stats mezclan filas centradas y no centradas. Unifica todas con `LabelValueRow` (nombre a la izquierda, valor a la derecha) reutilizando el componente existente, sin crear otro. Comprueba que los tests de overflow (T24) siguen en verde y revisa la pantalla.
 
-#### T37 · `GameElement` central y etiquetas traducidas
+#### ✅ T37 · `GameElement` central y etiquetas traducidas
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** —
 - **Contexto:** la API no tiene fuente para elementos ni estados (`/ailments` devuelve `[]`). Hoy las rutas `assets/imgs/elements/${x.toLowerCase()}.webp` se construyen a mano en ~10 sitios y `WeaponUtils.getElementAssetName/getElementIcon/elementLabel` duplican el mapeo. Elementos: fire, water, ice, thunder, dragon. Estados de armas: paralysis, poison, sleep, blastblight.
 - **Prompt:**

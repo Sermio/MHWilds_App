@@ -697,6 +697,33 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get creditsTooltip => 'Créditos';
+
+  @override
+  String get elementFire => 'Fogo';
+
+  @override
+  String get elementWater => 'Água';
+
+  @override
+  String get elementIce => 'Gelo';
+
+  @override
+  String get elementThunder => 'Trovão';
+
+  @override
+  String get elementDragon => 'Dragão';
+
+  @override
+  String get elementParalysis => 'Paralisia';
+
+  @override
+  String get elementPoison => 'Veneno';
+
+  @override
+  String get elementSleep => 'Sono';
+
+  @override
+  String get elementBlastblight => 'Explosão';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -1370,4 +1397,31 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get creditsTooltip => 'Créditos';
+
+  @override
+  String get elementFire => 'Fogo';
+
+  @override
+  String get elementWater => 'Água';
+
+  @override
+  String get elementIce => 'Gelo';
+
+  @override
+  String get elementThunder => 'Trovão';
+
+  @override
+  String get elementDragon => 'Dragão';
+
+  @override
+  String get elementParalysis => 'Paralisia';
+
+  @override
+  String get elementPoison => 'Veneno';
+
+  @override
+  String get elementSleep => 'Sono';
+
+  @override
+  String get elementBlastblight => 'Explosão';
 }

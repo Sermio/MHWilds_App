@@ -694,4 +694,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get creditsTooltip => 'Credits';
+
+  @override
+  String get elementFire => 'Fire';
+
+  @override
+  String get elementWater => 'Water';
+
+  @override
+  String get elementIce => 'Ice';
+
+  @override
+  String get elementThunder => 'Thunder';
+
+  @override
+  String get elementDragon => 'Dragon';
+
+  @override
+  String get elementParalysis => 'Paralysis';
+
+  @override
+  String get elementPoison => 'Poison';
+
+  @override
+  String get elementSleep => 'Sleep';
+
+  @override
+  String get elementBlastblight => 'Blastblight';
 }

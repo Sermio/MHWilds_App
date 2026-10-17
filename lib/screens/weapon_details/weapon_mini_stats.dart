@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/models/weapon.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
-import 'package:mhwilds_app/utils/weapon_utils.dart';
+import 'package:mhwilds_app/utils/game_element.dart';
 
 /// Daño, afinidad y daño elemental resumidos en una línea (árbol y tabla).
 class WeaponMiniStats extends StatelessWidget {
@@ -47,7 +47,7 @@ class WeaponMiniStats extends StatelessWidget {
           ),
         if (special != null && special.damage.display > 0)
           _MiniStat(
-            icon: WeaponUtils.getElementIcon(special.element),
+            icon: GameElement.iconOf(special.element),
             color: GameColors.of(context).element(special.element),
             text: '${special.damage.display}',
             style: valueStyle,
