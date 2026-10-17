@@ -16,11 +16,12 @@ void main() {
           .listSync(recursive: true)
           .whereType<File>()
           .where((f) => f.path.endsWith('.dart'))) {
-        if (allowed.contains(f.path)) continue;
+        final path = f.path.replaceAll(r'\', '/'); // Windows
+        if (allowed.contains(path)) continue;
         final lines = f.readAsLinesSync();
         for (var i = 0; i < lines.length; i++) {
           if (forbidden.hasMatch(lines[i])) {
-            offenders.add('${f.path}:${i + 1}');
+            offenders.add('$path:${i + 1}');
           }
         }
       }
