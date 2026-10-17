@@ -21,20 +21,20 @@ class ItemList extends StatefulWidget {
 }
 
 class _ItemListState extends State<ItemList> {
-  final TextEditingController _searchNameController = TextEditingController();
-  String _searchNameQuery = '';
-  int? _selectedRarity;
+  // El filtro vive en ItemsProvider; aquí solo el controlador del texto.
+  late final TextEditingController _searchNameController;
   bool _filtersVisible = false;
 
   @override
   void initState() {
     super.initState();
+    _searchNameController = TextEditingController(
+        text: context.read<ItemsProvider>().filter.name);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final itemsProvider = Provider.of<ItemsProvider>(context, listen: false);
 
       itemsProvider.fetchItems();
-      _resetFilters();
     });
   }
 
@@ -45,13 +45,8 @@ class _ItemListState extends State<ItemList> {
   }
 
   void _resetFilters() {
-    setState(() {
-      _searchNameQuery = '';
-      _searchNameController.clear();
-      _selectedRarity = null;
-    });
-
-    Provider.of<ItemsProvider>(context, listen: false).clearFilters();
+    _searchNameController.clear();
+    context.read<ItemsProvider>().clearFilters();
   }
 
   @override
@@ -86,6 +81,7 @@ class _ItemListState extends State<ItemList> {
             onRefresh: () => itemsProvider.refresh(force: true),
             isEmpty: (_) => filteredItems.isEmpty,
             builder: (context, _) => ListView.builder(
+              key: const PageStorageKey('items-list'),
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredItems.length,
@@ -262,25 +258,17 @@ class _ItemListState extends State<ItemList> {
           id: 'name',
           label: l10n.searchByName,
           controller: _searchNameController,
-          onTextChanged: (query) {
-            setState(() {
-              _searchNameQuery = query;
-            });
-            _applyFilters(itemsProvider);
-          },
+          onTextChanged: (query) => itemsProvider
+              .setFilter(itemsProvider.filter.copyWith(name: query)),
           hintText: l10n.enterItemName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
         ListFilterFieldConfig.select(
           id: 'rarity',
           label: l10n.rarity,
-          value: _selectedRarity,
-          onSelectChanged: (selectedRarity) {
-            setState(() {
-              _selectedRarity = selectedRarity as int?;
-            });
-            _applyFilters(itemsProvider);
-          },
+          value: itemsProvider.filter.rarity,
+          onSelectChanged: (selectedRarity) => itemsProvider.setFilter(
+              itemsProvider.filter.copyWith(rarity: () => selectedRarity as int?)),
           options: [1, 2, 3, 4, 5, 6, 7, 8]
               .map(
                 (rarity) => ListFilterOption(
@@ -299,13 +287,6 @@ class _ItemListState extends State<ItemList> {
               .toList(),
         ),
       ],
-    );
-  }
-
-  void _applyFilters(ItemsProvider itemsProvider) {
-    itemsProvider.applyFilters(
-      name: _searchNameQuery,
-      rarity: _selectedRarity,
     );
   }
 

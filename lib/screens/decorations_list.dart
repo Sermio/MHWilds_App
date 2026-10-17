@@ -24,14 +24,15 @@ class DecorationsList extends StatefulWidget {
 }
 
 class _DecorationsListState extends State<DecorationsList> {
-  final TextEditingController _searchNameController = TextEditingController();
-  String _searchNameQuery = '';
-  String? _selectedType;
+  // El filtro vive en DecorationsProvider; aquí solo el controlador del texto.
+  late final TextEditingController _searchNameController;
   bool _filtersVisible = false;
 
   @override
   void initState() {
     super.initState();
+    _searchNameController = TextEditingController(
+        text: context.read<DecorationsProvider>().filter.name);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final decorationsProvider =
@@ -45,7 +46,6 @@ class _DecorationsListState extends State<DecorationsList> {
       if (!skillsProvider.hasData && !skillsProvider.isLoading) {
         skillsProvider.fetchSkills();
       }
-      _resetFilters();
     });
   }
 
@@ -56,12 +56,8 @@ class _DecorationsListState extends State<DecorationsList> {
   }
 
   void _resetFilters() {
-    setState(() {
-      _searchNameQuery = '';
-      _searchNameController.clear();
-      _selectedType = null;
-    });
-    Provider.of<DecorationsProvider>(context, listen: false).clearFilters();
+    _searchNameController.clear();
+    context.read<DecorationsProvider>().clearFilters();
   }
 
   @override
@@ -93,6 +89,7 @@ class _DecorationsListState extends State<DecorationsList> {
             onRefresh: () => decorationsProvider.refresh(force: true),
             isEmpty: (_) => filteredDecorations.isEmpty,
             builder: (context, _) => ListView.builder(
+              key: const PageStorageKey('decorations-list'),
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredDecorations.length,
@@ -240,12 +237,8 @@ class _DecorationsListState extends State<DecorationsList> {
           id: 'name',
           label: l10n.searchByName,
           controller: _searchNameController,
-          onTextChanged: (query) {
-            setState(() {
-              _searchNameQuery = query;
-            });
-            _applyFilters(decorationsProvider);
-          },
+          onTextChanged: (query) => decorationsProvider
+              .setFilter(decorationsProvider.filter.copyWith(name: query)),
           hintText: l10n.enterDecorationName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
@@ -280,7 +273,7 @@ class _DecorationsListState extends State<DecorationsList> {
             fallback: Icon(
               isWeapon ? Icons.gps_fixed : Icons.shield,
               size: 18,
-              color: _selectedType == type
+              color: decorationsProvider.filter.type == type
                   ? colorScheme.onPrimary
                   : _getTypeColor(type),
             ),
@@ -288,7 +281,7 @@ class _DecorationsListState extends State<DecorationsList> {
           label: Text(
             _getDecorationTypeLabel(context, type),
             style: TextStyle(
-              color: _selectedType == type
+              color: decorationsProvider.filter.type == type
                   ? colorScheme.onPrimary
                   : colorScheme.onSurface,
               fontWeight: FontWeight.w500,
@@ -296,24 +289,14 @@ class _DecorationsListState extends State<DecorationsList> {
           ),
           backgroundColor: _getTypeColor(type).withValues(alpha: 0.2),
           selectedColor: _getTypeColor(type),
-          selected: _selectedType == type,
-          onSelected: (isSelected) {
-            setState(() {
-              _selectedType = isSelected ? type : null;
-            });
-            _applyFilters(decorationsProvider);
-          },
+          selected: decorationsProvider.filter.type == type,
+          onSelected: (isSelected) => decorationsProvider.setFilter(
+              decorationsProvider.filter
+                  .copyWith(type: () => isSelected ? type : null)),
           elevation: 2,
           pressElevation: 4,
         );
       }).toList(),
-    );
-  }
-
-  void _applyFilters(DecorationsProvider decorationsProvider) {
-    decorationsProvider.applyFilters(
-      name: _searchNameQuery,
-      type: _selectedType,
     );
   }
 

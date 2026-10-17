@@ -34,18 +34,18 @@ class WeaponsList extends StatefulWidget {
 }
 
 class _WeaponsListState extends State<WeaponsList> {
-  final TextEditingController _searchNameController = TextEditingController();
-  final TextEditingController _searchSeriesController = TextEditingController();
-  String _searchNameQuery = '';
-  String _searchSeriesQuery = '';
-  String? _selectedKind;
-  int? _selectedRarity;
+  // El filtro vive en WeaponsProvider; aquí solo los controladores de texto.
+  late final TextEditingController _searchNameController;
+  late final TextEditingController _searchSeriesController;
   bool _filtersVisible = false;
   bool _isTreeView = false;
 
   @override
   void initState() {
     super.initState();
+    final filter = context.read<WeaponsProvider>().filter;
+    _searchNameController = TextEditingController(text: filter.name);
+    _searchSeriesController = TextEditingController(text: filter.series);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final weaponsProvider =
           Provider.of<WeaponsProvider>(context, listen: false);
@@ -55,7 +55,6 @@ class _WeaponsListState extends State<WeaponsList> {
       if (!skillsProvider.hasData && !skillsProvider.isLoading) {
         skillsProvider.fetchSkills();
       }
-      _resetFilters();
     });
   }
 
@@ -66,21 +65,9 @@ class _WeaponsListState extends State<WeaponsList> {
   }
 
   void _resetFilters() {
-    setState(() {
-      _searchNameQuery = '';
-      _searchSeriesQuery = '';
-      _selectedKind = null;
-      _selectedRarity = null;
-      _searchNameController.clear();
-      _searchSeriesController.clear();
-    });
-    debugPrint('WeaponsList: _selectedKind reset to: "$_selectedKind"');
-    final provider = Provider.of<WeaponsProvider>(context, listen: false);
-    provider.clearFilters();
-
-    // Debug: Verificar que el provider se haya limpiado
-    debugPrint(
-        'WeaponsList: Provider filters cleared, weapons count: ${provider.weapons.length}');
+    _searchNameController.clear();
+    _searchSeriesController.clear();
+    context.read<WeaponsProvider>().clearFilters();
   }
 
   @override
@@ -180,12 +167,8 @@ class _WeaponsListState extends State<WeaponsList> {
           id: 'name',
           label: l10n.searchByName,
           controller: _searchNameController,
-          onTextChanged: (query) {
-            setState(() {
-              _searchNameQuery = query;
-            });
-            _applyFilters(weaponsProvider);
-          },
+          onTextChanged: (query) => weaponsProvider
+              .setFilter(weaponsProvider.filter.copyWith(name: query)),
           hintText: l10n.enterWeaponName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
@@ -193,49 +176,30 @@ class _WeaponsListState extends State<WeaponsList> {
           id: 'series',
           label: l10n.treeSeries,
           controller: _searchSeriesController,
-          onTextChanged: (query) {
-            setState(() {
-              _searchSeriesQuery = query;
-            });
-            _applyFilters(weaponsProvider);
-          },
+          onTextChanged: (query) => weaponsProvider
+              .setFilter(weaponsProvider.filter.copyWith(series: query)),
           hintText: l10n.enterSeriesName,
           prefixIcon: Icon(Icons.account_tree, color: colorScheme.primary),
         ),
         ListFilterFieldConfig.gridMenu(
           id: 'type',
           label: l10n.type,
-          value: _selectedKind,
-          onSelectChanged: (selectedKind) {
-            setState(() {
-              _selectedKind = selectedKind as String?;
-            });
-            _applyFilters(weaponsProvider);
-          },
+          value: weaponsProvider.filter.kind,
+          onSelectChanged: (selectedKind) => weaponsProvider.setFilter(
+              weaponsProvider.filter
+                  .copyWith(kind: () => selectedKind as String?)),
           options: _weaponTypeOptions(context),
         ),
         ListFilterFieldConfig.gridMenu(
           id: 'rarity',
           label: l10n.rarity,
-          value: _selectedRarity,
-          onSelectChanged: (selectedRarity) {
-            setState(() {
-              _selectedRarity = selectedRarity as int?;
-            });
-            _applyFilters(weaponsProvider);
-          },
+          value: weaponsProvider.filter.rarity,
+          onSelectChanged: (selectedRarity) => weaponsProvider.setFilter(
+              weaponsProvider.filter
+                  .copyWith(rarity: () => selectedRarity as int?)),
           options: _rarityOptions(l10n),
         ),
       ],
-    );
-  }
-
-  void _applyFilters(WeaponsProvider weaponsProvider) {
-    weaponsProvider.applyFilters(
-      name: _searchNameQuery,
-      series: _searchSeriesQuery,
-      kind: _selectedKind,
-      rarity: _selectedRarity,
     );
   }
 
@@ -327,6 +291,8 @@ class _WeaponsListState extends State<WeaponsList> {
         onRefresh: () => weaponsProvider.refresh(force: true),
         isEmpty: (_) => filteredWeapons.isEmpty,
         builder: (context, _) => ListView.builder(
+              key:
+                  PageStorageKey(_isTreeView ? 'weapons-tree' : 'weapons-list'),
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 120, top: 64),
               itemCount:

@@ -29,15 +29,15 @@ class ArmorSetList extends StatefulWidget {
 }
 
 class _ArmorSetListState extends State<ArmorSetList> {
-  final TextEditingController _searchNameController = TextEditingController();
-  String _searchNameQuery = '';
-  String? _selectedKind;
-  int? _selectedRarity;
+  // El filtro vive en ArmorSetProvider; aquí solo el controlador del texto.
+  late final TextEditingController _searchNameController;
   bool _filtersVisible = false;
 
   @override
   void initState() {
     super.initState();
+    _searchNameController = TextEditingController(
+        text: context.read<ArmorSetProvider>().filter.name);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final armorSetProvider =
@@ -51,7 +51,6 @@ class _ArmorSetListState extends State<ArmorSetList> {
       if (!skillsProvider.hasData && !skillsProvider.isLoading) {
         skillsProvider.fetchSkills();
       }
-      _resetFilters();
     });
   }
 
@@ -62,15 +61,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
   }
 
   void _resetFilters() {
-    setState(() {
-      _searchNameQuery = '';
-      _selectedKind = null;
-      _selectedRarity = null;
-      _searchNameController.clear();
-    });
-
-    final provider = Provider.of<ArmorSetProvider>(context, listen: false);
-    provider.clearFilters();
+    _searchNameController.clear();
+    context.read<ArmorSetProvider>().clearFilters();
   }
 
   @override
@@ -102,6 +94,7 @@ class _ArmorSetListState extends State<ArmorSetList> {
             onRefresh: () => armorSetProvider.refresh(force: true),
             isEmpty: (_) => filteredArmorSets.isEmpty,
             builder: (context, _) => ListView.builder(
+              key: const PageStorageKey('armor-sets-list'),
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredArmorSets.length,
@@ -314,48 +307,30 @@ class _ArmorSetListState extends State<ArmorSetList> {
           id: 'name',
           label: l10n.searchByName,
           controller: _searchNameController,
-          onTextChanged: (query) {
-            setState(() {
-              _searchNameQuery = query;
-            });
-            _applyFilters(armorSetProvider);
-          },
+          onTextChanged: (query) => armorSetProvider
+              .setFilter(armorSetProvider.filter.copyWith(name: query)),
           hintText: l10n.enterArmorSetName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
         ListFilterFieldConfig.gridMenu(
           id: 'type',
           label: l10n.type,
-          value: _selectedKind,
-          onSelectChanged: (selectedKind) {
-            setState(() {
-              _selectedKind = selectedKind as String?;
-            });
-            _applyFilters(armorSetProvider);
-          },
+          value: armorSetProvider.filter.kind,
+          onSelectChanged: (selectedKind) => armorSetProvider.setFilter(
+              armorSetProvider.filter
+                  .copyWith(kind: () => selectedKind as String?)),
           options: _armorTypeOptions(context),
         ),
         ListFilterFieldConfig.gridMenu(
           id: 'rarity',
           label: l10n.rarity,
-          value: _selectedRarity,
-          onSelectChanged: (selectedRarity) {
-            setState(() {
-              _selectedRarity = selectedRarity as int?;
-            });
-            _applyFilters(armorSetProvider);
-          },
+          value: armorSetProvider.filter.rarity,
+          onSelectChanged: (selectedRarity) => armorSetProvider.setFilter(
+              armorSetProvider.filter
+                  .copyWith(rarity: () => selectedRarity as int?)),
           options: _rarityOptions(l10n),
         ),
       ],
-    );
-  }
-
-  void _applyFilters(ArmorSetProvider armorSetProvider) {
-    armorSetProvider.applyFilters(
-      name: _searchNameQuery,
-      kind: _selectedKind,
-      rarity: _selectedRarity,
     );
   }
 

@@ -24,14 +24,15 @@ class AmuletList extends StatefulWidget {
 }
 
 class _AmuletListState extends State<AmuletList> {
-  final TextEditingController _searchNameController = TextEditingController();
-  String _searchNameQuery = '';
-  int? _selectedRarity;
+  // El filtro vive en TalismansProvider; aquí solo el controlador del texto.
+  late final TextEditingController _searchNameController;
   bool _filtersVisible = false;
 
   @override
   void initState() {
     super.initState();
+    _searchNameController = TextEditingController(
+        text: context.read<TalismansProvider>().filter.name);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final talismansProvider =
@@ -45,7 +46,6 @@ class _AmuletListState extends State<AmuletList> {
       if (!skillsProvider.hasData && !skillsProvider.isLoading) {
         skillsProvider.fetchSkills();
       }
-      _resetFilters();
     });
   }
 
@@ -56,12 +56,8 @@ class _AmuletListState extends State<AmuletList> {
   }
 
   void _resetFilters() {
-    setState(() {
-      _searchNameQuery = '';
-      _selectedRarity = null;
-      _searchNameController.clear();
-    });
-    Provider.of<TalismansProvider>(context, listen: false).clearFilters();
+    _searchNameController.clear();
+    context.read<TalismansProvider>().clearFilters();
   }
 
   @override
@@ -94,6 +90,7 @@ class _AmuletListState extends State<AmuletList> {
             onRefresh: () => talismansProvider.refresh(force: true),
             isEmpty: (_) => filteredAmulets.isEmpty,
             builder: (context, _) => ListView.builder(
+              key: const PageStorageKey('talismans-list'),
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredAmulets.length,
@@ -285,35 +282,21 @@ class _AmuletListState extends State<AmuletList> {
           id: 'name',
           label: l10n.searchByName,
           controller: _searchNameController,
-          onTextChanged: (query) {
-            setState(() {
-              _searchNameQuery = query;
-            });
-            _applyFilters(talismansProvider);
-          },
+          onTextChanged: (query) => talismansProvider
+              .setFilter(talismansProvider.filter.copyWith(name: query)),
           hintText: l10n.enterTalismanName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
         ListFilterFieldConfig.gridMenu(
           id: 'rarity',
           label: l10n.rarity,
-          value: _selectedRarity,
-          onSelectChanged: (selectedRarity) {
-            setState(() {
-              _selectedRarity = selectedRarity as int?;
-            });
-            _applyFilters(talismansProvider);
-          },
+          value: talismansProvider.filter.rarity,
+          onSelectChanged: (selectedRarity) => talismansProvider.setFilter(
+              talismansProvider.filter
+                  .copyWith(rarity: () => selectedRarity as int?)),
           options: _rarityOptions(l10n),
         ),
       ],
-    );
-  }
-
-  void _applyFilters(TalismansProvider talismansProvider) {
-    talismansProvider.applyFilters(
-      name: _searchNameQuery,
-      rarity: _selectedRarity,
     );
   }
 

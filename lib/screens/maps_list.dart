@@ -51,6 +51,7 @@ class _MapsListState extends State<MapsList> {
         onRetry: provider.fetchZones,
         onRefresh: () => provider.refresh(force: true),
         builder: (context, zones) => ListView.builder(
+          key: const PageStorageKey('maps-list'),
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.lg, vertical: AppSpacing.md),

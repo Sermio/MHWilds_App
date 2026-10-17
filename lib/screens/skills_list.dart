@@ -21,21 +21,21 @@ class SkillList extends StatefulWidget {
 }
 
 class _SkillListState2 extends State<SkillList> {
-  final TextEditingController _searchNameController = TextEditingController();
-  String _searchNameQuery = '';
-  String? _selectedType;
+  // El filtro vive en SkillsProvider; aquí solo el controlador del texto.
+  late final TextEditingController _searchNameController;
   bool _filtersVisible = false;
 
   @override
   void initState() {
     super.initState();
+    _searchNameController =
+        TextEditingController(text: context.read<SkillsProvider>().filter.name);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final skillsProvider =
           Provider.of<SkillsProvider>(context, listen: false);
 
       skillsProvider.fetchSkills();
-      _resetFilters();
     });
   }
 
@@ -46,13 +46,8 @@ class _SkillListState2 extends State<SkillList> {
   }
 
   void _resetFilters() {
-    setState(() {
-      _searchNameQuery = '';
-      _searchNameController.clear();
-      _selectedType = null;
-    });
-
-    Provider.of<SkillsProvider>(context, listen: false).clearFilters();
+    _searchNameController.clear();
+    context.read<SkillsProvider>().clearFilters();
   }
 
   @override
@@ -84,6 +79,7 @@ class _SkillListState2 extends State<SkillList> {
             onRefresh: () => skillsProvider.refresh(force: true),
             isEmpty: (_) => filteredSkills.isEmpty,
             builder: (context, _) => ListView.builder(
+              key: const PageStorageKey('skills-list'),
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredSkills.length,
@@ -280,25 +276,19 @@ class _SkillListState2 extends State<SkillList> {
           id: 'name',
           label: l10n.searchByName,
           controller: _searchNameController,
-          onTextChanged: (query) {
-            setState(() {
-              _searchNameQuery = query;
-            });
-            _applyFilters(skillsProvider);
-          },
+          onTextChanged: (query) => skillsProvider
+              .setFilter(skillsProvider.filter.copyWith(name: query)),
           hintText: l10n.enterSkillName,
           prefixIcon: Icon(Icons.search, color: colorScheme.primary),
         ),
         ListFilterFieldConfig.gridMenu(
           id: 'type',
           label: l10n.type,
-          value: _selectedType,
-          onSelectChanged: (selectedType) {
-            setState(() {
-              _selectedType = selectedType as String?;
-            });
-            _applyFilters(skillsProvider);
-          },
+          // El filtro guarda el tipo en minúsculas; las opciones, capitalizado.
+          value: _capitalized(skillsProvider.filter.kind),
+          onSelectChanged: (selectedType) => skillsProvider.setFilter(
+              skillsProvider.filter.copyWith(
+                  kind: () => (selectedType as String?)?.toLowerCase())),
           options: ['Weapon', 'Armor', 'Group', 'Set']
               .map(
                 (type) => ListFilterOption(
@@ -313,12 +303,9 @@ class _SkillListState2 extends State<SkillList> {
     );
   }
 
-  void _applyFilters(SkillsProvider skillsProvider) {
-    skillsProvider.applyFilters(
-      name: _searchNameQuery,
-      kind: _selectedType?.toLowerCase(),
-    );
-  }
+  static String? _capitalized(String? text) => text == null || text.isEmpty
+      ? text
+      : text[0].toUpperCase() + text.substring(1);
 
   Widget _buildSkillTypeFilterIcon(String type) {
     final kindLower = type.toLowerCase();
