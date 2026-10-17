@@ -352,7 +352,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 - **Prompt:**
   > Lee CLAUDE.md y la sección 6.3 de docs/PLAN_MEJORAS.md. Crea `test/overflow_test.dart` con un helper que monte un widget a 360×640 dp, con `textScaler: TextScaler.linear(2.0)` y `locale: Locale('de')`, y que falle si aparece cualquier `FlutterError` de overflow. Pruébalo sobre las tarjetas de cada lista y las cabeceras de cada detalle, usando los fixtures de T02 (extrae primero las tarjetas a widgets si siguen dentro de un `itemBuilder`). Corrige lo que falle: `Expanded` + `maxLines` + `ellipsis` en títulos dentro de `Row`, `Wrap` para grupos de chips, `minHeight` en lugar de `height` fijo, y `MediaQuery.withClampedTextScaling(maxScaleFactor: 1.3)` solo en tablas densas (afilado, daño).
 
-#### T25 · Un único `SpriteIcon`
+#### ✅ T25 · Un único `SpriteIcon`
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** T11
 - **Prompt:**
   > Lee CLAUDE.md. `DecorationSpriteIcon`, `SkillSpriteIcon` y `GearSpriteIcon` repiten la misma lógica: cargar la hoja de sprites, guardar el `ui.Image` en caché y recortar un rectángulo. Extrae un `SpriteIcon(sheetAsset, sourceRect, size)` con una caché compartida y deja los tres como envoltorios que solo calculan el rectángulo. Mantén sus APIs públicas para no tocar a quienes los usan. Añade un widget test que pinte cada tipo.
