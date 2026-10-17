@@ -40,4 +40,26 @@ void main() {
     expect(tester.getTopLeft(find.text('12345')).dy,
         greaterThan(tester.getTopLeft(find.text('Defense:')).dy));
   });
+
+  testWidgets(
+      'en un Column alineado al inicio sigue separando etiqueta y valor',
+      (tester) async {
+    await tester.pumpWidget(const MaterialApp(
+      home: Material(
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: SizedBox(
+            width: 300,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LabelValueRow(label: Text('Defense:'), value: Text('12345')),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ));
+    expect(tester.getTopRight(find.text('12345')).dx, closeTo(300, 0.5));
+  });
 }

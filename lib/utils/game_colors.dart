@@ -197,7 +197,18 @@ class GameColors extends ThemeExtension<GameColors> {
   static GameColors of(BuildContext context) =>
       Theme.of(context).extension<GameColors>() ?? light;
 
-  Color element(String name) => elements[name.toLowerCase()] ?? neutral;
+  Color element(String name) => elementOrNull(name) ?? neutral;
+
+  /// Color de un elemento o estado, o null si no tiene. Acepta las variantes
+  /// de la API (`blastblight`, `paralyze`, `Fire`…).
+  Color? elementOrNull(String name) {
+    final id = name.toLowerCase().replaceAll(RegExp(r'[\s_-]'), '');
+    return elements[switch (id) {
+      'paralyze' => 'paralysis',
+      'blastblight' => 'blast',
+      _ => id,
+    }];
+  }
 
   Color coating(String name) => coatings[name.toLowerCase()] ?? neutral;
 

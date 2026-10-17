@@ -117,31 +117,26 @@ class ListFiltersPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    final header = Container(
-      padding: const EdgeInsets.fromLTRB(20, AppSpacing.xs, AppSpacing.md, 0),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+    // Flota sobre la esquina del panel (no ocupa altura): queda fija mientras
+    // los filtros hacen scroll por debajo, a la altura de la primera etiqueta.
+    final resetButton = PositionedDirectional(
+      top: AppSpacing.xs,
+      end: AppSpacing.md,
+      child: FilledButton.tonalIcon(
+        onPressed: onReset,
+        icon: const Icon(Icons.refresh, size: 18),
+        label: Text(resetLabel),
+        style: FilledButton.styleFrom(
+          minimumSize: const Size(0, 36),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          visualDensity: VisualDensity.compact,
+          foregroundColor: colorScheme.primary,
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          TextButton.icon(
-            onPressed: onReset,
-            icon: const Icon(Icons.refresh, size: 18),
-            label: Text(resetLabel),
-            style: TextButton.styleFrom(
-              foregroundColor: colorScheme.primary,
-            ),
-          ),
-        ],
       ),
     );
 
     final fieldsContent = SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, AppSpacing.lg),
+      padding: const EdgeInsets.fromLTRB(20, AppSpacing.sm, 20, AppSpacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -154,26 +149,15 @@ class ListFiltersPanel extends StatelessWidget {
       ),
     );
 
+    final content = Stack(children: [fieldsContent, resetButton]);
     return Material(
       color: colorScheme.surface,
       child: maxHeight != null
           ? ConstrainedBox(
               constraints: BoxConstraints(maxHeight: maxHeight!),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  header,
-                  Flexible(child: fieldsContent),
-                ],
-              ),
+              child: content,
             )
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                header,
-                fieldsContent,
-              ],
-            ),
+          : content,
     );
   }
 

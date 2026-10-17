@@ -210,6 +210,10 @@ class WeaponDisplayUtils {
 
     final phialKind = weapon.phial!.kind;
     final colorScheme = Theme.of(context).colorScheme;
+    // Los viales de elemento o estado usan el color de ese elemento; el resto
+    // (impact, power…) no tiene color de juego.
+    final phialColor = GameColors.of(context).elementOrNull(phialKind) ??
+        (phialKind == 'impact' ? Colors.blue[600]! : Colors.orange[600]!);
     return LabelValueRow(
         label: Text(
           '${AppLocalizations.of(context)!.phial}:',
@@ -227,9 +231,7 @@ class WeaponDisplayUtils {
               style: TextStyle(
                 fontSize: isDetailView ? 16 : 12,
                 fontWeight: FontWeight.bold,
-                color: phialKind == 'impact'
-                    ? Colors.blue[600]!
-                    : Colors.orange[600]!,
+                color: phialColor,
               ),
             ),
             const SizedBox(width: 4),
@@ -239,9 +241,7 @@ class WeaponDisplayUtils {
               fallback: Icon(
                 Icons.electric_bolt,
                 size: 16,
-                color: phialKind == 'impact'
-                    ? Colors.blue[600]!
-                    : Colors.orange[600]!,
+                color: phialColor,
               ),
             ),
           ],

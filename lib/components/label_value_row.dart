@@ -17,11 +17,19 @@ class LabelValueRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      alignment: WrapAlignment.spaceBetween,
-      crossAxisAlignment: WrapCrossAlignment.center,
-      runSpacing: runSpacing,
-      children: [label, value],
+    // Un Wrap solo reparte el espacio sobrante dentro de su propio ancho, que
+    // en un Column con `crossAxisAlignment.start` se ajusta a los hijos y deja
+    // etiqueta y valor pegados; por eso se fuerza el ancho disponible.
+    return LayoutBuilder(
+      builder: (context, constraints) => SizedBox(
+        width: constraints.hasBoundedWidth ? constraints.maxWidth : null,
+        child: Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          runSpacing: runSpacing,
+          children: [label, value],
+        ),
+      ),
     );
   }
 }
