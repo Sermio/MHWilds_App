@@ -384,7 +384,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 - **Prompt:**
   > Lee CLAUDE.md. `HomeScreen` decide el título y las acciones con cadenas de `if (screen is X)`, y el drawer guarda instancias de `Widget`. Crea `enum AppSection` con título traducido, icono o asset, constructor de pantalla y acciones de la AppBar, y úsalo en `HomeScreen` y en `Cdrawer` como única fuente. Mismo orden, mismos iconos y mismo comportamiento. Test: cada sección muestra su título.
 
-#### T31 · Partir pantallas grandes (una tarea por pantalla)
+#### ✅ T31 · Partir pantallas grandes (una tarea por pantalla)
 - **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** T24
 - **Prompt (repetir para `weapon_details.dart`, `monster_details.dart`, `weapons_list.dart`, `armor_sets_list.dart`, `armor_piece_details.dart`):**
   > Lee CLAUDE.md. `<archivo>` supera las 800 líneas. Divídelo en widgets por sección dentro de `lib/screens/<nombre>/`, siguiendo el patrón de `lib/screens/weapons_list/`. Antes de crear nada, busca si ya existe un componente equivalente en `lib/components/` y reutilízalo. No cambies la UI ni la lógica: es un refactor puro. Constructores `const` donde se pueda. Comprueba que los tests de overflow (T24) siguen en verde y revisa la pantalla en emulador.
