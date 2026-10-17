@@ -824,6 +824,63 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get openLink => 'Abrir enlace';
+
+  @override
+  String get reportBug => 'Reportar un error';
+
+  @override
+  String get bugReportDescriptionLabel => '¿Qué ocurrió?';
+
+  @override
+  String get bugReportDescriptionHint =>
+      'Describe el problema y cómo reproducirlo';
+
+  @override
+  String get bugReportDescriptionRequired => 'Describe el problema';
+
+  @override
+  String get bugReportContactLabel => 'Tu email (opcional)';
+
+  @override
+  String get bugReportContactHint => 'Solo si quieres recibir respuesta';
+
+  @override
+  String get bugReportAttach => 'Adjuntar imágenes o vídeos';
+
+  @override
+  String bugReportAttachLimit(int max, int mb) {
+    return 'Hasta $max archivos, $mb MB en total';
+  }
+
+  @override
+  String get bugReportRemoveAttachment => 'Quitar adjunto';
+
+  @override
+  String get bugReportSend => 'Enviar reporte';
+
+  @override
+  String get bugReportSending => 'Enviando...';
+
+  @override
+  String get bugReportSent => '¡Gracias! Tu reporte fue enviado.';
+
+  @override
+  String get bugReportFailed =>
+      'No se pudo enviar el reporte. Inténtalo más tarde.';
+
+  @override
+  String bugReportTooMany(int max) {
+    return 'Puedes adjuntar como máximo $max archivos.';
+  }
+
+  @override
+  String bugReportTooLarge(int mb) {
+    return 'Los adjuntos superan $mb MB.';
+  }
+
+  @override
+  String get bugReportPrivacy =>
+      'El reporte incluye la versión de la app, la plataforma y el idioma.';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).

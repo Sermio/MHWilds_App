@@ -825,6 +825,63 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get openLink => 'Abrir link';
+
+  @override
+  String get reportBug => 'Reportar um erro';
+
+  @override
+  String get bugReportDescriptionLabel => 'O que aconteceu?';
+
+  @override
+  String get bugReportDescriptionHint =>
+      'Descreva o problema e como reproduzi-lo';
+
+  @override
+  String get bugReportDescriptionRequired => 'Descreva o problema';
+
+  @override
+  String get bugReportContactLabel => 'Seu e-mail (opcional)';
+
+  @override
+  String get bugReportContactHint => 'Somente se quiser receber resposta';
+
+  @override
+  String get bugReportAttach => 'Anexar imagens ou vídeos';
+
+  @override
+  String bugReportAttachLimit(int max, int mb) {
+    return 'Até $max arquivos, $mb MB no total';
+  }
+
+  @override
+  String get bugReportRemoveAttachment => 'Remover anexo';
+
+  @override
+  String get bugReportSend => 'Enviar relatório';
+
+  @override
+  String get bugReportSending => 'Enviando...';
+
+  @override
+  String get bugReportSent => 'Obrigado! Seu relatório foi enviado.';
+
+  @override
+  String get bugReportFailed =>
+      'Não foi possível enviar o relatório. Tente novamente mais tarde.';
+
+  @override
+  String bugReportTooMany(int max) {
+    return 'Você pode anexar no máximo $max arquivos.';
+  }
+
+  @override
+  String bugReportTooLarge(int mb) {
+    return 'Os anexos excedem $mb MB.';
+  }
+
+  @override
+  String get bugReportPrivacy =>
+      'O relatório inclui a versão do app, a plataforma e o idioma.';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).

@@ -822,4 +822,60 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get openLink => 'Open link';
+
+  @override
+  String get reportBug => 'Report a bug';
+
+  @override
+  String get bugReportDescriptionLabel => 'What happened?';
+
+  @override
+  String get bugReportDescriptionHint =>
+      'Describe the problem and how to reproduce it';
+
+  @override
+  String get bugReportDescriptionRequired => 'Please describe the problem';
+
+  @override
+  String get bugReportContactLabel => 'Your email (optional)';
+
+  @override
+  String get bugReportContactHint => 'Only if you want a reply';
+
+  @override
+  String get bugReportAttach => 'Attach images or videos';
+
+  @override
+  String bugReportAttachLimit(int max, int mb) {
+    return 'Up to $max files, $mb MB in total';
+  }
+
+  @override
+  String get bugReportRemoveAttachment => 'Remove attachment';
+
+  @override
+  String get bugReportSend => 'Send report';
+
+  @override
+  String get bugReportSending => 'Sending...';
+
+  @override
+  String get bugReportSent => 'Thanks! Your report was sent.';
+
+  @override
+  String get bugReportFailed => 'Could not send the report. Try again later.';
+
+  @override
+  String bugReportTooMany(int max) {
+    return 'You can attach at most $max files.';
+  }
+
+  @override
+  String bugReportTooLarge(int mb) {
+    return 'Attachments exceed $mb MB.';
+  }
+
+  @override
+  String get bugReportPrivacy =>
+      'The report includes the app version, platform and language.';
 }

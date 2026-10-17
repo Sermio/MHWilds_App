@@ -828,4 +828,61 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get openLink => 'Ouvrir le lien';
+
+  @override
+  String get reportBug => 'Signaler un bug';
+
+  @override
+  String get bugReportDescriptionLabel => 'Que s\'est-il passé ?';
+
+  @override
+  String get bugReportDescriptionHint =>
+      'Décrivez le problème et comment le reproduire';
+
+  @override
+  String get bugReportDescriptionRequired => 'Veuillez décrire le problème';
+
+  @override
+  String get bugReportContactLabel => 'Votre e-mail (facultatif)';
+
+  @override
+  String get bugReportContactHint => 'Uniquement si vous souhaitez une réponse';
+
+  @override
+  String get bugReportAttach => 'Joindre des images ou des vidéos';
+
+  @override
+  String bugReportAttachLimit(int max, int mb) {
+    return 'Jusqu\'à $max fichiers, $mb Mo au total';
+  }
+
+  @override
+  String get bugReportRemoveAttachment => 'Retirer la pièce jointe';
+
+  @override
+  String get bugReportSend => 'Envoyer le rapport';
+
+  @override
+  String get bugReportSending => 'Envoi...';
+
+  @override
+  String get bugReportSent => 'Merci ! Votre rapport a été envoyé.';
+
+  @override
+  String get bugReportFailed =>
+      'Impossible d\'envoyer le rapport. Réessayez plus tard.';
+
+  @override
+  String bugReportTooMany(int max) {
+    return 'Vous pouvez joindre $max fichiers au maximum.';
+  }
+
+  @override
+  String bugReportTooLarge(int mb) {
+    return 'Les pièces jointes dépassent $mb Mo.';
+  }
+
+  @override
+  String get bugReportPrivacy =>
+      'Le rapport inclut la version de l\'appli, la plateforme et la langue.';
 }

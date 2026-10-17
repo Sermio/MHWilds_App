@@ -1664,6 +1664,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open link'**
   String get openLink;
+
+  /// No description provided for @reportBug.
+  ///
+  /// In en, this message translates to:
+  /// **'Report a bug'**
+  String get reportBug;
+
+  /// No description provided for @bugReportDescriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What happened?'**
+  String get bugReportDescriptionLabel;
+
+  /// No description provided for @bugReportDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the problem and how to reproduce it'**
+  String get bugReportDescriptionHint;
+
+  /// No description provided for @bugReportDescriptionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please describe the problem'**
+  String get bugReportDescriptionRequired;
+
+  /// No description provided for @bugReportContactLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your email (optional)'**
+  String get bugReportContactLabel;
+
+  /// No description provided for @bugReportContactHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Only if you want a reply'**
+  String get bugReportContactHint;
+
+  /// No description provided for @bugReportAttach.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach images or videos'**
+  String get bugReportAttach;
+
+  /// No description provided for @bugReportAttachLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to {max} files, {mb} MB in total'**
+  String bugReportAttachLimit(int max, int mb);
+
+  /// No description provided for @bugReportRemoveAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove attachment'**
+  String get bugReportRemoveAttachment;
+
+  /// No description provided for @bugReportSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send report'**
+  String get bugReportSend;
+
+  /// No description provided for @bugReportSending.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending...'**
+  String get bugReportSending;
+
+  /// No description provided for @bugReportSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks! Your report was sent.'**
+  String get bugReportSent;
+
+  /// No description provided for @bugReportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not send the report. Try again later.'**
+  String get bugReportFailed;
+
+  /// No description provided for @bugReportTooMany.
+  ///
+  /// In en, this message translates to:
+  /// **'You can attach at most {max} files.'**
+  String bugReportTooMany(int max);
+
+  /// No description provided for @bugReportTooLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachments exceed {mb} MB.'**
+  String bugReportTooLarge(int mb);
+
+  /// No description provided for @bugReportPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'The report includes the app version, platform and language.'**
+  String get bugReportPrivacy;
 }
 
 class _AppLocalizationsDelegate

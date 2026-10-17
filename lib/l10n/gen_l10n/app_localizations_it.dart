@@ -827,4 +827,61 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get openLink => 'Apri link';
+
+  @override
+  String get reportBug => 'Segnala un bug';
+
+  @override
+  String get bugReportDescriptionLabel => 'Cosa è successo?';
+
+  @override
+  String get bugReportDescriptionHint =>
+      'Descrivi il problema e come riprodurlo';
+
+  @override
+  String get bugReportDescriptionRequired => 'Descrivi il problema';
+
+  @override
+  String get bugReportContactLabel => 'La tua email (facoltativa)';
+
+  @override
+  String get bugReportContactHint => 'Solo se vuoi ricevere una risposta';
+
+  @override
+  String get bugReportAttach => 'Allega immagini o video';
+
+  @override
+  String bugReportAttachLimit(int max, int mb) {
+    return 'Fino a $max file, $mb MB in totale';
+  }
+
+  @override
+  String get bugReportRemoveAttachment => 'Rimuovi allegato';
+
+  @override
+  String get bugReportSend => 'Invia segnalazione';
+
+  @override
+  String get bugReportSending => 'Invio...';
+
+  @override
+  String get bugReportSent => 'Grazie! La tua segnalazione è stata inviata.';
+
+  @override
+  String get bugReportFailed =>
+      'Impossibile inviare la segnalazione. Riprova più tardi.';
+
+  @override
+  String bugReportTooMany(int max) {
+    return 'Puoi allegare al massimo $max file.';
+  }
+
+  @override
+  String bugReportTooLarge(int mb) {
+    return 'Gli allegati superano $mb MB.';
+  }
+
+  @override
+  String get bugReportPrivacy =>
+      'La segnalazione include versione dell\'app, piattaforma e lingua.';
 }

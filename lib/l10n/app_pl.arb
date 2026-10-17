@@ -295,5 +295,21 @@
   "announcementsNew": "Ogłoszenia (nowe)",
   "loadingAnnouncements": "Ładowanie ogłoszeń...",
   "noAnnouncements": "Brak ogłoszeń",
-  "openLink": "Otwórz link"
+  "openLink": "Otwórz link",
+  "reportBug": "Zgłoś błąd",
+  "bugReportDescriptionLabel": "Co się stało?",
+  "bugReportDescriptionHint": "Opisz problem i jak go odtworzyć",
+  "bugReportDescriptionRequired": "Opisz problem",
+  "bugReportContactLabel": "Twój e-mail (opcjonalnie)",
+  "bugReportContactHint": "Tylko jeśli chcesz otrzymać odpowiedź",
+  "bugReportAttach": "Dołącz zdjęcia lub filmy",
+  "bugReportAttachLimit": "Do {max} plików, łącznie {mb} MB",
+  "bugReportRemoveAttachment": "Usuń załącznik",
+  "bugReportSend": "Wyślij zgłoszenie",
+  "bugReportSending": "Wysyłanie...",
+  "bugReportSent": "Dziękujemy! Zgłoszenie zostało wysłane.",
+  "bugReportFailed": "Nie udało się wysłać zgłoszenia. Spróbuj później.",
+  "bugReportTooMany": "Możesz dołączyć maksymalnie {max} plików.",
+  "bugReportTooLarge": "Załączniki przekraczają {mb} MB.",
+  "bugReportPrivacy": "Zgłoszenie zawiera wersję aplikacji, platformę i język."
 }

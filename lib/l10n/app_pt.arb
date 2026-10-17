@@ -295,5 +295,21 @@
   "announcementsNew": "Avisos (novo)",
   "loadingAnnouncements": "Carregando avisos...",
   "noAnnouncements": "Ainda não há avisos",
-  "openLink": "Abrir link"
+  "openLink": "Abrir link",
+  "reportBug": "Reportar um erro",
+  "bugReportDescriptionLabel": "O que aconteceu?",
+  "bugReportDescriptionHint": "Descreva o problema e como reproduzi-lo",
+  "bugReportDescriptionRequired": "Descreva o problema",
+  "bugReportContactLabel": "Seu e-mail (opcional)",
+  "bugReportContactHint": "Somente se quiser receber resposta",
+  "bugReportAttach": "Anexar imagens ou vídeos",
+  "bugReportAttachLimit": "Até {max} arquivos, {mb} MB no total",
+  "bugReportRemoveAttachment": "Remover anexo",
+  "bugReportSend": "Enviar relatório",
+  "bugReportSending": "Enviando...",
+  "bugReportSent": "Obrigado! Seu relatório foi enviado.",
+  "bugReportFailed": "Não foi possível enviar o relatório. Tente novamente mais tarde.",
+  "bugReportTooMany": "Você pode anexar no máximo {max} arquivos.",
+  "bugReportTooLarge": "Os anexos excedem {mb} MB.",
+  "bugReportPrivacy": "O relatório inclui a versão do app, a plataforma e o idioma."
 }

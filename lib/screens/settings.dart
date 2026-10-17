@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/locale_provider.dart';
+import 'package:mhwilds_app/screens/bug_report_screen.dart';
 import 'package:mhwilds_app/providers/theme_provider.dart';
 import 'package:mhwilds_app/utils/locale_utils.dart';
 import 'package:mhwilds_app/utils/review_service.dart';
@@ -99,6 +100,23 @@ class SettingsScreen extends StatelessWidget {
               title: Text(l10n.rateAppAction),
               trailing: const Icon(Icons.open_in_new, size: 16),
               onTap: () => ReviewService.openStore(),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: colorScheme.outlineVariant),
+            ),
+            child: ListTile(
+              leading: Icon(Icons.bug_report_outlined, color: colorScheme.primary),
+              title: Text(l10n.reportBug),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute<void>(builder: (_) => const BugReportScreen()),
+              ),
             ),
           ),
           const SizedBox(height: 32),
