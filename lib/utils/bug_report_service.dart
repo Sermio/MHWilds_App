@@ -8,7 +8,8 @@ class BugReportService {
   BugReportService._();
 
   /// URL del Worker desplegado.
-  static const String endpoint = 'https://mhwilds-bug-report.smtdev.workers.dev';
+  static const String endpoint =
+      'https://mhwilds-bug-report.smtdev.workers.dev';
 
   static const int maxFiles = 3;
   static const int maxTotalMb = 20;

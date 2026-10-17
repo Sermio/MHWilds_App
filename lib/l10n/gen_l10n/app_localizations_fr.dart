@@ -405,6 +405,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get zone => 'Zone';
 
   @override
+  String get zones => 'Zones';
+
+  @override
   String get loadingMap => 'Chargement de la carte...';
 
   @override
@@ -885,4 +888,37 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get bugReportPrivacy =>
       'Le rapport inclut la version de l\'appli, la plateforme et la langue.';
+
+  @override
+  String get rewardTargetReward => 'Récompense de cible';
+
+  @override
+  String get rewardCarve => 'Dépeçage';
+
+  @override
+  String get rewardBrokenPart => 'Partie brisée';
+
+  @override
+  String get rewardCarveRotten => 'Dépeçage (pourri)';
+
+  @override
+  String get rewardWoundDestroyed => 'Plaie détruite';
+
+  @override
+  String get rewardTemperedWoundDestroyed => 'Plaie détruite (tempéré)';
+
+  @override
+  String get rewardCarveSevered => 'Dépeçage (partie tranchée)';
+
+  @override
+  String get rewardCarveRottenSevered => 'Dépeçage (pourri, partie tranchée)';
+
+  @override
+  String get rewardCarveCrystallized => 'Dépeçage (cristallisé)';
+
+  @override
+  String get rewardBrokenFragment => 'Fragment brisé';
+
+  @override
+  String get maps => 'Cartes';
 }

@@ -1,0 +1,817 @@
+diff --git a/lib/components/c_appbar.dart b/lib/components/c_appbar.dart
+index ac1dd2e..1b2c13b 100644
+--- a/lib/components/c_appbar.dart
++++ b/lib/components/c_appbar.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/app_bar_background.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+ import 'package:mhwilds_app/screens/settings.dart';
+ 
+@@ -13,7 +14,6 @@ class Cappbar extends StatelessWidget implements PreferredSizeWidget {
+     return AppBar(
+       title: Text(title),
+       centerTitle: true,
+-      elevation: 10,
+       actions: actions ??
+           [
+             IconButton(
+@@ -29,24 +29,7 @@ class Cappbar extends StatelessWidget implements PreferredSizeWidget {
+               },
+             ),
+           ],
+-      // backgroundColor: Colors.transparent,
+-      flexibleSpace: Stack(
+-        children: [
+-          Container(
+-              // color: const Color(0xFFC3A35D),
+-              ),
+-          // Padding(
+-          //   padding: const EdgeInsets.only(top: 5.0),
+-          //   child: Center(
+-          //     child: Image.asset(
+-          //       height: 150,
+-          //       width: 150,
+-          //       'assets/imgs/logo/logo512transparent.webp',
+-          //     ),
+-          //   ),
+-          // ),
+-        ],
+-      ),
++      flexibleSpace: const AppBarBackground(),
+     );
+   }
+ 
+diff --git a/lib/components/c_drawer.dart b/lib/components/c_drawer.dart
+index abbc080..b1fb122 100644
+--- a/lib/components/c_drawer.dart
++++ b/lib/components/c_drawer.dart
+@@ -8,7 +8,6 @@ import 'package:mhwilds_app/utils/spacing.dart';
+ class Cdrawer extends StatelessWidget {
+   final ValueChanged<AppSection> onSectionSelected;
+   final AppSection selectedSection;
+-  static final Color _selectedHighlightColor = Colors.orange[600]!;
+ 
+   const Cdrawer({
+     super.key,
+@@ -45,14 +44,7 @@ class Cdrawer extends StatelessWidget {
+     return Container(
+       width: double.infinity,
+       decoration: BoxDecoration(
+-        gradient: LinearGradient(
+-          begin: Alignment.topCenter,
+-          end: Alignment.bottomCenter,
+-          colors: [
+-            AppColors.goldSoft.withValues(alpha: 0.92),
+-            AppColors.goldSoft.withValues(alpha: 0.72),
+-          ],
+-        ),
++        gradient: AppColors.goldGradient,
+         border: Border(
+           bottom: BorderSide(
+             color:
+@@ -186,7 +178,7 @@ class Cdrawer extends StatelessWidget {
+     return Container(
+       decoration: BoxDecoration(
+         color: isSelected
+-            ? _selectedHighlightColor.withValues(alpha: 0.12)
++            ? colorScheme.primary.withValues(alpha: 0.12)
+             : colorScheme.surfaceContainerLow,
+         borderRadius: BorderRadius.circular(16),
+         boxShadow: [
+@@ -198,7 +190,7 @@ class Cdrawer extends StatelessWidget {
+         ],
+         border: Border.all(
+           color: isSelected
+-              ? _selectedHighlightColor.withValues(alpha: 0.35)
++              ? colorScheme.primary.withValues(alpha: 0.35)
+               : colorScheme.outlineVariant,
+           width: 1,
+         ),
+@@ -261,7 +253,7 @@ class Cdrawer extends StatelessWidget {
+                 Icon(
+                   Icons.arrow_forward_ios,
+                   color: isSelected
+-                      ? _selectedHighlightColor
++                      ? colorScheme.primary
+                       : colorScheme.onSurfaceVariant,
+                   size: 18,
+                 ),
+diff --git a/lib/screens/armor_piece_details.dart b/lib/screens/armor_piece_details.dart
+index 80fdf12..8d15c5f 100644
+--- a/lib/screens/armor_piece_details.dart
++++ b/lib/screens/armor_piece_details.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/app_bar_background.dart';
+ import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
+ import 'package:mhwilds_app/models/skills.dart';
+ import 'package:mhwilds_app/providers/skills_provider.dart';
+@@ -37,6 +38,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
+     final armor = widget.armor;
+     return Scaffold(
+       appBar: AppBar(
++        flexibleSpace: const AppBarBackground(),
+         title: Text(armor.name),
+         centerTitle: true,
+       ),
+diff --git a/lib/screens/armor_piece_details/armor_section_card.dart b/lib/screens/armor_piece_details/armor_section_card.dart
+index 778cf69..53ed237 100644
+--- a/lib/screens/armor_piece_details/armor_section_card.dart
++++ b/lib/screens/armor_piece_details/armor_section_card.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/section_heading.dart';
+ import 'package:mhwilds_app/utils/spacing.dart';
+ 
+ /// Tarjeta de sección con icono + título y contenido, común a las secciones
+@@ -37,22 +38,7 @@ class ArmorSectionCard extends StatelessWidget {
+         children: [
+           Padding(
+             padding: const EdgeInsets.all(20),
+-            child: Row(
+-              children: [
+-                Icon(icon, color: colorScheme.primary, size: 24),
+-                const SizedBox(width: 12),
+-                Flexible(
+-                  child: Text(
+-                    title,
+-                    style: TextStyle(
+-                      fontSize: 20,
+-                      fontWeight: FontWeight.bold,
+-                      color: colorScheme.onSurface,
+-                    ),
+-                  ),
+-                ),
+-              ],
+-            ),
++            child: SectionHeading(icon: icon, title: title),
+           ),
+           Padding(padding: const EdgeInsets.all(20), child: child),
+         ],
+diff --git a/lib/screens/item_details.dart b/lib/screens/item_details.dart
+index 169814c..c61a8a0 100644
+--- a/lib/screens/item_details.dart
++++ b/lib/screens/item_details.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/app_bar_background.dart';
+ import 'package:mhwilds_app/components/material_image.dart';
+ import 'package:mhwilds_app/models/item.dart';
+ import 'package:mhwilds_app/components/monster_icon.dart';
+@@ -34,6 +35,7 @@ class ItemDetails extends StatelessWidget {
+ 
+     return Scaffold(
+       appBar: AppBar(
++        flexibleSpace: const AppBarBackground(),
+         title: Text(item.name),
+         centerTitle: true,
+       ),
+diff --git a/lib/screens/map_details.dart b/lib/screens/map_details.dart
+index a4b06ca..daae5e0 100644
+--- a/lib/screens/map_details.dart
++++ b/lib/screens/map_details.dart
+@@ -1,6 +1,7 @@
+ import 'package:animate_do/animate_do.dart';
+ import 'package:flutter/material.dart';
+ import 'package:provider/provider.dart';
++import 'package:mhwilds_app/components/app_bar_background.dart';
+ import 'package:mhwilds_app/models/location.dart';
+ import 'package:mhwilds_app/providers/locations_provider.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+@@ -293,11 +294,9 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
+     return Scaffold(
+       backgroundColor: colorScheme.surfaceContainerHighest,
+       appBar: AppBar(
++        flexibleSpace: const AppBarBackground(),
+         title: Text(mapData?.name ?? AppLocalizations.of(context)!.map),
+         centerTitle: true,
+-        elevation: 10,
+-        backgroundColor: colorScheme.primary,
+-        foregroundColor: colorScheme.onPrimary,
+       ),
+       body: isLoadingImages
+           ? Container(
+diff --git a/lib/screens/monster_details.dart b/lib/screens/monster_details.dart
+index ec983d7..579c762 100644
+--- a/lib/screens/monster_details.dart
++++ b/lib/screens/monster_details.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/app_bar_background.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+ import 'package:mhwilds_app/models/monster.dart';
+ import 'package:mhwilds_app/providers/monsters_provider.dart';
+@@ -90,6 +91,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
+ 
+         return Scaffold(
+           appBar: AppBar(
++        flexibleSpace: const AppBarBackground(),
+             title: Text(monster.name),
+             centerTitle: true,
+           ),
+diff --git a/lib/screens/monster_details/monster_breakable_parts_section.dart b/lib/screens/monster_details/monster_breakable_parts_section.dart
+index cc7dd78..966e93d 100644
+--- a/lib/screens/monster_details/monster_breakable_parts_section.dart
++++ b/lib/screens/monster_details/monster_breakable_parts_section.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/section_heading.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+ import 'package:mhwilds_app/models/monster.dart';
+ import 'package:mhwilds_app/screens/monster_details/section_card.dart';
+@@ -18,7 +19,9 @@ class MonsterBreakablePartsSection extends StatelessWidget {
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+-          MonsterSectionTitle(AppLocalizations.of(context)!.breakableParts),
++          SectionHeading(
++              title: AppLocalizations.of(context)!.breakableParts,
++              icon: Icons.hardware),
+           const SizedBox(height: 16),
+           ...parts.map(
+             (part) => Container(
+diff --git a/lib/screens/monster_details/monster_header_image.dart b/lib/screens/monster_details/monster_header_image.dart
+index 15f95ef..ea34ba7 100644
+--- a/lib/screens/monster_details/monster_header_image.dart
++++ b/lib/screens/monster_details/monster_header_image.dart
+@@ -11,12 +11,31 @@ class MonsterHeaderImage extends StatelessWidget {
+   Widget build(BuildContext context) {
+     final imagePath = monsterImageAssets[monsterId];
+     if (imagePath == null) return const _ImagePlaceholder();
+-    return Image.asset(
+-      imagePath,
+-      width: 380,
+-      height: 250,
+-      fit: BoxFit.fill,
+-      errorBuilder: (context, error, stackTrace) => const _ImagePlaceholder(),
++    final background = Theme.of(context).scaffoldBackgroundColor;
++    return Stack(
++      children: [
++        Image.asset(
++          imagePath,
++          width: 380,
++          height: 250,
++          fit: BoxFit.fill,
++          errorBuilder: (context, error, stackTrace) =>
++              const _ImagePlaceholder(),
++        ),
++        // Funde el borde inferior con el fondo en lugar de un corte recto.
++        Positioned.fill(
++          child: DecoratedBox(
++            decoration: BoxDecoration(
++              gradient: LinearGradient(
++                begin: Alignment.topCenter,
++                end: Alignment.bottomCenter,
++                stops: const [0.6, 1],
++                colors: [background.withValues(alpha: 0), background],
++              ),
++            ),
++          ),
++        ),
++      ],
+     );
+   }
+ }
+diff --git a/lib/screens/monster_details/monster_info_section.dart b/lib/screens/monster_details/monster_info_section.dart
+index 8f56e93..ac38b63 100644
+--- a/lib/screens/monster_details/monster_info_section.dart
++++ b/lib/screens/monster_details/monster_info_section.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/section_heading.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+ import 'package:mhwilds_app/models/monster.dart';
+ import 'package:mhwilds_app/screens/monster_details/section_card.dart';
+@@ -19,8 +20,8 @@ class MonsterInfoSection extends StatelessWidget {
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+-          MonsterSectionTitle(l10n.monsterInformation,
+-              tint: colorScheme.primary),
++          SectionHeading(
++              title: l10n.monsterInformation, icon: Icons.info_outline),
+           const SizedBox(height: 16),
+           Row(
+             children: [
+@@ -64,13 +65,14 @@ class _VariantsBox extends StatelessWidget {
+   @override
+   Widget build(BuildContext context) {
+     final textTheme = Theme.of(context).textTheme;
++    final accent = Theme.of(context).colorScheme.primary;
+     return Container(
+       padding: const EdgeInsets.all(AppSpacing.lg),
+       decoration: BoxDecoration(
+-        color: Colors.orange.withValues(alpha: 0.1),
++        color: accent.withValues(alpha: 0.1),
+         borderRadius: BorderRadius.circular(12),
+         border: Border.all(
+-          color: Colors.orange.withValues(alpha: 0.3),
++          color: accent.withValues(alpha: 0.3),
+           width: 1,
+         ),
+       ),
+@@ -78,13 +80,13 @@ class _VariantsBox extends StatelessWidget {
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+           Row(children: [
+-            Icon(Icons.warning_amber, size: 20, color: Colors.orange[700]),
++            Icon(Icons.warning_amber, size: 20, color: accent),
+             const SizedBox(width: 8),
+             Flexible(
+               child: Text(
+                 AppLocalizations.of(context)!.monsterVariants,
+-                style: textTheme.bodyLarge!.copyWith(
+-                    fontWeight: FontWeight.bold, color: Colors.orange[700]),
++                style: textTheme.bodyLarge!
++                    .copyWith(fontWeight: FontWeight.bold, color: accent),
+               ),
+             ),
+           ]),
+diff --git a/lib/screens/monster_details/monster_size_section.dart b/lib/screens/monster_details/monster_size_section.dart
+index 6078cc9..33c5a28 100644
+--- a/lib/screens/monster_details/monster_size_section.dart
++++ b/lib/screens/monster_details/monster_size_section.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/section_heading.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+ import 'package:mhwilds_app/models/monster.dart';
+ import 'package:mhwilds_app/screens/monster_details/section_card.dart';
+@@ -18,7 +19,7 @@ class MonsterSizeSection extends StatelessWidget {
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+-          MonsterSectionTitle(l10n.crownSizes),
++          SectionHeading(title: l10n.crownSizes, icon: Icons.straighten),
+           const SizedBox(height: 16),
+           _SizeRow(
+             label: l10n.baseSize,
+@@ -45,7 +46,7 @@ class MonsterSizeSection extends StatelessWidget {
+             label: l10n.goldCrown,
+             size: '≥ ${(sizes.gold / 100).toStringAsFixed(2)} m',
+             icon: Icons.keyboard_arrow_up,
+-            color: AppColors.goldSoft,
++            color: AppColors.goldAccent(context),
+           ),
+         ],
+       ),
+diff --git a/lib/screens/monster_details/monster_stats_section.dart b/lib/screens/monster_details/monster_stats_section.dart
+index caef356..b00d059 100644
+--- a/lib/screens/monster_details/monster_stats_section.dart
++++ b/lib/screens/monster_details/monster_stats_section.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/section_heading.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+ import 'package:mhwilds_app/models/monster.dart';
+ import 'package:mhwilds_app/screens/monster_details/section_card.dart';
+@@ -32,7 +33,7 @@ class MonsterStatsSection extends StatelessWidget {
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+-          MonsterSectionTitle(l10n.statistics),
++          SectionHeading(title: l10n.statistics, icon: Icons.bar_chart),
+           const SizedBox(height: 16),
+           Row(
+             children: [
+diff --git a/lib/screens/monster_details/monster_weaknesses_section.dart b/lib/screens/monster_details/monster_weaknesses_section.dart
+index 6aaaed5..5257379 100644
+--- a/lib/screens/monster_details/monster_weaknesses_section.dart
++++ b/lib/screens/monster_details/monster_weaknesses_section.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/section_heading.dart';
+ import 'package:mhwilds_app/components/element_icon.dart';
+ import 'package:mhwilds_app/components/label_value_row.dart';
+ import 'package:mhwilds_app/components/monster_details_card.dart';
+@@ -25,8 +26,9 @@ class MonsterWeaknessesSection extends StatelessWidget {
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+           LabelValueRow(
+-            label: MonsterSectionTitle(
+-                AppLocalizations.of(context)!.weaknessesAndResistances),
++            label: SectionHeading(
++                title: AppLocalizations.of(context)!.weaknessesAndResistances,
++                icon: Icons.bolt),
+             value: const ElementsInfo(),
+           ),
+           const SizedBox(height: 16),
+diff --git a/lib/screens/monster_details/section_card.dart b/lib/screens/monster_details/section_card.dart
+index 5f56006..b05ae46 100644
+--- a/lib/screens/monster_details/section_card.dart
++++ b/lib/screens/monster_details/section_card.dart
+@@ -31,34 +31,6 @@ class MonsterSectionCard extends StatelessWidget {
+   }
+ }
+ 
+-/// Título en "pill" de una sección.
+-class MonsterSectionTitle extends StatelessWidget {
+-  final String text;
+-  final Color? tint;
+-
+-  const MonsterSectionTitle(this.text, {super.key, this.tint});
+-
+-  @override
+-  Widget build(BuildContext context) {
+-    final colorScheme = Theme.of(context).colorScheme;
+-    return Container(
+-      padding:
+-          const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
+-      decoration: BoxDecoration(
+-        color: (tint ?? AppColors.goldSoft).withValues(alpha: 0.1),
+-        borderRadius: BorderRadius.circular(AppRadius.lg),
+-      ),
+-      child: Text(
+-        text,
+-        style: Theme.of(context)
+-            .textTheme
+-            .bodyLarge!
+-            .copyWith(fontWeight: FontWeight.bold, color: colorScheme.primary),
+-      ),
+-    );
+-  }
+-}
+-
+ /// Fila etiqueta (negrita) + valor.
+ class MonsterInfoRow extends StatelessWidget {
+   final String label;
+diff --git a/lib/screens/skill_details.dart b/lib/screens/skill_details.dart
+index ee436ff..6030188 100644
+--- a/lib/screens/skill_details.dart
++++ b/lib/screens/skill_details.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/app_bar_background.dart';
+ import 'package:mhwilds_app/components/set_piece_tag.dart';
+ import 'package:mhwilds_app/components/skill_sprite_icon.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+@@ -44,6 +45,7 @@ class _SkillDetailsState extends State<SkillDetails> {
+     final l10n = AppLocalizations.of(context)!;
+     return Scaffold(
+       appBar: AppBar(
++        flexibleSpace: const AppBarBackground(),
+         title: Text(l10n.skillDetails),
+         centerTitle: true,
+       ),
+diff --git a/lib/screens/weapon_details.dart b/lib/screens/weapon_details.dart
+index 44bbe9c..0010d67 100644
+--- a/lib/screens/weapon_details.dart
++++ b/lib/screens/weapon_details.dart
+@@ -1,6 +1,7 @@
+ import 'dart:async';
+ 
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/app_bar_background.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+ import 'package:mhwilds_app/models/skills.dart';
+ import 'package:mhwilds_app/models/weapon.dart';
+@@ -47,6 +48,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
+     return Scaffold(
+       backgroundColor: colorScheme.surfaceContainerHighest,
+       appBar: AppBar(
++        flexibleSpace: const AppBarBackground(),
+         title: Text(weapon.name),
+         centerTitle: true,
+       ),
+diff --git a/lib/screens/weapon_details/section_card.dart b/lib/screens/weapon_details/section_card.dart
+index 704157c..93effe5 100644
+--- a/lib/screens/weapon_details/section_card.dart
++++ b/lib/screens/weapon_details/section_card.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/section_heading.dart';
+ import 'package:mhwilds_app/utils/spacing.dart';
+ 
+ /// Tarjeta contenedora común a todas las secciones del detalle de arma.
+@@ -50,7 +51,7 @@ class WeaponTitledCard extends StatelessWidget {
+         children: [
+           Padding(
+             padding: const EdgeInsets.all(20),
+-            child: WeaponSectionTitle(icon: icon, title: title),
++            child: SectionHeading(icon: icon, title: title),
+           ),
+           Padding(padding: const EdgeInsets.all(20), child: child),
+         ],
+@@ -58,41 +59,3 @@ class WeaponTitledCard extends StatelessWidget {
+     );
+   }
+ }
+-
+-/// Icono + título de sección. [fill] hace que el texto ocupe el espacio libre
+-/// (para colocar acciones a la derecha); [trailing] es ese contenido.
+-class WeaponSectionTitle extends StatelessWidget {
+-  const WeaponSectionTitle({
+-    super.key,
+-    required this.icon,
+-    required this.title,
+-    this.fill = false,
+-    this.trailing,
+-  });
+-
+-  final IconData icon;
+-  final String title;
+-  final bool fill;
+-  final Widget? trailing;
+-
+-  @override
+-  Widget build(BuildContext context) {
+-    final colorScheme = Theme.of(context).colorScheme;
+-    final text = Text(
+-      title,
+-      style: TextStyle(
+-        fontSize: 20,
+-        fontWeight: FontWeight.bold,
+-        color: colorScheme.onSurface,
+-      ),
+-    );
+-    return Row(
+-      children: [
+-        Icon(icon, color: colorScheme.primary, size: 24),
+-        const SizedBox(width: 12),
+-        fill ? Expanded(child: text) : Flexible(child: text),
+-        if (trailing != null) trailing!,
+-      ],
+-    );
+-  }
+-}
+diff --git a/lib/screens/weapon_details/weapon_crafting_section.dart b/lib/screens/weapon_details/weapon_crafting_section.dart
+index 843a19e..c7a8e2d 100644
+--- a/lib/screens/weapon_details/weapon_crafting_section.dart
++++ b/lib/screens/weapon_details/weapon_crafting_section.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/section_heading.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+ import 'package:mhwilds_app/models/weapon.dart';
+ import 'package:mhwilds_app/screens/weapon_details/crafting_costs.dart';
+@@ -20,7 +21,7 @@ class WeaponCraftingSection extends StatelessWidget {
+           initiallyExpanded: false,
+           tilePadding: const EdgeInsets.symmetric(
+               horizontal: 20, vertical: AppSpacing.sm),
+-          title: WeaponSectionTitle(
++          title: SectionHeading(
+             icon: Icons.build,
+             title: AppLocalizations.of(context)!.craftingMaterials,
+           ),
+diff --git a/lib/screens/weapon_details/weapon_tree_section.dart b/lib/screens/weapon_details/weapon_tree_section.dart
+index 13964cb..21d0b2a 100644
+--- a/lib/screens/weapon_details/weapon_tree_section.dart
++++ b/lib/screens/weapon_details/weapon_tree_section.dart
+@@ -1,4 +1,5 @@
+ import 'package:flutter/material.dart';
++import 'package:mhwilds_app/components/section_heading.dart';
+ import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+ import 'package:mhwilds_app/models/weapon.dart';
+ import 'package:mhwilds_app/screens/weapon_details/section_card.dart';
+@@ -39,7 +40,7 @@ class WeaponTreeSection extends StatelessWidget {
+           initiallyExpanded: true,
+           tilePadding: const EdgeInsets.symmetric(
+               horizontal: 20, vertical: AppSpacing.sm),
+-          title: WeaponSectionTitle(
++          title: SectionHeading(
+             icon: Icons.account_tree,
+             title: l10n?.weaponTree ?? 'Weapon Tree',
+             fill: true,
+diff --git a/lib/utils/colors.dart b/lib/utils/colors.dart
+index 8c6e34f..5aee0fe 100644
+--- a/lib/utils/colors.dart
++++ b/lib/utils/colors.dart
+@@ -13,6 +13,31 @@ class AppColors {
+   static Color goldAccent(BuildContext context) =>
+       Theme.of(context).brightness == Brightness.dark ? goldSoft : goldInk;
+ 
++  // Degradado dorado de cabeceras (AppBar clara y menú lateral).
++  static const Color goldLight = Color(0xFFD9C084);
++  static const Color goldDeep = Color(0xFFA8863E);
++  static const LinearGradient goldGradient = LinearGradient(
++    begin: Alignment.topLeft,
++    end: Alignment.bottomRight,
++    colors: [goldLight, goldSoft, goldDeep],
++  );
++
++  // Degradado de la AppBar oscura: marrón casi negro con un rastro dorado.
++  static const LinearGradient darkBarGradient = LinearGradient(
++    begin: Alignment.topLeft,
++    end: Alignment.bottomRight,
++    colors: [Color(0xFF1D1812), Color(0xFF33291A)],
++  );
++
++  static LinearGradient barGradient(BuildContext context) =>
++      Theme.of(context).brightness == Brightness.dark
++          ? darkBarGradient
++          : goldGradient;
++
++  // Superficies cálidas (tema claro): fondo de página y tarjetas.
++  static const Color parchment = Color(0xFFF6F0E1);
++  static const Color parchmentCard = Color(0xFFFFFCF5);
++
+   // Color marrón oliva
+   static const Color oliveBrown = Color(0xFF605632);
+ 
+diff --git a/lib/utils/theme.dart b/lib/utils/theme.dart
+index 9b46b99..917da30 100644
+--- a/lib/utils/theme.dart
++++ b/lib/utils/theme.dart
+@@ -3,6 +3,9 @@ import 'package:mhwilds_app/utils/colors.dart';
+ import 'package:mhwilds_app/utils/game_colors.dart';
+ 
+ class AppTheme {
++  /// Fuente de títulos (solo peso regular: no usar negrita con ella).
++  static const String displayFont = 'Marcellus';
++
+   /// Esquemas generados desde el dorado para que `secondary`, `tertiary` y los
+   /// contenedores de Material 3 no caigan en los colores por defecto de
+   /// Flutter. Las superficies y `onSurfaceVariant` (texto secundario, >= 4,5:1)
+@@ -11,19 +14,22 @@ class AppTheme {
+     seedColor: AppColors.goldSoft,
+     brightness: Brightness.light,
+   ).copyWith(
+-    primary: AppColors.goldSoft,
+-    onPrimary: Colors.black87,
++    // goldInk (no goldSoft): `primary` se usa como color de texto e iconos y
++    // goldSoft solo llega a 2,41:1 sobre claro. Los rellenos dorados (botones,
++    // FAB) usan goldSoft explícito.
++    primary: AppColors.goldInk,
++    onPrimary: Colors.white,
+     secondary: AppColors.oliveBrown,
+     onSecondary: Colors.white,
+     tertiary: AppColors.mutedOlive,
+     onTertiary: Colors.black87,
+-    surface: Colors.white,
++    surface: AppColors.parchmentCard,
+     onSurface: Colors.black87,
+-    onSurfaceVariant: const Color(0xFF5F5F5F),
+-    surfaceContainerLow: const Color(0xFFF8F8F8),
+-    surfaceContainerHighest: const Color(0xFFF5F5F5),
+-    outline: const Color(0xFFE0E0E0),
+-    outlineVariant: const Color(0xFFEEEEEE),
++    onSurfaceVariant: const Color(0xFF5E5645),
++    surfaceContainerLow: const Color(0xFFF9F4E8),
++    surfaceContainerHighest: const Color(0xFFF3EDDD),
++    outline: const Color(0xFFDDD3BC),
++    outlineVariant: const Color(0xFFE8E0CC),
+   );
+ 
+   static final ColorScheme darkScheme = ColorScheme.fromSeed(
+@@ -36,25 +42,32 @@ class AppTheme {
+     onSecondary: Colors.black87,
+     tertiary: AppColors.goldSoft,
+     onTertiary: Colors.black87,
+-    surface: const Color(0xFF121212),
+-    onSurface: const Color(0xFFE0E0E0),
+-    onSurfaceVariant: const Color(0xFFB8B8B8),
+-    surfaceContainerLow: const Color(0xFF1A1A1A),
+-    surfaceContainerHighest: const Color(0xFF2C2C2C),
+-    outline: const Color(0xFF404040),
+-    outlineVariant: const Color(0xFF383838),
++    surface: const Color(0xFF14110C),
++    onSurface: const Color(0xFFE6E0D2),
++    onSurfaceVariant: const Color(0xFFC2BAA9),
++    surfaceContainer: const Color(0xFF1D1812),
++    surfaceContainerLow: const Color(0xFF1A1610),
++    surfaceContainerHighest: const Color(0xFF29231A),
++    outline: const Color(0xFF4A4132),
++    outlineVariant: const Color(0xFF3A3326),
+   );
+ 
+   /// Escala tipográfica completa; ningún estilo baja de 12 px.
+   static TextTheme _textTheme(Color color) => TextTheme(
+-        displayLarge: TextStyle(color: color, fontSize: 57),
+-        displayMedium: TextStyle(color: color, fontSize: 45),
+-        displaySmall: TextStyle(color: color, fontSize: 36),
+-        headlineLarge: TextStyle(color: color, fontSize: 32),
+-        headlineMedium: TextStyle(color: color, fontSize: 28),
+-        headlineSmall: TextStyle(color: color, fontSize: 24),
++        displayLarge:
++            TextStyle(color: color, fontSize: 57, fontFamily: displayFont),
++        displayMedium:
++            TextStyle(color: color, fontSize: 45, fontFamily: displayFont),
++        displaySmall:
++            TextStyle(color: color, fontSize: 36, fontFamily: displayFont),
++        headlineLarge:
++            TextStyle(color: color, fontSize: 32, fontFamily: displayFont),
++        headlineMedium:
++            TextStyle(color: color, fontSize: 28, fontFamily: displayFont),
++        headlineSmall:
++            TextStyle(color: color, fontSize: 24, fontFamily: displayFont),
+         titleLarge:
+-            TextStyle(color: color, fontSize: 22, fontWeight: FontWeight.w500),
++            TextStyle(color: color, fontSize: 22, fontFamily: displayFont),
+         titleMedium:
+             TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500),
+         titleSmall:
+@@ -76,17 +89,23 @@ class AppTheme {
+       useMaterial3: true,
+       colorScheme: colorScheme,
+       extensions: [GameColors.light],
++      // El degradado dorado lo pone `AppBarBackground` (flexibleSpace); el
++      // color liso es el de reserva.
+       appBarTheme: const AppBarTheme(
+         backgroundColor: AppColors.goldSoft,
+         foregroundColor: Colors.black87,
+-        elevation: 10,
++        surfaceTintColor: Colors.transparent,
++        elevation: 0,
++        scrolledUnderElevation: 0,
++        shape: Border(bottom: BorderSide(color: AppColors.goldInk, width: 1)),
+         titleTextStyle: TextStyle(
+           color: Colors.black87,
+-          fontSize: 20,
+-          fontWeight: FontWeight.bold,
++          fontSize: 22,
++          fontFamily: displayFont,
+         ),
+       ),
+-      drawerTheme: const DrawerThemeData(backgroundColor: Colors.white),
++      drawerTheme:
++          const DrawerThemeData(backgroundColor: AppColors.parchmentCard),
+       floatingActionButtonTheme: const FloatingActionButtonThemeData(
+         backgroundColor: AppColors.goldSoft,
+         foregroundColor: Colors.black87,
+@@ -112,7 +131,7 @@ class AppTheme {
+         color: colorScheme.surface,
+         elevation: 3,
+       ),
+-      scaffoldBackgroundColor: colorScheme.surface,
++      scaffoldBackgroundColor: AppColors.parchment,
+       elevatedButtonTheme: ElevatedButtonThemeData(
+         style: ElevatedButton.styleFrom(
+           backgroundColor: AppColors.goldSoft,
+@@ -155,14 +174,18 @@ class AppTheme {
+         backgroundColor: colorScheme.surfaceContainer,
+         foregroundColor: colorScheme.primary,
+         surfaceTintColor: Colors.transparent,
+-        elevation: 10,
++        elevation: 0,
++        scrolledUnderElevation: 0,
++        shape: const Border(
++          bottom: BorderSide(color: AppColors.goldSoft, width: 1),
++        ),
+         titleTextStyle: TextStyle(
+           color: colorScheme.primary,
+-          fontSize: 20,
+-          fontWeight: FontWeight.bold,
++          fontSize: 22,
++          fontFamily: displayFont,
+         ),
+       ),
+-      drawerTheme: const DrawerThemeData(backgroundColor: Color(0xFF121212)),
++      drawerTheme: DrawerThemeData(backgroundColor: colorScheme.surface),
+       floatingActionButtonTheme: const FloatingActionButtonThemeData(
+         backgroundColor: AppColors.goldSoft,
+         foregroundColor: Colors.black87,
+diff --git a/test/drawer_test.dart b/test/drawer_test.dart
+index 67566cb..92aff22 100644
+--- a/test/drawer_test.dart
++++ b/test/drawer_test.dart
+@@ -68,12 +68,11 @@ void main() {
+     expect(tester.getSize(button), const Size(48, 48));
+   });
+ 
+-  test('surfaceContainerLow es neutro, sin tinte dorado', () {
++  test('surfaceContainerLow es cálido (r >= g >= b), no el tinte del seed', () {
+     for (final s in [AppTheme.lightScheme, AppTheme.darkScheme]) {
+       final c = s.surfaceContainerLow;
+-      final spread = [c.r, c.g, c.b].reduce((a, b) => a > b ? a : b) -
+-          [c.r, c.g, c.b].reduce((a, b) => a < b ? a : b);
+-      expect(spread, lessThan(0.02));
++      expect(c.r, greaterThanOrEqualTo(c.g));
++      expect(c.g, greaterThanOrEqualTo(c.b));
+     }
+   });
+ }
+diff --git a/test/theme_test.dart b/test/theme_test.dart
+index 2e155e0..90445d0 100644
+--- a/test/theme_test.dart
++++ b/test/theme_test.dart
+@@ -24,7 +24,11 @@ void main() {
+     final s = entry.value;
+     group('esquema ${entry.key}', () {
+       test('conserva dorado y no usa el turquesa por defecto', () {
+-        expect(s.primary, AppColors.goldSoft);
++        expect(
++            s.primary,
++            s.brightness == Brightness.light
++                ? AppColors.goldInk
++                : AppColors.goldSoft);
+         expect(s.secondary, isNot(const Color(0xFF03DAC6)));
+         expect(s.tertiary, isNot(const Color(0xFF03DAC6)));
+       });
+@@ -41,8 +45,14 @@ void main() {
+     });
+   }
+ 
+-  test('AppBar dorada en claro; en oscuro superficie con título dorado', () {
+-    expect(AppTheme.lightTheme.appBarTheme.backgroundColor, AppColors.goldSoft);
++  test('AppBar dorada con degradado; en oscuro superficie con título dorado',
++      () {
++    final light = AppTheme.lightTheme.appBarTheme;
++    expect(light.backgroundColor, AppColors.goldSoft);
++    // El texto oscuro debe leerse sobre todo el degradado dorado.
++    for (final c in AppColors.goldGradient.colors) {
++      expect(_contrast(light.foregroundColor!, c), greaterThan(4.5));
++    }
+     final dark = AppTheme.darkTheme.appBarTheme;
+     expect(dark.backgroundColor, AppTheme.darkScheme.surfaceContainer);
+     expect(dark.foregroundColor, AppColors.goldSoft);

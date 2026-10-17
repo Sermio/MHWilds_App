@@ -8,7 +8,6 @@ import 'package:mhwilds_app/utils/spacing.dart';
 class Cdrawer extends StatelessWidget {
   final ValueChanged<AppSection> onSectionSelected;
   final AppSection selectedSection;
-  static final Color _selectedHighlightColor = Colors.orange[600]!;
 
   const Cdrawer({
     super.key,
@@ -45,14 +44,7 @@ class Cdrawer extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            AppColors.goldSoft.withValues(alpha: 0.92),
-            AppColors.goldSoft.withValues(alpha: 0.72),
-          ],
-        ),
+        gradient: AppColors.goldGradient,
         border: Border(
           bottom: BorderSide(
             color:
@@ -155,11 +147,10 @@ class Cdrawer extends StatelessWidget {
       child: Column(
         children: [
           for (final section in AppSection.values) ...[
-            if (section != AppSection.values.first) const SizedBox(height: 8),
+            if (section != AppSection.values.first) const SizedBox(height: 6),
             _buildMenuItem(
               context: context,
               title: section.title(l10n),
-              subtitle: section.subtitle(l10n),
               leadingIcon: section.menuLeading(context),
               icon: section.icon,
               iconColor: section.iconColor(context),
@@ -175,7 +166,6 @@ class Cdrawer extends StatelessWidget {
   Widget _buildMenuItem({
     required BuildContext context,
     required String title,
-    required String subtitle,
     required IconData icon,
     required Color iconColor,
     required VoidCallback onTap,
@@ -186,7 +176,7 @@ class Cdrawer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: isSelected
-            ? _selectedHighlightColor.withValues(alpha: 0.12)
+            ? colorScheme.primary.withValues(alpha: 0.12)
             : colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
@@ -198,7 +188,7 @@ class Cdrawer extends StatelessWidget {
         ],
         border: Border.all(
           color: isSelected
-              ? _selectedHighlightColor.withValues(alpha: 0.35)
+              ? colorScheme.primary.withValues(alpha: 0.35)
               : colorScheme.outlineVariant,
           width: 1,
         ),
@@ -209,51 +199,36 @@ class Cdrawer extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md, vertical: AppSpacing.sm),
             child: Row(
               children: [
-                // Icono con fondo circular
-                Container(
-                  width: 56,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
+                SizedBox(
+                  width: 44,
+                  height: 44,
                   child: Padding(
-                    padding: const EdgeInsets.all(6),
+                    padding: const EdgeInsets.all(4),
                     child: leadingIcon ??
                         Icon(
                           icon,
                           color: iconColor,
-                          size: 30,
+                          size: 28,
                         ),
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: AppSpacing.md),
 
                 // Texto del menú
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        subtitle,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: colorScheme.onSurfaceVariant,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
+                  child: Text(
+                    title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                 ),
 
@@ -261,9 +236,9 @@ class Cdrawer extends StatelessWidget {
                 Icon(
                   Icons.arrow_forward_ios,
                   color: isSelected
-                      ? _selectedHighlightColor
+                      ? colorScheme.primary
                       : colorScheme.onSurfaceVariant,
-                  size: 18,
+                  size: 16,
                 ),
               ],
             ),

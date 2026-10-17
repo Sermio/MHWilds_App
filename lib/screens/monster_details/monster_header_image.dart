@@ -11,12 +11,31 @@ class MonsterHeaderImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final imagePath = monsterImageAssets[monsterId];
     if (imagePath == null) return const _ImagePlaceholder();
-    return Image.asset(
-      imagePath,
-      width: 380,
-      height: 250,
-      fit: BoxFit.fill,
-      errorBuilder: (context, error, stackTrace) => const _ImagePlaceholder(),
+    final background = Theme.of(context).scaffoldBackgroundColor;
+    return Stack(
+      children: [
+        Image.asset(
+          imagePath,
+          width: 380,
+          height: 250,
+          fit: BoxFit.fill,
+          errorBuilder: (context, error, stackTrace) =>
+              const _ImagePlaceholder(),
+        ),
+        // Funde el borde inferior con el fondo en lugar de un corte recto.
+        Positioned.fill(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [0.6, 1],
+                colors: [background.withValues(alpha: 0), background],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

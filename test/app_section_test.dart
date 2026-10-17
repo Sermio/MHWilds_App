@@ -31,7 +31,7 @@ void main() {
       l10n.talismans,
       l10n.skills,
       l10n.items,
-      l10n.locations,
+      l10n.maps,
       l10n.buildCrafter,
       l10n.buildOptimizer,
     ]);
@@ -50,10 +50,9 @@ void main() {
     expect(AppSection.buildOptimizer.screen, isA<BuildOptimizerScreen>());
   });
 
-  test('títulos y subtítulos no están vacíos', () {
+  test('los títulos no están vacíos', () {
     for (final s in AppSection.values) {
       expect(s.title(l10n), isNotEmpty, reason: '$s');
-      expect(s.subtitle(l10n), isNotEmpty, reason: '$s');
     }
   });
 

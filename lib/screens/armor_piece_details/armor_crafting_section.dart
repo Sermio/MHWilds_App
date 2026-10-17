@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/material_image.dart';
+import 'package:mhwilds_app/components/material_cost_widgets.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/screens/armor_piece_details/armor_section_card.dart';
-import 'package:mhwilds_app/screens/item_details.dart';
-import 'package:mhwilds_app/utils/spacing.dart';
 
 /// Materiales de la receta, sin las entradas de Zenny.
 List<armor_models.Material> armorRecipeMaterials(
@@ -36,121 +34,19 @@ class ArmorCraftingSection extends StatelessWidget {
       child: Column(
         children: [
           if (materials.isNotEmpty)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (final material in materials)
-                  _MaterialItem(material: material),
-              ],
-            ),
+            MaterialCostTable(materials: materials),
           if (zennyCost > 0) ...[
             SizedBox(height: materials.isEmpty ? 8 : 20),
             materials.isEmpty
                 ? SizedBox(
                     width: double.infinity,
                     child: Center(
-                      child: _CostChip(label: l10n.craft, cost: zennyCost),
+                      child: ZennyCostChip(label: l10n.craft, cost: zennyCost),
                     ),
                   )
-                : _CostChip(label: l10n.craft, cost: zennyCost),
+                : ZennyCostChip(label: l10n.craft, cost: zennyCost),
           ],
         ],
-      ),
-    );
-  }
-}
-
-class _MaterialItem extends StatelessWidget {
-  final armor_models.Material material;
-
-  const _MaterialItem({required this.material});
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.md),
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: colorScheme.outlineVariant, width: 1),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ItemDetails(item: material.item),
-              ),
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: MaterialImage(
-                      item: material.item,
-                      width: 40,
-                      height: 40,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    material.item.name,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: colorScheme.onSurface),
-                  ),
-                ),
-                Text(
-                  'x${material.quantity}',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.primary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _CostChip extends StatelessWidget {
-  final String label;
-  final int cost;
-
-  const _CostChip({required this.label, required this.cost});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding:
-          const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.amber[100],
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.amber[300]!),
-      ),
-      child: Text(
-        '$label: $cost Z',
-        style: TextStyle(
-          color: Colors.amber[800],
-          fontWeight: FontWeight.w600,
-        ),
       ),
     );
   }

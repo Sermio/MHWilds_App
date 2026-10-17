@@ -24,7 +24,11 @@ void main() {
     final s = entry.value;
     group('esquema ${entry.key}', () {
       test('conserva dorado y no usa el turquesa por defecto', () {
-        expect(s.primary, AppColors.goldSoft);
+        expect(
+            s.primary,
+            s.brightness == Brightness.light
+                ? AppColors.goldInk
+                : AppColors.goldSoft);
         expect(s.secondary, isNot(const Color(0xFF03DAC6)));
         expect(s.tertiary, isNot(const Color(0xFF03DAC6)));
       });
@@ -41,8 +45,14 @@ void main() {
     });
   }
 
-  test('AppBar dorada en claro; en oscuro superficie con título dorado', () {
-    expect(AppTheme.lightTheme.appBarTheme.backgroundColor, AppColors.goldSoft);
+  test('AppBar dorada con degradado; en oscuro superficie con título dorado',
+      () {
+    final light = AppTheme.lightTheme.appBarTheme;
+    expect(light.backgroundColor, AppColors.goldSoft);
+    // El texto oscuro debe leerse sobre todo el degradado dorado.
+    for (final c in AppColors.goldGradient.colors) {
+      expect(_contrast(light.foregroundColor!, c), greaterThan(4.5));
+    }
     final dark = AppTheme.darkTheme.appBarTheme;
     expect(dark.backgroundColor, AppTheme.darkScheme.surfaceContainer);
     expect(dark.foregroundColor, AppColors.goldSoft);

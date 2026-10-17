@@ -28,3 +28,9 @@ String removeDiacritics(String text) {
   }
   return out.toString().toLowerCase().trim();
 }
+
+/// Quita el prefijo de zona del nombre de un campamento de la API
+/// ("Zona 2: Bifurcación" / "Zone 2 - Fossé" -> "Bifurcación"), porque la
+/// zona ya se muestra en su propio chip. Sin prefijo, devuelve el nombre.
+String campNameWithoutZone(String? name) =>
+    (name ?? '').replaceFirst(RegExp(r'^\S+\s+\d+\s*[:\-–]\s*'), '');

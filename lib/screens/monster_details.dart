@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/app_bar_background.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
@@ -90,6 +91,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
 
         return Scaffold(
           appBar: AppBar(
+        flexibleSpace: const AppBarBackground(),
             title: Text(monster.name),
             centerTitle: true,
           ),

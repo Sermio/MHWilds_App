@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/section_heading.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/monster_details/section_card.dart';
@@ -32,7 +33,7 @@ class MonsterStatsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MonsterSectionTitle(l10n.statistics),
+          SectionHeading(title: l10n.statistics, icon: Icons.bar_chart),
           const SizedBox(height: 16),
           Row(
             children: [

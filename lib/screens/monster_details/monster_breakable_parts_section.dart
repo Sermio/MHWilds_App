@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/section_heading.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/monster_details/section_card.dart';
@@ -18,7 +19,9 @@ class MonsterBreakablePartsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MonsterSectionTitle(AppLocalizations.of(context)!.breakableParts),
+          SectionHeading(
+              title: AppLocalizations.of(context)!.breakableParts,
+              icon: Icons.hardware),
           const SizedBox(height: 16),
           ...parts.map(
             (part) => Container(

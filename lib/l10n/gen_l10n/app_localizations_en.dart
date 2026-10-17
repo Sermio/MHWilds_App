@@ -403,6 +403,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get zone => 'Zone';
 
   @override
+  String get zones => 'Zones';
+
+  @override
   String get loadingMap => 'Loading map...';
 
   @override
@@ -878,4 +881,37 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get bugReportPrivacy =>
       'The report includes the app version, platform and language.';
+
+  @override
+  String get rewardTargetReward => 'Target Reward';
+
+  @override
+  String get rewardCarve => 'Carve';
+
+  @override
+  String get rewardBrokenPart => 'Broken Part';
+
+  @override
+  String get rewardCarveRotten => 'Carve (Rotten)';
+
+  @override
+  String get rewardWoundDestroyed => 'Wound Destroyed';
+
+  @override
+  String get rewardTemperedWoundDestroyed => 'Wound Destroyed (Tempered)';
+
+  @override
+  String get rewardCarveSevered => 'Carve (Severed)';
+
+  @override
+  String get rewardCarveRottenSevered => 'Carve (Rotten, Severed)';
+
+  @override
+  String get rewardCarveCrystallized => 'Carve (Crystallized)';
+
+  @override
+  String get rewardBrokenFragment => 'Broken Fragment';
+
+  @override
+  String get maps => 'Maps';
 }

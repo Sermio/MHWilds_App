@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/section_heading.dart';
 import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/label_value_row.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
@@ -25,8 +26,9 @@ class MonsterWeaknessesSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           LabelValueRow(
-            label: MonsterSectionTitle(
-                AppLocalizations.of(context)!.weaknessesAndResistances),
+            label: SectionHeading(
+                title: AppLocalizations.of(context)!.weaknessesAndResistances,
+                icon: Icons.bolt),
             value: const ElementsInfo(),
           ),
           const SizedBox(height: 16),

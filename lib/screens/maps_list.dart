@@ -167,7 +167,7 @@ class _MapsListState extends State<MapsList> {
                           _buildInfoBadge(
                             context,
                             Icons.grid_on,
-                            '${l10n.zone}: $zoneCount',
+                            '${l10n.zones}: $zoneCount',
                             colorScheme.primary,
                           ),
                           // Campamentos chip

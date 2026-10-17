@@ -173,6 +173,7 @@
   },
   "risk": "Ryzyko",
   "zone": "Strefa",
+  "zones": "Strefy",
   "loadingMap": "Ładowanie mapy...",
   "noMapImagesFound": "Nie znaleziono obrazów mapy",
   "monsterInformation": "Informacje o Potworze",
@@ -311,5 +312,16 @@
   "bugReportFailed": "Nie udało się wysłać zgłoszenia. Spróbuj później.",
   "bugReportTooMany": "Możesz dołączyć maksymalnie {max} plików.",
   "bugReportTooLarge": "Załączniki przekraczają {mb} MB.",
-  "bugReportPrivacy": "Zgłoszenie zawiera wersję aplikacji, platformę i język."
+  "bugReportPrivacy": "Zgłoszenie zawiera wersję aplikacji, platformę i język.",
+  "rewardTargetReward": "Nagroda za cel",
+  "rewardCarve": "Skórowanie",
+  "rewardBrokenPart": "Złamana część",
+  "rewardCarveRotten": "Skórowanie (zgniłe)",
+  "rewardWoundDestroyed": "Zniszczona rana",
+  "rewardTemperedWoundDestroyed": "Zniszczona rana (zahartowany)",
+  "rewardCarveSevered": "Skórowanie (odcięta część)",
+  "rewardCarveRottenSevered": "Skórowanie (zgniłe, odcięta część)",
+  "rewardCarveCrystallized": "Skórowanie (skrystalizowane)",
+  "rewardBrokenFragment": "Złamany fragment",
+  "maps": "Mapy"
 }

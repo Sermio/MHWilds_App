@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/section_heading.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/weapon.dart';
 import 'package:mhwilds_app/screens/weapon_details/section_card.dart';
@@ -39,7 +40,7 @@ class WeaponTreeSection extends StatelessWidget {
           initiallyExpanded: true,
           tilePadding: const EdgeInsets.symmetric(
               horizontal: 20, vertical: AppSpacing.sm),
-          title: WeaponSectionTitle(
+          title: SectionHeading(
             icon: Icons.account_tree,
             title: l10n?.weaponTree ?? 'Weapon Tree',
             fill: true,

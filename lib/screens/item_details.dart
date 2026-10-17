@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/drop_chance_row.dart';
+import 'package:mhwilds_app/components/app_bar_background.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/components/monster_icon.dart';
@@ -34,6 +36,7 @@ class ItemDetails extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: const AppBarBackground(),
         title: Text(item.name),
         centerTitle: true,
       ),
@@ -272,54 +275,11 @@ class ItemDetails extends StatelessWidget {
                               style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
                             ),
                             const SizedBox(height: 16),
-                            ...relatedRewards
-                                .expand((reward) => reward.conditions)
-                                .map((condition) {
-                              final String formattedKind = condition.kind
-                                  .replaceAll('-', ' ')
-                                  .split(' ')
-                                  .map((word) =>
-                                      word[0].toUpperCase() + word.substring(1))
-                                  .join(' ');
-
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: AppSpacing.md),
-                                padding: const EdgeInsets.all(AppSpacing.lg),
-                                decoration: BoxDecoration(
-                                  color: colorScheme.surfaceContainerHighest,
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: colorScheme.outlineVariant,
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: AppSpacing.md,
-                                        vertical: 6,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: colorScheme.primary,
-                                        borderRadius: BorderRadius.circular(AppRadius.lg),
-                                      ),
-                                      child: Text(
-                                        '${condition.chance}%',
-                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onPrimary),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 16),
-                                    Expanded(
-                                      child: Text(
-                                        formattedKind,
-                                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
+                            DropChanceTable(rows: [
+                              for (final c in relatedRewards
+                                  .expand((reward) => reward.conditions))
+                                (chance: c.chance, kind: c.kind),
+                            ]),
                           ],
                         ),
                       ),

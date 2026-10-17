@@ -80,7 +80,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get offDefault => 'Desactivado (por defecto)';
 
   @override
-  String get armorSets => 'Conjuntos de armadura';
+  String get armorSets => 'Armaduras';
 
   @override
   String get menuMonstersSubtitle => 'Base de datos de monstruos';
@@ -401,6 +401,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get zone => 'Zona';
+
+  @override
+  String get zones => 'Zonas';
 
   @override
   String get loadingMap => 'Cargando mapa...';
@@ -881,6 +884,39 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get bugReportPrivacy =>
       'El reporte incluye la versión de la app, la plataforma y el idioma.';
+
+  @override
+  String get rewardTargetReward => 'Recompensa de objetivo';
+
+  @override
+  String get rewardCarve => 'Despiece';
+
+  @override
+  String get rewardBrokenPart => 'Parte rota';
+
+  @override
+  String get rewardCarveRotten => 'Despiece (podrido)';
+
+  @override
+  String get rewardWoundDestroyed => 'Herida destruida';
+
+  @override
+  String get rewardTemperedWoundDestroyed => 'Herida destruida (curtido)';
+
+  @override
+  String get rewardCarveSevered => 'Despiece (parte cortada)';
+
+  @override
+  String get rewardCarveRottenSevered => 'Despiece (podrido, parte cortada)';
+
+  @override
+  String get rewardCarveCrystallized => 'Despiece (cristalizado)';
+
+  @override
+  String get rewardBrokenFragment => 'Fragmento roto';
+
+  @override
+  String get maps => 'Mapas';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -959,7 +995,7 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
   String get offDefault => 'Desactivado (por defecto)';
 
   @override
-  String get armorSets => 'Conjuntos de armadura';
+  String get armorSets => 'Armaduras';
 
   @override
   String get menuMonstersSubtitle => 'Base de datos de monstruos';
@@ -1766,7 +1802,7 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
   String get offDefault => 'Desactivado (por defecto)';
 
   @override
-  String get armorSets => 'Conjuntos de armadura';
+  String get armorSets => 'Armaduras';
 
   @override
   String get menuMonstersSubtitle => 'Base de datos de monstruos';

@@ -867,6 +867,12 @@ abstract class AppLocalizations {
   /// **'Zone'**
   String get zone;
 
+  /// No description provided for @zones.
+  ///
+  /// In en, this message translates to:
+  /// **'Zones'**
+  String get zones;
+
   /// No description provided for @loadingMap.
   ///
   /// In en, this message translates to:
@@ -1760,6 +1766,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The report includes the app version, platform and language.'**
   String get bugReportPrivacy;
+
+  /// No description provided for @rewardTargetReward.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Reward'**
+  String get rewardTargetReward;
+
+  /// No description provided for @rewardCarve.
+  ///
+  /// In en, this message translates to:
+  /// **'Carve'**
+  String get rewardCarve;
+
+  /// No description provided for @rewardBrokenPart.
+  ///
+  /// In en, this message translates to:
+  /// **'Broken Part'**
+  String get rewardBrokenPart;
+
+  /// No description provided for @rewardCarveRotten.
+  ///
+  /// In en, this message translates to:
+  /// **'Carve (Rotten)'**
+  String get rewardCarveRotten;
+
+  /// No description provided for @rewardWoundDestroyed.
+  ///
+  /// In en, this message translates to:
+  /// **'Wound Destroyed'**
+  String get rewardWoundDestroyed;
+
+  /// No description provided for @rewardTemperedWoundDestroyed.
+  ///
+  /// In en, this message translates to:
+  /// **'Wound Destroyed (Tempered)'**
+  String get rewardTemperedWoundDestroyed;
+
+  /// No description provided for @rewardCarveSevered.
+  ///
+  /// In en, this message translates to:
+  /// **'Carve (Severed)'**
+  String get rewardCarveSevered;
+
+  /// No description provided for @rewardCarveRottenSevered.
+  ///
+  /// In en, this message translates to:
+  /// **'Carve (Rotten, Severed)'**
+  String get rewardCarveRottenSevered;
+
+  /// No description provided for @rewardCarveCrystallized.
+  ///
+  /// In en, this message translates to:
+  /// **'Carve (Crystallized)'**
+  String get rewardCarveCrystallized;
+
+  /// No description provided for @rewardBrokenFragment.
+  ///
+  /// In en, this message translates to:
+  /// **'Broken Fragment'**
+  String get rewardBrokenFragment;
+
+  /// No description provided for @maps.
+  ///
+  /// In en, this message translates to:
+  /// **'Maps'**
+  String get maps;
 }
 
 class _AppLocalizationsDelegate

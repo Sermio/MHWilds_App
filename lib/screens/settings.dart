@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/app_bar_background.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/locale_provider.dart';
 import 'package:mhwilds_app/screens/bug_report_screen.dart';
@@ -19,6 +20,7 @@ class SettingsScreen extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: const AppBarBackground(),
         title: Text(l10n.settings),
         centerTitle: true,
       ),
@@ -27,7 +29,9 @@ class SettingsScreen extends StatelessWidget {
         children: [
           Text(
             l10n.appearance,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.7)),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontWeight: FontWeight.w600,
+                color: colorScheme.onSurface.withValues(alpha: 0.7)),
           ),
           const SizedBox(height: 8),
           Card(
@@ -46,7 +50,10 @@ class SettingsScreen extends StatelessWidget {
                       title: Text(l10n.language),
                       subtitle: Text(
                         subtitle,
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurfaceVariant),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(color: colorScheme.onSurfaceVariant),
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       onTap: () =>
@@ -69,7 +76,10 @@ class SettingsScreen extends StatelessWidget {
                         themeProvider.mode == AppThemeMode.dark
                             ? l10n.on
                             : l10n.offDefault,
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurfaceVariant),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(color: colorScheme.onSurfaceVariant),
                       ),
                       value: themeProvider.mode == AppThemeMode.dark,
                       onChanged: (value) {
@@ -86,7 +96,9 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(height: 24),
           Text(
             l10n.rateAppAction,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.7)),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontWeight: FontWeight.w600,
+                color: colorScheme.onSurface.withValues(alpha: 0.7)),
           ),
           const SizedBox(height: 8),
           Card(
@@ -110,12 +122,14 @@ class SettingsScreen extends StatelessWidget {
               side: BorderSide(color: colorScheme.outlineVariant),
             ),
             child: ListTile(
-              leading: Icon(Icons.bug_report_outlined, color: colorScheme.primary),
+              leading:
+                  Icon(Icons.bug_report_outlined, color: colorScheme.primary),
               title: Text(l10n.reportBug),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute<void>(builder: (_) => const BugReportScreen()),
+                MaterialPageRoute<void>(
+                    builder: (_) => const BugReportScreen()),
               ),
             ),
           ),
@@ -128,7 +142,10 @@ class SettingsScreen extends StatelessWidget {
                 return Center(
                   child: Text(
                     'v${packageInfo.version}',
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurfaceVariant),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(color: colorScheme.onSurfaceVariant),
                   ),
                 );
               }
@@ -180,8 +197,7 @@ class SettingsScreen extends StatelessWidget {
                             currentLocale.languageCode == locale.languageCode &&
                                 currentLocale.countryCode == locale.countryCode;
                         return ListTile(
-                          title: Text(
-                              getLocaleDisplayName(locale, '')),
+                          title: Text(getLocaleDisplayName(locale, '')),
                           trailing: isSelected
                               ? Icon(Icons.check, color: colorScheme.primary)
                               : null,

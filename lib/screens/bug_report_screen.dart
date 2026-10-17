@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/app_bar_background.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/utils/bug_report_service.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
@@ -38,8 +39,8 @@ class _BugReportScreenState extends State<BugReportScreen> {
         .pickFiles(type: FileType.media, allowMultiple: true);
     if (result == null || !mounted) return;
     final merged = [..._files, ...result.files.where((f) => f.path != null)];
-    final issue =
-        BugReportService.validateAttachments(merged.map((f) => f.size).toList());
+    final issue = BugReportService.validateAttachments(
+        merged.map((f) => f.size).toList());
     if (issue != null) {
       _snack(issue == AttachmentIssue.tooMany
           ? l10n.bugReportTooMany(BugReportService.maxFiles)
@@ -86,7 +87,10 @@ class _BugReportScreenState extends State<BugReportScreen> {
     final l10n = AppLocalizations.of(context)!;
     final scheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.reportBug), centerTitle: true),
+      appBar: AppBar(
+          title: Text(l10n.reportBug),
+          centerTitle: true,
+          flexibleSpace: const AppBarBackground()),
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.lg),
         children: [
@@ -144,13 +148,15 @@ class _BugReportScreenState extends State<BugReportScreen> {
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.insert_drive_file_outlined),
-              title: Text(file.name, maxLines: 1, overflow: TextOverflow.ellipsis),
+              title:
+                  Text(file.name, maxLines: 1, overflow: TextOverflow.ellipsis),
               subtitle:
                   Text('${(file.size / (1024 * 1024)).toStringAsFixed(1)} MB'),
               trailing: IconButton(
                 icon: const Icon(Icons.close),
                 tooltip: l10n.bugReportRemoveAttachment,
-                onPressed: _sending ? null : () => setState(() => _files.remove(file)),
+                onPressed:
+                    _sending ? null : () => setState(() => _files.remove(file)),
               ),
             ),
           const SizedBox(height: AppSpacing.lg),

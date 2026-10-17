@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/section_heading.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
 
 /// Tarjeta de sección con icono + título y contenido, común a las secciones
@@ -37,22 +38,7 @@ class ArmorSectionCard extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Icon(icon, color: colorScheme.primary, size: 24),
-                const SizedBox(width: 12),
-                Flexible(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            child: SectionHeading(icon: icon, title: title),
           ),
           Padding(padding: const EdgeInsets.all(20), child: child),
         ],

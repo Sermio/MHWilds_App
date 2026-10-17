@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/section_heading.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/monster_details/section_card.dart';
@@ -18,7 +19,7 @@ class MonsterSizeSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MonsterSectionTitle(l10n.crownSizes),
+          SectionHeading(title: l10n.crownSizes, icon: Icons.straighten),
           const SizedBox(height: 16),
           _SizeRow(
             label: l10n.baseSize,
@@ -45,7 +46,7 @@ class MonsterSizeSection extends StatelessWidget {
             label: l10n.goldCrown,
             size: '≥ ${(sizes.gold / 100).toStringAsFixed(2)} m',
             icon: Icons.keyboard_arrow_up,
-            color: AppColors.goldSoft,
+            color: AppColors.goldAccent(context),
           ),
         ],
       ),

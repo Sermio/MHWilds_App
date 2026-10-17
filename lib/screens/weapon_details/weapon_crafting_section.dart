@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/section_heading.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/weapon.dart';
 import 'package:mhwilds_app/screens/weapon_details/crafting_costs.dart';
 import 'package:mhwilds_app/screens/weapon_details/section_card.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
 
-/// Sección expandible (cerrada por defecto) con materiales y costes.
+/// Sección expandible (abierta por defecto) con materiales y costes.
 class WeaponCraftingSection extends StatelessWidget {
   const WeaponCraftingSection({super.key, required this.crafting});
 
@@ -17,10 +18,10 @@ class WeaponCraftingSection extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
-          initiallyExpanded: false,
+          initiallyExpanded: true,
           tilePadding: const EdgeInsets.symmetric(
               horizontal: 20, vertical: AppSpacing.sm),
-          title: WeaponSectionTitle(
+          title: SectionHeading(
             icon: Icons.build,
             title: AppLocalizations.of(context)!.craftingMaterials,
           ),

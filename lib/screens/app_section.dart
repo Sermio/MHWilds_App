@@ -40,22 +40,9 @@ extension AppSectionView on AppSection {
         AppSection.talismans => l10n.talismans,
         AppSection.skills => l10n.skills,
         AppSection.items => l10n.items,
-        AppSection.locations => l10n.locations,
+        AppSection.locations => l10n.maps,
         AppSection.buildCrafter => l10n.buildCrafter,
         AppSection.buildOptimizer => l10n.buildOptimizer,
-      };
-
-  String subtitle(AppLocalizations l10n) => switch (this) {
-        AppSection.monsters => l10n.menuMonstersSubtitle,
-        AppSection.weapons => l10n.menuWeaponsSubtitle,
-        AppSection.armorSets => l10n.menuArmorSetsSubtitle,
-        AppSection.decorations => l10n.menuDecorationsSubtitle,
-        AppSection.talismans => l10n.menuTalismansSubtitle,
-        AppSection.skills => l10n.menuSkillsSubtitle,
-        AppSection.items => l10n.menuItemsSubtitle,
-        AppSection.locations => l10n.menuLocationsSubtitle,
-        AppSection.buildCrafter => l10n.buildCrafterMenuSubtitle,
-        AppSection.buildOptimizer => l10n.buildOptimizerMenuSubtitle,
       };
 
   Widget get screen => switch (this) {
@@ -123,7 +110,7 @@ extension AppSectionView on AppSection {
       AppSection.skills =>
         SkillSpriteIcon(iconId: 1, size: 30, fallback: fallback),
       AppSection.items => asset('assets/imgs/drawer/potion.png'),
-      AppSection.locations => asset('assets/imgs/maps/map.webp'),
+      AppSection.locations => asset('assets/imgs/drawer/camp.webp'),
       AppSection.buildCrafter || AppSection.buildOptimizer => fallback,
     };
   }

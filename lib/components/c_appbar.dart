@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/app_bar_background.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/screens/settings.dart';
 
@@ -13,7 +14,6 @@ class Cappbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(title),
       centerTitle: true,
-      elevation: 10,
       actions: actions ??
           [
             IconButton(
@@ -29,24 +29,7 @@ class Cappbar extends StatelessWidget implements PreferredSizeWidget {
               },
             ),
           ],
-      // backgroundColor: Colors.transparent,
-      flexibleSpace: Stack(
-        children: [
-          Container(
-              // color: const Color(0xFFC3A35D),
-              ),
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 5.0),
-          //   child: Center(
-          //     child: Image.asset(
-          //       height: 150,
-          //       width: 150,
-          //       'assets/imgs/logo/logo512transparent.webp',
-          //     ),
-          //   ),
-          // ),
-        ],
-      ),
+      flexibleSpace: const AppBarBackground(),
     );
   }
 

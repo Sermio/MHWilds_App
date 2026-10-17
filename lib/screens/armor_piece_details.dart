@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/app_bar_background.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
@@ -37,6 +38,7 @@ class _ArmorDetailsState extends State<ArmorDetails> {
     final armor = widget.armor;
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: const AppBarBackground(),
         title: Text(armor.name),
         centerTitle: true,
       ),

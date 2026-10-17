@@ -80,7 +80,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get offDefault => 'Desligado (predefinido)';
 
   @override
-  String get armorSets => 'Conjuntos de armadura';
+  String get armorSets => 'Armaduras';
 
   @override
   String get menuMonstersSubtitle => 'Base de dados de todos os monstros';
@@ -402,6 +402,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get zone => 'Zona';
+
+  @override
+  String get zones => 'Zonas';
 
   @override
   String get loadingMap => 'Carregando mapa...';
@@ -882,6 +885,40 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get bugReportPrivacy =>
       'O relatório inclui a versão do app, a plataforma e o idioma.';
+
+  @override
+  String get rewardTargetReward => 'Recompensa de alvo';
+
+  @override
+  String get rewardCarve => 'Esquartejamento';
+
+  @override
+  String get rewardBrokenPart => 'Parte quebrada';
+
+  @override
+  String get rewardCarveRotten => 'Esquartejamento (podre)';
+
+  @override
+  String get rewardWoundDestroyed => 'Ferida destruída';
+
+  @override
+  String get rewardTemperedWoundDestroyed => 'Ferida destruída (temperado)';
+
+  @override
+  String get rewardCarveSevered => 'Esquartejamento (parte decepada)';
+
+  @override
+  String get rewardCarveRottenSevered =>
+      'Esquartejamento (podre, parte decepada)';
+
+  @override
+  String get rewardCarveCrystallized => 'Esquartejamento (cristalizado)';
+
+  @override
+  String get rewardBrokenFragment => 'Fragmento quebrado';
+
+  @override
+  String get maps => 'Mapas';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -960,7 +997,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get offDefault => 'Desligado (padrão)';
 
   @override
-  String get armorSets => 'Conjuntos de armadura';
+  String get armorSets => 'Armaduras';
 
   @override
   String get menuMonstersSubtitle => 'Banco de dados de todos os monstros';

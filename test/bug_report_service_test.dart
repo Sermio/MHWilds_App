@@ -61,8 +61,8 @@ void main() {
       });
       final boom = MockClient.streaming((_, __) async => throw Exception('x'));
       for (final c in [http500, boom]) {
-        expect(await BugReportService.send(description: 'a', client: c),
-            isFalse);
+        expect(
+            await BugReportService.send(description: 'a', client: c), isFalse);
       }
     });
   });

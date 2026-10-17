@@ -164,6 +164,7 @@
   },
   "risk": "Rischio",
   "zone": "Zona",
+  "zones": "Zone",
   "loadingMap": "Caricamento mappa...",
   "noMapImagesFound": "Nessuna immagine della mappa trovata",
   "monsterInformation": "Informazioni sul Mostro",
@@ -302,5 +303,16 @@
   "bugReportFailed": "Impossibile inviare la segnalazione. Riprova più tardi.",
   "bugReportTooMany": "Puoi allegare al massimo {max} file.",
   "bugReportTooLarge": "Gli allegati superano {mb} MB.",
-  "bugReportPrivacy": "La segnalazione include versione dell'app, piattaforma e lingua."
+  "bugReportPrivacy": "La segnalazione include versione dell'app, piattaforma e lingua.",
+  "rewardTargetReward": "Ricompensa bersaglio",
+  "rewardCarve": "Squartamento",
+  "rewardBrokenPart": "Parte rotta",
+  "rewardCarveRotten": "Squartamento (marcio)",
+  "rewardWoundDestroyed": "Ferita distrutta",
+  "rewardTemperedWoundDestroyed": "Ferita distrutta (temprato)",
+  "rewardCarveSevered": "Squartamento (parte recisa)",
+  "rewardCarveRottenSevered": "Squartamento (marcio, parte recisa)",
+  "rewardCarveCrystallized": "Squartamento (cristallizzato)",
+  "rewardBrokenFragment": "Frammento rotto",
+  "maps": "Mappe"
 }

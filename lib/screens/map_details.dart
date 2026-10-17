@@ -1,11 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:mhwilds_app/components/app_bar_background.dart';
 import 'package:mhwilds_app/models/location.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/utils/asset_ids.g.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
+import 'package:mhwilds_app/utils/text_utils.dart';
 
 class MonsterMapDetails extends StatefulWidget {
   const MonsterMapDetails({super.key, required this.mapId});
@@ -216,7 +218,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            camp.name!,
+                            campNameWithoutZone(camp.name),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -293,11 +295,9 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
       appBar: AppBar(
+        flexibleSpace: const AppBarBackground(),
         title: Text(mapData?.name ?? AppLocalizations.of(context)!.map),
         centerTitle: true,
-        elevation: 10,
-        backgroundColor: colorScheme.primary,
-        foregroundColor: colorScheme.onPrimary,
       ),
       body: isLoadingImages
           ? Container(

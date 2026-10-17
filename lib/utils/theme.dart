@@ -3,6 +3,9 @@ import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 
 class AppTheme {
+  /// Fuente de títulos (solo peso regular: no usar negrita con ella).
+  static const String displayFont = 'Marcellus';
+
   /// Esquemas generados desde el dorado para que `secondary`, `tertiary` y los
   /// contenedores de Material 3 no caigan en los colores por defecto de
   /// Flutter. Las superficies y `onSurfaceVariant` (texto secundario, >= 4,5:1)
@@ -11,19 +14,22 @@ class AppTheme {
     seedColor: AppColors.goldSoft,
     brightness: Brightness.light,
   ).copyWith(
-    primary: AppColors.goldSoft,
-    onPrimary: Colors.black87,
+    // goldInk (no goldSoft): `primary` se usa como color de texto e iconos y
+    // goldSoft solo llega a 2,41:1 sobre claro. Los rellenos dorados (botones,
+    // FAB) usan goldSoft explícito.
+    primary: AppColors.goldInk,
+    onPrimary: Colors.white,
     secondary: AppColors.oliveBrown,
     onSecondary: Colors.white,
     tertiary: AppColors.mutedOlive,
     onTertiary: Colors.black87,
-    surface: Colors.white,
+    surface: AppColors.parchmentCard,
     onSurface: Colors.black87,
-    onSurfaceVariant: const Color(0xFF5F5F5F),
-    surfaceContainerLow: const Color(0xFFF8F8F8),
-    surfaceContainerHighest: const Color(0xFFF5F5F5),
-    outline: const Color(0xFFE0E0E0),
-    outlineVariant: const Color(0xFFEEEEEE),
+    onSurfaceVariant: const Color(0xFF5E5645),
+    surfaceContainerLow: const Color(0xFFF9F4E8),
+    surfaceContainerHighest: const Color(0xFFF3EDDD),
+    outline: const Color(0xFFDDD3BC),
+    outlineVariant: const Color(0xFFE8E0CC),
   );
 
   static final ColorScheme darkScheme = ColorScheme.fromSeed(
@@ -36,25 +42,32 @@ class AppTheme {
     onSecondary: Colors.black87,
     tertiary: AppColors.goldSoft,
     onTertiary: Colors.black87,
-    surface: const Color(0xFF121212),
-    onSurface: const Color(0xFFE0E0E0),
-    onSurfaceVariant: const Color(0xFFB8B8B8),
-    surfaceContainerLow: const Color(0xFF1A1A1A),
-    surfaceContainerHighest: const Color(0xFF2C2C2C),
-    outline: const Color(0xFF404040),
-    outlineVariant: const Color(0xFF383838),
+    surface: const Color(0xFF14110C),
+    onSurface: const Color(0xFFE6E0D2),
+    onSurfaceVariant: const Color(0xFFC2BAA9),
+    surfaceContainer: const Color(0xFF1D1812),
+    surfaceContainerLow: const Color(0xFF1A1610),
+    surfaceContainerHighest: const Color(0xFF29231A),
+    outline: const Color(0xFF4A4132),
+    outlineVariant: const Color(0xFF3A3326),
   );
 
   /// Escala tipográfica completa; ningún estilo baja de 12 px.
   static TextTheme _textTheme(Color color) => TextTheme(
-        displayLarge: TextStyle(color: color, fontSize: 57),
-        displayMedium: TextStyle(color: color, fontSize: 45),
-        displaySmall: TextStyle(color: color, fontSize: 36),
-        headlineLarge: TextStyle(color: color, fontSize: 32),
-        headlineMedium: TextStyle(color: color, fontSize: 28),
-        headlineSmall: TextStyle(color: color, fontSize: 24),
+        displayLarge:
+            TextStyle(color: color, fontSize: 57, fontFamily: displayFont),
+        displayMedium:
+            TextStyle(color: color, fontSize: 45, fontFamily: displayFont),
+        displaySmall:
+            TextStyle(color: color, fontSize: 36, fontFamily: displayFont),
+        headlineLarge:
+            TextStyle(color: color, fontSize: 32, fontFamily: displayFont),
+        headlineMedium:
+            TextStyle(color: color, fontSize: 28, fontFamily: displayFont),
+        headlineSmall:
+            TextStyle(color: color, fontSize: 24, fontFamily: displayFont),
         titleLarge:
-            TextStyle(color: color, fontSize: 22, fontWeight: FontWeight.w500),
+            TextStyle(color: color, fontSize: 22, fontFamily: displayFont),
         titleMedium:
             TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500),
         titleSmall:
@@ -76,17 +89,23 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       extensions: [GameColors.light],
+      // El degradado dorado lo pone `AppBarBackground` (flexibleSpace); el
+      // color liso es el de reserva.
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.goldSoft,
         foregroundColor: Colors.black87,
-        elevation: 10,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        shape: Border(bottom: BorderSide(color: AppColors.goldInk, width: 1)),
         titleTextStyle: TextStyle(
           color: Colors.black87,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
       ),
-      drawerTheme: const DrawerThemeData(backgroundColor: Colors.white),
+      drawerTheme:
+          const DrawerThemeData(backgroundColor: AppColors.parchmentCard),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: AppColors.goldSoft,
         foregroundColor: Colors.black87,
@@ -112,7 +131,7 @@ class AppTheme {
         color: colorScheme.surface,
         elevation: 3,
       ),
-      scaffoldBackgroundColor: colorScheme.surface,
+      scaffoldBackgroundColor: AppColors.parchment,
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.goldSoft,
@@ -155,14 +174,18 @@ class AppTheme {
         backgroundColor: colorScheme.surfaceContainer,
         foregroundColor: colorScheme.primary,
         surfaceTintColor: Colors.transparent,
-        elevation: 10,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        shape: const Border(
+          bottom: BorderSide(color: AppColors.goldSoft, width: 1),
+        ),
         titleTextStyle: TextStyle(
           color: colorScheme.primary,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
       ),
-      drawerTheme: const DrawerThemeData(backgroundColor: Color(0xFF121212)),
+      drawerTheme: DrawerThemeData(backgroundColor: colorScheme.surface),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: AppColors.goldSoft,
         foregroundColor: Colors.black87,

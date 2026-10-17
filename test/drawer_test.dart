@@ -68,12 +68,11 @@ void main() {
     expect(tester.getSize(button), const Size(48, 48));
   });
 
-  test('surfaceContainerLow es neutro, sin tinte dorado', () {
+  test('surfaceContainerLow es cálido (r >= g >= b), no el tinte del seed', () {
     for (final s in [AppTheme.lightScheme, AppTheme.darkScheme]) {
       final c = s.surfaceContainerLow;
-      final spread = [c.r, c.g, c.b].reduce((a, b) => a > b ? a : b) -
-          [c.r, c.g, c.b].reduce((a, b) => a < b ? a : b);
-      expect(spread, lessThan(0.02));
+      expect(c.r, greaterThanOrEqualTo(c.g));
+      expect(c.g, greaterThanOrEqualTo(c.b));
     }
   });
 }

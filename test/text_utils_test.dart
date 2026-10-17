@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mhwilds_app/utils/text_utils.dart';
 
 void main() {
+  _campNameTests();
   test('removeDiacritics quita tildes', () {
     expect(removeDiacritics('Árbol Éxito ÍÓÚ àèìòù üç'),
         'arbol exito iou aeiou uc');
@@ -14,5 +15,17 @@ void main() {
   test('removeDiacritics pasa a minúsculas, recorta y respeta el resto', () {
     expect(removeDiacritics('  Rathalos-X 2 '), 'rathalos-x 2');
     expect(removeDiacritics(''), '');
+  });
+}
+
+void _campNameTests() {
+  test('campNameWithoutZone quita el prefijo de zona', () {
+    expect(campNameWithoutZone('Zona 2: Bifurcación del cañón'),
+        'Bifurcación del cañón');
+    expect(campNameWithoutZone('Zone 4 - Route vétuste'), 'Route vétuste');
+    expect(campNameWithoutZone('Area 8: Middle Strata North'),
+        'Middle Strata North');
+    expect(campNameWithoutZone('Campamento base'), 'Campamento base');
+    expect(campNameWithoutZone(null), '');
   });
 }

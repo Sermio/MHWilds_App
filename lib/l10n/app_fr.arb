@@ -164,6 +164,7 @@
   },
   "risk": "Risque",
   "zone": "Zone",
+  "zones": "Zones",
   "loadingMap": "Chargement de la carte...",
   "noMapImagesFound": "Aucune image de carte trouvée",
   "monsterInformation": "Informations sur le Monstre",
@@ -302,5 +303,16 @@
   "bugReportFailed": "Impossible d'envoyer le rapport. Réessayez plus tard.",
   "bugReportTooMany": "Vous pouvez joindre {max} fichiers au maximum.",
   "bugReportTooLarge": "Les pièces jointes dépassent {mb} Mo.",
-  "bugReportPrivacy": "Le rapport inclut la version de l'appli, la plateforme et la langue."
+  "bugReportPrivacy": "Le rapport inclut la version de l'appli, la plateforme et la langue.",
+  "rewardTargetReward": "Récompense de cible",
+  "rewardCarve": "Dépeçage",
+  "rewardBrokenPart": "Partie brisée",
+  "rewardCarveRotten": "Dépeçage (pourri)",
+  "rewardWoundDestroyed": "Plaie détruite",
+  "rewardTemperedWoundDestroyed": "Plaie détruite (tempéré)",
+  "rewardCarveSevered": "Dépeçage (partie tranchée)",
+  "rewardCarveRottenSevered": "Dépeçage (pourri, partie tranchée)",
+  "rewardCarveCrystallized": "Dépeçage (cristallisé)",
+  "rewardBrokenFragment": "Fragment brisé",
+  "maps": "Cartes"
 }

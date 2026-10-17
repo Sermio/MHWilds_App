@@ -177,6 +177,7 @@
   },
   "risk": "Risk",
   "zone": "Zone",
+  "zones": "Zones",
   "loadingMap": "Loading map...",
   "noMapImagesFound": "No map images found",
   "monsterInformation": "Monster Information",
@@ -337,5 +338,16 @@
   "@bugReportTooMany": {"placeholders": {"max": {"type": "int"}}},
   "bugReportTooLarge": "Attachments exceed {mb} MB.",
   "@bugReportTooLarge": {"placeholders": {"mb": {"type": "int"}}},
-  "bugReportPrivacy": "The report includes the app version, platform and language."
+  "bugReportPrivacy": "The report includes the app version, platform and language.",
+  "rewardTargetReward": "Target Reward",
+  "rewardCarve": "Carve",
+  "rewardBrokenPart": "Broken Part",
+  "rewardCarveRotten": "Carve (Rotten)",
+  "rewardWoundDestroyed": "Wound Destroyed",
+  "rewardTemperedWoundDestroyed": "Wound Destroyed (Tempered)",
+  "rewardCarveSevered": "Carve (Severed)",
+  "rewardCarveRottenSevered": "Carve (Rotten, Severed)",
+  "rewardCarveCrystallized": "Carve (Crystallized)",
+  "rewardBrokenFragment": "Broken Fragment",
+  "maps": "Maps"
 }

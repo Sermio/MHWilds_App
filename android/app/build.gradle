@@ -90,6 +90,11 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            // Símbolos nativos para que Play Console desofusque crashes nativos
+            ndk { debugSymbolLevel "SYMBOL_TABLE" }
         }
     }
 

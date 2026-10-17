@@ -405,6 +405,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get zone => 'Zona';
 
   @override
+  String get zones => 'Zone';
+
+  @override
   String get loadingMap => 'Caricamento mappa...';
 
   @override
@@ -884,4 +887,37 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get bugReportPrivacy =>
       'La segnalazione include versione dell\'app, piattaforma e lingua.';
+
+  @override
+  String get rewardTargetReward => 'Ricompensa bersaglio';
+
+  @override
+  String get rewardCarve => 'Squartamento';
+
+  @override
+  String get rewardBrokenPart => 'Parte rotta';
+
+  @override
+  String get rewardCarveRotten => 'Squartamento (marcio)';
+
+  @override
+  String get rewardWoundDestroyed => 'Ferita distrutta';
+
+  @override
+  String get rewardTemperedWoundDestroyed => 'Ferita distrutta (temprato)';
+
+  @override
+  String get rewardCarveSevered => 'Squartamento (parte recisa)';
+
+  @override
+  String get rewardCarveRottenSevered => 'Squartamento (marcio, parte recisa)';
+
+  @override
+  String get rewardCarveCrystallized => 'Squartamento (cristallizzato)';
+
+  @override
+  String get rewardBrokenFragment => 'Frammento rotto';
+
+  @override
+  String get maps => 'Mappe';
 }

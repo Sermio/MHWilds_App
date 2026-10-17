@@ -103,6 +103,12 @@ flutter:
     - assets/imgs/sprites/
   #   - images/a_dot_ham.jpeg
 
+  # Fuente solo para títulos (Marcellus, SIL OFL; licencia en assets/fonts/OFL.txt).
+  fonts:
+    - family: Marcellus
+      fonts:
+        - asset: assets/fonts/Marcellus-Regular.ttf
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

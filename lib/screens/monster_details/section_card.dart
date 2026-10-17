@@ -31,34 +31,6 @@ class MonsterSectionCard extends StatelessWidget {
   }
 }
 
-/// Título en "pill" de una sección.
-class MonsterSectionTitle extends StatelessWidget {
-  final String text;
-  final Color? tint;
-
-  const MonsterSectionTitle(this.text, {super.key, this.tint});
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      padding:
-          const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
-      decoration: BoxDecoration(
-        color: (tint ?? AppColors.goldSoft).withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-      ),
-      child: Text(
-        text,
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge!
-            .copyWith(fontWeight: FontWeight.bold, color: colorScheme.primary),
-      ),
-    );
-  }
-}
-
 /// Fila etiqueta (negrita) + valor.
 class MonsterInfoRow extends StatelessWidget {
   final String label;

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/app_bar_background.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/skills.dart';
 import 'package:mhwilds_app/models/weapon.dart';
@@ -47,6 +48,7 @@ class _WeaponDetailsState extends State<WeaponDetails> {
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerHighest,
       appBar: AppBar(
+        flexibleSpace: const AppBarBackground(),
         title: Text(weapon.name),
         centerTitle: true,
       ),
