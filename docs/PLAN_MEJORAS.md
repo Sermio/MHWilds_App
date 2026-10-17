@@ -364,7 +364,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 
 ### Fase 5 — Arquitectura
 
-#### T27 · Mapa `id → asset` y adiós a `EnNamesCache` (pendiente: ver T34)
+#### ✅ T27 · Mapa `id → asset` y adiós a `EnNamesCache`
 - **Modelo:** Opus 5.5 · **Razonamiento:** high · **Depende de:** T11, T18
 - **Prompt:**
   > Lee CLAUDE.md y la sección 5 de docs/PLAN_MEJORAS.md. Hoy `EnNamesCache` traduce `id → nombre en inglés` para construir rutas de assets locales (`monster_icons`, `monsters`, `maps`) y para el fallback de `MaterialImage`. Crea `scripts/generate_asset_ids.dart`, que llame a la API en inglés y genere `lib/utils/asset_ids.g.dart` con mapas `const` `monsterId → asset`, `locationId → carpeta de mapa` (e `itemId → asset` si aplica), y que avise de los ids sin asset. Sustituye todos los usos de `EnNamesCache` por esos mapas y elimina el provider, su espera en `main.dart` y el fallback a fextralife de `MaterialImage` (usa el placeholder local). Documenta en CLAUDE.md cómo regenerar el archivo cuando salgan monstruos nuevos. Tests: todos los ids de los fixtures resuelven a un asset que existe.
@@ -422,10 +422,52 @@ Cada fase deja la app publicable. Las puertas entre fases son:
 
 ## 11. Tareas añadidas durante la ejecución
 
-#### T34 · Generar `asset_ids.g.dart` (reintento de T27, bloqueada por red)
+#### ✅ T34 · Generar `asset_ids.g.dart` (reintento de T27, bloqueada por red)
 - **Modelo:** Opus 5.5 · **Razonamiento:** high · **Depende de:** T18
 - **Problema:** T27 no pudo hacerse en la ejecución automática (T18–T33). El entorno no alcanza `https://wilds.mhdb.io` (el proxy responde `403` al `CONNECT`), y el script necesita la lista completa de monstruos, localizaciones y objetos en inglés. Los fixtures de `test/fixtures` solo traen 3 elementos por archivo, así que no sirven para generar el mapa: quitar `EnNamesCache` con un mapa incompleto dejaría sin icono a los monstruos y mapas que falten.
 - **Intentado:** comprobar el acceso con `curl` (403), buscar un volcado local completo de la API (no existe) y ver si los fixtures bastaban (no). No se ha dejado ningún cambio de T27 en el código; `EnNamesCache` sigue funcionando como tras T18 (solo `id`+`name`, con `CacheStore`, sin bloquear el arranque).
 - **Falta:** ejecutar el prompt de T27 desde una máquina con red: crear `scripts/generate_asset_ids.dart` (llama a la API en inglés y escribe `lib/utils/asset_ids.g.dart` con mapas `const` `monsterId → asset`, `locationId → carpeta de mapa`, `itemId → asset` si aplica, avisando de los ids sin asset), sustituir los usos de `EnNamesCache` (`nameForMonsterImage`, `nameForMapImage`, `nameForItemImage`), quitar el provider, su `ChangeNotifierProvider` en `main.dart` y el fallback a fextralife de `MaterialImage`, documentar en CLAUDE.md cómo regenerar el archivo y añadir el test «todos los ids de los fixtures resuelven a un asset que existe». Usar `ApiConfig.baseUrlForLanguage('en')` y `?p={"id":true,"name":true}` para que la descarga sea pequeña.
 - **Prompt:**
   > Lee CLAUDE.md y la sección 5 y la tarea T27 de docs/PLAN_MEJORAS.md. Ejecuta T27 desde un entorno con acceso a https://wilds.mhdb.io. Tras T18, `EnNamesCache` ya pide solo `id` y `name` y se guarda con `CacheStore`; el objetivo ahora es sustituirla por mapas generados `const` y borrarla.
+
+### Bloque .todo (T35–T41)
+
+Salen de `.todo`. Decisiones tomadas: filtro de elemento en armaduras sin multiselección, solo piezas con resistencia > 0 y ordenadas de mayor a menor; anuncios con un JSON en el repo (sin Firebase ni web de administrador); login con Google descartado; Buy me a coffee **no se implementa por ahora** (ver nota al final). Orden: T35 · T36 → T37 → T38 · T39 · T40 → T41.
+
+#### T35 · Bugs de listas, drawer y árbol de armas
+- **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** —
+- **Prompt:**
+  > Lee CLAUDE.md. Tres bugs de `.todo`, cada uno en su commit y con su test: (1) el panel de filtros tapa los primeros elementos de todas las listas (monstruos, armas, sets de armadura, decoraciones, talismanes, habilidades, objetos): reproduce en un test de widget con un `ListFiltersPanel` abierto y arregla el solape en el sitio común, sin parchear lista por lista. (2) los elementos del drawer (`Cdrawer`/`AppSection`) se pintan todos de marrón como si estuvieran seleccionados, en claro y en oscuro: solo debe destacar el activo; test con `selected`. (3) abrir un árbol (serie) desde la lista de armas lanza un error: reprodúcelo con los fixtures, arregla la causa raíz y añade el test. Aplica `ui-ux-pro-max` y comprueba contraste en claro y oscuro.
+
+#### T36 · Dialog de mapas sin scroll y layout de stats
+- **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** —
+- **Prompt:**
+  > Lee CLAUDE.md. (1) En `_showFullImage` de `lib/screens/map_details.dart`, el `InteractiveViewer` permite arrastrar sin zoom (`minScale: 0.5`, `boundaryMargin` de 20). Haz que a escala 1 la imagen no se mueva y siga pudiéndose hacer zoom (`minScale: 1`, sin margen); test de widget. (2) En los detalles de armas y armaduras los stats mezclan filas centradas y no centradas. Unifica todas con `LabelValueRow` (nombre a la izquierda, valor a la derecha) reutilizando el componente existente, sin crear otro. Comprueba que los tests de overflow (T24) siguen en verde y revisa la pantalla.
+
+#### T37 · `GameElement` central y etiquetas traducidas
+- **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** —
+- **Contexto:** la API no tiene fuente para elementos ni estados (`/ailments` devuelve `[]`). Hoy las rutas `assets/imgs/elements/${x.toLowerCase()}.webp` se construyen a mano en ~10 sitios y `WeaponUtils.getElementAssetName/getElementIcon/elementLabel` duplican el mapeo. Elementos: fire, water, ice, thunder, dragon. Estados de armas: paralysis, poison, sleep, blastblight.
+- **Prompt:**
+  > Lee CLAUDE.md. Crea `GameElement` (enum en `lib/utils/game_element.dart`) con id de la API, ruta del asset, icono de respaldo y `isStatus`, y una función que devuelva la etiqueta traducida con `AppLocalizations` (añade claves ARB para los 5 elementos y los 4 estados en los 10 archivos y ejecuta `flutter gen-l10n`). Sustituye las rutas construidas a mano y `WeaponUtils.getElementAssetName/getElementIcon/elementLabel` por él, empezando por los que usan los filtros; los `semanticLabel` pasan a ser traducidos. Test: todos los assets existen, todo valor de elemento o estado del fixture de armas resuelve a un `GameElement` y cada etiqueta existe en los 10 idiomas. Sin cambios visuales.
+
+#### T38 · Estados alterados traducidos
+- **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** T37
+- **Prompt:**
+  > Lee CLAUDE.md. `lib/data/ailments.dart` tiene los nombres y las descripciones de los estados solo en inglés y se muestra así en `ElementsAndAilments`. Mueve nombres y descripciones a ARB (en, es, es_419, es_ES, fr, it, pl, pt, pt_BR, de) y a un único registro con el nombre del asset, y borra `ailments.dart`. Si no hay traducción de un idioma, cae al inglés (Flutter ya lo hace con `fallback`); no inventes términos oficiales que no conozcas: deja la traducción más natural y lista los términos dudosos en la respuesta para revisarlos. Test: todas las claves existen en los 10 archivos y el diálogo muestra el texto en un idioma no inglés.
+
+#### T39 · Filtro de elemento en armas
+- **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** T37
+- **Prompt:**
+  > Lee CLAUDE.md y `lib/screens/weapons_list/weapon_filters.dart`. Añade a `WeaponFilter` un campo `element` (String?, id de `GameElement`) y filtra `filterWeapons` por los `specials` del arma (`kind: element` → `element`, `kind: status` → `status`); un arma tiene como mucho un special, así que un solo desplegable con los 5 elementos y 4 estados sirve. No mires el vial: 7 de las 47 armas con vial de elemento no tienen special de elemento. Usa `ListFilterFieldConfig.select` con icono (`leading`) y nombre traducido, y mantén `provider.filter` como única fuente del estado. Comprueba además que la lista y el detalle muestran el tipo de vial (hacha cargada, hacha espada) y el recubrimiento (arco) con `GameElement`, y corrige lo que falte. Tests: `filterWeapons` con casos límite (elemento, estado, combinado con tipo y rareza, sin resultados) y el filtro se conserva al volver a la sección.
+
+#### T40 · Filtro de elemento en armaduras
+- **Modelo:** Sonnet 5.5 · **Razonamiento:** medium · **Depende de:** T37
+- **Prompt:**
+  > Lee CLAUDE.md, `lib/providers/filters/armor_set_filter.dart` y `lib/screens/armor_sets_list/armor_set_filters.dart`. Añade a `ArmorSetFilter` un `element` (un solo elemento, sin multiselección; solo fire, water, ice, thunder, dragon: las armaduras no resisten estados). Con elemento elegido, `filterArmorSets` conserva solo las piezas con `resistances[element] > 0` y las ordena de mayor a menor resistencia a ese elemento; se combina con nombre, tipo y rareza. Decide y documenta en un comentario cómo se ordenan los sets: por defecto, por la mejor pieza que conservan, manteniendo el orden cabeza→piernas dentro del set. Si no hay elemento, el comportamiento actual no cambia. Desplegable con icono y nombre traducido (`ListFilterFieldConfig.select`). Tests: puros de `filterArmorSets` (resistencia 0 y negativa se excluyen, empates, combinado con rareza y tipo, orden) y de conservación del filtro.
+
+#### T41 · Pantalla de anuncios con JSON
+- **Modelo:** Opus 5.5 · **Razonamiento:** medium · **Depende de:** T30
+- **Prompt:**
+  > Lee CLAUDE.md y docs/ANUNCIOS.md (formato y guía ya decididos). Crea `announcements/announcements.json` en la raíz con un anuncio de ejemplo, un modelo `Announcement` (id, fecha, título y texto por idioma, enlace opcional) con `fromJson` a mano, un `CatalogProvider` y una pantalla de listado nueva (título traducido, estados de carga/vacío/offline con los componentes existentes, `AsyncListBody`). No es una `AppSection`: se abre con `Navigator.push` desde un `IconButton` de altavoz (`Icons.campaign_outlined`) colocado junto al nombre de la app en `Cdrawer.menuHeader`, con `tooltip`/`semanticLabel` traducido, zona táctil de 48 dp y sin romper el centrado ni desbordar con nombres largos (el texto en un `Flexible`). El icono lleva un punto de «nuevo» si hay un anuncio cuyo `id` no se ha visto: guarda el último `id` visto en `shared_preferences` y márcalo al abrir la pantalla. La pantalla de inicio sigue siendo `AppSection.monsters` y no se abre ningún diálogo al arrancar. Descarga de `https://raw.githubusercontent.com/Sermio/MHWilds_App/main/announcements/announcements.json` con `ApiClient` y `CachedApi` (copia en disco para el modo offline); el idioma es el de `LocaleProvider` con caída a `en`. Un JSON roto o una petición fallida no debe romper la app: se enseña la copia en disco o el estado vacío. No añadas Firebase ni dependencias nuevas. Tests: parseo del JSON de ejemplo del repo (así la CI avisa si alguien lo rompe), elección de idioma con caída a `en`, estado vacío o error, y el punto de «nuevo» (aparece con un `id` no visto y desaparece al abrir la pantalla).
+
+**Nota (Buy me a coffee, no implementar por ahora):** la FAQ de pagos de Play exime las propinas solo si el 100 % va al creador y no se da nada digital a cambio; Buy Me a Coffee cobra comisión y hay casos de apps avisadas por enlaces de donación (AnkiDroid, StreetComplete). Si se retoma: enlace externo, texto de apoyo voluntario, sin recompensas, y valorar ponerlo solo en la ficha de la tienda y el README. No se han podido leer los hilos de la comunidad de Play y de r/androiddev enlazados (cargan con JavaScript o devuelven 403).
