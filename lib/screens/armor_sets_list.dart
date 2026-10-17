@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
-import 'package:mhwilds_app/components/asset_thumb.dart';
-import 'package:mhwilds_app/components/decoration_sprite_icon.dart';
-import 'package:mhwilds_app/components/gear_sprite_icon.dart';
-import 'package:mhwilds_app/components/set_piece_tag.dart';
-import 'package:mhwilds_app/components/skill_sprite_icon.dart';
-import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/armor_set.dart' as set_models;
 import 'package:mhwilds_app/models/skills.dart' as skills_model;
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
-import 'package:mhwilds_app/screens/armor_piece_details.dart';
-import 'package:provider/provider.dart';
-import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/screens/armor_sets_list/armor_piece_card.dart';
+import 'package:mhwilds_app/screens/armor_sets_list/armor_set_bonus_section.dart';
+import 'package:mhwilds_app/screens/armor_sets_list/armor_set_filters.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
-import 'package:mhwilds_app/components/label_value_row.dart';
-import 'package:mhwilds_app/utils/weapon_utils.dart';
+import 'package:provider/provider.dart';
+
+export 'package:mhwilds_app/screens/armor_sets_list/armor_set_bonus_section.dart'
+    show ArmorSetBonusSection;
 
 class ArmorSetList extends StatefulWidget {
   const ArmorSetList({super.key});
@@ -75,7 +70,6 @@ class _ArmorSetListState extends State<ArmorSetList> {
       backgroundColor: colorScheme.surfaceContainerHighest,
       body: Stack(
         children: [
-          // Lista de sets de armadura
           AsyncListBody<set_models.ArmorSet>(
             state: armorSetProvider.state,
             isOffline: armorSetProvider.isOffline,
@@ -90,169 +84,8 @@ class _ArmorSetListState extends State<ArmorSetList> {
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 120, top: AppSpacing.lg),
               itemCount: filteredArmorSets.length,
-              itemBuilder: (context, index) {
-                final armorSet = filteredArmorSets[index];
-
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Título del set
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
-                      child: Text(
-                        armorSet.name,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
-                        ),
-                      ),
-                    ),
-                    // Skills de grupo / set
-                    if (armorSet.groupBonusSkill.ranks.isNotEmpty ||
-                        armorSet.pieces.any((p) =>
-                            p.skills.any((s) => s.isSetOrGroupBonus))) ...[
-                      ArmorSetBonusSection(
-                        armorSet: armorSet,
-                        onSkillIconRequest: (id) =>
-                            _skillIconForId(id, context),
-                      ),
-                    ],
-                    // Piezas del set
-                    ...armorSet.pieces.map(
-                      (piece) => Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
-                        decoration: BoxDecoration(
-                          color: colorScheme.surface,
-                          borderRadius: BorderRadius.circular(AppRadius.lg),
-                          boxShadow: [
-                            BoxShadow(
-                              color: colorScheme.shadow.withValues(alpha: 0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(AppRadius.lg),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ArmorDetails(
-                                    armor: piece,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  // Header de la pieza
-                                  Row(
-                                    children: [
-                                      // Imagen de la armadura
-                                      SizedBox(
-                                        width: 60,
-                                        height: 60,
-                                        child: Center(
-                                          child: armorColumnByKind
-                                                  .containsKey(piece.kind)
-                                              ? GearSpriteIcon(
-                                                  column: armorColumnByKind[
-                                                      piece.kind]!,
-                                                  rarity: piece.rarity,
-                                                  size: 42,
-                                                  fallback: AssetThumb(
-                                                    'assets/imgs/armor/${piece.kind}/rarity${piece.rarity}.webp',
-                                                    fit: BoxFit.contain,
-                                                  ),
-                                                )
-                                              : AssetThumb(
-                                                  'assets/imgs/armor/${piece.kind}/rarity${piece.rarity}.webp',
-                                                  fit: BoxFit.contain,
-                                                ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 16),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              piece.name,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                                color: colorScheme.onSurface,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 8),
-                                            // Indicador de rarity
-                                            Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: AppSpacing.sm,
-                                                vertical: AppSpacing.xs,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: _getRarityColor(
-                                                        piece.rarity)
-                                                    .withValues(alpha: 0.1),
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                border: Border.all(
-                                                  color: _getRarityColor(
-                                                          piece.rarity)
-                                                      .withValues(alpha: 0.3),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                AppLocalizations.of(context)!
-                                                    .rarityLevel(piece.rarity),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodySmall!
-                                                    .copyWith(
-                                                        color: _getRarityColor(
-                                                            piece.rarity),
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: colorScheme.onSurfaceVariant,
-                                        size: 20,
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 16),
-
-                                  // Habilidades
-                                  if (piece.displaySkills.isNotEmpty) ...[
-                                    _buildSkillsSection(piece),
-                                  ],
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
+              itemBuilder: (context, index) =>
+                  _buildArmorSet(context, filteredArmorSets[index]),
             ),
           ),
           if (_filtersVisible)
@@ -265,15 +98,18 @@ class _ArmorSetListState extends State<ArmorSetList> {
                 borderRadius:
                     const BorderRadius.vertical(bottom: Radius.circular(24)),
                 clipBehavior: Clip.antiAlias,
-                child: _buildFiltersSection(context, armorSetProvider),
+                child: ArmorSetFiltersPanel(
+                  filter: armorSetProvider.filter,
+                  nameController: _searchNameController,
+                  onFilterChanged: armorSetProvider.setFilter,
+                  onReset: _resetFilters,
+                ),
               ),
             ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        tooltip: _filtersVisible
-            ? AppLocalizations.of(context)!.close
-            : AppLocalizations.of(context)!.filters,
+        tooltip: _filtersVisible ? l10n.close : l10n.filters,
         onPressed: _toggleFiltersVisibility,
         backgroundColor: colorScheme.primary,
         child: Icon(
@@ -284,374 +120,39 @@ class _ArmorSetListState extends State<ArmorSetList> {
     );
   }
 
-  Widget _buildFiltersSection(
-      BuildContext context, ArmorSetProvider armorSetProvider) {
-    final l10n = AppLocalizations.of(context)!;
+  Widget _buildArmorSet(BuildContext context, set_models.ArmorSet armorSet) {
     final colorScheme = Theme.of(context).colorScheme;
+    final hasBonus = armorSet.groupBonusSkill.ranks.isNotEmpty ||
+        armorSet.pieces.any((p) => p.skills.any((s) => s.isSetOrGroupBonus));
 
-    return ListFiltersPanel(
-      maxHeight: 340,
-      title: l10n.filters,
-      resetLabel: l10n.reset,
-      onReset: _resetFilters,
-      fields: [
-        ListFilterFieldConfig.text(
-          id: 'name',
-          label: l10n.searchByName,
-          controller: _searchNameController,
-          onTextChanged: (query) => armorSetProvider
-              .setFilter(armorSetProvider.filter.copyWith(name: query)),
-          hintText: l10n.enterArmorSetName,
-          prefixIcon: Icon(Icons.search, color: colorScheme.primary),
-        ),
-        ListFilterFieldConfig.gridMenu(
-          id: 'type',
-          label: l10n.type,
-          value: armorSetProvider.filter.kind,
-          onSelectChanged: (selectedKind) => armorSetProvider.setFilter(
-              armorSetProvider.filter
-                  .copyWith(kind: () => selectedKind as String?)),
-          options: _armorTypeOptions(context),
-        ),
-        ListFilterFieldConfig.gridMenu(
-          id: 'rarity',
-          label: l10n.rarity,
-          value: armorSetProvider.filter.rarity,
-          onSelectChanged: (selectedRarity) => armorSetProvider.setFilter(
-              armorSetProvider.filter
-                  .copyWith(rarity: () => selectedRarity as int?)),
-          options: _rarityOptions(l10n),
-        ),
-      ],
-    );
-  }
-
-  List<ListFilterOption> _armorTypeOptions(BuildContext context) {
-    return ['head', 'chest', 'arms', 'waist', 'legs'].map((kind) {
-      final int? spriteColumn = armorColumnByKind[kind];
-      return ListFilterOption(
-        value: kind,
-        label: _getArmorSlotLabel(context, kind),
-        leading: spriteColumn != null
-            ? GearSpriteIcon(
-                column: spriteColumn,
-                rarity: 1,
-                size: 20,
-                fallback: Icon(
-                  Icons.shield,
-                  color: _getKindColor(kind),
-                  size: 20,
-                ),
-              )
-            : Icon(
-                Icons.shield,
-                color: _getKindColor(kind),
-                size: 20,
-              ),
-      );
-    }).toList();
-  }
-
-  List<ListFilterOption> _rarityOptions(AppLocalizations l10n) {
-    return [1, 2, 3, 4, 5, 6, 7, 8].map((rarity) {
-      return ListFilterOption(
-        value: rarity,
-        label: l10n.rarityLevel(rarity),
-        leading: Container(
-          width: 14,
-          height: 14,
-          decoration: BoxDecoration(
-            color: _getRarityColor(rarity),
-            borderRadius: BorderRadius.circular(4),
-          ),
-        ),
-      );
-    }).toList();
-  }
-
-  Widget _buildSkillsSection(armor_models.ArmorPiece armorPiece) {
-    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Sección de defensa
-        LabelValueRow(
-          label: Text(
-            '${AppLocalizations.of(context)!.defense}:',
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withValues(alpha: 0.8)),
-          ),
-          value: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '${armorPiece.defense['base']}',
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    fontWeight: FontWeight.bold, color: colorScheme.onSurface),
-              ),
-              const SizedBox(width: 4),
-              const SizedBox(
-                height: 16,
-                child: AssetThumb(
-                  'assets/imgs/armor/armor.webp',
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 12),
-        // Sección de slots
-        LabelValueRow(
-          label: Text(
-            '${AppLocalizations.of(context)!.slots}:',
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withValues(alpha: 0.8)),
-          ),
-          value: _buildSlotsWidget(armorPiece),
-        ),
-        const SizedBox(height: 12),
-        // Sección de resistencias
-        Text(
-          '${AppLocalizations.of(context)!.resistances}:',
-          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withValues(alpha: 0.8)),
-        ),
-        const SizedBox(height: 8),
-        _buildResistancesWidget(armorPiece),
-        const SizedBox(height: 12),
-        // Sección de skills
-        Text(
-          '${AppLocalizations.of(context)!.skills}:',
-          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withValues(alpha: 0.8)),
-        ),
-        const SizedBox(height: 8),
-        ...armorPiece.displaySkills.map((skill) => Container(
-              margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-              padding: const EdgeInsets.all(AppSpacing.md),
-              decoration: BoxDecoration(
-                color: colorScheme.primary.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                    color: colorScheme.primary.withValues(alpha: 0.3)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      // Imagen de la habilidad
-                      Container(
-                        width: 24,
-                        height: 24,
-                        margin: const EdgeInsets.only(right: AppSpacing.sm),
-                        child: SkillSpriteIcon(
-                          iconId: _skillIconForId(skill.skill.id, context)?.id,
-                          iconKind:
-                              _skillIconForId(skill.skill.id, context)?.kind,
-                          size: 24,
-                          fallback: Icon(
-                            Icons.auto_awesome,
-                            size: 14,
-                            color: colorScheme.primary,
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.sm,
-                              vertical: AppSpacing.xs),
-                          decoration: BoxDecoration(
-                            color: colorScheme.primary,
-                            borderRadius: BorderRadius.circular(AppRadius.lg),
-                          ),
-                          child: Text(
-                            '${skill.name ?? skill.skill.name} +${skill.level}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(
-                                    color: colorScheme.onPrimary,
-                                    fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      if (skill.setPiecesRequired != null)
-                        Padding(
-                          padding: const EdgeInsets.only(left: AppSpacing.sm),
-                          child: SetPieceTag(
-                            count: skill.setPiecesRequired!,
-                          ),
-                        ),
-                    ],
-                  ),
-                  if (skill.description.isNotEmpty) ...[
-                    const SizedBox(height: 6),
-                    Text(
-                      skill.description,
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: colorScheme.onSurface.withValues(alpha: 0.8),
-                        height: 1.3,
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            )),
-      ],
-    );
-  }
-
-  Widget _buildSlotsWidget(armor_models.ArmorPiece armorPiece) {
-    final colorScheme = Theme.of(context).colorScheme;
-    if (armorPiece.slots.isEmpty) {
-      return Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
-        decoration: BoxDecoration(
-          color: colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: colorScheme.outlineVariant),
-        ),
-        child: Text(
-          AppLocalizations.of(context)!.noSlots,
-          style: TextStyle(
-            fontSize: 11,
-            color: colorScheme.onSurface.withValues(alpha: 0.8),
-            fontStyle: FontStyle.italic,
-          ),
-        ),
-      );
-    }
-
-    return Wrap(
-      children: armorPiece.slots.map((slot) {
-        final Color slotColor = _slotColor(slot);
-        return Padding(
-          padding: const EdgeInsets.only(left: 6),
-          child: DecorationSpriteIcon(
-            slot: slot,
-            size: 18,
-            fallback: Container(
-              decoration: BoxDecoration(
-                color: slotColor.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: slotColor, width: 1),
-              ),
-              child: Center(
-                child: Text(
-                  slot.toString(),
-                  style: TextStyle(
-                    fontSize: 9,
-                    fontWeight: FontWeight.bold,
-                    color: slotColor,
-                  ),
-                ),
-              ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
+          child: Text(
+            armorSet.name,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: colorScheme.onSurface,
             ),
           ),
-        );
-      }).toList(),
-    );
-  }
-
-  Color _slotColor(int slot) {
-    switch (slot) {
-      case 1:
-        return Colors.green;
-      case 2:
-        return Colors.blue;
-      case 3:
-        return Colors.purple;
-      case 4:
-        return Colors.orange;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  Widget _buildResistancesWidget(armor_models.ArmorPiece armorPiece) {
-    final colorScheme = Theme.of(context).colorScheme;
-    if (armorPiece.resistances.isEmpty) {
-      return Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
-        decoration: BoxDecoration(
-          color: colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: colorScheme.outlineVariant),
         ),
-        child: Text(
-          AppLocalizations.of(context)!.noResistances,
-          style: TextStyle(
-            fontSize: 11,
-            color: colorScheme.onSurface.withValues(alpha: 0.8),
-            fontStyle: FontStyle.italic,
+        if (hasBonus)
+          ArmorSetBonusSection(
+            armorSet: armorSet,
+            onSkillIconRequest: (id) => _skillIconForId(id, context),
+          ),
+        ...armorSet.pieces.map(
+          (piece) => ArmorPieceCard(
+            piece: piece,
+            onSkillIconRequest: (id) => _skillIconForId(id, context),
           ),
         ),
-      );
-    }
-
-    return Wrap(
-      children: armorPiece.resistances.entries.map((entry) {
-        final resistanceType = entry.key;
-        final resistanceValue = entry.value;
-
-        return Container(
-          margin: const EdgeInsets.only(right: AppSpacing.sm),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                resistanceValue.toString(),
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface,
-                ),
-              ),
-              const SizedBox(width: 4),
-              SizedBox(
-                height: 16,
-                child: AssetThumb(
-                    'assets/imgs/elements/${resistanceType.toLowerCase()}.webp',
-                    semanticLabel: WeaponUtils.elementLabel(resistanceType)),
-              ),
-            ],
-          ),
-        );
-      }).toList(),
+      ],
     );
-  }
-
-  String _getArmorSlotLabel(BuildContext context, String slot) {
-    final l10n = AppLocalizations.of(context)!;
-    switch (slot) {
-      case 'head':
-        return l10n.armorSlotHead;
-      case 'chest':
-        return l10n.armorSlotChest;
-      case 'arms':
-        return l10n.armorSlotArms;
-      case 'waist':
-        return l10n.armorSlotWaist;
-      case 'legs':
-        return l10n.armorSlotLegs;
-      default:
-        return slot;
-    }
-  }
-
-  Color _getKindColor(String kind) => GameColors.of(context).kind(kind);
-
-  Color _getRarityColor(int rarity) {
-    return GameColors.of(context).rarity(rarity);
   }
 
   skills_model.SkillIcon? _skillIconForId(int skillId, BuildContext context) {
@@ -663,240 +164,5 @@ class _ArmorSetListState extends State<ArmorSetList> {
     }
     return null;
   }
-}
 
-class ArmorSetBonusSection extends StatefulWidget {
-  final set_models.ArmorSet armorSet;
-  final skills_model.SkillIcon? Function(int) onSkillIconRequest;
-
-  const ArmorSetBonusSection({
-    super.key,
-    required this.armorSet,
-    required this.onSkillIconRequest,
-  });
-
-  @override
-  State<ArmorSetBonusSection> createState() => _ArmorSetBonusSectionState();
-}
-
-class _ArmorSetBonusSectionState extends State<ArmorSetBonusSection> {
-  bool _isExpanded = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    // Título del bono para comparar
-    final String bonusTitleName = widget.armorSet.setBonusSkill.name.isNotEmpty
-        ? widget.armorSet.setBonusSkill.name
-        : (widget.armorSet.groupBonusSkill.name.isNotEmpty
-            ? widget.armorSet.groupBonusSkill.name
-            : widget.armorSet.groupBonusSkill.skill.name);
-
-    // Agrupar habilidades
-    final Map<int, Map<String, dynamic>> bonusSkills = {};
-    for (var piece in widget.armorSet.pieces) {
-      for (var skillInfo in piece.skills) {
-        if (skillInfo.isSetOrGroupBonus) {
-          // Priorizar descripción de la habilidad si no es la genérica
-          String bestDescription = skillInfo.skill.description;
-          if (bestDescription == 'No description available' ||
-              bestDescription.isEmpty) {
-            bestDescription = skillInfo.description;
-          }
-
-          bonusSkills[skillInfo.skill.id] = {
-            'skill': skillInfo.skill,
-            'description': bestDescription,
-          };
-        }
-      }
-    }
-
-    final allSkills = bonusSkills.values.toList();
-    if (allSkills.isEmpty) return const SizedBox.shrink();
-
-    // Identificar el bono primario:
-    // 1. Intentar coincidir por nombre Y que sea tipo 'set'
-    int primaryIndex = allSkills.indexWhere((s) {
-      final skill = s['skill'] as skills_model.Skills;
-      return skill.name.toLowerCase() == bonusTitleName.toLowerCase() &&
-          skill.kind.toLowerCase() == 'set';
-    });
-
-    // 2. Si no, intentar coincidir solo por nombre
-    if (primaryIndex == -1) {
-      primaryIndex = allSkills.indexWhere((s) {
-        final skill = s['skill'] as skills_model.Skills;
-        return skill.name.toLowerCase() == bonusTitleName.toLowerCase();
-      });
-    }
-
-    // 3. Si no, buscar la primera que sea de tipo 'set'
-    if (primaryIndex == -1) {
-      primaryIndex = allSkills.indexWhere((s) {
-        final skill = s['skill'] as skills_model.Skills;
-        return skill.kind.toLowerCase() == 'set';
-      });
-    }
-
-    // 4. Si aún no hay nada, usar la primera disponible
-    if (primaryIndex == -1) primaryIndex = 0;
-
-    final primarySkill = allSkills[primaryIndex];
-    final List<Map<String, dynamic>> extraSkills = [];
-    for (int i = 0; i < allSkills.length; i++) {
-      if (i != primaryIndex) {
-        extraSkills.add(allSkills[i]);
-      }
-    }
-
-    return Container(
-      margin: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: BoxDecoration(
-        color: colorScheme.primary.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: colorScheme.primary.withValues(alpha: 0.3),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.group_work,
-                size: 20,
-                color: colorScheme.primary,
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  '${AppLocalizations.of(context)!.setBonus} ${(primarySkill['skill'] as skills_model.Skills).name}',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onSurface),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-
-          // Bono primario (siempre visible)
-          _buildSkillCard(
-              context, primarySkill['skill'], primarySkill['description']),
-
-          // Otros bonos (colapsables)
-          if (extraSkills.isNotEmpty) ...[
-            if (_isExpanded)
-              ...extraSkills.map(
-                  (s) => _buildSkillCard(context, s['skill'], s['description']))
-            else
-              const SizedBox.shrink(),
-
-            // Botón de expansión centrando
-            Center(
-              child: TextButton.icon(
-                onPressed: () => setState(() => _isExpanded = !_isExpanded),
-                icon: Icon(
-                  _isExpanded ? Icons.expand_less : Icons.expand_more,
-                  size: 18,
-                ),
-                label: Text(
-                  _isExpanded
-                      ? AppLocalizations.of(context)!.showLess
-                      : '${AppLocalizations.of(context)!.showMore} (${extraSkills.length})',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-                style: TextButton.styleFrom(
-                  foregroundColor: colorScheme.primary,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-                ),
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSkillCard(
-      BuildContext context, skills_model.Skills skill, String description) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final iconData = widget.onSkillIconRequest(skill.id);
-
-    return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.md),
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: colorScheme.primary.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: colorScheme.primary.withValues(alpha: 0.3),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 24,
-                height: 24,
-                margin: const EdgeInsets.only(right: AppSpacing.sm),
-                child: SkillSpriteIcon(
-                  iconId: iconData?.id,
-                  iconKind: iconData?.kind,
-                  size: 24,
-                  fallback: Icon(
-                    Icons.auto_awesome,
-                    size: 14,
-                    color: colorScheme.primary,
-                  ),
-                ),
-              ),
-              Flexible(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFC5A35C)
-                        .withValues(alpha: 0.8), // Dorado/Beige solicitado
-                    borderRadius: BorderRadius.circular(AppRadius.lg),
-                  ),
-                  child: Text(
-                    skill.name,
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          if (description.isNotEmpty &&
-              description != 'No description available') ...[
-            const SizedBox(height: 8),
-            Text(
-              description,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.8),
-                  height: 1.3),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
 }
