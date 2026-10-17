@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/utils/item_icon_asset_resolver.dart';
-import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/utils/remote_images.dart';
 
 class MaterialImage extends StatelessWidget {
   const MaterialImage({

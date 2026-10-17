@@ -1,6 +1,6 @@
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/providers/catalog_provider.dart';
-import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/utils/text_utils.dart';
 
 class MonsterFilter extends CatalogFilter {
   const MonsterFilter({

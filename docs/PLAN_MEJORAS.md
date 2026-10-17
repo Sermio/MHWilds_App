@@ -389,7 +389,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 - **Prompt (repetir para `weapon_details.dart`, `monster_details.dart`, `weapons_list.dart`, `armor_sets_list.dart`, `armor_piece_details.dart`):**
   > Lee CLAUDE.md. `<archivo>` supera las 800 líneas. Divídelo en widgets por sección dentro de `lib/screens/<nombre>/`, siguiendo el patrón de `lib/screens/weapons_list/`. Antes de crear nada, busca si ya existe un componente equivalente en `lib/components/` y reutilízalo. No cambies la UI ni la lógica: es un refactor puro. Constructores `const` donde se pueda. Comprueba que los tests de overflow (T24) siguen en verde y revisa la pantalla en emulador.
 
-#### T32 · Ordenar `utils/` y `widgets/`
+#### ✅ T32 · Ordenar `utils/` y `widgets/`
 - **Modelo:** Haiku 5.5 · **Razonamiento:** low · **Depende de:** T04, T21
 - **Prompt:**
   > Lee CLAUDE.md. Divide `lib/utils/utils.dart` en archivos con un solo propósito: `text_utils.dart` (`removeDiacritics`), `asset_paths.dart` (`getTypeImage`, `getKindImage`, `getJewelSlotIcon`) y lo que quede de imágenes remotas, si queda algo. Mueve lo que haya en `lib/widgets/` a `lib/components/` y borra la carpeta. Actualiza los imports. Sin cambios de comportamiento.

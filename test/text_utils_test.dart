@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/utils/text_utils.dart';
 
 void main() {
   test('removeDiacritics quita tildes', () {

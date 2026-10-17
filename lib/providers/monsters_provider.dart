@@ -3,7 +3,7 @@ import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/providers/catalog_provider.dart';
 import 'package:mhwilds_app/providers/filters/monster_filter.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
-import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/utils/text_utils.dart';
 
 class MonstersProvider extends CatalogProvider<Monster, MonsterFilter> {
   MonstersProvider({
