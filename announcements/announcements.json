@@ -1,6 +1,28 @@
 {
   "announcements": [
     {
+      "id": "2026-10-big-update",
+      "date": "2026-10-17",
+      "title": {
+        "en": "Big update: faster, offline and easier on the eyes",
+        "es": "Gran actualización: más rápida, offline y más agradable a la vista",
+        "fr": "Grosse mise à jour : plus rapide, hors ligne et plus agréable",
+        "it": "Grande aggiornamento: più veloce, offline e più piacevole",
+        "pl": "Duża aktualizacja: szybsza, offline i przyjemniejsza dla oczu",
+        "pt": "Grande atualização: mais rápida, offline e mais agradável",
+        "de": "Großes Update: schneller, offline und angenehmer"
+      },
+      "body": {
+        "en": "• Data is saved on your device: the app opens instantly and works without a connection.\n• New element filters for weapons and armor.\n• Elements and status ailments are now translated.\n• Better dark mode and contrast, plus accessibility improvements.\n• Smaller app and faster lists.",
+        "es": "• Los datos se guardan en tu dispositivo: la app abre al instante y funciona sin conexión.\n• Nuevos filtros por elemento en armas y armaduras.\n• Elementos y estados alterados ahora están traducidos.\n• Mejor modo oscuro y contraste, y mejoras de accesibilidad.\n• App más ligera y listas más rápidas.",
+        "fr": "• Les données sont enregistrées sur votre appareil : l'appli s'ouvre instantanément et fonctionne hors ligne.\n• Nouveaux filtres par élément pour les armes et armures.\n• Éléments et altérations d'état traduits.\n• Meilleur mode sombre et contraste, accessibilité améliorée.\n• Appli plus légère et listes plus rapides.",
+        "it": "• I dati vengono salvati sul dispositivo: l'app si apre subito e funziona offline.\n• Nuovi filtri per elemento su armi e armature.\n• Elementi e stati alterati ora tradotti.\n• Modalità scura e contrasto migliorati, più accessibilità.\n• App più leggera e liste più veloci.",
+        "pl": "• Dane są zapisywane na urządzeniu: aplikacja otwiera się od razu i działa offline.\n• Nowe filtry żywiołów dla broni i zbroi.\n• Żywioły i statusy są teraz przetłumaczone.\n• Lepszy tryb ciemny i kontrast, większa dostępność.\n• Lżejsza aplikacja i szybsze listy.",
+        "pt": "• Os dados ficam salvos no dispositivo: o app abre na hora e funciona sem conexão.\n• Novos filtros por elemento em armas e armaduras.\n• Elementos e estados alterados agora traduzidos.\n• Modo escuro e contraste melhores, mais acessibilidade.\n• App mais leve e listas mais rápidas.",
+        "de": "• Daten werden auf dem Gerät gespeichert: Die App öffnet sofort und funktioniert offline.\n• Neue Elementfilter für Waffen und Rüstungen.\n• Elemente und Statuseffekte sind jetzt übersetzt.\n• Besserer Dunkelmodus und Kontrast, mehr Barrierefreiheit.\n• Kleinere App und schnellere Listen."
+      }
+    },
+    {
       "id": "2026-10-announcements",
       "date": "2026-10-17",
       "title": {
