@@ -17,7 +17,8 @@ void main() {
 
   test('nombre: parcial, sin mayúsculas ni tildes', () {
     expect(names(const MonsterFilter(name: 'rEy')), ['Rey Dau']);
-    expect(names(const MonsterFilter(name: 'guardián')), isEmpty);
+    expect(
+        names(const MonsterFilter(name: 'guardián')), ['Guardian Doshaguma']);
     expect(
         names(const MonsterFilter(name: 'guardian')), ['Guardian Doshaguma']);
   });
