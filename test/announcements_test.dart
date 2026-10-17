@@ -19,12 +19,14 @@ import 'fake_cached_api.dart';
 final _repoJson = File('announcements/announcements.json').readAsStringSync();
 
 MockServer _serve(String body, {int status = 200}) =>
-    (_) async => http.Response.bytes(utf8.encode(body), status);
+    (_) async => http.Response.bytes(utf8.encode(body), status,
+        headers: {'content-type': 'application/json; charset=utf-8'});
 
 typedef MockServer = Future<http.Response> Function(http.Request);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+  announcementBodyTests();
 
   group('JSON del repo', () {
     test('se parsea y cumple docs/ANUNCIOS.md', () async {
@@ -152,5 +154,16 @@ void main() {
     await tester.tap(find.byType(IconButton));
     await tester.pumpAndSettle();
     expect(find.text('Retry'), findsOneWidget);
+  });
+}
+
+void announcementBodyTests() {
+  testWidgets('cuerpo: viñetas con sangría y párrafos', (tester) async {
+    await tester.pumpWidget(const MaterialApp(
+      home: Scaffold(body: AnnouncementBody('Intro\n• uno\n• dos')),
+    ));
+    expect(find.text('Intro'), findsOneWidget);
+    expect(find.text('uno'), findsOneWidget);
+    expect(find.text('•'), findsNWidgets(2));
   });
 }

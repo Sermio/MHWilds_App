@@ -4,6 +4,7 @@ import 'package:mhwilds_app/components/c_appbar.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/announcement.dart';
 import 'package:mhwilds_app/providers/announcements_provider.dart';
+import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -83,37 +84,89 @@ class _AnnouncementCard extends StatelessWidget {
     final url = announcement.url;
     return Card(
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              MaterialLocalizations.of(context)
-                  .formatMediumDate(announcement.date),
-              style: theme.textTheme.labelMedium!
-                  .copyWith(color: theme.colorScheme.onSurfaceVariant),
-            ),
-            const SizedBox(height: AppSpacing.xs),
-            Text(announcement.titleFor(languageCode),
-                style: theme.textTheme.titleMedium!
-                    .copyWith(fontWeight: FontWeight.bold)),
-            const SizedBox(height: AppSpacing.sm),
-            Text(announcement.bodyFor(languageCode),
-                style: theme.textTheme.bodyMedium),
-            if (url != null)
-              Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: TextButton.icon(
-                  onPressed: () =>
-                      launchUrl(url, mode: LaunchMode.externalApplication),
-                  icon: const Icon(Icons.open_in_new),
-                  label: Text(AppLocalizations.of(context)!.openLink),
-                ),
+      clipBehavior: Clip.antiAlias,
+      child: Container(
+        decoration: const BoxDecoration(
+          border: BorderDirectional(
+            start: BorderSide(color: AppColors.goldSoft, width: 4),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                MaterialLocalizations.of(context)
+                    .formatMediumDate(announcement.date),
+                style: theme.textTheme.labelMedium!
+                    .copyWith(color: theme.colorScheme.onSurfaceVariant),
               ),
-          ],
+              const SizedBox(height: AppSpacing.xs),
+              Text(announcement.titleFor(languageCode),
+                  style: theme.textTheme.titleMedium!
+                      .copyWith(fontWeight: FontWeight.bold)),
+              const SizedBox(height: AppSpacing.sm),
+              AnnouncementBody(announcement.bodyFor(languageCode)),
+              if (url != null)
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: TextButton.icon(
+                    onPressed: () =>
+                        launchUrl(url, mode: LaunchMode.externalApplication),
+                    icon: const Icon(Icons.open_in_new),
+                    label: Text(AppLocalizations.of(context)!.openLink),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+/// Cuerpo de un anuncio: las líneas que empiezan por «• » se pintan como
+/// viñetas con sangría; el resto, como párrafos.
+class AnnouncementBody extends StatelessWidget {
+  const AnnouncementBody(this.text, {super.key});
+
+  final String text;
+
+  static const _bullet = '• ';
+
+  @override
+  Widget build(BuildContext context) {
+    final style = Theme.of(context).textTheme.bodyMedium;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final line in text.split('\n'))
+          if (line.startsWith(_bullet))
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ExcludeSemantics(
+                    child: Text('•',
+                        style: style?.copyWith(
+                            color: AppColors.goldAccent(context),
+                            fontWeight: FontWeight.bold)),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                      child:
+                          Text(line.substring(_bullet.length), style: style)),
+                ],
+              ),
+            )
+          else
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+              child: Text(line, style: style),
+            ),
+      ],
     );
   }
 }
