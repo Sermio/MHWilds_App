@@ -29,6 +29,7 @@ Companion app for *Monster Hunter Wilds* built with Flutter: monsters, weapons, 
 - State: Provider + `ChangeNotifier`. Read with `context.read` in callbacks, `context.watch`/`context.select` in `build`.
 - The API language is not global: `LocaleProvider` feeds every data provider through `dataProviders()` (`ChangeNotifierProxyProvider`); new data providers must be added there. Providers keep their filter, so screens read/write it via `provider.filter`/`setFilter`.
 - Monster and map images are looked up by id in `lib/utils/asset_ids.g.dart` (generated `const` maps; the API returns translated names). When new monsters/maps and their assets are added, run `dart run scripts/generate_asset_ids.dart` (needs network; warns about ids without an asset) and commit the result. Do not edit it by hand.
+- Elements and status effects (icon, translated name, ailment text) come from `GameElement` (`lib/utils/game_element.dart`) and `ElementIcon`; never build `assets/imgs/elements/...` paths by hand. The API has no endpoint for them, so new ones are added to the enum, the asset folder and the ARB files.
 - Item icons resolve from `api kind + color` to a file in `assets/imgs/item_icons/` (`ItemIconAssetResolver`).
 - User-facing strings always go through ARB/`AppLocalizations`; never hard-code text.
 - Game colors (elements, rarity, sharpness, zones) come from `GameColors.of(context)`; spacing/radius from `AppSpacing`/`AppRadius`.
