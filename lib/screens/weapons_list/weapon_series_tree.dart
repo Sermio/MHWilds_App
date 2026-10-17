@@ -75,7 +75,10 @@ class WeaponSeriesTile extends StatelessWidget {
       ),
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        // Claves propias: sin ellas, el ExpansionTile (guarda un bool) y el
+        // scroll de dentro (guarda un double) comparten hueco en PageStorage.
         child: ExpansionTile(
+          key: PageStorageKey('series-tile-$seriesName'),
           initiallyExpanded: initiallyExpanded,
           collapsedBackgroundColor: Colors.transparent,
           backgroundColor: Colors.transparent,
@@ -122,6 +125,7 @@ class WeaponSeriesTile extends StatelessWidget {
                   right: AppSpacing.sm,
                   top: AppSpacing.sm),
               child: SingleChildScrollView(
+                key: PageStorageKey('series-scroll-$seriesName'),
                 scrollDirection: Axis.horizontal,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
