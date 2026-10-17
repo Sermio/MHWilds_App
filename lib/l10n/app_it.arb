@@ -281,5 +281,10 @@
   "ailmentDescWebbed": "Imbrigliato impedisce temporaneamente al cacciatore di muoversi o agire.\nSi cura con un Cleanser, muovendosi, premendo i pulsanti, venendo colpiti da un attacco o subendo un colpo.",
   "ailmentDescPoison": "Il Veleno riduce gradualmente la salute del bersaglio nel tempo.\nSi cura con Antidote, Herbal Medicine o Herbal Powder.",
   "ailmentDescSleep": "Il Sonno fa addormentare il bersaglio, che diventa vulnerabile a un singolo attacco.\nIl bersaglio si sveglia quando subisce danni.\nSi cura con un Energy Drink, usato da un alleato o da un mostro.",
-  "ailmentDescParalysis": "La Paralisi immobilizza il cacciatore o il mostro e lo rende vulnerabile a danni maggiori finché dura.\nSi cura con impatti dal forte contraccolpo, come un colpo verso l'alto di un Martello o uno Spadone."
+  "ailmentDescParalysis": "La Paralisi immobilizza il cacciatore o il mostro e lo rende vulnerabile a danni maggiori finché dura.\nSi cura con impatti dal forte contraccolpo, come un colpo verso l'alto di un Martello o uno Spadone.",
+  "announcements": "Annunci",
+  "announcementsNew": "Annunci (nuovo)",
+  "loadingAnnouncements": "Caricamento annunci...",
+  "noAnnouncements": "Ancora nessun annuncio",
+  "openLink": "Apri link"
 }

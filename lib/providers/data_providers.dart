@@ -1,4 +1,5 @@
 import 'package:mhwilds_app/api/cached_api.dart';
+import 'package:mhwilds_app/providers/announcements_provider.dart';
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/providers/cached_list_provider.dart';
 import 'package:mhwilds_app/providers/decorations_provider.dart';
@@ -38,4 +39,6 @@ List<SingleChildWidget> dataProviders({CachedApi? api}) => [
       _followingLocale(() => MonstersProvider(api: api)),
       _followingLocale(() => LocationsProvider(api: api)),
       _followingLocale(() => WeaponsProvider(api: api)),
+      // Trae todos los idiomas en un archivo: no sigue a LocaleProvider.
+      ChangeNotifierProvider(create: (_) => AnnouncementsProvider(api: api)),
     ];

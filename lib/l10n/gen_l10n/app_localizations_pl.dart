@@ -814,4 +814,19 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get ailmentDescParalysis =>
       'Paraliż unieruchamia łowcę lub potwora i naraża go na zwiększone obrażenia przez czas trwania.\nMożna go przerwać uderzeniami z dużym odrzutem, np. uderzeniem w górę Młotem lub Wielkim Mieczem.';
+
+  @override
+  String get announcements => 'Ogłoszenia';
+
+  @override
+  String get announcementsNew => 'Ogłoszenia (nowe)';
+
+  @override
+  String get loadingAnnouncements => 'Ładowanie ogłoszeń...';
+
+  @override
+  String get noAnnouncements => 'Brak ogłoszeń';
+
+  @override
+  String get openLink => 'Otwórz link';
 }

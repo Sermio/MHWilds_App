@@ -4,7 +4,8 @@ La app tiene una pantalla de listado con mensajes para los usuarios (planes futu
 
 - Archivo: [`announcements/announcements.json`](../announcements/announcements.json), en la rama `main`.
 - La app lo descarga de `https://raw.githubusercontent.com/Sermio/MHWilds_App/main/announcements/announcements.json` y guarda una copia en disco para el modo offline.
-- Estado: el formato está decidido; la pantalla y el archivo los crea la tarea T41 de `docs/PLAN_MEJORAS.md`.
+- En la app: altavoz junto al nombre en la cabecera del menú lateral; lleva un punto si el primer anuncio de la lista aún no se ha visto.
+- `flutter test` (y la CI) parsea este archivo: si lo rompes, el test `announcements_test.dart` falla.
 
 ## Cómo añadir un anuncio
 
@@ -14,7 +15,7 @@ La app tiene una pantalla de listado con mensajes para los usuarios (planes futu
 4. Comprueba que el JSON es válido (por ejemplo pegándolo en jsonlint.com): una coma de más o de menos lo rompe.
 5. Guarda con *Commit directly to the `main` branch*.
 
-Los usuarios lo verán al abrir la app o al refrescar la pantalla; GitHub puede tardar unos 5 minutos en servir la versión nueva.
+Los usuarios lo verán al abrir el menú lateral o al refrescar la pantalla de anuncios; GitHub puede tardar unos 5 minutos en servir la versión nueva.
 
 Si el JSON queda roto, la app no falla: enseña la copia anterior guardada en el móvil o la pantalla vacía. Aun así, corrígelo cuanto antes.
 

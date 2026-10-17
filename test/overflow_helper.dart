@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/providers/announcements_provider.dart';
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/providers/decorations_provider.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
@@ -43,6 +45,7 @@ class FixtureProviders {
   late final SkillsProvider skills;
   late final ItemsProvider items;
   late final LocationsProvider locations;
+  late final AnnouncementsProvider announcements;
 
   static Future<FixtureProviders> load(WidgetTester tester) async {
     final bodies = {
@@ -51,6 +54,10 @@ class FixtureProviders {
     };
     Future<http.Response> server(http.Request r) async {
       final path = r.url.path.replaceFirst('/en/', '');
+      if (r.url.host == 'raw.githubusercontent.com') {
+        return http.Response.bytes(
+            File('announcements/announcements.json').readAsBytesSync(), 200);
+      }
       if (r.url.path == '/version') {
         return http.Response('{"version":"v1"}', 200);
       }
@@ -69,7 +76,8 @@ class FixtureProviders {
       ..talismans = TalismansProvider(api: api)
       ..skills = SkillsProvider(api: api)
       ..items = ItemsProvider(api: api)
-      ..locations = LocationsProvider(api: api);
+      ..locations = LocationsProvider(api: api)
+      ..announcements = AnnouncementsProvider(api: api);
     await tester.runAsync(() => Future.wait([
           p.monsters.fetch(),
           p.weapons.fetch(),
@@ -92,6 +100,8 @@ class FixtureProviders {
         ChangeNotifierProvider<SkillsProvider>.value(value: skills),
         ChangeNotifierProvider<ItemsProvider>.value(value: items),
         ChangeNotifierProvider<LocationsProvider>.value(value: locations),
+        ChangeNotifierProvider<AnnouncementsProvider>.value(
+            value: announcements),
       ];
 }
 

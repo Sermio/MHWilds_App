@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/providers/announcements_provider.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/home.dart';
 import 'package:mhwilds_app/utils/load_state.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'fake_cached_api.dart';
 
 // Offline providers so the smoke test never touches the network.
 class _OfflineLocationsProvider extends LocationsProvider {
@@ -30,6 +34,9 @@ Widget _buildApp() {
           create: (_) => _EmptyMonstersProvider()),
       ChangeNotifierProvider<LocationsProvider>(
           create: (_) => _OfflineLocationsProvider()),
+      ChangeNotifierProvider(
+          create: (_) => AnnouncementsProvider(
+              api: fakeCachedApi((_) async => http.Response('', 503)))),
     ],
     child: const MaterialApp(
       locale: Locale('en'),

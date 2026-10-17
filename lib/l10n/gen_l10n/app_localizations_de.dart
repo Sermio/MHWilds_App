@@ -812,4 +812,19 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get ailmentDescParalysis =>
       'Lähmung macht den Jäger oder das Monster bewegungsunfähig und anfälliger für erhöhten Schaden, solange sie anhält.\nSie wird durch Treffer mit starkem Rückstoß geheilt, etwa einen Aufwärtshieb mit Hammer oder Großschwert.';
+
+  @override
+  String get announcements => 'Ankündigungen';
+
+  @override
+  String get announcementsNew => 'Ankündigungen (neu)';
+
+  @override
+  String get loadingAnnouncements => 'Ankündigungen werden geladen...';
+
+  @override
+  String get noAnnouncements => 'Noch keine Ankündigungen';
+
+  @override
+  String get openLink => 'Link öffnen';
 }

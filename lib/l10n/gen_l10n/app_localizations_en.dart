@@ -807,4 +807,19 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ailmentDescParalysis =>
       'Paralysis renders the hunter or monster immobilized and susceptible to increased damage for the duration.\nIt can be cured by impacts with large amounts of knockback, such as an upswing from a Hammer or Great Sword.';
+
+  @override
+  String get announcements => 'Announcements';
+
+  @override
+  String get announcementsNew => 'Announcements (new)';
+
+  @override
+  String get loadingAnnouncements => 'Loading announcements...';
+
+  @override
+  String get noAnnouncements => 'No announcements yet';
+
+  @override
+  String get openLink => 'Open link';
 }

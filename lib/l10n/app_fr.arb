@@ -281,5 +281,10 @@
   "ailmentDescWebbed": "Entoilé empêche temporairement le chasseur de bouger ou d'agir.\nIl se soigne avec un Cleanser, en bougeant, en appuyant sur des boutons, en étant projeté par une attaque ou en subissant un coup.",
   "ailmentDescPoison": "Le poison réduit progressivement la santé de la cible au fil du temps.\nIl se soigne avec un Antidote, une Herbal Medicine ou une Herbal Powder.",
   "ailmentDescSleep": "Le sommeil endort la cible, qui devient vulnérable à une seule attaque.\nLa cible se réveille lorsqu'elle subit des dégâts.\nIl se soigne avec un Energy Drink, par un allié ou un monstre.",
-  "ailmentDescParalysis": "La paralysie immobilise le chasseur ou le monstre et le rend vulnérable à des dégâts accrus pendant sa durée.\nElle se soigne avec des impacts à fort recul, comme un coup montant d'un Marteau ou d'une Grande Épée."
+  "ailmentDescParalysis": "La paralysie immobilise le chasseur ou le monstre et le rend vulnérable à des dégâts accrus pendant sa durée.\nElle se soigne avec des impacts à fort recul, comme un coup montant d'un Marteau ou d'une Grande Épée.",
+  "announcements": "Annonces",
+  "announcementsNew": "Annonces (nouveau)",
+  "loadingAnnouncements": "Chargement des annonces...",
+  "noAnnouncements": "Aucune annonce pour le moment",
+  "openLink": "Ouvrir le lien"
 }

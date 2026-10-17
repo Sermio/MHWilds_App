@@ -313,5 +313,10 @@
   "ailmentDescWebbed": "Webbed prevents the hunter from moving or acting temporarily.\nIt can be cured with a Cleanser, by moving, pressing buttons, being knocked by an attack, or taking a hit.",
   "ailmentDescPoison": "Poison gradually depletes the health of the target over time.\nThe Poison effect can be cured by Antidote, Herbal Medicine, or Herbal Powder.",
   "ailmentDescSleep": "Sleep causes the target to fall asleep which renders them susceptible to a one-time attack after.\nThe target will wake up after they receive damage.\nIt can be cured with an Energy Drink, being it by an ally or a Monster.",
-  "ailmentDescParalysis": "Paralysis renders the hunter or monster immobilized and susceptible to increased damage for the duration.\nIt can be cured by impacts with large amounts of knockback, such as an upswing from a Hammer or Great Sword."
+  "ailmentDescParalysis": "Paralysis renders the hunter or monster immobilized and susceptible to increased damage for the duration.\nIt can be cured by impacts with large amounts of knockback, such as an upswing from a Hammer or Great Sword.",
+  "announcements": "Announcements",
+  "announcementsNew": "Announcements (new)",
+  "loadingAnnouncements": "Loading announcements...",
+  "noAnnouncements": "No announcements yet",
+  "openLink": "Open link"
 }

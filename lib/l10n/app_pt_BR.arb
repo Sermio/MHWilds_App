@@ -293,5 +293,10 @@
   "ailmentDescWebbed": "Enredado impede temporariamente o caçador de se mover ou agir.\nPode ser curado com um Cleanser, movendo-se, apertando botões, sendo empurrado por um ataque ou levando um golpe.",
   "ailmentDescPoison": "O veneno reduz gradualmente a vida do alvo com o tempo.\nPode ser curado com Antidote, Herbal Medicine ou Herbal Powder.",
   "ailmentDescSleep": "O sono faz o alvo adormecer e o deixa vulnerável a um único ataque.\nO alvo acorda ao receber dano.\nPode ser curado com um Energy Drink, usado por um aliado ou por um monstro.",
-  "ailmentDescParalysis": "A paralisia imobiliza o caçador ou o monstro e o deixa vulnerável a mais dano enquanto durar.\nPode ser curada com impactos de grande repulsão, como um golpe ascendente de um Martelo ou Espada Grande."
+  "ailmentDescParalysis": "A paralisia imobiliza o caçador ou o monstro e o deixa vulnerável a mais dano enquanto durar.\nPode ser curada com impactos de grande repulsão, como um golpe ascendente de um Martelo ou Espada Grande.",
+  "announcements": "Avisos",
+  "announcementsNew": "Avisos (novo)",
+  "loadingAnnouncements": "Carregando avisos...",
+  "noAnnouncements": "Ainda não há avisos",
+  "openLink": "Abrir link"
 }

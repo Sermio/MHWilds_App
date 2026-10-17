@@ -810,6 +810,21 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get ailmentDescParalysis =>
       'A paralisia imobiliza o caçador ou o monstro e o deixa vulnerável a mais dano enquanto durar.\nPode ser curada com impactos de grande repulsão, como um golpe ascendente de um Martelo ou Espada Grande.';
+
+  @override
+  String get announcements => 'Avisos';
+
+  @override
+  String get announcementsNew => 'Avisos (novo)';
+
+  @override
+  String get loadingAnnouncements => 'Carregando avisos...';
+
+  @override
+  String get noAnnouncements => 'Ainda não há avisos';
+
+  @override
+  String get openLink => 'Abrir link';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -1596,4 +1611,19 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get ailmentDescParalysis =>
       'A paralisia imobiliza o caçador ou o monstro e o deixa vulnerável a mais dano enquanto durar.\nPode ser curada com impactos de grande repulsão, como um golpe ascendente de um Martelo ou Espada Grande.';
+
+  @override
+  String get announcements => 'Avisos';
+
+  @override
+  String get announcementsNew => 'Avisos (novo)';
+
+  @override
+  String get loadingAnnouncements => 'Carregando avisos...';
+
+  @override
+  String get noAnnouncements => 'Ainda não há avisos';
+
+  @override
+  String get openLink => 'Abrir link';
 }

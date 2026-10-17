@@ -1634,6 +1634,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Paralysis renders the hunter or monster immobilized and susceptible to increased damage for the duration.\nIt can be cured by impacts with large amounts of knockback, such as an upswing from a Hammer or Great Sword.'**
   String get ailmentDescParalysis;
+
+  /// No description provided for @announcements.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements'**
+  String get announcements;
+
+  /// No description provided for @announcementsNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements (new)'**
+  String get announcementsNew;
+
+  /// No description provided for @loadingAnnouncements.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading announcements...'**
+  String get loadingAnnouncements;
+
+  /// No description provided for @noAnnouncements.
+  ///
+  /// In en, this message translates to:
+  /// **'No announcements yet'**
+  String get noAnnouncements;
+
+  /// No description provided for @openLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Open link'**
+  String get openLink;
 }
 
 class _AppLocalizationsDelegate

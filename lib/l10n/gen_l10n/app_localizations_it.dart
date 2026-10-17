@@ -812,4 +812,19 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get ailmentDescParalysis =>
       'La Paralisi immobilizza il cacciatore o il mostro e lo rende vulnerabile a danni maggiori finché dura.\nSi cura con impatti dal forte contraccolpo, come un colpo verso l\'alto di un Martello o uno Spadone.';
+
+  @override
+  String get announcements => 'Annunci';
+
+  @override
+  String get announcementsNew => 'Annunci (nuovo)';
+
+  @override
+  String get loadingAnnouncements => 'Caricamento annunci...';
+
+  @override
+  String get noAnnouncements => 'Ancora nessun annuncio';
+
+  @override
+  String get openLink => 'Apri link';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/announcements_button.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/screens/app_section.dart';
 import 'package:mhwilds_app/utils/colors.dart';
@@ -110,15 +111,25 @@ class Cdrawer extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 14),
-              Text(
-                l10n.appTitle,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                  color: accentColor,
-                  letterSpacing: 0.2,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Mismo ancho que el botón: el nombre queda centrado.
+                  const SizedBox(width: 48),
+                  Flexible(
+                    child: Text(
+                      l10n.appTitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: accentColor,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                  ),
+                  AnnouncementsButton(color: accentColor),
+                ],
               ),
               const SizedBox(height: 10),
               Container(

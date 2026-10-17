@@ -813,4 +813,19 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get ailmentDescParalysis =>
       'La paralysie immobilise le chasseur ou le monstre et le rend vulnérable à des dégâts accrus pendant sa durée.\nElle se soigne avec des impacts à fort recul, comme un coup montant d\'un Marteau ou d\'une Grande Épée.';
+
+  @override
+  String get announcements => 'Annonces';
+
+  @override
+  String get announcementsNew => 'Annonces (nouveau)';
+
+  @override
+  String get loadingAnnouncements => 'Chargement des annonces...';
+
+  @override
+  String get noAnnouncements => 'Aucune annonce pour le moment';
+
+  @override
+  String get openLink => 'Ouvrir le lien';
 }

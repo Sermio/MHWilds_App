@@ -809,6 +809,21 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get ailmentDescParalysis =>
       'La parálisis inmoviliza al cazador o al monstruo y lo hace vulnerable a más daño mientras dura.\nSe cura con impactos que lancen con mucha fuerza hacia atrás, como un golpe ascendente de un Martillo o un Espadón.';
+
+  @override
+  String get announcements => 'Anuncios';
+
+  @override
+  String get announcementsNew => 'Anuncios (nuevo)';
+
+  @override
+  String get loadingAnnouncements => 'Cargando anuncios...';
+
+  @override
+  String get noAnnouncements => 'Aún no hay anuncios';
+
+  @override
+  String get openLink => 'Abrir enlace';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -1601,6 +1616,21 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
   @override
   String get ailmentDescParalysis =>
       'La parálisis inmoviliza al cazador o al monstruo y lo hace vulnerable a más daño mientras dura.\nSe cura con impactos que lancen con mucha fuerza hacia atrás, como un golpe ascendente de un Martillo o un Espadón.';
+
+  @override
+  String get announcements => 'Anuncios';
+
+  @override
+  String get announcementsNew => 'Anuncios (nuevo)';
+
+  @override
+  String get loadingAnnouncements => 'Cargando anuncios...';
+
+  @override
+  String get noAnnouncements => 'Aún no hay anuncios';
+
+  @override
+  String get openLink => 'Abrir enlace';
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -2393,4 +2423,19 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
   @override
   String get ailmentDescParalysis =>
       'La parálisis inmoviliza al cazador o al monstruo y lo hace vulnerable a más daño mientras dura.\nSe cura con impactos que lancen con mucha fuerza hacia atrás, como un golpe ascendente de un Martillo o un Espadón.';
+
+  @override
+  String get announcements => 'Anuncios';
+
+  @override
+  String get announcementsNew => 'Anuncios (nuevo)';
+
+  @override
+  String get loadingAnnouncements => 'Cargando anuncios...';
+
+  @override
+  String get noAnnouncements => 'Aún no hay anuncios';
+
+  @override
+  String get openLink => 'Abrir enlace';
 }
