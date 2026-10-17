@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/armor_sets_provider.dart';
 import 'package:mhwilds_app/providers/decorations_provider.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
@@ -44,7 +43,6 @@ class FixtureProviders {
   late final SkillsProvider skills;
   late final ItemsProvider items;
   late final LocationsProvider locations;
-  late final EnNamesCache enNames;
 
   static Future<FixtureProviders> load(WidgetTester tester) async {
     final bodies = {
@@ -71,8 +69,7 @@ class FixtureProviders {
       ..talismans = TalismansProvider(api: api)
       ..skills = SkillsProvider(api: api)
       ..items = ItemsProvider(api: api)
-      ..locations = LocationsProvider(api: api)
-      ..enNames = EnNamesCache(api);
+      ..locations = LocationsProvider(api: api);
     await tester.runAsync(() => Future.wait([
           p.monsters.fetch(),
           p.weapons.fetch(),
@@ -82,7 +79,6 @@ class FixtureProviders {
           p.skills.fetch(),
           p.items.fetch(),
           p.locations.fetch(),
-          p.enNames.loadEnNames(),
         ]));
     return p;
   }
@@ -96,7 +92,6 @@ class FixtureProviders {
         ChangeNotifierProvider<SkillsProvider>.value(value: skills),
         ChangeNotifierProvider<ItemsProvider>.value(value: items),
         ChangeNotifierProvider<LocationsProvider>.value(value: locations),
-        ChangeNotifierProvider<EnNamesCache>.value(value: enNames),
       ];
 }
 

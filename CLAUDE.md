@@ -4,9 +4,9 @@ Companion app for *Monster Hunter Wilds* built with Flutter: monsters, weapons, 
 
 ## Source layout
 
-- `lib/main.dart` — `MultiProvider` setup and startup gate (waits only for the saved locale and the item icon index; `EnNamesCache` loads in the background).
+- `lib/main.dart` — `MultiProvider` setup and startup gate (waits only for the saved locale and the item icon index).
 - `lib/api/` — `ApiClient`, `CachedApi`/`CacheStore` (disk cache validated with `/version`), one static class per endpoint, `api_config.dart` (host, `languageFor`).
-- `lib/providers/` — `CatalogProvider<T, F>` per entity (`providers/filters/` holds the immutable filters and pure `filterX` functions), `data_providers.dart` (binds them to `LocaleProvider`), `LocaleProvider`, `ThemeProvider`, `EnNamesCache`.
+- `lib/providers/` — `CatalogProvider<T, F>` per entity (`providers/filters/` holds the immutable filters and pure `filterX` functions), `data_providers.dart` (binds them to `LocaleProvider`), `LocaleProvider`, `ThemeProvider`.
 - `lib/models/` — hand-written `fromJson` models.
 - `lib/screens/` — list and detail screens; `app_section.dart` is the single source of sections (title, screen, icon, AppBar actions). Big screens live in `screens/<name>/` section widgets.
 - `lib/components/` — shared widgets (`SpriteIcon`, `LabelValueRow`, `AsyncListBody`, `CardSkeletonList`, filters panel…).
@@ -21,13 +21,14 @@ Companion app for *Monster Hunter Wilds* built with Flutter: monsters, weapons, 
 - `flutter analyze`
 - `flutter test`
 - `flutter gen-l10n` (after editing ARB files; config in `l10n.yaml`)
+- `dart run scripts/generate_asset_ids.dart` (regenerates `lib/utils/asset_ids.g.dart`)
 - `flutter run`
 
 ## Conventions
 
 - State: Provider + `ChangeNotifier`. Read with `context.read` in callbacks, `context.watch`/`context.select` in `build`.
 - The API language is not global: `LocaleProvider` feeds every data provider through `dataProviders()` (`ChangeNotifierProxyProvider`); new data providers must be added there. Providers keep their filter, so screens read/write it via `provider.filter`/`setFilter`.
-- Local images are looked up by the English name (`EnNamesCache`, loaded in the background; widgets watch it and show a placeholder until ready), because the API returns translated names. Replacing it with generated id maps is pending (T34).
+- Monster and map images are looked up by id in `lib/utils/asset_ids.g.dart` (generated `const` maps; the API returns translated names). When new monsters/maps and their assets are added, run `dart run scripts/generate_asset_ids.dart` (needs network; warns about ids without an asset) and commit the result. Do not edit it by hand.
 - Item icons resolve from `api kind + color` to a file in `assets/imgs/item_icons/` (`ItemIconAssetResolver`).
 - User-facing strings always go through ARB/`AppLocalizations`; never hard-code text.
 - Game colors (elements, rarity, sharpness, zones) come from `GameColors.of(context)`; spacing/radius from `AppSpacing`/`AppRadius`.
@@ -44,4 +45,4 @@ Companion app for *Monster Hunter Wilds* built with Flutter: monsters, weapons, 
 
 ## Plan de mejoras
 
-- Las tareas están en `docs/PLAN_MEJORAS.md` (T01…T34). Al terminar una, marca su título con ✅ en el plan y termina la respuesta con el prompt de la siguiente (respeta "Depende de"), copiado del plan en un bloque de código, indicando modelo y razonamiento.
+- Las tareas están en `docs/PLAN_MEJORAS.md` (T01…T41). Al terminar una, marca su título con ✅ en el plan y termina la respuesta con el prompt de la siguiente (respeta "Depende de"), copiado del plan en un bloque de código, indicando modelo y razonamiento.

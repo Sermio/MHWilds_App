@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/item.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
+import 'package:mhwilds_app/components/monster_icon.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:provider/provider.dart';
@@ -56,11 +56,7 @@ class ItemDetails extends StatelessWidget {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(AppRadius.md),
-                        child: MaterialImage(
-                            item: item,
-                            materialName: context.watch<EnNamesCache>()
-                                    .nameForItemImage(item.id, item.name) ??
-                                item.name),
+                        child: MaterialImage(item: item),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -151,10 +147,6 @@ class ItemDetails extends StatelessWidget {
                                     item: itemsById[recipeItem.id],
                                     width: 48,
                                     height: 48,
-                                    materialName: context.watch<EnNamesCache>()
-                                            .nameForItemImage(recipeItem.id,
-                                                recipeItem.name) ??
-                                        recipeItem.name,
                                   ),
                                 ),
                               ),
@@ -250,8 +242,8 @@ class ItemDetails extends StatelessWidget {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(AppRadius.sm),
-                                  child: _buildMonsterIcon(
-                                      context, monster.id, monster.name),
+                                  child: MonsterIcon(monster.id,
+                                      placeholderIconSize: 20),
                                 ),
                               ),
                             const SizedBox(width: 16),
@@ -341,36 +333,6 @@ class ItemDetails extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildMonsterIcon(
-      BuildContext context, int monsterId, String monsterName) {
-    final enNamesCache = context.watch<EnNamesCache>();
-    final imageName = enNamesCache.nameForMonsterImage(monsterId, monsterName);
-
-    if (imageName == null) {
-      // Cache no cargado, mostrar placeholder
-      return Container(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        child:
-            Icon(Icons.image_not_supported, color: Theme.of(context).colorScheme.onSurfaceVariant, size: 20),
-      );
-    }
-
-    final imagePath =
-        'assets/imgs/monster_icons/${imageName.toLowerCase().replaceAll(' ', '_')}.webp';
-    return Image.asset(
-      imagePath,
-      fit: BoxFit.cover,
-      errorBuilder: (context, error, stackTrace) {
-        // Si la imagen no existe, mostrar placeholder
-        return Container(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          child: Icon(Icons.image_not_supported,
-              color: Theme.of(context).colorScheme.onSurfaceVariant, size: 20),
-        );
-      },
     );
   }
 }

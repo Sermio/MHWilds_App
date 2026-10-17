@@ -1,31 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
-import 'package:provider/provider.dart';
+import 'package:mhwilds_app/utils/asset_ids.g.dart';
 
 /// Imagen de cabecera del monstruo (con placeholder si no existe).
 class MonsterHeaderImage extends StatelessWidget {
   final int monsterId;
-  final String monsterName;
 
-  const MonsterHeaderImage({
-    super.key,
-    required this.monsterId,
-    required this.monsterName,
-  });
+  const MonsterHeaderImage({super.key, required this.monsterId});
 
   @override
   Widget build(BuildContext context) {
-    final imageName = context
-        .watch<EnNamesCache>()
-        .nameForMonsterImage(monsterId, monsterName);
-
-    if (imageName == null) {
-      // Cache no cargado, mostrar placeholder
-      return const _ImagePlaceholder();
-    }
-
-    final imagePath =
-        'assets/imgs/monsters/${imageName.toLowerCase().replaceAll(' ', '_')}.webp';
+    final imagePath = monsterImageAssets[monsterId];
+    if (imagePath == null) return const _ImagePlaceholder();
     return Image.asset(
       imagePath,
       width: 380,

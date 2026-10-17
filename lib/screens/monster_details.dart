@@ -98,10 +98,7 @@ class _MonsterDetailsState extends State<MonsterDetails> {
               children: [
                 Hero(
                   tag: monster.name,
-                  child: MonsterHeaderImage(
-                    monsterId: monster.id,
-                    monsterName: monster.name,
-                  ),
+                  child: MonsterHeaderImage(monsterId: monster.id),
                 ),
                 const SizedBox(height: 20),
                 MonsterInfoSection(monster: monster),

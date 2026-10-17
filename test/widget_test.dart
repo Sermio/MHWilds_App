@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/home.dart';
@@ -31,7 +30,6 @@ Widget _buildApp() {
           create: (_) => _EmptyMonstersProvider()),
       ChangeNotifierProvider<LocationsProvider>(
           create: (_) => _OfflineLocationsProvider()),
-      ChangeNotifierProvider(create: (_) => EnNamesCache()),
     ],
     child: const MaterialApp(
       locale: Locale('en'),

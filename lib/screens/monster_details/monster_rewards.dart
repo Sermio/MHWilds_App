@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/monster.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
-import 'package:provider/provider.dart';
 
 class MonsterRewards extends StatelessWidget {
   final List<Reward> rewards;
@@ -91,11 +89,6 @@ class MonsterRewards extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                   child: MaterialImage(
                                     item: reward.item,
-                                    materialName: (context
-                                            .watch<EnNamesCache>()
-                                            .nameForItemImage(reward.item.id,
-                                                reward.item.name) ??
-                                        reward.item.name),
                                   ),
                                 ),
                               ),

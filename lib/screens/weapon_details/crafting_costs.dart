@@ -3,10 +3,8 @@ import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
 import 'package:mhwilds_app/models/weapon.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
-import 'package:provider/provider.dart';
 
 /// Indica si el arma tiene materiales o costes de crafteo/mejora.
 bool hasCraftingData(WeaponCrafting c) {
@@ -157,11 +155,6 @@ class MaterialTile extends StatelessWidget {
                       item: material.item,
                       width: 40,
                       height: 40,
-                      materialName: context
-                              .watch<EnNamesCache>()
-                              .nameForItemImage(
-                                  material.item.id, material.item.name) ??
-                          material.item.name,
                     ),
                   ),
                 ),

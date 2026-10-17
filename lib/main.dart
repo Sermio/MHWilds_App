@@ -3,7 +3,6 @@ import 'package:mhwilds_app/api/api_client.dart';
 import 'package:mhwilds_app/api/cached_api.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/data_providers.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/locale_provider.dart';
 import 'package:mhwilds_app/providers/theme_provider.dart';
 import 'package:mhwilds_app/screens/home.dart';
@@ -22,7 +21,6 @@ void main() {
         Provider<ApiClient>.value(value: ApiClient.shared),
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => EnNamesCache()..loadEnNames()),
         ...dataProviders(),
       ],
       child: const MyApp(),
@@ -35,7 +33,6 @@ void main() {
 
 /// Espera solo a lo local (idioma guardado e índice de iconos) antes de pintar,
 /// así la primera petición (p. ej. monstruos) usa ya el idioma correcto.
-/// Los nombres en inglés (`EnNamesCache`) cargan en segundo plano.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

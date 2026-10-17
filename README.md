@@ -43,7 +43,7 @@
   <li><strong>Translations</strong>: edit <code>lib/l10n/app_*.arb</code> (the English file is the template) and run <code>flutter gen-l10n</code>.</li>
   <li><strong>Assets</strong>: images are WebP; <code>scripts/optimize_assets.py</code> converts them keeping the file name.</li>
   <li><strong>Test fixtures</strong>: <code>dart run scripts/fetch_fixtures.dart</code>.</li>
-  <li><strong>Asset id maps (<code>asset_ids.g.dart</code>)</strong>: not generated yet; local images are still found through <code>EnNamesCache</code> (pending, see T34 in <code>docs/PLAN_MEJORAS.md</code>).</li>
+  <li><strong>Asset id maps (<code>lib/utils/asset_ids.g.dart</code>)</strong>: <code>const</code> maps from monster and location id to the bundled image. When new monsters or maps (and their images) are added, run <code>dart run scripts/generate_asset_ids.dart</code>; it warns about ids with no asset.</li>
 </ul>
 
 <h2>How to Run the Project</h2>

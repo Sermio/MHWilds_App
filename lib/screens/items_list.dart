@@ -6,7 +6,6 @@ import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:provider/provider.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
@@ -126,13 +125,7 @@ class _ItemListState extends State<ItemList> {
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(AppRadius.md),
-                                    child: MaterialImage(
-                                      item: item,
-                                      materialName: (context.watch<EnNamesCache>()
-                                              .nameForItemImage(
-                                                  item.id, item.name) ??
-                                          item.name),
-                                    ),
+                                    child: MaterialImage(item: item),
                                   ),
                                 ),
                                 const SizedBox(width: 16),
@@ -320,13 +313,6 @@ class _ItemListState extends State<ItemList> {
                         item: itemsById[recipeItem.id],
                         width: 32,
                         height: 32,
-                        materialName:
-                            (context.watch<EnNamesCache>()
-                                    .nameForItemImage(
-                                  recipeItem.id,
-                                  recipeItem.name,
-                                ) ??
-                                recipeItem.name),
                       ),
                     ),
                   ),

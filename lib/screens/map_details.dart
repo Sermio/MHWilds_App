@@ -1,11 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/models/location.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/asset_ids.g.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
 
 class MonsterMapDetails extends StatefulWidget {
@@ -34,51 +33,20 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
     });
   }
 
-  Future<void> _initMapData(LocationsProvider provider) async {
-    mapData = provider.zones.firstWhere(
-      (element) => element.id == widget.mapId,
-      orElse: () => MapData(
-        id: widget.mapId,
-        name: AppLocalizations.of(context)!.unknownMap,
-        gameId: 0,
-        zoneCount: 0,
-        camps: [],
-      ),
-    );
-    // Obtener el nombre en inglés del mapa para cargar las imágenes
-    final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
-    await enNamesCache.cacheReady;
+  void _initMapData(LocationsProvider provider) {
     if (!mounted) return;
-    final l10n = AppLocalizations.of(context)!;
-    final englishMapName = enNamesCache.nameForMapImage(
-          widget.mapId,
-          mapData!.name ?? l10n.unknownMap,
-        ) ??
-        mapData!.name ??
-        l10n.unknownMap;
-    await loadImages(englishMapName);
-  }
-
-  Future<void> loadImages(String? mapName) async {
-    final List<String> loadedImages = [];
-    final String folder =
-        mapName!.toLowerCase().replaceAll(' ', '_').replaceAll("'", '_');
-    final String baseName = folder;
-
-    int index = 1;
-    while (true) {
-      final String assetPath = 'assets/imgs/maps/$folder/$baseName$index.webp';
-      try {
-        await rootBundle.load(assetPath);
-        loadedImages.add(assetPath);
-        index++;
-      } catch (_) {
-        break;
-      }
-    }
-
     setState(() {
-      imageFiles = loadedImages;
+      mapData = provider.zones.firstWhere(
+        (element) => element.id == widget.mapId,
+        orElse: () => MapData(
+          id: widget.mapId,
+          name: AppLocalizations.of(context)!.unknownMap,
+          gameId: 0,
+          zoneCount: 0,
+          camps: [],
+        ),
+      );
+      imageFiles = locationMapAssets[widget.mapId] ?? const [];
       isLoadingImages = false;
     });
   }

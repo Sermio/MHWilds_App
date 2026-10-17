@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/armor_piece.dart' as armor_models;
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/armor_piece_details/armor_section_card.dart';
 import 'package:mhwilds_app/screens/item_details.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
-import 'package:provider/provider.dart';
 
 /// Materiales de la receta, sin las entradas de Zenny.
 List<armor_models.Material> armorRecipeMaterials(
@@ -102,11 +100,6 @@ class _MaterialItem extends StatelessWidget {
                       item: material.item,
                       width: 40,
                       height: 40,
-                      materialName: context
-                              .watch<EnNamesCache>()
-                              .nameForItemImage(
-                                  material.item.id, material.item.name) ??
-                          material.item.name,
                     ),
                   ),
                 ),

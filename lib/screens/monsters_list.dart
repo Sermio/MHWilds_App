@@ -3,9 +3,9 @@ import 'package:mhwilds_app/components/async_list_body.dart';
 import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
+import 'package:mhwilds_app/components/monster_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
@@ -138,11 +138,7 @@ class _MonstersListState extends State<MonstersList> {
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                               AppRadius.md),
-                                          child: _buildMonsterIcon(
-                                            context,
-                                            monster.id,
-                                            monster.name,
-                                          ),
+                                          child: MonsterIcon(monster.id),
                                         ),
                                       ),
                                       // Superposición de debilidades elementales
@@ -514,36 +510,6 @@ class _MonstersListState extends State<MonstersList> {
           }).toList(),
         ),
       ],
-    );
-  }
-
-  Widget _buildMonsterIcon(
-      BuildContext context, int monsterId, String monsterName) {
-    final enNamesCache = context.watch<EnNamesCache>();
-    final imageName = enNamesCache.nameForMonsterImage(monsterId, monsterName);
-
-    if (imageName == null) {
-      // Cache no cargado, mostrar placeholder
-      return Container(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        child: Icon(Icons.image_not_supported,
-            color: Theme.of(context).colorScheme.onSurfaceVariant),
-      );
-    }
-
-    final imagePath =
-        'assets/imgs/monster_icons/${imageName.toLowerCase().replaceAll(' ', '_')}.webp';
-    return AssetThumb(
-      imagePath,
-      fit: BoxFit.cover,
-      errorBuilder: (context, error, stackTrace) {
-        // Si la imagen no existe, mostrar placeholder
-        return Container(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          child: Icon(Icons.image_not_supported,
-              color: Theme.of(context).colorScheme.onSurfaceVariant),
-        );
-      },
     );
   }
 }

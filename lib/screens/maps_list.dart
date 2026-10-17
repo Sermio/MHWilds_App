@@ -3,10 +3,10 @@ import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/components/async_list_body.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/location.dart';
+import 'package:mhwilds_app/utils/asset_ids.g.dart';
 import 'package:mhwilds_app/utils/spacing.dart';
 
 class MapsList extends StatefulWidget {
@@ -57,18 +57,8 @@ class _MapsListState extends State<MapsList> {
   Widget _buildMapCard(BuildContext context, MapData zone) {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
-    final enNamesCache = context.watch<EnNamesCache>();
-
-    final englishMapName = enNamesCache.nameForMapImage(
-          zone.id ?? 0,
-          zone.name ?? '',
-        ) ??
-        zone.name ??
-        '';
-
-    final folder =
-        englishMapName.toLowerCase().replaceAll(' ', '_').replaceAll("'", '_');
-    final imagePath = 'assets/imgs/maps/$folder/${folder}1.webp';
+    final imagePath =
+        locationMapAssets[zone.id]?.first ?? 'assets/imgs/maps/map.webp';
 
     final campCount = zone.camps?.length ?? 0;
     final zoneCount = zone.zoneCount ?? 0;
