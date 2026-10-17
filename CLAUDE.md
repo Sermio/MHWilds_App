@@ -4,13 +4,13 @@ Companion app for *Monster Hunter Wilds* built with Flutter: monsters, weapons, 
 
 ## Source layout
 
-- `lib/main.dart` — `MultiProvider` setup and startup gate (locale, EN names cache, item icon index).
-- `lib/api/` — one static class per endpoint; `api_config.dart` holds host and current API language.
-- `lib/providers/` — one `ChangeNotifier` per entity (full list in memory + client-side filters), plus `LocaleProvider`, `ThemeProvider`, `EnNamesCache`.
+- `lib/main.dart` — `MultiProvider` setup and startup gate (waits only for the saved locale and the item icon index; `EnNamesCache` loads in the background).
+- `lib/api/` — `ApiClient`, `CachedApi`/`CacheStore` (disk cache validated with `/version`), one static class per endpoint, `api_config.dart` (host, `languageFor`).
+- `lib/providers/` — `CatalogProvider<T, F>` per entity (`providers/filters/` holds the immutable filters and pure `filterX` functions), `data_providers.dart` (binds them to `LocaleProvider`), `LocaleProvider`, `ThemeProvider`, `EnNamesCache`.
 - `lib/models/` — hand-written `fromJson` models.
-- `lib/screens/` — list and detail screens; `screens/weapons_list/` holds sub-widgets split out of the weapons screens.
-- `lib/components/` — shared widgets (sprite icons, chips, filters panel, sharpness bar…).
-- `lib/utils/` — theme (`theme.dart`, `colors.dart`), item icon resolver, update checker, review prompt, misc helpers.
+- `lib/screens/` — list and detail screens; `app_section.dart` is the single source of sections (title, screen, icon, AppBar actions). Big screens live in `screens/<name>/` section widgets.
+- `lib/components/` — shared widgets (`SpriteIcon`, `LabelValueRow`, `AsyncListBody`, `CardSkeletonList`, filters panel…).
+- `lib/utils/` — theme (`theme.dart`, `colors.dart`, `game_colors.dart`, `spacing.dart`), `text_utils.dart`, `asset_paths.dart`, item icon resolver, update checker, review prompt.
 - `lib/l10n/` — ARB files; generated code in `lib/l10n/gen_l10n/` (do not edit by hand).
 - `scripts/` — offline data/asset tooling (Dart and Python), not shipped.
 - `docs/` — improvement plan and other notes.
@@ -26,10 +26,11 @@ Companion app for *Monster Hunter Wilds* built with Flutter: monsters, weapons, 
 ## Conventions
 
 - State: Provider + `ChangeNotifier`. Read with `context.read` in callbacks, `context.watch`/`context.select` in `build`.
-- Changing language invalidates every data provider (`settings.dart` → `_invalidateDataProviders`); new data providers must be added there.
-- Local images are looked up by the English name (`EnNamesCache`), because the API returns translated names.
+- The API language is not global: `LocaleProvider` feeds every data provider through `dataProviders()` (`ChangeNotifierProxyProvider`); new data providers must be added there. Providers keep their filter, so screens read/write it via `provider.filter`/`setFilter`.
+- Local images are looked up by the English name (`EnNamesCache`, loaded in the background; widgets watch it and show a placeholder until ready), because the API returns translated names. Replacing it with generated id maps is pending (T34).
 - Item icons resolve from `api kind + color` to a file in `assets/imgs/item_icons/` (`ItemIconAssetResolver`).
 - User-facing strings always go through ARB/`AppLocalizations`; never hard-code text.
+- Game colors (elements, rarity, sharpness, zones) come from `GameColors.of(context)`; spacing/radius from `AppSpacing`/`AppRadius`.
 - Colors come from `Theme.of(context).colorScheme` or `AppColors`; avoid `Colors.white/black` (breaks dark mode). Use `withValues(alpha:)`, not `withOpacity`.
 - Branches: work on `develop`, release from `main`.
 
@@ -43,4 +44,4 @@ Companion app for *Monster Hunter Wilds* built with Flutter: monsters, weapons, 
 
 ## Plan de mejoras
 
-- Las tareas están en `docs/PLAN_MEJORAS.md` (T01…T33). Al terminar una, marca su título con ✅ en el plan y termina la respuesta con el prompt de la siguiente (respeta "Depende de"), copiado del plan en un bloque de código, indicando modelo y razonamiento.
+- Las tareas están en `docs/PLAN_MEJORAS.md` (T01…T34). Al terminar una, marca su título con ✅ en el plan y termina la respuesta con el prompt de la siguiente (respeta "Depende de"), copiado del plan en un bloque de código, indicando modelo y razonamiento.

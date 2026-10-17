@@ -26,12 +26,24 @@
   <li><strong>API & Local Storage</strong>: Custom APIs are utilized to fetch and cache information about monsters, decorations, and armor sets.</li>
 </ul>
 
-<h2>Project Structure</h2>
+<h2>Architecture</h2>
+<p>Data flows through four layers: <strong>API → cache → providers → UI</strong>.</p>
 <ul>
-  <li><strong>Screens</strong>: Contains the main screens of the application, including monster lists, decoration details, map views, materials list, skills list and much more!</li>
-  <li><strong>Components</strong>: Includes reusable components like lists, filters, and custom UI elements.</li>
-  <li><strong>Data Models</strong>: Defines the structure of monsters, decorations, and armor.</li>
-  <li><strong>API Services</strong>: Handles fetching data from external sources and caching mechanisms.</li>
+  <li><strong>API</strong> (<code>lib/api/</code>): <code>ApiClient</code> (timeout, one retry, typed exceptions) and one static class per endpoint. The language is never global: every request receives its API language.</li>
+  <li><strong>Cache</strong>: <code>CachedApi</code> + <code>CacheStore</code> keep the raw JSON on disk per language and revalidate it against <code>/version</code> (stale-while-revalidate).</li>
+  <li><strong>Providers</strong> (<code>lib/providers/</code>): every catalog extends <code>CatalogProvider&lt;T, F&gt;</code> (load state, immutable filter <code>F</code>, pure <code>filterX</code> functions in <code>providers/filters/</code>). <code>dataProviders()</code> binds them to <code>LocaleProvider</code>, so changing language reloads the data (from disk if already cached).</li>
+  <li><strong>UI</strong> (<code>lib/screens/</code>, <code>lib/components/</code>): sections are declared once in the <code>AppSection</code> enum; big screens are split into section widgets under <code>lib/screens/&lt;name&gt;/</code>. Theme tokens: <code>GameColors</code> (theme extension), <code>AppSpacing</code>, <code>AppRadius</code>.</li>
+</ul>
+
+<h3>Offline mode</h3>
+<p>After the first load each list opens from the on-disk cache. Without a network the cached data is shown with an "offline" banner and pull-to-refresh retries; with no cache the list shows an error with a retry button.</p>
+
+<h3>Regenerating files</h3>
+<ul>
+  <li><strong>Translations</strong>: edit <code>lib/l10n/app_*.arb</code> (the English file is the template) and run <code>flutter gen-l10n</code>.</li>
+  <li><strong>Assets</strong>: images are WebP; <code>scripts/optimize_assets.py</code> converts them keeping the file name.</li>
+  <li><strong>Test fixtures</strong>: <code>dart run scripts/fetch_fixtures.dart</code>.</li>
+  <li><strong>Asset id maps (<code>asset_ids.g.dart</code>)</strong>: not generated yet; local images are still found through <code>EnNamesCache</code> (pending, see T34 in <code>docs/PLAN_MEJORAS.md</code>).</li>
 </ul>
 
 <h2>How to Run the Project</h2>

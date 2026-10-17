@@ -364,7 +364,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 
 ### Fase 5 — Arquitectura
 
-#### T27 · Mapa `id → asset` y adiós a `EnNamesCache`
+#### T27 · Mapa `id → asset` y adiós a `EnNamesCache` (pendiente: ver T34)
 - **Modelo:** Opus 5.5 · **Razonamiento:** high · **Depende de:** T11, T18
 - **Prompt:**
   > Lee CLAUDE.md y la sección 5 de docs/PLAN_MEJORAS.md. Hoy `EnNamesCache` traduce `id → nombre en inglés` para construir rutas de assets locales (`monster_icons`, `monsters`, `maps`) y para el fallback de `MaterialImage`. Crea `scripts/generate_asset_ids.dart`, que llame a la API en inglés y genere `lib/utils/asset_ids.g.dart` con mapas `const` `monsterId → asset`, `locationId → carpeta de mapa` (e `itemId → asset` si aplica), y que avise de los ids sin asset. Sustituye todos los usos de `EnNamesCache` por esos mapas y elimina el provider, su espera en `main.dart` y el fallback a fextralife de `MaterialImage` (usa el placeholder local). Documenta en CLAUDE.md cómo regenerar el archivo cuando salgan monstruos nuevos. Tests: todos los ids de los fixtures resuelven a un asset que existe.
@@ -394,7 +394,7 @@ Reglas comunes a todos los prompts (ya están en `CLAUDE.md`): no quitar funcion
 - **Prompt:**
   > Lee CLAUDE.md. Divide `lib/utils/utils.dart` en archivos con un solo propósito: `text_utils.dart` (`removeDiacritics`), `asset_paths.dart` (`getTypeImage`, `getKindImage`, `getJewelSlotIcon`) y lo que quede de imágenes remotas, si queda algo. Mueve lo que haya en `lib/widgets/` a `lib/components/` y borra la carpeta. Actualiza los imports. Sin cambios de comportamiento.
 
-#### T33 · Actualizar README y CLAUDE.md
+#### ✅ T33 · Actualizar README y CLAUDE.md
 - **Modelo:** Haiku 5.5 · **Razonamiento:** low · **Depende de:** todas las anteriores
 - **Prompt:**
   > Lee CLAUDE.md y docs/PLAN_MEJORAS.md. Actualiza el README (arquitectura con capas API → caché → providers → UI, cómo funciona el modo offline, cómo regenerar ARB, assets WebP y `asset_ids.g.dart`) y ajusta CLAUDE.md a la estructura final. Marca como hechas en este plan las tareas completadas.
