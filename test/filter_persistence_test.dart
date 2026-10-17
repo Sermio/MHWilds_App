@@ -71,4 +71,33 @@ void main() {
     expect(find.widgetWithText(TextField, 'hope'), findsOneWidget);
     expect(find.widgetWithText(TextField, 'abc'), findsOneWidget);
   });
+
+  testWidgets('armas: el elemento elegido se muestra en el desplegable',
+      (tester) async {
+    final data = await FixtureProviders.load(tester);
+    data.weapons.setFilter(const WeaponFilter(element: 'fire'));
+
+    await open(tester, const WeaponsList(), data);
+    await showFilters(tester);
+
+    expect(find.text('Element'), findsOneWidget); // etiqueta del campo
+    expect(find.text('Fire'), findsOneWidget); // valor elegido
+  });
+
+  testWidgets('armas: elegir un elemento en el desplegable filtra la lista',
+      (tester) async {
+    final data = await FixtureProviders.load(tester);
+
+    await open(tester, const WeaponsList(), data);
+    await showFilters(tester);
+    final field = find.byType(DropdownButtonFormField<dynamic>);
+    await tester.ensureVisible(field); // el panel hace scroll por dentro
+    await tester.pump();
+    await tester.tap(field);
+    await tester.pump(const Duration(milliseconds: 400));
+    await tester.tap(find.text('Ice').last);
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(data.weapons.filter.element, 'ice');
+  });
 }

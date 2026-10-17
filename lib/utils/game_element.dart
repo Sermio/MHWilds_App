@@ -45,6 +45,7 @@ enum GameElement {
   static GameElement? fromId(String? raw) {
     if (raw == null) return null;
     final id = raw.toLowerCase().replaceAll(RegExp(r'[\s_-]'), '');
+    if (id == 'paralyze') return paralysis; // vial del hacha espada
     for (final e in values) {
       if (e.name == id) return e;
     }

@@ -49,6 +49,7 @@ void main() {
     expect(GameElement.fromId('Fire'), GameElement.fire);
     expect(GameElement.fromId('blast-blight'), GameElement.blastblight);
     expect(GameElement.fromId('Frost Blight'), GameElement.frostblight);
+    expect(GameElement.fromId('paralyze'), GameElement.paralysis); // vial
     expect(GameElement.fromId('impact'), isNull);
     expect(GameElement.fromId(null), isNull);
   });

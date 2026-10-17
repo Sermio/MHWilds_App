@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/components/list_filters_panel.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/weapons_provider.dart';
 import 'package:mhwilds_app/screens/weapons_list/weapon_kind_helpers.dart';
 import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/game_element.dart';
 
 /// Panel de filtros de armas. El estado del filtro vive en [WeaponsProvider].
 class WeaponsFiltersPanel extends StatelessWidget {
@@ -27,7 +29,7 @@ class WeaponsFiltersPanel extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ListFiltersPanel(
-      maxHeight: 340,
+      maxHeight: 440,
       title: l10n.filters,
       resetLabel: l10n.reset,
       onReset: onReset,
@@ -66,8 +68,28 @@ class WeaponsFiltersPanel extends StatelessWidget {
               provider.filter.copyWith(rarity: () => selectedRarity as int?)),
           options: _rarityOptions(context, l10n),
         ),
+        ListFilterFieldConfig.select(
+          id: 'element',
+          label: l10n.element,
+          value: provider.filter.element,
+          onSelectChanged: (selected) => provider.setFilter(
+              provider.filter.copyWith(element: () => selected as String?)),
+          options: _elementOptions(l10n),
+        ),
       ],
     );
+  }
+
+  /// Los cinco elementos y los estados que pueden llevar las armas.
+  static List<ListFilterOption> _elementOptions(AppLocalizations l10n) {
+    return [
+      for (final e in [...GameElement.elements, ...GameElement.weaponStatuses])
+        ListFilterOption(
+          value: e.id,
+          label: e.label(l10n),
+          leading: ElementIcon(e.id, size: 20),
+        ),
+    ];
   }
 
   static List<ListFilterOption> _weaponTypeOptions(BuildContext context) {
