@@ -300,10 +300,10 @@ class MonsterVariant {
 
   factory MonsterVariant.fromJson(Map<String, dynamic> json) {
     return MonsterVariant(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
-      kind: json['kind'] ?? '',
-      monsterId: json['monster']?['id'] ?? 0,
+      id: json['id'] as int? ?? 0,
+      name: json['name'] as String? ?? '',
+      kind: json['kind'] as String? ?? '',
+      monsterId: (json['monster'] as Map<String, dynamic>?)?['id'] as int? ?? 0,
     );
   }
 }
@@ -323,10 +323,10 @@ class BreakablePart {
 
   factory BreakablePart.fromJson(Map<String, dynamic> json) {
     return BreakablePart(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
-      part: json['part'] ?? '',
-      monsterId: json['monster']?['id'] ?? 0,
+      id: json['id'] as int? ?? 0,
+      name: json['name'] as String? ?? '',
+      part: json['part'] as String? ?? '',
+      monsterId: (json['monster'] as Map<String, dynamic>?)?['id'] as int? ?? 0,
     );
   }
 }
@@ -346,10 +346,10 @@ class MonsterSize {
 
   factory MonsterSize.fromJson(Map<String, dynamic> json) {
     return MonsterSize(
-      base: (json['base'] ?? 0.0).toDouble(),
-      mini: (json['mini'] ?? 0.0).toDouble(),
-      silver: (json['silver'] ?? 0.0).toDouble(),
-      gold: (json['gold'] ?? 0.0).toDouble(),
+      base: ((json['base'] as num?) ?? 0).toDouble(),
+      mini: ((json['mini'] as num?) ?? 0).toDouble(),
+      silver: ((json['silver'] as num?) ?? 0).toDouble(),
+      gold: ((json['gold'] as num?) ?? 0).toDouble(),
     );
   }
 }

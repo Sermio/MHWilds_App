@@ -20,27 +20,37 @@ class Cchip<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    final name = itemName.isNotEmpty ? itemName : "Unknown";
+    return Semantics(
+      container: true,
+      button: onTap != null,
+      label: name,
       onTap: onTap,
-      child: Chip(
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-        elevation: 0,
-        backgroundColor: getItemColor(itemIdForColor),
-        label: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              itemName.isNotEmpty ? itemName : "Unknown",
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 12,
+      excludeSemantics: true,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Chip(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          elevation: 0,
+          backgroundColor: getItemColor(itemIdForColor),
+          label: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: Text(
+                  name,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(color: Colors.black),
+                ),
               ),
-            ),
-            if (optionalWidget != null) ...[
-              const SizedBox(width: 6),
-              optionalWidget!,
+              if (optionalWidget != null) ...[
+                const SizedBox(width: 6),
+                optionalWidget!,
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

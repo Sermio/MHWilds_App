@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/gear_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class RarityChip extends StatelessWidget {
   final int rarity;
@@ -11,12 +12,13 @@ class RarityChip extends StatelessWidget {
     super.key,
     required this.rarity,
     this.fontSize = 12,
-    this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+    this.padding = const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
   });
 
   @override
   Widget build(BuildContext context) {
-    final color = rarityColorFromSprite(rarity);
+    final color = GameColors.of(context).rarity(rarity);
     return Container(
       padding: padding,
       decoration: BoxDecoration(

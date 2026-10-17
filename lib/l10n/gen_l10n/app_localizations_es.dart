@@ -674,6 +674,156 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get masterRank => 'Rango Maestro';
+
+  @override
+  String get retry => 'Reintentar';
+
+  @override
+  String get errorOffline =>
+      'Sin conexión. Revisa tu internet e inténtalo de nuevo.';
+
+  @override
+  String get errorLoadingData =>
+      'No se pudieron cargar los datos. Inténtalo de nuevo.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Sin conexión · datos del $dateString';
+  }
+
+  @override
+  String get creditsTooltip => 'Créditos';
+
+  @override
+  String get elementFire => 'Fuego';
+
+  @override
+  String get elementWater => 'Agua';
+
+  @override
+  String get elementIce => 'Hielo';
+
+  @override
+  String get elementThunder => 'Rayo';
+
+  @override
+  String get elementDragon => 'Dragón';
+
+  @override
+  String get elementParalysis => 'Parálisis';
+
+  @override
+  String get elementPoison => 'Veneno';
+
+  @override
+  String get elementSleep => 'Sueño';
+
+  @override
+  String get elementBlastblight => 'Explosión';
+
+  @override
+  String get elementBlast => 'Explosivo';
+
+  @override
+  String get elementFireblight => 'Plaga de fuego';
+
+  @override
+  String get elementWaterblight => 'Plaga de agua';
+
+  @override
+  String get elementIceblight => 'Plaga de hielo';
+
+  @override
+  String get elementThunderblight => 'Plaga de rayo';
+
+  @override
+  String get elementDragonblight => 'Plaga de dragón';
+
+  @override
+  String get elementFrostblight => 'Congelación';
+
+  @override
+  String get elementWebbed => 'Enredado';
+
+  @override
+  String get elementBleeding => 'Hemorragia';
+
+  @override
+  String get elementFrenzy => 'Frenesí';
+
+  @override
+  String get ailmentDescThunderblight =>
+      'La plaga de rayo la causa el elemento Rayo y aumenta la probabilidad de que los ataques de los monstruos aturdan al cazador.\nSe cura consumiendo una Nulberry o usando un Cleanser Booster.';
+
+  @override
+  String get ailmentDescWaterblight =>
+      'La plaga de agua la causa el elemento Agua y reduce la recuperación de aguante del cazador.\nSe cura consumiendo una Nulberry o usando un Cleanser Booster.';
+
+  @override
+  String get ailmentDescFireblight =>
+      'La plaga de fuego la causa el elemento Fuego y hace que el cazador pierda salud con el tiempo.\nSe cura consumiendo una Nulberry. Si hay agua cerca, se puede saltar a ella o rodar 3 veces por el suelo.';
+
+  @override
+  String get ailmentDescIceblight =>
+      'La plaga de hielo la causa el elemento Hielo y aumenta el consumo de aguante al correr, atacar o esquivar.\nSe cura consumiendo una Nulberry.';
+
+  @override
+  String get ailmentDescDragonblight =>
+      'La plaga de dragón la causa el elemento Dragón y anula los efectos de daño y la acumulación de estados de este elemento.\nSe cura consumiendo una Nulberry.';
+
+  @override
+  String get ailmentDescBlast =>
+      'Explosivo es un estado que marca a un monstruo y permite dañarlo con pequeñas explosiones.\nSe cura con una Nulberry o esquivando con una voltereta hasta tres veces.';
+
+  @override
+  String get ailmentDescBlastblight =>
+      'La explosión hace que el objetivo estalle pasado un tiempo o al recibir un ataque contundente.\nSe cura con una Nulberry o esquivando con una voltereta hasta tres veces.';
+
+  @override
+  String get ailmentDescBleeding =>
+      'La hemorragia hace que el cazador pierda salud al moverse, atacar o esquivar.\nSe cura comiendo Astera Jerky, Well-Done Steak o Sushifish Scale, o agachándose unos segundos.';
+
+  @override
+  String get ailmentDescFrenzy =>
+      'El frenesí hace que el cazador reciba temporalmente más daño cuando está totalmente infectado.\nSe cura usando una Nulberry.';
+
+  @override
+  String get ailmentDescFrostblight =>
+      'La congelación impide temporalmente que el cazador se mueva o actúe.\nSe cura con un Cleanser o con Resistencia a la inmovilización de nivel 3.';
+
+  @override
+  String get ailmentDescWebbed =>
+      'Enredado impide temporalmente que el cazador se mueva o actúe.\nSe cura con un Cleanser, moviéndose, pulsando botones, recibiendo el golpe de un ataque o un impacto.';
+
+  @override
+  String get ailmentDescPoison =>
+      'El veneno reduce poco a poco la salud del objetivo con el tiempo.\nSe cura con Antidote, Herbal Medicine o Herbal Powder.';
+
+  @override
+  String get ailmentDescSleep =>
+      'El sueño hace que el objetivo se duerma y quede expuesto a un único ataque.\nEl objetivo se despierta al recibir daño.\nSe cura con un Energy Drink, de un aliado o de un monstruo.';
+
+  @override
+  String get ailmentDescParalysis =>
+      'La parálisis inmoviliza al cazador o al monstruo y lo hace vulnerable a más daño mientras dura.\nSe cura con impactos que lancen con mucha fuerza hacia atrás, como un golpe ascendente de un Martillo o un Espadón.';
+
+  @override
+  String get announcements => 'Anuncios';
+
+  @override
+  String get announcementsNew => 'Anuncios (nuevo)';
+
+  @override
+  String get loadingAnnouncements => 'Cargando anuncios...';
+
+  @override
+  String get noAnnouncements => 'Aún no hay anuncios';
+
+  @override
+  String get openLink => 'Abrir enlace';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -1331,6 +1481,156 @@ class AppLocalizationsEs419 extends AppLocalizationsEs {
 
   @override
   String get masterRank => 'Rango Maestro';
+
+  @override
+  String get retry => 'Reintentar';
+
+  @override
+  String get errorOffline =>
+      'Sin conexión. Revisa tu internet e inténtalo de nuevo.';
+
+  @override
+  String get errorLoadingData =>
+      'No se pudieron cargar los datos. Inténtalo de nuevo.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Sin conexión · datos del $dateString';
+  }
+
+  @override
+  String get creditsTooltip => 'Créditos';
+
+  @override
+  String get elementFire => 'Fuego';
+
+  @override
+  String get elementWater => 'Agua';
+
+  @override
+  String get elementIce => 'Hielo';
+
+  @override
+  String get elementThunder => 'Rayo';
+
+  @override
+  String get elementDragon => 'Dragón';
+
+  @override
+  String get elementParalysis => 'Parálisis';
+
+  @override
+  String get elementPoison => 'Veneno';
+
+  @override
+  String get elementSleep => 'Sueño';
+
+  @override
+  String get elementBlastblight => 'Explosión';
+
+  @override
+  String get elementBlast => 'Explosivo';
+
+  @override
+  String get elementFireblight => 'Plaga de fuego';
+
+  @override
+  String get elementWaterblight => 'Plaga de agua';
+
+  @override
+  String get elementIceblight => 'Plaga de hielo';
+
+  @override
+  String get elementThunderblight => 'Plaga de rayo';
+
+  @override
+  String get elementDragonblight => 'Plaga de dragón';
+
+  @override
+  String get elementFrostblight => 'Congelación';
+
+  @override
+  String get elementWebbed => 'Enredado';
+
+  @override
+  String get elementBleeding => 'Hemorragia';
+
+  @override
+  String get elementFrenzy => 'Frenesí';
+
+  @override
+  String get ailmentDescThunderblight =>
+      'La plaga de rayo la causa el elemento Rayo y aumenta la probabilidad de que los ataques de los monstruos aturdan al cazador.\nSe cura consumiendo una Nulberry o usando un Cleanser Booster.';
+
+  @override
+  String get ailmentDescWaterblight =>
+      'La plaga de agua la causa el elemento Agua y reduce la recuperación de aguante del cazador.\nSe cura consumiendo una Nulberry o usando un Cleanser Booster.';
+
+  @override
+  String get ailmentDescFireblight =>
+      'La plaga de fuego la causa el elemento Fuego y hace que el cazador pierda salud con el tiempo.\nSe cura consumiendo una Nulberry. Si hay agua cerca, se puede saltar a ella o rodar 3 veces por el suelo.';
+
+  @override
+  String get ailmentDescIceblight =>
+      'La plaga de hielo la causa el elemento Hielo y aumenta el consumo de aguante al correr, atacar o esquivar.\nSe cura consumiendo una Nulberry.';
+
+  @override
+  String get ailmentDescDragonblight =>
+      'La plaga de dragón la causa el elemento Dragón y anula los efectos de daño y la acumulación de estados de este elemento.\nSe cura consumiendo una Nulberry.';
+
+  @override
+  String get ailmentDescBlast =>
+      'Explosivo es un estado que marca a un monstruo y permite dañarlo con pequeñas explosiones.\nSe cura con una Nulberry o esquivando con una voltereta hasta tres veces.';
+
+  @override
+  String get ailmentDescBlastblight =>
+      'La explosión hace que el objetivo estalle pasado un tiempo o al recibir un ataque contundente.\nSe cura con una Nulberry o esquivando con una voltereta hasta tres veces.';
+
+  @override
+  String get ailmentDescBleeding =>
+      'La hemorragia hace que el cazador pierda salud al moverse, atacar o esquivar.\nSe cura comiendo Astera Jerky, Well-Done Steak o Sushifish Scale, o agachándose unos segundos.';
+
+  @override
+  String get ailmentDescFrenzy =>
+      'El frenesí hace que el cazador reciba temporalmente más daño cuando está totalmente infectado.\nSe cura usando una Nulberry.';
+
+  @override
+  String get ailmentDescFrostblight =>
+      'La congelación impide temporalmente que el cazador se mueva o actúe.\nSe cura con un Cleanser o con Resistencia a la inmovilización de nivel 3.';
+
+  @override
+  String get ailmentDescWebbed =>
+      'Enredado impide temporalmente que el cazador se mueva o actúe.\nSe cura con un Cleanser, moviéndose, pulsando botones, recibiendo el golpe de un ataque o un impacto.';
+
+  @override
+  String get ailmentDescPoison =>
+      'El veneno reduce poco a poco la salud del objetivo con el tiempo.\nSe cura con Antidote, Herbal Medicine o Herbal Powder.';
+
+  @override
+  String get ailmentDescSleep =>
+      'El sueño hace que el objetivo se duerma y quede expuesto a un único ataque.\nEl objetivo se despierta al recibir daño.\nSe cura con un Energy Drink, de un aliado o de un monstruo.';
+
+  @override
+  String get ailmentDescParalysis =>
+      'La parálisis inmoviliza al cazador o al monstruo y lo hace vulnerable a más daño mientras dura.\nSe cura con impactos que lancen con mucha fuerza hacia atrás, como un golpe ascendente de un Martillo o un Espadón.';
+
+  @override
+  String get announcements => 'Anuncios';
+
+  @override
+  String get announcementsNew => 'Anuncios (nuevo)';
+
+  @override
+  String get loadingAnnouncements => 'Cargando anuncios...';
+
+  @override
+  String get noAnnouncements => 'Aún no hay anuncios';
+
+  @override
+  String get openLink => 'Abrir enlace';
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -1988,4 +2288,154 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
   @override
   String get masterRank => 'Rango Maestro';
+
+  @override
+  String get retry => 'Reintentar';
+
+  @override
+  String get errorOffline =>
+      'Sin conexión. Revisa tu internet e inténtalo de nuevo.';
+
+  @override
+  String get errorLoadingData =>
+      'No se pudieron cargar los datos. Inténtalo de nuevo.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Sin conexión · datos del $dateString';
+  }
+
+  @override
+  String get creditsTooltip => 'Créditos';
+
+  @override
+  String get elementFire => 'Fuego';
+
+  @override
+  String get elementWater => 'Agua';
+
+  @override
+  String get elementIce => 'Hielo';
+
+  @override
+  String get elementThunder => 'Rayo';
+
+  @override
+  String get elementDragon => 'Dragón';
+
+  @override
+  String get elementParalysis => 'Parálisis';
+
+  @override
+  String get elementPoison => 'Veneno';
+
+  @override
+  String get elementSleep => 'Sueño';
+
+  @override
+  String get elementBlastblight => 'Explosión';
+
+  @override
+  String get elementBlast => 'Explosivo';
+
+  @override
+  String get elementFireblight => 'Plaga de fuego';
+
+  @override
+  String get elementWaterblight => 'Plaga de agua';
+
+  @override
+  String get elementIceblight => 'Plaga de hielo';
+
+  @override
+  String get elementThunderblight => 'Plaga de rayo';
+
+  @override
+  String get elementDragonblight => 'Plaga de dragón';
+
+  @override
+  String get elementFrostblight => 'Congelación';
+
+  @override
+  String get elementWebbed => 'Enredado';
+
+  @override
+  String get elementBleeding => 'Hemorragia';
+
+  @override
+  String get elementFrenzy => 'Frenesí';
+
+  @override
+  String get ailmentDescThunderblight =>
+      'La plaga de rayo la causa el elemento Rayo y aumenta la probabilidad de que los ataques de los monstruos aturdan al cazador.\nSe cura consumiendo una Nulberry o usando un Cleanser Booster.';
+
+  @override
+  String get ailmentDescWaterblight =>
+      'La plaga de agua la causa el elemento Agua y reduce la recuperación de aguante del cazador.\nSe cura consumiendo una Nulberry o usando un Cleanser Booster.';
+
+  @override
+  String get ailmentDescFireblight =>
+      'La plaga de fuego la causa el elemento Fuego y hace que el cazador pierda salud con el tiempo.\nSe cura consumiendo una Nulberry. Si hay agua cerca, se puede saltar a ella o rodar 3 veces por el suelo.';
+
+  @override
+  String get ailmentDescIceblight =>
+      'La plaga de hielo la causa el elemento Hielo y aumenta el consumo de aguante al correr, atacar o esquivar.\nSe cura consumiendo una Nulberry.';
+
+  @override
+  String get ailmentDescDragonblight =>
+      'La plaga de dragón la causa el elemento Dragón y anula los efectos de daño y la acumulación de estados de este elemento.\nSe cura consumiendo una Nulberry.';
+
+  @override
+  String get ailmentDescBlast =>
+      'Explosivo es un estado que marca a un monstruo y permite dañarlo con pequeñas explosiones.\nSe cura con una Nulberry o esquivando con una voltereta hasta tres veces.';
+
+  @override
+  String get ailmentDescBlastblight =>
+      'La explosión hace que el objetivo estalle pasado un tiempo o al recibir un ataque contundente.\nSe cura con una Nulberry o esquivando con una voltereta hasta tres veces.';
+
+  @override
+  String get ailmentDescBleeding =>
+      'La hemorragia hace que el cazador pierda salud al moverse, atacar o esquivar.\nSe cura comiendo Astera Jerky, Well-Done Steak o Sushifish Scale, o agachándose unos segundos.';
+
+  @override
+  String get ailmentDescFrenzy =>
+      'El frenesí hace que el cazador reciba temporalmente más daño cuando está totalmente infectado.\nSe cura usando una Nulberry.';
+
+  @override
+  String get ailmentDescFrostblight =>
+      'La congelación impide temporalmente que el cazador se mueva o actúe.\nSe cura con un Cleanser o con Resistencia a la inmovilización de nivel 3.';
+
+  @override
+  String get ailmentDescWebbed =>
+      'Enredado impide temporalmente que el cazador se mueva o actúe.\nSe cura con un Cleanser, moviéndose, pulsando botones, recibiendo el golpe de un ataque o un impacto.';
+
+  @override
+  String get ailmentDescPoison =>
+      'El veneno reduce poco a poco la salud del objetivo con el tiempo.\nSe cura con Antidote, Herbal Medicine o Herbal Powder.';
+
+  @override
+  String get ailmentDescSleep =>
+      'El sueño hace que el objetivo se duerma y quede expuesto a un único ataque.\nEl objetivo se despierta al recibir daño.\nSe cura con un Energy Drink, de un aliado o de un monstruo.';
+
+  @override
+  String get ailmentDescParalysis =>
+      'La parálisis inmoviliza al cazador o al monstruo y lo hace vulnerable a más daño mientras dura.\nSe cura con impactos que lancen con mucha fuerza hacia atrás, como un golpe ascendente de un Martillo o un Espadón.';
+
+  @override
+  String get announcements => 'Anuncios';
+
+  @override
+  String get announcementsNew => 'Anuncios (nuevo)';
+
+  @override
+  String get loadingAnnouncements => 'Cargando anuncios...';
+
+  @override
+  String get noAnnouncements => 'Aún no hay anuncios';
+
+  @override
+  String get openLink => 'Abrir enlace';
 }

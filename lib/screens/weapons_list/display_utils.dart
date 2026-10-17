@@ -1,4 +1,11 @@
-part of '../weapons_list.dart';
+import 'package:flutter/material.dart';
+import 'package:mhwilds_app/models/weapon.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
+import 'package:mhwilds_app/components/label_value_row.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
+import 'package:mhwilds_app/utils/game_element.dart';
 
 // Clase estática para métodos auxiliares reutilizables
 class WeaponDisplayUtils {
@@ -6,133 +13,108 @@ class WeaponDisplayUtils {
       {bool isDetailView = false}) {
     // Buscar specials con daño elemental o de status, y también daño de phial
     if (weapon.specials is List) {
-      final specials = weapon.specials as List;
+      final specials =
+          (weapon.specials as List).whereType<Map<String, dynamic>>();
       final elementalAndStatusSpecials = specials.where((special) {
-        if (special is Map<String, dynamic>) {
-          return (special['kind'] == 'element' ||
-                  special['kind'] == 'status') &&
-              special['damage'] != null &&
-              special['damage']['raw'] > 0;
-        }
-        return false;
+        return (special['kind'] == 'element' || special['kind'] == 'status') &&
+            (((special['damage'] as Map<String, dynamic>?)?['raw'] as num?) ??
+                    0) >
+                0;
       }).toList();
 
       // También buscar phial damage si existe
       final phialSpecial = specials.where((special) {
-        if (special is Map<String, dynamic>) {
-          return special['phial'] != null &&
-              special['phial']['damage'] != null &&
-              special['phial']['damage']['raw'] > 0;
-        }
-        return false;
+        final damage = (special['phial'] as Map<String, dynamic>?)?['damage']
+            as Map<String, dynamic>?;
+        return ((damage?['raw'] as num?) ?? 0) > 0;
       }).toList();
 
       // Priorizar specials elementales/status, luego phial
       if (elementalAndStatusSpecials.isNotEmpty) {
         final special = elementalAndStatusSpecials.first;
         final elementOrStatus = special['kind'] == 'element'
-            ? (special['element'] ?? '')
-            : (special['status'] ?? '');
-        final damage = special['damage'];
-        final damageValue = damage?['display'] ?? damage?['raw'] ?? 0;
+            ? (special['element'] as String? ?? '')
+            : (special['status'] as String? ?? '');
+        final damage = special['damage'] as Map<String, dynamic>?;
+        final damageValue =
+            damage?['display'] as num? ?? damage?['raw'] as num? ?? 0;
 
         if (damageValue > 0) {
           final colorScheme = Theme.of(context).colorScheme;
-          return Row(
-            children: [
-
-              Text(
+          return LabelValueRow(
+              label: Text(
                 special['kind'] == 'element'
                     ? '${AppLocalizations.of(context)!.element}:'
                     : '${AppLocalizations.of(context)!.statusEffect}:',
                 style: TextStyle(
                   fontSize: isDetailView ? 16 : 12,
                   fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withOpacity(0.8),
+                  color: colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
               ),
-              const Spacer(),
-              Row(
+              value: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     '$damageValue',
                     style: TextStyle(
                       fontSize: isDetailView ? 16 : 12,
                       fontWeight: FontWeight.bold,
-                      color: WeaponUtils.getElementColor(elementOrStatus),
+                      color: GameColors.of(context).element(elementOrStatus),
                     ),
                   ),
                   const SizedBox(width: 6),
-                  SizedBox(
-                    width: isDetailView ? 18 : 16,
-                    height: isDetailView ? 18 : 16,
-                    child: Image.asset(
-                      'assets/imgs/elements/${elementOrStatus.toLowerCase()}.webp',
-                      errorBuilder: (context, error, stackTrace) {
-                        return Icon(
-                          WeaponUtils.getElementIcon(elementOrStatus),
-                          size: isDetailView ? 18 : 16,
-                          color: WeaponUtils.getElementColor(elementOrStatus),
-                        );
-                      },
+                  ElementIcon(
+                    elementOrStatus,
+                    size: isDetailView ? 18 : 16,
+                    fallback: Icon(
+                      GameElement.iconOf(elementOrStatus),
+                      size: isDetailView ? 18 : 16,
+                      color: GameColors.of(context).element(elementOrStatus),
                     ),
                   ),
                 ],
-              ),
-            ],
-          );
+              ));
         }
       } else if (phialSpecial.isNotEmpty) {
         // Mostrar daño de phial si no hay specials elementales/status
         final special = phialSpecial.first;
-        final phial = special['phial'];
-        final phialKind = phial['kind'] ?? '';
-        final phialDamage = phial['damage'];
+        final phial = special['phial'] as Map<String, dynamic>;
+        final phialKind = phial['kind'] as String? ?? '';
+        final phialDamage = phial['damage'] as Map<String, dynamic>?;
         final phialDamageValue =
-            phialDamage?['display'] ?? phialDamage?['raw'] ?? 0;
+            phialDamage?['display'] as num? ?? phialDamage?['raw'] as num? ?? 0;
 
         if (phialDamageValue > 0) {
           final colorScheme = Theme.of(context).colorScheme;
-          return Row(
-            children: [
-              Text(
+          return LabelValueRow(
+              label: Text(
                 '${AppLocalizations.of(context)!.phial}:',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface.withOpacity(0.8),
-                ),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface.withValues(alpha: 0.8)),
               ),
-              const Spacer(),
-              Row(
+              value: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     '$phialDamageValue',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: WeaponUtils.getElementColor(phialKind),
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: GameColors.of(context).element(phialKind)),
                   ),
                   const SizedBox(width: 6),
-                  SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: Image.asset(
-                      'assets/imgs/elements/${phialKind.toLowerCase()}.webp',
-                      errorBuilder: (context, error, stackTrace) {
-                        return Icon(
-                          WeaponUtils.getElementIcon(phialKind),
-                          size: 18,
-                          color: WeaponUtils.getElementColor(phialKind),
-                        );
-                      },
+                  ElementIcon(
+                    phialKind,
+                    size: 18,
+                    fallback: Icon(
+                      GameElement.iconOf(phialKind),
+                      size: 18,
+                      color: GameColors.of(context).element(phialKind),
                     ),
                   ),
                 ],
-              ),
-            ],
-          );
+              ));
         }
       }
     }
@@ -176,25 +158,24 @@ class WeaponDisplayUtils {
     try {
       if (weapon.coatings != null && weapon.coatings!.isNotEmpty) {
         final colorScheme = Theme.of(context).colorScheme;
-        return Row(
-          children: [
-            Text(
+        return LabelValueRow(
+            label: Text(
               '${AppLocalizations.of(context)!.coatings}:',
               style: TextStyle(
                 fontSize: isDetailView ? 16 : 12,
                 fontWeight: FontWeight.w600,
-                color: colorScheme.onSurface.withOpacity(0.8),
+                color: colorScheme.onSurface.withValues(alpha: 0.8),
               ),
             ),
-            const Spacer(),
-            Row(
+            value: Wrap(
+              runSpacing: AppSpacing.xs,
               children: weapon.coatings!.map((coating) {
                 return Container(
-                  margin: const EdgeInsets.only(left: 4),
+                  margin: const EdgeInsets.only(left: AppSpacing.xs),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: _getCoatingColor(coating),
+                    color: GameColors.of(context).coating(coating),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -209,92 +190,62 @@ class WeaponDisplayUtils {
                         ),
                       ),
                       // Icono del elemento/status si existe después del texto
-                      if (_hasElementIcon(coating)) ...[
+                      if (GameElement.fromId(coating) != null) ...[
                         const SizedBox(width: 4),
-                        Image.asset(
-                          'assets/imgs/elements/${_getElementAssetName(coating)}.webp',
-                          width: 12,
-                          height: 12,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Icon(
-                              WeaponUtils.getElementIcon(coating),
-                              size: 12,
-                              color: Colors.white,
-                            );
-                          },
-                        ),
+                        ElementIcon(coating, size: 12),
                       ],
                     ],
                   ),
                 );
               }).toList(),
-            ),
-          ],
-        );
+            ));
       }
     } catch (_) {}
     return const SizedBox.shrink();
   }
 
-  static Widget buildChargeBladeDamageInfo(
-      BuildContext context, Weapon weapon,
+  static Widget buildChargeBladeDamageInfo(BuildContext context, Weapon weapon,
       {bool isDetailView = false}) {
     if (weapon.phial == null) return const SizedBox.shrink();
 
     final phialKind = weapon.phial!.kind;
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
+    // Los viales de elemento o estado usan el color de ese elemento; el resto
+    // (impact, power…) no tiene color de juego.
+    final phialColor = GameColors.of(context).elementOrNull(phialKind) ??
+        (phialKind == 'impact' ? Colors.blue[600]! : Colors.orange[600]!);
+    return LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.phial}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
-        const Spacer(),
-        Row(
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               phialKind[0].toUpperCase() + phialKind.substring(1),
               style: TextStyle(
                 fontSize: isDetailView ? 16 : 12,
                 fontWeight: FontWeight.bold,
-                color: phialKind == 'impact'
-                    ? Colors.blue[600]!
-                    : Colors.orange[600]!,
+                color: phialColor,
               ),
             ),
             const SizedBox(width: 4),
-            if (_hasElementIcon(phialKind)) ...[
-              Image.asset(
-                'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
-                width: 16,
-                height: 16,
-                errorBuilder: (context, error, stackTrace) {
-                  return Icon(
-                    WeaponUtils.getElementIcon(phialKind),
-                    size: 16,
-                    color: phialKind == 'impact'
-                        ? Colors.blue[600]!
-                        : Colors.orange[600]!,
-                  );
-                },
-              ),
-            ] else ...[
-              Icon(
+            ElementIcon(
+              phialKind,
+              size: 16,
+              fallback: Icon(
                 Icons.electric_bolt,
                 size: 16,
-                color: phialKind == 'impact'
-                    ? Colors.blue[600]!
-                    : Colors.orange[600]!,
+                color: phialColor,
               ),
-            ],
+            ),
           ],
-        ),
-      ],
-    );
+        ));
   }
 
   static Widget buildGunlanceDamageInfo(BuildContext context, Weapon weapon,
@@ -304,18 +255,17 @@ class WeaponDisplayUtils {
     }
 
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
+    return LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.shell}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
-        const Spacer(),
-        Row(
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               '${weapon.shell![0].toUpperCase() + weapon.shell!.substring(1)} Lv${weapon.shellLevel}',
@@ -329,187 +279,80 @@ class WeaponDisplayUtils {
             Icon(Icons.local_fire_department,
                 size: 16, color: Colors.red[600]!),
           ],
-        ),
-      ],
-    );
+        ));
   }
 
+  /// Mismo formato que la hacha cargada: nombre del vial e icono.
   static Widget buildSwitchAxeDamageInfo(BuildContext context, Weapon weapon,
-      {bool isDetailView = false}) {
-    if (weapon.phial == null) return const SizedBox.shrink();
+          {bool isDetailView = false}) =>
+      buildChargeBladeDamageInfo(context, weapon, isDetailView: isDetailView);
 
-    final phialKind = weapon.phial!.kind;
+  static Widget buildHuntingHornDamageInfo(BuildContext context, Weapon weapon,
+      {bool isDetailView = false}) {
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
-          '${AppLocalizations.of(context)!.phial}:',
+    final l10n = AppLocalizations.of(context)!;
+    final fontSize = isDetailView ? 16.0 : 12.0;
+
+    Widget row(String label, String text, Color textColor, IconData icon,
+        Color iconColor) {
+      return LabelValueRow(
+        label: Text(
+          '$label:',
           style: TextStyle(
-            fontSize: isDetailView ? 16 : 12,
+            fontSize: fontSize,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
-        const Spacer(),
-        Row(
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              phialKind[0].toUpperCase() + phialKind.substring(1),
-              style: TextStyle(
-                fontSize: isDetailView ? 16 : 12,
-                fontWeight: FontWeight.bold,
-                color: phialKind == 'impact'
-                    ? Colors.blue[600]!
-                    : Colors.orange[600]!,
+            Flexible(
+              child: Text(
+                text,
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
               ),
             ),
             const SizedBox(width: 4),
-            if (_hasElementIcon(phialKind)) ...[
-              Image.asset(
-                'assets/imgs/elements/${_getElementAssetName(phialKind)}.webp',
-                width: 16,
-                height: 16,
-                errorBuilder: (context, error, stackTrace) {
-                  return Icon(
-                    WeaponUtils.getElementIcon(phialKind),
-                    size: 16,
-                    color: phialKind == 'impact'
-                        ? Colors.blue[600]!
-                        : Colors.orange[600]!,
-                  );
-                },
-              ),
-            ] else ...[
-              Icon(
-                Icons.electric_bolt,
-                size: 16,
-                color: phialKind == 'impact'
-                    ? Colors.blue[600]!
-                    : Colors.orange[600]!,
-              ),
-            ],
+            Icon(icon, size: 16, color: iconColor),
           ],
         ),
-      ],
-    );
-  }
-
-  static Widget buildHuntingHornDamageInfo(
-      BuildContext context, Weapon weapon,
-      {bool isDetailView = false}) {
-    final List<Widget> sections = [];
-
-    final colorScheme = Theme.of(context).colorScheme;
-    if (weapon.melody != null) {
-      sections.add(Row(
-        children: [
-          Text(
-            '${AppLocalizations.of(context)!.melody}:',
-            style: TextStyle(
-              fontSize: isDetailView ? 16 : 12,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.8),
-            ),
-          ),
-          const Spacer(),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '${weapon.melody!.songs.length} ${AppLocalizations.of(context)!.songs}',
-                style: TextStyle(
-                  fontSize: isDetailView ? 16 : 12,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.amber[600],
-                ),
-              ),
-              const SizedBox(width: 4),
-              Icon(Icons.music_note, size: 16, color: Colors.teal[600]),
-            ],
-          ),
-        ],
-      ));
+      );
     }
 
-    if (weapon.echoBubble != null) {
-      sections.add(Row(
-        children: [
-          Text(
-            '${AppLocalizations.of(context)!.echoBubble}:',
-            style: TextStyle(
-              fontSize: isDetailView ? 16 : 12,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.8),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Flexible(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Flexible(
-                  child: Text(
-                    weapon.echoBubble!.name,
-                    style: TextStyle(
-                      fontSize: isDetailView ? 16 : 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue[600],
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Icon(Icons.bubble_chart, size: 16, color: Colors.indigo[600]),
-              ],
-            ),
-          ),
-        ],
-      ));
-    }
-
-    if (weapon.echoWave != null) {
-      sections.add(Row(
-        children: [
-          Text(
-            '${AppLocalizations.of(context)!.echoWave}:',
-            style: TextStyle(
-              fontSize: isDetailView ? 16 : 12,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.8),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Flexible(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Flexible(
-                  child: Text(
-                    weapon.echoWave!.name,
-                    style: TextStyle(
-                      fontSize: isDetailView ? 16 : 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green[600],
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Icon(Icons.waves, size: 16, color: Colors.orange[600]),
-              ],
-            ),
-          ),
-        ],
-      ));
-    }
+    final sections = <Widget>[
+      if (weapon.melody != null)
+        row(l10n.melody, '${weapon.melody!.songs.length} ${l10n.songs}',
+            Colors.amber[600]!, Icons.music_note, Colors.teal[600]!),
+      if (weapon.echoBubble != null)
+        row(l10n.echoBubble, weapon.echoBubble!.name, Colors.blue[600]!,
+            Icons.bubble_chart, Colors.indigo[600]!),
+      if (weapon.echoWave != null)
+        row(l10n.echoWave, weapon.echoWave!.name, Colors.green[600]!,
+            Icons.waves, Colors.orange[600]!),
+    ];
 
     if (sections.isEmpty) {
       return const SizedBox.shrink();
     }
 
-    return Column(children: sections);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        for (var i = 0; i < sections.length; i++) ...[
+          if (i > 0)
+            isDetailView
+                ? const Divider(height: 24)
+                : const SizedBox(height: 4),
+          sections[i],
+        ],
+      ],
+    );
   }
 
   static Widget buildBowgunDamageInfo(BuildContext context, Weapon weapon,
@@ -519,21 +362,20 @@ class WeaponDisplayUtils {
     }
 
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
+    return LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.ammo}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
-        const Spacer(),
-        Row(
+        value: Wrap(
+          runSpacing: AppSpacing.xs,
           children: weapon.ammo!.take(3).map((ammo) {
             return Container(
-              margin: const EdgeInsets.only(left: 4),
+              margin: const EdgeInsets.only(left: AppSpacing.xs),
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
                 color: weapon.kind == 'heavy-bowgun'
@@ -560,52 +402,35 @@ class WeaponDisplayUtils {
                           : Colors.green[800],
                     ),
                   ),
-                  if (_hasElementIcon(ammo.kind)) ...[
+                  if (GameElement.fromId(ammo.kind) != null) ...[
                     const SizedBox(width: 4),
-                    Image.asset(
-                      'assets/imgs/elements/${_getElementAssetName(ammo.kind)}.webp',
-                      width: 12,
-                      height: 12,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Icon(
-                          WeaponUtils.getElementIcon(ammo.kind),
-                          size: 12,
-                          color: weapon.kind == 'heavy-bowgun'
-                              ? Colors.purple[800]
-                              : Colors.green[800],
-                        );
-                      },
-                    ),
+                    ElementIcon(ammo.kind, size: 12),
                   ],
                 ],
               ),
             );
           }).toList(),
-        ),
-      ],
-    );
+        ));
   }
 
-  static Widget buildInsectGlaiveDamageInfo(
-      BuildContext context, Weapon weapon,
+  static Widget buildInsectGlaiveDamageInfo(BuildContext context, Weapon weapon,
       {bool isDetailView = false}) {
     if (weapon.kinsectLevel == null || weapon.kinsectLevel! <= 0) {
       return const SizedBox.shrink();
     }
 
     final colorScheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Text(
+    return LabelValueRow(
+        label: Text(
           '${AppLocalizations.of(context)!.kinsect}:',
           style: TextStyle(
             fontSize: isDetailView ? 16 : 12,
             fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface.withOpacity(0.8),
+            color: colorScheme.onSurface.withValues(alpha: 0.8),
           ),
         ),
-        const Spacer(),
-        Row(
+        value: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               'Lv${weapon.kinsectLevel}',
@@ -618,61 +443,6 @@ class WeaponDisplayUtils {
             const SizedBox(width: 4),
             Icon(Icons.flutter_dash, size: 16, color: Colors.lime[600]),
           ],
-        ),
-      ],
-    );
-  }
-
-  // Métodos auxiliares estáticos
-  static bool _hasElementIcon(String element) {
-    final elementTypes = [
-      'fire',
-      'water',
-      'ice',
-      'thunder',
-      'dragon',
-      'poison',
-      'paralysis',
-      'sleep',
-      'blast'
-    ];
-    return elementTypes.any((type) => element.toLowerCase().contains(type));
-  }
-
-  static String _getElementAssetName(String element) {
-    final elementLower = element.toLowerCase();
-    if (elementLower.contains('fire')) return 'fire';
-    if (elementLower.contains('water')) return 'water';
-    if (elementLower.contains('ice')) return 'ice';
-    if (elementLower.contains('thunder')) return 'thunder';
-    if (elementLower.contains('dragon')) return 'dragon';
-    if (elementLower.contains('poison')) return 'poison';
-    if (elementLower.contains('paralysis')) return 'paralysis';
-    if (elementLower.contains('sleep')) return 'sleep';
-    if (elementLower.contains('blast')) return 'blast';
-    return 'fire'; // default
-  }
-
-  static Color _getCoatingColor(String coating) {
-    switch (coating.toLowerCase()) {
-      case 'power':
-        return Colors.red[600]!;
-      case 'paralysis':
-        return Colors.amber[600]!;
-      case 'poison':
-        return Colors.green[600]!;
-      case 'sleep':
-        return Colors.indigo[600]!;
-      case 'blast':
-        return Colors.orange[600]!;
-      case 'exhaust':
-        return Colors.grey[600]!;
-      case 'close-range':
-        return Colors.blue[600]!;
-      case 'pierce':
-        return Colors.purple[600]!;
-      default:
-        return Colors.grey[600]!;
-    }
+        ));
   }
 }

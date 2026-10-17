@@ -1,37 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:mhwilds_app/api/locations_api.dart';
 import 'package:mhwilds_app/models/location.dart';
+import 'package:mhwilds_app/providers/catalog_provider.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 
-class LocationsProvider with ChangeNotifier {
-  List<MapData> _zones = [];
-  bool _isLoading = false;
+class LocationsProvider extends CatalogProvider<MapData, NoFilter> {
+  LocationsProvider({super.api}) : super(const NoFilter());
 
-  bool get isLoading => _isLoading;
-  List<MapData> get zones => _zones;
+  List<MapData> get zones => all;
 
-  bool get hasData => _zones.isNotEmpty;
+  Future<void> fetchZones() => fetch();
 
-  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
-  void invalidate() {
-    _zones = [];
-    notifyListeners();
-  }
+  @override
+  Stream<Data<List<MapData>>> watch({required bool force}) =>
+      LocationsApi.watchLocations(force: force, lang: language, api: api);
 
-  Future<void> fetchZones() async {
-    if (_zones.isNotEmpty) return;
+  @override
+  List<MapData> prepare(List<MapData> data) => data
+    ..sort((a, b) =>
+        (a.name ?? '').toLowerCase().compareTo((b.name ?? '').toLowerCase()));
 
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      _zones = await LocationsApi.fetchLocations();
-      _zones.sort((a, b) => (a.name ?? '').toLowerCase().compareTo((b.name ?? '').toLowerCase()));
-    } catch (e) {
-      // ignore: avoid_print
-      print("Error fetching zones: $e");
-    }
-
-    _isLoading = false;
-    notifyListeners();
-  }
+  @override
+  List<MapData> applyFilter(List<MapData> items, NoFilter filter) => items;
 }

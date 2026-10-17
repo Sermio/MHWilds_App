@@ -1,17 +1,17 @@
-import 'package:http/http.dart' as http;
-import 'package:mhwilds_app/api/api_config.dart';
-import 'package:mhwilds_app/models/item.dart';
 import 'dart:convert';
 
-class ItemsApi {
-  static Future<List<Item>> fetchItems() async {
-    final response = await http.get(Uri.parse(ApiConfig.url('items')));
+import 'package:mhwilds_app/api/cached_api.dart';
+import 'package:mhwilds_app/models/item.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonData = json.decode(response.body);
-      return jsonData.map((e) => Item.fromJson(e)).toList();
-    } else {
-      throw Exception('Error al cargar item: ${response.statusCode}');
-    }
-  }
+class ItemsApi {
+  static Stream<Data<List<Item>>> watchItems(
+          {bool force = false, String? lang, CachedApi? api}) =>
+      (api ?? CachedApi.shared)
+          .watch('items', _parse, force: force, lang: lang);
+
+  static Future<List<Item>> _parse(String body) async =>
+      (json.decode(body) as List<dynamic>)
+          .map((e) => Item.fromJson(e))
+          .toList();
 }

@@ -1,0 +1,2203 @@
+[
+  {
+    "coatings": [
+      "power",
+      "paralysis"
+    ],
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 1
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Bow II",
+          "id": 2
+        },
+        {
+          "name": "Quematrice Arco I",
+          "id": 17
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1
+    },
+    "rarity": 1,
+    "kind": "bow",
+    "damage": {
+      "raw": 90,
+      "display": 108
+    },
+    "specials": [],
+    "name": "Hope Bow I",
+    "description": "A bow made specifically for the expedition. Its arrows can be used to handle a variety of situations.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 1
+  },
+  {
+    "coatings": [
+      "close-range",
+      "paralysis"
+    ],
+    "gameId": 95,
+    "crafting": {
+      "weapon": {
+        "id": 1184
+      },
+      "craftable": false,
+      "previous": {
+        "name": "Azure Era Wyrmbow",
+        "id": 1183
+      },
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 0,
+      "upgradeMaterials": [
+        {
+          "item": {
+            "id": 318,
+            "gameId": 351,
+            "rarity": 7,
+            "name": "Rey Dau Boltgem",
+            "description": "A rare jewel that developed within a Rey Dau. Said to wield the power of ten thousand storms.",
+            "value": 14400,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 20,
+              "kind": "gem",
+              "colorId": 10,
+              "color": "yellow"
+            }
+          },
+          "quantity": 1,
+          "id": 43066
+        },
+        {
+          "item": {
+            "id": 697,
+            "gameId": 732,
+            "rarity": 6,
+            "name": "Lagiacrus Shockspike",
+            "description": "The spike from a Lagiacrus's back. Safe to handle since it's used to release electricity, not generate it.",
+            "value": 3960,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 41,
+              "kind": "medulla",
+              "colorId": 16,
+              "color": "sky"
+            }
+          },
+          "quantity": 3,
+          "id": 43067
+        },
+        {
+          "item": {
+            "id": 701,
+            "gameId": 736,
+            "rarity": 7,
+            "name": "Lagiacrus Sapphire",
+            "description": "A deep azure gem formed inside a Lagiacrus. The sound of rippling water can be heard from its core.",
+            "value": 13200,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 20,
+              "kind": "gem",
+              "colorId": 16,
+              "color": "sky"
+            }
+          },
+          "quantity": 1,
+          "id": 43068
+        },
+        {
+          "item": {
+            "id": 793,
+            "gameId": 830,
+            "rarity": 6,
+            "name": "Azure Stargem",
+            "description": "Special reward for overcoming the USJ challenge. Give it to the Smithy to get special equipment.",
+            "value": 350,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 20,
+              "kind": "gem",
+              "colorId": 17,
+              "color": "blue"
+            }
+          },
+          "quantity": 1,
+          "id": 43069
+        }
+      ],
+      "upgradeZennyCost": 20000,
+      "column": 9,
+      "row": 25,
+      "id": 1184
+    },
+    "rarity": 8,
+    "kind": "bow",
+    "damage": {
+      "raw": 210,
+      "display": 252
+    },
+    "specials": [
+      {
+        "element": "water",
+        "kind": "element",
+        "weapon": {
+          "id": 1184
+        },
+        "damage": {
+          "raw": 30,
+          "display": 300
+        },
+        "hidden": false,
+        "id": 7081
+      }
+    ],
+    "name": "Azure Era \"Soaring Dragon\"",
+    "description": "Each arrow loosed draws a shining path like a dragon across the heavens.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      2,
+      1
+    ],
+    "affinity": 25,
+    "skills": [
+      {
+        "skill": {
+          "id": 82,
+          "name": "Critical Element",
+          "description": "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits."
+        },
+        "level": 2,
+        "name": null,
+        "description": "Increases elemental damage while active.",
+        "setPiecesRequired": null,
+        "id": 204
+      },
+      {
+        "skill": {
+          "id": 181,
+          "name": "Convert Water Resistance",
+          "description": "Increases your weapon's elemental attack proportional to your water resistance."
+        },
+        "level": 1,
+        "name": null,
+        "description": "Activates skill effect.",
+        "setPiecesRequired": null,
+        "id": 446
+      }
+    ],
+    "series": {
+      "id": 46,
+      "gameId": 288608864,
+      "name": "Azure Era Tree"
+    },
+    "id": 1184
+  },
+  {
+    "phial": "impact",
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 79
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Strongarm II",
+          "id": 80
+        },
+        {
+          "name": "Chata Strongarm I",
+          "id": 93
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 79
+    },
+    "rarity": 1,
+    "kind": "charge-blade",
+    "damage": {
+      "raw": 90,
+      "display": 324
+    },
+    "specials": [],
+    "name": "Hope Strongarm I",
+    "description": "A charge blade made specifically for the expedition. A shield is not just for defense. Unleash your power!",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 79,
+    "sharpness": {
+      "red": 50,
+      "orange": 60,
+      "yellow": 40,
+      "green": 50,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "phial": "element",
+    "gameId": 87,
+    "crafting": {
+      "weapon": {
+        "id": 1144
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1144
+    },
+    "rarity": 8,
+    "kind": "charge-blade",
+    "damage": {
+      "raw": 190,
+      "display": 684
+    },
+    "specials": [],
+    "name": "Promised Abyss",
+    "description": "A grotesque weapon that thirsts for potential, its forbidden coffin thrown wide by unpunished sin.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1144,
+    "sharpness": {
+      "red": 140,
+      "orange": 40,
+      "yellow": 40,
+      "green": 80,
+      "blue": 30,
+      "white": 20,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 155
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Daggers II",
+          "id": 156
+        },
+        {
+          "name": "Quematrice Silexes I",
+          "id": 169
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 155
+    },
+    "rarity": 1,
+    "kind": "dual-blades",
+    "damage": {
+      "raw": 90,
+      "display": 126
+    },
+    "specials": [],
+    "name": "Hope Daggers I",
+    "description": "Dual blades made specifically for the expedition. Allows a hunter to unleash the power of a demon.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 155,
+    "sharpness": {
+      "red": 50,
+      "orange": 40,
+      "yellow": 40,
+      "green": 70,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 92,
+    "crafting": {
+      "weapon": {
+        "id": 1147
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1147
+    },
+    "rarity": 8,
+    "kind": "dual-blades",
+    "damage": {
+      "raw": 190,
+      "display": 266
+    },
+    "specials": [],
+    "name": "Eternal Cusp",
+    "description": "Grotesque scars that thirst for potential: their souls ever parted, their circle never complete.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1147,
+    "sharpness": {
+      "red": 140,
+      "orange": 40,
+      "yellow": 40,
+      "green": 80,
+      "blue": 30,
+      "white": 20,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 236
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Blade II",
+          "id": 237
+        },
+        {
+          "name": "Quematrice Espada I",
+          "id": 250
+        },
+        {
+          "name": "Paretic Blade I",
+          "id": 298
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 236
+    },
+    "rarity": 1,
+    "kind": "great-sword",
+    "damage": {
+      "raw": 90,
+      "display": 432
+    },
+    "specials": [],
+    "name": "Hope Blade I",
+    "description": "A great sword made specifically for the expedition. Its large blade can clear the area in one sweep.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 236,
+    "sharpness": {
+      "red": 60,
+      "orange": 60,
+      "yellow": 50,
+      "green": 30,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 91,
+    "crafting": {
+      "weapon": {
+        "id": 1186
+      },
+      "craftable": false,
+      "previous": {
+        "name": "Shatterseal",
+        "id": 1185
+      },
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 0,
+      "upgradeMaterials": [
+        {
+          "item": {
+            "id": 270,
+            "gameId": 303,
+            "rarity": 6,
+            "name": "Quematrice Igniter+",
+            "description": "Especially viscous fluid from a Quematrice. The gas it releases burns at a perilous temperature.",
+            "value": 1566,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 73,
+              "kind": "extract",
+              "colorId": 5,
+              "color": "red"
+            }
+          },
+          "quantity": 8,
+          "id": 43912
+        },
+        {
+          "item": {
+            "id": 608,
+            "gameId": 661,
+            "rarity": 8,
+            "name": "Hunter Symbol III",
+            "description": "Proof that you've hunted a vicious tempered monster, certifying your heroism.",
+            "value": 3000,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 30,
+              "kind": "certificate",
+              "colorId": 11,
+              "color": "lemon"
+            }
+          },
+          "quantity": 5,
+          "id": 43913
+        },
+        {
+          "item": {
+            "id": 663,
+            "gameId": 728,
+            "rarity": 7,
+            "name": "Mizutsune Water Orb",
+            "description": "A multicolored orb formed from a crystallized Mizutsune scale and bubblefoam.",
+            "value": 10500,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 20,
+              "kind": "gem",
+              "colorId": 21,
+              "color": "dark-purple"
+            }
+          },
+          "quantity": 1,
+          "id": 43914
+        },
+        {
+          "item": {
+            "id": 795,
+            "gameId": 836,
+            "rarity": 6,
+            "name": "Master Craftsman's Blueprint",
+            "description": "A master craftsman's blueprint for a new weapon. The Smithy can make something remarkable with this.",
+            "value": 350,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 30,
+              "kind": "certificate",
+              "colorId": 2,
+              "color": "gray"
+            }
+          },
+          "quantity": 1,
+          "id": 43915
+        }
+      ],
+      "upgradeZennyCost": 20000,
+      "column": 9,
+      "row": 27,
+      "id": 1186
+    },
+    "rarity": 8,
+    "kind": "great-sword",
+    "damage": {
+      "raw": 210,
+      "display": 1008
+    },
+    "specials": [],
+    "name": "Shatterseal Drakesnest",
+    "description": "Shatterseal's upgraded form hungers most for its aeons-lost eye. Does it stare from its abyssal home, or is it merely your own reflection?",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [
+      {
+        "skill": {
+          "id": 60,
+          "name": "Focus",
+          "description": "Increases the fill rate for weapons with gauges and the charge rate for weapons with charge attacks."
+        },
+        "level": 3,
+        "name": null,
+        "description": "Increases gauge fill rate and reduces charge times by 15%.",
+        "setPiecesRequired": null,
+        "id": 150
+      },
+      {
+        "skill": {
+          "id": 182,
+          "name": "Shattering Reflection",
+          "description": "Level 3 charged slashes deal area-of-effect damage upon hitting the ground."
+        },
+        "level": 1,
+        "name": null,
+        "description": "Activates skill effect.",
+        "setPiecesRequired": null,
+        "id": 447
+      }
+    ],
+    "series": {
+      "id": 47,
+      "gameId": 787080512,
+      "name": "Shatterseal Tree"
+    },
+    "id": 1186,
+    "sharpness": {
+      "red": 10,
+      "orange": 10,
+      "yellow": 10,
+      "green": 10,
+      "blue": 10,
+      "white": 350,
+      "purple": 0
+    },
+    "handicraft": []
+  },
+  {
+    "shell": "normal",
+    "shellLevel": 2,
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 315
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Gunlance II",
+          "id": 316
+        },
+        {
+          "name": "Paretic Gunlance I",
+          "id": 373
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 315
+    },
+    "rarity": 1,
+    "kind": "gunlance",
+    "damage": {
+      "raw": 90,
+      "display": 207
+    },
+    "specials": [],
+    "name": "Hope Gunlance I",
+    "description": "A gunlance made specifically for the expedition. Uses a variety of shells and a Wyrmstake cannon for attacks.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 315,
+    "sharpness": {
+      "red": 50,
+      "orange": 50,
+      "yellow": 40,
+      "green": 60,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "shell": "wide",
+    "shellLevel": 3,
+    "gameId": 86,
+    "crafting": {
+      "weapon": {
+        "id": 1153
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1153
+    },
+    "rarity": 8,
+    "kind": "gunlance",
+    "damage": {
+      "raw": 190,
+      "display": 437
+    },
+    "specials": [],
+    "name": "Auguring Omen",
+    "description": "Grotesque agony that thirsts for potential, its sigils pulsing as they await the coming demise.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1153,
+    "sharpness": {
+      "red": 140,
+      "orange": 40,
+      "yellow": 40,
+      "green": 80,
+      "blue": 30,
+      "white": 20,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 387
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Hammer II",
+          "id": 388
+        },
+        {
+          "name": "Chata Clobberer I",
+          "id": 401
+        },
+        {
+          "name": "Jail Hammer I",
+          "id": 449
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 387
+    },
+    "rarity": 1,
+    "kind": "hammer",
+    "damage": {
+      "raw": 90,
+      "display": 468
+    },
+    "specials": [],
+    "name": "Hope Hammer I",
+    "description": "A hammer made specifically for the expedition. Its weight on top of physical force can smash anything.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 387,
+    "sharpness": {
+      "red": 50,
+      "orange": 60,
+      "yellow": 50,
+      "green": 40,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 88,
+    "crafting": {
+      "weapon": {
+        "id": 1156
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1156
+    },
+    "rarity": 8,
+    "kind": "hammer",
+    "damage": {
+      "raw": 190,
+      "display": 988
+    },
+    "specials": [],
+    "name": "Bound Admonition",
+    "description": "A grotesque soul that thirsts for potential, encaged but driven to find its true vessel.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1156,
+    "sharpness": {
+      "red": 140,
+      "orange": 40,
+      "yellow": 40,
+      "green": 80,
+      "blue": 30,
+      "white": 20,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "ammo": [
+      {
+        "kind": "normal",
+        "level": 2,
+        "capacity": 4,
+        "id": 1
+      },
+      {
+        "kind": "pierce",
+        "level": 1,
+        "capacity": 5,
+        "id": 2
+      },
+      {
+        "kind": "spread",
+        "level": 1,
+        "capacity": 4,
+        "id": 3
+      },
+      {
+        "kind": "sticky",
+        "level": 1,
+        "capacity": 2,
+        "id": 4
+      },
+      {
+        "kind": "thunder",
+        "level": 1,
+        "capacity": 6,
+        "id": 5
+      },
+      {
+        "kind": "poison",
+        "level": 1,
+        "capacity": 4,
+        "id": 6
+      },
+      {
+        "kind": "demon",
+        "level": 1,
+        "capacity": 2,
+        "id": 7
+      },
+      {
+        "kind": "recover",
+        "level": 1,
+        "capacity": 2,
+        "id": 8
+      },
+      {
+        "kind": "tranq",
+        "level": 1,
+        "capacity": 4,
+        "id": 9
+      }
+    ],
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 464
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Cannon II",
+          "id": 465
+        },
+        {
+          "name": "Chata Sheller I",
+          "id": 469
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 464
+    },
+    "rarity": 1,
+    "kind": "heavy-bowgun",
+    "damage": {
+      "raw": 90,
+      "display": 135
+    },
+    "specials": [],
+    "name": "Hope Cannon I",
+    "description": "A heavy bowgun made specifically for the expedition. Each part was designed to aid high-power shots.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 464
+  },
+  {
+    "ammo": [
+      {
+        "kind": "normal",
+        "level": 2,
+        "capacity": 2,
+        "id": 552
+      },
+      {
+        "kind": "pierce",
+        "level": 2,
+        "capacity": 3,
+        "id": 553
+      },
+      {
+        "kind": "spread",
+        "level": 2,
+        "capacity": 3,
+        "id": 554
+      },
+      {
+        "kind": "slicing",
+        "level": 1,
+        "capacity": 2,
+        "id": 555
+      },
+      {
+        "kind": "armor",
+        "level": 1,
+        "capacity": 2,
+        "id": 556
+      },
+      {
+        "kind": "exhaust",
+        "level": 1,
+        "capacity": 2,
+        "id": 557
+      },
+      {
+        "kind": "tranq",
+        "level": 1,
+        "capacity": 4,
+        "id": 558
+      }
+    ],
+    "gameId": 82,
+    "crafting": {
+      "weapon": {
+        "id": 1159
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1159
+    },
+    "rarity": 8,
+    "kind": "heavy-bowgun",
+    "damage": {
+      "raw": 190,
+      "display": 285
+    },
+    "specials": [],
+    "name": "Trembling Hels",
+    "description": "A once blissful memory that thirsts for potential, in lieu of the freedom of pain it will never know.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1159
+  },
+  {
+    "melody": {
+      "id": 5,
+      "gameId": 4,
+      "notes": [
+        "white",
+        "red",
+        "yellow"
+      ],
+      "songs": [
+        {
+          "effectId": 1,
+          "sequence": [
+            "white",
+            "white"
+          ],
+          "name": "Self-Improvement",
+          "id": 2
+        },
+        {
+          "effectId": 11,
+          "sequence": [
+            "white",
+            "red",
+            "white"
+          ],
+          "name": "Attack Up (S)",
+          "id": 18
+        },
+        {
+          "effectId": 18,
+          "sequence": [
+            "yellow",
+            "red",
+            "white"
+          ],
+          "name": "Fire Res (S)",
+          "id": 32
+        },
+        {
+          "effectId": 40,
+          "sequence": [
+            "yellow",
+            "yellow",
+            "yellow"
+          ],
+          "name": "Sonic Waves",
+          "id": 61
+        },
+        {
+          "effectId": 48,
+          "sequence": [
+            "white",
+            "red",
+            "red"
+          ],
+          "name": "Melody of Life",
+          "id": 71
+        }
+      ]
+    },
+    "echoBubble": {
+      "kind": "evasion",
+      "name": "Evasion & Movement Speed Up",
+      "id": 1,
+      "gameId": 1
+    },
+    "echoWave": {
+      "id": 1,
+      "gameId": 1,
+      "kind": "blunt",
+      "name": "Echo Wave (Blunt)"
+    },
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 531
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Horn II",
+          "id": 532
+        },
+        {
+          "name": "Sonic Horn I",
+          "id": 593
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 531
+    },
+    "rarity": 1,
+    "kind": "hunting-horn",
+    "damage": {
+      "raw": 90,
+      "display": 378
+    },
+    "specials": [],
+    "name": "Hope Horn I",
+    "description": "A hunting horn made specifically for the expedition. Its tunes produce a variety of effects.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 531,
+    "sharpness": {
+      "red": 50,
+      "orange": 60,
+      "yellow": 50,
+      "green": 40,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "melody": {
+      "id": 1,
+      "gameId": 0,
+      "notes": [
+        "white",
+        "red",
+        "blue"
+      ],
+      "songs": [
+        {
+          "effectId": 1,
+          "sequence": [
+            "white",
+            "white"
+          ],
+          "name": "Self-Improvement",
+          "id": 2
+        },
+        {
+          "effectId": 11,
+          "sequence": [
+            "white",
+            "red",
+            "white"
+          ],
+          "name": "Attack Up (S)",
+          "id": 18
+        },
+        {
+          "effectId": 15,
+          "sequence": [
+            "white",
+            "blue",
+            "blue"
+          ],
+          "name": "Defense Up (S)",
+          "id": 28
+        },
+        {
+          "effectId": 33,
+          "sequence": [
+            "blue",
+            "blue",
+            "red"
+          ],
+          "name": "Wind Pressure Negated",
+          "id": 51
+        },
+        {
+          "effectId": 46,
+          "sequence": [
+            "red",
+            "blue",
+            "white"
+          ],
+          "name": "Offset Melody",
+          "id": 65
+        },
+        {
+          "effectId": 48,
+          "sequence": [
+            "white",
+            "red",
+            "red"
+          ],
+          "name": "Melody of Life",
+          "id": 71
+        }
+      ]
+    },
+    "echoBubble": {
+      "kind": "defense",
+      "name": "Defense & Elemental Res Up",
+      "id": 5,
+      "gameId": 5
+    },
+    "echoWave": null,
+    "gameId": 88,
+    "crafting": {
+      "weapon": {
+        "id": 1162
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1162
+    },
+    "rarity": 8,
+    "kind": "hunting-horn",
+    "damage": {
+      "raw": 190,
+      "display": 798
+    },
+    "specials": [],
+    "name": "Onyx Choros",
+    "description": "A grotesque melody that thirsts for potential, tormenting its host with no coda ever to come.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1162,
+    "sharpness": {
+      "red": 140,
+      "orange": 40,
+      "yellow": 40,
+      "green": 80,
+      "blue": 30,
+      "white": 20,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "kinsectLevel": 1,
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 608
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Glaive II",
+          "id": 609
+        },
+        {
+          "name": "Chata Glaive I",
+          "id": 622
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 608
+    },
+    "rarity": 1,
+    "kind": "insect-glaive",
+    "damage": {
+      "raw": 90,
+      "display": 279
+    },
+    "specials": [],
+    "name": "Hope Glaive I",
+    "description": "An insect glaive made specifically for the expedition. Control insects while moving with nimble ease.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 608,
+    "sharpness": {
+      "red": 50,
+      "orange": 50,
+      "yellow": 40,
+      "green": 60,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "kinsectLevel": 8,
+    "gameId": 88,
+    "crafting": {
+      "weapon": {
+        "id": 1165
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1165
+    },
+    "rarity": 8,
+    "kind": "insect-glaive",
+    "damage": {
+      "raw": 190,
+      "display": 589
+    },
+    "specials": [],
+    "name": "Limbo Llor",
+    "description": "Haunting tears that thirst for potential, even as all other hopes drown in a sea of lament.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1165,
+    "sharpness": {
+      "red": 140,
+      "orange": 40,
+      "yellow": 40,
+      "green": 80,
+      "blue": 30,
+      "white": 20,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 685
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Lance II",
+          "id": 686
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 685
+    },
+    "rarity": 1,
+    "kind": "lance",
+    "damage": {
+      "raw": 90,
+      "display": 207
+    },
+    "specials": [],
+    "name": "Hope Lance I",
+    "description": "A lance made specifically for the expedition. Keep an iron-clad guard and strike with well-aimed thrusts.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 685,
+    "sharpness": {
+      "red": 50,
+      "orange": 60,
+      "yellow": 40,
+      "green": 50,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 87,
+    "crafting": {
+      "weapon": {
+        "id": 1168
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1168
+    },
+    "rarity": 8,
+    "kind": "lance",
+    "damage": {
+      "raw": 190,
+      "display": 437
+    },
+    "specials": [],
+    "name": "Aether Pike",
+    "description": "A grotesque husk that thirsts for potential, cast into darkness but still clawing toward heaven.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1168,
+    "sharpness": {
+      "red": 140,
+      "orange": 40,
+      "yellow": 40,
+      "green": 80,
+      "blue": 30,
+      "white": 20,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "ammo": [
+      {
+        "kind": "normal",
+        "level": 2,
+        "capacity": 4,
+        "rapid": true,
+        "id": 1
+      },
+      {
+        "kind": "pierce",
+        "level": 1,
+        "capacity": 4,
+        "rapid": false,
+        "id": 2
+      },
+      {
+        "kind": "spread",
+        "level": 1,
+        "capacity": 3,
+        "rapid": true,
+        "id": 3
+      },
+      {
+        "kind": "poison",
+        "level": 1,
+        "capacity": 2,
+        "rapid": false,
+        "id": 4
+      },
+      {
+        "kind": "thunder",
+        "level": 1,
+        "capacity": 5,
+        "rapid": false,
+        "id": 5
+      },
+      {
+        "kind": "recover",
+        "level": 1,
+        "capacity": 1,
+        "rapid": false,
+        "id": 6
+      },
+      {
+        "kind": "demon",
+        "level": 1,
+        "capacity": 1,
+        "rapid": false,
+        "id": 7
+      },
+      {
+        "kind": "tranq",
+        "level": 1,
+        "capacity": 4,
+        "rapid": false,
+        "id": 8
+      }
+    ],
+    "specialAmmo": "wyvernblast",
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 763
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Rifle II",
+          "id": 764
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 763
+    },
+    "rarity": 1,
+    "kind": "light-bowgun",
+    "damage": {
+      "raw": 90,
+      "display": 117
+    },
+    "specials": [],
+    "name": "Hope Rifle I",
+    "description": "A light bowgun made specifically for the expedition. Its rapid-fire mechanism rains bullets on prey.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 763
+  },
+  {
+    "ammo": [
+      {
+        "kind": "normal",
+        "level": 2,
+        "capacity": 2,
+        "rapid": false,
+        "id": 560
+      },
+      {
+        "kind": "pierce",
+        "level": 2,
+        "capacity": 2,
+        "rapid": true,
+        "id": 561
+      },
+      {
+        "kind": "spread",
+        "level": 2,
+        "capacity": 2,
+        "rapid": true,
+        "id": 562
+      },
+      {
+        "kind": "slicing",
+        "level": 1,
+        "capacity": 1,
+        "rapid": false,
+        "id": 563
+      },
+      {
+        "kind": "demon",
+        "level": 1,
+        "capacity": 1,
+        "rapid": false,
+        "id": 564
+      },
+      {
+        "kind": "exhaust",
+        "level": 1,
+        "capacity": 1,
+        "rapid": false,
+        "id": 565
+      },
+      {
+        "kind": "tranq",
+        "level": 1,
+        "capacity": 4,
+        "rapid": false,
+        "id": 566
+      }
+    ],
+    "specialAmmo": "adhesive",
+    "gameId": 88,
+    "crafting": {
+      "weapon": {
+        "id": 1171
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1171
+    },
+    "rarity": 8,
+    "kind": "light-bowgun",
+    "damage": {
+      "raw": 190,
+      "display": 247
+    },
+    "specials": [],
+    "name": "Bethorned Agony",
+    "description": "As guilt swallows all, these thorns shall bind and punish your pitiable soul.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1171
+  },
+  {
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 836
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Edge II",
+          "id": 837
+        },
+        {
+          "name": "Quematrice Lima I",
+          "id": 855
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 836
+    },
+    "rarity": 1,
+    "kind": "long-sword",
+    "damage": {
+      "raw": 90,
+      "display": 297
+    },
+    "specials": [],
+    "name": "Hope Edge I",
+    "description": "A long sword made specifically for the expedition. A blade imbued with spirit to aid its mighty swings.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 836,
+    "sharpness": {
+      "red": 50,
+      "orange": 60,
+      "yellow": 40,
+      "green": 50,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 94,
+    "crafting": {
+      "weapon": {
+        "id": 1188
+      },
+      "craftable": false,
+      "previous": {
+        "name": "Azure Star Blade",
+        "id": 1187
+      },
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 0,
+      "upgradeMaterials": [
+        {
+          "item": {
+            "id": 318,
+            "gameId": 351,
+            "rarity": 7,
+            "name": "Rey Dau Boltgem",
+            "description": "A rare jewel that developed within a Rey Dau. Said to wield the power of ten thousand storms.",
+            "value": 14400,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 20,
+              "kind": "gem",
+              "colorId": 10,
+              "color": "yellow"
+            }
+          },
+          "quantity": 1,
+          "id": 46017
+        },
+        {
+          "item": {
+            "id": 697,
+            "gameId": 732,
+            "rarity": 6,
+            "name": "Lagiacrus Shockspike",
+            "description": "The spike from a Lagiacrus's back. Safe to handle since it's used to release electricity, not generate it.",
+            "value": 3960,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 41,
+              "kind": "medulla",
+              "colorId": 16,
+              "color": "sky"
+            }
+          },
+          "quantity": 3,
+          "id": 46018
+        },
+        {
+          "item": {
+            "id": 701,
+            "gameId": 736,
+            "rarity": 7,
+            "name": "Lagiacrus Sapphire",
+            "description": "A deep azure gem formed inside a Lagiacrus. The sound of rippling water can be heard from its core.",
+            "value": 13200,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 20,
+              "kind": "gem",
+              "colorId": 16,
+              "color": "sky"
+            }
+          },
+          "quantity": 1,
+          "id": 46019
+        },
+        {
+          "item": {
+            "id": 793,
+            "gameId": 830,
+            "rarity": 6,
+            "name": "Azure Stargem",
+            "description": "Special reward for overcoming the USJ challenge. Give it to the Smithy to get special equipment.",
+            "value": 350,
+            "carryLimit": 99,
+            "recipes": [],
+            "icon": {
+              "id": 20,
+              "kind": "gem",
+              "colorId": 17,
+              "color": "blue"
+            }
+          },
+          "quantity": 1,
+          "id": 46020
+        }
+      ],
+      "upgradeZennyCost": 20000,
+      "column": 9,
+      "row": 25,
+      "id": 1188
+    },
+    "rarity": 8,
+    "kind": "long-sword",
+    "damage": {
+      "raw": 210,
+      "display": 693
+    },
+    "specials": [
+      {
+        "element": "water",
+        "kind": "element",
+        "weapon": {
+          "id": 1188
+        },
+        "damage": {
+          "raw": 45,
+          "display": 450
+        },
+        "hidden": false,
+        "id": 7580
+      }
+    ],
+    "name": "Azure Star \"Dragon Dance\"",
+    "description": "Gleams blue with hopes and dreams. Its every swing the image of a dragon's flight.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      2,
+      1
+    ],
+    "affinity": 25,
+    "skills": [
+      {
+        "skill": {
+          "id": 82,
+          "name": "Critical Element",
+          "description": "Increases elemental damage (fire, water, thunder, ice, dragon) when landing critical hits."
+        },
+        "level": 2,
+        "name": null,
+        "description": "Increases elemental damage while active.",
+        "setPiecesRequired": null,
+        "id": 204
+      },
+      {
+        "skill": {
+          "id": 181,
+          "name": "Convert Water Resistance",
+          "description": "Increases your weapon's elemental attack proportional to your water resistance."
+        },
+        "level": 1,
+        "name": null,
+        "description": "Activates skill effect.",
+        "setPiecesRequired": null,
+        "id": 446
+      }
+    ],
+    "series": {
+      "id": 45,
+      "gameId": 232774032,
+      "name": "Azure Star Tree"
+    },
+    "id": 1188,
+    "sharpness": {
+      "red": 30,
+      "orange": 40,
+      "yellow": 60,
+      "green": 60,
+      "blue": 80,
+      "white": 80,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "phial": {
+      "kind": "power"
+    },
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 914
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Axe II",
+          "id": 915
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 914
+    },
+    "rarity": 1,
+    "kind": "switch-axe",
+    "damage": {
+      "raw": 90,
+      "display": 315
+    },
+    "specials": [],
+    "name": "Hope Axe I",
+    "description": "A switch axe made specifically for the expedition. A sword and axe in one, it requires skill to wield.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 914,
+    "sharpness": {
+      "red": 50,
+      "orange": 50,
+      "yellow": 40,
+      "green": 60,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "phial": {
+      "kind": "element"
+    },
+    "gameId": 82,
+    "crafting": {
+      "weapon": {
+        "id": 1177
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1177
+    },
+    "rarity": 8,
+    "kind": "switch-axe",
+    "damage": {
+      "raw": 190,
+      "display": 665
+    },
+    "specials": [],
+    "name": "Wicked Regnum",
+    "description": "Grotesque shame that thirsts for potential, its buried pain now poised to devour heaven and earth.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1177,
+    "sharpness": {
+      "red": 140,
+      "orange": 40,
+      "yellow": 40,
+      "green": 80,
+      "blue": 30,
+      "white": 20,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 1,
+    "crafting": {
+      "weapon": {
+        "id": 985
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [
+        {
+          "name": "Hope Sword II",
+          "id": 986
+        },
+        {
+          "name": "Quematrice Cuchillo I",
+          "id": 1001
+        },
+        {
+          "name": "Chata Club I",
+          "id": 1046
+        }
+      ],
+      "craftingMaterials": [],
+      "craftingZennyCost": 200,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 985
+    },
+    "rarity": 1,
+    "kind": "sword-shield",
+    "damage": {
+      "raw": 90,
+      "display": 126
+    },
+    "specials": [],
+    "name": "Hope Sword I",
+    "description": "A sword & shield made specifically for the expedition. Allows a hunter to unleash attacks without pause.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [],
+    "affinity": 0,
+    "skills": [],
+    "series": {
+      "id": 19,
+      "gameId": 1,
+      "name": "Expedition Tree"
+    },
+    "id": 985,
+    "sharpness": {
+      "red": 50,
+      "orange": 50,
+      "yellow": 40,
+      "green": 60,
+      "blue": 0,
+      "white": 0,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  },
+  {
+    "gameId": 97,
+    "crafting": {
+      "weapon": {
+        "id": 1182
+      },
+      "craftable": true,
+      "previous": null,
+      "branches": [],
+      "craftingMaterials": [],
+      "craftingZennyCost": 300,
+      "upgradeMaterials": [],
+      "upgradeZennyCost": 0,
+      "column": 0,
+      "row": 0,
+      "id": 1182
+    },
+    "rarity": 8,
+    "kind": "sword-shield",
+    "damage": {
+      "raw": 190,
+      "display": 266
+    },
+    "specials": [],
+    "name": "Kyrie Verd",
+    "description": "As despair swallows all, your trampled compassion shall be your shield as you discover true hopelessness.",
+    "defenseBonus": 0,
+    "elderseal": null,
+    "slots": [
+      3,
+      3,
+      3
+    ],
+    "affinity": 0,
+    "skills": [],
+    "series": null,
+    "id": 1182,
+    "sharpness": {
+      "red": 140,
+      "orange": 40,
+      "yellow": 40,
+      "green": 80,
+      "blue": 30,
+      "white": 20,
+      "purple": 0
+    },
+    "handicraft": [
+      5
+    ]
+  }
+]

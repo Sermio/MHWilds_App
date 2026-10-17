@@ -1,75 +1,36 @@
-import 'package:flutter/material.dart';
 import 'package:mhwilds_app/api/skills_api.dart';
 import 'package:mhwilds_app/models/skills.dart';
+import 'package:mhwilds_app/providers/catalog_provider.dart';
+import 'package:mhwilds_app/providers/filters/skill_filter.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 
-class SkillsProvider with ChangeNotifier {
-  List<Skills> _allSkills = [];
-  List<Skills> _filteredSkills = [];
-  bool _isLoading = false;
+class SkillsProvider extends CatalogProvider<Skills, SkillFilter> {
+  SkillsProvider({super.api}) : super(const SkillFilter());
 
-  String _nameFilter = '';
-  String? _kindFilter;
+  List<Skills> get allSkills => all;
+  List<Skills> get skills => visible;
 
-  List<Skills> get allSkills => _allSkills;
-  List<Skills> get skills => _filteredSkills;
-  bool get isLoading => _isLoading;
-  bool get hasData => _allSkills.isNotEmpty;
-
-  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
-  void invalidate() {
-    _allSkills = [];
-    _filteredSkills = [];
-    _nameFilter = '';
-    _kindFilter = null;
-    notifyListeners();
-  }
-
-  Future<void> fetchSkills() async {
-    if (_allSkills.isNotEmpty) {
-      final hasIconData = _allSkills.any(
-        (skill) =>
-            skill.icon != null &&
-            (skill.icon!.id > 0 || skill.icon!.kind.isNotEmpty),
-      );
-      if (hasIconData) return;
+  /// Skills por id en el orden de [ids]: de memoria si ya están cargadas todas,
+  /// si no, con una sola petición a la API.
+  Future<List<Skills>> skillsByIds(Set<int> ids) {
+    final byId = {for (final s in all) s.id: s};
+    if (ids.every(byId.containsKey)) {
+      return Future.value([for (final id in ids) byId[id]!]);
     }
-
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      _allSkills = await SkillsApi.fetchSkills();
-      _allSkills.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-      _filteredSkills = List.from(_allSkills);
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-    }
-
-    _isLoading = false;
-    notifyListeners();
+    return SkillsApi.fetchSkillsByIds(ids, lang: language);
   }
 
-  void applyFilters({String? name, String? kind}) {
-    _nameFilter = name ?? '';
-    _kindFilter = kind;
+  Future<void> fetchSkills() => fetch();
 
-    _filteredSkills = _allSkills.where((skill) {
-      final matchesName = _nameFilter.isEmpty ||
-          skill.name.toLowerCase().contains(_nameFilter.toLowerCase());
+  @override
+  Stream<Data<List<Skills>>> watch({required bool force}) =>
+      SkillsApi.watchSkills(force: force, lang: language, api: api);
 
-      final matchesKind = _kindFilter == null || skill.kind == _kindFilter;
+  @override
+  List<Skills> prepare(List<Skills> data) => data
+    ..sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
 
-      return matchesName && matchesKind;
-    }).toList();
-
-    notifyListeners();
-  }
-
-  void clearFilters() {
-    _nameFilter = '';
-    _kindFilter = null;
-    _filteredSkills = List.from(_allSkills);
-    notifyListeners();
-  }
+  @override
+  List<Skills> applyFilter(List<Skills> items, SkillFilter filter) =>
+      filterSkills(items, filter);
 }

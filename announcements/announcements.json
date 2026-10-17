@@ -1,0 +1,26 @@
+{
+  "announcements": [
+    {
+      "id": "2026-10-announcements",
+      "date": "2026-10-17",
+      "title": {
+        "en": "News inside the app",
+        "es": "Novedades dentro de la app",
+        "fr": "Les nouveautés dans l'appli",
+        "it": "Novità nell'app",
+        "pl": "Nowości w aplikacji",
+        "pt": "Novidades no app",
+        "de": "Neuigkeiten in der App"
+      },
+      "body": {
+        "en": "From now on we will post here what we are working on and what is coming next.",
+        "es": "A partir de ahora publicaremos aquí en qué estamos trabajando y qué viene después.",
+        "fr": "Désormais, nous publierons ici ce sur quoi nous travaillons et ce qui arrive ensuite.",
+        "it": "D'ora in poi pubblicheremo qui ciò su cui stiamo lavorando e cosa arriverà.",
+        "pl": "Od teraz będziemy tu publikować, nad czym pracujemy i co pojawi się wkrótce.",
+        "pt": "A partir de agora publicaremos aqui no que estamos trabalhando e o que vem a seguir.",
+        "de": "Ab jetzt veröffentlichen wir hier, woran wir arbeiten und was als Nächstes kommt."
+      }
+    }
+  ]
+}

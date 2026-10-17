@@ -1,11 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/models/location.dart';
 import 'package:mhwilds_app/providers/locations_provider.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/asset_ids.g.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class MonsterMapDetails extends StatefulWidget {
   const MonsterMapDetails({super.key, required this.mapId});
@@ -34,48 +34,19 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
   }
 
   void _initMapData(LocationsProvider provider) {
-    mapData = provider.zones.firstWhere(
-      (element) => element.id == widget.mapId,
-      orElse: () => MapData(
-        id: widget.mapId,
-        name: AppLocalizations.of(context)!.unknownMap,
-        gameId: 0,
-        zoneCount: 0,
-        camps: [],
-      ),
-    );
-    // Obtener el nombre en inglés del mapa para cargar las imágenes
-    final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
-    final l10n = AppLocalizations.of(context)!;
-    final englishMapName = enNamesCache.nameForMapImage(
-          widget.mapId,
-          mapData!.name ?? l10n.unknownMap,
-        ) ??
-        mapData!.name ??
-        l10n.unknownMap;
-    loadImages(englishMapName);
-  }
-
-  Future<void> loadImages(String? mapName) async {
-    List<String> loadedImages = [];
-    String folder =
-        mapName!.toLowerCase().replaceAll(' ', '_').replaceAll("'", '_');
-    String baseName = folder;
-
-    int index = 1;
-    while (true) {
-      String assetPath = 'assets/imgs/maps/$folder/$baseName$index.png';
-      try {
-        await rootBundle.load(assetPath);
-        loadedImages.add(assetPath);
-        index++;
-      } catch (_) {
-        break;
-      }
-    }
-
+    if (!mounted) return;
     setState(() {
-      imageFiles = loadedImages;
+      mapData = provider.zones.firstWhere(
+        (element) => element.id == widget.mapId,
+        orElse: () => MapData(
+          id: widget.mapId,
+          name: AppLocalizations.of(context)!.unknownMap,
+          gameId: 0,
+          zoneCount: 0,
+          camps: [],
+        ),
+      );
+      imageFiles = locationMapAssets[widget.mapId] ?? const [];
       isLoadingImages = false;
     });
   }
@@ -98,9 +69,10 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
             ),
             // Imagen centrada con zoom que NO se puede tocar para cerrar
             Center(
+              // Sin margen y con minScale 1 la imagen no se mueve a escala 1;
+              // el arrastre solo sirve una vez hecho el zoom.
               child: InteractiveViewer(
-                boundaryMargin: const EdgeInsets.all(20),
-                minScale: 0.5,
+                minScale: 1.0,
                 maxScale: 4.0,
                 child: Container(
                   decoration: BoxDecoration(
@@ -130,7 +102,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
   Color _getRiskColor(String? risk) {
     if (risk == null) return Colors.grey;
 
-    String riskLower = risk.toLowerCase().trim();
+    final String riskLower = risk.toLowerCase().trim();
 
     // Riesgos bajos - Verde
     if (riskLower.contains('low') ||
@@ -190,26 +162,24 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
+          padding: const EdgeInsets.only(bottom: AppSpacing.lg),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md, vertical: 6),
             decoration: BoxDecoration(
               color: colorScheme.primary.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(AppRadius.lg),
             ),
             child: Text(
               AppLocalizations.of(context)!.campsOfLevel(floor + 1),
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onSurface,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold, color: colorScheme.onSurface),
             ),
           ),
         ),
         ...campsOnFloor.map((camp) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
+            padding: const EdgeInsets.only(bottom: AppSpacing.md),
             child: Container(
               decoration: BoxDecoration(
                 color: colorScheme.surface,
@@ -235,9 +205,9 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
-                          'assets/imgs/item_icons/MHWilds-Tent_Icon_White_e15a70e45a.png',
-                          fit: BoxFit.contain,
-                        ),
+                            'assets/imgs/item_icons/MHWilds-Tent_Icon_White_e15a70e45a.webp',
+                            fit: BoxFit.contain,
+                            excludeFromSemantics: true),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -278,42 +248,41 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
               ),
             ),
           );
-        }).toList(),
+        }),
       ],
     );
   }
 
   Widget _buildInfoChip(String label, String value, Color color) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding:
+          const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 6),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         border: Border.all(
           color: color.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            '$label: ',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: color.withValues(alpha: 0.8),
+      child: Text.rich(
+        TextSpan(
+          children: [
+            TextSpan(
+              text: '$label: ',
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: color.withValues(alpha: 0.8)),
             ),
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-              color: color,
+            TextSpan(
+              text: value,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(fontWeight: FontWeight.w700, color: color),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -332,7 +301,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
       ),
       body: isLoadingImages
           ? Container(
-              height: 200,
+              constraints: const BoxConstraints(minHeight: 200),
               margin: const EdgeInsets.all(20),
               child: Center(
                 child: Column(
@@ -345,10 +314,8 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                     const SizedBox(height: 16),
                     Text(
                       AppLocalizations.of(context)!.loadingMap,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: colorScheme.onSurface.withValues(alpha: 0.7)),
                     ),
                   ],
                 ),
@@ -356,7 +323,7 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
             )
           : imageFiles.isEmpty
               ? Container(
-                  height: 200,
+                  constraints: const BoxConstraints(minHeight: 200),
                   margin: const EdgeInsets.all(20),
                   child: Center(
                     child: Column(
@@ -365,29 +332,31 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                         Icon(
                           Icons.map_outlined,
                           size: 64,
-                          color: colorScheme.onSurface.withValues(alpha: 0.5),
+                          color: colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(height: 16),
                         Text(
                           AppLocalizations.of(context)!.noMapImagesFound,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: colorScheme.onSurface.withValues(alpha: 0.7),
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                  color: colorScheme.onSurface
+                                      .withValues(alpha: 0.7)),
                         ),
                       ],
                     ),
                   ),
                 )
               : SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: imageFiles.asMap().entries.map((entry) {
-                      int index = entry.key;
-                      String image = entry.value;
-                      int floorIndex = index;
-                      int levelLabel = index + 1;
+                      final int index = entry.key;
+                      final String image = entry.value;
+                      final int floorIndex = index;
+                      final int levelLabel = index + 1;
 
                       return FadeInUp(
                         duration: Duration(milliseconds: 600 + (index * 200)),
@@ -398,24 +367,25 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                           ),
                           decoration: BoxDecoration(
                             color: colorScheme.surface,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(AppRadius.lg),
                             boxShadow: [
                               BoxShadow(
-                                color: colorScheme.shadow.withValues(alpha: 0.1),
+                                color:
+                                    colorScheme.shadow.withValues(alpha: 0.1),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               ),
                             ],
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(24),
+                            padding: const EdgeInsets.all(AppSpacing.xl),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   padding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 8,
+                                    horizontal: AppSpacing.lg,
+                                    vertical: AppSpacing.sm,
                                   ),
                                   decoration: BoxDecoration(
                                     color: Color.lerp(colorScheme.primary,
@@ -424,12 +394,13 @@ class _MonsterMapDetailsState extends State<MonsterMapDetails> {
                                   ),
                                   child: Text(
                                     '${AppLocalizations.of(context)!.level} $levelLabel',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                      letterSpacing: 0.5,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white,
+                                            letterSpacing: 0.5),
                                   ),
                                 ),
                                 const SizedBox(height: 20),

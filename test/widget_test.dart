@@ -1,30 +1,80 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/models/monster.dart';
+import 'package:mhwilds_app/providers/announcements_provider.dart';
+import 'package:mhwilds_app/providers/locations_provider.dart';
+import 'package:mhwilds_app/providers/monsters_provider.dart';
+import 'package:mhwilds_app/screens/home.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:mhwilds_app/main.dart';
+import 'fake_cached_api.dart';
+
+// Offline providers so the smoke test never touches the network.
+class _OfflineLocationsProvider extends LocationsProvider {
+  @override
+  Future<void> fetchZones() async {}
+}
+
+class _EmptyMonstersProvider extends MonstersProvider {
+  @override
+  LoadState<List<Monster>> get state => const Data([]);
+
+  @override
+  Future<void> refresh({bool force = false}) async {}
+}
+
+Widget _buildApp() {
+  return MultiProvider(
+    providers: [
+      ChangeNotifierProvider<MonstersProvider>(
+          create: (_) => _EmptyMonstersProvider()),
+      ChangeNotifierProvider<LocationsProvider>(
+          create: (_) => _OfflineLocationsProvider()),
+      ChangeNotifierProvider(
+          create: (_) => AnnouncementsProvider(
+              api: fakeCachedApi((_) async => http.Response('', 503)))),
+    ],
+    child: const MaterialApp(
+      locale: Locale('en'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: HomeScreen(),
+    ),
+  );
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  setUp(() => SharedPreferences.setMockInitialValues({}));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('HomeScreen opens on the Monsters section', (tester) async {
+    await tester.pumpWidget(_buildApp());
+    await tester.pumpAndSettle();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(
+      find.descendant(of: find.byType(AppBar), matching: find.text('Monsters')),
+      findsOneWidget,
+    );
+    // No data loaded: the list shows its empty state instead of crashing.
+    expect(find.text('No monsters found'), findsOneWidget);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('Drawer lists the main sections', (tester) async {
+    await tester.pumpWidget(_buildApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byTooltip('Open navigation menu'));
+    await tester.pumpAndSettle();
+
+    final drawer = find.byType(Drawer);
+    expect(drawer, findsOneWidget);
+    for (final title in ['Weapons', 'Armor Sets', 'Decorations']) {
+      expect(find.descendant(of: drawer, matching: find.text(title)),
+          findsOneWidget,
+          reason: '"$title" should be in the drawer');
+    }
   });
 }

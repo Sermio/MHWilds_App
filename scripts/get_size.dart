@@ -5,8 +5,8 @@ void main() {
   final bytes = File('assets/imgs/sprites/gear.png').readAsBytesSync();
   final img = decodeImage(bytes);
   if (img != null) {
-    print('Width: ${img.width}, Height: ${img.height}');
+    stdout.writeln('Width: ${img.width}, Height: ${img.height}');
   } else {
-    print('Failed to decode image');
+    stdout.writeln('Failed to decode image');
   }
 }

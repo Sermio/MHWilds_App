@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/screens/settings.dart';
 
 class Cappbar extends StatelessWidget implements PreferredSizeWidget {
@@ -16,6 +17,7 @@ class Cappbar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions ??
           [
             IconButton(
+              tooltip: AppLocalizations.of(context)!.settings,
               icon: const Icon(Icons.settings),
               onPressed: () {
                 Navigator.push(
@@ -39,7 +41,7 @@ class Cappbar extends StatelessWidget implements PreferredSizeWidget {
           //     child: Image.asset(
           //       height: 150,
           //       width: 150,
-          //       'assets/imgs/logo/logo512transparent.png',
+          //       'assets/imgs/logo/logo512transparent.webp',
           //     ),
           //   ),
           // ),

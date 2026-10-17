@@ -98,8 +98,8 @@ class GroupBonus {
       id: json['id'] as int? ??
           (json['groupBonusId'] as int? ??
               (json['group_bonus_id'] as int? ?? 0)),
-      name: json['name'] as String? ?? (json['skill']?['name'] as String? ?? ''),
-      skill: Skill.fromJson(json['skill'] ?? {}),
+      name: json['name'] as String? ?? ((json['skill'] as Map<String, dynamic>?)?['name'] as String? ?? ''),
+      skill: Skill.fromJson(json['skill'] as Map<String, dynamic>? ?? {}),
       ranks: (json['ranks'] as List? ?? [])
           .map((rankJson) => Rank.fromJson(rankJson))
           .toList(),
@@ -182,11 +182,11 @@ class SkillWithLevel {
   factory SkillWithLevel.fromJson(Map<String, dynamic> json) {
     return SkillWithLevel(
       id: json['id'] as int? ?? 0,
-      skill: Skill.fromJson(json['skill'] ?? {}),
+      skill: Skill.fromJson(json['skill'] as Map<String, dynamic>? ?? {}),
       level: json['level'] as int? ??
           (json['rank'] as int? ?? (json['skillLevel'] as int? ?? 0)),
       description: json['description'] as String? ??
-          (json['skill']?['description'] as String? ?? ''),
+          ((json['skill'] as Map<String, dynamic>?)?['description'] as String? ?? ''),
     );
   }
 }

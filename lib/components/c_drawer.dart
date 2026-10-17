@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/components/gear_sprite_icon.dart';
-import 'package:mhwilds_app/components/skill_sprite_icon.dart';
+import 'package:mhwilds_app/components/announcements_button.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/screens/talismans_list.dart';
-import 'package:mhwilds_app/screens/armor_sets_list.dart';
-import 'package:mhwilds_app/screens/decorations_list.dart';
-import 'package:mhwilds_app/screens/items_list.dart';
-import 'package:mhwilds_app/screens/monsters_list.dart';
-import 'package:mhwilds_app/screens/skills_list.dart';
-import 'package:mhwilds_app/screens/weapons_list.dart';
-import 'package:mhwilds_app/screens/build_optimizer_screen.dart';
-import 'package:mhwilds_app/screens/build_crafter_screen.dart';
-import 'package:mhwilds_app/screens/maps_list.dart';
+import 'package:mhwilds_app/screens/app_section.dart';
 import 'package:mhwilds_app/utils/colors.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class Cdrawer extends StatelessWidget {
-  final Function(Widget) onItemSelected;
-  final Widget selectedScreen;
+  final ValueChanged<AppSection> onSectionSelected;
+  final AppSection selectedSection;
   static final Color _selectedHighlightColor = Colors.orange[600]!;
 
   const Cdrawer({
     super.key,
-    required this.onItemSelected,
-    required this.selectedScreen,
+    required this.onSectionSelected,
+    required this.selectedSection,
   });
 
   @override
@@ -50,7 +41,7 @@ class Cdrawer extends StatelessWidget {
   Widget menuHeader(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final accentColor = isDark ? Colors.white : Colors.black87;
+    final accentColor = Theme.of(context).colorScheme.onSurface;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -58,19 +49,20 @@ class Cdrawer extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppColors.goldSoft.withOpacity(0.92),
-            AppColors.goldSoft.withOpacity(0.72),
+            AppColors.goldSoft.withValues(alpha: 0.92),
+            AppColors.goldSoft.withValues(alpha: 0.72),
           ],
         ),
         border: Border(
           bottom: BorderSide(
-            color: (isDark ? Colors.black : Colors.white).withOpacity(0.35),
+            color:
+                (isDark ? Colors.black : Colors.white).withValues(alpha: 0.35),
             width: 1,
           ),
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.goldSoft.withOpacity(0.25),
+            color: AppColors.goldSoft.withValues(alpha: 0.25),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
@@ -78,7 +70,7 @@ class Cdrawer extends StatelessWidget {
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 18),
+          padding: const EdgeInsets.fromLTRB(20, AppSpacing.lg, 20, 18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -88,10 +80,12 @@ class Cdrawer extends StatelessWidget {
                   height: 92,
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: (isDark ? Colors.black : Colors.white).withOpacity(0.25),
+                    color: (isDark ? Colors.black : Colors.white)
+                        .withValues(alpha: 0.25),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: (isDark ? Colors.black : Colors.white).withOpacity(0.55),
+                      color: (isDark ? Colors.black : Colors.white)
+                          .withValues(alpha: 0.55),
                       width: 1,
                     ),
                   ),
@@ -101,7 +95,8 @@ class Cdrawer extends StatelessWidget {
                       borderRadius: BorderRadius.circular(18),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(isDark ? 0.3 : 0.1),
+                          color: Colors.black
+                              .withValues(alpha: isDark ? 0.3 : 0.1),
                           blurRadius: 10,
                           offset: const Offset(0, 3),
                         ),
@@ -109,31 +104,39 @@ class Cdrawer extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(18),
-                      child: Image.asset(
-                        'assets/imgs/drawer/logo512.png',
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.asset('assets/imgs/drawer/logo512.png',
+                          fit: BoxFit.cover, excludeFromSemantics: true),
                     ),
                   ),
                 ),
               ),
               const SizedBox(height: 14),
-              Text(
-                l10n.appTitle,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                  color: accentColor,
-                  letterSpacing: 0.2,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Mismo ancho que el botón: el nombre queda centrado.
+                  const SizedBox(width: 48),
+                  Flexible(
+                    child: Text(
+                      l10n.appTitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: accentColor,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                  ),
+                  AnnouncementsButton(color: accentColor),
+                ],
               ),
               const SizedBox(height: 10),
               Container(
                 width: 56,
                 height: 3,
                 decoration: BoxDecoration(
-                  color: accentColor.withOpacity(0.4),
+                  color: accentColor.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(99),
                 ),
               ),
@@ -147,193 +150,23 @@ class Cdrawer extends StatelessWidget {
   Widget menuItems(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Container(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+      padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.xl),
       child: Column(
         children: [
-          _buildMenuItem(
-            context: context,
-            title: l10n.monsters,
-            subtitle: l10n.menuMonstersSubtitle,
-            leadingIcon: Image.asset(
-              'assets/imgs/monster_icons/arkveld.png',
-              fit: BoxFit.contain,
-              errorBuilder: (_, __, ___) => Icon(
-                Icons.pets,
-                color: Colors.red[400],
-                size: 30,
-              ),
+          for (final section in AppSection.values) ...[
+            if (section != AppSection.values.first) const SizedBox(height: 8),
+            _buildMenuItem(
+              context: context,
+              title: section.title(l10n),
+              subtitle: section.subtitle(l10n),
+              leadingIcon: section.menuLeading(context),
+              icon: section.icon,
+              iconColor: section.iconColor(context),
+              isSelected: selectedSection == section,
+              onTap: () => onSectionSelected(section),
             ),
-            icon: Icons.pets,
-            iconColor: Colors.red[400]!,
-            isSelected: selectedScreen is MonstersList,
-            onTap: () => onItemSelected(const MonstersList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.weapons,
-            subtitle: l10n.menuWeaponsSubtitle,
-            leadingIcon: GearSpriteIcon(
-              column: weaponColumnByKind['great-sword']!,
-              rarity: 1,
-              size: 30,
-              fallback: Icon(
-                Icons.gps_fixed,
-                color: Colors.indigo[600],
-                size: 30,
-              ),
-            ),
-            icon: Icons.gps_fixed,
-            iconColor: Colors.indigo[600]!,
-            isSelected: selectedScreen is WeaponsList,
-            onTap: () => onItemSelected(const WeaponsList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.armorSets,
-            subtitle: l10n.menuArmorSetsSubtitle,
-            leadingIcon: GearSpriteIcon(
-              column: armorColumnByKind['head']!,
-              rarity: 1,
-              size: 30,
-              fallback: Icon(
-                Icons.shield,
-                color: Colors.blue[600],
-                size: 30,
-              ),
-            ),
-            icon: Icons.shield,
-            iconColor: Colors.blue[600]!,
-            isSelected: selectedScreen is ArmorSetList,
-            onTap: () => onItemSelected(const ArmorSetList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.decorations,
-            subtitle: l10n.menuDecorationsSubtitle,
-            leadingIcon: Image.asset(
-              'assets/imgs/drawer/decoration.png',
-              fit: BoxFit.contain,
-              errorBuilder: (_, __, ___) => Icon(
-                Icons.diamond,
-                color: Colors.purple[400],
-                size: 30,
-              ),
-            ),
-            icon: Icons.diamond,
-            iconColor: Colors.purple[400]!,
-            isSelected: selectedScreen is DecorationsList,
-            onTap: () => onItemSelected(const DecorationsList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.talismans,
-            subtitle: l10n.menuTalismansSubtitle,
-            leadingIcon: GearSpriteIcon(
-              column: talismanColumn,
-              rarity: 1,
-              size: 30,
-              fallback: Icon(
-                Icons.workspace_premium,
-                color: AppColors.goldSoft,
-                size: 30,
-              ),
-            ),
-            icon: Icons.workspace_premium,
-            iconColor: AppColors.goldSoft,
-            isSelected: selectedScreen is AmuletList,
-            onTap: () => onItemSelected(const AmuletList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.skills,
-            subtitle: l10n.menuSkillsSubtitle,
-            leadingIcon: SkillSpriteIcon(
-              iconId: 1,
-              size: 30,
-              fallback: Icon(
-                Icons.flash_on,
-                color: Colors.green[600],
-                size: 30,
-              ),
-            ),
-            icon: Icons.flash_on,
-            iconColor: Colors.green[600]!,
-            isSelected: selectedScreen is SkillList,
-            onTap: () => onItemSelected(const SkillList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.items,
-            subtitle: l10n.menuItemsSubtitle,
-            leadingIcon: Image.asset(
-              'assets/imgs/drawer/potion.png',
-              fit: BoxFit.contain,
-              errorBuilder: (_, __, ___) => Icon(
-                Icons.inventory_2,
-                color: Colors.orange[600],
-                size: 30,
-              ),
-            ),
-            icon: Icons.inventory_2,
-            iconColor: Colors.orange[600]!,
-            isSelected: selectedScreen is ItemList,
-            onTap: () => onItemSelected(const ItemList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.locations,
-            subtitle: l10n.menuLocationsSubtitle,
-            leadingIcon: Image.asset(
-              'assets/imgs/maps/map.png',
-              fit: BoxFit.contain,
-              errorBuilder: (_, __, ___) => Icon(
-                Icons.map,
-                color: Colors.blue[400],
-                size: 30,
-              ),
-            ),
-            icon: Icons.map,
-            iconColor: Colors.blue[400]!,
-            isSelected: selectedScreen is MapsList,
-            onTap: () => onItemSelected(const MapsList()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.buildCrafter,
-            subtitle: l10n.buildCrafterMenuSubtitle,
-            leadingIcon: Icon(
-              Icons.handyman,
-              color: Colors.deepPurple.shade400,
-              size: 30,
-            ),
-            icon: Icons.handyman,
-            iconColor: Colors.deepPurple.shade400,
-            isSelected: selectedScreen is BuildCrafterScreen,
-            onTap: () => onItemSelected(const BuildCrafterScreen()),
-          ),
-          const SizedBox(height: 8),
-          _buildMenuItem(
-            context: context,
-            title: l10n.buildOptimizer,
-            subtitle: l10n.buildOptimizerMenuSubtitle,
-            leadingIcon: Icon(
-              Icons.auto_graph,
-              color: Colors.teal[600],
-              size: 30,
-            ),
-            icon: Icons.auto_graph,
-            iconColor: Colors.teal[600]!,
-            isSelected: selectedScreen is BuildOptimizerScreen,
-            onTap: () => onItemSelected(const BuildOptimizerScreen()),
-          ),
+          ],
         ],
       ),
     );
@@ -353,19 +186,19 @@ class Cdrawer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: isSelected
-            ? _selectedHighlightColor.withOpacity(0.12)
+            ? _selectedHighlightColor.withValues(alpha: 0.12)
             : colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.08),
+            color: colorScheme.shadow.withValues(alpha: 0.08),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
         ],
         border: Border.all(
           color: isSelected
-              ? _selectedHighlightColor.withOpacity(0.35)
+              ? _selectedHighlightColor.withValues(alpha: 0.35)
               : colorScheme.outlineVariant,
           width: 1,
         ),
@@ -376,7 +209,7 @@ class Cdrawer extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppSpacing.lg),
             child: Row(
               children: [
                 // Icono con fondo circular

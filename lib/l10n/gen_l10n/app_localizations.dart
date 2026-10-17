@@ -1406,6 +1406,264 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Master Rank'**
   String get masterRank;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @errorOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'No connection. Check your internet and try again.'**
+  String get errorOffline;
+
+  /// No description provided for @errorLoadingData.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load the data. Please try again.'**
+  String get errorLoadingData;
+
+  /// Banner over cached data that could not be refreshed. {date} is the day it was downloaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline · data from {date}'**
+  String offlineDataFrom(DateTime date);
+
+  /// Tooltip of the help button that opens the credits of an external tool screen
+  ///
+  /// In en, this message translates to:
+  /// **'Credits'**
+  String get creditsTooltip;
+
+  /// No description provided for @elementFire.
+  ///
+  /// In en, this message translates to:
+  /// **'Fire'**
+  String get elementFire;
+
+  /// No description provided for @elementWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get elementWater;
+
+  /// No description provided for @elementIce.
+  ///
+  /// In en, this message translates to:
+  /// **'Ice'**
+  String get elementIce;
+
+  /// No description provided for @elementThunder.
+  ///
+  /// In en, this message translates to:
+  /// **'Thunder'**
+  String get elementThunder;
+
+  /// No description provided for @elementDragon.
+  ///
+  /// In en, this message translates to:
+  /// **'Dragon'**
+  String get elementDragon;
+
+  /// No description provided for @elementParalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Paralysis'**
+  String get elementParalysis;
+
+  /// No description provided for @elementPoison.
+  ///
+  /// In en, this message translates to:
+  /// **'Poison'**
+  String get elementPoison;
+
+  /// No description provided for @elementSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get elementSleep;
+
+  /// No description provided for @elementBlastblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Blastblight'**
+  String get elementBlastblight;
+
+  /// No description provided for @elementBlast.
+  ///
+  /// In en, this message translates to:
+  /// **'Blast'**
+  String get elementBlast;
+
+  /// No description provided for @elementFireblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Fireblight'**
+  String get elementFireblight;
+
+  /// No description provided for @elementWaterblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Waterblight'**
+  String get elementWaterblight;
+
+  /// No description provided for @elementIceblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Iceblight'**
+  String get elementIceblight;
+
+  /// No description provided for @elementThunderblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Thunderblight'**
+  String get elementThunderblight;
+
+  /// No description provided for @elementDragonblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Dragonblight'**
+  String get elementDragonblight;
+
+  /// No description provided for @elementFrostblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Frostblight'**
+  String get elementFrostblight;
+
+  /// No description provided for @elementWebbed.
+  ///
+  /// In en, this message translates to:
+  /// **'Webbed'**
+  String get elementWebbed;
+
+  /// No description provided for @elementBleeding.
+  ///
+  /// In en, this message translates to:
+  /// **'Bleeding'**
+  String get elementBleeding;
+
+  /// No description provided for @elementFrenzy.
+  ///
+  /// In en, this message translates to:
+  /// **'Frenzy'**
+  String get elementFrenzy;
+
+  /// No description provided for @ailmentDescThunderblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Thunderblight is caused by the Thunder Element which increases the Hunter\'s chance of being stunned by Monster attacks.\nIt can be cured by consuming a Nulberry, or using a Cleanser Booster.'**
+  String get ailmentDescThunderblight;
+
+  /// No description provided for @ailmentDescWaterblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Waterblight is caused by the Water Element which reduces the Stamina recovery of the Hunter.\nIt can be cured by consuming a Nulberry, or using a Cleanser Booster.'**
+  String get ailmentDescWaterblight;
+
+  /// No description provided for @ailmentDescFireblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Fireblight is caused by the Fire Element which causes the hunter to lose health over time.\nIt can be cured by consuming a Nulberry. When available, players can jump into a nearby water, or roll 3 times on the ground.'**
+  String get ailmentDescFireblight;
+
+  /// No description provided for @ailmentDescIceblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Iceblight is caused by the Ice Element which increases the Stamina consumption when performing tasks such as dashing, attacking, and dodging.\nIt can be cured by consuming a Nulberry.'**
+  String get ailmentDescIceblight;
+
+  /// No description provided for @ailmentDescDragonblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Dragonblight is caused by the Dragon Element which nullifies the damaging effects and status buildup from this element.\nIt can be cured by consuming a Nulberry.'**
+  String get ailmentDescDragonblight;
+
+  /// No description provided for @ailmentDescBlast.
+  ///
+  /// In en, this message translates to:
+  /// **'Blast is a status that marks a monster that can damage them through small explosions.\nIt can be cured with a Nulberry or by dodge-rolling up to three times.'**
+  String get ailmentDescBlast;
+
+  /// No description provided for @ailmentDescBlastblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Blastblight causes the target to explode after some time has passed, or upon receiving an impactful attack.\nIt can be cured with a Nulberry or by dodge-rolling up to three times.'**
+  String get ailmentDescBlastblight;
+
+  /// No description provided for @ailmentDescBleeding.
+  ///
+  /// In en, this message translates to:
+  /// **'Bleeding causes the players to lose Health when performing actions such as moving, attacking, or dodging.\nIt can be cured by eating an Astera Jerky, Well-Done Steak, or Sushifish Scale, or by crouching for a few seconds.'**
+  String get ailmentDescBleeding;
+
+  /// No description provided for @ailmentDescFrenzy.
+  ///
+  /// In en, this message translates to:
+  /// **'Frenzy will cause the Hunter to temporarily receive more damage when fully infected.\nIt can be cured by using a Nulberry.'**
+  String get ailmentDescFrenzy;
+
+  /// No description provided for @ailmentDescFrostblight.
+  ///
+  /// In en, this message translates to:
+  /// **'Frostblight prevents the hunter from moving or acting temporarily.\nIt can be cured with a Cleanser or by having a Bind Resistance Level 3.'**
+  String get ailmentDescFrostblight;
+
+  /// No description provided for @ailmentDescWebbed.
+  ///
+  /// In en, this message translates to:
+  /// **'Webbed prevents the hunter from moving or acting temporarily.\nIt can be cured with a Cleanser, by moving, pressing buttons, being knocked by an attack, or taking a hit.'**
+  String get ailmentDescWebbed;
+
+  /// No description provided for @ailmentDescPoison.
+  ///
+  /// In en, this message translates to:
+  /// **'Poison gradually depletes the health of the target over time.\nThe Poison effect can be cured by Antidote, Herbal Medicine, or Herbal Powder.'**
+  String get ailmentDescPoison;
+
+  /// No description provided for @ailmentDescSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep causes the target to fall asleep which renders them susceptible to a one-time attack after.\nThe target will wake up after they receive damage.\nIt can be cured with an Energy Drink, being it by an ally or a Monster.'**
+  String get ailmentDescSleep;
+
+  /// No description provided for @ailmentDescParalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Paralysis renders the hunter or monster immobilized and susceptible to increased damage for the duration.\nIt can be cured by impacts with large amounts of knockback, such as an upswing from a Hammer or Great Sword.'**
+  String get ailmentDescParalysis;
+
+  /// No description provided for @announcements.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements'**
+  String get announcements;
+
+  /// No description provided for @announcementsNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements (new)'**
+  String get announcementsNew;
+
+  /// No description provided for @loadingAnnouncements.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading announcements...'**
+  String get loadingAnnouncements;
+
+  /// No description provided for @noAnnouncements.
+  ///
+  /// In en, this message translates to:
+  /// **'No announcements yet'**
+  String get noAnnouncements;
+
+  /// No description provided for @openLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Open link'**
+  String get openLink;
 }
 
 class _AppLocalizationsDelegate

@@ -1,11 +1,14 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_chip.dart';
+import 'package:mhwilds_app/components/element_icon.dart';
 import 'package:mhwilds_app/components/elements_dialog.dart';
-import 'package:mhwilds_app/data/ailments.dart';
+import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
 import 'package:mhwilds_app/screens/map_details.dart';
-import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/utils/game_colors.dart';
+import 'package:mhwilds_app/utils/game_element.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class MonsterDetailsCard extends StatelessWidget {
   final Monster monster;
@@ -19,7 +22,7 @@ class MonsterDetailsCard extends StatelessWidget {
       elevation: 5,
       margin: EdgeInsets.zero,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(AppSpacing.sm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -66,24 +69,14 @@ class MonsterDetailsCard extends StatelessWidget {
                       attributeType: "Elements",
                       children: monster.elements
                           .where((w) => w.isNotEmpty)
-                          .map(
-                            (w) => Image.asset(
-                              'assets/imgs/elements/${w.toLowerCase()}.webp',
-                              height: 25,
-                            ),
-                          )
+                          .map((w) => ElementIcon(w))
                           .toList(),
                     ),
                     MonsterAttributes(
                       attributeType: "Ailments",
                       children: monster.ailments
                           .where((w) => w.name.isNotEmpty)
-                          .map(
-                            (w) => Image.asset(
-                              'assets/imgs/elements/${w.name.toLowerCase()}.webp',
-                              height: 25,
-                            ),
-                          )
+                          .map((w) => ElementIcon(w.name))
                           .toList(),
                     ),
                   ],
@@ -95,13 +88,13 @@ class MonsterDetailsCard extends StatelessWidget {
             // Variantes del monstruo (incluyendo tempered)
             if (monster.variants.isNotEmpty) ...[
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md, vertical: AppSpacing.sm),
                 decoration: BoxDecoration(
-                  color: Colors.orange.withOpacity(0.1),
+                  color: Colors.orange.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: Colors.orange.withOpacity(0.3),
+                    color: Colors.orange.withValues(alpha: 0.3),
                     width: 1,
                   ),
                 ),
@@ -118,11 +111,12 @@ class MonsterDetailsCard extends StatelessWidget {
                         const SizedBox(width: 6),
                         Text(
                           'Variants Available:',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.orange[700],
-                            fontSize: 12,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.orange[700]),
                         ),
                       ],
                     ),
@@ -133,10 +127,10 @@ class MonsterDetailsCard extends StatelessWidget {
                       alignment: WrapAlignment.center,
                       children: monster.variants.map((variant) {
                         // Determinar si es tempered o arch-tempered
-                        bool isTempered =
+                        final bool isTempered =
                             variant.kind.toLowerCase().contains('tempered') ||
                                 variant.name.toLowerCase().contains('tempered');
-                        bool isArchTempered = variant.kind
+                        final bool isArchTempered = variant.kind
                                 .toLowerCase()
                                 .contains('arch-tempered') ||
                             variant.name
@@ -150,21 +144,24 @@ class MonsterDetailsCard extends StatelessWidget {
 
                         if (isArchTempered) {
                           variantColor = Colors.orange[700]!;
-                          borderColor = Colors.orange.withOpacity(0.6);
-                          backgroundColor = Colors.orange.withOpacity(0.1);
+                          borderColor = Colors.orange.withValues(alpha: 0.6);
+                          backgroundColor =
+                              Colors.orange.withValues(alpha: 0.1);
                         } else if (isTempered) {
                           variantColor = Colors.purple[700]!;
-                          borderColor = Colors.purple.withOpacity(0.6);
-                          backgroundColor = Colors.purple.withOpacity(0.1);
+                          borderColor = Colors.purple.withValues(alpha: 0.6);
+                          backgroundColor =
+                              Colors.purple.withValues(alpha: 0.1);
                         } else {
                           variantColor = Colors.blue[700]!;
-                          borderColor = Colors.blue.withOpacity(0.6);
-                          backgroundColor = Colors.blue.withOpacity(0.1);
+                          borderColor = Colors.blue.withValues(alpha: 0.6);
+                          backgroundColor = Colors.blue.withValues(alpha: 0.1);
                         }
 
                         return Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 4),
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xs),
                           decoration: BoxDecoration(
                             color: backgroundColor,
                             borderRadius: BorderRadius.circular(8),
@@ -199,20 +196,22 @@ class MonsterDetailsCard extends StatelessWidget {
                     children: monster.weaknesses
                         .where((w) =>
                             w.level >= 1 &&
-                            ((w.kind == 'element' && w.element != null && w.element!.isNotEmpty) ||
-                             (w.kind == 'status' && w.status != null && w.status!.isNotEmpty)))
+                            ((w.kind == 'element' &&
+                                    w.element != null &&
+                                    w.element!.isNotEmpty) ||
+                                (w.kind == 'status' &&
+                                    w.status != null &&
+                                    w.status!.isNotEmpty)))
                         .map((w) {
-                      final name = (w.kind == 'element' ? w.element : w.status) ?? '';
+                      final name =
+                          (w.kind == 'element' ? w.element : w.status) ?? '';
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppSpacing.xs, vertical: 2),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Image.asset(
-                              'assets/imgs/elements/${name.toLowerCase()}.webp',
-                              height: 25,
-                              errorBuilder: (_, __, ___) => const SizedBox(height: 25),
-                            ),
+                            ElementIcon(name),
                             const SizedBox(height: 2),
                             Row(
                               mainAxisSize: MainAxisSize.min,
@@ -238,12 +237,9 @@ class MonsterDetailsCard extends StatelessWidget {
                         .where((w) => w.element.isNotEmpty)
                         .map(
                           (w) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                            child: Image.asset(
-                              'assets/imgs/elements/${w.element.toLowerCase()}.webp',
-                              height: 25,
-                              errorBuilder: (_, __, ___) => const SizedBox(height: 25),
-                            ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.xs, vertical: 2),
+                            child: ElementIcon(w.element),
                           ),
                         )
                         .toList(),
@@ -271,20 +267,17 @@ class MonsterDetailsCard extends StatelessWidget {
                 spacing: 8.0,
                 runSpacing: 2.0,
                 children: monster.locations.asMap().entries.map((location) {
-                  int index = location.key;
-                  String loc = location.value.name;
+                  final int index = location.key;
+                  final String loc = location.value.name;
                   return Bounce(
                     from: 10,
                     delay: Duration(milliseconds: index * 150),
                     child: Cchip(
                       itemName: loc,
                       itemIdForColor: location.value.id,
-                      getItemColor: zoneBackgroundColor,
-                      optionalWidget: Image.asset(
-                        'assets/imgs/maps/map.png',
-                        width: 16,
-                        height: 16,
-                      ),
+                      getItemColor: GameColors.of(context).zone,
+                      optionalWidget: Image.asset('assets/imgs/maps/map.webp',
+                          width: 16, height: 16, excludeFromSemantics: true),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -360,42 +353,34 @@ class ElementsAndAilments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return ListView.builder(
-      itemCount: ailments.length,
+      itemCount: GameElement.ailments.length,
       itemBuilder: (context, index) {
-        String ailmentName = ailments[index].keys.first;
-        String description = ailments[index][ailmentName] ?? "";
+        final ailment = GameElement.ailments[index];
 
         return Container(
           margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHighest.withOpacity(0.6),
+            color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: colorScheme.outlineVariant.withOpacity(0.7),
+              color: colorScheme.outlineVariant.withValues(alpha: 0.7),
               width: 1,
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(AppSpacing.md),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Image.asset(
-                      'assets/imgs/elements/${ailmentName.toLowerCase()}.webp',
-                      height: 24,
-                    ),
+                    ElementIcon(ailment.id, size: 24),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        ailmentName
-                            .replaceAll('-', ' ')
-                            .split(' ')
-                            .map((word) =>
-                                word[0].toUpperCase() + word.substring(1))
-                            .join(' '),
+                        ailment.label(l10n),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -407,10 +392,10 @@ class ElementsAndAilments extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  description,
+                  ailment.description(l10n) ?? '',
                   style: TextStyle(
                     fontSize: 13,
-                    color: colorScheme.onSurface.withOpacity(0.9),
+                    color: colorScheme.onSurface.withValues(alpha: 0.9),
                     height: 1.35,
                   ),
                 ),
@@ -458,22 +443,4 @@ class MonsterAttributes extends StatelessWidget {
       ],
     );
   }
-}
-
-Widget attributeIconWithText(String imageName, String label) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 4),
-    child: Column(
-      children: [
-        Image.asset(
-          'assets/imgs/elements/${imageName.toLowerCase()}.webp',
-          height: 25,
-        ),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 10),
-        ),
-      ],
-    ),
-  );
 }

@@ -678,4 +678,153 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get masterRank => 'Rango Maestro';
+
+  @override
+  String get retry => 'Riprova';
+
+  @override
+  String get errorOffline =>
+      'Nessuna connessione. Controlla internet e riprova.';
+
+  @override
+  String get errorLoadingData => 'Impossibile caricare i dati. Riprova.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Offline · dati del $dateString';
+  }
+
+  @override
+  String get creditsTooltip => 'Crediti';
+
+  @override
+  String get elementFire => 'Fuoco';
+
+  @override
+  String get elementWater => 'Acqua';
+
+  @override
+  String get elementIce => 'Ghiaccio';
+
+  @override
+  String get elementThunder => 'Fulmine';
+
+  @override
+  String get elementDragon => 'Drago';
+
+  @override
+  String get elementParalysis => 'Paralisi';
+
+  @override
+  String get elementPoison => 'Veleno';
+
+  @override
+  String get elementSleep => 'Sonno';
+
+  @override
+  String get elementBlastblight => 'Esplosione';
+
+  @override
+  String get elementBlast => 'Esplosivo';
+
+  @override
+  String get elementFireblight => 'Piaga del fuoco';
+
+  @override
+  String get elementWaterblight => 'Piaga dell\'acqua';
+
+  @override
+  String get elementIceblight => 'Piaga del ghiaccio';
+
+  @override
+  String get elementThunderblight => 'Piaga del fulmine';
+
+  @override
+  String get elementDragonblight => 'Piaga del drago';
+
+  @override
+  String get elementFrostblight => 'Congelamento';
+
+  @override
+  String get elementWebbed => 'Imbrigliato';
+
+  @override
+  String get elementBleeding => 'Sanguinamento';
+
+  @override
+  String get elementFrenzy => 'Frenesia';
+
+  @override
+  String get ailmentDescThunderblight =>
+      'La Piaga del fulmine è causata dall\'elemento Fulmine e aumenta la probabilità che gli attacchi dei mostri stordiscano il cacciatore.\nSi cura consumando una Nulberry o usando un Cleanser Booster.';
+
+  @override
+  String get ailmentDescWaterblight =>
+      'La Piaga dell\'acqua è causata dall\'elemento Acqua e riduce il recupero della resistenza del cacciatore.\nSi cura consumando una Nulberry o usando un Cleanser Booster.';
+
+  @override
+  String get ailmentDescFireblight =>
+      'La Piaga del fuoco è causata dall\'elemento Fuoco e fa perdere salute al cacciatore nel tempo.\nSi cura consumando una Nulberry. Se c\'è acqua vicino, ci si può tuffare dentro o rotolare 3 volte a terra.';
+
+  @override
+  String get ailmentDescIceblight =>
+      'La Piaga del ghiaccio è causata dall\'elemento Ghiaccio e aumenta il consumo di resistenza quando si corre, si attacca o si schiva.\nSi cura consumando una Nulberry.';
+
+  @override
+  String get ailmentDescDragonblight =>
+      'La Piaga del drago è causata dall\'elemento Drago e annulla gli effetti dannosi e l\'accumulo di stati di questo elemento.\nSi cura consumando una Nulberry.';
+
+  @override
+  String get ailmentDescBlast =>
+      'Esplosivo è uno stato che marca un mostro e permette di danneggiarlo con piccole esplosioni.\nSi cura con una Nulberry o schivando con una rotolata fino a tre volte.';
+
+  @override
+  String get ailmentDescBlastblight =>
+      'L\'Esplosione fa esplodere il bersaglio dopo un po\' di tempo o quando subisce un attacco potente.\nSi cura con una Nulberry o schivando con una rotolata fino a tre volte.';
+
+  @override
+  String get ailmentDescBleeding =>
+      'Il Sanguinamento fa perdere salute al cacciatore quando si muove, attacca o schiva.\nSi cura mangiando un Astera Jerky, una Well-Done Steak o una Sushifish Scale, oppure accucciandosi per alcuni secondi.';
+
+  @override
+  String get ailmentDescFrenzy =>
+      'La Frenesia fa subire temporaneamente più danni al cacciatore quando è completamente infetto.\nSi cura usando una Nulberry.';
+
+  @override
+  String get ailmentDescFrostblight =>
+      'Il Congelamento impedisce temporaneamente al cacciatore di muoversi o agire.\nSi cura con un Cleanser o con Resistenza all\'immobilizzazione di livello 3.';
+
+  @override
+  String get ailmentDescWebbed =>
+      'Imbrigliato impedisce temporaneamente al cacciatore di muoversi o agire.\nSi cura con un Cleanser, muovendosi, premendo i pulsanti, venendo colpiti da un attacco o subendo un colpo.';
+
+  @override
+  String get ailmentDescPoison =>
+      'Il Veleno riduce gradualmente la salute del bersaglio nel tempo.\nSi cura con Antidote, Herbal Medicine o Herbal Powder.';
+
+  @override
+  String get ailmentDescSleep =>
+      'Il Sonno fa addormentare il bersaglio, che diventa vulnerabile a un singolo attacco.\nIl bersaglio si sveglia quando subisce danni.\nSi cura con un Energy Drink, usato da un alleato o da un mostro.';
+
+  @override
+  String get ailmentDescParalysis =>
+      'La Paralisi immobilizza il cacciatore o il mostro e lo rende vulnerabile a danni maggiori finché dura.\nSi cura con impatti dal forte contraccolpo, come un colpo verso l\'alto di un Martello o uno Spadone.';
+
+  @override
+  String get announcements => 'Annunci';
+
+  @override
+  String get announcementsNew => 'Annunci (nuovo)';
+
+  @override
+  String get loadingAnnouncements => 'Caricamento annunci...';
+
+  @override
+  String get noAnnouncements => 'Ancora nessun annuncio';
+
+  @override
+  String get openLink => 'Apri link';
 }

@@ -5,18 +5,29 @@
 -quitar texto de las resistencias de monstruos @done
 -Poner por defecto el inglés @done
 -Rehacer modal de ailments @done
-_corregir recipes de armas/armaduras?
+-corregir recipes de armas/armaduras? @done
+-Añadir viales de comentario de google play @done
+-Añadir tablon de anuncios con firebase? @done
+-Añadir web para administrador y gestion de anuncios desde ahi o de otra manera? @done
+-si metemos Firebase, meter login por google? serviría para algo? a parte de enviarle el login a la webview del buildcrafter? @done
+-Los filtros tapan elementos de las listas en la parte superior donde está el filtro, en todas las pantallas con filtros, o sea todos los listados @done
+-Añadir buy me a koffee en pantalla de ajustes
+-Los elementos del drawer están coloreados de marron como si estuvieran todos seleccionados, pasa en modo claro y oscuro. @done
+-Abrir un arbol de la lista de armas da error @done
+-El layout de los stats en las pantallas de detalles de armas y armaduras no me gusta del todo, algunos estan centrados, otros no, antes estaban separados el nombre y el valor cada uno en un extremo etc. @done
+-Como funciona para que si hay entradas nuevas en als listas, se carguen esas nuevas? porque ahora mismo se carga 1 vez  la respuesta del api y luego no. como se cargarían cosas neuvas si se añadiesen mas al api el dia de mañana? @done
+-No scroll en imagenes de mapa, pero sí permitir zoom @done
+-Que se pueda buscar por elementos las armas y que digan el tipo de vial que usan @done
 
-
-Add Weapons @done
-add more armor sets filters @done
-armor sets filter Kind for Type @done
-monsters images cahnge to cover/contain @done
-Add maps section @done
-Add crafting cost to Amulets @done
-Add crafting cost to armors @done
-add armor decoration slots @done
-add mizutsune @done
-add guardian arkveld items @done
-add small monsters @done
-add female armor images, the url should be ypeB,         'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedArmorPieceName.toLowerCase().replaceAll(' ', '_')}_${armorPieceType}_typea_mhwilds_wiki_guide_200px.png',
+-Add Weapons @done @done
+-add more armor sets filters @done
+-armor sets filter Kind for Type @done
+-monsters images cahnge to cover/contain @done
+-Add maps section @done
+-Add crafting cost to Amulets @done
+-Add crafting cost to armors @done
+-add armor decoration slots @done
+-add mizutsune @done
+-add guardian arkveld items @done
+-add small monsters @done
+-add female armor images, the url should be ypeB,         'https://monsterhunterwilds.wiki.fextralife.com/file/Monster-Hunter-Wilds/${formattedArmorPieceName.toLowerCase().replaceAll(' ', '_')}_${armorPieceType}_typea_mhwilds_wiki_guide_200px.png', @done

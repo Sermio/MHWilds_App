@@ -4,6 +4,7 @@ import 'package:mhwilds_app/components/skill_sprite_icon.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/providers/skills_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class SkillDetails extends StatefulWidget {
   const SkillDetails({super.key, required this.skillsIds, this.skillsLevels});
@@ -55,10 +56,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                   const SizedBox(height: 16),
                   Text(
                     l10n.loadingSkills,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: colorScheme.onSurface.withOpacity(0.7),
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
                   ),
                 ],
               ),
@@ -72,13 +70,13 @@ class _SkillDetailsState extends State<SkillDetails> {
 
                     return Container(
                       margin: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                          horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
                       decoration: BoxDecoration(
                         color: colorScheme.surface,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(AppRadius.lg),
                         boxShadow: [
                           BoxShadow(
-                            color: colorScheme.shadow.withOpacity(0.1),
+                            color: colorScheme.shadow.withValues(alpha: 0.1),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
@@ -88,7 +86,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                         children: [
                           // Header de la skill
                           Container(
-                            padding: const EdgeInsets.all(24),
+                            padding: const EdgeInsets.all(AppSpacing.xl),
                             decoration: BoxDecoration(
                               color: colorScheme.surface,
                               borderRadius: const BorderRadius.vertical(
@@ -102,10 +100,10 @@ class _SkillDetailsState extends State<SkillDetails> {
                                   width: 80,
                                   height: 80,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(AppRadius.md),
                                   ),
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(AppRadius.md),
                                     child: SkillSpriteIcon(
                                       iconId: skill.icon?.id,
                                       iconKind: skill.icon?.kind,
@@ -122,11 +120,7 @@ class _SkillDetailsState extends State<SkillDetails> {
                                 // Nombre de la skill
                                 Text(
                                   skill.name,
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: colorScheme.onSurface,
-                                  ),
+                                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
                                   textAlign: TextAlign.center,
                                 ),
                                 const SizedBox(height: 8),
@@ -134,12 +128,8 @@ class _SkillDetailsState extends State<SkillDetails> {
                                 if (skill.description.isNotEmpty) ...[
                                   Text(
                                     skill.description,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: colorScheme.onSurface
-                                          .withOpacity(0.8),
-                                      height: 1.4,
-                                    ),
+                                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface
+                                          .withValues(alpha: 0.8), height: 1.4),
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
@@ -149,7 +139,7 @@ class _SkillDetailsState extends State<SkillDetails> {
 
                           // Sección de rangos
                           Padding(
-                            padding: const EdgeInsets.all(24),
+                            padding: const EdgeInsets.all(AppSpacing.xl),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -163,23 +153,23 @@ class _SkillDetailsState extends State<SkillDetails> {
                                 ),
                                 const SizedBox(height: 16),
                                 ...skill.ranks.map((rank) {
-                                  bool isCurrentLevel = widget.skillsLevels !=
+                                  final bool isCurrentLevel = widget.skillsLevels !=
                                           null &&
                                       index < widget.skillsLevels!.length &&
                                       rank.level == widget.skillsLevels![index];
 
                                   return Container(
-                                    margin: const EdgeInsets.only(bottom: 16),
+                                    margin: const EdgeInsets.only(bottom: AppSpacing.lg),
                                     padding: const EdgeInsets.all(20),
                                     decoration: BoxDecoration(
                                       color: isCurrentLevel
-                                          ? colorScheme.primary.withOpacity(0.1)
+                                          ? colorScheme.primary.withValues(alpha: 0.1)
                                           : colorScheme.surfaceContainerHighest,
                                       borderRadius: BorderRadius.circular(16),
                                       border: Border.all(
                                         color: isCurrentLevel
                                             ? colorScheme.primary
-                                                .withOpacity(0.3)
+                                                .withValues(alpha: 0.3)
                                             : colorScheme.outlineVariant,
                                         width: isCurrentLevel ? 2 : 1,
                                       ),
@@ -193,26 +183,22 @@ class _SkillDetailsState extends State<SkillDetails> {
                                             Container(
                                               padding:
                                                   const EdgeInsets.symmetric(
-                                                horizontal: 12,
+                                                horizontal: AppSpacing.md,
                                                 vertical: 6,
                                               ),
                                               decoration: BoxDecoration(
                                                 color: isCurrentLevel
                                                     ? colorScheme.primary
                                                     : colorScheme.onSurface
-                                                        .withOpacity(0.4),
+                                                        .withValues(alpha: 0.4),
                                                 borderRadius:
-                                                    BorderRadius.circular(20),
+                                                    BorderRadius.circular(AppRadius.lg),
                                               ),
                                               child: Text(
                                                 '${AppLocalizations.of(context)!.level} ${rank.level}',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: isCurrentLevel
+                                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: isCurrentLevel
                                                       ? colorScheme.onPrimary
-                                                      : colorScheme.surface,
-                                                ),
+                                                      : colorScheme.surface),
                                               ),
                                             ),
                                             if (rank.setPiecesRequired > 0) ...[
@@ -226,26 +212,21 @@ class _SkillDetailsState extends State<SkillDetails> {
                                         const SizedBox(height: 12),
                                         Text(
                                           rank.description,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: colorScheme.onSurface,
-                                            height: 1.4,
-                                            fontWeight: isCurrentLevel
+                                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, height: 1.4, fontWeight: isCurrentLevel
                                                 ? FontWeight.w500
-                                                : FontWeight.normal,
-                                          ),
+                                                : FontWeight.normal),
                                         ),
                                       ],
                                     ),
                                   );
-                                }).toList(),
+                                }),
                               ],
                             ),
                           ),
                         ],
                       ),
                     );
-                  }).toList(),
+                  }),
                   const SizedBox(height: 40),
                 ],
               ),

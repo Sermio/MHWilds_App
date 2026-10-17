@@ -1,84 +1,54 @@
-import 'package:flutter/material.dart';
 import 'package:mhwilds_app/api/monsters_api.dart';
-import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:mhwilds_app/models/monster.dart';
-import 'package:mhwilds_app/utils/utils.dart';
+import 'package:mhwilds_app/providers/catalog_provider.dart';
+import 'package:mhwilds_app/providers/filters/monster_filter.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
+import 'package:mhwilds_app/utils/text_utils.dart';
 
-class MonstersProvider with ChangeNotifier {
-  List<Monster> _monsters = [];
-  List<Monster> _filteredMonsters = [];
-  bool _isLoading = false;
-  List<String> _selectedLocations = [];
-  bool _hasLocationFilter = false;
+class MonstersProvider extends CatalogProvider<Monster, MonsterFilter> {
+  MonstersProvider({
+    super.api,
+    Future<Monster> Function(int id)? fetchById,
+  })  : _fetchById = fetchById,
+        super(const MonsterFilter());
 
-  List<Monster> get allMonsters => _monsters;
-  bool get isLoading => _isLoading;
-  List<Monster> get filteredMonsters => _filteredMonsters;
-  bool get hasData => _monsters.isNotEmpty;
+  final Future<Monster> Function(int id)? _fetchById;
 
-  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
-  void invalidate() {
-    _monsters = [];
-    _filteredMonsters = [];
-    _selectedLocations.clear();
-    _hasLocationFilter = false;
-    notifyListeners();
-  }
+  // Nombre normalizado por id, calculado una vez al cargar.
+  Map<int, String> _normalizedNames = {};
 
-  Future<void> fetchMonsters() async {
-    if (_monsters.isNotEmpty) return;
-
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      _monsters = await MonstersApi.fetchMonsters();
-      _filteredMonsters = List.from(_monsters);
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
+  /// `/monsters` y `/monsters/{id}` devuelven el mismo JSON, así que el
+  /// monstruo del listado vale para el detalle; se pide por id solo si falta.
+  Future<Monster> monsterById(int id) {
+    for (final m in all) {
+      if (m.id == id) return Future.value(m);
     }
-
-    _isLoading = false;
-    notifyListeners();
+    return _fetchById?.call(id) ??
+        MonstersApi.fetchMonsterById(id, lang: language);
   }
 
-  void applyFilters(
-      {String? name,
-      String? species,
-      String? rank,
-      List<String>? locations,
-      required AppLocalizations l10n}) {
-    _selectedLocations = locations ?? [];
-    _hasLocationFilter = _selectedLocations.isNotEmpty;
+  List<Monster> get allMonsters => all;
+  List<Monster> get filteredMonsters => visible;
 
-    _filteredMonsters = _monsters.where((monster) {
-      final searchName = removeDiacritics(name ?? '');
-      final monsterName = removeDiacritics(monster.name);
+  Future<void> fetchMonsters() => fetch();
 
-      bool matchesName = name == null || monsterName.contains(searchName);
+  @override
+  Stream<Data<List<Monster>>> watch({required bool force}) =>
+      MonstersApi.watchMonsters(force: force, lang: language, api: api);
 
-      bool matchesSpecies = species == null || monster.species == species;
-      
-      bool matchesRank = rank == null || monster.availableRanks.contains(rank);
-
-      bool matchesLocation = _hasLocationFilter
-          ? monster.locations.any((location) {
-              return _selectedLocations.any((loc) =>
-                  location.name.toLowerCase().contains(loc.toLowerCase()));
-            })
-          : true;
-
-      return matchesName && matchesSpecies && matchesRank && matchesLocation;
-    }).toList();
-
-    notifyListeners();
+  @override
+  List<Monster> prepare(List<Monster> data) {
+    _normalizedNames = {for (final m in data) m.id: removeDiacritics(m.name)};
+    return data;
   }
 
-  void clearFilters() {
-    _filteredMonsters = _monsters;
-    _selectedLocations.clear();
-    _hasLocationFilter = false;
-    notifyListeners();
+  @override
+  List<Monster> applyFilter(List<Monster> items, MonsterFilter filter) =>
+      filterMonsters(items, filter, normalizedNames: _normalizedNames);
+
+  @override
+  void onReset() {
+    super.onReset();
+    _normalizedNames = {};
   }
 }

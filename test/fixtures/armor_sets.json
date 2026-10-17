@@ -1,0 +1,2607 @@
+[
+  {
+    "name": "Conga α",
+    "pieces": [
+      {
+        "kind": "head",
+        "name": "Conga Helm α",
+        "description": "Head armor made from Congalala materials. Remember: it's \"feral,\" not \"unkempt.\"",
+        "rank": "high",
+        "rarity": 5,
+        "resistances": {
+          "fire": -3,
+          "water": 1,
+          "ice": -1,
+          "thunder": 1,
+          "dragon": 2
+        },
+        "defense": {
+          "base": 36,
+          "max": 76
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 111,
+              "gameId": 850626240,
+              "name": "Free Meal",
+              "description": "Gives you a predetermined chance of consuming a food or drink item for free.",
+              "kind": "armor",
+              "icon": {
+                "id": 11,
+                "kind": "item"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Activates 10% of the time.",
+            "setPiecesRequired": null,
+            "id": 279
+          },
+          {
+            "skill": {
+              "id": 130,
+              "gameId": 1472632704,
+              "name": "Intimidator",
+              "description": "Reduces the chance small monsters will attack after spotting you. (Has no effect on certain monsters.)",
+              "kind": "armor",
+              "icon": {
+                "id": 10,
+                "kind": "utility"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Discourages monsters from engaging you even if you've been spotted.",
+            "setPiecesRequired": null,
+            "id": 341
+          },
+          {
+            "skill": {
+              "id": 150,
+              "gameId": 1998066176,
+              "name": "Fortifying Pelt",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Fortify",
+            "description": "Increases attack and defense after fainting during a quest. (Can be used twice.)",
+            "setPiecesRequired": 3,
+            "id": 394
+          }
+        ],
+        "slots": [
+          1
+        ],
+        "armorSet": {
+          "id": 1
+        },
+        "crafting": {
+          "armor": {
+            "id": 1
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 467,
+                "gameId": 509,
+                "rarity": 6,
+                "name": "Congalala Pelt+",
+                "description": "High-quality Congalala fur. Stout and resilient, an important crafting material once processed.",
+                "value": 930,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 2,
+              "id": 1
+            },
+            {
+              "item": {
+                "id": 469,
+                "gameId": 511,
+                "rarity": 6,
+                "name": "Congalala Fang+",
+                "description": "An extra large Congalala fang. Its sturdiness is better suited for crushing than tearing.",
+                "value": 1674,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 1,
+              "id": 2
+            },
+            {
+              "item": {
+                "id": 604,
+                "gameId": 657,
+                "rarity": 6,
+                "name": "Stoutbone",
+                "description": "The bone of a large, high ranking monster. Very sturdy.",
+                "value": 800,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 42,
+                  "kind": "bone",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 1,
+              "id": 3
+            }
+          ],
+          "zennyCost": 3000,
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "kind": "chest",
+        "name": "Conga Mail α",
+        "description": "Chest armor made from Congalala materials. The shocks of monster fur help hunters keep it wild.",
+        "rank": "high",
+        "rarity": 5,
+        "resistances": {
+          "fire": -3,
+          "water": 1,
+          "ice": -1,
+          "thunder": 1,
+          "dragon": 2
+        },
+        "defense": {
+          "base": 36,
+          "max": 76
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 95,
+              "gameId": 565867136,
+              "name": "Burst",
+              "description": "Continuously landing hits gradually increases attack and elemental attack. (Amount increased depends on weapon.)",
+              "kind": "armor",
+              "icon": {
+                "id": 9,
+                "kind": "offense"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "On first hit, gain a small temporary attack and element boost, replaced by a larger boost after the fifth hit.",
+            "setPiecesRequired": null,
+            "id": 236
+          },
+          {
+            "skill": {
+              "id": 130,
+              "gameId": 1472632704,
+              "name": "Intimidator",
+              "description": "Reduces the chance small monsters will attack after spotting you. (Has no effect on certain monsters.)",
+              "kind": "armor",
+              "icon": {
+                "id": 10,
+                "kind": "utility"
+              }
+            },
+            "level": 2,
+            "name": null,
+            "description": "Highly discourages monsters from engaging you even if you've been spotted.",
+            "setPiecesRequired": null,
+            "id": 342
+          },
+          {
+            "skill": {
+              "id": 150,
+              "gameId": 1998066176,
+              "name": "Fortifying Pelt",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Fortify",
+            "description": "Increases attack and defense after fainting during a quest. (Can be used twice.)",
+            "setPiecesRequired": 3,
+            "id": 394
+          }
+        ],
+        "slots": [],
+        "armorSet": {
+          "id": 1
+        },
+        "crafting": {
+          "armor": {
+            "id": 2
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 467,
+                "gameId": 509,
+                "rarity": 6,
+                "name": "Congalala Pelt+",
+                "description": "High-quality Congalala fur. Stout and resilient, an important crafting material once processed.",
+                "value": 930,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 2,
+              "id": 4
+            },
+            {
+              "item": {
+                "id": 468,
+                "gameId": 510,
+                "rarity": 6,
+                "name": "Congalala Claw+",
+                "description": "A long, hard, sharp claw from the wildest of Congalala, and no less tricky to manage than its source.",
+                "value": 1395,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 2,
+              "id": 5
+            },
+            {
+              "item": {
+                "id": 469,
+                "gameId": 511,
+                "rarity": 6,
+                "name": "Congalala Fang+",
+                "description": "An extra large Congalala fang. Its sturdiness is better suited for crushing than tearing.",
+                "value": 1674,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 1,
+              "id": 6
+            },
+            {
+              "item": {
+                "id": 470,
+                "gameId": 512,
+                "rarity": 6,
+                "name": "Vibrant Pelt+",
+                "description": "Vibrant hair from a Congalala's head. The tuft works as crown of sorts, establishing its status as leader.",
+                "value": 2046,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 10,
+                  "color": "yellow"
+                }
+              },
+              "quantity": 1,
+              "id": 7
+            }
+          ],
+          "zennyCost": 3000,
+          "id": 2
+        },
+        "id": 2
+      },
+      {
+        "kind": "arms",
+        "name": "Conga Vambraces α",
+        "description": "Armguards made from Congalala materials. Crudely made but highly protective.",
+        "rank": "high",
+        "rarity": 5,
+        "resistances": {
+          "fire": -3,
+          "water": 1,
+          "ice": -1,
+          "thunder": 1,
+          "dragon": 2
+        },
+        "defense": {
+          "base": 36,
+          "max": 76
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 52,
+              "gameId": -481419552,
+              "name": "Mushroomancer",
+              "description": "Lets you digest mushrooms that would otherwise be inedible and gain their advantageous effects.",
+              "kind": "armor",
+              "icon": {
+                "id": 11,
+                "kind": "item"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Lets you digest blue mushrooms and toadstools.",
+            "setPiecesRequired": null,
+            "id": 125
+          },
+          {
+            "skill": {
+              "id": 100,
+              "gameId": 634068352,
+              "name": "Speed Eating",
+              "description": "Increases meat-eating and item-consumption speed.",
+              "kind": "armor",
+              "icon": {
+                "id": 10,
+                "kind": "utility"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Moderately increases eating speed.",
+            "setPiecesRequired": null,
+            "id": 249
+          },
+          {
+            "skill": {
+              "id": 150,
+              "gameId": 1998066176,
+              "name": "Fortifying Pelt",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Fortify",
+            "description": "Increases attack and defense after fainting during a quest. (Can be used twice.)",
+            "setPiecesRequired": 3,
+            "id": 394
+          }
+        ],
+        "slots": [],
+        "armorSet": {
+          "id": 1
+        },
+        "crafting": {
+          "armor": {
+            "id": 3
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 470,
+                "gameId": 512,
+                "rarity": 6,
+                "name": "Vibrant Pelt+",
+                "description": "Vibrant hair from a Congalala's head. The tuft works as crown of sorts, establishing its status as leader.",
+                "value": 2046,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 10,
+                  "color": "yellow"
+                }
+              },
+              "quantity": 1,
+              "id": 8
+            },
+            {
+              "item": {
+                "id": 522,
+                "gameId": 572,
+                "rarity": 6,
+                "name": "Conga Pelt+",
+                "description": "A high-quality Conga pelt. The thick fur can be used to make long-lasting equipment.",
+                "value": 425,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 2,
+              "id": 9
+            },
+            {
+              "item": {
+                "id": 535,
+                "gameId": 585,
+                "rarity": 6,
+                "name": "Congalala Certificate S",
+                "description": "A Guild certificate awarded to those who have hunted a Congalala. Used to make equipment.",
+                "value": 930,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 30,
+                  "kind": "certificate",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 1,
+              "id": 10
+            }
+          ],
+          "zennyCost": 3000,
+          "id": 3
+        },
+        "id": 3
+      },
+      {
+        "kind": "waist",
+        "name": "Conga Coil α",
+        "description": "Waistgear made from Congalala materials, complete with an array of handy pockets!",
+        "rank": "high",
+        "rarity": 5,
+        "resistances": {
+          "fire": -3,
+          "water": 1,
+          "ice": -1,
+          "thunder": 1,
+          "dragon": 2
+        },
+        "defense": {
+          "base": 36,
+          "max": 76
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 52,
+              "gameId": -481419552,
+              "name": "Mushroomancer",
+              "description": "Lets you digest mushrooms that would otherwise be inedible and gain their advantageous effects.",
+              "kind": "armor",
+              "icon": {
+                "id": 11,
+                "kind": "item"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Lets you digest blue mushrooms and toadstools.",
+            "setPiecesRequired": null,
+            "id": 125
+          },
+          {
+            "skill": {
+              "id": 111,
+              "gameId": 850626240,
+              "name": "Free Meal",
+              "description": "Gives you a predetermined chance of consuming a food or drink item for free.",
+              "kind": "armor",
+              "icon": {
+                "id": 11,
+                "kind": "item"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Activates 10% of the time.",
+            "setPiecesRequired": null,
+            "id": 279
+          },
+          {
+            "skill": {
+              "id": 150,
+              "gameId": 1998066176,
+              "name": "Fortifying Pelt",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Fortify",
+            "description": "Increases attack and defense after fainting during a quest. (Can be used twice.)",
+            "setPiecesRequired": 3,
+            "id": 394
+          }
+        ],
+        "slots": [
+          1
+        ],
+        "armorSet": {
+          "id": 1
+        },
+        "crafting": {
+          "armor": {
+            "id": 4
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 468,
+                "gameId": 510,
+                "rarity": 6,
+                "name": "Congalala Claw+",
+                "description": "A long, hard, sharp claw from the wildest of Congalala, and no less tricky to manage than its source.",
+                "value": 1395,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 3,
+              "id": 11
+            },
+            {
+              "item": {
+                "id": 470,
+                "gameId": 512,
+                "rarity": 6,
+                "name": "Vibrant Pelt+",
+                "description": "Vibrant hair from a Congalala's head. The tuft works as crown of sorts, establishing its status as leader.",
+                "value": 2046,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 10,
+                  "color": "yellow"
+                }
+              },
+              "quantity": 1,
+              "id": 12
+            },
+            {
+              "item": {
+                "id": 535,
+                "gameId": 585,
+                "rarity": 6,
+                "name": "Congalala Certificate S",
+                "description": "A Guild certificate awarded to those who have hunted a Congalala. Used to make equipment.",
+                "value": 930,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 30,
+                  "kind": "certificate",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 1,
+              "id": 13
+            }
+          ],
+          "zennyCost": 3000,
+          "id": 4
+        },
+        "id": 4
+      },
+      {
+        "kind": "legs",
+        "name": "Conga Greaves α",
+        "description": "Greaves made of Congalala parts. Wild crafting perfect for those who run in the wilderness.",
+        "rank": "high",
+        "rarity": 5,
+        "resistances": {
+          "fire": -3,
+          "water": 1,
+          "ice": -1,
+          "thunder": 1,
+          "dragon": 2
+        },
+        "defense": {
+          "base": 36,
+          "max": 76
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 52,
+              "gameId": -481419552,
+              "name": "Mushroomancer",
+              "description": "Lets you digest mushrooms that would otherwise be inedible and gain their advantageous effects.",
+              "kind": "armor",
+              "icon": {
+                "id": 11,
+                "kind": "item"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Lets you digest blue mushrooms and toadstools.",
+            "setPiecesRequired": null,
+            "id": 125
+          },
+          {
+            "skill": {
+              "id": 95,
+              "gameId": 565867136,
+              "name": "Burst",
+              "description": "Continuously landing hits gradually increases attack and elemental attack. (Amount increased depends on weapon.)",
+              "kind": "armor",
+              "icon": {
+                "id": 9,
+                "kind": "offense"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "On first hit, gain a small temporary attack and element boost, replaced by a larger boost after the fifth hit.",
+            "setPiecesRequired": null,
+            "id": 236
+          },
+          {
+            "skill": {
+              "id": 150,
+              "gameId": 1998066176,
+              "name": "Fortifying Pelt",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Fortify",
+            "description": "Increases attack and defense after fainting during a quest. (Can be used twice.)",
+            "setPiecesRequired": 3,
+            "id": 394
+          }
+        ],
+        "slots": [],
+        "armorSet": {
+          "id": 1
+        },
+        "crafting": {
+          "armor": {
+            "id": 5
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 90,
+                "gameId": 98,
+                "rarity": 6,
+                "name": "Acute Fang",
+                "description": "Fangs come in many shapes and sizes. This one is small but can still pierce scale.",
+                "value": 425,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 7,
+                  "color": "orange"
+                }
+              },
+              "quantity": 1,
+              "id": 14
+            },
+            {
+              "item": {
+                "id": 467,
+                "gameId": 509,
+                "rarity": 6,
+                "name": "Congalala Pelt+",
+                "description": "High-quality Congalala fur. Stout and resilient, an important crafting material once processed.",
+                "value": 930,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 2,
+              "id": 15
+            },
+            {
+              "item": {
+                "id": 469,
+                "gameId": 511,
+                "rarity": 6,
+                "name": "Congalala Fang+",
+                "description": "An extra large Congalala fang. Its sturdiness is better suited for crushing than tearing.",
+                "value": 1674,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 1,
+              "id": 16
+            },
+            {
+              "item": {
+                "id": 535,
+                "gameId": 585,
+                "rarity": 6,
+                "name": "Congalala Certificate S",
+                "description": "A Guild certificate awarded to those who have hunted a Congalala. Used to make equipment.",
+                "value": 930,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 30,
+                  "kind": "certificate",
+                  "colorId": 4,
+                  "color": "pink"
+                }
+              },
+              "quantity": 1,
+              "id": 17
+            }
+          ],
+          "zennyCost": 3000,
+          "id": 5
+        },
+        "id": 5
+      }
+    ],
+    "bonus": null,
+    "setBonusSkill": null,
+    "groupBonus": {
+      "id": 1,
+      "skill": {
+        "id": 150,
+        "name": "Fortifying Pelt"
+      },
+      "ranks": [
+        {
+          "bonus": {
+            "id": 1
+          },
+          "pieces": 3,
+          "skill": {
+            "skill": {
+              "id": 150
+            },
+            "level": 1,
+            "name": "Fortify",
+            "description": "Increases attack and defense after fainting during a quest. (Can be used twice.)",
+            "setPiecesRequired": 3,
+            "id": 394
+          },
+          "id": 1
+        }
+      ]
+    },
+    "groupBonusSkill": {
+      "id": 150,
+      "gameId": 1998066176,
+      "name": "Fortifying Pelt",
+      "ranks": [
+        {
+          "skill": {
+            "id": 150
+          },
+          "level": 1,
+          "name": "Fortify",
+          "description": "Increases attack and defense after fainting during a quest. (Can be used twice.)",
+          "setPiecesRequired": 3,
+          "id": 394
+        }
+      ],
+      "description": null,
+      "kind": "group",
+      "icon": {
+        "id": 13,
+        "kind": "group"
+      }
+    },
+    "id": 1,
+    "gameId": -2117203456
+  },
+  {
+    "name": "Quematrice",
+    "pieces": [
+      {
+        "kind": "head",
+        "name": "Quematrice Helm",
+        "description": "Head armor made from Quematrice spoils. The shock of feathers ties the whole look together.",
+        "rank": "low",
+        "rarity": 1,
+        "resistances": {
+          "fire": 2,
+          "water": -3,
+          "ice": -1,
+          "thunder": 0,
+          "dragon": 0
+        },
+        "defense": {
+          "base": 6,
+          "max": 26
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 108,
+              "gameId": 742695104,
+              "name": "Flinch Free",
+              "description": "Prevents knockbacks and other reactions to small damage.",
+              "kind": "armor",
+              "icon": {
+                "id": 10,
+                "kind": "utility"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Prevents knockbacks.",
+            "setPiecesRequired": null,
+            "id": 271
+          },
+          {
+            "skill": {
+              "id": 132,
+              "gameId": 1487598336,
+              "name": "Scaling Prowess",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          }
+        ],
+        "slots": [],
+        "armorSet": {
+          "id": 2
+        },
+        "crafting": {
+          "armor": {
+            "id": 6
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 51,
+                "gameId": 53,
+                "rarity": 4,
+                "name": "Iron Ore",
+                "description": "Ore that can be smelted into a multi-purpose metal.",
+                "value": 60,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 38,
+                  "kind": "ore",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 1,
+              "id": 18
+            },
+            {
+              "item": {
+                "id": 83,
+                "gameId": 91,
+                "rarity": 4,
+                "name": "Quematrice Tail",
+                "description": "The tail of a Quematrice. Its many pleats scrape against each other to create sparks.",
+                "value": 440,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 47,
+                  "kind": "tail",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 1,
+              "id": 19
+            },
+            {
+              "item": {
+                "id": 266,
+                "gameId": 299,
+                "rarity": 4,
+                "name": "Quematrice Igniter",
+                "description": "Flammable fluids from a Quematrice, expelled as a gas then ignited by sparks from its coarse tail.",
+                "value": 396,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 73,
+                  "kind": "extract",
+                  "colorId": 5,
+                  "color": "red"
+                }
+              },
+              "quantity": 1,
+              "id": 20
+            },
+            {
+              "item": {
+                "id": 267,
+                "gameId": 300,
+                "rarity": 4,
+                "name": "Quematrice Certificate",
+                "description": "A Guild certificate awarded to those who have hunted a Quematrice. Used to make equipment.",
+                "value": 220,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 30,
+                  "kind": "certificate",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 1,
+              "id": 21
+            }
+          ],
+          "zennyCost": 200,
+          "id": 6
+        },
+        "id": 6
+      },
+      {
+        "kind": "chest",
+        "name": "Quematrice Mail",
+        "description": "Quematrice chest armor. The design may look ceremonial, but it offers ample protection.",
+        "rank": "low",
+        "rarity": 1,
+        "resistances": {
+          "fire": 2,
+          "water": -3,
+          "ice": -1,
+          "thunder": 0,
+          "dragon": 0
+        },
+        "defense": {
+          "base": 6,
+          "max": 26
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 125,
+              "gameId": 1425756032,
+              "name": "Fire Resistance",
+              "description": "Increases fire resistance. Also improves defense at higher levels.",
+              "kind": "armor",
+              "icon": {
+                "id": 6,
+                "kind": "defense"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Fire resistance +6",
+            "setPiecesRequired": null,
+            "id": 327
+          },
+          {
+            "skill": {
+              "id": 132,
+              "gameId": 1487598336,
+              "name": "Scaling Prowess",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          }
+        ],
+        "slots": [],
+        "armorSet": {
+          "id": 2
+        },
+        "crafting": {
+          "armor": {
+            "id": 7
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 82,
+                "gameId": 90,
+                "rarity": 4,
+                "name": "Quematrice Crest",
+                "description": "The crest of a Quematrice. Its flamboyant red color serves as a decoy to would-be predators.",
+                "value": 484,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 49,
+                  "kind": "skull",
+                  "colorId": 5,
+                  "color": "red"
+                }
+              },
+              "quantity": 1,
+              "id": 22
+            },
+            {
+              "item": {
+                "id": 83,
+                "gameId": 91,
+                "rarity": 4,
+                "name": "Quematrice Tail",
+                "description": "The tail of a Quematrice. Its many pleats scrape against each other to create sparks.",
+                "value": 440,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 47,
+                  "kind": "tail",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 1,
+              "id": 23
+            },
+            {
+              "item": {
+                "id": 266,
+                "gameId": 299,
+                "rarity": 4,
+                "name": "Quematrice Igniter",
+                "description": "Flammable fluids from a Quematrice, expelled as a gas then ignited by sparks from its coarse tail.",
+                "value": 396,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 73,
+                  "kind": "extract",
+                  "colorId": 5,
+                  "color": "red"
+                }
+              },
+              "quantity": 1,
+              "id": 24
+            }
+          ],
+          "zennyCost": 200,
+          "id": 7
+        },
+        "id": 7
+      },
+      {
+        "kind": "arms",
+        "name": "Quematrice Braces",
+        "description": "Armguards made from Quematrice parts. The wide cuffs allow the wrists to move unimpeded.",
+        "rank": "low",
+        "rarity": 1,
+        "resistances": {
+          "fire": 2,
+          "water": -3,
+          "ice": -1,
+          "thunder": 0,
+          "dragon": 0
+        },
+        "defense": {
+          "base": 6,
+          "max": 26
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 108,
+              "gameId": 742695104,
+              "name": "Flinch Free",
+              "description": "Prevents knockbacks and other reactions to small damage.",
+              "kind": "armor",
+              "icon": {
+                "id": 10,
+                "kind": "utility"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Prevents knockbacks.",
+            "setPiecesRequired": null,
+            "id": 271
+          },
+          {
+            "skill": {
+              "id": 132,
+              "gameId": 1487598336,
+              "name": "Scaling Prowess",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          }
+        ],
+        "slots": [],
+        "armorSet": {
+          "id": 2
+        },
+        "crafting": {
+          "armor": {
+            "id": 8
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 80,
+                "gameId": 88,
+                "rarity": 4,
+                "name": "Quematrice Scale",
+                "description": "The scale of a Quematrice. Its fine texture acts as a natural file used to grind and polish armor.",
+                "value": 220,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 2,
+              "id": 25
+            },
+            {
+              "item": {
+                "id": 266,
+                "gameId": 299,
+                "rarity": 4,
+                "name": "Quematrice Igniter",
+                "description": "Flammable fluids from a Quematrice, expelled as a gas then ignited by sparks from its coarse tail.",
+                "value": 396,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 73,
+                  "kind": "extract",
+                  "colorId": 5,
+                  "color": "red"
+                }
+              },
+              "quantity": 1,
+              "id": 26
+            }
+          ],
+          "zennyCost": 200,
+          "id": 8
+        },
+        "id": 8
+      },
+      {
+        "kind": "waist",
+        "name": "Quematrice Coil",
+        "description": "Flaunt-worthy Quematrice waistgear. Nothing shouts haute couture like flowing tassets.",
+        "rank": "low",
+        "rarity": 1,
+        "resistances": {
+          "fire": 2,
+          "water": -3,
+          "ice": -1,
+          "thunder": 0,
+          "dragon": 0
+        },
+        "defense": {
+          "base": 6,
+          "max": 26
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 125,
+              "gameId": 1425756032,
+              "name": "Fire Resistance",
+              "description": "Increases fire resistance. Also improves defense at higher levels.",
+              "kind": "armor",
+              "icon": {
+                "id": 6,
+                "kind": "defense"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Fire resistance +6",
+            "setPiecesRequired": null,
+            "id": 327
+          },
+          {
+            "skill": {
+              "id": 132,
+              "gameId": 1487598336,
+              "name": "Scaling Prowess",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          }
+        ],
+        "slots": [],
+        "armorSet": {
+          "id": 2
+        },
+        "crafting": {
+          "armor": {
+            "id": 9
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 81,
+                "gameId": 89,
+                "rarity": 4,
+                "name": "Quematrice Hide",
+                "description": "The hide of a Quematrice. Quite thick despite its wrinkly form, it is highly resistant to fire.",
+                "value": 330,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 2,
+              "id": 27
+            },
+            {
+              "item": {
+                "id": 82,
+                "gameId": 90,
+                "rarity": 4,
+                "name": "Quematrice Crest",
+                "description": "The crest of a Quematrice. Its flamboyant red color serves as a decoy to would-be predators.",
+                "value": 484,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 49,
+                  "kind": "skull",
+                  "colorId": 5,
+                  "color": "red"
+                }
+              },
+              "quantity": 1,
+              "id": 28
+            }
+          ],
+          "zennyCost": 200,
+          "id": 9
+        },
+        "id": 9
+      },
+      {
+        "kind": "legs",
+        "name": "Quematrice Greaves",
+        "description": "Quematrice leg armor. The ornate gaiters let a hunter strut like a Quematrice.",
+        "rank": "low",
+        "rarity": 1,
+        "resistances": {
+          "fire": 2,
+          "water": -3,
+          "ice": -1,
+          "thunder": 0,
+          "dragon": 0
+        },
+        "defense": {
+          "base": 6,
+          "max": 26
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 108,
+              "gameId": 742695104,
+              "name": "Flinch Free",
+              "description": "Prevents knockbacks and other reactions to small damage.",
+              "kind": "armor",
+              "icon": {
+                "id": 10,
+                "kind": "utility"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Prevents knockbacks.",
+            "setPiecesRequired": null,
+            "id": 271
+          },
+          {
+            "skill": {
+              "id": 132,
+              "gameId": 1487598336,
+              "name": "Scaling Prowess",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          }
+        ],
+        "slots": [],
+        "armorSet": {
+          "id": 2
+        },
+        "crafting": {
+          "armor": {
+            "id": 10
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 80,
+                "gameId": 88,
+                "rarity": 4,
+                "name": "Quematrice Scale",
+                "description": "The scale of a Quematrice. Its fine texture acts as a natural file used to grind and polish armor.",
+                "value": 220,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 2,
+              "id": 29
+            },
+            {
+              "item": {
+                "id": 81,
+                "gameId": 89,
+                "rarity": 4,
+                "name": "Quematrice Hide",
+                "description": "The hide of a Quematrice. Quite thick despite its wrinkly form, it is highly resistant to fire.",
+                "value": 330,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 44,
+                  "kind": "hide",
+                  "colorId": 17,
+                  "color": "blue"
+                }
+              },
+              "quantity": 2,
+              "id": 30
+            },
+            {
+              "item": {
+                "id": 82,
+                "gameId": 90,
+                "rarity": 4,
+                "name": "Quematrice Crest",
+                "description": "The crest of a Quematrice. Its flamboyant red color serves as a decoy to would-be predators.",
+                "value": 484,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 49,
+                  "kind": "skull",
+                  "colorId": 5,
+                  "color": "red"
+                }
+              },
+              "quantity": 1,
+              "id": 31
+            }
+          ],
+          "zennyCost": 200,
+          "id": 10
+        },
+        "id": 10
+      }
+    ],
+    "bonus": null,
+    "setBonusSkill": null,
+    "groupBonus": {
+      "id": 2,
+      "skill": {
+        "id": 132,
+        "name": "Scaling Prowess"
+      },
+      "ranks": [
+        {
+          "bonus": {
+            "id": 2
+          },
+          "pieces": 3,
+          "skill": {
+            "skill": {
+              "id": 132
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          },
+          "id": 2
+        }
+      ]
+    },
+    "groupBonusSkill": {
+      "id": 132,
+      "gameId": 1487598336,
+      "name": "Scaling Prowess",
+      "ranks": [
+        {
+          "skill": {
+            "id": 132
+          },
+          "level": 1,
+          "name": "Master Mounter",
+          "description": "Makes it easier to mount monsters and to wound them once mounted.",
+          "setPiecesRequired": 3,
+          "id": 345
+        }
+      ],
+      "description": null,
+      "kind": "group",
+      "icon": {
+        "id": 13,
+        "kind": "group"
+      }
+    },
+    "id": 2,
+    "gameId": -2109565568
+  },
+  {
+    "name": "Gore α",
+    "pieces": [
+      {
+        "kind": "head",
+        "name": "Gore Helm α",
+        "description": "A helmet made from Gore Magala spoils. The nether-black surface thrums with its late master's power.",
+        "rank": "high",
+        "rarity": 7,
+        "resistances": {
+          "fire": -2,
+          "water": 3,
+          "ice": 2,
+          "thunder": -1,
+          "dragon": -1
+        },
+        "defense": {
+          "base": 60,
+          "max": 82
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 13,
+              "gameId": -1700743296,
+              "name": "Coalescence",
+              "description": "Temporarily increases elemental attack power and status effects after recovering from blights or abnormal status.",
+              "kind": "armor",
+              "icon": {
+                "id": 9,
+                "kind": "offense"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "When active, grants a slight increase to elemental attack and status buildup.",
+            "setPiecesRequired": null,
+            "id": 28
+          },
+          {
+            "skill": {
+              "id": 77,
+              "gameId": 144660544,
+              "name": "Evade Window",
+              "description": "Extends the invulnerability period when evading.",
+              "kind": "armor",
+              "icon": {
+                "id": 10,
+                "kind": "utility"
+              }
+            },
+            "level": 2,
+            "name": null,
+            "description": "Slightly increases invulnerability window.",
+            "setPiecesRequired": null,
+            "id": 189
+          },
+          {
+            "skill": {
+              "id": 106,
+              "gameId": 722735744,
+              "name": "Gore Magala's Tyranny",
+              "description": null,
+              "kind": "set",
+              "icon": {
+                "id": 14,
+                "kind": "set"
+              }
+            },
+            "level": 1,
+            "name": "Black Eclipse I",
+            "description": "Infects you with Frenzy when against large monsters.",
+            "setPiecesRequired": 2,
+            "id": 267
+          },
+          {
+            "skill": {
+              "id": 132,
+              "gameId": 1487598336,
+              "name": "Scaling Prowess",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          }
+        ],
+        "slots": [
+          2
+        ],
+        "armorSet": {
+          "id": 3
+        },
+        "crafting": {
+          "armor": {
+            "id": 11
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 84,
+                "gameId": 92,
+                "rarity": 7,
+                "name": "Wyvern Gem",
+                "description": "Throughout a wyvern's life, impurities gather and form this peculiar gem.",
+                "value": 4000,
+                "carryLimit": 10,
+                "recipes": [],
+                "icon": {
+                  "id": 20,
+                  "kind": "gem",
+                  "colorId": 16,
+                  "color": "sky"
+                }
+              },
+              "quantity": 1,
+              "id": 32
+            },
+            {
+              "item": {
+                "id": 514,
+                "gameId": 564,
+                "rarity": 6,
+                "name": "Gore Magala Wing+",
+                "description": "A horrifying wing that casts a hungry shadow over prey and drives them insane.",
+                "value": 4140,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 48,
+                  "kind": "wing",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 4,
+              "id": 33
+            },
+            {
+              "item": {
+                "id": 517,
+                "gameId": 567,
+                "rarity": 6,
+                "name": "Gore Magala Feeler+",
+                "description": "A well-honed sensory organ from a Gore Magala that oozes violet melancholy from its infected tip.",
+                "value": 5060,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 2,
+              "id": 34
+            },
+            {
+              "item": {
+                "id": 519,
+                "gameId": 569,
+                "rarity": 6,
+                "name": "Gore Magala Certificate S",
+                "description": "A Guild certificate awarded to those who have hunted a Gore Magala. Used to make equipment.",
+                "value": 2300,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 30,
+                  "kind": "certificate",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 2,
+              "id": 35
+            }
+          ],
+          "zennyCost": 7000,
+          "id": 11
+        },
+        "id": 11
+      },
+      {
+        "kind": "chest",
+        "name": "Gore Mail α",
+        "description": "Chest armor made from Gore Magala spoils. Its agonizing miasma sends prey screaming to the netherworld.",
+        "rank": "high",
+        "rarity": 7,
+        "resistances": {
+          "fire": -2,
+          "water": 3,
+          "ice": 2,
+          "thunder": -1,
+          "dragon": -1
+        },
+        "defense": {
+          "base": 60,
+          "max": 82
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 18,
+              "gameId": -1662120192,
+              "name": "Antivirus",
+              "description": "Once infected, makes it easier to overcome the Frenzy and increases affinity if cured.",
+              "kind": "armor",
+              "icon": {
+                "id": 9,
+                "kind": "offense"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Slightly increases recovery rate after contracting the Frenzy. Affinity +3% if cured.",
+            "setPiecesRequired": null,
+            "id": 43
+          },
+          {
+            "skill": {
+              "id": 77,
+              "gameId": 144660544,
+              "name": "Evade Window",
+              "description": "Extends the invulnerability period when evading.",
+              "kind": "armor",
+              "icon": {
+                "id": 10,
+                "kind": "utility"
+              }
+            },
+            "level": 2,
+            "name": null,
+            "description": "Slightly increases invulnerability window.",
+            "setPiecesRequired": null,
+            "id": 189
+          },
+          {
+            "skill": {
+              "id": 106,
+              "gameId": 722735744,
+              "name": "Gore Magala's Tyranny",
+              "description": null,
+              "kind": "set",
+              "icon": {
+                "id": 14,
+                "kind": "set"
+              }
+            },
+            "level": 1,
+            "name": "Black Eclipse I",
+            "description": "Infects you with Frenzy when against large monsters.",
+            "setPiecesRequired": 2,
+            "id": 267
+          },
+          {
+            "skill": {
+              "id": 132,
+              "gameId": 1487598336,
+              "name": "Scaling Prowess",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          }
+        ],
+        "slots": [
+          3
+        ],
+        "armorSet": {
+          "id": 3
+        },
+        "crafting": {
+          "armor": {
+            "id": 12
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 512,
+                "gameId": 562,
+                "rarity": 6,
+                "name": "Gore Magala Scale+",
+                "description": "A deep black scale that seems to devour surrounding light, not reflect it.",
+                "value": 2300,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 6,
+              "id": 36
+            },
+            {
+              "item": {
+                "id": 513,
+                "gameId": 563,
+                "rarity": 6,
+                "name": "Gore Magala Carapace",
+                "description": "The Gore Magala's handsome black suit of armor, said to negate all blows.",
+                "value": 3450,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 46,
+                  "kind": "shell",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 6,
+              "id": 37
+            },
+            {
+              "item": {
+                "id": 515,
+                "gameId": 565,
+                "rarity": 6,
+                "name": "Gore Magala Ripclaw+",
+                "description": "A claw from a Gore Magala's second foreleg. It inflicts Frenzy and generations of suffering.",
+                "value": 4140,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 2,
+              "id": 38
+            },
+            {
+              "item": {
+                "id": 516,
+                "gameId": 566,
+                "rarity": 6,
+                "name": "Gore Magala Tail",
+                "description": "A pliant tail covered in reverse scales that strikes like a whip, not a blade.",
+                "value": 4600,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 47,
+                  "kind": "tail",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 2,
+              "id": 39
+            }
+          ],
+          "zennyCost": 7000,
+          "id": 12
+        },
+        "id": 12
+      },
+      {
+        "kind": "arms",
+        "name": "Gore Vambraces α",
+        "description": "Armguards made from Gore Magala materials. Even the largest prey will be drawn into oblivion.",
+        "rank": "high",
+        "rarity": 7,
+        "resistances": {
+          "fire": -2,
+          "water": 3,
+          "ice": 2,
+          "thunder": -1,
+          "dragon": -1
+        },
+        "defense": {
+          "base": 60,
+          "max": 82
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 14,
+              "gameId": -1689391744,
+              "name": "Constitution",
+              "description": "Reduces stamina depletion from evading or performing certain other actions.",
+              "kind": "armor",
+              "icon": {
+                "id": 8,
+                "kind": "stamina"
+              }
+            },
+            "level": 2,
+            "name": null,
+            "description": "Reduces fixed stamina depletion by 20%.",
+            "setPiecesRequired": null,
+            "id": 32
+          },
+          {
+            "skill": {
+              "id": 77,
+              "gameId": 144660544,
+              "name": "Evade Window",
+              "description": "Extends the invulnerability period when evading.",
+              "kind": "armor",
+              "icon": {
+                "id": 10,
+                "kind": "utility"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Very slightly increases invulnerability window.",
+            "setPiecesRequired": null,
+            "id": 188
+          },
+          {
+            "skill": {
+              "id": 106,
+              "gameId": 722735744,
+              "name": "Gore Magala's Tyranny",
+              "description": null,
+              "kind": "set",
+              "icon": {
+                "id": 14,
+                "kind": "set"
+              }
+            },
+            "level": 1,
+            "name": "Black Eclipse I",
+            "description": "Infects you with Frenzy when against large monsters.",
+            "setPiecesRequired": 2,
+            "id": 267
+          },
+          {
+            "skill": {
+              "id": 132,
+              "gameId": 1487598336,
+              "name": "Scaling Prowess",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          }
+        ],
+        "slots": [
+          2,
+          1
+        ],
+        "armorSet": {
+          "id": 3
+        },
+        "crafting": {
+          "armor": {
+            "id": 13
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 513,
+                "gameId": 563,
+                "rarity": 6,
+                "name": "Gore Magala Carapace",
+                "description": "The Gore Magala's handsome black suit of armor, said to negate all blows.",
+                "value": 3450,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 46,
+                  "kind": "shell",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 5,
+              "id": 40
+            },
+            {
+              "item": {
+                "id": 517,
+                "gameId": 567,
+                "rarity": 6,
+                "name": "Gore Magala Feeler+",
+                "description": "A well-honed sensory organ from a Gore Magala that oozes violet melancholy from its infected tip.",
+                "value": 5060,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 2,
+              "id": 41
+            },
+            {
+              "item": {
+                "id": 519,
+                "gameId": 569,
+                "rarity": 6,
+                "name": "Gore Magala Certificate S",
+                "description": "A Guild certificate awarded to those who have hunted a Gore Magala. Used to make equipment.",
+                "value": 2300,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 30,
+                  "kind": "certificate",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 2,
+              "id": 42
+            },
+            {
+              "item": {
+                "id": 520,
+                "gameId": 570,
+                "rarity": 7,
+                "name": "Frenzy Crystal",
+                "description": "An unsettling crystal wreathed in Frenzied power. Handle with extreme care.",
+                "value": 2000,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 52,
+                  "kind": "crystal",
+                  "colorId": 20,
+                  "color": "purple"
+                }
+              },
+              "quantity": 2,
+              "id": 43
+            }
+          ],
+          "zennyCost": 7000,
+          "id": 13
+        },
+        "id": 13
+      },
+      {
+        "kind": "waist",
+        "name": "Gore Coil α",
+        "description": "Waistgear made from Gore Magala materials. Darkens the world and seduces prey toward certain demise.",
+        "rank": "high",
+        "rarity": 7,
+        "resistances": {
+          "fire": -2,
+          "water": 3,
+          "ice": 2,
+          "thunder": -1,
+          "dragon": -1
+        },
+        "defense": {
+          "base": 60,
+          "max": 82
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 14,
+              "gameId": -1689391744,
+              "name": "Constitution",
+              "description": "Reduces stamina depletion from evading or performing certain other actions.",
+              "kind": "armor",
+              "icon": {
+                "id": 8,
+                "kind": "stamina"
+              }
+            },
+            "level": 2,
+            "name": null,
+            "description": "Reduces fixed stamina depletion by 20%.",
+            "setPiecesRequired": null,
+            "id": 32
+          },
+          {
+            "skill": {
+              "id": 18,
+              "gameId": -1662120192,
+              "name": "Antivirus",
+              "description": "Once infected, makes it easier to overcome the Frenzy and increases affinity if cured.",
+              "kind": "armor",
+              "icon": {
+                "id": 9,
+                "kind": "offense"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Slightly increases recovery rate after contracting the Frenzy. Affinity +3% if cured.",
+            "setPiecesRequired": null,
+            "id": 43
+          },
+          {
+            "skill": {
+              "id": 106,
+              "gameId": 722735744,
+              "name": "Gore Magala's Tyranny",
+              "description": null,
+              "kind": "set",
+              "icon": {
+                "id": 14,
+                "kind": "set"
+              }
+            },
+            "level": 1,
+            "name": "Black Eclipse I",
+            "description": "Infects you with Frenzy when against large monsters.",
+            "setPiecesRequired": 2,
+            "id": 267
+          },
+          {
+            "skill": {
+              "id": 132,
+              "gameId": 1487598336,
+              "name": "Scaling Prowess",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          }
+        ],
+        "slots": [
+          3,
+          1
+        ],
+        "armorSet": {
+          "id": 3
+        },
+        "crafting": {
+          "armor": {
+            "id": 14
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 382,
+                "gameId": 418,
+                "rarity": 6,
+                "name": "Frenzy Shard",
+                "description": "A fragment of a disturbing crystal that possesses a hidden power.",
+                "value": 1000,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 52,
+                  "kind": "crystal",
+                  "colorId": 20,
+                  "color": "purple"
+                }
+              },
+              "quantity": 2,
+              "id": 44
+            },
+            {
+              "item": {
+                "id": 512,
+                "gameId": 562,
+                "rarity": 6,
+                "name": "Gore Magala Scale+",
+                "description": "A deep black scale that seems to devour surrounding light, not reflect it.",
+                "value": 2300,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 5,
+              "id": 45
+            },
+            {
+              "item": {
+                "id": 514,
+                "gameId": 564,
+                "rarity": 6,
+                "name": "Gore Magala Wing+",
+                "description": "A horrifying wing that casts a hungry shadow over prey and drives them insane.",
+                "value": 4140,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 48,
+                  "kind": "wing",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 3,
+              "id": 46
+            },
+            {
+              "item": {
+                "id": 515,
+                "gameId": 565,
+                "rarity": 6,
+                "name": "Gore Magala Ripclaw+",
+                "description": "A claw from a Gore Magala's second foreleg. It inflicts Frenzy and generations of suffering.",
+                "value": 4140,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 45,
+                  "kind": "claw",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 3,
+              "id": 47
+            }
+          ],
+          "zennyCost": 7000,
+          "id": 14
+        },
+        "id": 14
+      },
+      {
+        "kind": "legs",
+        "name": "Gore Greaves α",
+        "description": "Leg armor made from Gore Magala materials. Spirits you across hunting grounds as fast as the wind.",
+        "rank": "high",
+        "rarity": 7,
+        "resistances": {
+          "fire": -2,
+          "water": 3,
+          "ice": 2,
+          "thunder": -1,
+          "dragon": -1
+        },
+        "defense": {
+          "base": 60,
+          "max": 82
+        },
+        "skills": [
+          {
+            "skill": {
+              "id": 18,
+              "gameId": -1662120192,
+              "name": "Antivirus",
+              "description": "Once infected, makes it easier to overcome the Frenzy and increases affinity if cured.",
+              "kind": "armor",
+              "icon": {
+                "id": 9,
+                "kind": "offense"
+              }
+            },
+            "level": 1,
+            "name": null,
+            "description": "Slightly increases recovery rate after contracting the Frenzy. Affinity +3% if cured.",
+            "setPiecesRequired": null,
+            "id": 43
+          },
+          {
+            "skill": {
+              "id": 106,
+              "gameId": 722735744,
+              "name": "Gore Magala's Tyranny",
+              "description": null,
+              "kind": "set",
+              "icon": {
+                "id": 14,
+                "kind": "set"
+              }
+            },
+            "level": 1,
+            "name": "Black Eclipse I",
+            "description": "Infects you with Frenzy when against large monsters.",
+            "setPiecesRequired": 2,
+            "id": 267
+          },
+          {
+            "skill": {
+              "id": 108,
+              "gameId": 742695104,
+              "name": "Flinch Free",
+              "description": "Prevents knockbacks and other reactions to small damage.",
+              "kind": "armor",
+              "icon": {
+                "id": 10,
+                "kind": "utility"
+              }
+            },
+            "level": 2,
+            "name": null,
+            "description": "Prevents knockbacks. Tripping is reduced to a knockback instead.",
+            "setPiecesRequired": null,
+            "id": 272
+          },
+          {
+            "skill": {
+              "id": 132,
+              "gameId": 1487598336,
+              "name": "Scaling Prowess",
+              "description": null,
+              "kind": "group",
+              "icon": {
+                "id": 13,
+                "kind": "group"
+              }
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          }
+        ],
+        "slots": [
+          3,
+          1
+        ],
+        "armorSet": {
+          "id": 3
+        },
+        "crafting": {
+          "armor": {
+            "id": 15
+          },
+          "materials": [
+            {
+              "item": {
+                "id": 512,
+                "gameId": 562,
+                "rarity": 6,
+                "name": "Gore Magala Scale+",
+                "description": "A deep black scale that seems to devour surrounding light, not reflect it.",
+                "value": 2300,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 43,
+                  "kind": "scale",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 3,
+              "id": 48
+            },
+            {
+              "item": {
+                "id": 514,
+                "gameId": 564,
+                "rarity": 6,
+                "name": "Gore Magala Wing+",
+                "description": "A horrifying wing that casts a hungry shadow over prey and drives them insane.",
+                "value": 4140,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 48,
+                  "kind": "wing",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 4,
+              "id": 49
+            },
+            {
+              "item": {
+                "id": 518,
+                "gameId": 568,
+                "rarity": 7,
+                "name": "Gore Magala Nyctgem",
+                "description": "A pure, jet-black jewel that imprisons and swallows all nearby light.",
+                "value": 13800,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 20,
+                  "kind": "gem",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 1,
+              "id": 50
+            },
+            {
+              "item": {
+                "id": 519,
+                "gameId": 569,
+                "rarity": 6,
+                "name": "Gore Magala Certificate S",
+                "description": "A Guild certificate awarded to those who have hunted a Gore Magala. Used to make equipment.",
+                "value": 2300,
+                "carryLimit": 99,
+                "recipes": [],
+                "icon": {
+                  "id": 30,
+                  "kind": "certificate",
+                  "colorId": 2,
+                  "color": "gray"
+                }
+              },
+              "quantity": 1,
+              "id": 51
+            }
+          ],
+          "zennyCost": 7000,
+          "id": 15
+        },
+        "id": 15
+      }
+    ],
+    "bonus": {
+      "id": 3,
+      "skill": {
+        "id": 106,
+        "name": "Gore Magala's Tyranny"
+      },
+      "ranks": [
+        {
+          "bonus": {
+            "id": 3
+          },
+          "pieces": 2,
+          "skill": {
+            "skill": {
+              "id": 106
+            },
+            "level": 1,
+            "name": "Black Eclipse I",
+            "description": "Infects you with Frenzy when against large monsters.",
+            "setPiecesRequired": 2,
+            "id": 267
+          },
+          "id": 3
+        },
+        {
+          "bonus": {
+            "id": 3
+          },
+          "pieces": 4,
+          "skill": {
+            "id": 268,
+            "skill": {
+              "id": 106
+            },
+            "level": 2,
+            "name": "Black Eclipse II",
+            "description": "Infects you with Frenzy and raises attack when against large monsters. Attack power increases upon recovery.",
+            "setPiecesRequired": 4
+          },
+          "id": 4
+        }
+      ]
+    },
+    "setBonusSkill": {
+      "id": 106,
+      "gameId": 722735744,
+      "name": "Gore Magala's Tyranny",
+      "ranks": [
+        {
+          "skill": {
+            "id": 106
+          },
+          "level": 1,
+          "name": "Black Eclipse I",
+          "description": "Infects you with Frenzy when against large monsters.",
+          "setPiecesRequired": 2,
+          "id": 267
+        },
+        {
+          "id": 268,
+          "skill": {
+            "id": 106
+          },
+          "level": 2,
+          "name": "Black Eclipse II",
+          "description": "Infects you with Frenzy and raises attack when against large monsters. Attack power increases upon recovery.",
+          "setPiecesRequired": 4
+        }
+      ],
+      "description": null,
+      "kind": "set",
+      "icon": {
+        "id": 14,
+        "kind": "set"
+      }
+    },
+    "groupBonus": {
+      "id": 2,
+      "skill": {
+        "id": 132,
+        "name": "Scaling Prowess"
+      },
+      "ranks": [
+        {
+          "bonus": {
+            "id": 2
+          },
+          "pieces": 3,
+          "skill": {
+            "skill": {
+              "id": 132
+            },
+            "level": 1,
+            "name": "Master Mounter",
+            "description": "Makes it easier to mount monsters and to wound them once mounted.",
+            "setPiecesRequired": 3,
+            "id": 345
+          },
+          "id": 2
+        }
+      ]
+    },
+    "groupBonusSkill": {
+      "id": 132,
+      "gameId": 1487598336,
+      "name": "Scaling Prowess",
+      "ranks": [
+        {
+          "skill": {
+            "id": 132
+          },
+          "level": 1,
+          "name": "Master Mounter",
+          "description": "Makes it easier to mount monsters and to wound them once mounted.",
+          "setPiecesRequired": 3,
+          "id": 345
+        }
+      ],
+      "description": null,
+      "kind": "group",
+      "icon": {
+        "id": 13,
+        "kind": "group"
+      }
+    },
+    "id": 3,
+    "gameId": -2086657152
+  }
+]

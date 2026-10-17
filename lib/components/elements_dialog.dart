@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/monster_details_card.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class ElementsDialog extends StatelessWidget {
   const ElementsDialog({super.key});
@@ -22,7 +23,8 @@ class ElementsDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              padding: const EdgeInsets.fromLTRB(20, 16, 12, 12),
+              padding: const EdgeInsets.fromLTRB(
+                  20, AppSpacing.lg, AppSpacing.md, AppSpacing.md),
               decoration: BoxDecoration(
                 color: colorScheme.surfaceContainerHighest,
                 borderRadius: const BorderRadius.only(
@@ -45,6 +47,7 @@ class ElementsDialog extends StatelessWidget {
                     ),
                   ),
                   IconButton(
+                    tooltip: AppLocalizations.of(context)!.close,
                     onPressed: () => Navigator.of(context).pop(),
                     icon: Icon(
                       Icons.close,
@@ -55,11 +58,11 @@ class ElementsDialog extends StatelessWidget {
                 ],
               ),
             ),
-
-            Expanded(
+            const Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 12, 12, 16),
-                child: const ElementsAndAilments(),
+                padding: EdgeInsets.fromLTRB(
+                    AppSpacing.md, AppSpacing.md, AppSpacing.md, AppSpacing.lg),
+                child: ElementsAndAilments(),
               ),
             ),
           ],

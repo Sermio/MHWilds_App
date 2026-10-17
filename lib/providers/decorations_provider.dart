@@ -1,69 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:mhwilds_app/api/decorations_api.dart';
 import 'package:mhwilds_app/models/decoration.dart';
+import 'package:mhwilds_app/providers/catalog_provider.dart';
+import 'package:mhwilds_app/providers/filters/decoration_filter.dart';
+import 'package:mhwilds_app/utils/load_state.dart';
 
-class DecorationsProvider with ChangeNotifier {
-  List<DecorationItem> _decorations = [];
-  List<DecorationItem> _filteredDecorations = [];
-  bool _isLoading = false;
+class DecorationsProvider
+    extends CatalogProvider<DecorationItem, DecorationFilter> {
+  DecorationsProvider({super.api}) : super(const DecorationFilter());
 
-  List<DecorationItem> get decorations => _decorations;
-  List<DecorationItem> get filteredDecorations => _filteredDecorations;
+  List<DecorationItem> get decorations => all;
+  List<DecorationItem> get filteredDecorations => visible;
 
-  bool get hasData => _decorations.isNotEmpty;
-  bool get isLoading => _isLoading;
+  Future<void> fetchDecorations() => fetch();
 
-  /// Invalida la caché para forzar nueva petición (p. ej. al cambiar idioma).
-  void invalidate() {
-    _decorations = [];
-    _filteredDecorations = [];
-    notifyListeners();
-  }
+  @override
+  Stream<Data<List<DecorationItem>>> watch({required bool force}) =>
+      DecorationsApi.watchDecorations(force: force, lang: language, api: api);
 
-  Future<void> fetchDecorations() async {
-    if (_decorations.isNotEmpty) return;
-
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      _decorations = await DecorationsApi.fetchDecorations();
-      _decorations.sort((a, b) {
-        final slotCompare = b.displayLevel.compareTo(a.displayLevel);
-        if (slotCompare != 0) return slotCompare;
-        return a.name.toLowerCase().compareTo(b.name.toLowerCase());
-      });
-
-      _filteredDecorations = List.from(_decorations);
-    } catch (e) {
-      // ignore: avoid_print
-      print(e);
-    }
-
-    _isLoading = false;
-    notifyListeners();
-  }
-
-  void applyFilters({String? name, String? type}) {
-    _filteredDecorations = _decorations.where((decoration) {
-      bool matchesName = name == null ||
-          decoration.name.toLowerCase().contains(name.toLowerCase());
-      bool matchesType =
-          type == null || decoration.kind.toLowerCase() == type.toLowerCase();
-      return matchesName && matchesType;
-    }).toList();
-
-    _filteredDecorations.sort((a, b) {
-      final slotCompare = b.displayLevel.compareTo(a.displayLevel);
-      if (slotCompare != 0) return slotCompare;
-      return a.name.toLowerCase().compareTo(b.name.toLowerCase());
-    });
-
-    notifyListeners();
-  }
-
-  void clearFilters() {
-    _filteredDecorations = _decorations;
-    notifyListeners();
-  }
+  @override
+  List<DecorationItem> applyFilter(
+          List<DecorationItem> items, DecorationFilter filter) =>
+      filterDecorations(items, filter);
 }

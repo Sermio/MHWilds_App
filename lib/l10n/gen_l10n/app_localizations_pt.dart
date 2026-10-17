@@ -675,6 +675,156 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get masterRank => 'Rank Mestre';
+
+  @override
+  String get retry => 'Tentar novamente';
+
+  @override
+  String get errorOffline =>
+      'Sem ligação. Verifica a internet e tenta novamente.';
+
+  @override
+  String get errorLoadingData =>
+      'Não foi possível carregar os dados. Tenta novamente.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Sem ligação · dados de $dateString';
+  }
+
+  @override
+  String get creditsTooltip => 'Créditos';
+
+  @override
+  String get elementFire => 'Fogo';
+
+  @override
+  String get elementWater => 'Água';
+
+  @override
+  String get elementIce => 'Gelo';
+
+  @override
+  String get elementThunder => 'Trovão';
+
+  @override
+  String get elementDragon => 'Dragão';
+
+  @override
+  String get elementParalysis => 'Paralisia';
+
+  @override
+  String get elementPoison => 'Veneno';
+
+  @override
+  String get elementSleep => 'Sono';
+
+  @override
+  String get elementBlastblight => 'Explosão';
+
+  @override
+  String get elementBlast => 'Explosivo';
+
+  @override
+  String get elementFireblight => 'Praga de fogo';
+
+  @override
+  String get elementWaterblight => 'Praga de água';
+
+  @override
+  String get elementIceblight => 'Praga de gelo';
+
+  @override
+  String get elementThunderblight => 'Praga de trovão';
+
+  @override
+  String get elementDragonblight => 'Praga de dragão';
+
+  @override
+  String get elementFrostblight => 'Congelamento';
+
+  @override
+  String get elementWebbed => 'Enredado';
+
+  @override
+  String get elementBleeding => 'Sangramento';
+
+  @override
+  String get elementFrenzy => 'Frenesi';
+
+  @override
+  String get ailmentDescThunderblight =>
+      'A praga de trovão é causada pelo elemento Trovão e aumenta a chance de os ataques dos monstros atordoarem o caçador.\nPode ser curada consumindo uma Nulberry ou usando um Cleanser Booster.';
+
+  @override
+  String get ailmentDescWaterblight =>
+      'A praga de água é causada pelo elemento Água e reduz a recuperação de vigor do caçador.\nPode ser curada consumindo uma Nulberry ou usando um Cleanser Booster.';
+
+  @override
+  String get ailmentDescFireblight =>
+      'A praga de fogo é causada pelo elemento Fogo e faz o caçador perder vida com o tempo.\nPode ser curada consumindo uma Nulberry. Se houver água por perto, dá para pular nela ou rolar 3 vezes no chão.';
+
+  @override
+  String get ailmentDescIceblight =>
+      'A praga de gelo é causada pelo elemento Gelo e aumenta o consumo de vigor ao correr, atacar e esquivar.\nPode ser curada consumindo uma Nulberry.';
+
+  @override
+  String get ailmentDescDragonblight =>
+      'A praga de dragão é causada pelo elemento Dragão e anula os efeitos de dano e o acúmulo de estados deste elemento.\nPode ser curada consumindo uma Nulberry.';
+
+  @override
+  String get ailmentDescBlast =>
+      'Explosivo é um estado que marca um monstro e permite causar dano a ele com pequenas explosões.\nPode ser curado com uma Nulberry ou esquivando com rolamentos até três vezes.';
+
+  @override
+  String get ailmentDescBlastblight =>
+      'A explosão faz o alvo explodir depois de um tempo ou ao receber um ataque forte.\nPode ser curada com uma Nulberry ou esquivando com rolamentos até três vezes.';
+
+  @override
+  String get ailmentDescBleeding =>
+      'O sangramento faz o caçador perder vida ao se mover, atacar ou esquivar.\nPode ser curado comendo Astera Jerky, Well-Done Steak ou Sushifish Scale, ou agachando por alguns segundos.';
+
+  @override
+  String get ailmentDescFrenzy =>
+      'O frenesi faz o caçador receber mais dano temporariamente quando totalmente infectado.\nPode ser curado usando uma Nulberry.';
+
+  @override
+  String get ailmentDescFrostblight =>
+      'O congelamento impede temporariamente o caçador de se mover ou agir.\nPode ser curado com um Cleanser ou com Resistência a Imobilização nível 3.';
+
+  @override
+  String get ailmentDescWebbed =>
+      'Enredado impede temporariamente o caçador de se mover ou agir.\nPode ser curado com um Cleanser, movendo-se, apertando botões, sendo empurrado por um ataque ou levando um golpe.';
+
+  @override
+  String get ailmentDescPoison =>
+      'O veneno reduz gradualmente a vida do alvo com o tempo.\nPode ser curado com Antidote, Herbal Medicine ou Herbal Powder.';
+
+  @override
+  String get ailmentDescSleep =>
+      'O sono faz o alvo adormecer e o deixa vulnerável a um único ataque.\nO alvo acorda ao receber dano.\nPode ser curado com um Energy Drink, usado por um aliado ou por um monstro.';
+
+  @override
+  String get ailmentDescParalysis =>
+      'A paralisia imobiliza o caçador ou o monstro e o deixa vulnerável a mais dano enquanto durar.\nPode ser curada com impactos de grande repulsão, como um golpe ascendente de um Martelo ou Espada Grande.';
+
+  @override
+  String get announcements => 'Avisos';
+
+  @override
+  String get announcementsNew => 'Avisos (novo)';
+
+  @override
+  String get loadingAnnouncements => 'Carregando avisos...';
+
+  @override
+  String get noAnnouncements => 'Ainda não há avisos';
+
+  @override
+  String get openLink => 'Abrir link';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -1326,4 +1476,154 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get masterRank => 'Rank Mestre';
+
+  @override
+  String get retry => 'Tentar novamente';
+
+  @override
+  String get errorOffline =>
+      'Sem conexão. Verifique sua internet e tente novamente.';
+
+  @override
+  String get errorLoadingData =>
+      'Não foi possível carregar os dados. Tente novamente.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Sem conexão · dados de $dateString';
+  }
+
+  @override
+  String get creditsTooltip => 'Créditos';
+
+  @override
+  String get elementFire => 'Fogo';
+
+  @override
+  String get elementWater => 'Água';
+
+  @override
+  String get elementIce => 'Gelo';
+
+  @override
+  String get elementThunder => 'Trovão';
+
+  @override
+  String get elementDragon => 'Dragão';
+
+  @override
+  String get elementParalysis => 'Paralisia';
+
+  @override
+  String get elementPoison => 'Veneno';
+
+  @override
+  String get elementSleep => 'Sono';
+
+  @override
+  String get elementBlastblight => 'Explosão';
+
+  @override
+  String get elementBlast => 'Explosivo';
+
+  @override
+  String get elementFireblight => 'Praga de fogo';
+
+  @override
+  String get elementWaterblight => 'Praga de água';
+
+  @override
+  String get elementIceblight => 'Praga de gelo';
+
+  @override
+  String get elementThunderblight => 'Praga de trovão';
+
+  @override
+  String get elementDragonblight => 'Praga de dragão';
+
+  @override
+  String get elementFrostblight => 'Congelamento';
+
+  @override
+  String get elementWebbed => 'Enredado';
+
+  @override
+  String get elementBleeding => 'Sangramento';
+
+  @override
+  String get elementFrenzy => 'Frenesi';
+
+  @override
+  String get ailmentDescThunderblight =>
+      'A praga de trovão é causada pelo elemento Trovão e aumenta a chance de os ataques dos monstros atordoarem o caçador.\nPode ser curada consumindo uma Nulberry ou usando um Cleanser Booster.';
+
+  @override
+  String get ailmentDescWaterblight =>
+      'A praga de água é causada pelo elemento Água e reduz a recuperação de vigor do caçador.\nPode ser curada consumindo uma Nulberry ou usando um Cleanser Booster.';
+
+  @override
+  String get ailmentDescFireblight =>
+      'A praga de fogo é causada pelo elemento Fogo e faz o caçador perder vida com o tempo.\nPode ser curada consumindo uma Nulberry. Se houver água por perto, dá para pular nela ou rolar 3 vezes no chão.';
+
+  @override
+  String get ailmentDescIceblight =>
+      'A praga de gelo é causada pelo elemento Gelo e aumenta o consumo de vigor ao correr, atacar e esquivar.\nPode ser curada consumindo uma Nulberry.';
+
+  @override
+  String get ailmentDescDragonblight =>
+      'A praga de dragão é causada pelo elemento Dragão e anula os efeitos de dano e o acúmulo de estados deste elemento.\nPode ser curada consumindo uma Nulberry.';
+
+  @override
+  String get ailmentDescBlast =>
+      'Explosivo é um estado que marca um monstro e permite causar dano a ele com pequenas explosões.\nPode ser curado com uma Nulberry ou esquivando com rolamentos até três vezes.';
+
+  @override
+  String get ailmentDescBlastblight =>
+      'A explosão faz o alvo explodir depois de um tempo ou ao receber um ataque forte.\nPode ser curada com uma Nulberry ou esquivando com rolamentos até três vezes.';
+
+  @override
+  String get ailmentDescBleeding =>
+      'O sangramento faz o caçador perder vida ao se mover, atacar ou esquivar.\nPode ser curado comendo Astera Jerky, Well-Done Steak ou Sushifish Scale, ou agachando por alguns segundos.';
+
+  @override
+  String get ailmentDescFrenzy =>
+      'O frenesi faz o caçador receber mais dano temporariamente quando totalmente infectado.\nPode ser curado usando uma Nulberry.';
+
+  @override
+  String get ailmentDescFrostblight =>
+      'O congelamento impede temporariamente o caçador de se mover ou agir.\nPode ser curado com um Cleanser ou com Resistência a Imobilização nível 3.';
+
+  @override
+  String get ailmentDescWebbed =>
+      'Enredado impede temporariamente o caçador de se mover ou agir.\nPode ser curado com um Cleanser, movendo-se, apertando botões, sendo empurrado por um ataque ou levando um golpe.';
+
+  @override
+  String get ailmentDescPoison =>
+      'O veneno reduz gradualmente a vida do alvo com o tempo.\nPode ser curado com Antidote, Herbal Medicine ou Herbal Powder.';
+
+  @override
+  String get ailmentDescSleep =>
+      'O sono faz o alvo adormecer e o deixa vulnerável a um único ataque.\nO alvo acorda ao receber dano.\nPode ser curado com um Energy Drink, usado por um aliado ou por um monstro.';
+
+  @override
+  String get ailmentDescParalysis =>
+      'A paralisia imobiliza o caçador ou o monstro e o deixa vulnerável a mais dano enquanto durar.\nPode ser curada com impactos de grande repulsão, como um golpe ascendente de um Martelo ou Espada Grande.';
+
+  @override
+  String get announcements => 'Avisos';
+
+  @override
+  String get announcementsNew => 'Avisos (novo)';
+
+  @override
+  String get loadingAnnouncements => 'Carregando avisos...';
+
+  @override
+  String get noAnnouncements => 'Ainda não há avisos';
+
+  @override
+  String get openLink => 'Abrir link';
 }

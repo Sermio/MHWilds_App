@@ -673,4 +673,153 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get masterRank => 'Master Rank';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get errorOffline =>
+      'No connection. Check your internet and try again.';
+
+  @override
+  String get errorLoadingData => 'Couldn\'t load the data. Please try again.';
+
+  @override
+  String offlineDataFrom(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.Md(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Offline · data from $dateString';
+  }
+
+  @override
+  String get creditsTooltip => 'Credits';
+
+  @override
+  String get elementFire => 'Fire';
+
+  @override
+  String get elementWater => 'Water';
+
+  @override
+  String get elementIce => 'Ice';
+
+  @override
+  String get elementThunder => 'Thunder';
+
+  @override
+  String get elementDragon => 'Dragon';
+
+  @override
+  String get elementParalysis => 'Paralysis';
+
+  @override
+  String get elementPoison => 'Poison';
+
+  @override
+  String get elementSleep => 'Sleep';
+
+  @override
+  String get elementBlastblight => 'Blastblight';
+
+  @override
+  String get elementBlast => 'Blast';
+
+  @override
+  String get elementFireblight => 'Fireblight';
+
+  @override
+  String get elementWaterblight => 'Waterblight';
+
+  @override
+  String get elementIceblight => 'Iceblight';
+
+  @override
+  String get elementThunderblight => 'Thunderblight';
+
+  @override
+  String get elementDragonblight => 'Dragonblight';
+
+  @override
+  String get elementFrostblight => 'Frostblight';
+
+  @override
+  String get elementWebbed => 'Webbed';
+
+  @override
+  String get elementBleeding => 'Bleeding';
+
+  @override
+  String get elementFrenzy => 'Frenzy';
+
+  @override
+  String get ailmentDescThunderblight =>
+      'Thunderblight is caused by the Thunder Element which increases the Hunter\'s chance of being stunned by Monster attacks.\nIt can be cured by consuming a Nulberry, or using a Cleanser Booster.';
+
+  @override
+  String get ailmentDescWaterblight =>
+      'Waterblight is caused by the Water Element which reduces the Stamina recovery of the Hunter.\nIt can be cured by consuming a Nulberry, or using a Cleanser Booster.';
+
+  @override
+  String get ailmentDescFireblight =>
+      'Fireblight is caused by the Fire Element which causes the hunter to lose health over time.\nIt can be cured by consuming a Nulberry. When available, players can jump into a nearby water, or roll 3 times on the ground.';
+
+  @override
+  String get ailmentDescIceblight =>
+      'Iceblight is caused by the Ice Element which increases the Stamina consumption when performing tasks such as dashing, attacking, and dodging.\nIt can be cured by consuming a Nulberry.';
+
+  @override
+  String get ailmentDescDragonblight =>
+      'Dragonblight is caused by the Dragon Element which nullifies the damaging effects and status buildup from this element.\nIt can be cured by consuming a Nulberry.';
+
+  @override
+  String get ailmentDescBlast =>
+      'Blast is a status that marks a monster that can damage them through small explosions.\nIt can be cured with a Nulberry or by dodge-rolling up to three times.';
+
+  @override
+  String get ailmentDescBlastblight =>
+      'Blastblight causes the target to explode after some time has passed, or upon receiving an impactful attack.\nIt can be cured with a Nulberry or by dodge-rolling up to three times.';
+
+  @override
+  String get ailmentDescBleeding =>
+      'Bleeding causes the players to lose Health when performing actions such as moving, attacking, or dodging.\nIt can be cured by eating an Astera Jerky, Well-Done Steak, or Sushifish Scale, or by crouching for a few seconds.';
+
+  @override
+  String get ailmentDescFrenzy =>
+      'Frenzy will cause the Hunter to temporarily receive more damage when fully infected.\nIt can be cured by using a Nulberry.';
+
+  @override
+  String get ailmentDescFrostblight =>
+      'Frostblight prevents the hunter from moving or acting temporarily.\nIt can be cured with a Cleanser or by having a Bind Resistance Level 3.';
+
+  @override
+  String get ailmentDescWebbed =>
+      'Webbed prevents the hunter from moving or acting temporarily.\nIt can be cured with a Cleanser, by moving, pressing buttons, being knocked by an attack, or taking a hit.';
+
+  @override
+  String get ailmentDescPoison =>
+      'Poison gradually depletes the health of the target over time.\nThe Poison effect can be cured by Antidote, Herbal Medicine, or Herbal Powder.';
+
+  @override
+  String get ailmentDescSleep =>
+      'Sleep causes the target to fall asleep which renders them susceptible to a one-time attack after.\nThe target will wake up after they receive damage.\nIt can be cured with an Energy Drink, being it by an ally or a Monster.';
+
+  @override
+  String get ailmentDescParalysis =>
+      'Paralysis renders the hunter or monster immobilized and susceptible to increased damage for the duration.\nIt can be cured by impacts with large amounts of knockback, such as an upswing from a Hammer or Great Sword.';
+
+  @override
+  String get announcements => 'Announcements';
+
+  @override
+  String get announcementsNew => 'Announcements (new)';
+
+  @override
+  String get loadingAnnouncements => 'Loading announcements...';
+
+  @override
+  String get noAnnouncements => 'No announcements yet';
+
+  @override
+  String get openLink => 'Open link';
 }

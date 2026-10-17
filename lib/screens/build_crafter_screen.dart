@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 /// Pantalla embebida para [MH Wilds Build Crafter](https://mhwilds-build-crafter.vercel.app/builder).
 /// Misma idea que [BuildOptimizerScreen], sin inyectar localStorage de mh-opti.
@@ -78,7 +79,7 @@ class _BuildCrafterScreenState extends State<BuildCrafterScreen> {
                 )
               : Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(AppSpacing.xl),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -90,11 +91,12 @@ class _BuildCrafterScreenState extends State<BuildCrafterScreen> {
                         const SizedBox(height: 12),
                         Text(
                           l10n.buildCrafterWebViewUnavailable,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: colorScheme.onSurface,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: colorScheme.onSurface),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 16),
@@ -122,21 +124,19 @@ Future<void> showBuildCrafterCreditsDialog(BuildContext context) async {
     context: context,
     builder: (dialogContext) {
       final cs = Theme.of(dialogContext).colorScheme;
-      final bodyStyle = TextStyle(
-        color: cs.onSurface,
-        fontSize: 16,
-        height: 1.4,
-      );
+      final bodyStyle = Theme.of(context)
+          .textTheme
+          .bodyLarge!
+          .copyWith(color: cs.onSurface, height: 1.4);
       return AlertDialog(
         backgroundColor: cs.surfaceContainerHighest,
         surfaceTintColor: Colors.transparent,
         title: Text(
           l10n.buildCrafter,
-          style: TextStyle(
-            color: cs.onSurface,
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: cs.onSurface, fontWeight: FontWeight.w600),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,

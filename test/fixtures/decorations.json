@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Venom Jewel [1]",
+    "description": "A decoration that grants the Poison Attack skill.",
+    "value": 150,
+    "slot": 1,
+    "rarity": 3,
+    "kind": "weapon",
+    "skills": [
+      {
+        "skill": {
+          "id": 12,
+          "name": "Poison Attack"
+        },
+        "level": 1,
+        "description": "Poison buildup +5% Bonus: +10",
+        "setPiecesRequired": null,
+        "id": 25
+      }
+    ],
+    "icon": {
+      "color": "purple",
+      "colorId": 20
+    },
+    "id": 1,
+    "gameId": -2144349312
+  },
+  {
+    "name": "Handicraft Jewel II [2]",
+    "description": "A decoration that grants the Handicraft skill.",
+    "value": 200,
+    "slot": 2,
+    "rarity": 4,
+    "kind": "weapon",
+    "skills": [
+      {
+        "skill": {
+          "id": 119,
+          "name": "Handicraft"
+        },
+        "level": 2,
+        "description": "Weapon sharpness +20",
+        "setPiecesRequired": null,
+        "id": 306
+      }
+    ],
+    "icon": {
+      "color": "white",
+      "colorId": 1
+    },
+    "id": 2,
+    "gameId": -2136274304
+  },
+  {
+    "name": "Flayer Jewel [3]",
+    "description": "A decoration that grants the Flayer skill.",
+    "value": 250,
+    "slot": 3,
+    "rarity": 5,
+    "kind": "armor",
+    "skills": [
+      {
+        "skill": {
+          "id": 38,
+          "name": "Flayer"
+        },
+        "level": 1,
+        "description": "Makes it ever so slightly easier to inflict wounds. Also deals additional non-elemental damage.",
+        "setPiecesRequired": null,
+        "id": 88
+      }
+    ],
+    "icon": {
+      "color": "white",
+      "colorId": 1
+    },
+    "id": 3,
+    "gameId": -2135118208
+  }
+]

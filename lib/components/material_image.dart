@@ -1,127 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/components/asset_thumb.dart';
 import 'package:mhwilds_app/models/item.dart';
 import 'package:mhwilds_app/utils/item_icon_asset_resolver.dart';
-import 'package:mhwilds_app/utils/utils.dart';
 
+/// Icono local del objeto (por `kind + color`) o el placeholder si no se
+/// resuelve.
 class MaterialImage extends StatelessWidget {
   const MaterialImage({
     super.key,
-    required this.materialName,
     this.item,
     this.width = 50,
     this.height = 50,
   });
 
-  final String materialName;
+  static const _placeholder = 'assets/imgs/materials/default_material.webp';
+
   final Item? item;
   final double width;
   final double height;
 
-  static final Map<String, String?> _urlCache = {};
   static final Map<String, String?> _assetCache = {};
-
-  String get formattedMaterialName {
-    return materialName
-        .replaceAll(RegExp(r'\s\+'), '+')
-        .replaceAll(RegExp(r'[()]'), '')
-        .toLowerCase()
-        .replaceAll(' ', '_');
-  }
-
-  Future<String?> _getImageUrl() async {
-    if (_urlCache.containsKey(formattedMaterialName)) {
-      return _urlCache[formattedMaterialName];
-    }
-
-    try {
-      final url = await getValidItemImageUrl(formattedMaterialName);
-      _urlCache[formattedMaterialName] = url;
-      return url;
-    } catch (e) {
-      return null;
-    }
-  }
 
   String? _getAssetPathSync() {
     final icon = item?.icon;
     if (icon == null) return null;
     final key = '${icon.kind}|${icon.color}';
-    if (_assetCache.containsKey(key)) {
-      return _assetCache[key];
-    }
-
-    final assetPath = ItemIconAssetResolver.resolveSync(
-      apiKind: icon.kind,
-      apiColor: icon.color,
+    return _assetCache.putIfAbsent(
+      key,
+      () => ItemIconAssetResolver.resolveSync(
+        apiKind: icon.kind,
+        apiColor: icon.color,
+      ),
     );
-    _assetCache[key] = assetPath;
-    return assetPath;
   }
 
   @override
   Widget build(BuildContext context) {
+    final placeholder = AssetThumb(_placeholder, width: width, height: height);
     final assetPath = _getAssetPathSync();
-
-    if (assetPath != null) {
-      return Image.asset(
-        assetPath,
-        width: width,
-        height: height,
-        fit: BoxFit.contain,
-        errorBuilder: (_, __, ___) => Image.asset(
-          'assets/imgs/materials/default_material.webp',
-          width: width,
-          height: height,
-        ),
-      );
-    }
-
-    return FutureBuilder<String?>(
-      future: _getImageUrl(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return SizedBox(
-            height: height,
-            width: width,
-            child: const Center(child: CircularProgressIndicator()),
-          );
-        } else if (snapshot.hasError || !snapshot.hasData) {
-          return Image.asset(
-            'assets/imgs/materials/default_material.webp',
-            width: width,
-            height: height,
-          );
-        } else {
-          final networkUrl = snapshot.data!;
-          return Image.network(
-            networkUrl,
-            height: height,
-            width: width,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) return child;
-              return SizedBox(
-                height: height,
-                width: width,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            (loadingProgress.expectedTotalBytes ?? 1)
-                        : null,
-                  ),
-                ),
-              );
-            },
-            errorBuilder: (context, error, stackTrace) {
-              return Image.asset(
-                'assets/imgs/materials/default_material.webp',
-                width: width,
-                height: height,
-              );
-            },
-          );
-        }
-      },
+    if (assetPath == null) return placeholder;
+    return AssetThumb(
+      assetPath,
+      width: width,
+      height: height,
+      fit: BoxFit.contain,
+      errorBuilder: (_, __, ___) => placeholder,
     );
   }
 }

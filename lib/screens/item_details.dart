@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/material_image.dart';
 import 'package:mhwilds_app/models/item.dart';
-import 'package:mhwilds_app/providers/en_names_cache.dart';
+import 'package:mhwilds_app/components/monster_icon.dart';
 import 'package:mhwilds_app/providers/items_provider.dart';
 import 'package:mhwilds_app/providers/monsters_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class ItemDetails extends StatelessWidget {
   const ItemDetails({super.key, required this.item});
@@ -42,7 +43,7 @@ class ItemDetails extends StatelessWidget {
             // Header del item
             Center(
               child: Container(
-                margin: const EdgeInsets.all(16),
+                margin: const EdgeInsets.all(AppSpacing.lg),
                 constraints: const BoxConstraints(maxWidth: 400),
                 child: Column(
                   children: [
@@ -51,27 +52,18 @@ class ItemDetails extends StatelessWidget {
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(AppRadius.md),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: MaterialImage(
-                            item: item,
-                            materialName: Provider.of<EnNamesCache>(context,
-                                        listen: false)
-                                    .nameForItemImage(item.id, item.name) ??
-                                item.name),
+                        borderRadius: BorderRadius.circular(AppRadius.md),
+                        child: MaterialImage(item: item),
                       ),
                     ),
                     const SizedBox(height: 16),
                     // Nombre del item
                     Text(
                       item.name,
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface,
-                      ),
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onSurface),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
@@ -79,11 +71,7 @@ class ItemDetails extends StatelessWidget {
                     if (item.description.isNotEmpty) ...[
                       Text(
                         item.description,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: colorScheme.onSurface.withOpacity(0.8),
-                          height: 1.4,
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.8), height: 1.4),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -95,7 +83,7 @@ class ItemDetails extends StatelessWidget {
             // Sección de recetas de crafting
             if (item.recipes.isNotEmpty) ...[
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                 child: Text(
                   AppLocalizations.of(context)!.craftingRecipe,
                   style: TextStyle(
@@ -107,14 +95,14 @@ class ItemDetails extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16),
+                margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: colorScheme.surface,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(AppRadius.lg),
                   boxShadow: [
                     BoxShadow(
-                      color: colorScheme.shadow.withOpacity(0.1),
+                      color: colorScheme.shadow.withValues(alpha: 0.1),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -123,24 +111,14 @@ class ItemDetails extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Icon(
+                    Row(children: [Icon(
                           Icons.construction,
                           size: 20,
                           color: colorScheme.primary,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
+                        ), const SizedBox(width: 8), Flexible(child: Text(
                           AppLocalizations.of(context)!.requiredMaterials,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: colorScheme.onSurface.withOpacity(0.8),
-                          ),
-                        ),
-                      ],
-                    ),
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
+                        ))]),
                     const SizedBox(height: 16),
                     Wrap(
                       spacing: 8,
@@ -169,12 +147,6 @@ class ItemDetails extends StatelessWidget {
                                     item: itemsById[recipeItem.id],
                                     width: 48,
                                     height: 48,
-                                    materialName: Provider.of<EnNamesCache>(
-                                                context,
-                                                listen: false)
-                                            .nameForItemImage(recipeItem.id,
-                                                recipeItem.name) ??
-                                        recipeItem.name,
                                   ),
                                 ),
                               ),
@@ -186,11 +158,7 @@ class ItemDetails extends StatelessWidget {
                                   recipeItem.name,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: colorScheme.onSurface,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
                                 ),
                               ),
                               // Símbolo "+" si no es el último
@@ -202,14 +170,14 @@ class ItemDetails extends StatelessWidget {
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color:
-                                        colorScheme.onSurface.withOpacity(0.8),
+                                        colorScheme.onSurface.withValues(alpha: 0.8),
                                   ),
                                 ),
                                 const SizedBox(width: 8),
                               ],
                             ],
                           );
-                        }).toList(),
+                        }),
                       ],
                     ),
                   ],
@@ -221,7 +189,7 @@ class ItemDetails extends StatelessWidget {
             // Sección de monstruos que dan este item
             if (monstersWithItem.isNotEmpty) ...[
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                 child: Text(
                   AppLocalizations.of(context)!.monstersThatDropThisItem,
                   style: TextStyle(
@@ -239,13 +207,13 @@ class ItemDetails extends StatelessWidget {
 
                 return Container(
                   margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
                   decoration: BoxDecoration(
                     color: colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(AppRadius.lg),
                     boxShadow: [
                       BoxShadow(
-                        color: colorScheme.shadow.withOpacity(0.1),
+                        color: colorScheme.shadow.withValues(alpha: 0.1),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -270,12 +238,12 @@ class ItemDetails extends StatelessWidget {
                                 width: 40,
                                 height: 40,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(AppRadius.sm),
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: _buildMonsterIcon(
-                                      context, monster.id, monster.name),
+                                  borderRadius: BorderRadius.circular(AppRadius.sm),
+                                  child: MonsterIcon(monster.id,
+                                      placeholderIconSize: 20),
                                 ),
                               ),
                             const SizedBox(width: 16),
@@ -301,17 +269,13 @@ class ItemDetails extends StatelessWidget {
                           children: [
                             Text(
                               AppLocalizations.of(context)!.dropConditions,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: colorScheme.onSurface.withOpacity(0.8),
-                              ),
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.8)),
                             ),
                             const SizedBox(height: 16),
                             ...relatedRewards
                                 .expand((reward) => reward.conditions)
                                 .map((condition) {
-                              String formattedKind = condition.kind
+                              final String formattedKind = condition.kind
                                   .replaceAll('-', ' ')
                                   .split(' ')
                                   .map((word) =>
@@ -319,8 +283,8 @@ class ItemDetails extends StatelessWidget {
                                   .join(' ');
 
                               return Container(
-                                margin: const EdgeInsets.only(bottom: 12),
-                                padding: const EdgeInsets.all(16),
+                                margin: const EdgeInsets.only(bottom: AppSpacing.md),
+                                padding: const EdgeInsets.all(AppSpacing.lg),
                                 decoration: BoxDecoration(
                                   color: colorScheme.surfaceContainerHighest,
                                   borderRadius: BorderRadius.circular(12),
@@ -333,80 +297,42 @@ class ItemDetails extends StatelessWidget {
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.symmetric(
-                                        horizontal: 12,
+                                        horizontal: AppSpacing.md,
                                         vertical: 6,
                                       ),
                                       decoration: BoxDecoration(
                                         color: colorScheme.primary,
-                                        borderRadius: BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(AppRadius.lg),
                                       ),
                                       child: Text(
                                         '${condition.chance}%',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                          color: colorScheme.onPrimary,
-                                        ),
+                                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold, color: colorScheme.onPrimary),
                                       ),
                                     ),
                                     const SizedBox(width: 16),
                                     Expanded(
                                       child: Text(
                                         formattedKind,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: colorScheme.onSurface,
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface, fontWeight: FontWeight.w500),
                                       ),
                                     ),
                                   ],
                                 ),
                               );
-                            }).toList(),
+                            }),
                           ],
                         ),
                       ),
                     ],
                   ),
                 );
-              }).toList(),
+              }),
             ],
 
             const SizedBox(height: 40),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildMonsterIcon(
-      BuildContext context, int monsterId, String monsterName) {
-    final enNamesCache = Provider.of<EnNamesCache>(context, listen: false);
-    final imageName = enNamesCache.nameForMonsterImage(monsterId, monsterName);
-
-    if (imageName == null) {
-      // Cache no cargado, mostrar placeholder
-      return Container(
-        color: Colors.grey[300],
-        child:
-            Icon(Icons.image_not_supported, color: Colors.grey[600], size: 20),
-      );
-    }
-
-    final imagePath =
-        'assets/imgs/monster_icons/${imageName.toLowerCase().replaceAll(' ', '_')}.png';
-    return Image.asset(
-      imagePath,
-      fit: BoxFit.cover,
-      errorBuilder: (context, error, stackTrace) {
-        // Si la imagen no existe, mostrar placeholder
-        return Container(
-          color: Colors.grey[300],
-          child: Icon(Icons.image_not_supported,
-              color: Colors.grey[600], size: 20),
-        );
-      },
     );
   }
 }

@@ -2,30 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:mhwilds_app/components/c_appbar.dart';
 import 'package:mhwilds_app/components/c_drawer.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/screens/talismans_list.dart';
-import 'package:mhwilds_app/utils/update_checker.dart';
+import 'package:mhwilds_app/screens/app_section.dart';
 import 'package:mhwilds_app/utils/review_service.dart';
-import 'package:mhwilds_app/screens/armor_sets_list.dart';
-import 'package:mhwilds_app/screens/decorations_list.dart';
-import 'package:mhwilds_app/screens/items_list.dart';
-import 'package:mhwilds_app/screens/monsters_list.dart';
-import 'package:mhwilds_app/screens/skills_list.dart';
-import 'package:mhwilds_app/screens/weapons_list.dart';
-import 'package:mhwilds_app/screens/build_optimizer_screen.dart';
-import 'package:mhwilds_app/screens/build_crafter_screen.dart';
-import 'package:mhwilds_app/screens/maps_list.dart';
-import 'package:mhwilds_app/screens/settings.dart';
+import 'package:mhwilds_app/utils/update_checker.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Widget _selectedScreen = const MonstersList();
+  AppSection _section = AppSection.monsters;
 
   @override
   void initState() {
@@ -39,81 +28,23 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-
-  String _titleForScreen(BuildContext context, Widget screen) {
-    final l10n = AppLocalizations.of(context)!;
-    if (screen is MonstersList) return l10n.monsters;
-    if (screen is DecorationsList) return l10n.decorations;
-    if (screen is ArmorSetList) return l10n.armorSets;
-    if (screen is SkillList) return l10n.skills;
-    if (screen is AmuletList) return l10n.talismans;
-    if (screen is ItemList) return l10n.items;
-    if (screen is WeaponsList) return l10n.weapons;
-    if (screen is MapsList) return l10n.locations;
-    if (screen is BuildOptimizerScreen) return l10n.buildOptimizer;
-    if (screen is BuildCrafterScreen) return l10n.buildCrafter;
-    return l10n.monsters;
-  }
-
-  void _changeScreen(Widget newScreen) {
-    setState(() => _selectedScreen = newScreen);
+  void _changeSection(AppSection section) {
+    setState(() => _section = section);
     Navigator.pop(context);
-  }
-
-  List<Widget>? _appBarActions() {
-    if (_selectedScreen is BuildOptimizerScreen) {
-      return [
-        IconButton(
-          icon: const Icon(Icons.help_outline),
-          onPressed: () => showBuildOptimizerCreditsDialog(context),
-        ),
-        IconButton(
-          icon: const Icon(Icons.settings),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const SettingsScreen(),
-              ),
-            );
-          },
-        ),
-      ];
-    }
-    if (_selectedScreen is BuildCrafterScreen) {
-      return [
-        IconButton(
-          icon: const Icon(Icons.help_outline),
-          onPressed: () => showBuildCrafterCreditsDialog(context),
-        ),
-        IconButton(
-          icon: const Icon(Icons.settings),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const SettingsScreen(),
-              ),
-            );
-          },
-        ),
-      ];
-    }
-    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Cappbar(
-        title: _titleForScreen(context, _selectedScreen),
-        actions: _appBarActions(),
+        title: _section.title(AppLocalizations.of(context)!),
+        actions: _section.appBarActions(context),
       ),
       drawer: Cdrawer(
-        onItemSelected: _changeScreen,
-        selectedScreen: _selectedScreen,
+        onSectionSelected: _changeSection,
+        selectedSection: _section,
       ),
-      body: _selectedScreen,
+      body: _section.screen,
     );
   }
 }

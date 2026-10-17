@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:mhwilds_app/api/api_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String _keyLocale = 'app_locale';
@@ -18,6 +19,9 @@ class LocaleProvider extends ChangeNotifier {
 
   /// Idioma actual (siempre controlado por la app; no depende del sistema).
   Locale get locale => _locale;
+
+  /// Idioma con el que se piden los datos a la API.
+  String get apiLanguage => ApiConfig.languageFor(_locale.languageCode);
 
   LocaleProvider() {
     _loadSavedLocale();
@@ -43,7 +47,8 @@ class LocaleProvider extends ChangeNotifier {
       }
 
       final parts = saved.split('_');
-      _locale = parts.length > 1 ? Locale(parts[0], parts[1]) : Locale(parts[0]);
+      _locale =
+          parts.length > 1 ? Locale(parts[0], parts[1]) : Locale(parts[0]);
       notifyListeners();
     } finally {
       if (!_localeReadyCompleter.isCompleted) {

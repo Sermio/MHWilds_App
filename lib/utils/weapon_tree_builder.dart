@@ -19,10 +19,10 @@ class WeaponTreeBuilder {
     // 1. Find root weapon
     Weapon current = startingWeapon;
     // We use a set to prevent infinite loops in case of circular references (shouldn't happen, but safe)
-    Set<int> visitedIds = {current.id};
+    final Set<int> visitedIds = {current.id};
 
     while (current.crafting.previous != null) {
-      Weapon? previousWeapon = provider.getWeaponById(current.crafting.previous!.id);
+      final Weapon? previousWeapon = provider.getWeaponById(current.crafting.previous!.id);
       if (previousWeapon == null) {
         // Cannot trace further back, consider current as root.
         break;
@@ -35,7 +35,7 @@ class WeaponTreeBuilder {
       current = previousWeapon;
     }
 
-    Weapon rootWeapon = current;
+    final Weapon rootWeapon = current;
 
     // 2. Build tree from root
     return _buildNode(rootWeapon, provider, null, {});

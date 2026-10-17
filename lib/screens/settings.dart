@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mhwilds_app/api/api_config.dart';
 import 'package:mhwilds_app/l10n/gen_l10n/app_localizations.dart';
-import 'package:mhwilds_app/providers/armor_sets_provider.dart';
-import 'package:mhwilds_app/providers/decorations_provider.dart';
-import 'package:mhwilds_app/providers/items_provider.dart';
 import 'package:mhwilds_app/providers/locale_provider.dart';
-import 'package:mhwilds_app/providers/locations_provider.dart';
-import 'package:mhwilds_app/providers/monsters_provider.dart';
-import 'package:mhwilds_app/providers/skills_provider.dart';
-import 'package:mhwilds_app/providers/talismans_provider.dart';
 import 'package:mhwilds_app/providers/theme_provider.dart';
-import 'package:mhwilds_app/providers/weapons_provider.dart';
 import 'package:mhwilds_app/utils/locale_utils.dart';
 import 'package:mhwilds_app/utils/review_service.dart';
 import 'package:provider/provider.dart';
 
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:mhwilds_app/utils/spacing.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -30,15 +22,11 @@ class SettingsScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         children: [
           Text(
             l10n.appearance,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.7),
-            ),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.7)),
           ),
           const SizedBox(height: 8),
           Card(
@@ -57,10 +45,7 @@ class SettingsScreen extends StatelessWidget {
                       title: Text(l10n.language),
                       subtitle: Text(
                         subtitle,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: colorScheme.onSurface.withOpacity(0.6),
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurfaceVariant),
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       onTap: () =>
@@ -83,10 +68,7 @@ class SettingsScreen extends StatelessWidget {
                         themeProvider.mode == AppThemeMode.dark
                             ? l10n.on
                             : l10n.offDefault,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: colorScheme.onSurface.withOpacity(0.6),
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurfaceVariant),
                       ),
                       value: themeProvider.mode == AppThemeMode.dark,
                       onChanged: (value) {
@@ -103,11 +85,7 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(height: 24),
           Text(
             l10n.rateAppAction,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface.withOpacity(0.7),
-            ),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w600, color: colorScheme.onSurface.withValues(alpha: 0.7)),
           ),
           const SizedBox(height: 8),
           Card(
@@ -132,10 +110,7 @@ class SettingsScreen extends StatelessWidget {
                 return Center(
                   child: Text(
                     'v${packageInfo.version}',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: colorScheme.onSurface.withOpacity(0.5),
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(color: colorScheme.onSurfaceVariant),
                   ),
                 );
               }
@@ -154,7 +129,7 @@ class SettingsScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
     final currentLocale = localeProvider.locale;
-    final supportedLocales = AppLocalizations.supportedLocales;
+    const supportedLocales = AppLocalizations.supportedLocales;
 
     showModalBottomSheet<void>(
       context: context,
@@ -172,7 +147,7 @@ class SettingsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(AppSpacing.lg),
                   child: Text(
                     l10n.language,
                     style: Theme.of(ctx).textTheme.titleLarge,
@@ -193,9 +168,7 @@ class SettingsScreen extends StatelessWidget {
                               ? Icon(Icons.check, color: colorScheme.primary)
                               : null,
                           onTap: () {
-                            ApiConfig.languageCode = locale.languageCode;
                             localeProvider.setLocale(locale);
-                            _invalidateDataProviders(ctx);
                             Navigator.pop(ctx);
                           },
                         );
@@ -209,18 +182,5 @@ class SettingsScreen extends StatelessWidget {
         );
       },
     );
-  }
-
-  /// Invalida la caché de todos los providers de datos para que la próxima
-  /// vez que se abra cada pantalla se vuelva a pedir la API con el nuevo idioma.
-  void _invalidateDataProviders(BuildContext context) {
-    Provider.of<MonstersProvider>(context, listen: false).invalidate();
-    Provider.of<WeaponsProvider>(context, listen: false).invalidate();
-    Provider.of<ArmorSetProvider>(context, listen: false).invalidate();
-    Provider.of<DecorationsProvider>(context, listen: false).invalidate();
-    Provider.of<ItemsProvider>(context, listen: false).invalidate();
-    Provider.of<LocationsProvider>(context, listen: false).invalidate();
-    Provider.of<SkillsProvider>(context, listen: false).invalidate();
-    Provider.of<TalismansProvider>(context, listen: false).invalidate();
   }
 }
